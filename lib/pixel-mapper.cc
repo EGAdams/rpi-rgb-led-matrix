@@ -198,18 +198,13 @@ public:
   virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
                                   int x, int y,
                                   int *matrix_x, int *matrix_y) const {
-
-    const int panel_height = matrix_height / parallel_;       // 32
+    const int panel_height = matrix_height / parallel_;
     const int visible_width = (matrix_width / 64) * 32;
     const int slab_height = 2 * panel_height;   // one folded u-shape
     const int base_y = (y / slab_height) * panel_height;
     y %= slab_height;
     if (y < panel_height) {
       x += matrix_width / 2;
-      // this is only broken when y is smaller than panel_height.
-      // use below code for the internally chained panels
-      // x = matirx_width  - 1 - x;
-      // y = matrix_height - y - 1;
     } else {
       x = visible_width - x - 1;
       y = slab_height - y - 1;

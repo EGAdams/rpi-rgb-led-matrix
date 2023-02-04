@@ -346,26 +346,6 @@ Framebuffer::~Framebuffer() {
   delete [] bitplane_buffer_;
 }
 
-/*
-    This is part of a constructor for a Framebuffer class. 
-    It is used to set up a HardwareMapping struct with the provided parameters 
-    from the named_hardware argument.
-
-    If the named_hardware argument is NULL or empty, it is set to "regular" instead.
-    
-    It will then attempt to search for the passed named_hardware in the available 
-    HardwareMapping structs, and stored that in the mapping variable.
-
-    If the name is not found, an error will be outputted, and the entire function will be aborted.
-
-    If the max_parallel_chains is set to 0, it will determine the maximum number of parallel 
-    chains depending on the provided parameters of the specific hardware mapping.
-
-    Finally, the hardware_mapping_ variable of the class is set to the mapping that was 
-    found or created.
-
-*/
-
 // TODO: this should also be parsed from some special formatted string, e.g.
 // {addr={22,23,24,25,15},oe=18,clk=17,strobe=4, p0={11,27,7,8,9,10},...}
 /* static */ void Framebuffer::InitHardwareMapping(const char *named_hardware) {

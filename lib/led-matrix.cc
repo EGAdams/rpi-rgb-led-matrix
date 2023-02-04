@@ -322,7 +322,7 @@ RGBMatrix::Options::Options() :
   // Nothing to see here.
 }
 
-#define DEBUG_MATRIX_OPTIONS 1
+#define DEBUG_MATRIX_OPTIONS 0
 
 #if DEBUG_MATRIX_OPTIONS
 static void PrintOptions(const RGBMatrix::Options &o) {
