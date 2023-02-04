@@ -19,19 +19,7 @@
  */
 #include "hardware-mapping.h"
 
-/*
-    This is a bitwise left shift operator. 
-    It takes an unsigned 64-bit integer, and shifts the 
-    bits of the given number to the left, by the number 
-    of bits indicated by the variable b.
-
-    The result of the operation is the same as multiplying 
-    the number by 2 raised to the power of b.
-    
-    For example, if the value of b is 3, then the number 
-    will be multiplied by 8 (2 cubed).
-*/
-#define GPIO_BIT( b ) (( uint64_t )1<<( b ))
+#define GPIO_BIT(b) ((uint64_t)1<<(b))
 
 struct HardwareMapping matrix_hardware_mappings[] = {
   /*
@@ -41,7 +29,7 @@ struct HardwareMapping matrix_hardware_mappings[] = {
   {
     .name          = "regular",
 
-    .output_enable = GPIO_BIT(18),  // ( ( uint64_t )1 << ( 18 ) )
+    .output_enable = GPIO_BIT(18),
     .clock         = GPIO_BIT(17),
     .strobe        = GPIO_BIT(4),
 

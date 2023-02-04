@@ -12,18 +12,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://gnu.org/licenses/gpl-2.0.txt>
-
-/*
-    This code is part of the Raspberry Pi RaspberryMatrix Library and part of the Framebuffer class. 
-    It defines and initializes various components of the project as classes and objects, 
-    such as the GPIO, which is the main control mechanism of the LED matrix, 
-    the rows and columns of the LED panel, and the type of scan mode used. 
-    
-    It also contains methods for setting LCD-Base Color depth, brightness, and luminance correction, 
-    as well as creating various bit planes for memory optimization. Finally, 
-    it includes PixelDesignatorMap and Framebuffer classes, which define the methods for controlling the matrix.
-*/
-
 #ifndef RPI_RGBMATRIX_FRAMEBUFFER_INTERNAL_H
 #define RPI_RGBMATRIX_FRAMEBUFFER_INTERNAL_H
 
@@ -38,19 +26,6 @@ class PinPulser;
 namespace internal {
 class RowAddressSetter;
 
-/*
-
-Define a struct named PixelDesignator. This struct has five members:
-
-gpio_word: This member is of type long and is initialized with a value of -1.
-
-r_bit, g_bit, b_bit: These three members are of type gpio_bits_t and are initialized with 0.
-
-mask: This member is of type gpio_bits_t and is initialized with the bitwise inverse of 0u.
-
-This struct can be used within the framebuffer to copy between PixelMappers.
-
-*/
 // An opaque type used within the framebuffer that can be used
 // to copy between PixelMappers.
 struct PixelDesignator {

@@ -68,8 +68,8 @@ static bool parseBitmap(const char *buffer, rowbitmap_t* result) {
 
 Font::Font() : font_height_(-1), base_line_(0) {}
 Font::~Font() {
-  for (CodepointGlyphMap::iterator it = glyphs_.begin( );
-       it != glyphs_.end( ); ++it) {
+  for (CodepointGlyphMap::iterator it = glyphs_.begin();
+       it != glyphs_.end(); ++it) {
     delete it->second;
   }
 }
@@ -77,7 +77,7 @@ Font::~Font() {
 // TODO: that might not be working for all input files yet.
 bool Font::LoadFont(const char *path) {
   if (!path || !*path) return false;
-  FILE *f = fopen(path, "r" );
+  FILE *f = fopen(path, "r");
   if (f == NULL)
     return false;
   uint32_t codepoint;
@@ -98,14 +98,14 @@ bool Font::LoadFont(const char *path) {
     else if (sscanf(buffer, "DWIDTH %d %d", &tmp.device_width, &tmp.device_height
                     ) == 2) {
       // Limit to width we can actually display, limited by rowbitmap_t
-      tmp.device_width = std::min(tmp.device_width, kMaxFontWidth );
+      tmp.device_width = std::min(tmp.device_width, kMaxFontWidth);
       // parsed.
     }
     else if (sscanf(buffer, "BBX %d %d %d %d", &tmp.width, &tmp.height,
                     &tmp.x_offset, &tmp.y_offset) == 4) {
-      current_glyph = new Glyph( );
+      current_glyph = new Glyph();
       *current_glyph = tmp;
-      current_glyph->bitmap.resize(tmp.height );
+      current_glyph->bitmap.resize(tmp.height);
       row = -1;  // let's not start yet, wait for BITMAP
     }
     else if (strncmp(buffer, "BITMAP", strlen("BITMAP")) == 0) {
@@ -123,21 +123,21 @@ bool Font::LoadFont(const char *path) {
       }
     }
   }
-  fclose(f );
+  fclose(f);
   return true;
 }
 
 Font *Font::CreateOutlineFont() const {
-  Font *r = new Font( );
+  Font *r = new Font();
   const int kBorder = 1;
   r->font_height_ = font_height_ + 2*kBorder;
   r->base_line_ = base_line_ + kBorder;
-  for (CodepointGlyphMap::const_iterator it = glyphs_.begin( );
-       it != glyphs_.end( ); ++it) {
+  for (CodepointGlyphMap::const_iterator it = glyphs_.begin();
+       it != glyphs_.end(); ++it) {
     const Glyph *orig = it->second;
     const int height = orig->height + 2 * kBorder;
-    Glyph *const tmp_glyph = new Glyph( );
-    tmp_glyph->bitmap.resize(height );
+    Glyph *const tmp_glyph = new Glyph();
+    tmp_glyph->bitmap.resize(height);
     tmp_glyph->width  = orig->width  + 2*kBorder;
     tmp_glyph->height = height;
     tmp_glyph->device_width  = orig->device_width + 2*kBorder;
@@ -150,7 +150,7 @@ Font *Font::CreateOutlineFont() const {
     for (int h = 0; h < orig->height; ++h) {
       rowbitmap_t fill = fill_pattern;
       rowbitmap_t orig_bitmap = orig->bitmap[h] >> kBorder;
-      for (rowbitmap_t m = start_mask; m.any( ); m <<= 1, fill <<= 1) {
+      for (rowbitmap_t m = start_mask; m.any(); m <<= 1, fill <<= 1) {
         if ((orig_bitmap & m).any()) {
           tmp_glyph->bitmap[h+kBorder-1] |= fill;
           tmp_glyph->bitmap[h+kBorder+0] |= fill;
@@ -169,71 +169,46 @@ Font *Font::CreateOutlineFont() const {
 }
 
 const Font::Glyph *Font::FindGlyph(uint32_t unicode_codepoint) const {
-  CodepointGlyphMap::const_iterator found = glyphs_.find(unicode_codepoint );
+  CodepointGlyphMap::const_iterator found = glyphs_.find(unicode_codepoint);
   if (found == glyphs_.end())
     return NULL;
   return found->second;
 }
 
 int Font::CharacterWidth(uint32_t unicode_codepoint) const {
-  const Glyph *g = FindGlyph(unicode_codepoint );
+  const Glyph *g = FindGlyph(unicode_codepoint);
   return g ? g->device_width : -1;
 }
-
-/*
-    int Font::DrawGliph( ... )
-
-    This code is for drawing a glyph on a canvas. 
-    The parameters of this function are as follows:
-
-    Canvas *c: A pointer to the canvas that the glyph is drawn on.
-
-    int x_pos, int y_pos: The x and y coordinates on the canvas where the glyph is drawn.
-
-    const Color &color, const Color *bgcolor: The color and background color used to draw the glyph
-
-    uint32_t unicode_codepoint: The unicode codepoint of the glyph.
-
-
-    The code first looks for a glyph corresponding to the unicode code point. 
-    If the glyph is not found, it falls back to the Unicode replacement character 
-    glyph and if that one is not found either, the function returns g->device_width.
-
-    The function then finds the starting point of the glyph by subtracting the height 
-    and y offset of the glyph from the y position. 
-
-    The function then checks if the canvas area going to be affected by the drawing 
-    of the glyph is within the canvas and if it is, 
-    it starts to draw the glyph one row of pixels at a time.
-
-    For each row it checks if each pixel should be drawn using the color or the background color. 
-    It sets the pixel accordingly and once all rows have been drawn, it returns the width of the glyph.
-*/
 
 int Font::DrawGlyph(Canvas *c, int x_pos, int y_pos,
                     const Color &color, const Color *bgcolor,
                     uint32_t unicode_codepoint) const {
-  const Glyph *g = FindGlyph(unicode_codepoint );
-  if (g == NULL) g = FindGlyph(kUnicodeReplacementCodepoint );
+  const Glyph *g = FindGlyph(unicode_codepoint);
+  if (g == NULL) g = FindGlyph(kUnicodeReplacementCodepoint);
   if (g == NULL) return 0;
   y_pos = y_pos - g->height - g->y_offset;
 
-  if ( x_pos + g->device_width < 0 || x_pos > c->width() ||                       // Outside canvas border,
-      y_pos + g->height < 0 || y_pos > c->height()) { return g->device_width; }   // bail out early!
-            
+  if (x_pos + g->device_width < 0 || x_pos > c->width() ||
+      y_pos + g->height < 0 || y_pos > c->height()) {
+    return g->device_width;  // Outside canvas border. Bail out early.
+  }
+
   for (int y = 0; y < g->height; ++y) {
     const rowbitmap_t& row = g->bitmap[y];
     for (int x = 0; x < g->device_width; ++x) {
       if (row.test(kMaxFontWidth - 1 - x)) {
-        c->SetPixel( x_pos + x, y_pos + y, color.r, color.g, color.b );
-      } else if ( bgcolor ) {
-        c->SetPixel( x_pos + x, y_pos + y, bgcolor->r, bgcolor->g, bgcolor->b ); }}}
-        
-  return g->device_width; }
+        c->SetPixel(x_pos + x, y_pos + y, color.r, color.g, color.b);
+      } else if (bgcolor) {
+        c->SetPixel(x_pos + x, y_pos + y, bgcolor->r, bgcolor->g, bgcolor->b);
+      }
+    }
+  }
+  return g->device_width;
+}
 
 int Font::DrawGlyph(Canvas *c, int x_pos, int y_pos, const Color &color,
                     uint32_t unicode_codepoint) const {
-  return DrawGlyph(c, x_pos, y_pos, color, NULL, unicode_codepoint );
+  return DrawGlyph(c, x_pos, y_pos, color, NULL, unicode_codepoint);
 }
 
 }  // namespace rgb_matrix
