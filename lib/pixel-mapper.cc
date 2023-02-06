@@ -228,7 +228,19 @@ namespace rgb_matrix
                                             int x, int y,
                                             int *matrix_x, int *matrix_y) const
             {
-                
+                if( x < 8 ) {
+                    *matrix_x = x;
+                    *matrix_y = y;
+                } else if( x < 16 ) {
+                    *matrix_x = 15 - x;
+                    *matrix_y = y + matrix_height;
+                } else if( x < 24 ) {
+                    *matrix_x = x - 16;
+                    *matrix_y = y + matrix_height;
+                } else {
+                    *matrix_x = 31 - x;
+                    *matrix_y = y;
+                }
                 *matrix_x = x;
                 *matrix_y = y;
             }
