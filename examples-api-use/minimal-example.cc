@@ -52,7 +52,7 @@ static void DrawLine(Canvas *canvas)
     int y_position = 0;
 
     for ( int test_count = 0; test_count < 50; test_count++ ) {
-        for ( y_position = 0; y_position < 32; y_position++ ) {
+        for ( y_position = 0; y_position < 3; y_position++ ) {
             for ( x_position = 0; x_position < 256; x_position++ ) {
                 canvas->Fill( 0, 0, 0 );
                 canvas->SetPixel( x_position, y_position, 0, 255, 0 );
