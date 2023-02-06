@@ -37,30 +37,36 @@ static void DrawOnCanvas(Canvas *canvas)
     {
         if (interrupt_received)
             return;
-        float dot_x = cos( a * 2 * M_PI ) * r;
-        float dot_y = sin( a * 2 * M_PI ) * r;
+        float dot_x = cos(a * 2 * M_PI) * r;
+        float dot_y = sin(a * 2 * M_PI) * r;
         canvas->SetPixel(center_x + dot_x, center_y + dot_y,
                          255, 0, 0);
         usleep(1 * 1000); // wait a little to slow down things.
     }
 }
 
-static void DrawLine( Canvas *canvas ) {
-    canvas->Fill( 0, 0, 0 );
+static void DrawLine(Canvas *canvas)
+{
+    canvas->Fill(0, 0, 0);
     int x_position = 0;
     int y_position = 0;
-    
-    for ( int test_count=0; test_count < 50; test_count++ ) {
-        for ( x_position=0; x_position < 128; x_position++ ) {
-        canvas->Fill( 0, 0, 0 );
-        canvas->SetPixel( x_position, y_position, 0, 255, 0 );
-        usleep( 5 * 1000 ); }}// wait a little to slow down things.
-    
-    printf( "done drawing lines" );
-    usleep( 100 * 1000 * 1000 ); }// wait a little to slow down things.
 
+    for (int test_count = 0; test_count < 50; test_count++)
+    {
+        for (x_position = 0; x_position < 128; x_position++)
+        {
+            canvas->Fill(0, 0, 0);
+            canvas->SetPixel(x_position, y_position, 0, 255, 0);
+            usleep(500 * 1000);
+        }
+    } // wait a little to slow down things.
 
-int main( int argc, char *argv[]) {
+    printf("done drawing lines");
+    usleep(100 * 1000 * 1000);
+} // wait a little to slow down things.
+
+int main(int argc, char *argv[])
+{
     RGBMatrix::Options defaults;
     defaults.hardware_mapping = "adafruit-hat"; // or e.g. "adafruit-hat"
     defaults.rows = 32;
@@ -70,17 +76,21 @@ int main( int argc, char *argv[]) {
     defaults.show_refresh_rate = false;
     defaults.chain_length = 1;
     defaults.parallel = 1;
-    Canvas *canvas = RGBMatrix::CreateFromFlags( &argc, &argv, &defaults );
-    if ( canvas == NULL ) { return 1; }
+    Canvas *canvas = RGBMatrix::CreateFromFlags(&argc, &argv, &defaults);
+    if (canvas == NULL)
+    {
+        return 1;
+    }
 
     // It is always good to set up a signal handler to cleanly exit when we
     // receive a CTRL-C for instance. The DrawOnCanvas() routine is looking
     // for that.
-    signal( SIGTERM, InterruptHandler );
-    signal( SIGINT, InterruptHandler  );
+    signal(SIGTERM, InterruptHandler);
+    signal(SIGINT, InterruptHandler);
 
-    DrawLine( canvas ); // Using the canvas.
+    DrawLine(canvas); // Using the canvas.
     // Animation finished. Shut down the RGB matrix.
     canvas->Clear();
     delete canvas;
-    return 0; }
+    return 0;
+}
