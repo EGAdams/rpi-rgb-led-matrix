@@ -229,8 +229,8 @@ namespace rgb_matrix
                                             int *matrix_x, int *matrix_y) const
             {
                 
-                *matrix_x = x + 128;
-                *matrix_y = y + 8;
+                *matrix_x = x;
+                *matrix_y = y;
             }
 
         private:
