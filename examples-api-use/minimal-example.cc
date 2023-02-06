@@ -49,7 +49,9 @@ static void DrawLine( Canvas *canvas ) {
     canvas->Fill( 0, 0, 0 );
     int x_position = 0;
     int y_position = 0;
+
     canvas->SetPixel( x_position, y_position, 0, 255, 0 );
+    
     usleep( 100 * 1000 * 1000 ); }// wait a little to slow down things.
 
 
@@ -59,6 +61,7 @@ int main( int argc, char *argv[]) {
     defaults.rows = 32;
     defaults.cols = 32;
     defaults.brightness = 20;
+    defaults.pixel_mapper_config = "U-mapper";
     defaults.chain_length = 1;
     defaults.parallel = 1;
     defaults.show_refresh_rate = true;
