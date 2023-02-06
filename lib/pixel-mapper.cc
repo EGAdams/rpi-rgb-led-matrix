@@ -241,8 +241,8 @@ namespace rgb_matrix
                     *matrix_x = 31 - x;
                     *matrix_y = y;
                 }
-                *matrix_x = x;
-                *matrix_y = y;
+                // *matrix_x = x;
+                // *matrix_y = y;
             }
 
         private:
