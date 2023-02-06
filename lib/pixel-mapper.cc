@@ -295,7 +295,7 @@ namespace rgb_matrix
                     *matrix_x = x;
                 }
 
-                *matrix_y = 32;
+                *matrix_y = 31;
             }
 
         private:
