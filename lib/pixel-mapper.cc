@@ -229,7 +229,7 @@ namespace rgb_matrix
                                             int *matrix_x, int *matrix_y) const
             {
                 if( x < 16 ) {
-                    *matrix_x = x;
+                    *matrix_x = x + 16;
                     *matrix_y = y;
                     printf( "matrix_x=%d matrix_y=%d\n", *matrix_x, *matrix_y );
                 } else {
