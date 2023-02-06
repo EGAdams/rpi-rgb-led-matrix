@@ -228,9 +228,10 @@ namespace rgb_matrix
                                             int x, int y,
                                             int *matrix_x, int *matrix_y) const
             {
-                if( y > 8 ) {
+                if( x < 16 ) {
                     *matrix_x = x;
-                    *matrix_y = y - 8;
+                    *matrix_y -= 8;
+                    printf( "matrix_x=%d matrix_y=%d", *matrix_x, *matrix_y );
                 } else {
                     *matrix_x = x;
                     *matrix_y = y;
