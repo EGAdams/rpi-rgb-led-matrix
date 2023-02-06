@@ -65,7 +65,6 @@ int main( int argc, char *argv[]) {
     defaults.show_refresh_rate = false;
     defaults.chain_length = 1;
     defaults.parallel = 1;
-    defaults.show_refresh_rate = true;
     Canvas *canvas = RGBMatrix::CreateFromFlags( &argc, &argv, &defaults );
     if ( canvas == NULL ) { return 1; }
 
