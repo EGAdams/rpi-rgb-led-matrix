@@ -236,13 +236,11 @@ namespace rgb_matrix
                     *matrix_x = x + 64;
                 } else if( x < 80 ) {
                     *matrix_x = x + 80;
-                    *matrix_y = y + 8;
+                    *matrix_y = y + 1;
                 } else if( x < 96 ) {
                     *matrix_x = x + 96;
-                    *matrix_y = y + 8;
                 } else if( x < 112 ) {
                     *matrix_x = x + 112;
-                    *matrix_y = y + 8;
                 } else if( x < 128 ) {
                     *matrix_x = x + 128;
                 } else if( x < 144 ) {
@@ -295,14 +293,9 @@ namespace rgb_matrix
                     *matrix_x = x + 512;
                 } else {
                     *matrix_x = x;
-                    *matrix_y = y;
                 }
 
-                if ( y < 0 ) {
-                        *matrix_y = 0;
-                }
-
-                
+                *matrix_y = y;
             }
 
         private:
