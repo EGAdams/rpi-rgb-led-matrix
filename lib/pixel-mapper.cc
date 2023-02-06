@@ -232,7 +232,7 @@ namespace rgb_matrix
                     *matrix_x = x + 16;
                     *matrix_y = y;
                 } else if( x >= 16 ) {
-                    *matrix_x = x - 16;
+                    *matrix_x = x + 32;
                     *matrix_y = y;
 
                 } else {
