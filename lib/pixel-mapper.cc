@@ -276,6 +276,54 @@ namespace rgb_matrix
                 } else if( x < 256 ) {
                     *matrix_x = x + 256;
                     *matrix_y = y;
+                } else if( x < 272 ) {
+                    *matrix_x = x + 272;
+                    *matrix_y = y;
+                } else if( x < 288 ) {
+                    *matrix_x = x + 288;
+                    *matrix_y = y;
+                } else if( x < 304 ) {
+                    *matrix_x = x + 304;
+                    *matrix_y = y;
+                } else if( x < 320 ) {
+                    *matrix_x = x + 320;
+                    *matrix_y = y;
+                } else if( x < 336 ) {
+                    *matrix_x = x + 336;
+                    *matrix_y = y;
+                } else if( x < 352 ) {
+                    *matrix_x = x + 352;
+                    *matrix_y = y;
+                } else if( x < 368 ) {
+                    *matrix_x = x + 368;
+                    *matrix_y = y;
+                } else if( x < 384 ) {
+                    *matrix_x = x + 384;
+                    *matrix_y = y;
+                } else if( x < 400 ) {
+                    *matrix_x = x + 400;
+                    *matrix_y = y;
+                } else if( x < 416 ) {
+                    *matrix_x = x + 416;
+                    *matrix_y = y;
+                } else if( x < 432 ) {
+                    *matrix_x = x + 432;
+                    *matrix_y = y;
+                } else if( x < 448 ) {
+                    *matrix_x = x + 448;
+                    *matrix_y = y;
+                } else if( x < 464 ) {
+                    *matrix_x = x + 464;
+                    *matrix_y = y;
+                } else if( x < 480 ) {
+                    *matrix_x = x + 480;
+                    *matrix_y = y;
+                } else if( x < 496 ) {
+                    *matrix_x = x + 496;
+                    *matrix_y = y;
+                } else if( x < 512 ) {
+                    *matrix_x = x + 512;
+                    *matrix_y = y;
                 } else {
                     *matrix_x = x;
                     *matrix_y = y;
