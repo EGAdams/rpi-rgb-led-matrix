@@ -295,12 +295,11 @@ namespace rgb_matrix
                     *matrix_x = x + 512;
                 } else {
                     *matrix_x = x;
-                    
-                    if ( y < 0 ) {
-                        y = 0;
-                    }   
-                    
                     *matrix_y = y;
+                }
+
+                if ( y < 0 ) {
+                        *matrix_y = 0;
                 }
 
                 
