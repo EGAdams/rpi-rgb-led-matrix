@@ -57,7 +57,7 @@ static void DrawLine(Canvas *canvas)
         {
             canvas->Fill(0, 0, 0);
             canvas->SetPixel(x_position, y_position, 0, 255, 0);
-            usleep(500 * 1000);
+            usleep(50 * 1000);
         }
     } // wait a little to slow down things.
 
