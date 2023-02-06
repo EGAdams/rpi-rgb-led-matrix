@@ -276,11 +276,22 @@ namespace rgb_matrix
                 } else if( x < 256 ) {
                     *matrix_x = x + 256;
                     *matrix_y = y;
+                } else if( x < 272 ) {
+                    *matrix_x = x - 272;
+                    *matrix_y = y;
+                } else if( x < 288 ) {
+                    *matrix_x = x - 288;
+                    *matrix_y = y;
+                } else if( x < 304 ) {
+                    *matrix_x = x - 304;
+                    *matrix_y = y;
+                } else if( x < 320 ) {
+                    *matrix_x = x - 320;
+                    *matrix_y = y;
                 } else {
                     *matrix_x = x;
                     *matrix_y = y;
-                }
-                
+                }     
             }
 
         private:
