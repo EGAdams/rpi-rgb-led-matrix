@@ -240,6 +240,18 @@ namespace rgb_matrix
                 } else if( x < 64 ) {
                     *matrix_x = x + 64;
                     *matrix_y = y;
+                } else if( x < 80 ) {
+                    *matrix_x = x + 80;
+                    *matrix_y = y;
+                } else if( x < 96 ) {
+                    *matrix_x = x + 96;
+                    *matrix_y = y;
+                } else if( x < 112 ) {
+                    *matrix_x = x + 112;
+                    *matrix_y = y;
+                } else if( x < 128 ) {
+                    *matrix_x = x + 128;
+                    *matrix_y = y;
                 } else {
                     *matrix_x = x;
                     *matrix_y = y;
