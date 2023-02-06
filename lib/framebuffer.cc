@@ -673,6 +673,8 @@ void Framebuffer::SetPixel(int x, int y, uint8_t r, uint8_t g, uint8_t b) {
   const long pos = designator->gpio_word;
   if (pos < 0) return;  // non-used pixel marker.
 
+  printf( "pos: %ld", pos );
+
   uint16_t red, green, blue;
   MapColors(r, g, b, &red, &green, &blue);
 
