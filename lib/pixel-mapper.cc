@@ -226,56 +226,24 @@ namespace rgb_matrix
 
             virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
                                             int x, int y,
-                                            int *matrix_x, int *matrix_y) const {
-
+                                            int *matrix_x, int *matrix_y) const
+            {
                 const int panel_height = matrix_height / parallel_;
-                
-                int original_x = x;
-                int original_y = y;
-
-                if ( original_y == 0 ) {
-                    printf( "panel_height=%d parallel=%d      \n", panel_height, parallel_     );
-                    printf( "matrix_width=%d matrix_height=%d \n", matrix_width, matrix_height );
-                    printf( "x=%d y=%d\n", x, y );
-                }
-
-                const int visible_width = ( matrix_width / 64 ) * 32; 
-
-                if ( original_y == 0 ) {
-                    printf( "visible_width=%d\n", visible_width );
-                }
-                
+                const int visible_width = (matrix_width / 64) * 32;
                 const int slab_height = 2 * panel_height; // one folded u-shape
-
-                if ( original_y == 0 ) {
-                    printf( "slab_height=%d\n", slab_height );
-                }    
-
-                const int base_y = (y / slab_height) * panel_height; 
-                
-                if ( original_y == 0 ) {
-                    printf( "base_y=%d\n", base_y );
-                }    
-                
-                y %= slab_height; 
-                
-                if ( original_y == 0 ) {
-                    printf( "y=%d\n", y );
-                }
-
-                if (y < panel_height) {
+                const int base_y = (y / slab_height) * panel_height;
+                y %= slab_height;
+                if (y < panel_height)
+                {
                     x += matrix_width / 2;
-                    // y -= 8; // 8px offset between panels
-                } else {
-                    x = visible_width - x - 1;
-                    y = slab_height - y - 1 - 8; // 8px offset between panels
                 }
-
+                else
+                {
+                    x = visible_width - x - 1;
+                    y = slab_height - y - 1;
+                }
                 *matrix_x = x;
                 *matrix_y = base_y + y;
-                if ( original_y == 0 ) {
-                    printf( "Final Output: matrix_x=%d matrix_y=%d\n", *matrix_x, *matrix_y );
-                }    
             }
 
         private:
