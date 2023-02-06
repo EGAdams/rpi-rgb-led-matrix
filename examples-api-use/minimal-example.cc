@@ -47,16 +47,10 @@ static void DrawOnCanvas(Canvas *canvas)
 
 static void DrawLine( Canvas *canvas ) {
     canvas->Fill( 0, 0, 0 );
-    // int x_position = 0;
-    // int y_position = 0;
+    int x_position = 0;
+    int y_position = 0;
     
-    for ( int x=0; x<32; x++ ) {
-        for ( int y=0; y<32; y++ ) {
-            canvas->SetPixel( x, y, 255, 0, 0 );
-            usleep( 10 * 1000 ); // wait a little to slow down things.
-        }
-    }
-    //canvas->SetPixel( x_position, y_position, 0, 255, 0 );
+    canvas->SetPixel( x_position, y_position, 0, 255, 0 );
     
     usleep( 100 * 1000 * 1000 ); }// wait a little to slow down things.
 
