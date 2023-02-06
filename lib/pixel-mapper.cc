@@ -252,6 +252,30 @@ namespace rgb_matrix
                 } else if( x < 128 ) {
                     *matrix_x = x + 128;
                     *matrix_y = y;
+                } else if( x < 144 ) {
+                    *matrix_x = x + 144;
+                    *matrix_y = y;
+                } else if( x < 160 ) {
+                    *matrix_x = x + 160;
+                    *matrix_y = y;
+                } else if( x < 176 ) {
+                    *matrix_x = x + 176;
+                    *matrix_y = y;
+                } else if( x < 192 ) {
+                    *matrix_x = x + 192;
+                    *matrix_y = y;
+                } else if( x < 208 ) {
+                    *matrix_x = x + 208;
+                    *matrix_y = y;
+                } else if( x < 224 ) {
+                    *matrix_x = x + 224;
+                    *matrix_y = y;
+                } else if( x < 240 ) {
+                    *matrix_x = x + 240;
+                    *matrix_y = y;
+                } else if( x < 256 ) {
+                    *matrix_x = x + 256;
+                    *matrix_y = y;
                 } else {
                     *matrix_x = x;
                     *matrix_y = y;
