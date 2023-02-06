@@ -234,7 +234,9 @@ namespace rgb_matrix
                 } else if( x >= 16 ) {
                     *matrix_x = x + 32;
                     *matrix_y = y;
-
+                } else if( x > 16 && x < 32 ) {
+                    *matrix_x = x + 48;
+                    *matrix_y = y;
                 } else {
                     *matrix_x = x;
                     *matrix_y = y;
