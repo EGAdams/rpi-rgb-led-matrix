@@ -292,8 +292,9 @@ namespace rgb_matrix
                     *matrix_x = x + 512;
                 } else {
                     *matrix_x = x;
-                    *matrix_y = y;
                 }
+                
+                *matrix_y = y;
             }
 
         private:
