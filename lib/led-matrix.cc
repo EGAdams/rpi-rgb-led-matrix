@@ -568,26 +568,26 @@ bool RGBMatrix::Impl::ApplyPixelMapper(const PixelMapper *mapper) {
   const int old_height = shared_pixel_mapper_->height();
   int new_width, new_height;
   if (!mapper->GetSizeMapping(old_width, old_height, &new_width, &new_height)) { return false; }
-  PixelDesignatorMap *new_mapper = new PixelDesignatorMap(
-    new_width, new_height, shared_pixel_mapper_->GetFillColorBits());
+  PixelDesignatorMap *new_mapper = new PixelDesignatorMap( new_width, new_height, shared_pixel_mapper_->GetFillColorBits());
+  int count = 0;
   for (int y = 0; y < new_height; ++y) {
     for (int x = 0; x < new_width; ++x) {
       int orig_x = -1, orig_y = -1;
-      mapper->MapVisibleToMatrix(old_width, old_height,
-                                 x, y, &orig_x, &orig_y);
-      if (orig_x < 0 || orig_y < 0 ||
-          orig_x >= old_width || orig_y >= old_height) {
+      mapper->MapVisibleToMatrix( old_width, old_height, x, y, &orig_x, &orig_y );
+      if ( orig_x < 0 || orig_y < 0 || orig_x >= old_width || orig_y >= old_height ) {
         fprintf(stderr, "Error in PixelMapper: (%d, %d) -> (%d, %d) [range: "
                 "%dx%d]\n", x, y, orig_x, orig_y, old_width, old_height);
         exit( 1 );        
         // continue;
       } else {
-        printf("PixelMapper: ( %d, %d ) -> ( %d, %d ) [ range: %dx%d ]\n", x, y, orig_x, orig_y, old_width, old_height );
+        printf( "PixelMapper: ( %d, %d ) -> ( %d, %d ) [ range: %dx%d ]\n", x, y, orig_x, orig_y, old_width, old_height );
       }
       const internal::PixelDesignator *orig_designator;
       orig_designator = shared_pixel_mapper_->get(orig_x, orig_y);
       *new_mapper->get(x, y) = *orig_designator;
     }
+    count++;
+    if ( count > 100 ) { break; }
   }
   delete shared_pixel_mapper_;
   shared_pixel_mapper_ = new_mapper;
