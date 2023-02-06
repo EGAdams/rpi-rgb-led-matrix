@@ -587,7 +587,7 @@ bool RGBMatrix::Impl::ApplyPixelMapper(const PixelMapper *mapper) {
       *new_mapper->get(x, y) = *orig_designator;
     }
     count++;
-    if ( count > 2 ) { break; }
+    if ( count > 1 ) { break; }
   }
   delete shared_pixel_mapper_;
   shared_pixel_mapper_ = new_mapper;
