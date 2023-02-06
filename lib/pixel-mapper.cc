@@ -229,18 +229,16 @@ namespace rgb_matrix
                                             int *matrix_x, int *matrix_y) const
             {
                 const int panel_height = matrix_height / parallel_;
-                const int visible_width = (matrix_width / 64) * 32;
+                const int visible_width = ( matrix_width / 64 ) * 32;
                 const int slab_height = 2 * panel_height; // one folded u-shape
                 const int base_y = (y / slab_height) * panel_height;
                 y %= slab_height;
-                if (y < panel_height)
-                {
+                if (y < panel_height) {
                     x += matrix_width / 2;
-                }
-                else
-                {
+                    y -= 8; // 8px offset between panels
+                } else {
                     x = visible_width - x - 1;
-                    y = slab_height - y - 1;
+                    y = slab_height - y - 1 - 8; // 8px offset between panels
                 }
                 *matrix_x = x;
                 *matrix_y = base_y + y;

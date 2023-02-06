@@ -46,28 +46,24 @@ static void DrawOnCanvas(Canvas *canvas)
 }
 
 static void DrawLine( Canvas *canvas ) {
-
     canvas->Fill( 0, 0, 0 );
-
     int x_position = 0;
     int y_position = 0;
     canvas->SetPixel( x_position, y_position, 0, 255, 0 );
-    
-    usleep( 100 * 1000 * 1000 ); // wait a little to slow down things.
-}
+    usleep( 100 * 1000 * 1000 ); }// wait a little to slow down things.
 
-int main( int argc, char *argv[])
-{
+
+int main( int argc, char *argv[]) {
     RGBMatrix::Options defaults;
     defaults.hardware_mapping = "adafruit-hat"; // or e.g. "adafruit-hat"
     defaults.rows = 32;
     defaults.cols = 32;
+    defaults.brightness = 20;
     defaults.chain_length = 1;
     defaults.parallel = 1;
     defaults.show_refresh_rate = true;
     Canvas *canvas = RGBMatrix::CreateFromFlags( &argc, &argv, &defaults );
-    if (canvas == NULL)
-        return 1;
+    if ( canvas == NULL ) { return 1; }
 
     // It is always good to set up a signal handler to cleanly exit when we
     // receive a CTRL-C for instance. The DrawOnCanvas() routine is looking
@@ -76,10 +72,7 @@ int main( int argc, char *argv[])
     signal( SIGINT, InterruptHandler  );
 
     DrawLine( canvas ); // Using the canvas.
-
     // Animation finished. Shut down the RGB matrix.
     canvas->Clear();
     delete canvas;
-
-    return 0;
-}
+    return 0; }
