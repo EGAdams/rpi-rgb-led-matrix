@@ -222,18 +222,32 @@ namespace rgb_matrix
                 return true;
             }
 
+            void setMatrixX( int x, int *matrix_x ) const {
+                *matrix_x = x;
+            }
+            bool setMatrixY( int y, int *matrix_y ) const {
+                *matrix_y = y;
+                return false;
+            }
+            
             virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
                                             int x, int y,
                                             int *matrix_x, int *matrix_y) const
             {
+                bool y_not_set_yet = true;
+
                 if( x < 16 ) {
                     *matrix_x = x + 16;
+                    y_not_set_yet = setMatrixY( y, matrix_y );
                 } else if( x < 32 ) {
                     *matrix_x = x + 32;
-                } else if( x < 48 ) {
+                    y_not_set_yet = setMatrixY( y, matrix_y );
+               } else if( x < 48 ) {
                     *matrix_x = x + 48;
+                    y_not_set_yet = setMatrixY( y, matrix_y );
                 } else if( x < 64 ) {
                     *matrix_x = x + 64;
+                    y_not_set_yet = setMatrixY( y, matrix_y );
                 } else if( x < 80 ) {
                     *matrix_x = x + 80;
                     *matrix_y = y + 1;
@@ -294,8 +308,8 @@ namespace rgb_matrix
                 } else {
                     *matrix_x = x;
                 }
-
-                *matrix_y = 31;
+                
+                if ( y_not_set_yet ) { *matrix_y = 0; }
             }
 
         private:
