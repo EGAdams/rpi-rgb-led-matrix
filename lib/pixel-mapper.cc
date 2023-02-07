@@ -227,7 +227,7 @@ namespace rgb_matrix
             }
             bool setMatrixY( int y, int *matrix_y ) const {
                 if( y > 2 )  {
-                    y = y + 32;
+                    y = y + 8;
                 }
                 *matrix_y = y;
                 return false;
