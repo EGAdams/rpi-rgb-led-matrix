@@ -414,13 +414,14 @@ namespace rgb_matrix
                 }
 
                 if ( y > 2 ) {
-                    printf( "inside last if: setting matrix_y to 3!" );
+                    printf( "inside last if: setting matrix_y to 3!\n" );
                     *matrix_y = 3;
-                    printf( "inside last if: matrix_y is now %d", *matrix_y );
+                    printf( "inside last if: matrix_y is now %d \n", *matrix_y );
                 } else {
                     *matrix_y = y;
                 }
-                printf( "matrix_y is now %d", *matrix_y );
+                printf( "y: %d\n", y );
+                printf( "matrix_y is now %d\n", *matrix_y );
                 //*matrix_y = 3;
             }
 
