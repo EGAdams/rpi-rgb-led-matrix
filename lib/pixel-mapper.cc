@@ -230,8 +230,9 @@ namespace rgb_matrix
             {
                 if ( y > 2 ) {
                     *matrix_y = 3;
+                } else {
+                    *matrix_y = y;
                 }
-                *matrix_y = y;
                 return false;
             }
 
