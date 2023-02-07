@@ -226,6 +226,9 @@ namespace rgb_matrix
                 *matrix_x = x;
             }
             bool setMatrixY( int y, int *matrix_y ) const {
+                if( y > 2 )  {
+                    y = y - 3;
+                }
                 *matrix_y = y;
                 return false;
             }
