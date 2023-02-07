@@ -228,9 +228,8 @@ namespace rgb_matrix
             }
             bool setMatrixY(int y, int *matrix_y) const
             {
-                if (y > 2)
-                {
-                    // y = 3;
+                if ( y > 2 ) {
+                    *matrix_y = 3;
                 }
                 *matrix_y = y;
                 return false;
@@ -412,8 +411,6 @@ namespace rgb_matrix
                     printf("setting matrix_y to 0");
                     *matrix_y = 0;
                 }
-
-                *matrix_y = 3;
             }
 
         private:
