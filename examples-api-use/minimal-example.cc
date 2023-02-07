@@ -48,12 +48,10 @@ static void DrawOnCanvas(Canvas *canvas)
 static void DrawLine(Canvas *canvas)
 {
     canvas->Fill(0, 0, 0);
-    int x_position = 0;
-    int y_position = 0;
-
+    
     for ( int test_count = 0; test_count < 500; test_count++ ) {
-        for ( y_position = 0; y_position < 3; y_position++ ) {
-            for ( x_position = 0; x_position < 64; x_position++ ) {
+        for ( int y_position = 0; y_position < 3; y_position++ ) {
+            for ( int x_position = 0; x_position < 64; x_position++ ) {
                 canvas->Fill( 0, 0, 0 );
                 canvas->SetPixel( x_position, y_position, 0, 255, 0 );
                 // printf( "canvas width: %d  canvas height: %d \n", canvas->width(), canvas->height() );
@@ -62,7 +60,7 @@ static void DrawLine(Canvas *canvas)
         }    
     } // wait a little to slow down things.
 
-    printf("done drawing lines");
+    printf("done drawing lines\n\n");
     usleep(100 * 1000 * 1000);
 } // wait a little to slow down things.
 
