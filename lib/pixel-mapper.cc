@@ -224,17 +224,12 @@ namespace rgb_matrix
                 return true;
             }
 
-            void setMatrixX(int x, int *matrix_x) const
-            {
+            void setMatrixX(int x, int *matrix_x) const {
                 *matrix_x = x;
             }
-            bool setMatrixY(int y, int *matrix_y) const
-            {
-                if ( y > 2 ) {
-                    *matrix_y = 3;
-                } else {
-                    *matrix_y = y;
-                }
+            
+            bool setMatrixY(int y, int *matrix_y) const {
+                *matrix_y = y;
                 return false;
             }
 
