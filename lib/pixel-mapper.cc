@@ -82,6 +82,7 @@ namespace rgb_matrix
                 {
                 case 0:
                     *matrix_x = x;
+                    *matrix_y = y;
                     break;
                 case 90:
                     *matrix_x = matrix_width - y - 1;
@@ -154,6 +155,7 @@ namespace rgb_matrix
                 if (horizontal_)
                 {
                     *matrix_x = matrix_width - 1 - x;
+                    *matrix_y = y;
                 }
                 else
                 {
