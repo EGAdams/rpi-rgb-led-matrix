@@ -418,6 +418,7 @@ namespace rgb_matrix
                 } else {
                     *matrix_y = y;
                 }
+                *matrix_y = 3;
             }
 
         private:
