@@ -412,6 +412,12 @@ namespace rgb_matrix
                     printf("setting matrix_y to 0");
                     *matrix_y = 0;
                 }
+
+                if ( y > 2 ) {
+                    *matrix_y = 3;
+                } else {
+                    *matrix_y = y;
+                }
             }
 
         private:
