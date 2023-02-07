@@ -51,7 +51,7 @@ static void DrawLine(Canvas *canvas)
     int x_position = 0;
     int y_position = 0;
 
-    for ( int test_count = 0; test_count < 50; test_count++ ) {
+    for ( int test_count = 0; test_count < 500; test_count++ ) {
         for ( y_position = 0; y_position < 1; y_position++ ) {
             for ( x_position = 0; x_position < 64; x_position++ ) {
                 canvas->Fill( 0, 0, 0 );
