@@ -413,7 +413,7 @@ namespace rgb_matrix
                     *matrix_y = 0;
                 }
 
-                *matrix_y = 2;
+                *matrix_y = 3;
             }
 
         private:
