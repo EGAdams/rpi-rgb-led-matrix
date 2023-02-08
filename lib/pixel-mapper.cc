@@ -225,13 +225,13 @@ namespace rgb_matrix
             void setMatrixX( int x, int *matrix_x ) const {
                 *matrix_x = x;
             }
-            bool setMatrixY( int y, int *matrix_y ) const {
+            bool setMatrixY( int x, int y, int *matrix_y ) const {
                 *matrix_y = y;
-                // if ( y < 8 ) {
-                //     *matrix_y = y;
-                // } else {
-                //     *matrix_y = y + 8;
-                // }
+                if ( x < 64 ) {
+                    *matrix_y = y;
+                }else if ( x < 128 ) {
+                    *matrix_y = y + 1;
+                }    
                 return false;
             }
             
@@ -243,100 +243,100 @@ namespace rgb_matrix
 
                 if( x < 16 ) {
                     *matrix_x = x + 16;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 32 ) {
                     *matrix_x = x + 32;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                } else if( x < 48 ) {
                     *matrix_x = x + 48;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 64 ) {
                     *matrix_x = x + 64;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 80 ) {
                     *matrix_x = x + 80;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 96 ) {
                     *matrix_x = x + 96;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 112 ) {
                     *matrix_x = x + 112;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 128 ) {
                     *matrix_x = x + 128;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 144 ) {
                     *matrix_x = x + 144;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 160 ) {
                     *matrix_x = x + 160;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 176 ) {
                     *matrix_x = x + 176;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 192 ) {
                     *matrix_x = x + 192;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 208 ) {
                     *matrix_x = x + 208;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 224 ) {
                     *matrix_x = x + 224;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 240 ) {
                     *matrix_x = x + 240;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 256 ) {
                     *matrix_x = x + 256;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 272 ) {
                     *matrix_x = x + 272;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 288 ) {
                     *matrix_x = x + 288;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 304 ) {
                     *matrix_x = x + 304;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 320 ) {
                     *matrix_x = x + 320;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 336 ) {
                     *matrix_x = x + 336;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 352 ) {
                     *matrix_x = x + 352;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 368 ) {
                     *matrix_x = x + 368;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 384 ) {
                     *matrix_x = x + 384;
-                    y_not_set_yet = setMatrixY( y, matrix_y ); 
+                    y_not_set_yet = setMatrixY( x, y, matrix_y ); 
                 } else if( x < 400 ) {
                     *matrix_x = x + 400;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 416 ) {
                     *matrix_x = x + 416;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 432 ) {
                     *matrix_x = x + 432;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 448 ) {
                     *matrix_x = x + 448;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 464 ) {
                     *matrix_x = x + 464;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 480 ) {
                     *matrix_x = x + 480;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 496 ) {
                     *matrix_x = x + 496;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else if( x < 512 ) {
                     *matrix_x = x + 512;
-                    y_not_set_yet = setMatrixY( y, matrix_y );
+                    y_not_set_yet = setMatrixY( x, y, matrix_y );
                 } else {
                     *matrix_x = x;
                 }
