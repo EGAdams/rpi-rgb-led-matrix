@@ -226,7 +226,11 @@ namespace rgb_matrix
                 *matrix_x = x;
             }
             bool setMatrixY( int y, int *matrix_y ) const {
-                *matrix_y = y;
+                if ( y > 8 ) {
+                    *matrix_y = y + 8;
+                } else {
+                    *matrix_y = y;
+                }
                 return false;
             }
             
