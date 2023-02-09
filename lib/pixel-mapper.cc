@@ -257,7 +257,7 @@ namespace rgb_matrix
                     *matrix_x = x - 48;
                     y_not_set_yet = setMatrixY( y + 1, matrix_y );
                 } else if( x < 96 ) {
-                    *matrix_x = x;
+                    *matrix_x = x - 32;
                     y_not_set_yet = setMatrixY( y + 1, matrix_y );
                 } else if( x < 112 ) {
                     *matrix_x = x + 112 - 96;
