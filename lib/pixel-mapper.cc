@@ -247,12 +247,22 @@ namespace rgb_matrix
                         *matrix_y = y;
                     }    
                } else if( x < 48 ) {
-                    *matrix_x = x + 48;
-                    *matrix_y = y;
+                    if ( y < 8 ) {
+                        *matrix_x = x + 48;
+                        *matrix_y = y;
+                    } else if ( y < 16 ) {
+                        *matrix_x = x;
+                        *matrix_y = y;
+                    }
                 } else if( x < 64 ) {
-                    *matrix_x = x + 64;
-                    *matrix_y = y;
-
+                    if ( y < 8 ) {
+                        *matrix_x = x + 64;
+                        *matrix_y = y;
+                    } else if ( y < 16 ) {
+                        *matrix_x = x;
+                        *matrix_y = y;
+                    }
+                
                 // } else if( x < 80 ) {
                 //     *matrix_x = x - 48;
                 //     y_not_set_yet = setMatrixY( y + 1, matrix_y );
