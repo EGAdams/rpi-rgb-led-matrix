@@ -266,16 +266,16 @@ namespace rgb_matrix
                     *matrix_x = x - 0;
                     y_not_set_yet = setMatrixY( y + 1, matrix_y );
                 } else if( x < 144 ) {
-                    *matrix_x = x + 48;
-                    y_not_set_yet = setMatrixY( y + 2, matrix_y );
-                } else if( x < 160 ) {
                     *matrix_x = x - 128;
                     y_not_set_yet = setMatrixY( y + 2, matrix_y );
+                } else if( x < 160 ) {
+                    *matrix_x = x - 96;
+                    y_not_set_yet = setMatrixY( y + 2, matrix_y );
                 } else if( x < 176 ) {
-                    *matrix_x = x - 112;
+                    *matrix_x = x - 80;
                     y_not_set_yet = setMatrixY( y + 2, matrix_y );
                 } else if( x < 192 ) {
-                    *matrix_x = x + 64;
+                    *matrix_x = x - 64;
                     y_not_set_yet = setMatrixY( y + 2, matrix_y );
                 } else if( x < 208 ) {
                     *matrix_x = x + 208;
