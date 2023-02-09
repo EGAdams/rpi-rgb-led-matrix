@@ -260,10 +260,10 @@ namespace rgb_matrix
                     *matrix_x = x - 32;
                     y_not_set_yet = setMatrixY( y + 1, matrix_y );
                 } else if( x < 112 ) {
-                    *matrix_x = x + 112 - 96;
+                    *matrix_x = x - 16;
                     y_not_set_yet = setMatrixY( y + 1, matrix_y );
                 } else if( x < 128 ) {
-                    *matrix_x = x + 128 - 96;
+                    *matrix_x = x - 0;
                     y_not_set_yet = setMatrixY( y + 1, matrix_y );
                 } else if( x < 144 ) {
                     *matrix_x = x + 144;
