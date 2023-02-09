@@ -20,8 +20,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <iostream.h>
-
 #include <map>
 
 namespace rgb_matrix
@@ -230,7 +228,7 @@ namespace rgb_matrix
             bool setMatrixY( int y, int *matrix_y ) const {
                 
                 if ( y > 31 ) {
-                    cout << "y > 31" << endl;
+                    printf( "y > 31" );
                     *matrix_y = 31;
                 } else {
                     *matrix_y = y;
