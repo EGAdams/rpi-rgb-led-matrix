@@ -253,9 +253,9 @@ namespace rgb_matrix
                 } else if( x < 64 ) {
                     *matrix_x = x + 64;
                     y_not_set_yet = setMatrixY( y, matrix_y );
-                } else if( x < 80 ) {
-                     *matrix_x = x - 48;
-                     y_not_set_yet = setMatrixY( y + 1, matrix_y );
+                // } else if( x < 80 ) {
+                //     *matrix_x = x - 48;
+                //     y_not_set_yet = setMatrixY( y + 1, matrix_y );
                 // } else if( x < 96 ) {
                 //     *matrix_x = x - 32;
                 //     y_not_set_yet = setMatrixY( y + 1, matrix_y );
@@ -337,7 +337,7 @@ namespace rgb_matrix
                 // } else if( x < 512 ) {
                 //     *matrix_x = x + 512;
                 //     y_not_set_yet = setMatrixY( y, matrix_y );
-                // } else {
+                } else {
                     *matrix_x = x;
                 }
                 
