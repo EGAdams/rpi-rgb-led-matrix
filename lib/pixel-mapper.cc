@@ -228,16 +228,8 @@ namespace rgb_matrix
                                             int *matrix_x, int *matrix_y) const
             {
                 if( x < 16 ) {
-                    if ( y < 1 ) {
-                        *matrix_x = x + 16;
-                        *matrix_y = y;
-                    } else if ( y < 2 ) {
-                        *matrix_x = x + 32;
-                        *matrix_y = y - 1;
-                    } else {
-                        *matrix_x = x;
-                        *matrix_y = y;
-                    }
+                    *matrix_x = x + 16;
+                    *matrix_y = y;
                 } else if( x < 32 ) {
                     *matrix_x = x + 32;
                     *matrix_y = y;
