@@ -690,7 +690,7 @@ namespace rgb_matrix
                         *matrix_y = y;
                     } else if ( y < 16 ) {
                         *matrix_x = x + 16;
-                        *matrix_y = y + 8;
+                        *matrix_y = y + 16;
                     } else if ( y < 24 ) {
                         *matrix_x = x + 16;
                         *matrix_y = y;
