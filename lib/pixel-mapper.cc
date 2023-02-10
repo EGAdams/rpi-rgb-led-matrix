@@ -752,9 +752,69 @@ namespace rgb_matrix
             virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
                                             int x, int y,
                                             int *matrix_x, int *matrix_y) const {
-                // shotgun_includes_bottom_row( x, y, matrix_x, matrix_y );
-                // shotgun_all_pixels_top_row_good( x, y, matrix_x, matrix_y );
-                current_experiment( x, y, matrix_x, matrix_y );
+                if( x < 16 ) {
+                    if ( y < 8 ) { 
+                        *matrix_x = x + 16;
+                        *matrix_y = y;
+                    } else if ( y < 16 ) {
+                        *matrix_x = x + 16;
+                        *matrix_y = y;
+                    } else if ( y < 24 ) {
+                        *matrix_x = x + 16;
+                        *matrix_y = y;
+                    } else if ( y < 32 ) {
+                        *matrix_x = x + 16;
+                        *matrix_y = y;
+                    } else {
+                        *matrix_x = x;
+                        *matrix_y = y;
+                    }
+                } else if( x < 32 ) {
+                    if ( y < 8 ) {
+                        *matrix_x = x + 32;
+                        *matrix_y = y;
+                    } else if ( y < 16 ) {
+                        *matrix_x = x + 32;
+                        *matrix_y = y;  
+                    } else if ( y < 24 ) {
+                        *matrix_x = x + 32;
+                        *matrix_y = y;  
+                    } else if ( y < 32 ) {
+                        *matrix_x = x + 32;
+                        *matrix_y = y;
+                    }    
+               } else if( x < 48 ) {
+                    if ( y < 8 ) {
+                        *matrix_x = x + 48;
+                        *matrix_y = y;
+                    } else if ( y < 16 ) {
+                        *matrix_x = x + 48;
+                        *matrix_y = y;
+                    } else if ( y < 24 ) {
+                        *matrix_x = x + 48;
+                        *matrix_y = y;
+                    } else if ( y < 32 ) {
+                        *matrix_x = x + 48;
+                        *matrix_y = y;
+                    }
+                } else if( x < 64 ) {
+                    if ( y < 8 ) {
+                        *matrix_x = x + 64;
+                        *matrix_y = y;
+                    } else if ( y < 16 ) {
+                        *matrix_x = x + 64;
+                        *matrix_y = y;
+                    } else if ( y < 24 ) {
+                        *matrix_x = x + 64;
+                        *matrix_y = y;
+                    } else if ( y < 32 ) {
+                        *matrix_x = x + 64;
+                        *matrix_y = y;
+                    }
+                } else {
+                    *matrix_x = x;
+                    *matrix_y = y;
+                }
             }
 
         private:
