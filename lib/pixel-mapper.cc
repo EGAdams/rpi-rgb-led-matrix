@@ -834,7 +834,7 @@ namespace rgb_matrix
     }
     if (y < 8 || (y < 16 && offset != 0) || (y < 24 && offset != 0) || (y < 32 && offset != 0)) {
         *matrix_x = x + offset;
-        *matrix_y = y;
+        *matrix_y = y + 8;
     } else {
         *matrix_x = x;
         *matrix_y = y;
