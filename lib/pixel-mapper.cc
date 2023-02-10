@@ -547,16 +547,16 @@ namespace rgb_matrix
                     }
                 } else if( x < 32 ) {
                     if ( y < 8 ) {
-                        *matrix_x = x + 16;
+                        *matrix_x = x + 32;
                         *matrix_y = y;
                     } else if ( y < 16 ) {
                         *matrix_x = x;
                         *matrix_y = y + 8;  
                     } else if ( y < 24 ) {
-                        *matrix_x = x + 16;
+                        *matrix_x = x + 32;
                         *matrix_y = y;  
                     } else if ( y < 32 ) {
-                        *matrix_x = x + 16;
+                        *matrix_x = x + 32;
                         *matrix_y = y + 8;
                     }    
                } else if( x < 48 ) {
