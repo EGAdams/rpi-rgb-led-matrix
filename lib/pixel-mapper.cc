@@ -749,73 +749,99 @@ namespace rgb_matrix
                 }
             }
 
-            virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
+            // virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
+            //                                 int x, int y,
+            //                                 int *matrix_x, int *matrix_y) const {
+            //     if( x < 16 ) {
+            //         if ( y < 8 ) { 
+            //             *matrix_x = x + 16;
+            //             *matrix_y = y;
+            //         } else if ( y < 16 ) {
+            //             *matrix_x = x + 16;
+            //             *matrix_y = y;
+            //         } else if ( y < 24 ) {
+            //             *matrix_x = x + 16;
+            //             *matrix_y = y;
+            //         } else if ( y < 32 ) {
+            //             *matrix_x = x + 16;
+            //             *matrix_y = y;
+            //         } else {
+            //             *matrix_x = x;
+            //             *matrix_y = y;
+            //         }
+            //     } else if( x < 32 ) {
+            //         if ( y < 8 ) {
+            //             *matrix_x = x + 32;
+            //             *matrix_y = y;
+            //         } else if ( y < 16 ) {
+            //             *matrix_x = x + 32;
+            //             *matrix_y = y;  
+            //         } else if ( y < 24 ) {
+            //             *matrix_x = x + 32;
+            //             *matrix_y = y;  
+            //         } else if ( y < 32 ) {
+            //             *matrix_x = x + 32;
+            //             *matrix_y = y;
+            //         }    
+            //    } else if( x < 48 ) {
+            //         if ( y < 8 ) {
+            //             *matrix_x = x + 48;
+            //             *matrix_y = y;
+            //         } else if ( y < 16 ) {
+            //             *matrix_x = x + 48;
+            //             *matrix_y = y;
+            //         } else if ( y < 24 ) {
+            //             *matrix_x = x + 48;
+            //             *matrix_y = y;
+            //         } else if ( y < 32 ) {
+            //             *matrix_x = x + 48;
+            //             *matrix_y = y;
+            //         }
+            //     } else if( x < 64 ) {
+            //         if ( y < 8 ) {
+            //             *matrix_x = x + 64;
+            //             *matrix_y = y;
+            //         } else if ( y < 16 ) {
+            //             *matrix_x = x + 64;
+            //             *matrix_y = y;
+            //         } else if ( y < 24 ) {
+            //             *matrix_x = x + 64;
+            //             *matrix_y = y;
+            //         } else if ( y < 32 ) {
+            //             *matrix_x = x + 64;
+            //             *matrix_y = y;
+            //         }
+            //     } else {
+            //         *matrix_x = x;
+            //         *matrix_y = y;
+            //     }
+            // }
+
+        void MapVisibleToMatrix(int matrix_width, int matrix_height,
                                             int x, int y,
                                             int *matrix_x, int *matrix_y) const {
-                if( x < 16 ) {
-                    if ( y < 8 ) { 
-                        *matrix_x = x + 16;
-                        *matrix_y = y;
-                    } else if ( y < 16 ) {
-                        *matrix_x = x + 16;
-                        *matrix_y = y;
-                    } else if ( y < 24 ) {
-                        *matrix_x = x + 16;
-                        *matrix_y = y;
-                    } else if ( y < 32 ) {
-                        *matrix_x = x + 16;
-                        *matrix_y = y;
-                    } else {
-                        *matrix_x = x;
-                        *matrix_y = y;
-                    }
-                } else if( x < 32 ) {
-                    if ( y < 8 ) {
-                        *matrix_x = x + 32;
-                        *matrix_y = y;
-                    } else if ( y < 16 ) {
-                        *matrix_x = x + 32;
-                        *matrix_y = y;  
-                    } else if ( y < 24 ) {
-                        *matrix_x = x + 32;
-                        *matrix_y = y;  
-                    } else if ( y < 32 ) {
-                        *matrix_x = x + 32;
-                        *matrix_y = y;
-                    }    
-               } else if( x < 48 ) {
-                    if ( y < 8 ) {
-                        *matrix_x = x + 48;
-                        *matrix_y = y;
-                    } else if ( y < 16 ) {
-                        *matrix_x = x + 48;
-                        *matrix_y = y;
-                    } else if ( y < 24 ) {
-                        *matrix_x = x + 48;
-                        *matrix_y = y;
-                    } else if ( y < 32 ) {
-                        *matrix_x = x + 48;
-                        *matrix_y = y;
-                    }
-                } else if( x < 64 ) {
-                    if ( y < 8 ) {
-                        *matrix_x = x + 64;
-                        *matrix_y = y;
-                    } else if ( y < 16 ) {
-                        *matrix_x = x + 64;
-                        *matrix_y = y;
-                    } else if ( y < 24 ) {
-                        *matrix_x = x + 64;
-                        *matrix_y = y;
-                    } else if ( y < 32 ) {
-                        *matrix_x = x + 64;
-                        *matrix_y = y;
-                    }
-                } else {
-                    *matrix_x = x;
-                    *matrix_y = y;
-                }
-            }
+            int offset;
+    if (x < 16) {
+        offset = 16;
+    } else if (x < 32) {
+        offset = 32;
+    } else if (x < 48) {
+        offset = 48;
+    } else if (x < 64) {
+        offset = 64;
+    } else {
+        offset = 0;
+    }
+    if (y < 8 || (y < 16 && offset != 0) || (y < 24 && offset != 0) || (y < 32 && offset != 0)) {
+        *matrix_x = x + offset;
+        *matrix_y = y;
+    } else {
+        *matrix_x = x;
+        *matrix_y = y;
+    }
+}             
+
+       
 
         private:
             int parallel_;
