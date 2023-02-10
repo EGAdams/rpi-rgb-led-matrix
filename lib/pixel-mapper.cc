@@ -548,48 +548,48 @@ namespace rgb_matrix
                         *matrix_x = x;
                         *matrix_y = y;
                     }
-            //     } else if( x < 32 ) {
-            //         if ( y < 8 ) {
-            //             *matrix_x = x + 32;
-            //             *matrix_y = y;
-            //         } else if ( y < 16 ) {
-            //             *matrix_x = x + 16;
-            //             *matrix_y = y + 8;  
-            //         } else if ( y < 24 ) {
-            //             *matrix_x = x + 16;
-            //             *matrix_y = y + 8;  
-            //         } else if ( y < 32 ) {
-            //             *matrix_x = x + 32;
-            //             *matrix_y = y + 8;
-            //         }    
-            //    } else if( x < 48 ) {
-            //         if ( y < 8 ) {
-            //             *matrix_x = x + 48;
-            //             *matrix_y = y;
-            //         } else if ( y < 16 ) {
-            //             *matrix_x = x;
-            //             *matrix_y = y + 16;
-            //         } else if ( y < 24 ) {
-            //             *matrix_x = x + 32;
-            //             *matrix_y = y + 8;
-            //         } else if ( y < 32 ) {
-            //             *matrix_x = x + 48;
-            //             *matrix_y = y;
-            //         }
-            //     } else if( x < 64 ) {
-            //         if ( y < 8 ) {
-            //             *matrix_x = x + 64;
-            //             *matrix_y = y;
-            //         } else if ( y < 16 ) {
-            //             *matrix_x = x + 16;
-            //             *matrix_y = y + 8;
-            //         } else if ( y < 24 ) {
-            //             *matrix_x = x + 18;
-            //             *matrix_y = y + 16;
-            //         } else if ( y < 32 ) {
-            //             *matrix_x = x + 32;
-            //             *matrix_y = y;
-            //         }
+                } else if( x < 32 ) {
+                    if ( y < 8 ) {
+                        *matrix_x = x + 32;
+                        *matrix_y = y;
+                    } else if ( y < 16 ) {
+                        *matrix_x = x + 16;
+                        *matrix_y = y + 8;  
+                    } else if ( y < 24 ) {
+                        *matrix_x = x + 16;
+                        *matrix_y = y + 16;  
+                    } else if ( y < 32 ) {
+                        *matrix_x = x + 32;
+                        *matrix_y = y + 8;
+                    }    
+               } else if( x < 48 ) {
+                    if ( y < 8 ) {
+                        *matrix_x = x + 48;
+                        *matrix_y = y;
+                    } else if ( y < 16 ) {
+                        *matrix_x = x + 8;
+                        *matrix_y = y + 16;
+                    } else if ( y < 24 ) {
+                        *matrix_x = x + 48;
+                        *matrix_y = y + 8;
+                    } else if ( y < 32 ) {
+                        *matrix_x = x + 48;
+                        *matrix_y = y;
+                    }
+                } else if( x < 64 ) {
+                    if ( y < 8 ) {
+                        *matrix_x = x + 64;
+                        *matrix_y = y;
+                    } else if ( y < 16 ) {
+                        *matrix_x = x + 8;
+                        *matrix_y = y + 8;
+                    } else if ( y < 24 ) {
+                        *matrix_x = x + 16;
+                        *matrix_y = y + 16;
+                    } else if ( y < 32 ) {
+                        *matrix_x = x + 64;
+                        *matrix_y = y;
+                    }
                 
                 // } else if( x < 80 ) {
                 //     *matrix_x = x - 48;
