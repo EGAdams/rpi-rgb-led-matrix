@@ -1,0 +1,8 @@
+echo "synching git...  "
+git pull
+echo "rebuilding project..."
+make
+echo "running example... "
+sudo ./examples-api-use/minimal-example --led-chain=16
+
+
