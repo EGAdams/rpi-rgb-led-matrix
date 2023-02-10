@@ -574,8 +574,7 @@ bool RGBMatrix::Impl::ApplyPixelMapper(const PixelMapper *mapper) {
       int orig_x = -1, orig_y = -1;
       mapper->MapVisibleToMatrix( old_width, old_height, x, y, &orig_x, &orig_y );
       if ( orig_x < 0 || orig_y < 0 || orig_x >= old_width || orig_y >= old_height ) {
-        fprintf(stderr, "Error in PixelMapper: (%d, %d) -> (%d, %d) [range: "
-                "%dx%d]\n", x, y, orig_x, orig_y, old_width, old_height);
+        printf( "Error in PixelMapper: (%d, %d) -> (%d, %d) [range: " "%dx%d]\n", x, y, orig_x, orig_y, old_width, old_height );
         //exit( 1 );        
         continue;
       } else {
