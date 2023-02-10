@@ -3,6 +3,6 @@ git pull
 echo "rebuilding project..."
 make
 echo "running example... "
-sudo ./examples-api-use/minimal-example --led-chain=16
+sudo ./examples-api-use/minimal-example --led-chain=8
 
 
