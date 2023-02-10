@@ -377,7 +377,7 @@ namespace rgb_matrix
 
             //////////////// shotgun_all_pixels_short_top_row ///////////////////////////////////////
 
-            virtual void shotgun_all_pixels_short_top_row( int x, int y, int *matrix_x, int *matrix_y ) const {
+            virtual void shotgun_all_pixels_top_row_good( int x, int y, int *matrix_x, int *matrix_y ) const {
                 if( x < 16 ) {
                     if ( y < 8 ) { 
                         *matrix_x = x + 16;
@@ -532,7 +532,7 @@ namespace rgb_matrix
                                             int x, int y,
                                             int *matrix_x, int *matrix_y) const {
                 // shotgun_includes_bottom_row( x, y, matrix_x, matrix_y );
-                shotgun_all_pixels_short_top_row( x, y, matrix_x, matrix_y );
+                shotgun_all_pixels_top_row_good( x, y, matrix_x, matrix_y );
             }
 
         private:
