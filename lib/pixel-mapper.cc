@@ -536,7 +536,7 @@ namespace rgb_matrix
                         *matrix_x = x + 16;
                         *matrix_y = y;
                     } else if ( y < 16 ) {
-                        printf( " y < 16.  adding 16 to x, keeping y the same" );
+                        printf( "y < 16.  adding 16 to x, keeping y the same" );
                         *matrix_x = x + 32;
                         *matrix_y = y;
                     } else if ( y < 24 ) {
