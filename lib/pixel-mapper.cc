@@ -375,9 +375,9 @@ namespace rgb_matrix
             }
 
 
-            //////////////////////////////////// another shotgun ///////////////////////////////////////
+            //////////////// shotgun_all_pixels_short_top_row ///////////////////////////////////////
 
-            virtual void another_shotgun( int x, int y, int *matrix_x, int *matrix_y ) const {
+            virtual void shotgun_all_pixels_short_top_row( int x, int y, int *matrix_x, int *matrix_y ) const {
                 if( x < 16 ) {
                     if ( y < 8 ) { 
                         *matrix_x = x + 16;
@@ -425,7 +425,7 @@ namespace rgb_matrix
                     }
                 } else if( x < 64 ) {
                     if ( y < 8 ) {
-                        *matrix_x = x + 32;
+                        *matrix_x = x + 64;
                         *matrix_y = y;
                     } else if ( y < 16 ) {
                         *matrix_x = x + 16;
@@ -532,7 +532,7 @@ namespace rgb_matrix
                                             int x, int y,
                                             int *matrix_x, int *matrix_y) const {
                 // shotgun_includes_bottom_row( x, y, matrix_x, matrix_y );
-                another_shotgun( x, y, matrix_x, matrix_y );
+                shotgun_all_pixels_short_top_row( x, y, matrix_x, matrix_y );
             }
 
         private:
