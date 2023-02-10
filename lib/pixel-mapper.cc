@@ -223,10 +223,7 @@ namespace rgb_matrix
             }
 
             
-            virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
-                                            int x, int y,
-                                            int *matrix_x, int *matrix_y) const
-            {
+            virtual void shotgun_includes_bottom_row( int x, int y, int *matrix_x, int *matrix_y ) const {
                 if( x < 16 ) {
                     if ( y < 8 ) { 
                         *matrix_x = x + 16;
@@ -375,6 +372,12 @@ namespace rgb_matrix
                     *matrix_x = x;
                     *matrix_y = y;
                 }
+            }
+
+            virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
+                                            int x, int y,
+                                            int *matrix_x, int *matrix_y) const {
+                shotgun_includes_bottom_row( x, y, matrix_x, matrix_y );
                 
             }
 
