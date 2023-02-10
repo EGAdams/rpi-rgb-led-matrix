@@ -55,7 +55,7 @@ static void DrawLine(Canvas *canvas)
                 // canvas->Fill( 0, 0, 0 ); 
                 canvas->SetPixel( x_position, y_position, 0, 255, 0 );
                 // printf( "canvas width: %d  canvas height: %d \n", canvas->width(), canvas->height() );
-                usleep ( 1 * 1000 );
+                usleep ( 5 * 1000 );
             }
         }
         usleep ( 1 * 1000 * 1000 );
