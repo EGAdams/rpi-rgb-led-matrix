@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
     defaults.rows = 32;
     defaults.cols = 32;
     defaults.brightness = 20;
-    // defaults.pixel_mapper_config = "U-mapper";
+    defaults.pixel_mapper_config = "U-mapper";
     defaults.show_refresh_rate = false;
     defaults.chain_length = 1;
     defaults.parallel = 1;
