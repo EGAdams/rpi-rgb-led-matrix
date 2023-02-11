@@ -252,11 +252,11 @@ namespace rgb_matrix
             y %= slab_height;
 
             // Check which side the coordinates are on 
-            if ( y < panel_height ) { 
-                
+            if (y < panel_height) {
                 // On top panel, swap x and y and invert y
-                x = matrix_height - y - 1;
-                y = matrix_width  - x - 1;
+                int temp_x = x;
+                x = y;
+                y = matrix_width - temp_x - 1;
             } else {
                 // On the bottom panel, invert x and y
                 x = visible_width - x - 1;
