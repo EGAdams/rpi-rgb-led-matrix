@@ -247,20 +247,20 @@ namespace rgb_matrix
             // matrix_width = 128; // lets start making constants
             // Calculate visible width 
             // const int visible_width = ( 128 / 64 ) * 32;
-            matrix_height = 32; // lets start making constants
+            // matrix_height = 32; // lets start making constants
 
             // Calculate slab height
-            const int slab_height = 2 * matrix_height;
+            const int slab_height = 2 * 32;
                     
             // Calculate base y
-            const int base_y = ( y / slab_height ) * matrix_height;
+            const int base_y = ( y / slab_height ) * 32;
             // Update y
             y %= slab_height;
 
             // Check which side the coordinates are on 
-            if ( y < matrix_height ) {
+            if ( y < 32 ) {
                 x = 128 - x - 1;
-                y = matrix_height - y - 1;
+                y = 32 - y - 1;
             } else {
                 // On the bottom panel, invert x and y
                 x = 64          - x - 1;
