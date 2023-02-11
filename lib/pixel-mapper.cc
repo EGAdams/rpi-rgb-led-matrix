@@ -264,8 +264,8 @@ namespace rgb_matrix
                 y = matrix_width - temp_x - 1;
             } else {
                 // On the bottom panel, invert x and y
-                x = visible_width /* - x */ - 1;
-                y = slab_height   /* - y */ - 1;
+                x = visible_width - x - 1;
+                y = slab_height - y - 1;
             }
 
             // Update matrix coordinates
