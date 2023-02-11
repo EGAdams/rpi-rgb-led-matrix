@@ -262,16 +262,18 @@ namespace rgb_matrix
             // Check which side the coordinates are on 
             if ( y < 32 ) {
                 x = 128 - x - 1;
-                y = 32 - y - 1;
+                y = 32  - y - 1;
             } else {
                 // On the bottom panel, invert x and y
-                x = 64          - x - 1;
+                x = 64 - x - 1;
                 y = 64 - y - 1;
             }
 
             // Update matrix coordinates
             *matrix_x = x;
             *matrix_y = /* base_y */ 0 + y;
+
+            printf( "x: %d, y: %d, matrix_x: %d, matrix_y: %d" );
         }
 
 
