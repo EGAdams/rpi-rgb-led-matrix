@@ -239,20 +239,21 @@ namespace rgb_matrix
         void MapVisibleToMatrix(int matrix_width, int matrix_height, 
                                 int x, int y, 
                                 int *matrix_x, int *matrix_y) const {
-            // Calculate panel height
-            const int panel_height = matrix_height / parallel_;
+            
+            
             // Calculate visible width 
-            const int visible_width = (matrix_width / 64) * 32;
+            const int visible_width = ( matrix_width / 64 ) * 32;
+            
             // Calculate slab height
-            const int slab_height = 2 * panel_height;
+            const int slab_height = 2 * matrix_height;
                     
             // Calculate base y
-            const int base_y = ( y / slab_height ) * panel_height;
+            const int base_y = ( y / slab_height ) * matrix_height;
             // Update y
             y %= slab_height;
 
             // Check which side the coordinates are on 
-            if (y < panel_height) {
+            if (y < matrix_height) {
                 // On top panel, swap x and y and invert y
                 int temp_x = x;
                 x = y;
