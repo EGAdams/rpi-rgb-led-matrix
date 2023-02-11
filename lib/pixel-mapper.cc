@@ -253,10 +253,10 @@ namespace rgb_matrix
 
             // Check which side the coordinates are on 
             if ( y < panel_height ) { 
+                
                 // On top panel, swap x and y and invert y
-                int temp = x;
                 x = matrix_height - y - 1;
-                y = matrix_width - temp - 1;
+                y = matrix_width  - x - 1;
             } else {
                 // On the bottom panel, invert x and y
                 x = visible_width - x - 1;
