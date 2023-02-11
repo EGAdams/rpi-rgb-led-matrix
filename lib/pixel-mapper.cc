@@ -226,7 +226,7 @@ namespace rgb_matrix
             y %= slab_height;
             if (y < panel_height) {
                 // x += matrix_width / 2;
-                x = matrix_width - x - 1;
+                x = matrix_width - 1;
                 y = panel_height - y - 1;
             } else {
                 x = visible_width - x - 1;
