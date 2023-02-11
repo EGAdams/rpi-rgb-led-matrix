@@ -244,9 +244,9 @@ namespace rgb_matrix
                                 int x, int y, 
                                 int *matrix_x, int *matrix_y) const {
             
-            matrix_width = 128; // lets start making constants
+            // matrix_width = 128; // lets start making constants
             // Calculate visible width 
-            const int visible_width = ( matrix_width / 64 ) * 32;
+            const int visible_width = ( 128 / 64 ) * 32;
 
             // Calculate slab height
             const int slab_height = 2 * matrix_height;
@@ -258,7 +258,7 @@ namespace rgb_matrix
 
             // Check which side the coordinates are on 
             if ( y < matrix_height ) {
-                x = matrix_width  - x - 1;
+                x = 128 - x - 1;
                 y = matrix_height - y - 1;
             } else {
                 // On the bottom panel, invert x and y
