@@ -268,7 +268,7 @@ namespace rgb_matrix
 
             // Update matrix coordinates
             *matrix_x = x;
-            *matrix_y = base_y + y;
+            *matrix_y = base_y - y;
         }
 
 
