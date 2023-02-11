@@ -234,7 +234,11 @@ namespace rgb_matrix
 
 
         /*
-        This function maps visible coordinates to matrix coordinates, rotating the output by 180 degrees
+            This function maps visible coordinates to matrix coordinates.
+            
+            panel_height has been removed from the code, as _parallel_ is always 1
+            remember to put it pack in for _parallel values greater than 1
+
         */
         void MapVisibleToMatrix(int matrix_width, int matrix_height, 
                                 int x, int y, 
@@ -243,7 +247,7 @@ namespace rgb_matrix
             
             // Calculate visible width 
             const int visible_width = ( matrix_width / 64 ) * 32;
-            
+
             // Calculate slab height
             const int slab_height = 2 * matrix_height;
                     
@@ -253,7 +257,7 @@ namespace rgb_matrix
             y %= slab_height;
 
             // Check which side the coordinates are on 
-            if (y < matrix_height) {
+            if ( y < matrix_height ) {
                 // On top panel, swap x and y and invert y
                 int temp_x = x;
                 x = y;
