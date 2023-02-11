@@ -225,12 +225,12 @@ namespace rgb_matrix
             const int base_y = (y / slab_height) * panel_height;
             y %= slab_height;
             if (y < panel_height) {
-                x += matrix_width / 2;
-                // x = matrix_width - x - 1;
-                // y = panel_height - y - 1;
+                // x += matrix_width / 2;
+                x = matrix_width - x - 1;
+                y = panel_height - y - 1;
             } else {
-            x = visible_width - x - 1;
-            y = slab_height - y - 1;
+                x = visible_width - x - 1;
+                y = slab_height - y - 1;
             }
             *matrix_x = x;
             *matrix_y = base_y + y;
