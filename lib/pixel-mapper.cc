@@ -258,6 +258,8 @@ namespace rgb_matrix
             // Update y
             y %= 64;
 
+            printf( "y: %d, base_y: %d \n", y, base_y );
+
             // Check which side the coordinates are on 
             if ( y < 32 ) {
                 x = 128 - x - 1;
