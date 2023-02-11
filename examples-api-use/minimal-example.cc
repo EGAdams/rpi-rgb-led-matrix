@@ -55,7 +55,7 @@ static void DrawLine(Canvas *canvas)
                 // canvas->Fill( 0, 0, 0 ); 
                 canvas->SetPixel( x_position, y_position, 0, 255, 0 );
                 // printf( "canvas width: %d  canvas height: %d \n", canvas->width(), canvas->height() );
-                usleep ( 5 * 1000 );
+                usleep ( 2 * 1000 );
             }
         }
         usleep ( 1 * 1000 * 1000 );
@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
     defaults.hardware_mapping = "adafruit-hat"; // or e.g. "adafruit-hat"
     defaults.rows = 32;
     defaults.cols = 32;
-    defaults.brightness = 5;
+    defaults.brightness = 1;
     defaults.pixel_mapper_config = "U-mapper";
     defaults.show_refresh_rate = false;
     defaults.chain_length = 1;
