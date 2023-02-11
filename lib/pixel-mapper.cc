@@ -166,7 +166,7 @@ namespace rgb_matrix
             bool horizontal_;
         };
 
-                // If we take a long chain of panels and arrange them in a U-shape, so
+        // If we take a long chain of panels and arrange them in a U-shape, so
         // that after half the panels we bend around and continue below. This way
         // we have a panel that has double the height but only uses one chain.
         // A single chain display with four 32x32 panels can then be arranged in this
@@ -225,7 +225,9 @@ namespace rgb_matrix
             const int base_y = (y / slab_height) * panel_height;
             y %= slab_height;
             if (y < panel_height) {
-            x += matrix_width / 2;
+                // x += matrix_width / 2;
+                x = matrix_width - x - 1;
+                y = panel_height - y - 1;
             } else {
             x = visible_width - x - 1;
             y = slab_height - y - 1;
