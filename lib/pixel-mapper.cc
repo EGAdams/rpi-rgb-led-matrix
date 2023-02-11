@@ -254,9 +254,9 @@ namespace rgb_matrix
             // const int slab_height = 2 * 32;
                     
             // Calculate base y
-            const int base_y = ( y / slab_height ) * 32;
+            const int base_y = ( y / 64 ) * 32;
             // Update y
-            y %= slab_height;
+            y %= 64;
 
             // Check which side the coordinates are on 
             if ( y < 32 ) {
@@ -265,7 +265,7 @@ namespace rgb_matrix
             } else {
                 // On the bottom panel, invert x and y
                 x = 64          - x - 1;
-                y = slab_height - y - 1;
+                y = 64 - y - 1;
             }
 
             // Update matrix coordinates
