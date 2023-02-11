@@ -268,8 +268,8 @@ namespace rgb_matrix
                 x = x + 64;
                 y = y - 32;
             } else {
-                x = x + 96;
-                y = y - 64;
+                x = x + 64;
+                y = y - 32;
             }
 
             // Update matrix coordinates
