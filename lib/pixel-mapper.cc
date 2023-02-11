@@ -261,12 +261,12 @@ namespace rgb_matrix
 
             // Check which side the coordinates are on 
             if ( y < 32 ) {
-                x = 127 - x;
-                y = 31  - y;
+                x = x;
+                y = y + 31;
             } else {
                 // On the bottom panel, invert x and y
-                x = 63 - x;
-                y = 63 - y;
+                x = x + 63;
+                y = y + 63;
             }
 
             // Update matrix coordinates
