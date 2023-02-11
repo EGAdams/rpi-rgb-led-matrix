@@ -273,7 +273,7 @@ namespace rgb_matrix
             *matrix_x = x;
             *matrix_y = /* base_y */ 0 + y;
 
-            printf( "x: %d, y: %d, matrix_x: %d, matrix_y: %d" );
+            printf( "x: %d, y: %d, matrix_x: %d, matrix_y: %d\n", x, y, *matrix_x, *matrix_y );
         }
 
 
