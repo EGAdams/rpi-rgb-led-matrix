@@ -237,17 +237,25 @@ namespace rgb_matrix
             This function maps visible coordinates to matrix coordinates.
             
             panel_height has been removed from the code, as _parallel_ is always 1
-            remember to put it pack in for _parallel values greater than 1 */
+            remember to put it pack in for _parallel values greater than 1
 
+        */
         void MapVisibleToMatrix(int matrix_width, int matrix_height, 
                                 int x, int y, 
                                 int *matrix_x, int *matrix_y) const {
+            
+            // matrix_width = 128; // lets start making constants
+            // Calculate visible width 
+            // const int visible_width = ( 128 / 64 ) * 32;
+            // matrix_height = 32; // lets start making constants
+            // const int slab_height = 64;
+
+            // Calculate slab height
+            // const int slab_height = 2 * 32;
                     
             // Calculate base y
-            // const int base_y = ( y / 64 ) * 32;
+            const int base_y = ( y / 64 ) * 32;
             
-            const int base_y = y / 2;
-
             // Update y
             y %= 64;
 
