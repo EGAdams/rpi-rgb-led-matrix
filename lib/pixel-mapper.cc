@@ -266,7 +266,7 @@ namespace rgb_matrix
             } else {
                 // On the bottom panel, invert x and y
                 x = x + 63;
-                y = y + 63;
+                y = y - 31;
             }
 
             // Update matrix coordinates
