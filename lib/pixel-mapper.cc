@@ -254,11 +254,10 @@ namespace rgb_matrix
             // const int slab_height = 2 * 32;
                     
             // Calculate base y
-            const int base_y = ( y / 64 ) * 32;
+            // const int base_y = ( y / 64 ) * 32;
             // Update y
-            y %= 64;
-
-            printf( "y: %d, base_y: %d \n", y, base_y );
+            // y %= 64;
+            // base_y = 0 always
 
             // Check which side the coordinates are on 
             if ( y < 32 ) {
@@ -272,7 +271,7 @@ namespace rgb_matrix
 
             // Update matrix coordinates
             *matrix_x = x;
-            *matrix_y = base_y + y;
+            *matrix_y = /* base_y */ 0 + y;
         }
 
 
