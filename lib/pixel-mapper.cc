@@ -263,10 +263,13 @@ namespace rgb_matrix
             if ( y < 32 ) {
                 x = x;
                 y = y;
-            } else {
+            } else if ( y < 64 ) {
                 // On the bottom panel, invert x and y
                 x = x + 64;
                 y = y - 32;
+            } else {
+                x = x + 96;
+                y = y - 64;
             }
 
             // Update matrix coordinates
