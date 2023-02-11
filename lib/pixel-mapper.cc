@@ -244,10 +244,10 @@ namespace rgb_matrix
                 y = matrix_height; // - y - 1; // lets try matrix_height here instead of panel_height
             } else {
                 // On the bottom panel, invert x
-                x = visible_width; // - x - 1;
+                x = visible_width - x - 1;
 
                 // Invert y
-                y = slab_height; //  - y - 1;
+                y = slab_height - y - 1;
             }
 
             // Update matrix coordinates
