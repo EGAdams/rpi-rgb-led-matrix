@@ -254,8 +254,8 @@ namespace rgb_matrix
             // const int slab_height = 2 * 32;
                     
             // Calculate base y
-            const int base_y = ( y / 64 ) * 32;
-            
+            const int base_y = ( y / 2 );
+
             // Update y
             y %= 64;
 
