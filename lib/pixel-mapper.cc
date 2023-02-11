@@ -258,12 +258,12 @@ namespace rgb_matrix
 
             // Check which side the coordinates are on 
             if ( y < matrix_height ) {
-                x = matrix_width  - x - 1;
-                y = matrix_height - y - 1;
+                x = matrix_width  - x - 1 - x -1;
+                y = matrix_height - y - 1 - y -1;
             } else {
                 // On the bottom panel, invert x and y
-                x = visible_width - x - 1;
-                y = slab_height - y - 1;
+                x = visible_width - x - 1 - x -1;
+                y = slab_height   - y - 1 - y -1;
             }
 
             // Update matrix coordinates
