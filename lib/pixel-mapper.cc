@@ -248,9 +248,10 @@ namespace rgb_matrix
             // Calculate visible width 
             // const int visible_width = ( 128 / 64 ) * 32;
             // matrix_height = 32; // lets start making constants
+            const int slab_height = 64;
 
             // Calculate slab height
-            const int slab_height = 2 * 32;
+            // const int slab_height = 2 * 32;
                     
             // Calculate base y
             const int base_y = ( y / slab_height ) * 32;
