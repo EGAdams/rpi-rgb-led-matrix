@@ -234,7 +234,7 @@ namespace rgb_matrix
 
 
         /*
-            This function maps visible coordinates to matrix coordinates, rotating the output by 180 degrees
+        This function maps visible coordinates to matrix coordinates, rotating the output by 180 degrees
         */
         void MapVisibleToMatrix(int matrix_width, int matrix_height, 
                                 int x, int y, 
@@ -245,7 +245,7 @@ namespace rgb_matrix
             const int visible_width = (matrix_width / 64) * 32;
             // Calculate slab height
             const int slab_height = 2 * panel_height;
-            
+                    
             // Calculate base y
             const int base_y = ( y / slab_height ) * panel_height;
             // Update y
@@ -258,10 +258,8 @@ namespace rgb_matrix
                 x = matrix_height - y - 1;
                 y = matrix_width - temp - 1;
             } else {
-                // On the bottom panel, invert x
+                // On the bottom panel, invert x and y
                 x = visible_width - x - 1;
-
-                // Invert y
                 y = slab_height - y - 1;
             }
 
@@ -269,6 +267,7 @@ namespace rgb_matrix
             *matrix_x = x;
             *matrix_y = base_y + y;
         }
+
 
 
         private:
