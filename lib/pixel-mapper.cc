@@ -262,7 +262,7 @@ namespace rgb_matrix
             // Check which side the coordinates are on 
             if ( y < 32 ) {
                 x = x;
-                y = y + 31;
+                y = y;
             } else {
                 // On the bottom panel, invert x and y
                 x = x + 64;
