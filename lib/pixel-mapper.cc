@@ -216,6 +216,10 @@ namespace rgb_matrix
             return true;
         }
 
+        // case 180:
+        //             *matrix_x = matrix_width - x - 1;
+        //             *matrix_y = matrix_height - y - 1;
+
         // This function maps visible coordinates to matrix coordinates
         void MapVisibleToMatrix(int matrix_width, int matrix_height, 
                                 int x, int y, 
@@ -235,12 +239,11 @@ namespace rgb_matrix
             // Check which side the coordinates are on 
             if (y < panel_height) { 
                 // On top panel, invert x and y
-                x = matrix_width - x - 1;
-                y = panel_height - y - 1;
+                x = matrix_width  - x - 1;
+                y = matrix_height - y - 1; // lets try matrix_height here instead of panel_height
             } else {
                 // On the bottom panel, invert x
                 x = visible_width - x - 1;
-
 
                 // Invert y
                 y = slab_height - y - 1;
