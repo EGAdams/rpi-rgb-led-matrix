@@ -1,4 +1,7 @@
+
+
 sudo ./demo -D -m 0 --led-gpio-mapping="adafruit-hat" --led-multiplexing=2 --led-chain=2 > temp.txt
+
 PixelMapper: ( 0, 0 ) -> ( 16, 0 ) [ range: 128x16 ]
 PixelMapper: ( 1, 0 ) -> ( 17, 0 ) [ range: 128x16 ]
 PixelMapper: ( 2, 0 ) -> ( 18, 0 ) [ range: 128x16 ]
