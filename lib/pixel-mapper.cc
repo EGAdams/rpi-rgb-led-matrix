@@ -244,7 +244,7 @@ namespace rgb_matrix
                                 int x, int y, 
                                 int *matrix_x, int *matrix_y) const {
             
-            
+            matrix_width = 128; // lets start making constants
             // Calculate visible width 
             const int visible_width = ( matrix_width / 64 ) * 32;
 
@@ -268,7 +268,7 @@ namespace rgb_matrix
 
             // Update matrix coordinates
             *matrix_x = x;
-            *matrix_y = base_y - y;
+            *matrix_y = base_y + y;
         }
 
 
