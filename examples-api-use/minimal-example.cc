@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
     defaults.hardware_mapping = "adafruit-hat"; // or e.g. "adafruit-hat"
     defaults.rows = 32;
     defaults.cols = 32;
-    defaults.brightness = 20;
+    defaults.brightness = 5;
     defaults.pixel_mapper_config = "U-mapper";
     defaults.show_refresh_rate = false;
     defaults.chain_length = 1;
