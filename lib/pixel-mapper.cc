@@ -252,7 +252,7 @@ namespace rgb_matrix
             y %= slab_height;
 
             // Check which side the coordinates are on 
-            if (y < panel_height) {
+            if (y >= panel_height) {
                 // On top panel, swap x and y and invert y
                 int temp_x = x;
                 x = y;
