@@ -58,7 +58,7 @@ static void DrawLine(Canvas *canvas)
                 usleep ( 1 );
             }
         }
-        usleep ( 1 * 500 * 1000 );
+        usleep ( 1 * 5 * 1 );
         canvas->Fill( 0, 0, 0 );    
     } // wait a little to slow down things.
 
