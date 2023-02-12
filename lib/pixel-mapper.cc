@@ -239,46 +239,29 @@ namespace rgb_matrix
             panel_height has been removed from the code, as _parallel_ is always 1
             remember to put it pack in for _parallel values greater than 1
 
-        */
-        void MapVisibleToMatrix(int matrix_width, int matrix_height, 
-                                int x, int y, 
-                                int *matrix_x, int *matrix_y) const {
-            
-            // matrix_width = 128; // lets start making constants
-            // Calculate visible width 
-            // const int visible_width = ( 128 / 64 ) * 32;
-            // matrix_height = 32; // lets start making constants
-            // const int slab_height = 64;
+        */ 
+       
+        #define PANEL_HEIGHT  32
+        #define SLAB_HEIGHT   64
+        #define MATRIX_WIDTH  64
+        #define VISIBLE_WIDTH 64
 
-            // Calculate slab height
-            // const int slab_height = 2 * 32;
-                    
-            // Calculate base y
-            // const int base_y = ( y / 64 ) * 32;
-            // Update y
-            // y %= 64;
-            // base_y = 0 always
-
-            // Check which side the coordinates are on 
+        virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
+                                  int x, int y,
+                                  int *matrix_x, int *matrix_y) const {
+            // const int panel_height = matrix_height / parallel_;
+            // const int visible_width = (256 / 64) * 32;
+            // const int slab_height = 2 * 32;           // one folded u-shape #define SLAB_HEIGHT 64
+            const int base_y = ( y / 64 ) * 32;
+            y %= 64;
             if ( y < 32 ) {
-                x = x;
-                y = y;
-            } else if ( y < 64 ) {
-                x = x + 64;
-                y = y - 32;
-            } else if ( y < 96 ) {
-                x = x;
-                y = y;
+                x = x + 128;
             } else {
-                x = x + 64;
-                y = y - 32;
+                x = 64 - x - 1;
+                y = 64 - y - 1;
             }
-
-            // Update matrix coordinates
             *matrix_x = x;
-            *matrix_y = /* base_y */ 0 + y;
-
-            // printf( "x: %d, y: %d, matrix_x: %d, matrix_y: %d\n", x, y, *matrix_x, *matrix_y );
+            *matrix_y = base_y + y;
         }
 
 

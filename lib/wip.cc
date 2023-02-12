@@ -714,3 +714,55 @@
                 // Invert y
                 y = slab_height - y - 1; }
          }    
+
+
+
+
+         // this works until > 64
+                 /*
+            This function maps visible coordinates to matrix coordinates.
+            
+            panel_height has been removed from the code, as _parallel_ is always 1
+            remember to put it pack in for _parallel values greater than 1
+
+        */
+        void MapVisibleToMatrix(int matrix_width, int matrix_height, 
+                                int x, int y, 
+                                int *matrix_x, int *matrix_y) const {
+            
+            // matrix_width = 128; // lets start making constants
+            // Calculate visible width 
+            // const int visible_width = ( 128 / 64 ) * 32;
+            // matrix_height = 32; // lets start making constants
+            // const int slab_height = 64;
+
+            // Calculate slab height
+            // const int slab_height = 2 * 32;
+                    
+            // Calculate base y
+            // const int base_y = ( y / 64 ) * 32;
+            // Update y
+            // y %= 64;
+            // base_y = 0 always
+
+            // Check which side the coordinates are on 
+            if ( y < 32 ) {
+                x = x;
+                y = y;
+            } else if ( y < 64 ) {
+                x = x + 64;
+                y = y - 32;
+            } else if ( y < 96 ) {
+                x = x;
+                y = y;
+            } else {
+                x = x + 64;
+                y = y - 32;
+            }
+
+            // Update matrix coordinates
+            *matrix_x = x;
+            *matrix_y = /* base_y */ 0 + y;
+
+            // printf( "x: %d, y: %d, matrix_x: %d, matrix_y: %d\n", x, y, *matrix_x, *matrix_y );
+        }
