@@ -261,10 +261,10 @@ namespace rgb_matrix
                 x = x + 64;
                 y = y - 32;
             } else if ( y < 96 ) {
-                x = x + 128;
+                x = x + x;
                 y = y - 32;
             } else {
-                x = x + 192;
+                x = x + x;
                 y = y - 64;
             }
             *matrix_x = x;
