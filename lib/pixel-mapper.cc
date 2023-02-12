@@ -255,7 +255,8 @@ namespace rgb_matrix
             const int base_y = ( y / 64 ) * 32;
             y %= 64;
             if ( y < 32 ) {
-                x = x + 128;
+                x = x;
+                y = y;
             } else {
                 x = 64 - x - 1;
                 y = 64 - y - 1;
