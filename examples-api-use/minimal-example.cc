@@ -50,12 +50,12 @@ static void DrawLine(Canvas *canvas)
     canvas->Fill(0, 0, 0);
     
     for ( int test_count = 0; test_count < 500; test_count++ ) {
-        for ( int y_position = -128; y_position < 128; y_position++ ) {
-            for ( int x_position = -128; x_position < 128; x_position++ ) {
+        for ( int y_position = -256; y_position < 256; y_position++ ) {
+            for ( int x_position = -256; x_position < 256; x_position++ ) {
                 // canvas->Fill( 0, 0, 0 ); 
                 canvas->SetPixel( x_position, y_position, 0, 255, 0 );
                 // printf( "canvas width: %d  canvas height: %d \n", canvas->width(), canvas->height() );
-                usleep ( 1 * 500 );
+                usleep ( 1 * 5 );
             }
         }
         usleep ( 1 * 500 * 1000 );
