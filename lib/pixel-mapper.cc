@@ -264,7 +264,9 @@ namespace rgb_matrix
                 x = x;
                 y = y;
             } else if ( y < 64 ) {
-                // On the bottom panel, invert x and y
+                x = x + 64;
+                y = y - 32;
+            } else if ( y < 96 ) {
                 x = x + 64;
                 y = y - 32;
             } else {
