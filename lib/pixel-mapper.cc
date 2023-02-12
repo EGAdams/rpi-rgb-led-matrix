@@ -268,7 +268,7 @@ namespace rgb_matrix
                 y = y - 128;
             }
             *matrix_x = x;
-            *matrix_y = y;
+            *matrix_y = 64 + y;
         }
 
 
