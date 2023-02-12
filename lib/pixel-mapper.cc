@@ -264,7 +264,7 @@ namespace rgb_matrix
                 x = x + 128;
                 y = y - 64;
             } else {
-                x = x + 192;
+                x = x + 128;
                 y = y - 96;
             }
             *matrix_x = x;
