@@ -258,8 +258,8 @@ namespace rgb_matrix
                 x = x;
                 y = y;
             } else {
-                x = 64 - x - 1;
-                y = 64 - y - 1;
+                x = x + 64;
+                y = y - 32;
             }
             *matrix_x = x;
             *matrix_y = base_y + y;
