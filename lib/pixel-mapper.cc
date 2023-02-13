@@ -262,7 +262,7 @@ namespace rgb_matrix
                 x = MATRIX_WIDTH  - x - 1;
                 y = MATRIX_HEIGHT - y - 1;
             
-            if ( y < MATRIX_HEIGHT * 2 ) {
+            if ( y < ( MATRIX_HEIGHT * 2 )) {
 
                 // x += matrix_width / 2;
                 x = MATRIX_WIDTH  - x - 1;
