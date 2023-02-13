@@ -5,4 +5,5 @@ echo "rebuilding project..."
 make
 echo "running example... "
 #sudo ./examples-api-use/minimal-example --led-chain=4
-sudo examples-api-use/minimal-example --led-chain=4 --led-multiplexing=2 --led-pixel-mapper="U-mapper;Mirror:V"
+#sudo examples-api-use/minimal-example --led-chain=4 --led-multiplexing=2 --led-pixel-mapper="U-mapper"
+sudo examples-api-use/minimal-example --led-chain=8 --led-multiplexing=2 --led-pixel-mapper="U-mapper;Rotate:180"
