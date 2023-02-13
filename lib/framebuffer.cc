@@ -669,7 +669,7 @@ int Framebuffer::height() const { return (*shared_mapper_)->height(); }
 
 void Framebuffer::SetPixel(int x, int y, uint8_t r, uint8_t g, uint8_t b) {
   const PixelDesignator *designator = (*shared_mapper_)->get(x, y);
-  printf( "x:%d  y:%d  framebuffer_width: %d  framebuffer_height: %d \n", x, y, width(), height() );
+  printf( "x:%d  y:%d  shared_mapper_width: %d  shared_mapper_height: %d \n", x, y, (*shared_mapper_)->width(), (*shared_mapper_)->height() );
   if (designator == NULL) return;
   const long pos = designator->gpio_word;
   if (pos < 0) return;  // non-used pixel marker.
