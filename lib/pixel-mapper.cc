@@ -258,9 +258,9 @@ namespace rgb_matrix
 
             if ( y < MATRIX_HEIGHT ) {
 
-                x += matrix_width / 2;
-                //x = x;
-                //y = y;
+                // x += matrix_width / 2;
+                x = x;
+                y = y;
             
             } else if ( y < ( 2 * MATRIX_HEIGHT )) {
                 x = x + VISIBLE_WIDTH;
@@ -268,11 +268,11 @@ namespace rgb_matrix
             
             } else if ( y < ( 3 * MATRIX_HEIGHT )) {
                 x = x + VISIBLE_WIDTH;
-                y = y - ( SLAB_HEIGHT / 2 ); //  - y - 1;
+                y = y - ( SLAB_HEIGHT / 4 ); //  - y - 1;
             
             } else if ( y < ( 4 * MATRIX_HEIGHT )){
                 x = x + VISIBLE_WIDTH;
-                y = y - ( SLAB_HEIGHT / 2 ); //  - y - 1;
+                y = y - ( SLAB_HEIGHT / 4 ); //  - y - 1;
             }
             *matrix_x = x;
             *matrix_y = base_y + y;
