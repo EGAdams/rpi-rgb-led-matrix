@@ -256,17 +256,11 @@ namespace rgb_matrix
             const int base_y = (y / SLAB_HEIGHT) * MATRIX_HEIGHT;
             y %= SLAB_HEIGHT;
 
-            if ( y < MATRIX_HEIGHT ) {
+            if (y < MATRIX_HEIGHT ) {
 
                 // x += matrix_width / 2;
-                x = x + 100;
-                y = y -6;
-            
-            if ( y < ( MATRIX_HEIGHT * 2 )) {
-
-                // x += matrix_width / 2;
-                x = x + ( MATRIX_WIDTH / 2 );
-                y = y - ( MATRIX_HEIGHT * 2 );
+                x = MATRIX_WIDTH  - x - 1;
+                y = MATRIX_HEIGHT - y - 1;
             
             } else {
                 x = VISIBLE_WIDTH - x - 1;
@@ -279,8 +273,6 @@ namespace rgb_matrix
                      MATRIX_HEIGHT, VISIBLE_WIDTH, SLAB_HEIGHT, base_y,  matrix_width, matrix_height, *matrix_x,    *matrix_y );
             
         }
-
-
 
         private:
         int parallel_;
