@@ -214,7 +214,7 @@ public:
 
         *matrix_y = (( y / ( panel_rows_ / 2 )) * ( panel_rows_ / 4 ) + y % ( panel_rows_ / 4 ));
         
-        printf( "matrix_x before: %d matrix_y before:  \n", *matrix_x, *matrix_y );
+        printf( "matrix_x before: %d matrix_y before: %d\n", *matrix_x, *matrix_y );
         if ( y < PANEL_HEIGHT ) {
             // don't do anything
         } else if ( y < PANEL_HEIGHT * 2 ) {
@@ -227,7 +227,7 @@ public:
             *matrix_x = 255 - x;
             *matrix_y = 15  - y;
         }
-        printf( "matrix_x after: %d  matrix_y after: %d \n", *matrix_x, *matrix_y );
+        printf( "matrix_x after: %d  matrix_y after: %d\n", *matrix_x, *matrix_y );
     }
 
   // now MapDoublePanel
