@@ -139,6 +139,8 @@ public:
 
 };
 
+
+#define PANEL_HEIGHT 32
 class SuperbowlMultiplexMapper : public MultiplexMapperBase {
 public:
   SuperbowlMultiplexMapper() : MultiplexMapperBase("Superbowl", 2) {}
@@ -211,6 +213,21 @@ public:
         }
 
         *matrix_y = (( y / ( panel_rows_ / 2 )) * ( panel_rows_ / 4 ) + y % ( panel_rows_ / 4 ));
+        
+
+        if ( y < PANEL_HEIGHT ) {
+            // don't do anything
+        } else if ( y < PANEL_HEIGHT * 2 ) {
+            *matrix_x = 511 - x;
+            *matrix_y = 15  - y;
+        } else if ( y < PANEL_HEIGHT * 3 ) {
+            *matrix_x = 383 - x;
+            *matrix_y = 15  - y;
+        } else if ( y < PANEL_HEIGHT * 4 ) {
+            *matrix_x = 255 - x;
+            *matrix_y = 15  - y;
+        }
+
         printf( "matrix_y: %d  \n", *matrix_y );
     }
 
