@@ -243,24 +243,25 @@ namespace rgb_matrix
        
         #define PANEL_HEIGHT  32
         #define SLAB_HEIGHT   64
-        #define MATRIX_WIDTH  64
+        #define MATRIX_WIDTH  256 //
+        #define MATRIX_HEIGHT 32
         #define VISIBLE_WIDTH 64
 
         virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
                                   int x, int y,
                                   int *matrix_x, int *matrix_y) const {
             printf( "incomming x: %d  incomming y: %d  ", x, y );
-            const int panel_height = matrix_height / parallel_;
-            const int visible_width = (matrix_width / 64) * 32;
-            const int slab_height = 2 * panel_height;   // one folded u-shape
-            const int base_y = (y / slab_height) * panel_height;
+
+            const int visible_width = ( MATRIX_WIDTH / 64) * 32;
+            const int slab_height = 2 * MATRIX_HEIGHT;   // one folded u-shape
+            const int base_y = (y / slab_height) * MATRIX_HEIGHT;
             y %= slab_height;
 
-            if (y < panel_height) {
+            if (y < MATRIX_HEIGHT ) {
 
-                x = matrix_width  - x - 1;
-                y = matrix_height - y - 1;
-                x += matrix_width / 2;
+                // x += matrix_width / 2;
+                x = MATRIX_WIDTH  - x - 1;
+                y = MATRIX_HEIGHT - y - 1;
             
             } else {
                 x = visible_width - x - 1;
@@ -270,7 +271,7 @@ namespace rgb_matrix
             *matrix_y = base_y + y;
             
             printf( "pnl_hght: %d  vsbl_wdth: %d  slb_hght: %d bs_y: %d mtrx_wdth: %d mtrx_hght: %d, mtrx_x: %d,   mtrx_y %d \n", 
-                     panel_height, visible_width, slab_height, base_y,  matrix_width, matrix_height, *matrix_x,    *matrix_y );
+                     MATRIX_HEIGHT, visible_width, slab_height, base_y,  matrix_width, matrix_height, *matrix_x,    *matrix_y );
             
         }
 
