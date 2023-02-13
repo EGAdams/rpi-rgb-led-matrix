@@ -251,7 +251,7 @@ namespace rgb_matrix
                                   int *matrix_x, int *matrix_y) const {
             const int panel_height = matrix_height / parallel_;
             const int visible_width = (matrix_width / 64) * 32;
-            const int slab_height = 2 * 32;   // one folded u-shape  // 32 is the panel height
+            const int slab_height = 2 * 64;   // one folded u-shape  // 32 was the panel_height variable
             const int base_y = (y / slab_height) * panel_height;
             y %= slab_height;
             if (y < panel_height) {
