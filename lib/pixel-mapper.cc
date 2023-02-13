@@ -252,7 +252,7 @@ namespace rgb_matrix
                                   int *matrix_x, int *matrix_y) const {
             printf( "incomming x: %d  incomming y: %d  ", x, y );
 
-            const int visible_width = ( MATRIX_WIDTH / 64) * 32;
+            //const int visible_width = ( MATRIX_WIDTH / 64) * 32;
             const int base_y = (y / SLAB_HEIGHT) * MATRIX_HEIGHT;
             y %= SLAB_HEIGHT;
 
@@ -262,8 +262,14 @@ namespace rgb_matrix
                 x = MATRIX_WIDTH  - x - 1;
                 y = MATRIX_HEIGHT - y - 1;
             
+            if ( y < MATRIX_HEIGHT * 2 ) {
+
+                // x += matrix_width / 2;
+                x = MATRIX_WIDTH/2  - x - 1;
+                y = MATRIX_HEIGHT*2 - y - 1;
+            
             } else {
-                x = visible_width - x - 1;
+                x = VISIBLE_WIDTH - x - 1;
                 y = SLAB_HEIGHT   - y - 1;
             }
             *matrix_x = x;
