@@ -259,8 +259,8 @@ namespace rgb_matrix
             if ( y < MATRIX_HEIGHT ) {
 
                 // x += matrix_width / 2;
-                x = x;
-                y = y;
+                x = x + 100;
+                y = y -6;
             
             if ( y < ( MATRIX_HEIGHT * 2 )) {
 
