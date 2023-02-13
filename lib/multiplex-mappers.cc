@@ -62,7 +62,7 @@ public:
     int new_x, new_y;
     MapSinglePanel(within_panel_x, within_panel_y, &new_x, &new_y);
     *matrix_x = chained_panel  * panel_stretch_factor_*panel_cols_ + new_x;
-    *matrix_y = parallel_panel * panel_rows_/panel_stretch_factor_ + new_y;
+    *matrix_y = parallel_panel * panel_rows_ /panel_stretch_factor_ + new_y;
   }
 
   // Map the coordinates for a single panel. This is to be overridden in
@@ -97,10 +97,10 @@ public:
   StripeMultiplexMapper() : MultiplexMapperBase("Stripe", 2) {}
 
   void MapSinglePanel(int x, int y, int *matrix_x, int *matrix_y) const {
-    const bool is_top_stripe = (y % (panel_rows_/2)) < panel_rows_/4;
+    const bool is_top_stripe = ( y % ( panel_rows_ /2)) < panel_rows_ /4;
     *matrix_x = is_top_stripe ? x + panel_cols_ : x;
-    *matrix_y = ((y / (panel_rows_/2)) * (panel_rows_/4)
-                 + y % (panel_rows_/4));
+    *matrix_y = (( y / ( panel_rows_ /2)) * ( panel_rows_ /4 )
+                 + y % ( panel_rows_ /4 ));
   }
 };
 
@@ -109,10 +109,10 @@ public:
   FlippedStripeMultiplexMapper() : MultiplexMapperBase("FlippedStripe", 2) {}
 
   void MapSinglePanel(int x, int y, int *matrix_x, int *matrix_y) const {
-    const bool is_top_stripe = (y % (panel_rows_/2)) >= panel_rows_/4;
+    const bool is_top_stripe = ( y % ( panel_rows_ /2)) >= panel_rows_ /4;
     *matrix_x = is_top_stripe ? x + panel_cols_ : x;
-    *matrix_y = ((y / (panel_rows_/2)) * (panel_rows_/4)
-                 + y % (panel_rows_/4));
+    *matrix_y = (( y / ( panel_rows_ /2)) * ( panel_rows_ /4 )
+                 + y % ( panel_rows_ /4 ));
   }
 };
 
@@ -121,15 +121,15 @@ public:
   CheckeredMultiplexMapper() : MultiplexMapperBase("Checkered", 2) {}
 
   void MapSinglePanel(int x, int y, int *matrix_x, int *matrix_y) const {
-    const bool is_top_check = (y % (panel_rows_/2)) < panel_rows_/4;
-    const bool is_left_check = (x < panel_cols_/2);
+    const bool is_top_check = ( y % ( panel_rows_ /2)) < panel_rows_ /4;
+    const bool is_left_check = (x < panel_cols_ /2);
     if (is_top_check) {
-      *matrix_x = is_left_check ? x+panel_cols_/2 : x+panel_cols_;
+      *matrix_x = is_left_check ? x+panel_cols_ /2 : x+panel_cols_;
     } else {
-      *matrix_x = is_left_check ? x : x + panel_cols_/2;
+      *matrix_x = is_left_check ? x : x + panel_cols_ /2;
     }
-    *matrix_y = ((y / (panel_rows_/2)) * (panel_rows_/4)
-                 + y % (panel_rows_/4));
+    *matrix_y = (( y / ( panel_rows_ /2)) * ( panel_rows_ /4 )
+                 + y % ( panel_rows_ /4 ));
     printf( "panel_rows_: %d, panel_cols_: %d is_top_check: %d  is_left_check: %d", panel_rows_, panel_cols_, is_top_check, is_left_check );
     printf( "CheckeredMultiplexMapper:  MapSinglePanel input x: %d, input: y: %d, matrix_x: %d, matrix_y: %d\n", x, y, *matrix_x, *matrix_y );             
   }
@@ -143,18 +143,16 @@ class SuperbowlMultiplexMapper : public MultiplexMapperBase {
 public:
   SuperbowlMultiplexMapper() : MultiplexMapperBase("Superbowl", 2) {}
 
-  #define ORIGINALLY_TWO 4
-  #define ORIGINALLY_FOUR 8
-  void MapSinglePanel(int x, int y, int *matrix_x, int *matrix_y) const {
-    const bool is_top_check = (y % (panel_rows_/ ORIGINALLY_TWO )) < panel_rows_/ ORIGINALLY_FOUR;
-    const bool is_left_check = (x < panel_cols_/ ORIGINALLY_TWO );
-    if (is_top_check) {
-      *matrix_x = is_left_check ? x+panel_cols_/ ORIGINALLY_TWO  : x+panel_cols_;
+  void MapSinglePanel( int x, int y, int *matrix_x, int *matrix_y ) const {
+    const bool is_top_check = ( y % ( panel_rows_ / 2 )) < panel_rows_ / 4;
+    const bool is_left_check = ( x < panel_cols_ / 2 );
+    if ( is_top_check ) {
+      *matrix_x = is_left_check ? x+panel_cols_ / 2  : x+panel_cols_;
     } else {
-      *matrix_x = is_left_check ? x : x + panel_cols_/ ORIGINALLY_TWO;
+      *matrix_x = is_left_check ? x : x + panel_cols_ / 2;
     }
-    *matrix_y = ((y / (panel_rows_/ ORIGINALLY_TWO )) * (panel_rows_/ ORIGINALLY_FOUR ) + y % (panel_rows_/ ORIGINALLY_FOUR ));
-
+    *matrix_y = (( y / ( panel_rows_ / 2 )) * ( panel_rows_ / 4 ) + y % ( panel_rows_ / 4 ));
+    
     printf( "panel_rows_: %d, panel_cols_: %d is_top_check: %d  is_left_check: %d  ", panel_rows_, panel_cols_, is_top_check, is_left_check );
     printf( "SuperbowlMultiplexMapper:  MapSinglePanel input x: %d, input: y: %d, matrix_x: %d, matrix_y: %d\n", x, y, *matrix_x, *matrix_y );             
   }
@@ -169,16 +167,16 @@ public:
   SpiralMultiplexMapper() : MultiplexMapperBase("Spiral", 2) {}
 
   void MapSinglePanel(int x, int y, int *matrix_x, int *matrix_y) const {
-    const bool is_top_stripe = (y % (panel_rows_/2)) < panel_rows_/4;
-    const int panel_quarter = panel_cols_/4;
+    const bool is_top_stripe = ( y % ( panel_rows_ /2)) < panel_rows_ /4;
+    const int panel_quarter = panel_cols_ /4;
     const int quarter = x / panel_quarter;
     const int offset = x % panel_quarter;
     *matrix_x = ((2*quarter*panel_quarter)
                  + (is_top_stripe
                     ? panel_quarter - 1 - offset
                     : panel_quarter + offset));
-    *matrix_y = ((y / (panel_rows_/2)) * (panel_rows_/4)
-                 + y % (panel_rows_/4));
+    *matrix_y = (( y / ( panel_rows_ /2)) * ( panel_rows_ /4 )
+                 + y % ( panel_rows_ /4 ));
   }
 };
 
@@ -193,13 +191,13 @@ public:
     static const int tile_width = 8;
     static const int tile_height = 4;
 
-    const int vert_block_is_odd = ((y / tile_height) % 2);
+    const int vert_block_is_odd = (( y / tile_height) % 2);
 
     const int even_vblock_shift = (1 - vert_block_is_odd) * even_vblock_offset_;
     const int odd_vblock_shitf = vert_block_is_odd * odd_vblock_offset_;
 
     *matrix_x = x + ((x + even_vblock_shift) / tile_width) * tile_width + odd_vblock_shitf;
-    *matrix_y = (y % tile_height) + tile_height * (y / (tile_height * 2));
+    *matrix_y = ( y % tile_height) + tile_height * ( y / (tile_height * 2));
   }
 
 private:
@@ -212,31 +210,31 @@ public:
   CoremanMapper() : MultiplexMapperBase("coreman", 2) {}
 
   void MapSinglePanel(int x, int y, int *matrix_x, int *matrix_y) const {
-    const bool is_left_check = (x < panel_cols_/2);
+    const bool is_left_check = (x < panel_cols_ /2);
 
-    if ((y <= 7) || ((y >= 16) && (y <= 23))){
-      *matrix_x = ((x / (panel_cols_/2)) * panel_cols_) + (x % (panel_cols_/2));
-      if ((y & (panel_rows_/4)) == 0) {
-        *matrix_y = (y / (panel_rows_/2)) * (panel_rows_/4) + (y % (panel_rows_/4));
+    if (( y <= 7) || (( y >= 16) && ( y <= 23))){
+      *matrix_x = ((x / ( panel_cols_ /2)) * panel_cols_) + (x % ( panel_cols_ /2));
+      if (( y & ( panel_rows_ /4 )) == 0) {
+        *matrix_y = ( y / ( panel_rows_ /2)) * ( panel_rows_ /4 ) + ( y % ( panel_rows_ /4 ));
       }
     } else {
-      *matrix_x = is_left_check ? x + panel_cols_/2 : x + panel_cols_;
-      *matrix_y = (y / (panel_rows_/2)) * (panel_rows_/4) + y % (panel_rows_/4);
+      *matrix_x = is_left_check ? x + panel_cols_ /2 : x + panel_cols_;
+      *matrix_y = ( y / ( panel_rows_ /2)) * ( panel_rows_ /4 ) + y % ( panel_rows_ /4 );
     }
   }
 };
 
 class Kaler2ScanMapper : public MultiplexMapperBase {
 public:
-  Kaler2ScanMapper() : MultiplexMapperBase("Kaler2Scan", 4) {}
+  Kaler2ScanMapper() : MultiplexMapperBase("Kaler2Scan", 4 ) {}
 
   void MapSinglePanel(int x, int y, int *matrix_x, int *matrix_y) const {
     // Now we have a 128x4 matrix
-    int offset = ((y%4)/2) == 0 ? -1 : 1;// Add o substract
+    int offset = (( y%4 )/2) == 0 ? -1 : 1;// Add o substract
     int deltaOffset = offset < 0 ? 7:8;
-    int deltaColumn = ((y%8)/4)== 0 ? 64 : 0;
+    int deltaColumn = (( y%8)/4 )== 0 ? 64 : 0;
 
-    *matrix_y = (y%2+(y/8)*2);
+    *matrix_y = ( y%2+( y/8)*2);
     *matrix_x = deltaColumn + (16 * (x/8)) + deltaOffset + ((x%8) * offset);
 
   }
@@ -244,25 +242,25 @@ public:
 
 class P10MapperZ : public MultiplexMapperBase {
 public:
-  P10MapperZ() : MultiplexMapperBase("P10-128x4-Z", 4) {}
+  P10MapperZ() : MultiplexMapperBase("P10-128x4-Z", 4 ) {}
   // supports this panel: https://www.aliexpress.com/item/2017-Special-Offer-P10-Outdoor-Smd-Full-Color-Led-Display-Module-320x160mm-1-2-Scan-Outdoor/32809267439.html?spm=a2g0s.9042311.0.0.Ob0jEw
   // with --led-row-addr-type=2 flag
   void MapSinglePanel(int x, int y, int *matrix_x, int *matrix_y) const {
     int yComp = 0;
-    if (y == 0 || y == 1 || y == 8 || y == 9) {
+    if ( y == 0 || y == 1 || y == 8 || y == 9) {
       yComp = 127;
     }
-    else if (y == 2 || y == 3 || y == 10 || y == 11) {
+    else if ( y == 2 || y == 3 || y == 10 || y == 11) {
       yComp = 112;
     }
-    else if (y == 4 || y == 5 || y == 12 || y == 13) {
+    else if ( y == 4 || y == 5 || y == 12 || y == 13) {
       yComp = 111;
     }
-    else if (y == 6 || y == 7 || y == 14 || y == 15) {
+    else if ( y == 6 || y == 7 || y == 14 || y == 15) {
       yComp = 96;
     }
 
-    if (y == 0 || y == 1 || y == 4 || y == 5 ||
+    if ( y == 0 || y == 1 || y == 4 || y == 5 ||
         y == 8 || y == 9 || y == 12 || y == 13) {
       *matrix_x = yComp - x;
       *matrix_x -= (24 * ((int)(x / 8)));
@@ -272,16 +270,16 @@ public:
       *matrix_x -= (40 * ((int)(x / 8)));
     }
 
-    if (y == 0 || y == 2 || y == 4 || y == 6) {
+    if ( y == 0 || y == 2 || y == 4 || y == 6) {
       *matrix_y = 3;
     }
-    else if (y == 1 || y == 3 || y == 5 || y == 7) {
+    else if ( y == 1 || y == 3 || y == 5 || y == 7) {
       *matrix_y = 2;
     }
-    else if (y == 8 || y == 10 || y == 12 || y == 14) {
+    else if ( y == 8 || y == 10 || y == 12 || y == 14 ) {
       *matrix_y = 1;
     }
-    else if (y == 9 || y == 11 || y == 13 || y == 15) {
+    else if ( y == 9 || y == 11 || y == 13 || y == 15) {
       *matrix_y = 0;
     }
   }
@@ -292,13 +290,13 @@ public:
   QiangLiQ8() : MultiplexMapperBase("QiangLiQ8", 2) {}
 
   void MapSinglePanel(int x, int y, int *matrix_x, int *matrix_y) const {
-    const int column = x + (4+ 4*(x/4));
+    const int column = x + (4+ 4*(x/4 ));
     *matrix_x = column;
-    if ((y >= 15 && y <=19) || (y >= 5 && y <= 9)) {
-      const int reverseColumn = x + (4*(x/4));
+    if (( y >= 15 && y <=19) || ( y >= 5 && y <= 9)) {
+      const int reverseColumn = x + (4*(x/4 ));
       *matrix_x = reverseColumn;
     }
-    *matrix_y = y % 5 + (y/10) *5;
+    *matrix_y = y % 5 + ( y/10) *5;
   }
 };
 
@@ -310,7 +308,7 @@ public:
     static const int tile_width = 8;
     static const int tile_height = 4;
 
-    const int vert_block_is_odd = ((y / tile_height) % 2);
+    const int vert_block_is_odd = (( y / tile_height) % 2);
     const int evenOffset[8] = {7, 5, 3, 1, -1, -3, -5, -7};
 
     if (vert_block_is_odd) {
@@ -318,7 +316,7 @@ public:
     } else {
       *matrix_x = x + (x / tile_width) * tile_width + 8 + evenOffset[x % 8];
     }
-    *matrix_y = (y % tile_height) + tile_height * (y / (tile_height * 2));
+    *matrix_y = ( y % tile_height) + tile_height * ( y / (tile_height * 2));
   }
 };
 
@@ -335,7 +333,7 @@ public:
     : MultiplexMapperBase(name, 2) {}
 
   void MapSinglePanel(int x, int y, int *matrix_x, int *matrix_y) const {
-    const int vblock_is_odd = (y / tile_height_) % 2;
+    const int vblock_is_odd = ( y / tile_height_) % 2;
     const int vblock_is_even = 1 - vblock_is_odd;
     const int even_vblock_shift = vblock_is_even * even_vblock_offset_;
     const int odd_vblock_shift = vblock_is_odd * odd_vblock_offset_;
@@ -367,7 +365,7 @@ protected:
                 const int even_vblock_shift, const int odd_vblock_shift) const {
     *matrix_x = tile_width_ * (1 + vblock_is_even + 2 * (x / tile_width_))
       - (x % tile_width_) - 1;
-    *matrix_y = (y % tile_height_) + tile_height_ * (y / (tile_height_ * 2));
+    *matrix_y = ( y % tile_height_) + tile_height_ * ( y / (tile_height_ * 2));
   }
 };
 
@@ -383,7 +381,7 @@ protected:
     *matrix_x = vblock_is_even
       ? tile_width_ * (1 + 2 * (x / tile_width_)) - (x % tile_width_) - 1
       : x + ((x + even_vblock_shift) / tile_width_) * tile_width_ + odd_vblock_shift;
-    *matrix_y = (y % tile_height_) + tile_height_ * (y / (tile_height_ * 2));
+    *matrix_y = ( y % tile_height_) + tile_height_ * ( y / (tile_height_ * 2));
   }
 };
 
@@ -399,24 +397,24 @@ protected:
     *matrix_x = vblock_is_odd
       ? tile_width_ * (2 + 2 * (x / tile_width_)) - (x % tile_width_) - 1
       : x + ((x + even_vblock_shift) / tile_width_) * tile_width_ + odd_vblock_shift;
-    *matrix_y = (y % tile_height_) + tile_height_ * (y / (tile_height_ * 2));
+    *matrix_y = ( y % tile_height_) + tile_height_ * ( y / (tile_height_ * 2));
   }
 };
 
 class P10CoremanMapper : public MultiplexMapperBase {
 public:
-  P10CoremanMapper() : MultiplexMapperBase("P10CoremanMapper", 4) {}
+  P10CoremanMapper() : MultiplexMapperBase("P10CoremanMapper", 4 ) {}
 
   void MapSinglePanel(int x, int y, int *matrix_x, int *matrix_y) const {
     //Row offset 8,8,8,8,0,0,0,0,8,8,8,8,0,0,0,0
-    int mulY = (y & 4) > 0 ? 0 : 8;
+    int mulY = ( y & 4 ) > 0 ? 0 : 8;
 
     //Row offset 9,9,8,8,1,1,0,0,9,9,8,8,1,1,0,0
-    mulY += (y & 2) > 0 ? 0 : 1;
+    mulY += ( y & 2) > 0 ? 0 : 1;
     mulY += (x >> 2) & ~1; //Drop lsb
 
     *matrix_x = (mulY << 3) + x % 8;
-    *matrix_y = (y & 1) + ((y >> 2) & ~1);
+    *matrix_y = ( y & 1) + (( y >> 2) & ~1);
   }
 };
 
@@ -429,7 +427,7 @@ public:
     : MultiplexMapperBase(name, 2) {}
 
   void MapSinglePanel(int x, int y, int *matrix_x, int *matrix_y) const {
-    const int vblock_is_odd = (y / tile_height_) % 2;
+    const int vblock_is_odd = ( y / tile_height_) % 2;
     const int vblock_is_even = 1 - vblock_is_odd;
     const int even_vblock_shift = vblock_is_even * even_vblock_offset_;
     const int odd_vblock_shift = vblock_is_odd * odd_vblock_offset_;
@@ -472,15 +470,15 @@ protected:
 
 class P10Outdoor32x16HalfScanMapper : public MultiplexMapperBase {
 public:
-  P10Outdoor32x16HalfScanMapper() : MultiplexMapperBase("P10Outdoor32x16HalfScan", 4) {}
+  P10Outdoor32x16HalfScanMapper() : MultiplexMapperBase("P10Outdoor32x16HalfScan", 4 ) {}
 
   void MapSinglePanel(int x, int y, int *matrix_x, int *matrix_y) const {
     int base = (x/8)*32;
-    bool reverse = (y%4)/2 == 0;
-    int offset = (3-((y%8)/2))*8;
+    bool reverse = ( y%4 )/2 == 0;
+    int offset = (3-(( y%8)/2))*8;
     int dx = x%8;
 
-    *matrix_y = (y/8 == 0) ? ((y%2 == 0) ? 0:1) : ((y%2 == 0) ? 2:3);
+    *matrix_y = ( y/8 == 0) ? (( y%2 == 0) ? 0:1) : (( y%2 == 0) ? 2:3);
     *matrix_x = base + (reverse ? offset + (7-dx) : offset + dx);
   }
 };
@@ -498,7 +496,7 @@ static MuxMapperList *CreateMultiplexMapperList() {
   result->push_back(new CheckeredMultiplexMapper());
   result->push_back(new SpiralMultiplexMapper());
   result->push_back(new ZStripeMultiplexMapper("ZStripe", 0, 8));
-  result->push_back(new ZStripeMultiplexMapper("ZnMirrorZStripe", 4, 4));
+  result->push_back(new ZStripeMultiplexMapper("ZnMirrorZStripe", 4, 4 ));
   result->push_back(new CoremanMapper());
   result->push_back(new Kaler2ScanMapper());
   result->push_back(new ZStripeMultiplexMapper("ZStripeUneven", 8, 0));
