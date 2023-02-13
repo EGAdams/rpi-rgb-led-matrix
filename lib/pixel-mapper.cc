@@ -259,6 +259,8 @@ namespace rgb_matrix
             } else {
             x = visible_width - x - 1;
             y = slab_height - y - 1;
+            x = matrix_width - x - 1;
+            y = matrix_height - y - 1;
             }
             *matrix_x = x;
             *matrix_y = base_y + y;
