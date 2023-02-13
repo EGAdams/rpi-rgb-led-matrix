@@ -255,7 +255,7 @@ namespace rgb_matrix
             const int base_y = (y / slab_height) * panel_height;
             y %= slab_height;
 
-            printf( "pnl_hght: %d  vsbl_wdth: %d  slb_hght: %d bs_y: %d mtrx_wdth: %d mtrx_hght: %d, mtrx_x: %d,   mtrx_y \n", 
+            printf( "pnl_hght: %d  vsbl_wdth: %d  slb_hght: %d bs_y: %d mtrx_wdth: %d mtrx_hght: %d, mtrx_x: %d,   mtrx_y %d \n", 
                      panel_height, visible_width, slab_height, base_y,  matrix_width, matrix_height, *matrix_x,    *matrix_y );
             
             if (y < panel_height) {
