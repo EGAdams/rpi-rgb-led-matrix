@@ -195,19 +195,19 @@ public:
 
     void MapSinglePanel( int x, int y, int *matrix_x, int *matrix_y ) const {
 
-        this->MapCoordinates(x, y, matrix_x, matrix_y);
+        //this->MapCoordinates(x, y, matrix_x, matrix_y);
         
-        // const bool is_top_half = ( y % ( panel_rows_ / 2 )) < panel_rows_ / 4;
-        // const bool is_left_half = ( x < panel_cols_ / 2 );
+        const bool is_top_half = ( y % ( panel_rows_ / 2 )) < panel_rows_ / 4;
+        const bool is_left_half = ( x < panel_cols_ / 2 );
         
-        // // set the x coordinate in the matrix
-        // if (is_top_half) {
-        //     *matrix_x = is_left_half ? x + panel_cols_ / 2 : x + panel_cols_;
-        // } else {
-        //     *matrix_x = is_left_half ? x : x + panel_cols_ / 2;
-        // }
+        // set the x coordinate in the matrix
+        if (is_top_half) {
+            *matrix_x = is_left_half ? x + panel_cols_ / 2 : x + panel_cols_;
+        } else {
+            *matrix_x = is_left_half ? x : x + panel_cols_ / 2;
+        }
 
-        // *matrix_y = (( y / ( panel_rows_ / 2 )) * ( panel_rows_ / 4 ) + y % ( panel_rows_ / 4 ));
+        *matrix_y = (( y / ( panel_rows_ / 2 )) * ( panel_rows_ / 4 ) + y % ( panel_rows_ / 4 ));
 
         
     }
