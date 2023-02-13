@@ -256,13 +256,12 @@ namespace rgb_matrix
             y %= slab_height;
             if (y < panel_height) {
 
-                // x += matrix_width / 2;
-                x = matrix_width  - x - 1;
-                y = matrix_height - y - 1;
+                x = 127 - x;
+                y = 31 - y;
             
             } else {
-                x = visible_width - x - 1;
-                y = slab_height   - y - 1;
+                x = 63 - x;
+                y = 63 - y;
             }
             *matrix_x = x;
             *matrix_y = base_y + y;
