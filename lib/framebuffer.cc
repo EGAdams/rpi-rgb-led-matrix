@@ -297,6 +297,7 @@ Framebuffer::Framebuffer(int rows, int columns, int parallel,
     double_rows_(rows / SUB_PANELS_),
     buffer_size_(double_rows_ * columns_ * kBitPlanes * sizeof(gpio_bits_t)),
     shared_mapper_(mapper) {
+  printf( "rows %d, parallel %d, height %d, columns %d, scan_mode %d, double_rows %d, buffer_size %d", rows_, parallel_, height_, columns_, scan_mode_, double_rows_, buffer_size_)
   assert(hardware_mapping_ != NULL);   // Called InitHardwareMapping() ?
   assert(shared_mapper_ != NULL);  // Storage should be provided by RGBMatrix.
   assert(rows_ >=4 && rows_ <= 64 && rows_ % 2 == 0);
