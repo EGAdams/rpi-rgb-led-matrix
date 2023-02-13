@@ -139,6 +139,29 @@ public:
 
 };
 
+class SuperbowlMultiplexMapper : public MultiplexMapperBase {
+public:
+  SuperbowlMultiplexMapper() : MultiplexMapperBase("Superbowl", 2) {}
+
+  void MapSinglePanel(int x, int y, int *matrix_x, int *matrix_y) const {
+    const bool is_top_check = (y % (panel_rows_/2)) < panel_rows_/4;
+    const bool is_left_check = (x < panel_cols_/2);
+    if (is_top_check) {
+      *matrix_x = is_left_check ? x+panel_cols_/2 : x+panel_cols_;
+    } else {
+      *matrix_x = is_left_check ? x : x + panel_cols_/2;
+    }
+    *matrix_y = ((y / (panel_rows_/2)) * (panel_rows_/4)
+                 + y % (panel_rows_/4));
+    printf( "panel_rows_: %d, panel_cols_: %d is_top_check: %d  is_left_check: %d", panel_rows_, panel_cols_, is_top_check, is_left_check );
+    printf( "SuperbowlMultiplexMapper:  MapSinglePanel input x: %d, input: y: %d, matrix_x: %d, matrix_y: %d\n", x, y, *matrix_x, *matrix_y );             
+  }
+
+  // now MapDoublePanel
+  // void MapDoublePanel( int x, int y, int *matrix_x, int *matrix_y) const {}
+
+};
+
 class SpiralMultiplexMapper : public MultiplexMapperBase {
 public:
   SpiralMultiplexMapper() : MultiplexMapperBase("Spiral", 2) {}
@@ -487,6 +510,7 @@ static MuxMapperList *CreateMultiplexMapperList() {
   result->push_back(new P8Outdoor1R1G1BMultiplexMapper());
   result->push_back(new FlippedStripeMultiplexMapper());
   result->push_back(new P10Outdoor32x16HalfScanMapper());
+  result->push_back(new SuperbowlMultiplexMapper());
   return result;
 }
 
