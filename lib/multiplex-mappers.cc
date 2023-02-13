@@ -144,13 +144,17 @@ public:
   SuperbowlMultiplexMapper() : MultiplexMapperBase("Superbowl", 2) {}
 
   void MapSinglePanel( int x, int y, int *matrix_x, int *matrix_y ) const {
-    const bool is_top_check = ( y % ( panel_rows_ / 2 )) < panel_rows_ / 4;
-    const bool is_left_check = ( x < panel_cols_ / 2 );
-    if ( is_top_check ) {
-      *matrix_x = is_left_check ? x+panel_cols_ / 2  : x+panel_cols_;
+    
+    const bool is_top_half = ( y % ( panel_rows_ / 2 )) < panel_rows_ / 4;
+    const bool is_left_half = ( x < panel_cols_ / 2 );
+    
+    // set the x coordinate in the matrix
+    if (is_top_half) {
+        *matrix_x = is_left_half ? x + panel_cols_ / 2 : x + panel_cols_;
     } else {
-      *matrix_x = is_left_check ? x : x + panel_cols_ / 2;
+        *matrix_x = is_left_half ? x : x + panel_cols_ / 2;
     }
+
     *matrix_y = (( y / ( panel_rows_ / 2 )) * ( panel_rows_ / 4 ) + y % ( panel_rows_ / 4 ));
     
     printf( "panel_rows_: %d, panel_cols_: %d is_top_check: %d  is_left_check: %d  ", panel_rows_, panel_cols_, is_top_check, is_left_check );
@@ -161,6 +165,36 @@ public:
   // void MapDoublePanel( int x, int y, int *matrix_x, int *matrix_y) const {}
 
 };
+
+
+class SinglePanelMapper { // GPT 3
+public:
+    // constructor to set the panel rows and columns
+    SinglePanelMapper(int panel_rows, int panel_cols) : panel_rows_(panel_rows), panel_cols_(panel_cols) {}
+
+    // method to map single panel coordinates to matrix coordinates
+    void MapCoordinates(int x, int y, int *matrix_x, int *matrix_y) const {
+        // check if the y coordinate is in the top half of the panel
+        const bool is_top_half = (y % (panel_rows_ / 2)) < panel_rows_ / 4;
+        // check if the x coordinate is in the left half of the panel
+        const bool is_left_half = (x < panel_cols_ / 2);
+
+        // set the x coordinate in the matrix
+        if (is_top_half) {
+            *matrix_x = is_left_half ? x + panel_cols_ / 2 : x + panel_cols_;
+        } else {
+            *matrix_x = is_left_half ? x : x + panel_cols_ / 2;
+        }
+
+        // set the y coordinate in the matrix
+        *matrix_y = ((y / (panel_rows_ / 2)) * (panel_rows_ / 4) + y % (panel_rows_ / 4));
+    }
+
+private:
+    int panel_rows_;
+    int panel_cols_;
+};
+
 
 class SpiralMultiplexMapper : public MultiplexMapperBase {
 public:

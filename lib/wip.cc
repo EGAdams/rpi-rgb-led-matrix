@@ -766,3 +766,25 @@
 
             // printf( "x: %d, y: %d, matrix_x: %d, matrix_y: %d\n", x, y, *matrix_x, *matrix_y );
         }
+
+
+// PanelMapper class class PanelMapper { public: // Method to map a single panel void MapSinglePanel(int x, int y, int *matrixx, int *matrixy) const;
+
+private: const int panelrows; const int panelcols; };
+
+// PixelPositionCalculator class 
+class PixelPositionCalculator { public: // Method to calculate the x and y coordinates of a single pixel void CalculatePixelPosition(int x, int y, int panelrows, int panelcols, int *matrixx, int *matrixy) const; };
+
+// Method to map a single panel 
+void PanelMapper::MapSinglePanel(int x, int y, int *matrixx, int *matrixy) const { 
+    // Calculate the x and y coordinates of a single pixel 
+    PixelPositionCalculator::CalculatePixelPosition(x, y, panelrows, panelcols, matrixx, matrixy); }
+
+// Method to calculate the x and y coordinates of a single pixel 
+void PixelPositionCalculator::CalculatePixelPosition(int x, int y, int panelrows, int panelcols, int *matrixx, int *matrixy) const { 
+    const bool istopcheck = (y % (panelrows / 2)) < panelrows / 4; const bool isleftcheck = (x < panelcols / 2);
+
+if (is_top_check) { 
+    *matrix_x = is_left_check ? x + panel_cols_ / 2 : x + panel_cols_;
+} else {              
+    *matrix_x = is_left_check ? x : x + panel_col
