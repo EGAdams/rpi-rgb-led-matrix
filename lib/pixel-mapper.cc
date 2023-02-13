@@ -265,8 +265,8 @@ namespace rgb_matrix
                 y = slab_height - y - 1;
             
             }
-            *matrix_x = x;
-            *matrix_y = base_y + y;
+            *matrix_x = x / 2;
+            *matrix_y = 2 * ( base_y + y );
         }
 
 
