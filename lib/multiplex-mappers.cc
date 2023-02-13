@@ -142,28 +142,128 @@ public:
 class SuperbowlMultiplexMapper : public MultiplexMapperBase {
 public:
   SuperbowlMultiplexMapper() : MultiplexMapperBase("Superbowl", 2) {}
-
-  void MapSinglePanel( int x, int y, int *matrix_x, int *matrix_y ) const {
-    
-    const bool is_top_half = ( y % ( panel_rows_ / 2 )) < panel_rows_ / 4;
-    const bool is_left_half = ( x < panel_cols_ / 2 );
-    
-    // set the x coordinate in the matrix
-    if (is_top_half) {
-        *matrix_x = is_left_half ? x + panel_cols_ / 2 : x + panel_cols_;
-    } else {
-        *matrix_x = is_left_half ? x : x + panel_cols_ / 2;
+      int GetYQuadrant(int y) const {
+        printf( "returning the y quadrant: y / ( panel_rows_ / 4 ): %d", y / ( panel_rows_ / 4 ) );
+        return y / (panel_rows_ / 4);
     }
 
-    *matrix_y = (( y / ( panel_rows_ / 2 )) * ( panel_rows_ / 4 ) + y % ( panel_rows_ / 4 ));
-    
-    printf( "panel_rows_: %d, panel_cols_: %d is_top_check: %d  is_left_check: %d  ", panel_rows_, panel_cols_, is_top_half, is_left_half );
-    printf( "SuperbowlMultiplexMapper:  MapSinglePanel input x: %d, input: y: %d, matrix_x: %d, matrix_y: %d\n", x, y, *matrix_x, *matrix_y );             
-  }
+    int GetYRemainder(int y) const {
+        printf( "returning the remainder of y: y %% ( panel_rows_ / 4 ): %d", y % ( panel_rows_ / 4 ) );
+        return y % ( panel_rows_ / 4 );
+    }
+
+    bool IsTopCheck(int y) const {
+        printf( "returning the top check: y < panel_rows_ / 4: %d", y < panel_rows_ / 4 );
+        return y < panel_rows_ / 4;
+    }
+
+    bool IsLeftCheck(int x) const {
+        printf( "returning the left check: x < panel_cols_ / 2: %d", x < panel_cols_ / 2 );
+        return x < panel_cols_ / 2;
+    }
+
+    int GetMatrixX(int x, int y) const {
+        if (IsTopCheck(y)) {
+            if (IsLeftCheck(x)) {
+                printf ( "returning is left check:  x + panel_cols_ / 2: %d", x + panel_cols_ / 2 );
+                return x + panel_cols_ / 2;
+            } else {
+                printf( "returning is right check: x + panel_cols_: %d", x + panel_cols_);
+                return x + panel_cols_;
+            }
+        } else {
+            if (IsLeftCheck(x)) {
+                printf( "returning is left check: x: %d", x );
+                return x;
+            } else {
+                printf( "returning not is left check: x + panel_cols_ / 2: %d", x + panel_cols_ / 2 );
+                return x + panel_cols_ / 2;
+            }
+        }
+    }
+
+    int GetMatrixY(int y) const {
+        printf( "returning the matrix y: GetYQuadrant(y) * (panel_rows_ / 4) + GetYRemainder(y): %d", GetYQuadrant(y) * (panel_rows_ / 4) + GetYRemainder(y) );
+        return GetYQuadrant(y) * (panel_rows_ / 4) + GetYRemainder(y);
+    }
+
+    void MapCoordinates(int x, int y, int *matrix_x, int *matrix_y) const {
+        *matrix_x = GetMatrixX(x, y);
+        *matrix_y = GetMatrixY(y);
+        printf( "Finally: MapCoordinates input x: %d, input: y: %d, matrix_x: %d, matrix_y: %d", x, y, *matrix_x, *matrix_y );
+    }
+
+    void MapSinglePanel( int x, int y, int *matrix_x, int *matrix_y ) const {
+
+        this->MapCoordinates(x, y, matrix_x, matrix_y);
+        
+        // const bool is_top_half = ( y % ( panel_rows_ / 2 )) < panel_rows_ / 4;
+        // const bool is_left_half = ( x < panel_cols_ / 2 );
+        
+        // // set the x coordinate in the matrix
+        // if (is_top_half) {
+        //     *matrix_x = is_left_half ? x + panel_cols_ / 2 : x + panel_cols_;
+        // } else {
+        //     *matrix_x = is_left_half ? x : x + panel_cols_ / 2;
+        // }
+
+        // *matrix_y = (( y / ( panel_rows_ / 2 )) * ( panel_rows_ / 4 ) + y % ( panel_rows_ / 4 ));
+
+        
+    }
 
   // now MapDoublePanel
   // void MapDoublePanel( int x, int y, int *matrix_x, int *matrix_y) const {}
 
+};
+
+class MapSinglePanel {
+    int panel_rows_;
+    int panel_cols_;
+
+public:
+    MapSinglePanel(int panel_rows, int panel_cols) : panel_rows_(panel_rows), panel_cols_(panel_cols) {}
+
+    int GetYQuadrant(int y) const {
+        return y / (panel_rows_ / 4);
+    }
+
+    int GetYRemainder(int y) const {
+        return y % (panel_rows_ / 4);
+    }
+
+    bool IsTopCheck(int y) const {
+        return y < panel_rows_ / 4;
+    }
+
+    bool IsLeftCheck(int x) const {
+        return x < panel_cols_ / 2;
+    }
+
+    int GetMatrixX(int x, int y) const {
+        if (IsTopCheck(y)) {
+            if (IsLeftCheck(x)) {
+                return x + panel_cols_ / 2;
+            } else {
+                return x + panel_cols_;
+            }
+        } else {
+            if (IsLeftCheck(x)) {
+                return x;
+            } else {
+                return x + panel_cols_ / 2;
+            }
+        }
+    }
+
+    int GetMatrixY(int y) const {
+        return GetYQuadrant(y) * (panel_rows_ / 4) + GetYRemainder(y);
+    }
+
+    void MapCoordinates(int x, int y, int *matrix_x, int *matrix_y) const {
+        *matrix_x = GetMatrixX(x, y);
+        *matrix_y = GetMatrixY(y);
+    }
 };
 
 
