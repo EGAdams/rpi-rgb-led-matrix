@@ -249,6 +249,7 @@ namespace rgb_matrix
         virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
                                   int x, int y,
                                   int *matrix_x, int *matrix_y) const {
+            printf( "incomming x: %d  incomming y: %d  " );
             const int panel_height = matrix_height / parallel_;
             const int visible_width = (matrix_width / 64) * 32;
             const int slab_height = 2 * panel_height;   // one folded u-shape
