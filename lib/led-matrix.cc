@@ -579,7 +579,7 @@ bool RGBMatrix::Impl::ApplyPixelMapper(const PixelMapper *mapper) {
         // exit( 1 );        
         continue;
       } else {
-        //printf( "PixelMapper: ( %d, %d ) -> ( %d, %d ) [ range: %dx%d ]\n", x, y, orig_x, orig_y, old_width, old_height );
+        printf( "PixelMapper: ( %d, %d ) -> ( %d, %d ) [ range: %dx%d ]\n", x, y, orig_x, orig_y, old_width, old_height );
       }
       const internal::PixelDesignator *orig_designator;
       orig_designator = shared_pixel_mapper_->get(orig_x, orig_y);
