@@ -164,8 +164,8 @@ public:
     }
 
     int GetMatrixX(int x, int y) const {
-        if (isTopCheck( y, panel_rows_ )) {
-            if ( isLeftCheck(x)) {
+        if ( isTopCheck( y, panel_rows_ )) {
+            if ( isLeftCheck( x )) {
                 printf ( "returning is left check:  x + panel_cols_ / 2: %d\n", x + panel_cols_ / 2 );
                 return x + panel_cols_ / 2;
             } else {
@@ -173,7 +173,7 @@ public:
                 return x + panel_cols_;
             }
         } else {
-            if ( isLeftCheck(x)) {
+            if ( isLeftCheck( x )) {
                 printf( "returning is left check: x: %d\n", x );
                 return x;
             } else {
@@ -202,15 +202,16 @@ public:
         const bool is_left_half = isLeftCheck( x );
         
         // set the x coordinate in the matrix
-        if (is_top_half) {
+        if ( is_top_half ) {
             *matrix_x = is_left_half ? x + panel_cols_ / 2 : x + panel_cols_;
+            printf( "is top half: matrix_x: %d\n", *matrix_x );
         } else {
+            printf( "is not top half: matrix_x: %d\n", *matrix_x );
             *matrix_x = is_left_half ? x : x + panel_cols_ / 2;
         }
 
         *matrix_y = (( y / ( panel_rows_ / 2 )) * ( panel_rows_ / 4 ) + y % ( panel_rows_ / 4 ));
-
-        
+        printf( "matrix_y: %d", *matrix_y );
     }
 
   // now MapDoublePanel
@@ -243,13 +244,13 @@ public:
 
     int GetMatrixX(int x, int y) const {
         if (IsTopCheck(y)) {
-            if (IsLeftCheck(x)) {
+            if (IsLeftCheck( x )) {
                 return x + panel_cols_ / 2;
             } else {
                 return x + panel_cols_;
             }
         } else {
-            if (IsLeftCheck(x)) {
+            if (IsLeftCheck( x )) {
                 return x;
             } else {
                 return x + panel_cols_ / 2;
