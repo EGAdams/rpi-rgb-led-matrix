@@ -130,6 +130,7 @@ public:
     }
     *matrix_y = ((y / (panel_rows_/2)) * (panel_rows_/4)
                  + y % (panel_rows_/4));
+    printf( "CheckeredMultiplexMapper:  MapSinglePanel input x: %d, input: y: %d, matrix_x: %d, matrix_y: %d", x, y, *matrix_x, *matrix_y );             
   }
 };
 
