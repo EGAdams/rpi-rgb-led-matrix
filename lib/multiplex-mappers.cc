@@ -204,14 +204,14 @@ public:
         // set the x coordinate in the matrix
         if ( is_top_half ) {
             *matrix_x = is_left_half ? x + panel_cols_ / 2 : x + panel_cols_;
-            printf( "is top half: matrix_x: %d\n", *matrix_x );
+            printf( "is top half: matrix_x: %d  ", *matrix_x );
         } else {
-            printf( "is not top half: matrix_x: %d\n", *matrix_x );
+            printf( "is not top half: matrix_x: %d  ", *matrix_x );
             *matrix_x = is_left_half ? x : x + panel_cols_ / 2;
         }
 
         *matrix_y = (( y / ( panel_rows_ / 2 )) * ( panel_rows_ / 4 ) + y % ( panel_rows_ / 4 ));
-        printf( "matrix_y: %d", *matrix_y );
+        printf( "matrix_y: %d  \n", *matrix_y );
     }
 
   // now MapDoublePanel
