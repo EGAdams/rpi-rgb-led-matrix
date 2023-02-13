@@ -204,9 +204,9 @@ public:
         // set the x coordinate in the matrix
         if ( is_top_half ) {
             *matrix_x = is_left_half ? x + panel_cols_ / 2 : x + panel_cols_;
-            printf( "//// ( %d, %d ) ////  TOP HALF   ////: matrix_x: %d  ", x, y, *matrix_x );
+            printf( "//// ( %3d, %3d ) ////  TOP HALF   ////: matrix_x: %3d  ", x, y, *matrix_x );
         } else {
-            printf( "//// ( %d, %d ) //// BOTTOM HALF ////: matrix_x: %d  ", x, y, *matrix_x );
+            printf( "//// ( %3d, %3d ) //// BOTTOM HALF ////: matrix_x: %3d  ", x, y, *matrix_x );
             *matrix_x = is_left_half ? x : x + panel_cols_ / 2;
         }
 
