@@ -262,7 +262,7 @@ namespace rgb_matrix
                 x = x;
                 y = y;
             
-            } else if ( y < ( 2 * MATRIX_HEIGHT )) {
+            } else if ( y < ( /*2 * MATRIX_HEIGHT*/ 32 )) {
                 x = x + VISIBLE_WIDTH;
                 y = y - ( SLAB_HEIGHT / 2 ); //  - y - 1;
             
