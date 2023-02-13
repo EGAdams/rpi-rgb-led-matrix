@@ -153,17 +153,18 @@ public:
     }
 
     bool isTopCheck( int y, int panel_rows_ ) const {
-        printf( "returning the top check: y < panel_rows_ / 4: %d\n", y < panel_rows_ / 4 );
-        return y < panel_rows_ / 4;
+        // printf( "returning the top check: y < panel_rows_ / 4: %d\n", y < panel_rows_ / 4 );
+        // return y < panel_rows_ / 4;
+        return ( y % ( panel_rows_ / 2 )) < panel_rows_ / 4;
     }
 
     bool isLeftCheck( int x ) const {
-        // printf( "returning the left check: x < panel_cols_ / 2: %d\n", x < panel_cols_ / 2 );
+        //printf( "returning the left check: x < panel_cols_ / 2: %d\n", x < panel_cols_ / 2 );
         return x < panel_cols_ / 2;
     }
 
     int GetMatrixX(int x, int y) const {
-        if (isTopCheck(y, panel_rows_ )) {
+        if (isTopCheck(y)) {
             if ( isLeftCheck(x)) {
                 printf ( "returning is left check:  x + panel_cols_ / 2: %d\n", x + panel_cols_ / 2 );
                 return x + panel_cols_ / 2;
