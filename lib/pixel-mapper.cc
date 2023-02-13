@@ -242,7 +242,7 @@ namespace rgb_matrix
         */ 
        
         #define PANEL_HEIGHT  32
-        #define SLAB_HEIGHT   64
+        #define SLAB_HEIGHT   128
         #define MATRIX_WIDTH  256 //
         #define MATRIX_HEIGHT 32
         #define VISIBLE_WIDTH 64
@@ -253,9 +253,8 @@ namespace rgb_matrix
             printf( "incomming x: %d  incomming y: %d  ", x, y );
 
             const int visible_width = ( MATRIX_WIDTH / 64) * 32;
-            const int slab_height = 2 * MATRIX_HEIGHT;   // one folded u-shape
-            const int base_y = (y / slab_height) * MATRIX_HEIGHT;
-            y %= slab_height;
+            const int base_y = (y / SLAB_HEIGHT) * MATRIX_HEIGHT;
+            y %= SLAB_HEIGHT;
 
             if (y < MATRIX_HEIGHT ) {
 
@@ -265,13 +264,13 @@ namespace rgb_matrix
             
             } else {
                 x = visible_width - x - 1;
-                y = slab_height   - y - 1;
+                y = SLAB_HEIGHT   - y - 1;
             }
             *matrix_x = x;
             *matrix_y = base_y + y;
             
             printf( "pnl_hght: %d  vsbl_wdth: %d  slb_hght: %d bs_y: %d mtrx_wdth: %d mtrx_hght: %d, mtrx_x: %d,   mtrx_y %d \n", 
-                     MATRIX_HEIGHT, visible_width, slab_height, base_y,  matrix_width, matrix_height, *matrix_x,    *matrix_y );
+                     MATRIX_HEIGHT, visible_width, SLAB_HEIGHT, base_y,  matrix_width, matrix_height, *matrix_x,    *matrix_y );
             
         }
 
