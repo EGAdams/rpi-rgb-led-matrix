@@ -143,8 +143,8 @@ class SuperbowlMultiplexMapper : public MultiplexMapperBase {
 public:
   SuperbowlMultiplexMapper() : MultiplexMapperBase("Superbowl", 2) {}
 
-  #define ORIGINALLY_TWO 2
-    #define ORIGINALLY_FOUR 4
+  #define ORIGINALLY_TWO 4
+  #define ORIGINALLY_FOUR 8
   void MapSinglePanel(int x, int y, int *matrix_x, int *matrix_y) const {
     const bool is_top_check = (y % (panel_rows_/ ORIGINALLY_TWO )) < panel_rows_/ ORIGINALLY_FOUR;
     const bool is_left_check = (x < panel_cols_/ ORIGINALLY_TWO );
