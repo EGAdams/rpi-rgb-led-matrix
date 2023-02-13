@@ -152,7 +152,7 @@ public:
         return y % ( panel_rows_ / 4 );
     }
 
-    bool IsTopCheck(int y) const {
+    bool isTopCheck(int y) const {
         printf( "returning the top check: y < panel_rows_ / 4: %d\n", y < panel_rows_ / 4 );
         return y < panel_rows_ / 4;
     }
@@ -163,7 +163,7 @@ public:
     }
 
     int GetMatrixX(int x, int y) const {
-        if (IsTopCheck(y)) {
+        if (isTopCheck(y)) {
             if ( isLeftCheck(x)) {
                 printf ( "returning is left check:  x + panel_cols_ / 2: %d\n", x + panel_cols_ / 2 );
                 return x + panel_cols_ / 2;
@@ -197,7 +197,7 @@ public:
 
         //this->MapCoordinates(x, y, matrix_x, matrix_y);
         
-        const bool is_top_half = ( y % ( panel_rows_ / 2 )) < panel_rows_ / 4;
+        const bool is_top_half  = isTopCheck(  y ); // ( y % ( panel_rows_ / 2 )) < panel_rows_ / 4;
         const bool is_left_half = isLeftCheck( x );
         
         // set the x coordinate in the matrix
