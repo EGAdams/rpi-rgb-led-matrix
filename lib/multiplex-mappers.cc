@@ -133,6 +133,10 @@ public:
     printf( "panel_rows_: %d, panel_cols_: %d is_top_check: %d  is_left_check: %d", panel_rows_, panel_cols_, is_top_check, is_left_check );
     printf( "CheckeredMultiplexMapper:  MapSinglePanel input x: %d, input: y: %d, matrix_x: %d, matrix_y: %d\n", x, y, *matrix_x, *matrix_y );             
   }
+
+  // now MapDoublePanel
+  // void MapDoublePanel( int x, int y, int *matrix_x, int *matrix_y) const {}
+
 };
 
 class SpiralMultiplexMapper : public MultiplexMapperBase {
