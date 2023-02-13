@@ -262,7 +262,7 @@ namespace rgb_matrix
             
             } else {
                 x = ( visible_width / 2 ) - x - 1;
-                y = ( slab_height * ) - y - 1;
+                y = ( slab_height * 2 ) - y - 1;
             
             }
             *matrix_x = x;
