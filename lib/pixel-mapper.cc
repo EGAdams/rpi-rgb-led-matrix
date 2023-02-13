@@ -249,25 +249,19 @@ namespace rgb_matrix
         virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
                                   int x, int y,
                                   int *matrix_x, int *matrix_y) const {
-            // const int panel_height = matrix_height / parallel_;
-            // const int visible_width = (256 / 64) * 32;
-            // const int slab_height = 2 * 32;           // one folded u-shape #define SLAB_HEIGHT 64
-            
-            if ( y < 32 ) {
-                x = x;
-                y = y;
-            } else if ( y < 64) {
-                x = x + 64;
-                y = y - 32;
-            } else if ( y < 96 ) {
-                x = x + 128;
-                y = y - 64;
+            const int panel_height = matrix_height / parallel_;
+            const int visible_width = (matrix_width / 64) * 32;
+            const int slab_height = 2 * panel_height;   // one folded u-shape
+            const int base_y = (y / slab_height) * panel_height;
+            y %= slab_height;
+            if (y < panel_height) {
+            x += matrix_width / 2;
             } else {
-                x = x + 192;
-                y = y - 128;
+            x = visible_width - x - 1;
+            y = slab_height - y - 1;
             }
             *matrix_x = x;
-            *matrix_y = y;
+            *matrix_y = base_y + y;
         }
 
 
