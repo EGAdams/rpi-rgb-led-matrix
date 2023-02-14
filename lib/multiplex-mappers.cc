@@ -219,7 +219,11 @@ public:
             *matrix_x = is_left_half ? x + panel_cols_ / 2 : x + panel_cols_;
             //topHalfCalculation( x, y, matrix_x );
             *matrix_y = y;
-            printf( "/// %4d //// ( %3d, %3d ) ////  TOP HALF   //// >>----> (", row_count, x, y );
+            if ( is_left_half ) {
+                printf( "/// %4d //// ( %3d, %3d ) ////  TOP LEFT HALF    //// >>----> (", row_count, x, y );
+            } else {
+                printf( "/// %4d //// ( %3d, %3d ) ////  TOP RIGHT HALF   //// >>----> (", row_count, x, y );
+            }
         } else {
             printf( "/// %4d //// ( %3d, %3d ) //// BOTTOM HALF //// >>----> (", row_count, x, y );
             *matrix_x = is_left_half ? x : x + panel_cols_ / 2;
