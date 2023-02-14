@@ -206,9 +206,9 @@ public:
         // set the x coordinate in the matrix
         if ( is_top_half ) {
             *matrix_x = is_left_half ? x + panel_cols_ / 2 : x + panel_cols_;
-            printf( "//// ( %3d, %3d ) ////  TOP HALF   ////: matrix_x: %3d  panel_rows: %3d  panel_cols:%3d  \n", x, y, *matrix_x, panel_rows_, panel_cols_ );
+            printf( "//// ( %3d, %3d ) ////  TOP HALF   ////: matrix_x: %3d   matrix_y: %3d  panel_rows: %3d  panel_cols:%3d  \n", x, y, *matrix_x, *matrix_y, panel_rows_, panel_cols_ );
         } else {
-            printf( "//// ( %3d, %3d ) //// BOTTOM HALF ////: matrix_x: %3d  panel_rows: %3d  panel_cols:%3d  \n", x, y, *matrix_x, panel_rows_, panel_cols_ );
+            printf( "//// ( %3d, %3d ) //// BOTTOM HALF ////: matrix_x: %3d   matrix_y: %3d  panel_rows: %3d  panel_cols:%3d  \n", x, y, *matrix_x, *matrix_y, panel_rows_, panel_cols_ );
             *matrix_x = is_left_half ? x : x + panel_cols_ / 2;
         }
 
@@ -228,7 +228,7 @@ public:
         // } else if ( y < PANEL_HEIGHT * 4 ) {
         //     *matrix_x = 255 - x;
         //     *matrix_y = 15  - y;
-        
+
         } ////////////////////////////// END PANEL_HEIGHT IF STATEMENT //////////////////////////////
 
         //printf( "matrix_x after: %d  matrix_y after: %d\n", *matrix_x, *matrix_y );
