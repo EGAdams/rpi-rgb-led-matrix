@@ -207,9 +207,9 @@ public:
 
         if ( is_top_half ) {
             *matrix_x = is_left_half ? x + panel_cols_ / 2 : x + panel_cols_;
-            printf( "/// %4d //// ( %3d, %3d ) ////  TOP HALF   ////: matrix_x: %3d   matrix_y: %3d  panel_rows: %3d  panel_cols:%3d  \n", row_count, x, y, *matrix_x, *matrix_y, panel_rows_, panel_cols_ );
+            printf( "/// %4d //// ( %3d, %3d ) ////  TOP HALF   //// >>----> ( %3d, %3d )  //////  panel_rows: %3d  panel_cols:%3d  \n", row_count, x, y, *matrix_x, *matrix_y, panel_rows_, panel_cols_ );
         } else {
-            printf( "/// %4d //// ( %3d, %3d ) //// BOTTOM HALF ////: matrix_x: %3d   matrix_y: %3d  panel_rows: %3d  panel_cols:%3d  \n", row_count, x, y, *matrix_x, *matrix_y, panel_rows_, panel_cols_ );
+            printf( "/// %4d //// ( %3d, %3d ) //// BOTTOM HALF //// >>----> ( %3d, %3d )  //////  panel_rows: %3d  panel_cols:%3d  \n", row_count, x, y, *matrix_x, *matrix_y, panel_rows_, panel_cols_ );
             *matrix_x = is_left_half ? x : x + panel_cols_ / 2;
         }
         row_count++;
