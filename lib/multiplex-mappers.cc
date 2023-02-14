@@ -206,14 +206,16 @@ public:
         // set the x coordinate in the matrix
 
         if ( is_top_half ) {
-            *matrix_x = is_left_half ? x + panel_cols_ / 2 : x + panel_cols_;
+            // *matrix_x = is_left_half ? x + panel_cols_ / 2 : x + panel_cols_;
+            *matrix_x = (( 16 * x ) + ( 16 * y ) + 16 );
+            *matrix_y = y;
             printf( "/// %4d //// ( %3d, %3d ) ////  TOP HALF   //// >>----> (", row_count, x, y );
         } else {
             printf( "/// %4d //// ( %3d, %3d ) //// BOTTOM HALF //// >>----> (", row_count, x, y );
             *matrix_x = is_left_half ? x : x + panel_cols_ / 2;
+            *matrix_y = (( y / ( panel_rows_ / 2 )) * ( panel_rows_ / 4 ) + y % ( panel_rows_ / 4 ));
         }
         row_count++;
-        *matrix_y = (( y / ( panel_rows_ / 2 )) * ( panel_rows_ / 4 ) + y % ( panel_rows_ / 4 ));
 
         printf( "%3d, %3d ) //////  panel_rows: %3d  panel_cols:%3d \n" , *matrix_x, *matrix_y, panel_rows_, panel_cols_ );        
 
