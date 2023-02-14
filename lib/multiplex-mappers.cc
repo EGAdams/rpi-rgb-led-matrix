@@ -198,8 +198,8 @@ public:
 
     void topHalfCalculation(int x, int y, int* matrix_x ) const {
         int temp = 0;
-        if (x >= 15) {
-            temp = x + 16 * (y + 1);
+        if ( x >= 15 ) {
+            temp = x + 16 * ( y + 1 );
         } else {
             temp = x + 16 * y + 16;
         }
@@ -216,8 +216,8 @@ public:
         // set the x coordinate in the matrix
 
         if ( is_top_half ) {
-            // *matrix_x = is_left_half ? x + panel_cols_ / 2 : x + panel_cols_;
-            topHalfCalculation( x, y, matrix_x );
+            *matrix_x = is_left_half ? x + panel_cols_ / 2 : x + panel_cols_;
+            //topHalfCalculation( x, y, matrix_x );
             *matrix_y = y;
             printf( "/// %4d //// ( %3d, %3d ) ////  TOP HALF   //// >>----> (", row_count, x, y );
         } else {
