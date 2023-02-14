@@ -215,7 +215,7 @@ public:
         row_count++;
         *matrix_y = (( y / ( panel_rows_ / 2 )) * ( panel_rows_ / 4 ) + y % ( panel_rows_ / 4 ));
 
-        printf(  "%3d, %3d  //////  panel_rows: %3d  panel_cols:%3d " , *matrix_x, *matrix_y, panel_rows_, panel_cols_ );        
+        printf( "%3d, %3d  //////  panel_rows: %3d  panel_cols:%3d \n" , *matrix_x, *matrix_y, panel_rows_, panel_cols_ );        
 
         #define PANEL_HEIGHT 16
         //printf( "matrix_x before: %d matrix_y before: %d\n", *matrix_x, *matrix_y );
