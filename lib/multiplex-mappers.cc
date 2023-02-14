@@ -219,16 +219,18 @@ public:
         //printf( "matrix_x before: %d matrix_y before: %d\n", *matrix_x, *matrix_y );
         if ( y < PANEL_HEIGHT ) {
             // don't do anything
-        } else if ( y < PANEL_HEIGHT * 2 ) {
-            *matrix_x = 511 - x;
-            *matrix_y = 15  - y;
+        // } else if ( y < PANEL_HEIGHT * 2 ) {
+        //     *matrix_x = 511 - x;
+        //     *matrix_y = 15  - y;
         // } else if ( y < PANEL_HEIGHT * 3 ) {
         //     *matrix_x = 383 - x;
         //     *matrix_y = 15  - y;
         // } else if ( y < PANEL_HEIGHT * 4 ) {
         //     *matrix_x = 255 - x;
         //     *matrix_y = 15  - y;
-        }
+        
+        } ////////////////////////////// END PANEL_HEIGHT IF STATEMENT //////////////////////////////
+
         //printf( "matrix_x after: %d  matrix_y after: %d\n", *matrix_x, *matrix_y );
     }
 
