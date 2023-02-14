@@ -196,6 +196,16 @@ public:
         printf( "Finally: MapCoordinates input x: %d, input: y: %d, matrix_x: %d, matrix_y: %d\n", x, y, *matrix_x, *matrix_y );
     }
 
+    void topHalfCalculation(int x, int y, int* matrix_x ) const {
+        int temp = 0;
+        if (x >= 15) {
+            temp = x + 16 * (y + 1);
+        } else {
+            temp = x + 16 * y + 16;
+        }
+        *matrix_x = temp;
+    }
+
     void MapSinglePanel( int x, int y, int *matrix_x, int *matrix_y ) const {
 
         //this->MapCoordinates(x, y, matrix_x, matrix_y);
@@ -207,7 +217,7 @@ public:
 
         if ( is_top_half ) {
             // *matrix_x = is_left_half ? x + panel_cols_ / 2 : x + panel_cols_;
-            *matrix_x = (( 16 * x ) + ( 16 * y ) + 16 );
+            topHalfCalculation( x, y, matrix_x );
             *matrix_y = y;
             printf( "/// %4d //// ( %3d, %3d ) ////  TOP HALF   //// >>----> (", row_count, x, y );
         } else {
