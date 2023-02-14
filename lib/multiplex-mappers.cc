@@ -199,19 +199,20 @@ public:
     void MapSinglePanel( int x, int y, int *matrix_x, int *matrix_y ) const {
 
         //this->MapCoordinates(x, y, matrix_x, matrix_y);
-        
+        static int row_count = 0;
         const bool is_top_half  = isTopCheck(  y, panel_rows_ ); // ( y % ( panel_rows_ / 2 )) < panel_rows_ / 4;
         const bool is_left_half = isLeftCheck( x );
         
         // set the x coordinate in the matrix
+
         if ( is_top_half ) {
             *matrix_x = is_left_half ? x + panel_cols_ / 2 : x + panel_cols_;
-            printf( "//// ( %3d, %3d ) ////  TOP HALF   ////: matrix_x: %3d   matrix_y: %3d  panel_rows: %3d  panel_cols:%3d  \n", x, y, *matrix_x, *matrix_y, panel_rows_, panel_cols_ );
+            printf( "/// %4d //// ( %3d, %3d ) ////  TOP HALF   ////: matrix_x: %3d   matrix_y: %3d  panel_rows: %3d  panel_cols:%3d  \n", row_count, x, y, *matrix_x, *matrix_y, panel_rows_, panel_cols_ );
         } else {
-            printf( "//// ( %3d, %3d ) //// BOTTOM HALF ////: matrix_x: %3d   matrix_y: %3d  panel_rows: %3d  panel_cols:%3d  \n", x, y, *matrix_x, *matrix_y, panel_rows_, panel_cols_ );
+            printf( "/// %4d //// ( %3d, %3d ) //// BOTTOM HALF ////: matrix_x: %3d   matrix_y: %3d  panel_rows: %3d  panel_cols:%3d  \n", row_count, x, y, *matrix_x, *matrix_y, panel_rows_, panel_cols_ );
             *matrix_x = is_left_half ? x : x + panel_cols_ / 2;
         }
-
+        row_count++;
         *matrix_y = (( y / ( panel_rows_ / 2 )) * ( panel_rows_ / 4 ) + y % ( panel_rows_ / 4 ));
         
 
