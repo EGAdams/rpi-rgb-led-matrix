@@ -63,7 +63,7 @@ static void DrawLine(Canvas *canvas)
     } // wait a little to slow down things.
 
     printf("done drawing lines\n\n");
-    usleep(100 * 1000 * 1000);
+    usleep( 20 * 1000 * 1000);
 } // wait a little to slow down things.
 
 int main(int argc, char *argv[])
