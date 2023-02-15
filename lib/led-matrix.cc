@@ -575,7 +575,7 @@ bool RGBMatrix::Impl::ApplyPixelMapper(const PixelMapper *mapper) {
   for ( int y = 0; y < new_height; ++y ) {
     for ( int x = 0; x < new_width; ++x ) {
       int orig_x = -1, orig_y = -1;
-      printf( "/// translation_count: %d\n", translation_count++ );
+      
       mapper->MapVisibleToMatrix( old_width, old_height, x, y, &orig_x, &orig_y );
       if ( orig_x < 0 || orig_y < 0 || orig_x >= old_width || orig_y >= old_height ) {
         printf( "Error in PixelMapper: (%d, %d) -> (%d, %d) [range: " "%dx%d]\n", x, y, orig_x, orig_y, old_width, old_height );
@@ -589,6 +589,7 @@ bool RGBMatrix::Impl::ApplyPixelMapper(const PixelMapper *mapper) {
       *new_mapper->get(x, y) = *orig_designator;
     }
   }
+  printf( "/// translation_count: %d\n", translation_count );
   delete shared_pixel_mapper_;
   shared_pixel_mapper_ = new_mapper;
   return true;
