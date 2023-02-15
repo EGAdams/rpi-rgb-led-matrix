@@ -72,8 +72,8 @@ public:
         *matrix_y = parallel_panel * panel_rows_ / panel_stretch_factor_ + new_y;
     }
     
-    printf( "visible: ( %3d, %3d ) internally mapped: ( %3d, %2d ) chained_panel: %d  parallel_panel: %d  in_pnl_x: %2d  in_pnl_y: %2d \n", 
-             visible_x, visible_y, *matrix_x, *matrix_y,           chained_panel, parallel_panel, within_panel_x, within_panel_y );
+    // printf( "visible: ( %3d, %3d ) internally mapped: ( %3d, %2d ) chained_panel: %d  parallel_panel: %d  in_pnl_x: %2d  in_pnl_y: %2d \n", 
+    //          visible_x, visible_y, *matrix_x, *matrix_y,           chained_panel, parallel_panel, within_panel_x, within_panel_y );
   }
 
   // Map the coordinates for a single panel. This is to be overridden in
