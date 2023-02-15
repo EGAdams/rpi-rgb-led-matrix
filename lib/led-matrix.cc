@@ -569,7 +569,7 @@ bool RGBMatrix::Impl::ApplyPixelMapper(const PixelMapper *mapper) {
   int new_width, new_height;
   if (!mapper->GetSizeMapping(old_width, old_height, &new_width, &new_height)) { return false; }
   PixelDesignatorMap *new_mapper = new PixelDesignatorMap( new_width, new_height, shared_pixel_mapper_->GetFillColorBits());
-  printf( "applying pixel mapper: %s", mapper->GetName());
+  printf( "applying pixel mapper: %s  because i can.", mapper->GetName());
   printf( "\n\nold_width: %d, old_height: %d, new_width: %d, new_height: %d\n\n", old_width, old_height, new_width, new_height );
   for ( int y = 0; y < new_height; ++y ) {
     for ( int x = 0; x < new_width; ++x ) {
