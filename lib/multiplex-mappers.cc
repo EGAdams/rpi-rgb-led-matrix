@@ -68,7 +68,7 @@ public:
     if ( visible_x < 64 ) {
         *matrix_x = new_x;
         *matrix_y = new_y;
-    } else if ( visible_x < 128 ) {
+    } else if (( visible_x < 128 ) && ( chained_panel == 0 )) {
         *matrix_x = new_x / 4;
         *matrix_y = new_y;
     } else {
