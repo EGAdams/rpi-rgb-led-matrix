@@ -88,7 +88,7 @@ public:
   uint8_t brightness();
 
   uint64_t RequestInputs(uint64_t);
-  uint64_t AwaitInputChange(int timeout_ms);
+  uint64_t AwaitInputChange( int timeout_ms);
 
   uint64_t RequestOutputs(uint64_t output_bits);
   void OutputGPIO(uint64_t output_bits);
@@ -230,7 +230,7 @@ public:
     return previous;
   }
 
-  gpio_bits_t AwaitInputChange(int timeout_ms) {
+  gpio_bits_t AwaitInputChange( int timeout_ms) {
     MutexLock l(&input_sync_);
     input_sync_.WaitOn(&input_change_, timeout_ms);
     return gpio_inputs_;
@@ -527,7 +527,7 @@ FrameCanvas *RGBMatrix::Impl::SwapOnVSync(FrameCanvas *other,
   return previous;
 }
 
-uint64_t RGBMatrix::Impl::AwaitInputChange(int timeout_ms) {
+uint64_t RGBMatrix::Impl::AwaitInputChange( int timeout_ms) {
   if (!updater_) return 0;
   return updater_->AwaitInputChange(timeout_ms);
 }
@@ -571,8 +571,8 @@ bool RGBMatrix::Impl::ApplyPixelMapper(const PixelMapper *mapper) {
   PixelDesignatorMap *new_mapper = new PixelDesignatorMap( new_width, new_height, shared_pixel_mapper_->GetFillColorBits());
   printf( "applying pixel mapper: %s", mapper->GetName());
   printf( "\n\nold_width: %d, old_height: %d, new_width: %d, new_height: %d\n\n", old_width, old_height, new_width, new_height );
-  for (int y = 0; y < new_height; ++y) {
-    for (int x = 0; x < new_width; ++x) {
+  for ( int y = 0; y < new_height; ++y ) {
+    for ( int x = 0; x < new_width; ++x ) {
       int orig_x = -1, orig_y = -1;
       mapper->MapVisibleToMatrix( old_width, old_height, x, y, &orig_x, &orig_y );
       if ( orig_x < 0 || orig_y < 0 || orig_x >= old_width || orig_y >= old_height ) {
@@ -680,7 +680,7 @@ RGBMatrix *RGBMatrix::CreateFromOptions(const RGBMatrix::Options &options,
 }
 
 // Public interface.
-RGBMatrix *RGBMatrix::CreateFromFlags(int *argc, char ***argv,
+RGBMatrix *RGBMatrix::CreateFromFlags( int *argc, char ***argv,
                                       RGBMatrix::Options *m_opt_in,
                                       RuntimeOptions *rt_opt_in,
                                       bool remove_consumed_options) {
@@ -721,7 +721,7 @@ uint8_t RGBMatrix::brightness() { return impl_->brightness(); }
 uint64_t RGBMatrix::RequestInputs(uint64_t all_interested_bits) {
   return impl_->RequestInputs(all_interested_bits);
 }
-uint64_t RGBMatrix::AwaitInputChange(int timeout_ms) {
+uint64_t RGBMatrix::AwaitInputChange( int timeout_ms) {
   return impl_->AwaitInputChange(timeout_ms);
 }
 
@@ -743,7 +743,7 @@ int RGBMatrix::height() const {
   return impl_->active_->height();
 }
 
-void RGBMatrix::SetPixel(int x, int y, uint8_t red, uint8_t green, uint8_t blue) {
+void RGBMatrix::SetPixel( int x, int y, uint8_t red, uint8_t green, uint8_t blue) {
   impl_->active_->SetPixel(x, y, red, green, blue);
 }
 
@@ -759,7 +759,7 @@ void RGBMatrix::Fill(uint8_t red, uint8_t green, uint8_t blue) {
 FrameCanvas::~FrameCanvas() { delete frame_; }
 int FrameCanvas::width() const { return frame_->width(); }
 int FrameCanvas::height() const { return frame_->height(); }
-void FrameCanvas::SetPixel(int x, int y,
+void FrameCanvas::SetPixel( int x, int y,
                          uint8_t red, uint8_t green, uint8_t blue) {
   frame_->SetPixel(x, y, red, green, blue);
 }
