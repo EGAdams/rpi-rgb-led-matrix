@@ -68,8 +68,8 @@ public:
         *matrix_x = chained_panel  * panel_stretch_factor_* panel_cols_ + new_x;
         *matrix_y = parallel_panel * panel_rows_ / panel_stretch_factor_ + new_y;
     } else {
-        *matrix_x = chained_panel  * panel_stretch_factor_* panel_cols_ + new_x + 64;
-        *matrix_y = parallel_panel * panel_rows_ / panel_stretch_factor_ + new_y - 32;
+        *matrix_x = chained_panel  * panel_stretch_factor_* panel_cols_ + new_x - 1 - visible_x;
+        *matrix_y = parallel_panel * panel_rows_ / panel_stretch_factor_ + new_y - 1 - visible_y;
     }
     
     printf( "visible: ( %3d, %3d ) internally mapped: ( %3d, %2d ) chained_panel: %d  parallel_panel: %d  in_pnl_x: %2d  in_pnl_y: %2d \n", 
