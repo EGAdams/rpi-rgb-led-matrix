@@ -65,7 +65,7 @@ public:
     MapSinglePanel(within_panel_x, within_panel_y, &new_x, &new_y);
     *matrix_x = chained_panel  * panel_stretch_factor_*panel_cols_ + new_x;
     *matrix_y = parallel_panel * panel_rows_ /panel_stretch_factor_ + new_y;
-
+    printf( "hello?" );
     printf( "/// row: %d /// visible: ( %3d, %3d ) //// internally mapped: ( %2d, %2d ) //// ", count++, visible_x, visible_y, *matrix_x, *matrix_y );
   }
 
