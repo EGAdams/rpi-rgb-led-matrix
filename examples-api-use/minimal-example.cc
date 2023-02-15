@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
     defaults.hardware_mapping = "adafruit-hat"; // or e.g. "adafruit-hat"
     defaults.rows = 32;
     defaults.cols = 32;
-    defaults.brightness = 1;
+    defaults.brightness = 20;
     // defaults.pixel_mapper_config = "U-mapper";
     // defaults.multiplexing = 19; // 19 is the Superbowl mapper
     defaults.show_refresh_rate = false;
