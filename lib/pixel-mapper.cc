@@ -253,22 +253,25 @@ namespace rgb_matrix
             //printf( "incomming x: %d  incomming y: %d  ", x, y );
 
             //const int visible_width = ( MATRIX_WIDTH / 64) * 32;
-            const int base_y = (y / SLAB_HEIGHT) * MATRIX_HEIGHT;
-            y %= SLAB_HEIGHT;
+            // const int base_y = (y / SLAB_HEIGHT) * MATRIX_HEIGHT;
+            // y %= SLAB_HEIGHT;
 
-            // if ( y < MATRIX_HEIGHT ) {
-
-            //     // x += matrix_width / 2;
-            //     x = x;
-            //     y = y;
-            
-            // } else if ( y < ( 2 * MATRIX_HEIGHT )) {
-            //     x = x + VISIBLE_WIDTH;
-            //     y = y - ( SLAB_HEIGHT / 2 ); //  - y - 1;
-            
-            // } 
+            // Check which side the coordinates are on 
+            if ( y < 32 ) {
+                x = x;
+                y = y;
+            } else if ( y < 64 ) {
+                x = x + 64;
+                y = y - 32;
+            } else if ( y < 96 ) {
+                x = x;
+                y = y;
+            } else {
+                x = x + 64;
+                y = y - 32;
+            } 
             *matrix_x = x;
-            *matrix_y = base_y + y;
+            *matrix_y = /*base_y +*/ y;
             
             // printf( "pnl_hght: %d  vsbl_wdth: %d  slb_hght: %d bs_y: %d mtrx_wdth: %d mtrx_hght: %d, mtrx_x: %d,   mtrx_y %d \n", 
             //          MATRIX_HEIGHT, VISIBLE_WIDTH, SLAB_HEIGHT, base_y,  matrix_width, matrix_height, *matrix_x,    *matrix_y );
