@@ -255,28 +255,26 @@ namespace rgb_matrix
             //const int visible_width = ( MATRIX_WIDTH / 64) * 32;
             const int base_y = (y / SLAB_HEIGHT) * MATRIX_HEIGHT;
             y %= SLAB_HEIGHT;
-
-            if ( y < MATRIX_HEIGHT ) {
-
-                // x += matrix_width / 2;
-                x = x;
-                y = y;
-            
-            } else if ( y < ( 2 * MATRIX_HEIGHT )) {
-                x = x + VISIBLE_WIDTH;
-                y = y - ( SLAB_HEIGHT / 2 ); //  - y - 1;
-            
-            } else if ( y < ( 3 * MATRIX_HEIGHT )) {
-            printf( "start ( %3d, %3d\n", x, y );
-                x = x + VISIBLE_WIDTH;
-                y = y - ( SLAB_HEIGHT / 4 ); //  - y - 1;
-            printf( "end ( %3d, %3d\n", x, y );
-            
-            } else if ( y < ( 4 * MATRIX_HEIGHT )){
-            printf( "start ( %3d, %3d\n", x, y );
-                x = x + VISIBLE_WIDTH;
-                y = y - ( SLAB_HEIGHT / 4 ); //  - y - 1;
-            printf( "end   ( %3d, %3d\n", x, y );
+            if ( x < 128 ) {
+                if ( y < MATRIX_HEIGHT ) {
+                    // x += matrix_width / 2;
+                    x = x;
+                    y = y;
+                } else if ( y < ( 2 * MATRIX_HEIGHT )) {
+                    x = x + VISIBLE_WIDTH;
+                    y = y - ( SLAB_HEIGHT / 2 ); //  - y - 1;
+                } 
+            } else {
+                if ( y < MATRIX_HEIGHT ) {
+                    // x += matrix_width / 2;
+                    x = x + VISIBLE_WIDTH;
+                    y = y - ( SLAB_HEIGHT / 4 ); //  - y - 1;
+                } else if ( y < ( 2 * MATRIX_HEIGHT )) {
+                    printf( "start ( %3d, %3d\n", x, y );
+                    x = x + VISIBLE_WIDTH;
+                    y = y - ( SLAB_HEIGHT / 4 ); //  - y - 1;
+                    printf( "end   ( %3d, %3d\n", x, y );
+                } 
             }
 
             *matrix_x = x;
