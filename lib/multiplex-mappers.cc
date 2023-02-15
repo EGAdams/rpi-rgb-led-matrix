@@ -77,6 +77,9 @@ public:
     } else if (( visible_x < 112 ) && ( chained_panel == 3 ) && ( visible_y < 23 )) {
         *matrix_x = visible_x - 16;
         *matrix_y = new_y + 1;
+    } else if (( visible_x < 128 ) && ( chained_panel == 3 ) && ( visible_y < 23 )) {
+        *matrix_x = visible_x;
+        *matrix_y = new_y + 1;
     } else {
         *matrix_x = chained_panel  * panel_stretch_factor_* panel_cols_ + new_x;
         *matrix_y = parallel_panel * panel_rows_ / panel_stretch_factor_ + new_y;
