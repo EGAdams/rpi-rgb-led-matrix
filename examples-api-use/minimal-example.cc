@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
     // defaults.pixel_mapper_config = "U-mapper";
     defaults.multiplexing = 19; // 19 is the Superbowl mapper
     defaults.show_refresh_rate = false;
-    defaults.chain_length = 8;
+    defaults.chain_length = 1;
     defaults.parallel = 1;
     Canvas *canvas = RGBMatrix::CreateFromFlags(&argc, &argv, &defaults);
     if (canvas == NULL)
