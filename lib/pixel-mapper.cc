@@ -266,13 +266,12 @@ namespace rgb_matrix
                 } 
             } else {
                 if ( y < MATRIX_HEIGHT ) {
-                    // x += matrix_width / 2;
-                    x = x + VISIBLE_WIDTH;
-                    y = y - ( SLAB_HEIGHT / 4 ); //  - y - 1;
+                    x = x + 2 * VISIBLE_WIDTH;
+                    y = y - SLAB_HEIGHT;
                 } else if ( y < ( 2 * MATRIX_HEIGHT )) {
                     printf( "start ( %3d, %3d\n", x, y );
-                    x = x + VISIBLE_WIDTH;
-                    y = y - ( SLAB_HEIGHT / 4 ); //  - y - 1;
+                    x = x + 3 * VISIBLE_WIDTH;
+                    y = y - SLAB_HEIGHT * 2;
                     printf( "end   ( %3d, %3d\n", x, y );
                 } 
             }
