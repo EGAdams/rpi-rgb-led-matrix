@@ -257,13 +257,13 @@ namespace rgb_matrix
             // y %= SLAB_HEIGHT;
 
             // Check which side the coordinates are on 
-            if ( y < 32 ) {
+            if ( y < 64 ) {
                 x = x;
                 y = y;
-            } else if ( y < 64 ) {
+            } else if ( y < 128 ) {
                 x = x + 64;
                 y = y - 32;
-            } else if ( y < 96 ) {
+            } else if ( y < 192 ) {
                 x = x;
                 y = y;
             } else {
