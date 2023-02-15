@@ -64,9 +64,9 @@ public:
 
     int new_x, new_y;
     MapSinglePanel(within_panel_x, within_panel_y, &new_x, &new_y); // map only one panel! in this case, ( 32x32 )
-    if ( visible_y < 16 ) {
+    if ( visible_x > 63 ) {
         *matrix_x = chained_panel  * panel_stretch_factor_* panel_cols_ + new_x;
-        *matrix_y = parallel_panel * panel_rows_ / panel_stretch_factor_ + new_y;
+        *matrix_y = new_y;
     } else {
         *matrix_x = chained_panel  * panel_stretch_factor_* panel_cols_ + new_x;
         *matrix_y = parallel_panel * panel_rows_ / panel_stretch_factor_ + new_y;
