@@ -69,8 +69,8 @@ public:
         *matrix_x = new_x;
         *matrix_y = new_y;
     } else if (( visible_x < 128 ) && ( chained_panel == 0 )) {
-        *matrix_x = new_x / 16;
-        *matrix_y = new_y;
+        *matrix_x = new_x - 48;
+        *matrix_y = new_y + 1;
     } else {
         *matrix_x = chained_panel  * panel_stretch_factor_* panel_cols_ + new_x;
         *matrix_y = parallel_panel * panel_rows_ / panel_stretch_factor_ + new_y;
