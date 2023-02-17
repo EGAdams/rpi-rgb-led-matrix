@@ -64,15 +64,10 @@ public:
 
     int new_x, new_y;
     MapSinglePanel(within_panel_x, within_panel_y, &new_x, &new_y); // map only one panel! in this case, ( 32x32 )
-    printf( "running MapSinglePanel() with ( %3d, %3d ) \n", within_panel_x, within_panel_y );
-    printf( "/////////////////////////// IS THIS EVEN BEING CALLED? /////////////////////////// \n" );
-    if ( visible_x > 63 ) {
-        *matrix_x = chained_panel  * panel_stretch_factor_* panel_cols_ + new_x;
-        *matrix_y = parallel_panel * panel_rows_ / panel_stretch_factor_ + new_y;
-    } else {
-        *matrix_x = chained_panel  * panel_stretch_factor_* panel_cols_ + new_x;
-        *matrix_y = parallel_panel * panel_rows_ / panel_stretch_factor_ + new_y;
-    }
+    printf( "running MapSinglePanel() with ( %3d, %3d ) ////////// INSIDE BASE! ////////// \n", within_panel_x, within_panel_y );
+   
+    *matrix_x = chained_panel  * panel_stretch_factor_* panel_cols_ + new_x;
+    *matrix_y = parallel_panel * panel_rows_ / panel_stretch_factor_ + new_y;
     
     printf( "visible: ( %3d, %3d ) internally mapped: ( %3d, %2d ) chained_panel: %d  parallel_panel: %d  in_pnl_x: %2d  in_pnl_y: %2d \n", 
              visible_x, visible_y, *matrix_x, *matrix_y,           chained_panel, parallel_panel, within_panel_x, within_panel_y );
@@ -221,7 +216,7 @@ public:
     }
 
     void MapSinglePanel( int x, int y, int *matrix_x, int *matrix_y ) const {
-        printf( "SuperbowlMultiplexMapper: input x: %d, input: y: %d, matrix_x: %d, matrix_y: %d" );
+        printf( "SuperbowlMultiplexMapper: input x: %d, input: y: %d, matrix_x: %d, matrix_y: %d \n", x, y, *matrix_x, *matrix_y );
 
         //this->MapCoordinates(x, y, matrix_x, matrix_y);
         static int row_count = 0;
