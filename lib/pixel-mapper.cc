@@ -192,8 +192,7 @@ namespace rgb_matrix
                 Panel firstPanel;
                 firstPanel.order = 0;
                 firstPanel.rotate = 0;
-                //_panels[ 0 ] = firstPanel;
-                _panels.push_back( firstPanel );
+                _panels[ 0 ] = firstPanel;
 
                 // Panel secondPanel;
                 // secondPanel.order = 1;
@@ -334,7 +333,7 @@ namespace rgb_matrix
                 int rotate;
                 // int parallel; hard code to 1
             };
-            std::vector< Panel > _panels;
+            Panel _panels[ 8 ];
         };        
        
 
