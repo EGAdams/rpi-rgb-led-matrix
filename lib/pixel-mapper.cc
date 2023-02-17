@@ -189,45 +189,45 @@ namespace rgb_matrix
             UArrangementMapper() : parallel_( 1 ) {
 
                 // initialize the panels
-                Panel firstPanel;
-                firstPanel.order = 0;
-                firstPanel.rotate = 0;
-                _panels[ 0 ] = firstPanel;
+                // Panel firstPanel;
+                // firstPanel.order = 0;
+                // firstPanel.rotate = 0;
+                // _panels[ 0 ] = firstPanel;
 
-                Panel secondPanel;
-                secondPanel.order = 1;
-                secondPanel.rotate = 0;
-                _panels[ 1 ] = secondPanel;
+                // Panel secondPanel;
+                // secondPanel.order = 1;
+                // secondPanel.rotate = 0;
+                // _panels[ 1 ] = secondPanel;
 
-                Panel thirdPanel;
-                thirdPanel.order = 2;
-                thirdPanel.rotate = 0;
-                _panels[ 2 ] = thirdPanel;
+                // Panel thirdPanel;
+                // thirdPanel.order = 2;
+                // thirdPanel.rotate = 0;
+                // _panels[ 2 ] = thirdPanel;
 
-                Panel fourthPanel;
-                fourthPanel.order = 3;
-                fourthPanel.rotate = 0;
-                _panels[ 3 ] = fourthPanel;
+                // Panel fourthPanel;
+                // fourthPanel.order = 3;
+                // fourthPanel.rotate = 0;
+                // _panels[ 3 ] = fourthPanel;
 
-                Panel fifthPanel;
-                fifthPanel.order = 4;
-                fifthPanel.rotate = 0;
-                _panels[ 4 ] = fifthPanel;
+                // Panel fifthPanel;
+                // fifthPanel.order = 4;
+                // fifthPanel.rotate = 0;
+                // _panels[ 4 ] = fifthPanel;
 
-                Panel sixthPanel;
-                sixthPanel.order = 5;
-                sixthPanel.rotate = 0;
-                _panels[ 5 ] = sixthPanel;
+                // Panel sixthPanel;
+                // sixthPanel.order = 5;
+                // sixthPanel.rotate = 0;
+                // _panels[ 5 ] = sixthPanel;
 
-                Panel seventhPanel;
-                seventhPanel.order = 6;
-                seventhPanel.rotate = 0;
-                _panels[ 6 ] = seventhPanel;
+                // Panel seventhPanel;
+                // seventhPanel.order = 6;
+                // seventhPanel.rotate = 0;
+                // _panels[ 6 ] = seventhPanel;
 
-                Panel eighthPanel;
-                eighthPanel.order = 7;
-                eighthPanel.rotate = 0;
-                _panels[ 7 ] = eighthPanel;
+                // Panel eighthPanel;
+                // eighthPanel.order = 7;
+                // eighthPanel.rotate = 0;
+                // _panels[ 7 ] = eighthPanel;
             }
 
             virtual const char *GetName() const { return "U-mapper"; }
@@ -328,12 +328,12 @@ namespace rgb_matrix
 
             private:
             int parallel_;
-            struct Panel {
-                int order;
-                int rotate;
-                // int parallel; hard code to 1
-            };
-            std::vector< Panel > _panels;
+            // struct Panel {
+            //     int order;
+            //     int rotate;
+            //     // int parallel; hard code to 1
+            // };
+            // std::vector< Panel > _panels;
         };        
        
 
