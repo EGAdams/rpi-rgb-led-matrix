@@ -66,8 +66,8 @@ public:
     MapSinglePanel( within_panel_x, within_panel_y, &new_x, &new_y ); // map only one panel! in this case, ( 32x32 )
     // printf( "////////// done running MapSinglePanel() with ( %3d, %3d ) ////////// INSIDE BASE! //", within_panel_x, within_panel_y );
    
-    // *matrix_x = chained_panel  * panel_stretch_factor_* panel_cols_ + new_x;
-    // *matrix_y = parallel_panel * panel_rows_ / panel_stretch_factor_ + new_y;
+    *matrix_x = chained_panel  * panel_stretch_factor_* panel_cols_ + new_x;
+    *matrix_y = parallel_panel * panel_rows_ / panel_stretch_factor_ + new_y;
     
     //printf( "////////// visible: ( %3d, %3d ) internally mapped: ( %3d, %2d ) chained_panel: %d  parallel_panel: %d  in_pnl_x: %2d  in_pnl_y: %2d \n", 
     //         visible_x, visible_y, *matrix_x, *matrix_y,           chained_panel, parallel_panel, within_panel_x, within_panel_y );
@@ -130,23 +130,16 @@ public:
   CheckeredMultiplexMapper() : MultiplexMapperBase("Checkered", 2) {}
 
   void MapSinglePanel(int x, int y, int *matrix_x, int *matrix_y) const {
-    
-    const bool is_top_check = ( y % ( panel_rows_ /2)) < panel_rows_ /4;
-    const bool is_left_check = (x < panel_cols_ /2);
+    const bool is_top_check = (y % (panel_rows_/2)) < panel_rows_/4;
+    const bool is_left_check = (x < panel_cols_/2);
     if (is_top_check) {
-      *matrix_x = is_left_check ? x+panel_cols_ /2 : x+panel_cols_;
+      *matrix_x = is_left_check ? x+panel_cols_/2 : x+panel_cols_;
     } else {
-      *matrix_x = is_left_check ? x : x + panel_cols_ /2;
+      *matrix_x = is_left_check ? x : x + panel_cols_/2;
     }
-    *matrix_y = (( y / ( panel_rows_ /2)) * ( panel_rows_ /4 )
-                 + y % ( panel_rows_ /4 ));
-    //printf( "After mapping single panel in Checkered: panel_rows_: %d, panel_cols_: %d is_top_check: %d  is_left_check: %d\n", panel_rows_, panel_cols_, is_top_check, is_left_check );
-    //printf( "End of CheckeredMultiplexMapper MapSinglePanel input: x: %d, input: y: %d, matrix_x: %d, matrix_y: %d\n", x, y, *matrix_x, *matrix_y );             
+    *matrix_y = ((y / (panel_rows_/2)) * (panel_rows_/4)
+                 + y % (panel_rows_/4));
   }
-
-  // now MapDoublePanel
-  // void MapDoublePanel( int x, int y, int *matrix_x, int *matrix_y) const {}
-
 };
 
 
