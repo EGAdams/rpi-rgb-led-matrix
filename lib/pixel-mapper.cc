@@ -317,8 +317,8 @@ namespace rgb_matrix
                 // _source->SetPixel(x_offset + x,
                 //                     y_offset + y,
                 //                     red, green, blue);
-                *matrix_x = x; //x_offset + x;
-                *matrix_y = y; //y_offset + y;
+                *matrix_x = x_offset + x;
+                *matrix_y = y_offset + y;
 
                 // *matrix_x = x;
                 // *matrix_y = /*base_y +*/ y;
