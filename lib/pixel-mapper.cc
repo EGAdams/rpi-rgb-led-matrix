@@ -262,6 +262,7 @@ namespace rgb_matrix
                 Panel fifteenthPanel;
                 fifteenthPanel.order  = 14;
                 fifteenthPanel.rotate = 0;
+                _panels[ 14 ] = fifteenthPanel;
 
                 Panel sixteenthPanel;
                 sixteenthPanel.order  = 15;
@@ -305,7 +306,7 @@ namespace rgb_matrix
             #define MATRIX_HEIGHT 32
             #define VISIBLE_WIDTH 64
             #define CHAIN_LENGTH   8
-            #define ROWS           1
+            #define ROWS           2
             #define COLS           8
             #define PANEL_PARALLEL 0
 
