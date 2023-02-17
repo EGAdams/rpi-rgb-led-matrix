@@ -55,16 +55,15 @@ public:
   virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
                                   int visible_x, int visible_y,
                                   int *matrix_x, int *matrix_y) const {
-    // const int chained_panel  = visible_x / panel_cols_;
-    // const int parallel_panel = visible_y / panel_rows_;
+    const int chained_panel  = visible_x / panel_cols_;
+    const int parallel_panel = visible_y / panel_rows_;
 
-    // const int within_panel_x = visible_x % panel_cols_;
-    // const int within_panel_y = visible_y % panel_rows_;
+    const int within_panel_x = visible_x % panel_cols_;
+    const int within_panel_y = visible_y % panel_rows_;
     
 
-    //int new_x, new_y;
-    //MapSinglePanel( within_panel_x, within_panel_y, &new_x, &new_y ); // map only one panel! in this case, ( 32x32 )
-    MapSinglePanel( visible_x, visible_y, matrix_x, matrix_y ); // map only one panel! in this case, ( 32x32 )
+    int new_x, new_y;
+    MapSinglePanel( within_panel_x, within_panel_y, &new_x, &new_y ); // map only one panel! in this case, ( 32x32 )
     // printf( "////////// done running MapSinglePanel() with ( %3d, %3d ) ////////// INSIDE BASE! //", within_panel_x, within_panel_y );
    
     // *matrix_x = chained_panel  * panel_stretch_factor_* panel_cols_ + new_x;
@@ -217,76 +216,52 @@ public:
         *matrix_x = temp;
     }
 
-    #define PANEL_HEIGHT  16
-    #define PANEL_WIDTH   16
-    #define ROWS          1
-    #define COLS          32
-
     void MapSinglePanel( int x, int y, int *matrix_x, int *matrix_y ) const {
         printf( "SuperbowlMultiplexMapper: input x: %d, input: y: %d, matrix_x: %d, matrix_y: %d \n", x, y, *matrix_x, *matrix_y );
-                
-                // Figure out what row and column panel this pixel is within.
-                int row = y / PANEL_HEIGHT; // _panel_height;
-                int col = x / PANEL_WIDTH;  // _panel_width;
 
+        //this->MapCoordinates(x, y, matrix_x, matrix_y);
+        static int row_count = 0;
+        const bool is_top_half  = isTopCheck(  y, panel_rows_ ); // ( y % ( panel_rows_ / 2 )) < panel_rows_ / 4;
+        const bool is_left_half = isLeftCheck( x );  // return x < panel_cols_ / 2; // is x smaller than 16?
+        
+        // set the x coordinate in the matrix
 
+        if ( is_top_half ) {
+            *matrix_x = is_left_half ? x + panel_cols_ / 2 : x + panel_cols_;
+            //topHalfCalculation( x, y, matrix_x );
+            // *matrix_y = y;
+            if ( is_left_half ) {
+                printf( "/// %4d //// ( %3d, %3d ) ////  TOP LEFT HALF    //// >>----> (", row_count, x, y );
+            } else {
+                printf( "/// %4d //// ( %3d, %3d ) ////  TOP RIGHT HALF   //// >>----> (", row_count, x, y );
+            }
+        } else {
+            printf( "/// %4d //// ( %3d, %3d ) //// BOTTOM HALF //// >>----> (", row_count, x, y );
+            *matrix_x = is_left_half ? x : x + panel_cols_ / 2;
+        }
+        
+        *matrix_y = (( y / ( panel_rows_ / 2 )) * ( panel_rows_ / 4 ) + y % ( panel_rows_ / 4 )); row_count++;
+        printf( "%3d, %3d ) //////  panel_rows_: %3d  panel_cols_:%3d \n" , *matrix_x, *matrix_y, panel_rows_, panel_cols_ );        
 
-                // Get the panel information for this pixel.
-                Panel panel = _panels[ ( COLS * row ) + col ];  //_cols*row + col];
-                printf( "row: %d  col: %d  panel.order: %d, panel.rotate: %d \n ", row, col, panel.order, panel.rotate );
+        //#define PANEL_HEIGHT 16
+        //printf( "matrix_x before: %d matrix_y before: %d\n", *matrix_x, *matrix_y );
+        //if ( y < PANEL_HEIGHT ) {
+            // don't do anything
+        // } else if ( y < PANEL_HEIGHT * 2 ) {
+        //     *matrix_x = 511 - x;
+        //     *matrix_y = 15  - y;
+        // } else if ( y < PANEL_HEIGHT * 3 ) {
+        //     *matrix_x = 383 - x;
+        //     *matrix_y = 15  - y;
+        // } else if ( y < PANEL_HEIGHT * 4 ) {
+        //     *matrix_x = 255 - x;
+        //     *matrix_y = 15  - y;
 
-                // // Compute location of the pixel within the panel.
-                // x = x % PANEL_WIDTH;  // _panel_width;
-                // y = y % PANEL_HEIGHT; // _panel_height;
+        //} ////////////////////////////// END PANEL_HEIGHT IF STATEMENT //////////////////////////////
 
-                // // Perform any panel rotation to the pixel.
-                // // NOTE: 90 and 270 degree rotation only possible on 32 row (square) panels.
-                // if ( panel.rotate == 90 ) {
-                //     // assert(_panel_height == _panel_width); // asserted.  PANEL_HEIGHT == PANEL_WIDTH
-                //     int old_x = x;
-                //     x = ( PANEL_HEIGHT -1 ) - y;
-                //     y = old_x;
-                // }
-                // else if ( panel.rotate == 180 ) {
-                //     x = ( PANEL_WIDTH  - 1 ) - x;
-                //     y = ( PANEL_HEIGHT - 1 ) - y;
-                // }
-                // else if ( panel.rotate == 270 ) {
-                //     // assert( PANEL_HEIGHT == PANEL_WIDTH ); // asserted.  PANEL_HEIGHT == PANEL_WIDTH
-                //     int old_y = y;
-                //     y = ( PANEL_WIDTH - 1 ) - x;
-                //     x = old_y;
-                // }
-
-                // // Determine x offset into the source panel based on its order along the chain.
-                // // The order needs to be inverted because the matrix library starts with the
-                // // origin of an image at the end of the chain and not at the start (where
-                // // ordering begins for this transformer).
-                // int x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
-
-                // // Determine y offset into the source panel based on its parrallel chain value.
-                // int y_offset = PANEL_PARALLEL * PANEL_HEIGHT;
-
-                // // _source->SetPixel(x_offset + x,
-                // //                     y_offset + y,
-                // //                     red, green, blue);
-
-                // printf( "x: %2d  y: %2d  x_offset: %d  y_offset: %d\n", x, y, x_offset, y_offset );
-
-                *matrix_x = x;
-                *matrix_y = y;
-
-        printf( "matrix_x after: %d  matrix_y after: %d\n", *matrix_x, *matrix_y );
+        //printf( "matrix_x after: %d  matrix_y after: %d\n", *matrix_x, *matrix_y );
     }
 
-    private:
-    int parallel_;
-    struct Panel {
-        int order;
-        int rotate;
-        // int parallel; hard code to 1
-    };
-    Panel _panels[ 32 ];
   // now MapDoublePanel
   // void MapDoublePanel( int x, int y, int *matrix_x, int *matrix_y) const {}
 
