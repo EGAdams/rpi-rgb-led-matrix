@@ -196,7 +196,7 @@ namespace rgb_matrix
 
                 Panel secondPanel;
                 secondPanel.order = 1;
-                secondPanel.rotate = 0;
+                secondPanel.rotate = 180;
                 _panels[ 1 ] = secondPanel;
 
                 Panel thirdPanel;
@@ -206,7 +206,7 @@ namespace rgb_matrix
 
                 Panel fourthPanel;
                 fourthPanel.order = 3;
-                fourthPanel.rotate = 0;
+                fourthPanel.rotate = 180;
                 _panels[ 3 ] = fourthPanel;
 
                 Panel fifthPanel;
@@ -216,7 +216,7 @@ namespace rgb_matrix
 
                 Panel sixthPanel;
                 sixthPanel.order = 5;
-                sixthPanel.rotate = 0;
+                sixthPanel.rotate = 180;
                 _panels[ 5 ] = sixthPanel;
 
                 Panel seventhPanel;
@@ -226,7 +226,7 @@ namespace rgb_matrix
 
                 Panel eighthPanel;
                 eighthPanel.order = 7;
-                eighthPanel.rotate = 0;
+                eighthPanel.rotate = 180;
                 _panels[ 7 ] = eighthPanel;
             }
 
@@ -288,22 +288,22 @@ namespace rgb_matrix
 
                 // Perform any panel rotation to the pixel.
                 // NOTE: 90 and 270 degree rotation only possible on 32 row (square) panels.
-                // if ( panel.rotate == 90 ) {
-                //     // assert(_panel_height == _panel_width); // asserted.  PANEL_HEIGHT == PANEL_WIDTH
-                //     int old_x = x;
-                //     x = ( PANEL_HEIGHT -1 ) - y;
-                //     y = old_x;
-                // }
-                // else if ( panel.rotate == 180 ) {
-                //     x = ( PANEL_WIDTH  - 1 ) - x;
-                //     y = ( PANEL_HEIGHT - 1 ) - y;
-                // }
-                // else if ( panel.rotate == 270 ) {
-                //     // assert( PANEL_HEIGHT == PANEL_WIDTH ); // asserted.  PANEL_HEIGHT == PANEL_WIDTH
-                //     int old_y = y;
-                //     y = ( PANEL_WIDTH - 1 ) - x;
-                //     x = old_y;
-                // }
+                if ( panel.rotate == 90 ) {
+                    // assert(_panel_height == _panel_width); // asserted.  PANEL_HEIGHT == PANEL_WIDTH
+                    int old_x = x;
+                    x = ( PANEL_HEIGHT -1 ) - y;
+                    y = old_x;
+                }
+                else if ( panel.rotate == 180 ) {
+                    x = ( PANEL_WIDTH  - 1 ) - x;
+                    y = ( PANEL_HEIGHT - 1 ) - y;
+                }
+                else if ( panel.rotate == 270 ) {
+                    // assert( PANEL_HEIGHT == PANEL_WIDTH ); // asserted.  PANEL_HEIGHT == PANEL_WIDTH
+                    int old_y = y;
+                    y = ( PANEL_WIDTH - 1 ) - x;
+                    x = old_y;
+                }
 
                 // Determine x offset into the source panel based on its order along the chain.
                 // The order needs to be inverted because the matrix library starts with the
