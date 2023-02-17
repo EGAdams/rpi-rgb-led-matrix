@@ -788,3 +788,52 @@ if (is_top_check) {
     *matrix_x = is_left_check ? x + panel_cols_ / 2 : x + panel_cols_;
 } else {              
     *matrix_x = is_left_check ? x : x + panel_col
+
+
+    void MapSinglePanel( int x, int y, int *matrix_x, int *matrix_y ) const {
+        printf( "SuperbowlMultiplexMapper: input x: %d, input: y: %d, matrix_x: %d, matrix_y: %d \n", x, y, *matrix_x, *matrix_y );
+
+        //this->MapCoordinates(x, y, matrix_x, matrix_y);
+        static int row_count = 0;
+        const bool is_top_half  = isTopCheck(  y, panel_rows_ ); // ( y % ( panel_rows_ / 2 )) < panel_rows_ / 4;
+        const bool is_left_half = isLeftCheck( x );  // return x < panel_cols_ / 2; // is x smaller than 16?
+        
+        // set the x coordinate in the matrix
+
+        if ( is_top_half ) {
+            *matrix_x = is_left_half ? x + panel_cols_ / 2 : x + panel_cols_;
+            //topHalfCalculation( x, y, matrix_x );
+            // *matrix_y = y;
+            if ( is_left_half ) {
+                printf( "/// %4d //// ( %3d, %3d ) ////  TOP LEFT HALF    //// >>----> (", row_count, x, y );
+            } else {
+                printf( "/// %4d //// ( %3d, %3d ) ////  TOP RIGHT HALF   //// >>----> (", row_count, x, y );
+            }
+        } else {
+            printf( "/// %4d //// ( %3d, %3d ) //// BOTTOM HALF //// >>----> (", row_count, x, y );
+            *matrix_x = is_left_half ? x : x + panel_cols_ / 2;
+        }
+        
+        *matrix_y = (( y / ( panel_rows_ / 2 )) * ( panel_rows_ / 4 ) + y % ( panel_rows_ / 4 )); row_count++;
+        printf( "%3d, %3d ) //////  panel_rows_: %3d  panel_cols_:%3d \n" , *matrix_x, *matrix_y, panel_rows_, panel_cols_ );        
+
+        //#define PANEL_HEIGHT 16
+        //printf( "matrix_x before: %d matrix_y before: %d\n", *matrix_x, *matrix_y );
+        //if ( y < PANEL_HEIGHT ) {
+            // don't do anything
+        // } else if ( y < PANEL_HEIGHT * 2 ) {
+        //     *matrix_x = 511 - x;
+        //     *matrix_y = 15  - y;
+        // } else if ( y < PANEL_HEIGHT * 3 ) {
+        //     *matrix_x = 383 - x;
+        //     *matrix_y = 15  - y;
+        // } else if ( y < PANEL_HEIGHT * 4 ) {
+        //     *matrix_x = 255 - x;
+        //     *matrix_y = 15  - y;
+
+        //} ////////////////////////////// END PANEL_HEIGHT IF STATEMENT //////////////////////////////
+
+        //printf( "matrix_x after: %d  matrix_y after: %d\n", *matrix_x, *matrix_y );
+    }
+
+    

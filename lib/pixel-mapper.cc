@@ -266,8 +266,8 @@ namespace rgb_matrix
             #define MATRIX_HEIGHT 32
             #define VISIBLE_WIDTH 64
             #define CHAIN_LENGTH   8
-            #define ROWS           1
-            #define COLS           8
+            #define ROWS           4
+            #define COLS           2
             #define PANEL_PARALLEL 1
 
             virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
@@ -280,7 +280,7 @@ namespace rgb_matrix
 
                 // Get the panel information for this pixel.
                 Panel panel = _panels[ ( COLS * row ) + col ];  //_cols*row + col];
-                printf( "row: %d  col: %d  panel.order: %d, panel.rotate: %d \n", row, col, panel.order, panel.rotate );
+                printf( "row: %d  col: %d  panel.order: %d, panel.rotate: %d \n ", row, col, panel.order, panel.rotate );
 
                 // // Compute location of the pixel within the panel.
                 // x = x % PANEL_WIDTH;  // _panel_width;
