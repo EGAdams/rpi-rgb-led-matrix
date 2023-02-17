@@ -130,6 +130,7 @@ public:
   CheckeredMultiplexMapper() : MultiplexMapperBase("Checkered", 2) {}
 
   void MapSinglePanel(int x, int y, int *matrix_x, int *matrix_y) const {
+    
     const bool is_top_check = ( y % ( panel_rows_ /2)) < panel_rows_ /4;
     const bool is_left_check = (x < panel_cols_ /2);
     if (is_top_check) {
@@ -139,8 +140,8 @@ public:
     }
     *matrix_y = (( y / ( panel_rows_ /2)) * ( panel_rows_ /4 )
                  + y % ( panel_rows_ /4 ));
-    printf( "panel_rows_: %d, panel_cols_: %d is_top_check: %d  is_left_check: %d\n", panel_rows_, panel_cols_, is_top_check, is_left_check );
-    printf( "CheckeredMultiplexMapper:  MapSinglePanel input x: %d, input: y: %d, matrix_x: %d, matrix_y: %d\n", x, y, *matrix_x, *matrix_y );             
+    printf( "After mapping single panel in Checkerd: panel_rows_: %d, panel_cols_: %d is_top_check: %d  is_left_check: %d\n", panel_rows_, panel_cols_, is_top_check, is_left_check );
+    printf( "End of CheckeredMultiplexMapper MapSinglePanel input: x: %d, input: y: %d, matrix_x: %d, matrix_y: %d\n", x, y, *matrix_x, *matrix_y );             
   }
 
   // now MapDoublePanel
