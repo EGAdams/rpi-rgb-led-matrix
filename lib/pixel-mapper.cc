@@ -274,13 +274,13 @@ namespace rgb_matrix
                                     int x, int y,
                                     int *matrix_x, int *matrix_y ) const {
 
-                // // Figure out what row and column panel this pixel is within.
-                // int row = y / PANEL_HEIGHT; // _panel_height;
-                // int col = x / PANEL_WIDTH;  // _panel_width;
+                // Figure out what row and column panel this pixel is within.
+                int row = y / PANEL_HEIGHT; // _panel_height;
+                int col = x / PANEL_WIDTH;  // _panel_width;
 
-                // //Get the panel information for this pixel.
-                // Panel panel = _panels[ ( COLS * row ) + col ];  //_cols*row + col];
-                // printf( "row: %d  col: %d  panel.order: %d, panel.rotate: %d  ", row, col, panel.order, panel.rotate );
+                // Get the panel information for this pixel.
+                Panel panel = _panels[ ( COLS * row ) + col ];  //_cols*row + col];
+                printf( "row: %d  col: %d  panel.order: %d, panel.rotate: %d  ", row, col, panel.order, panel.rotate );
 
                 // // Compute location of the pixel within the panel.
                 // x = x % PANEL_WIDTH;  // _panel_width;
