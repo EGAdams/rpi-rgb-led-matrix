@@ -188,11 +188,11 @@ namespace rgb_matrix
             public:
             UArrangementMapper() : parallel_( 1 ) {
 
-                // initialize the panels
-                // Panel firstPanel;
-                // firstPanel.order = 0;
-                // firstPanel.rotate = 0;
-                // _panels[ 0 ] = firstPanel;
+                //initialize the panels
+                Panel firstPanel;
+                firstPanel.order = 0;
+                firstPanel.rotate = 0;
+                _panels[ 0 ] = firstPanel;
 
                 // Panel secondPanel;
                 // secondPanel.order = 1;
@@ -328,12 +328,12 @@ namespace rgb_matrix
 
             private:
             int parallel_;
-            // struct Panel {
-            //     int order;
-            //     int rotate;
-            //     // int parallel; hard code to 1
-            // };
-            // std::vector< Panel > _panels;
+            struct Panel {
+                int order;
+                int rotate;
+                // int parallel; hard code to 1
+            };
+            std::vector< Panel > _panels;
         };        
        
 
