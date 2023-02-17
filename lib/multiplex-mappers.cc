@@ -230,17 +230,17 @@ public:
             //topHalfCalculation( x, y, matrix_x );
             // *matrix_y = y;
             if ( is_left_half ) {
-                // printf( "/// %4d //// ( %3d, %3d ) ////  TOP LEFT HALF    //// >>----> (", row_count, x, y );
+                printf( "/// %4d //// ( %3d, %3d ) ////  TOP LEFT HALF    //// >>----> (", row_count, x, y );
             } else {
-                // printf( "/// %4d //// ( %3d, %3d ) ////  TOP RIGHT HALF   //// >>----> (", row_count, x, y );
+                printf( "/// %4d //// ( %3d, %3d ) ////  TOP RIGHT HALF   //// >>----> (", row_count, x, y );
             }
         } else {
-            // printf( "/// %4d //// ( %3d, %3d ) //// BOTTOM HALF //// >>----> (", row_count, x, y );
+            printf( "/// %4d //// ( %3d, %3d ) //// BOTTOM HALF //// >>----> (", row_count, x, y );
             *matrix_x = is_left_half ? x : x + panel_cols_ / 2;
         }
         
         *matrix_y = (( y / ( panel_rows_ / 2 )) * ( panel_rows_ / 4 ) + y % ( panel_rows_ / 4 )); row_count++;
-        // printf( "%3d, %3d ) //////  panel_rows_: %3d  panel_cols_:%3d \n" , *matrix_x, *matrix_y, panel_rows_, panel_cols_ );        
+        printf( "%3d, %3d ) //////  panel_rows_: %3d  panel_cols_:%3d \n" , *matrix_x, *matrix_y, panel_rows_, panel_cols_ );        
 
         //#define PANEL_HEIGHT 16
         //printf( "matrix_x before: %d matrix_y before: %d\n", *matrix_x, *matrix_y );
@@ -266,12 +266,12 @@ public:
 
 };
 
-class MapSinglePanel {
+class GPT3_MapSinglePanel {
     int panel_rows_;
     int panel_cols_;
 
 public:
-    MapSinglePanel(int panel_rows, int panel_cols) : panel_rows_(panel_rows), panel_cols_(panel_cols) {}
+    GPT3_MapSinglePanel(int panel_rows, int panel_cols) : panel_rows_(panel_rows), panel_cols_(panel_cols) {}
 
     int GetYQuadrant(int y) const {
         return y / (panel_rows_ / 4);
