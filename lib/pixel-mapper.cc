@@ -259,8 +259,8 @@ namespace rgb_matrix
                 return true;
             }
         
-            #define PANEL_HEIGHT  32
-            #define PANEL_WIDTH   32
+            #define PANEL_HEIGHT  16
+            #define PANEL_WIDTH   16
             #define SLAB_HEIGHT   64
             #define MATRIX_WIDTH  128 // 256
             #define MATRIX_HEIGHT 32
