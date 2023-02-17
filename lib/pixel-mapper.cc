@@ -332,8 +332,8 @@ namespace rgb_matrix
                 //     x = x + 64;
                 //     y = y - 32;
                 // }
-                *matrix_x = x;
-                *matrix_y = y;
+                // *matrix_x = x;
+                // *matrix_y = y;
 
                 // *matrix_x = x;
                 // *matrix_y = /*base_y +*/ y;
