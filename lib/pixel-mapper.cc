@@ -192,7 +192,8 @@ namespace rgb_matrix
                 Panel firstPanel;
                 firstPanel.order = 0;
                 firstPanel.rotate = 0;
-                _panels[ 0 ] = firstPanel;
+                //_panels[ 0 ] = firstPanel;
+                _panels.push_back( firstPanel );
 
                 // Panel secondPanel;
                 // secondPanel.order = 1;
