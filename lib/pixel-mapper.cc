@@ -196,7 +196,7 @@ namespace rgb_matrix
 
                 Panel secondPanel;
                 secondPanel.order = 1;
-                secondPanel.rotate = 180;
+                secondPanel.rotate = 0;
                 _panels[ 1 ] = secondPanel;
 
                 Panel thirdPanel;
@@ -206,7 +206,7 @@ namespace rgb_matrix
 
                 Panel fourthPanel;
                 fourthPanel.order = 3;
-                fourthPanel.rotate = 180;
+                fourthPanel.rotate = 0;
                 _panels[ 3 ] = fourthPanel;
 
                 Panel fifthPanel;
@@ -216,7 +216,7 @@ namespace rgb_matrix
 
                 Panel sixthPanel;
                 sixthPanel.order = 5;
-                sixthPanel.rotate = 180;
+                sixthPanel.rotate = 0;
                 _panels[ 5 ] = sixthPanel;
 
                 Panel seventhPanel;
@@ -226,7 +226,7 @@ namespace rgb_matrix
 
                 Panel eighthPanel;
                 eighthPanel.order = 7;
-                eighthPanel.rotate = 180;
+                eighthPanel.rotate = 0;
                 _panels[ 7 ] = eighthPanel;
             }
 
@@ -312,7 +312,7 @@ namespace rgb_matrix
                 int x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
 
                 // Determine y offset into the source panel based on its parrallel chain value.
-                int y_offset = PANEL_PARALLEL * ( PANEL_HEIGHT - 1 );
+                int y_offset = PANEL_PARALLEL * PANEL_HEIGHT;
 
                 // _source->SetPixel(x_offset + x,
                 //                     y_offset + y,
