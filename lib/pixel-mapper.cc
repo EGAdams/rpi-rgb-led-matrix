@@ -316,11 +316,11 @@ namespace rgb_matrix
                 // _source->SetPixel(x_offset + x,
                 //                     y_offset + y,
                 //                     red, green, blue);
-                x = x_offset + x;
-                y = y_offset + y;
+                *matrix_x = x_offset + x;
+                *matrix_y = y_offset + y;
 
-                *matrix_x = x;
-                *matrix_y = /*base_y +*/ y;
+                // *matrix_x = x;
+                // *matrix_y = /*base_y +*/ y;
                     
                 // printf( "pnl_hght: %d  vsbl_wdth: %d  slb_hght: %d bs_y: %d mtrx_wdth: %d mtrx_hght: %d, mtrx_x: %d,   mtrx_y %d \n", 
                 //          MATRIX_HEIGHT, VISIBLE_WIDTH, SLAB_HEIGHT, base_y,  matrix_width, matrix_height, *matrix_x,    *matrix_y );                
