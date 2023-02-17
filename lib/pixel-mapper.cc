@@ -278,62 +278,50 @@ namespace rgb_matrix
                 int row = y / PANEL_HEIGHT; // _panel_height;
                 int col = x / PANEL_WIDTH;  // _panel_width;
 
-                // Get the panel information for this pixel.
+                //Get the panel information for this pixel.
                 Panel panel = _panels[ ( COLS * row ) + col ];  //_cols*row + col];
-                printf( "row: %d  col: %d  panel.order: %d, panel.rotate: %d \n ", row, col, panel.order, panel.rotate );
+                printf( "row: %d  col: %d  panel.order: %d, panel.rotate: %d", row, col, panel.order, panel.rotate );
 
-                // // Compute location of the pixel within the panel.
-                // x = x % PANEL_WIDTH;  // _panel_width;
-                // y = y % PANEL_HEIGHT; // _panel_height;
+                // Compute location of the pixel within the panel.
+                x = x % PANEL_WIDTH;  // _panel_width;
+                y = y % PANEL_HEIGHT; // _panel_height;
 
-                // // Perform any panel rotation to the pixel.
-                // // NOTE: 90 and 270 degree rotation only possible on 32 row (square) panels.
-                // if ( panel.rotate == 90 ) {
-                //     // assert(_panel_height == _panel_width); // asserted.  PANEL_HEIGHT == PANEL_WIDTH
-                //     int old_x = x;
-                //     x = ( PANEL_HEIGHT -1 ) - y;
-                //     y = old_x;
-                // }
-                // else if ( panel.rotate == 180 ) {
-                //     x = ( PANEL_WIDTH  - 1 ) - x;
-                //     y = ( PANEL_HEIGHT - 1 ) - y;
-                // }
-                // else if ( panel.rotate == 270 ) {
-                //     // assert( PANEL_HEIGHT == PANEL_WIDTH ); // asserted.  PANEL_HEIGHT == PANEL_WIDTH
-                //     int old_y = y;
-                //     y = ( PANEL_WIDTH - 1 ) - x;
-                //     x = old_y;
-                // }
+                // Perform any panel rotation to the pixel.
+                // NOTE: 90 and 270 degree rotation only possible on 32 row (square) panels.
+                if ( panel.rotate == 90 ) {
+                    // assert(_panel_height == _panel_width); // asserted.  PANEL_HEIGHT == PANEL_WIDTH
+                    int old_x = x;
+                    x = ( PANEL_HEIGHT -1 ) - y;
+                    y = old_x;
+                }
+                else if ( panel.rotate == 180 ) {
+                    x = ( PANEL_WIDTH  - 1 ) - x;
+                    y = ( PANEL_HEIGHT - 1 ) - y;
+                }
+                else if ( panel.rotate == 270 ) {
+                    // assert( PANEL_HEIGHT == PANEL_WIDTH ); // asserted.  PANEL_HEIGHT == PANEL_WIDTH
+                    int old_y = y;
+                    y = ( PANEL_WIDTH - 1 ) - x;
+                    x = old_y;
+                }
 
-                // // Determine x offset into the source panel based on its order along the chain.
-                // // The order needs to be inverted because the matrix library starts with the
-                // // origin of an image at the end of the chain and not at the start (where
-                // // ordering begins for this transformer).
-                // int x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
+                // Determine x offset into the source panel based on its order along the chain.
+                // The order needs to be inverted because the matrix library starts with the
+                // origin of an image at the end of the chain and not at the start (where
+                // ordering begins for this transformer).
+                int x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
 
-                // // Determine y offset into the source panel based on its parrallel chain value.
-                // int y_offset = PANEL_PARALLEL * PANEL_HEIGHT;
+                // Determine y offset into the source panel based on its parrallel chain value.
+                int y_offset = PANEL_PARALLEL * PANEL_HEIGHT;
 
-                // // _source->SetPixel(x_offset + x,
-                // //                     y_offset + y,
-                // //                     red, green, blue);
+                // _source->SetPixel(x_offset + x,
+                //                     y_offset + y,
+                //                     red, green, blue);
 
-                // printf( "x: %2d  y: %2d  x_offset: %d  y_offset: %d\n", x, y, x_offset, y_offset );
-                // if ( y < 32 ) {
-                //     x = x;
-                //     y = y;
-                // } else if ( y < 64 ) {
-                //     x = x + 64;
-                //     y = y - 32;
-                // } else if ( y < 96 ) {
-                //     x = x;
-                //     y = y;
-                // } else {
-                //     x = x + 64;
-                //     y = y - 32;
-                // }
-                // *matrix_x = x;
-                // *matrix_y = y;
+                printf( "x: %d  y: %d  x_offset: %d  y_offset: %d\n", x, y, x_offset, y_offset );
+
+                *matrix_x = x;
+                *matrix_y = y;
 
                 // *matrix_x = x;
                 // *matrix_y = /*base_y +*/ y;
