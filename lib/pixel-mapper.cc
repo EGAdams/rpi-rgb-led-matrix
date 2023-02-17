@@ -268,7 +268,7 @@ namespace rgb_matrix
             #define CHAIN_LENGTH   8
             #define ROWS           4
             #define COLS           2
-            #define PANEL_PARALLEL 1
+            #define PANEL_PARALLEL 0
 
             virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
                                     int x, int y,
