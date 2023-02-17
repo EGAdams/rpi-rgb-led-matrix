@@ -312,7 +312,7 @@ namespace rgb_matrix
                 int x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
 
                 // Determine y offset into the source panel based on its parrallel chain value.
-                int y_offset = PANEL_PARALLEL * PANEL_HEIGHT;
+                int y_offset = PANEL_PARALLEL * ( PANEL_HEIGHT - 1 );
 
                 // _source->SetPixel(x_offset + x,
                 //                     y_offset + y,
