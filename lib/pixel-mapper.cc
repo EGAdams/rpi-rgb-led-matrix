@@ -319,7 +319,19 @@ namespace rgb_matrix
                 // //                     red, green, blue);
 
                 // printf( "x: %2d  y: %2d  x_offset: %d  y_offset: %d\n", x, y, x_offset, y_offset );
-
+                if ( y < 32 ) {
+                    x = x;
+                    y = y;
+                } else if ( y < 64 ) {
+                    x = x + 64;
+                    y = y - 32;
+                } else if ( y < 96 ) {
+                    x = x;
+                    y = y;
+                } else {
+                    x = x + 64;
+                    y = y - 32;
+                }
                 *matrix_x = x;
                 *matrix_y = y;
 
