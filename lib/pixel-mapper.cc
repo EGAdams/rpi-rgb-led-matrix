@@ -228,6 +228,45 @@ namespace rgb_matrix
                 eighthPanel.order = 7;
                 eighthPanel.rotate = 0;
                 _panels[ 7 ] = eighthPanel;
+
+                Panel ninthPanel;
+                ninthPanel.order  = 8;
+                ninthPanel.rotate = 0;
+                _panels[ 8 ] = ninthPanel;
+
+                Panel tenthPanel;
+                tenthPanel.order  = 9;
+                tenthPanel.rotate = 0;
+                _panels[ 9 ] = tenthPanel;
+
+                Panel eleventhPanel;
+                eleventhPanel.order  = 10;
+                eleventhPanel.rotate = 0;
+                _panels[ 10 ] = eleventhPanel;
+
+                Panel twelfthPanel;
+                twelfthPanel.order  = 11;
+                twelfthPanel.rotate = 0;
+                _panels[ 11 ] = twelfthPanel;
+
+                Panel thirteenthPanel;
+                thirteenthPanel.order  = 12;
+                thirteenthPanel.rotate = 0;
+                _panels[ 12 ] = thirteenthPanel;
+
+                Panel fourteenthPanel;
+                fourteenthPanel.order  = 13;
+                fourteenthPanel.rotate = 0;
+                _panels[ 13 ] = fourteenthPanel;
+
+                Panel fifteenthPanel;
+                fifteenthPanel.order  = 14;
+                fifteenthPanel.rotate = 0;
+
+                Panel sixteenthPanel;
+                sixteenthPanel.order  = 15;
+                sixteenthPanel.rotate = 0;
+                _panels[ 15 ] = sixteenthPanel;
             }
 
             virtual const char *GetName() const { return "U-mapper"; }
@@ -337,7 +376,7 @@ namespace rgb_matrix
                 int rotate;
                 // int parallel; hard code to 1
             };
-            Panel _panels[ 8 ];
+            Panel _panels[ 16 ];
         };        
        
 
