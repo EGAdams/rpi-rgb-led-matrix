@@ -279,7 +279,7 @@ namespace rgb_matrix
                 int col = x / PANEL_WIDTH;  // _panel_width;
 
                 // Get the panel information for this pixel.
-                Panel panel = _panels[ ( COLS * row ) + col ];  //_cols*row + col];
+                //Panel panel = _panels[ ( COLS * row ) + col ];  //_cols*row + col];
 
                 // Compute location of the pixel within the panel.
                 x = x % PANEL_WIDTH;  // _panel_width;
@@ -287,37 +287,37 @@ namespace rgb_matrix
 
                 // Perform any panel rotation to the pixel.
                 // NOTE: 90 and 270 degree rotation only possible on 32 row (square) panels.
-                if ( panel.rotate == 90 ) {
-                    // assert(_panel_height == _panel_width); // asserted.  PANEL_HEIGHT == PANEL_WIDTH
-                    int old_x = x;
-                    x = ( PANEL_HEIGHT -1 ) - y;
-                    y = old_x;
-                }
-                else if ( panel.rotate == 180 ) {
-                    x = ( PANEL_WIDTH  - 1 ) - x;
-                    y = ( PANEL_HEIGHT - 1 ) - y;
-                }
-                else if ( panel.rotate == 270 ) {
-                    // assert( PANEL_HEIGHT == PANEL_WIDTH ); // asserted.  PANEL_HEIGHT == PANEL_WIDTH
-                    int old_y = y;
-                    y = ( PANEL_WIDTH - 1 ) - x;
-                    x = old_y;
-                }
+                // if ( panel.rotate == 90 ) {
+                //     // assert(_panel_height == _panel_width); // asserted.  PANEL_HEIGHT == PANEL_WIDTH
+                //     int old_x = x;
+                //     x = ( PANEL_HEIGHT -1 ) - y;
+                //     y = old_x;
+                // }
+                // else if ( panel.rotate == 180 ) {
+                //     x = ( PANEL_WIDTH  - 1 ) - x;
+                //     y = ( PANEL_HEIGHT - 1 ) - y;
+                // }
+                // else if ( panel.rotate == 270 ) {
+                //     // assert( PANEL_HEIGHT == PANEL_WIDTH ); // asserted.  PANEL_HEIGHT == PANEL_WIDTH
+                //     int old_y = y;
+                //     y = ( PANEL_WIDTH - 1 ) - x;
+                //     x = old_y;
+                // }
 
                 // Determine x offset into the source panel based on its order along the chain.
                 // The order needs to be inverted because the matrix library starts with the
                 // origin of an image at the end of the chain and not at the start (where
                 // ordering begins for this transformer).
-                int x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
+                //int x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
 
                 // Determine y offset into the source panel based on its parrallel chain value.
-                int y_offset = PANEL_PARALLEL * PANEL_HEIGHT;
+                //int y_offset = PANEL_PARALLEL * PANEL_HEIGHT;
 
                 // _source->SetPixel(x_offset + x,
                 //                     y_offset + y,
                 //                     red, green, blue);
-                *matrix_x = x_offset + x;
-                *matrix_y = y_offset + y;
+                *matrix_x = x; //x_offset + x;
+                *matrix_y = y; //y_offset + y;
 
                 // *matrix_x = x;
                 // *matrix_y = /*base_y +*/ y;
