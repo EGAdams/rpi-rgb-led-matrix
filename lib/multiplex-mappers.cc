@@ -141,7 +141,7 @@ public:
     *matrix_y = (( y / ( panel_rows_ /2)) * ( panel_rows_ /4 )
                  + y % ( panel_rows_ /4 ));
     //printf( "After mapping single panel in Checkered: panel_rows_: %d, panel_cols_: %d is_top_check: %d  is_left_check: %d\n", panel_rows_, panel_cols_, is_top_check, is_left_check );
-    printf( "End of CheckeredMultiplexMapper MapSinglePanel input: x: %d, input: y: %d, matrix_x: %d, matrix_y: %d\n", x, y, *matrix_x, *matrix_y );             
+    //printf( "End of CheckeredMultiplexMapper MapSinglePanel input: x: %d, input: y: %d, matrix_x: %d, matrix_y: %d\n", x, y, *matrix_x, *matrix_y );             
   }
 
   // now MapDoublePanel
