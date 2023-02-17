@@ -278,8 +278,9 @@ namespace rgb_matrix
                 int row = y / PANEL_HEIGHT; // _panel_height;
                 int col = x / PANEL_WIDTH;  // _panel_width;
 
-                // Get the panel information for this pixel.
-                //Panel panel = _panels[ ( COLS * row ) + col ];  //_cols*row + col];
+                //Get the panel information for this pixel.
+                Panel panel = _panels[ ( COLS * row ) + col ];  //_cols*row + col];
+                printf( "panel.order: %d, panel.rotate: %d\n", panel.order, panel.rotate );
 
                 // Compute location of the pixel within the panel.
                 x = x % PANEL_WIDTH;  // _panel_width;
