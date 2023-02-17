@@ -184,103 +184,156 @@ namespace rgb_matrix
         //   [<][<][<][<]  }--- Pi connector #2
         //   [>][>][>][>]
         class UArrangementMapper : public PixelMapper {
-        public:
-        UArrangementMapper() : parallel_(1) {}
 
-        virtual const char *GetName() const { return "U-mapper"; }
+            public:
+            UArrangementMapper() : parallel_( 1 ) {
 
-        virtual bool SetParameters(int chain, int parallel, const char *param) {
-            if (chain < 2) {  // technically, a chain of 2 would work, but somewhat pointless
-            fprintf(stderr, "U-mapper: need at least --led-chain=4 for useful folding\n");
-            return false;
+                // initialize the panels
+                Panel firstPanel;
+                firstPanel.order = 0;
+                firstPanel.rotate = 0;
+                _panels[ 0 ] = firstPanel;
+
+                Panel secondPanel;
+                secondPanel.order = 1;
+                secondPanel.rotate = 0;
+                _panels[ 1 ] = secondPanel;
+
+                Panel thirdPanel;
+                thirdPanel.order = 2;
+                thirdPanel.rotate = 0;
+                _panels[ 2 ] = thirdPanel;
+
+                Panel fourthPanel;
+                fourthPanel.order = 3;
+                fourthPanel.rotate = 0;
+                _panels[ 3 ] = fourthPanel;
+
+                Panel fifthPanel;
+                fifthPanel.order = 4;
+                fifthPanel.rotate = 0;
+                _panels[ 4 ] = fifthPanel;
+
+                Panel sixthPanel;
+                sixthPanel.order = 5;
+                sixthPanel.rotate = 0;
+                _panels[ 5 ] = sixthPanel;
+
+                Panel seventhPanel;
+                seventhPanel.order = 6;
+                seventhPanel.rotate = 0;
+                _panels[ 6 ] = seventhPanel;
+
+                Panel eighthPanel;
+                eighthPanel.order = 7;
+                eighthPanel.rotate = 0;
+                _panels[ 7 ] = eighthPanel;
             }
-            if (chain % 2 != 0) {
-            fprintf(stderr, "U-mapper: Chain (--led-chain) needs to be divisible by two\n");
-            return false;
+
+            virtual const char *GetName() const { return "U-mapper"; }
+
+            virtual bool SetParameters(int chain, int parallel, const char *param) {
+                if (chain < 2) {  // technically, a chain of 2 would work, but somewhat pointless
+                fprintf(stderr, "U-mapper: need at least --led-chain=4 for useful folding\n");
+                return false;
+                }
+                if (chain % 2 != 0) {
+                fprintf(stderr, "U-mapper: Chain (--led-chain) needs to be divisible by two\n");
+                return false;
+                }
+                parallel_ = parallel;
+                return true;
             }
-            parallel_ = parallel;
-            return true;
-        }
 
-        virtual bool GetSizeMapping(int matrix_width, int matrix_height,
-                                    int *visible_width, int *visible_height)
-            const {
-            *visible_width = (matrix_width / 64) * 32;   // Div at 32px boundary
-            *visible_height = 2 * matrix_height;
-            if (matrix_height % parallel_ != 0) {
-            fprintf(stderr, "%s For parallel=%d we would expect the height=%d "
-                    "to be divisible by %d ??\n",
-                    GetName(), parallel_, matrix_height, parallel_);
-            return false;
+            virtual bool GetSizeMapping(int matrix_width, int matrix_height,
+                                        int *visible_width, int *visible_height)
+                const {
+                *visible_width = (matrix_width / 64) * 32;   // Div at 32px boundary
+                *visible_height = 2 * matrix_height;
+                if (matrix_height % parallel_ != 0) {
+                fprintf(stderr, "%s For parallel=%d we would expect the height=%d "
+                        "to be divisible by %d ??\n",
+                        GetName(), parallel_, matrix_height, parallel_);
+                return false;
+                }
+                return true;
             }
-            return true;
-        }
+        
+            #define PANEL_HEIGHT  32
+            #define PANEL_WIDTH   32
+            #define SLAB_HEIGHT   64
+            #define MATRIX_WIDTH  128 // 256
+            #define MATRIX_HEIGHT 32
+            #define VISIBLE_WIDTH 64
+            #define CHAIN_LENGTH   8
+            #define ROWS           4
+            #define COLS           2
+            #define PANEL_PARALLEL 1
 
-        //////////////////////// ROTATE 180 //////////////////////////
-        // case 180:
-        //             *matrix_x = matrix_width - x - 1;
-        //             *matrix_y = matrix_height - y - 1;
+            virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
+                                    int x, int y,
+                                    int *matrix_x, int *matrix_y ) const {
 
-        ////////////////////////// MIRROR ////////////////////////////
-        // if (horizontal_)
-        //         {
-        //             *matrix_x = matrix_width - 1 - x;
-        //         }
-        //         else
-        //         {
-        //             *matrix_x = x;
-        //             *matrix_y = matrix_height - 1 - y;
-        //         }
+                // Figure out what row and column panel this pixel is within.
+                int row = y / PANEL_HEIGHT; // _panel_height;
+                int col = x / PANEL_WIDTH;  // _panel_width;
 
+                // Get the panel information for this pixel.
+                Panel panel = _panels[ ( COLS * row ) + col ];  //_cols*row + col];
 
-        /*
-            This function maps visible coordinates to matrix coordinates.
-            
-            panel_height has been removed from the code, as _parallel_ is always 1
-            remember to put it pack in for _parallel values greater than 1
+                // Compute location of the pixel within the panel.
+                x = x % PANEL_WIDTH;  // _panel_width;
+                y = y % PANEL_HEIGHT; // _panel_height;
 
-        */ 
-       
-        #define PANEL_HEIGHT  32
-        #define SLAB_HEIGHT   64
-        #define MATRIX_WIDTH  128 // 256
-        #define MATRIX_HEIGHT 32
-        #define VISIBLE_WIDTH 64
+                // Perform any panel rotation to the pixel.
+                // NOTE: 90 and 270 degree rotation only possible on 32 row (square) panels.
+                if ( panel.rotate == 90 ) {
+                    // assert(_panel_height == _panel_width); // asserted.  PANEL_HEIGHT == PANEL_WIDTH
+                    int old_x = x;
+                    x = ( PANEL_HEIGHT -1 ) - y;
+                    y = old_x;
+                }
+                else if ( panel.rotate == 180 ) {
+                    x = ( PANEL_WIDTH  - 1 ) - x;
+                    y = ( PANEL_HEIGHT - 1 ) - y;
+                }
+                else if ( panel.rotate == 270 ) {
+                    // assert( PANEL_HEIGHT == PANEL_WIDTH ); // asserted.  PANEL_HEIGHT == PANEL_WIDTH
+                    int old_y = y;
+                    y = ( PANEL_WIDTH - 1 ) - x;
+                    x = old_y;
+                }
 
-        virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
-                                  int x, int y,
-                                  int *matrix_x, int *matrix_y) const {
-            //printf( "incomming x: %d  incomming y: %d  ", x, y );
+                // Determine x offset into the source panel based on its order along the chain.
+                // The order needs to be inverted because the matrix library starts with the
+                // origin of an image at the end of the chain and not at the start (where
+                // ordering begins for this transformer).
+                int x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
 
-            //const int visible_width = ( MATRIX_WIDTH / 64) * 32;
-            // const int base_y = (y / SLAB_HEIGHT) * MATRIX_HEIGHT;
-            // y %= SLAB_HEIGHT;
+                // Determine y offset into the source panel based on its parrallel chain value.
+                int y_offset = PANEL_PARALLEL * PANEL_HEIGHT;
 
-            // Check which side the coordinates are on 
-            if ( y < 32 ) {
-                x = x;
-                y = y;
-            } else if ( y < 64 ) {
-                x = x + 64;
-                y = y - 32;
-            } 
-            // else if ( y < 192 ) {
-            //     x = x;
-            //     y = y;
-            // } else {
-            //     x = x + 64;
-            //     y = y - 32;
-            // } 
-            *matrix_x = x;
-            *matrix_y = /*base_y +*/ y;
-            
-            // printf( "pnl_hght: %d  vsbl_wdth: %d  slb_hght: %d bs_y: %d mtrx_wdth: %d mtrx_hght: %d, mtrx_x: %d,   mtrx_y %d \n", 
-            //          MATRIX_HEIGHT, VISIBLE_WIDTH, SLAB_HEIGHT, base_y,  matrix_width, matrix_height, *matrix_x,    *matrix_y );
-            
-        }
+                // _source->SetPixel(x_offset + x,
+                //                     y_offset + y,
+                //                     red, green, blue);
+                x = x_offset + x;
+                y = y_offset + y;
 
-        private:
-        int parallel_;
+                *matrix_x = x;
+                *matrix_y = /*base_y +*/ y;
+                    
+                // printf( "pnl_hght: %d  vsbl_wdth: %d  slb_hght: %d bs_y: %d mtrx_wdth: %d mtrx_hght: %d, mtrx_x: %d,   mtrx_y %d \n", 
+                //          MATRIX_HEIGHT, VISIBLE_WIDTH, SLAB_HEIGHT, base_y,  matrix_width, matrix_height, *matrix_x,    *matrix_y );                
+            }
+
+            private:
+            int parallel_;
+            struct Panel {
+                int order;
+                int rotate;
+                // int parallel; hard code to 1
+            };
+            std::vector< Panel > _panels;
         };        
        
 
