@@ -335,6 +335,14 @@ namespace rgb_matrix
                 int row = y / PANEL_HEIGHT; // _panel_height;
                 int col = x / PANEL_WIDTH;  // _panel_width;
                 
+                int x_offset, y_offset = 0;
+                if ( y < 32 ) {
+                    y_offset = 31 - y;
+                //     // x_offset = x + panel.x_offset;
+                //     // y_offset = y + panel.y_offset;
+                //     y_offset = -32;
+                }
+                
                 // Compute the index of the panel in the panel list.
                 int panel_index = ( COLS * row ) + col;
                 printf( "panel_index: %d  ", panel_index );
@@ -344,15 +352,13 @@ namespace rgb_matrix
                 printf( "input coordinates( %2d, %2d ) row: %d  col: %d  panel.order: %2d, panel.rotate: %3d panel.name: %12s ", x, y, row, col, panel.order, panel.rotate, panel.name );
                 printf( "x: %2d  y: %2d ", x, y );
 
-                // Compute location of the pixel within the panel.
+
                 // x = x % PANEL_WIDTH;  // _panel_width;
                 // y = y % PANEL_HEIGHT; // _panel_height;
 
-                if ( x >= PANEL_WIDTH ) {
-                    while ( x >= PANEL_WIDTH ) { x -= PANEL_WIDTH; }}
-
-                if ( y >= PANEL_HEIGHT ) {
-                    while ( y >= PANEL_HEIGHT ) { y -= PANEL_HEIGHT; }}
+                // Compute location of the pixel within the panel.
+                if ( x >= PANEL_WIDTH  ) { while ( x >= PANEL_WIDTH  ) { x -= PANEL_WIDTH;  }}
+                if ( y >= PANEL_HEIGHT ) { while ( y >= PANEL_HEIGHT ) { y -= PANEL_HEIGHT; }}
 
                 
 
@@ -379,10 +385,10 @@ namespace rgb_matrix
                 // The order needs to be inverted because the matrix library starts with the
                 // origin of an image at the end of the chain and not at the start (where
                 // ordering begins for this transformer).
-                int x_offset, y_offset = 0;
+                
                 
                 x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
-                y_offset = panel.y_offset;
+                //y_offset = panel.y_offset;
                
                 
                 // Determine y offset into the source panel based on its parrallel chain value.
@@ -391,11 +397,7 @@ namespace rgb_matrix
                 //                     y_offset + y,
                 //                     red, green, blue);
 
-                // if ( x < 63 && y >  ) {
-                //     // x_offset = x + panel.x_offset;
-                //     // y_offset = y + panel.y_offset;
-                //     y_offset = -32;
-                // } ele
+                
 
                 *matrix_x = x + x_offset;
                 *matrix_y = y + y_offset;
