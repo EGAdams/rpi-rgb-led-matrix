@@ -293,8 +293,8 @@ namespace rgb_matrix
             virtual bool GetSizeMapping(int matrix_width, int matrix_height,
                                         int *visible_width, int *visible_height)
                 const {
-                *visible_width = (matrix_width / 64) * 32;   // Div at 32px boundary
-                *visible_height = 2 * matrix_height;
+                *visible_width = ( matrix_width / /* 128 */ 64 ) * 32;   // Div at 32px boundary
+                *visible_height = 4 /* 2 */ * matrix_height;
                 if (matrix_height % parallel_ != 0) {
                 fprintf(stderr, "%s For parallel=%d we would expect the height=%d "
                         "to be divisible by %d ??\n",
