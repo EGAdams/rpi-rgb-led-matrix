@@ -196,12 +196,12 @@ namespace rgb_matrix
                 //initialize the panels
                 Panel firstPanel;
                 firstPanel.order = 15;
-                firstPanel.rotate = 0;
+                firstPanel.rotate = 180;
                 _panels[ 0 ] = firstPanel;
 
                 Panel secondPanel;
                 secondPanel.order = 14;
-                secondPanel.rotate = 0;
+                secondPanel.rotate = 180;
                 _panels[ 1 ] = secondPanel;
 
                 Panel thirdPanel;
@@ -319,7 +319,7 @@ namespace rgb_matrix
                 int col = x / PANEL_WIDTH;  // _panel_width;
 
                 //Get the panel information for this pixel.
-                Panel panel = _panels[ ( COLS * row ) + col ];  //_cols*row + col];
+                Panel panel = _panels[( COLS * row ) + col ];  //_cols*row + col];
                 printf( "row: %d  col: %d  panel.order: %2d, panel.rotate: %3d  ", row, col, panel.order, panel.rotate );
 
                 // Compute location of the pixel within the panel.
