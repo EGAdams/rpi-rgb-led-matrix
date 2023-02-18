@@ -199,7 +199,7 @@ namespace rgb_matrix
                 firstPanel.order = 7;
                 firstPanel.rotate = 0;
                 firstPanel.y_offset = 0;
-                firstPanel.x_offset = 0;
+                firstPanel.x_offset = -16;
                 _panels[ 0 ] = firstPanel;
 
                 Panel secondPanel;
