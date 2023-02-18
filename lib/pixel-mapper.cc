@@ -191,22 +191,22 @@ namespace rgb_matrix
                 //initialize the panels
                 Panel firstPanel;
                 firstPanel.order = 0;
-                firstPanel.rotate = 180;
+                firstPanel.rotate = 0;
                 _panels[ 0 ] = firstPanel;
 
                 Panel secondPanel;
                 secondPanel.order = 1;
-                secondPanel.rotate = 180;
+                secondPanel.rotate = 0;
                 _panels[ 1 ] = secondPanel;
 
                 Panel thirdPanel;
                 thirdPanel.order = 2;
-                thirdPanel.rotate = 180;
+                thirdPanel.rotate = 0;
                 _panels[ 2 ] = thirdPanel;
 
                 Panel fourthPanel;
                 fourthPanel.order = 3;
-                fourthPanel.rotate = 180;
+                fourthPanel.rotate = 0;
                 _panels[ 3 ] = fourthPanel;
 
                 Panel fifthPanel;
@@ -216,7 +216,7 @@ namespace rgb_matrix
 
                 Panel sixthPanel;
                 sixthPanel.order = 5;
-                sixthPanel.rotate = 180;
+                sixthPanel.rotate = 0;
                 _panels[ 5 ] = sixthPanel;
 
                 Panel seventhPanel;
