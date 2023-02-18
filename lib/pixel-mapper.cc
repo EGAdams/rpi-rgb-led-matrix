@@ -190,82 +190,82 @@ namespace rgb_matrix
 
                 //initialize the panels
                 Panel firstPanel;
-                firstPanel.order = 0;
+                firstPanel.order = 15;
                 firstPanel.rotate = 0;
                 _panels[ 0 ] = firstPanel;
 
                 Panel secondPanel;
-                secondPanel.order = 1;
+                secondPanel.order = 14;
                 secondPanel.rotate = 0;
                 _panels[ 1 ] = secondPanel;
 
                 Panel thirdPanel;
-                thirdPanel.order = 2;
+                thirdPanel.order = 13;
                 thirdPanel.rotate = 0;
                 _panels[ 2 ] = thirdPanel;
 
                 Panel fourthPanel;
-                fourthPanel.order = 3;
+                fourthPanel.order = 12;
                 fourthPanel.rotate = 0;
                 _panels[ 3 ] = fourthPanel;
 
                 Panel fifthPanel;
-                fifthPanel.order = 4;
+                fifthPanel.order = 11;
                 fifthPanel.rotate = 0;
                 _panels[ 4 ] = fifthPanel;
 
                 Panel sixthPanel;
-                sixthPanel.order = 5;
+                sixthPanel.order = 10;
                 sixthPanel.rotate = 0;
                 _panels[ 5 ] = sixthPanel;
 
                 Panel seventhPanel;
-                seventhPanel.order = 6;
+                seventhPanel.order = 9;
                 seventhPanel.rotate = 0;
                 _panels[ 6 ] = seventhPanel;
 
                 Panel eighthPanel;
-                eighthPanel.order = 7;
+                eighthPanel.order = 8;
                 eighthPanel.rotate = 0;
                 _panels[ 7 ] = eighthPanel;
 
                 Panel ninthPanel;
-                ninthPanel.order  = 8;
+                ninthPanel.order  = 7;
                 ninthPanel.rotate = 0;
                 _panels[ 8 ] = ninthPanel;
 
                 Panel tenthPanel;
-                tenthPanel.order  = 9;
+                tenthPanel.order  = 6;
                 tenthPanel.rotate = 0;
                 _panels[ 9 ] = tenthPanel;
 
                 Panel eleventhPanel;
-                eleventhPanel.order  = 10;
+                eleventhPanel.order  = 5;
                 eleventhPanel.rotate = 0;
                 _panels[ 10 ] = eleventhPanel;
 
                 Panel twelfthPanel;
-                twelfthPanel.order  = 11;
+                twelfthPanel.order  = 4;
                 twelfthPanel.rotate = 0;
                 _panels[ 11 ] = twelfthPanel;
 
                 Panel thirteenthPanel;
-                thirteenthPanel.order  = 12;
+                thirteenthPanel.order  = 3;
                 thirteenthPanel.rotate = 0;
                 _panels[ 12 ] = thirteenthPanel;
 
                 Panel fourteenthPanel;
-                fourteenthPanel.order  = 13;
+                fourteenthPanel.order  = 2;
                 fourteenthPanel.rotate = 0;
                 _panels[ 13 ] = fourteenthPanel;
 
                 Panel fifteenthPanel;
-                fifteenthPanel.order  = 14;
+                fifteenthPanel.order  = 1;
                 fifteenthPanel.rotate = 0;
                 _panels[ 14 ] = fifteenthPanel;
 
                 Panel sixteenthPanel;
-                sixteenthPanel.order  = 15;
+                sixteenthPanel.order  = 0;
                 sixteenthPanel.rotate = 0;
                 _panels[ 15 ] = sixteenthPanel;
             }
