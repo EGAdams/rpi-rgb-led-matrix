@@ -327,7 +327,7 @@ namespace rgb_matrix
 
                 return true; }
 
-            virtual void MapVisibleToMatrix( int, int, int x, int y, int *matrix_x, int *matrix_y ) const {
+            virtual void MapVisibleToMatrix( int mW, int mH, int x, int y, int *matrix_x, int *matrix_y ) const {
 
                 // Figure out what row and column panel this pixel is within.
                 int row = y / PANEL_HEIGHT; // _panel_height;
