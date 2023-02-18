@@ -379,10 +379,10 @@ namespace rgb_matrix
                 //                     y_offset + y,
                 //                     red, green, blue);
 
-                printf( "x: %2d  y: %2d  x_offset: %3d  y_offset: %d\n", x, y, x_offset, y_offset );
 
                 *matrix_x = x + x_offset;
                 *matrix_y = y + y_offset;
+                printf( "x: %2d  y: %2d  x_offset: %3d  y_offset: %d  matrix_x: %3d  matrix_y%3d \n", x, y, x_offset, y_offset, *matrix_x, *matrix_y );
 
                 // *matrix_x = x;
                 // *matrix_y = /*base_y +*/ y;
