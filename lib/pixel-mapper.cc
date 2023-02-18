@@ -199,6 +199,7 @@ namespace rgb_matrix
                 firstPanel.order = 15;
                 firstPanel.rotate = 0;
                 firstPanel.y_offset = 0;
+                firstPanel.x_offset = 16;
                 _panels[ 0 ] = firstPanel;
 
                 Panel secondPanel;
@@ -339,27 +340,27 @@ namespace rgb_matrix
                 printf( "input x: %2d  input y: %2d  row: %d  col: %d  panel.order: %2d, panel.rotate: %3d panel.name:%12s ", x, y, row, col, panel.order, panel.rotate, panel.name );
 
                 // Compute location of the pixel within the panel.
-                // x = x % PANEL_WIDTH;  // _panel_width;
-                // y = y % PANEL_HEIGHT; // _panel_height;
+                x = x % PANEL_WIDTH;  // _panel_width;
+                y = y % PANEL_HEIGHT; // _panel_height;
 
                 // Perform any panel rotation to the pixel.
                 // NOTE: 90 and 270 degree rotation only possible on 32 row ( square) panels.
-                // if ( panel.rotate == 90 ) {
-                //     // assert(_panel_height == _panel_width); // asserted.  PANEL_HEIGHT == PANEL_WIDTH
-                //     int old_x = x;
-                //     x = ( PANEL_HEIGHT - 1 ) - y;
-                //     y = old_x;
-                // }
-                // else if ( panel.rotate == 180 ) {
-                //     x = ( PANEL_WIDTH  - 1 ) - x;
-                //     y = ( PANEL_HEIGHT - 1 ) - y;
-                // }
-                // else if ( panel.rotate == 270 ) {
-                //     // assert( PANEL_HEIGHT == PANEL_WIDTH ); // asserted.  PANEL_HEIGHT == PANEL_WIDTH
-                //     int old_y = y;
-                //     y = ( PANEL_WIDTH - 1 ) - x;
-                //     x = old_y;
-                // }
+                if ( panel.rotate == 90 ) {
+                    // assert(_panel_height == _panel_width); // asserted.  PANEL_HEIGHT == PANEL_WIDTH
+                    int old_x = x;
+                    x = ( PANEL_HEIGHT - 1 ) - y;
+                    y = old_x;
+                }
+                else if ( panel.rotate == 180 ) {
+                    x = ( PANEL_WIDTH  - 1 ) - x;
+                    y = ( PANEL_HEIGHT - 1 ) - y;
+                }
+                else if ( panel.rotate == 270 ) {
+                    // assert( PANEL_HEIGHT == PANEL_WIDTH ); // asserted.  PANEL_HEIGHT == PANEL_WIDTH
+                    int old_y = y;
+                    y = ( PANEL_WIDTH - 1 ) - x;
+                    x = old_y;
+                }
 
                 // Determine x offset into the source panel based on its order along the chain.
                 // The order needs to be inverted because the matrix library starts with the
@@ -367,8 +368,8 @@ namespace rgb_matrix
                 // ordering begins for this transformer).
                 int x_offset, y_offset = 0;
                 
-                // x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
-                // y_offset = panel.y_offset;
+                x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
+                y_offset = panel.y_offset;
                
                 
                 // Determine y offset into the source panel based on its parrallel chain value.
@@ -376,18 +377,10 @@ namespace rgb_matrix
                 // _source->SetPixel(x_offset + x,
                 //                     y_offset + y,
                 //                     red, green, blue);
-                
-                // Check which side the coordinates are on 
-                if (y < PANEL_HEIGHT) { 
-                    // On top panel, invert x and y
-                    x = MATRIX_WIDTH  - x - 1;
-                    y = MATRIX_HEIGHT - y - 1; // lets try matrix_height here instead of panel_height
-                } else {
-                    // On the bottom panel, invert x
-                    x = VISIBLE_WIDTH - x - 1;
 
-                    // Invert y
-                    y = SLAB_HEIGHT - y - 1; }
+                if ( y < 16 ) {
+                    x_offset = x + panel.x_offset; 
+                }
 
                 *matrix_x = x + x_offset;
                 *matrix_y = y + y_offset;
@@ -407,6 +400,7 @@ namespace rgb_matrix
                 int order;
                 int rotate;
                 int y_offset;
+                int x_offset;
                 // int parallel; hard code to 1
             };
             Panel _panels[ 16 ];
