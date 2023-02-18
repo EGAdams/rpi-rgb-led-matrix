@@ -284,10 +284,10 @@ namespace rgb_matrix
                 fifteenthPanel.rotate = 0;
                 _panels[ 14 ] = fifteenthPanel;
 
-                // Panel sixteenthPanel;            // does this panel even exist?
-                // sixteenthPanel.order  = 0;
-                // sixteenthPanel.rotate = 180;
-                // _panels[ 15 ] = sixteenthPanel;
+                Panel sixteenthPanel;            // does this panel even exist?
+                sixteenthPanel.order  = 0;
+                sixteenthPanel.rotate = 180;
+                _panels[ 15 ] = sixteenthPanel;
             }
 
             virtual const char *GetName() const { return "U-mapper"; }
