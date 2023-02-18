@@ -322,7 +322,7 @@ namespace rgb_matrix
 
                 //Get the panel information for this pixel.
                 Panel panel = _panels[ ( COLS * row ) + col ];  //_cols*row + col];
-                printf( "row: %d  col: %d  panel.order: %d, panel.rotate: %d  ", row, col, panel.order, panel.rotate );
+                printf( "row: %d  col: %d  panel.order: %2d, panel.rotate: %3d  ", row, col, panel.order, panel.rotate );
 
                 // Compute location of the pixel within the panel.
                 x = x % PANEL_WIDTH;  // _panel_width;
@@ -360,7 +360,7 @@ namespace rgb_matrix
                 //                     y_offset + y,
                 //                     red, green, blue);
 
-                printf( "x: %2d  y: %2d  x_offset: %2d  y_offset: %d\n", x, y, x_offset, y_offset );
+                printf( "x: %2d  y: %2d  x_offset: %3d  y_offset: %d\n", x, y, x_offset, y_offset );
 
                 *matrix_x = x + x_offset;
                 *matrix_y = y + y_offset;
