@@ -198,7 +198,7 @@ namespace rgb_matrix
                 firstPanel.name = "firstPanel";
                 firstPanel.order = 7;
                 firstPanel.rotate = 0;
-                firstPanel.y_offset = 16;
+                firstPanel.y_offset;
                 firstPanel.x_offset = 16;
                 _panels[ 0 ] = firstPanel;
 
