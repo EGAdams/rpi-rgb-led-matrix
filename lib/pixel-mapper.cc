@@ -195,76 +195,91 @@ namespace rgb_matrix
 
                 //initialize the panels
                 Panel firstPanel;
+                firstPanel.name = "firstPanel";
                 firstPanel.order = 15;
                 firstPanel.rotate = 0;
                 _panels[ 0 ] = firstPanel;
 
                 Panel secondPanel;
+                secondPanel.name = "secondPanel";
                 secondPanel.order = 14;
                 secondPanel.rotate = 0;
                 _panels[ 1 ] = secondPanel;
 
                 Panel thirdPanel;
+                thirdPanel.name = "thirdPanel";
                 thirdPanel.order = 13;
                 thirdPanel.rotate = 0;
                 _panels[ 2 ] = thirdPanel;
 
                 Panel fourthPanel;
+                fourthPanel.name = "fourthPanel";
                 fourthPanel.order = 12;
                 fourthPanel.rotate = 0;
                 _panels[ 3 ] = fourthPanel;
 
                 Panel fifthPanel;
+                fifthPanel.name = "fifthPanel";
                 fifthPanel.order = 11;
                 fifthPanel.rotate = 0;
                 _panels[ 4 ] = fifthPanel;
 
                 Panel sixthPanel;
+                sixthPanel.name = "sixthPanel";
                 sixthPanel.order = 10;
                 sixthPanel.rotate = 0;
                 _panels[ 5 ] = sixthPanel;
 
                 Panel seventhPanel;
+                seventhPanel.name = "seventhPanel";
                 seventhPanel.order = 9;
                 seventhPanel.rotate = 0;
                 _panels[ 6 ] = seventhPanel;
 
                 Panel eighthPanel;
+                eighthPanel.name = "eighthPanel";
                 eighthPanel.order = 8;
                 eighthPanel.rotate = 0;
                 _panels[ 7 ] = eighthPanel;
 
                 Panel ninthPanel;
+                ninthPanel.name = "ninthPanel";
                 ninthPanel.order  = 7;
                 ninthPanel.rotate = 0;
                 _panels[ 8 ] = ninthPanel;
 
                 Panel tenthPanel;
+                tenthPanel.name = "tenthPanel";
                 tenthPanel.order  = 6;
                 tenthPanel.rotate = 0;
                 _panels[ 9 ] = tenthPanel;
 
                 Panel eleventhPanel;
+                eleventhPanel.name = "eleventhPanel";
                 eleventhPanel.order  = 5;
                 eleventhPanel.rotate = 0;
                 _panels[ 10 ] = eleventhPanel;
 
                 Panel twelfthPanel;
+                twelfthPanel.name = "twelfthPanel";
                 twelfthPanel.order  = 4;
                 twelfthPanel.rotate = 0;
                 _panels[ 11 ] = twelfthPanel;
 
                 Panel thirteenthPanel;
+                thirteenthPanel.name = "thirteenthPanel";
                 thirteenthPanel.order  = 3;
                 thirteenthPanel.rotate = 0;
                 _panels[ 12 ] = thirteenthPanel;
 
                 Panel fourteenthPanel;
+                fourteenthPanel.name = "fourteenthPanel";
                 fourteenthPanel.order  = 2;
                 fourteenthPanel.rotate = 0;
                 _panels[ 13 ] = fourteenthPanel;
 
                 Panel fifteenthPanel;
+                fifteenthPanel.name = "fifteenthPanel";
                 fifteenthPanel.order  = 1;
                 fifteenthPanel.rotate = 0;
                 _panels[ 14 ] = fifteenthPanel;
@@ -320,7 +335,7 @@ namespace rgb_matrix
 
                 //Get the panel information for this pixel.
                 Panel panel = _panels[( COLS * row ) + col ];  //_cols*row + col];
-                printf( "row: %d  col: %d  panel.order: %2d, panel.rotate: %3d  ", row, col, panel.order, panel.rotate );
+                printf( "row: %d  col: %d  panel.order: %2d, panel.rotate: %3d  panel.name: %s", row, col, panel.order, panel.rotate, panel.name );
 
                 // Compute location of the pixel within the panel.
                 x = x % PANEL_WIDTH;  // _panel_width;
@@ -373,6 +388,7 @@ namespace rgb_matrix
             private:
             int parallel_;
             struct Panel {
+                const char* name;
                 int order;
                 int rotate;
                 // int parallel; hard code to 1
