@@ -312,7 +312,7 @@ namespace rgb_matrix
             #define MATRIX_HEIGHT 32
             #define VISIBLE_WIDTH 64
             #define CHAIN_LENGTH   16
-            #define ROWS           4
+            #define ROWS           8
             #define COLS           2
             #define PANEL_PARALLEL 0
 
@@ -335,7 +335,7 @@ namespace rgb_matrix
 
                 //Get the panel information for this pixel.
                 Panel panel = _panels[( COLS * row ) + col ];  //_cols*row + col];
-                printf( "row: %d  col: %d  panel.order: %2d, panel.rotate: %3d  panel.name: %s", row, col, panel.order, panel.rotate, panel.name );
+                printf( "row: %d  col: %d  panel.order: %2d, panel.rotate: %3d panel.name: %s  ", row, col, panel.order, panel.rotate, panel.name );
 
                 // Compute location of the pixel within the panel.
                 x = x % PANEL_WIDTH;  // _panel_width;
