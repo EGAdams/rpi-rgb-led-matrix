@@ -299,7 +299,7 @@ namespace rgb_matrix
             #define CHAIN_LENGTH   16
             #define ROWS           4
             #define COLS           2
-            #define PANEL_PARALLEL 0
+            #define PANEL_PARALLEL 1
 
             virtual bool GetSizeMapping( int matrix_width, int matrix_height, int *visible_width, int *visible_height )
                 const {
