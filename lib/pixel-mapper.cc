@@ -367,7 +367,7 @@ namespace rgb_matrix
                 // ordering begins for this transformer).
                 int x_offset, y_offset = 0;
                 
-                x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
+                x_offset = (( CHAIN_LENGTH ) - panel.order ) * PANEL_WIDTH;
                 y_offset = panel.y_offset;
                
                 
