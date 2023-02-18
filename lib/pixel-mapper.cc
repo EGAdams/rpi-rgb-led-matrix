@@ -198,6 +198,7 @@ namespace rgb_matrix
                 firstPanel.name = "firstPanel";
                 firstPanel.order = 15;
                 firstPanel.rotate = 0;
+                firstPanel.y_offset = 32;
                 _panels[ 0 ] = firstPanel;
 
                 Panel secondPanel;
@@ -335,7 +336,7 @@ namespace rgb_matrix
 
                 //Get the panel information for this pixel.
                 Panel panel = _panels[( COLS * row ) + col ];  //_cols*row + col];
-                printf( "input x: %2d  input y: %2d  row: %d  col: %d  panel.order: %2d, panel.rotate: %3d panel.name: %15s ", x, y, row, col, panel.order, panel.rotate, panel.name );
+                printf( "input x: %2d  input y: %2d  row: %d  col: %d  panel.order: %2d, panel.rotate: %3d panel.name:%12s ", x, y, row, col, panel.order, panel.rotate, panel.name );
 
                 // Compute location of the pixel within the panel.
                 x = x % PANEL_WIDTH;  // _panel_width;
@@ -365,14 +366,11 @@ namespace rgb_matrix
                 // origin of an image at the end of the chain and not at the start (where
                 // ordering begins for this transformer).
                 int x_offset, y_offset = 0;
-                if ( row == 0 || row == 2 || row == 4 || row == 6 ) {
-                    x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
-                    y_offset = PANEL_PARALLEL * PANEL_HEIGHT;
-                } else {
-                    x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
-                    y_offset = PANEL_PARALLEL * PANEL_HEIGHT;
-                }
-                    
+                
+                x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
+                y_offset = panel.y_offset;
+               
+                
                 // Determine y offset into the source panel based on its parrallel chain value.
 
                 // _source->SetPixel(x_offset + x,
@@ -397,6 +395,7 @@ namespace rgb_matrix
                 const char* name;
                 int order;
                 int rotate;
+                int y_offset;
                 // int parallel; hard code to 1
             };
             Panel _panels[ 16 ];
