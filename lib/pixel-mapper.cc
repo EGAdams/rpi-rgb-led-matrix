@@ -313,7 +313,7 @@ namespace rgb_matrix
             #define MATRIX_HEIGHT 32
             #define VISIBLE_WIDTH 64
             #define CHAIN_LENGTH  16
-            #define ROWS           8
+            #define ROWS           4
             #define COLS           2
             #define PANEL_PARALLEL 0
 
@@ -339,8 +339,8 @@ namespace rgb_matrix
                 printf( "input x: %2d  input y: %2d  row: %d  col: %d  panel.order: %2d, panel.rotate: %3d panel.name:%12s ", x, y, row, col, panel.order, panel.rotate, panel.name );
 
                 // Compute location of the pixel within the panel.
-                x = x % PANEL_WIDTH;  // _panel_width;
-                y = y % PANEL_HEIGHT; // _panel_height;
+                x = x % 16; //PANEL_WIDTH;  // _panel_width;
+                y = y % 16; //PANEL_HEIGHT; // _panel_height;
 
                 // Perform any panel rotation to the pixel.
                 // NOTE: 90 and 270 degree rotation only possible on 32 row ( square) panels.
