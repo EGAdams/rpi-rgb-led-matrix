@@ -199,7 +199,7 @@ namespace rgb_matrix
                 firstPanel.order = 15;
                 firstPanel.rotate = 0;
                 firstPanel.y_offset = 0;
-                firstPanel.x_offset = 32;
+                firstPanel.x_offset = 0;
                 _panels[ 0 ] = firstPanel;
 
                 Panel secondPanel;
@@ -305,15 +305,15 @@ namespace rgb_matrix
                 }
                 parallel_ = parallel;
                 return true;
-            }
-
+            } 
+                                                        
             #define PANEL_HEIGHT  32
             #define PANEL_WIDTH   32
             #define SLAB_HEIGHT   64
             #define MATRIX_WIDTH  128
             #define MATRIX_HEIGHT 32
             #define VISIBLE_WIDTH 64
-            #define CHAIN_LENGTH  16
+            #define CHAIN_LENGTH   8    // start mods for CHAIN_LENGTH...  started at 16 today
             #define ROWS           4
             #define COLS           2
             #define PANEL_PARALLEL 0
