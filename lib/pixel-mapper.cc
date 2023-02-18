@@ -320,6 +320,9 @@ namespace rgb_matrix
 
                 //Get the panel information for this pixel.
                 Panel panel = _panels[ ( COLS * row ) + col ];  //_cols*row + col];
+                if ( row > 1 ) {
+                    panel.rotate = 180;
+                }
                 printf( "row: %d  col: %d  panel.order: %d, panel.rotate: %d  ", row, col, panel.order, panel.rotate );
 
                 // Compute location of the pixel within the panel.
