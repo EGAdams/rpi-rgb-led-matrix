@@ -370,7 +370,7 @@ namespace rgb_matrix
                     y_offset = PANEL_PARALLEL * PANEL_HEIGHT;
                 } else {
                     x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
-                    y_offset = 1 * PANEL_HEIGHT;
+                    y_offset = PANEL_PARALLEL * PANEL_HEIGHT;
                 }
                     
                 // Determine y offset into the source panel based on its parrallel chain value.
