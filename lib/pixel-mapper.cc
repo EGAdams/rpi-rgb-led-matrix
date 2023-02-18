@@ -364,15 +364,16 @@ namespace rgb_matrix
                 // The order needs to be inverted because the matrix library starts with the
                 // origin of an image at the end of the chain and not at the start (where
                 // ordering begins for this transformer).
-                int x_offset = 0;
+                int x_offset, y_offset = 0;
                 if ( row == 0 || row == 2 || row == 4 || row == 6 ) {
                     x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
+                    y_offset = PANEL_HEIGHT;
                 } else {
                     x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
+                    y_offset = PANEL_PARALLEL * PANEL_HEIGHT;
                 }
                     
                 // Determine y offset into the source panel based on its parrallel chain value.
-                int y_offset = PANEL_PARALLEL * PANEL_HEIGHT;
 
                 // _source->SetPixel(x_offset + x,
                 //                     y_offset + y,
