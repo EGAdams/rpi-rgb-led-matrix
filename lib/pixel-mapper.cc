@@ -30,38 +30,38 @@ namespace rgb_matrix
         class RotatePixelMapper : public PixelMapper
         {
         public:
-            RotatePixelMapper() : angle_(0) {}
+            RotatePixelMapper() : angle_(0 ) {}
 
             virtual const char *GetName() const { return "Rotate"; }
 
-            virtual bool SetParameters(int chain, int parallel, const char *param)
+            virtual bool SetParameters( int chain, int parallel, const char *param)
             {
-                if (param == NULL || strlen(param) == 0)
+                if (param == NULL || strlen(param) == 0 )
                 {
                     angle_ = 0;
                     return true;
                 }
                 char *errpos;
-                const int angle = strtol(param, &errpos, 10);
+                const int angle = strtol(param, &errpos, 10 );
                 if (*errpos != '\0')
                 {
-                    fprintf(stderr, "Invalid rotate parameter '%s'\n", param);
+                    fprintf( stderr, "Invalid rotate parameter '%s'\n", param);
                     return false;
                 }
-                if (angle % 90 != 0)
+                if (angle % 90 != 0 )
                 {
-                    fprintf(stderr, "Rotation needs to be multiple of 90 degrees\n");
+                    fprintf( stderr, "Rotation needs to be multiple of 90 degrees\n");
                     return false;
                 }
-                angle_ = (angle + 360) % 360;
+                angle_ = (angle + 360 ) % 360;
                 return true;
             }
 
-            virtual bool GetSizeMapping(int matrix_width, int matrix_height,
+            virtual bool GetSizeMapping( int matrix_width, int matrix_height,
                                         int *visible_width, int *visible_height)
                 const
             {
-                if (angle_ % 180 == 0)
+                if (angle_ % 180 == 0 )
                 {
                     *visible_width = matrix_width;
                     *visible_height = matrix_height;
@@ -74,7 +74,7 @@ namespace rgb_matrix
                 return true;
             }
 
-            virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
+            virtual void MapVisibleToMatrix( int matrix_width, int matrix_height,
                                             int x, int y,
                                             int *matrix_x, int *matrix_y) const
             {
@@ -109,16 +109,16 @@ namespace rgb_matrix
 
             virtual const char *GetName() const { return "Mirror"; }
 
-            virtual bool SetParameters(int chain, int parallel, const char *param)
+            virtual bool SetParameters( int chain, int parallel, const char *param)
             {
-                if (param == NULL || strlen(param) == 0)
+                if (param == NULL || strlen(param) == 0 )
                 {
                     horizontal_ = true;
                     return true;
                 }
-                if (strlen(param) != 1)
+                if ( strlen(param) != 1)
                 {
-                    fprintf(stderr, "Mirror parameter should be a single "
+                    fprintf( stderr, "Mirror parameter should be a single "
                                     "character:'V' or 'H'\n");
                 }
                 switch (*param)
@@ -132,13 +132,13 @@ namespace rgb_matrix
                     horizontal_ = true;
                     break;
                 default:
-                    fprintf(stderr, "Mirror parameter should be either 'V' or 'H'\n");
+                    fprintf( stderr, "Mirror parameter should be either 'V' or 'H'\n");
                     return false;
                 }
                 return true;
             }
 
-            virtual bool GetSizeMapping(int matrix_width, int matrix_height,
+            virtual bool GetSizeMapping( int matrix_width, int matrix_height,
                                         int *visible_width, int *visible_height)
                 const
             {
@@ -147,7 +147,7 @@ namespace rgb_matrix
                 return true;
             }
 
-            virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
+            virtual void MapVisibleToMatrix( int matrix_width, int matrix_height,
                                             int x, int y,
                                             int *matrix_x, int *matrix_y) const
             {
@@ -277,35 +277,21 @@ namespace rgb_matrix
 
             virtual const char *GetName() const { return "U-mapper"; }
 
-            virtual bool SetParameters(int chain, int parallel, const char *param) {
+            virtual bool SetParameters( int chain, int parallel, const char *param) {
                 if (chain < 2) {  // technically, a chain of 2 would work, but somewhat pointless
-                fprintf(stderr, "U-mapper: need at least --led-chain=4 for useful folding\n");
+                fprintf( stderr, "U-mapper: need at least --led-chain=4 for useful folding\n");
                 return false;
                 }
-                if (chain % 2 != 0) {
-                fprintf(stderr, "U-mapper: Chain (--led-chain) needs to be divisible by two\n");
+                if (chain % 2 != 0 ) {
+                fprintf( stderr, "U-mapper: Chain (--led-chain) needs to be divisible by two\n");
                 return false;
                 }
                 parallel_ = parallel;
                 return true;
             }
 
-            virtual bool GetSizeMapping(int matrix_width, int matrix_height,
-                                        int *visible_width, int *visible_height)
-                const {
-                *visible_width = ( matrix_width / 128 /* 64 */ ) * 32;   // Div at 32px boundary
-                *visible_height = 4 /* 2 */ * matrix_height;
-                if (matrix_height % parallel_ != 0) {
-                fprintf(stderr, "%s For parallel=%d we would expect the height=%d "
-                        "to be divisible by %d ??\n",
-                        GetName(), parallel_, matrix_height, parallel_);
-                return false;
-                }
-                return true;
-            }
-        
-            #define PANEL_HEIGHT  32
-            #define PANEL_WIDTH   32
+            #define PANEL_HEIGHT  16
+            #define PANEL_WIDTH   16
             #define SLAB_HEIGHT   64
             #define MATRIX_WIDTH  128 // 256
             #define MATRIX_HEIGHT 32
@@ -315,7 +301,18 @@ namespace rgb_matrix
             #define COLS           2
             #define PANEL_PARALLEL 0
 
-            virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
+            virtual bool GetSizeMapping( int matrix_width, int matrix_height, int *visible_width, int *visible_height )
+                const {
+                *visible_width = ( matrix_width / MATRIX_WIDTH /* before doubling chain, 64 */ ) * 32;   // Div at 32px boundary
+                *visible_height = ROWS /* before doubling chain, 2 */ * matrix_height;
+                if ( matrix_height % parallel_ != 0 ) {
+                fprintf( stderr, "%s For parallel=%d we would expect the height=%d to be divisible by %d ??\n",
+                                 GetName(), parallel_, matrix_height, parallel_ );
+                return false; }
+
+                return true; }
+
+            virtual void MapVisibleToMatrix( int matrix_width, int matrix_height,
                                     int x, int y,
                                     int *matrix_x, int *matrix_y ) const {
 
@@ -332,7 +329,7 @@ namespace rgb_matrix
                 y = y % PANEL_HEIGHT; // _panel_height;
 
                 // Perform any panel rotation to the pixel.
-                // NOTE: 90 and 270 degree rotation only possible on 32 row (square) panels.
+                // NOTE: 90 and 270 degree rotation only possible on 32 row ( square) panels.
                 if ( panel.rotate == 90 ) {
                     // assert(_panel_height == _panel_width); // asserted.  PANEL_HEIGHT == PANEL_WIDTH
                     int old_x = x;
@@ -397,7 +394,7 @@ namespace rgb_matrix
 
             virtual const char *GetName() const { return "V-mapper"; }
 
-            virtual bool SetParameters(int chain, int parallel, const char *param)
+            virtual bool SetParameters( int chain, int parallel, const char *param)
             {
                 chain_ = chain;
                 parallel_ = parallel;
@@ -408,18 +405,18 @@ namespace rgb_matrix
                 // [ O < I ]                   [ I > O  ]
                 //   ,---^            with Z     ^
                 // [ O < I ]            --->   [ O < I  ]
-                z_ = (param && strcasecmp(param, "Z") == 0);
+                z_ = (param && strcasecmp(param, "Z") == 0 );
                 return true;
             }
 
-            virtual bool GetSizeMapping(int matrix_width, int matrix_height,
+            virtual bool GetSizeMapping( int matrix_width, int matrix_height,
                                         int *visible_width, int *visible_height)
                 const
             {
                 *visible_width = matrix_width * parallel_ / chain_;
                 *visible_height = matrix_height * chain_ / parallel_;
 #if 0
-     fprintf(stderr, "%s: C:%d P:%d. Turning W:%d H:%d Physical "
+     fprintf( stderr, "%s: C:%d P:%d. Turning W:%d H:%d Physical "
 	     "into W:%d H:%d Virtual\n",
              GetName(), chain_, parallel_,
 	     *visible_width, *visible_height, matrix_width, matrix_height);
@@ -427,7 +424,7 @@ namespace rgb_matrix
                 return true;
             }
 
-            virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
+            virtual void MapVisibleToMatrix( int matrix_width, int matrix_height,
                                             int x, int y,
                                             int *matrix_x, int *matrix_y) const
             {
@@ -509,7 +506,7 @@ namespace rgb_matrix
         MapperByName::const_iterator found = GetMapperMap()->find(lower_name);
         if (found == GetMapperMap()->end())
         {
-            fprintf(stderr, "%s: no such mapper\n", name);
+            fprintf( stderr, "%s: no such mapper\n", name);
             return NULL;
         }
         PixelMapper *mapper = found->second;
