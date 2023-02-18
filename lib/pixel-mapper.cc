@@ -382,7 +382,8 @@ namespace rgb_matrix
                 //                     red, green, blue);
 
                 if ( y < 16 ) {
-                    x_offset = x + panel.x_offset; 
+                    x_offset = x + panel.x_offset;
+                    y_offset = y + panel.y_offset;
                 }
 
                 *matrix_x = x + x_offset;
