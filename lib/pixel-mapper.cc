@@ -287,7 +287,7 @@ namespace rgb_matrix
 
                 Panel sixteenthPanel;            // does this panel even exist?
                 sixteenthPanel.order  = 0;
-                sixteenthPanel.rotate = 180;
+                sixteenthPanel.rotate = 0;
                 _panels[ 15 ] = sixteenthPanel;
             }
 
@@ -312,7 +312,7 @@ namespace rgb_matrix
             #define MATRIX_WIDTH  128
             #define MATRIX_HEIGHT 32
             #define VISIBLE_WIDTH 64
-            #define CHAIN_LENGTH  16
+            #define CHAIN_LENGTH   8
             #define ROWS           4
             #define COLS           2
             #define PANEL_PARALLEL 0
