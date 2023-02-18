@@ -231,7 +231,7 @@ namespace rgb_matrix
 
                 Panel ninthPanel;
                 ninthPanel.order  = 8;
-                ninthPanel.rotate = 180;
+                ninthPanel.rotate = 0;
                 _panels[ 8 ] = ninthPanel;
 
                 Panel tenthPanel;
@@ -300,7 +300,7 @@ namespace rgb_matrix
             }
         
             #define PANEL_HEIGHT  16
-            #define PANEL_WIDTH   16
+            #define PANEL_WIDTH   32
             #define SLAB_HEIGHT   64
             #define MATRIX_WIDTH  128 // 256
             #define MATRIX_HEIGHT 32
