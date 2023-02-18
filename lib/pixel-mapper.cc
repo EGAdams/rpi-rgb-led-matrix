@@ -337,7 +337,7 @@ namespace rgb_matrix
 
                 //Get the panel information for this pixel.
                 int panel_index = ( COLS * row ) + col;
-                Panel panel = _panels[ ];  //_cols*row + col];
+                Panel panel = _panels[ panel_index ];  //_cols*row + col];
                 printf( "input x: %2d  input y: %2d  row: %d  col: %d  panel.order: %2d, panel.rotate: %3d panel.name:%12s ", x, y, row, col, panel.order, panel.rotate, panel.name );
 
                 // Compute location of the pixel within the panel.
