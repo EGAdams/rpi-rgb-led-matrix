@@ -366,7 +366,7 @@ namespace rgb_matrix
                 // ordering begins for this transformer).
                 int x_offset, y_offset = 0;
                 if ( row == 0 || row == 2 || row == 4 || row == 6 ) {
-                    x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
+                    x_offset = (( CHAIN_LENGTH ) - panel.order ) * PANEL_WIDTH;
                     y_offset = PANEL_PARALLEL * PANEL_HEIGHT;
                 } else {
                     x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
