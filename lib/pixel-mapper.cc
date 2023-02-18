@@ -306,7 +306,7 @@ namespace rgb_matrix
             #define MATRIX_HEIGHT 32
             #define VISIBLE_WIDTH 64
             #define CHAIN_LENGTH  16
-            #define ROWS           4
+            #define ROWS           8
             #define COLS           2
             #define PANEL_PARALLEL 0
 
