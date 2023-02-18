@@ -287,7 +287,7 @@ namespace rgb_matrix
 
                 Panel sixteenthPanel;            // does this panel even exist?
                 sixteenthPanel.order  = 0;
-                sixteenthPanel.rotate = 0;
+                sixteenthPanel.rotate = 0; // start mods...
                 _panels[ 15 ] = sixteenthPanel;
             }
 
@@ -313,13 +313,13 @@ namespace rgb_matrix
             #define MATRIX_HEIGHT 32
             #define VISIBLE_WIDTH 64
             #define CHAIN_LENGTH  16
-            #define ROWS           4
+            #define ROWS           8
             #define COLS           2
             #define PANEL_PARALLEL 0
 
             virtual bool GetSizeMapping( int matrix_width, int matrix_height, int *visible_width, int *visible_height )
                 const {
-                *visible_width = ( matrix_width / MATRIX_WIDTH /* before doubling chain, 64 */ ) * 16;   // Div at 32px boundary
+                *visible_width = ( matrix_width / MATRIX_WIDTH /* before doubling chain, 64 */ ) * 32;   // Div at 32px boundary
                 *visible_height = ROWS /* before doubling chain, 2 */ * matrix_height;
                 if ( matrix_height % parallel_ != 0 ) {
                 fprintf( stderr, "%s For parallel=%d we would expect the height=%d to be divisible by %d ??\n",
