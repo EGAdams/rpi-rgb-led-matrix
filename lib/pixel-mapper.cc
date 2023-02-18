@@ -320,9 +320,6 @@ namespace rgb_matrix
 
                 //Get the panel information for this pixel.
                 Panel panel = _panels[ ( COLS * row ) + col ];  //_cols*row + col];
-                if ( row > 1 ) {
-                    panel.rotate = 180;
-                }
                 printf( "row: %d  col: %d  panel.order: %d, panel.rotate: %d  ", row, col, panel.order, panel.rotate );
 
                 // Compute location of the pixel within the panel.
@@ -357,6 +354,7 @@ namespace rgb_matrix
                 // Determine y offset into the source panel based on its parrallel chain value.
                 int y_offset = PANEL_PARALLEL * PANEL_HEIGHT;
 
+                if ( row > 1 ) { y_offset = 64; }
                 // _source->SetPixel(x_offset + x,
                 //                     y_offset + y,
                 //                     red, green, blue);
