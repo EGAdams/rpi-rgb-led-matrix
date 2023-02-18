@@ -354,7 +354,7 @@ namespace rgb_matrix
                 // Determine y offset into the source panel based on its parrallel chain value.
                 int y_offset = PANEL_PARALLEL * PANEL_HEIGHT;
 
-                if ( row > 1 ) { y_offset = 64; }
+                if ( row > 1 ) { y_offset = 32; }
                 // _source->SetPixel(x_offset + x,
                 //                     y_offset + y,
                 //                     red, green, blue);
