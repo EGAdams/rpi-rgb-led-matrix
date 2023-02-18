@@ -197,7 +197,7 @@ namespace rgb_matrix
                 Panel firstPanel;
                 firstPanel.name = "firstPanel";
                 firstPanel.order = 15;
-                firstPanel.rotate = 180;
+                firstPanel.rotate = 0;
                 _panels[ 0 ] = firstPanel;
 
                 Panel secondPanel;
@@ -311,7 +311,7 @@ namespace rgb_matrix
             #define MATRIX_WIDTH  128
             #define MATRIX_HEIGHT 32
             #define VISIBLE_WIDTH 64
-            #define CHAIN_LENGTH   8
+            #define CHAIN_LENGTH  16
             #define ROWS           4
             #define COLS           2
             #define PANEL_PARALLEL 0
