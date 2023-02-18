@@ -271,7 +271,7 @@ namespace rgb_matrix
 
                 Panel sixteenthPanel;
                 sixteenthPanel.order  = 0;
-                sixteenthPanel.rotate = 0;
+                sixteenthPanel.rotate = 180;
                 _panels[ 15 ] = sixteenthPanel;
             }
 
