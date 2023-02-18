@@ -199,7 +199,7 @@ namespace rgb_matrix
                 firstPanel.order = 7;
                 firstPanel.rotate = 0;
                 firstPanel.y_offset = 16;
-                firstPanel.x_offset = 0;
+                firstPanel.x_offset = 16;
                 _panels[ 0 ] = firstPanel;
 
                 Panel secondPanel;
@@ -337,6 +337,7 @@ namespace rgb_matrix
                 
                 // Compute the index of the panel in the panel list.
                 int panel_index = ( COLS * row ) + col;
+                printf( "panel_index: %d  ", panel_index );
 
                 //Get the panel information for this pixel.
                 Panel panel = _panels[ panel_index ];  //_cols*row + col];
@@ -382,13 +383,13 @@ namespace rgb_matrix
                 //                     red, green, blue);
 
                 if ( x < 32 ) {
-                    x_offset = 32 - x - 1;
-                    y_offset = 16 - y - 1;
+                    x_offset = x + panel.x_offset;
+                    y_offset = y + panel.y_offset;
                 }
 
                 *matrix_x = x + x_offset;
                 *matrix_y = y + y_offset;
-                printf( "x: %2d  y: %2d  x_offset: %3d  y_offset: %d  matrix_x: %3d  matrix_y%3d panel_index: %2d \n", panel_index, x, y, x_offset, y_offset, *matrix_x, *matrix_y );
+                printf( "x: %2d  y: %2d  x_offset: %3d  y_offset: %d  matrix_x: %3d  matrix_y%3d \n", x, y, x_offset, y_offset, *matrix_x, *matrix_y );
 
                 // *matrix_x = x;
                 // *matrix_y = /*base_y +*/ y;
