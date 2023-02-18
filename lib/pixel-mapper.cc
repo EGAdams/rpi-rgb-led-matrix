@@ -297,8 +297,8 @@ namespace rgb_matrix
             #define MATRIX_HEIGHT 32
             #define VISIBLE_WIDTH 64
             #define CHAIN_LENGTH   16
-            #define ROWS           1
-            #define COLS           16
+            #define ROWS           2
+            #define COLS           4
             #define PANEL_PARALLEL 0
 
             virtual bool GetSizeMapping( int matrix_width, int matrix_height, int *visible_width, int *visible_height )
