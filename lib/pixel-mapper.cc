@@ -383,15 +383,15 @@ namespace rgb_matrix
                 //                     y_offset + y,
                 //                     red, green, blue);
 
-                if ( x > 223 ) {
-                    // x_offset = x + panel.x_offset;
-                    // y_offset = y + panel.y_offset;
-                    y_offset = 32;
-                }
+                // if ( x < 63 && y >  ) {
+                //     // x_offset = x + panel.x_offset;
+                //     // y_offset = y + panel.y_offset;
+                //     y_offset = -32;
+                // } ele
 
                 *matrix_x = x + x_offset;
                 *matrix_y = y + y_offset;
-                printf( "x_offset: %3d  y_offset: %d  matrix_x: %3d  matrix_y%3d \n", x_offset, y_offset, *matrix_x, *matrix_y );
+                printf( " ( %2d, %2d ) x_offset: %3d  y_offset: %d  matrix_x: %3d  matrix_y%3d \n", x, y, x_offset, y_offset, *matrix_x, *matrix_y );
 
                 // *matrix_x = x;
                 // *matrix_y = /*base_y +*/ y;
