@@ -381,7 +381,7 @@ namespace rgb_matrix
                 //                     y_offset + y,
                 //                     red, green, blue);
 
-                if ( y < 16 ) {
+                if ( x < 32 ) {
                     x_offset = 32 - x - 1;
                     y_offset = 16 - y - 1;
                 }
