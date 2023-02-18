@@ -383,7 +383,7 @@ namespace rgb_matrix
 
                 if ( y < 16 ) {
                     x_offset = x + panel.x_offset;
-                    y_offset = 32 - y - 1;
+                    y_offset = 16 - y - 1;
                 }
 
                 *matrix_x = x + x_offset;
