@@ -368,7 +368,7 @@ namespace rgb_matrix
                 if ( row == 0 || row == 2 || row == 4 || row == 6 ) {
                     x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
                 } else {
-                    x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH + x;
+                    x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
                 }
                     
                 // Determine y offset into the source panel based on its parrallel chain value.
