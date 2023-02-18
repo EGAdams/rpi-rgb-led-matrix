@@ -391,10 +391,6 @@ namespace rgb_matrix
                 if ( y < ( PANEL_HEIGHT / 2 )) {
                     y_offset += PANEL_HEIGHT / 2;
                 }
-                else {
-                    y_offset += PANEL_HEIGHT / 2;
-                    y -= PANEL_HEIGHT / 2;
-                }
 
                 *matrix_x = x + x_offset;
                 *matrix_y = y + y_offset;
