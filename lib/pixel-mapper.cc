@@ -327,7 +327,7 @@ namespace rgb_matrix
 
                 return true; }
 
-            virtual void MapVisibleToMatrix( int m_w, int mH, int x, int y, int *matrix_x, int *matrix_y ) const {
+            virtual void MapVisibleToMatrix( int, int, int x, int y, int *matrix_x, int *matrix_y ) const {
 
                 // Figure out what row and column panel this pixel is within.
                 int row = y / PANEL_HEIGHT; // _panel_height;
@@ -335,7 +335,7 @@ namespace rgb_matrix
 
                 //Get the panel information for this pixel.
                 Panel panel = _panels[( COLS * row ) + col ];  //_cols*row + col];
-                printf( "row: %d  col: %d  panel.order: %2d, panel.rotate: %3d panel.name: %s  ", row, col, panel.order, panel.rotate, panel.name );
+                printf( "x input: %d  y input: %d  row: %d  col: %d  panel.order: %2d, panel.rotate: %3d panel.name: %s  ", row, col, panel.order, panel.rotate, panel.name, x, y );
 
                 // Compute location of the pixel within the panel.
                 x = x % PANEL_WIDTH;  // _panel_width;
@@ -346,7 +346,7 @@ namespace rgb_matrix
                 if ( panel.rotate == 90 ) {
                     // assert(_panel_height == _panel_width); // asserted.  PANEL_HEIGHT == PANEL_WIDTH
                     int old_x = x;
-                    x = ( PANEL_HEIGHT -1 ) - y;
+                    x = ( PANEL_HEIGHT - 1 ) - y;
                     y = old_x;
                 }
                 else if ( panel.rotate == 180 ) {
