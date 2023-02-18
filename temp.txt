@@ -1,25 +1,3 @@
-[H[2J[3Jsynching git...  
-Already up to date.
-rebuilding project...
-make -C ./lib
-make[1]: Entering directory '/home/dietpi/rpi-rgb-led-matrix/lib'
-make[1]: Leaving directory '/home/dietpi/rpi-rgb-led-matrix/lib'
-make -C examples-api-use
-make[1]: Entering directory '/home/dietpi/rpi-rgb-led-matrix/examples-api-use'
-make -C ../lib
-make[2]: Entering directory '/home/dietpi/rpi-rgb-led-matrix/lib'
-make[2]: Leaving directory '/home/dietpi/rpi-rgb-led-matrix/lib'
-make[1]: Leaving directory '/home/dietpi/rpi-rgb-led-matrix/examples-api-use'
-running example... 
-applying pixel mapper: Checkered
-
-old_width: 512, old_height: 16, new_width: 256, new_height: 32
-
-/// translation_count: 8192
-applying pixel mapper: U-mapper
-
-old_width: 256, old_height: 32, new_width: 128, new_height: 64
-
 row: 0  col: 0  panel.order: 15, panel.rotate: 0  x: 0  y: 0  x_offset: 0  y_offset: 0
 row: 0  col: 0  panel.order: 15, panel.rotate: 0  x: 1  y: 0  x_offset: 0  y_offset: 0
 row: 0  col: 0  panel.order: 15, panel.rotate: 0  x: 2  y: 0  x_offset: 0  y_offset: 0
@@ -10244,3 +10222,27 @@ row: 3  col: 7  panel.order: 10880464, panel.rotate: 17  x: 6  y: 15  x_offset: 
 Error in PixelMapper: (118, 63) -> (-174087178, 15) [range: 256x32]
 row: 3  col: 7  panel.order: 10880464, panel.rotate: 17  x: 7  y: 15  x_offset: -174087184  y_offset: 0
 Error in Pi
+
+
+
+[H[2J[3Jsynching git...  
+Already up to date.
+rebuilding project...
+make -C ./lib
+make[1]: Entering directory '/home/dietpi/rpi-rgb-led-matrix/lib'
+make[1]: Leaving directory '/home/dietpi/rpi-rgb-led-matrix/lib'
+make -C examples-api-use
+make[1]: Entering directory '/home/dietpi/rpi-rgb-led-matrix/examples-api-use'
+make -C ../lib
+make[2]: Entering directory '/home/dietpi/rpi-rgb-led-matrix/lib'
+make[2]: Leaving directory '/home/dietpi/rpi-rgb-led-matrix/lib'
+make[1]: Leaving directory '/home/dietpi/rpi-rgb-led-matrix/examples-api-use'
+running example... 
+applying pixel mapper: Checkered
+
+old_width: 512, old_height: 16, new_width: 256, new_height: 32
+
+/// translation_count: 8192
+applying pixel mapper: U-mapper
+
+old_width: 256, old_height: 32, new_width: 128, new_height: 64
