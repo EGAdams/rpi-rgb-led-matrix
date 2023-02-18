@@ -297,8 +297,8 @@ namespace rgb_matrix
             #define MATRIX_HEIGHT 32
             #define VISIBLE_WIDTH 64
             #define CHAIN_LENGTH   16
-            #define ROWS           2
-            #define COLS           4
+            #define ROWS           4
+            #define COLS           2
             #define PANEL_PARALLEL 0
 
             virtual bool GetSizeMapping( int matrix_width, int matrix_height, int *visible_width, int *visible_height )
@@ -312,7 +312,7 @@ namespace rgb_matrix
 
                 return true; }
 
-            virtual void MapVisibleToMatrix( int m_w, int m_h, int x, int y, int *matrix_x, int *matrix_y ) const {
+            virtual void MapVisibleToMatrix( int m_w, int mH, int x, int y, int *matrix_x, int *matrix_y ) const {
 
                 // Figure out what row and column panel this pixel is within.
                 int row = y / PANEL_HEIGHT; // _panel_height;
