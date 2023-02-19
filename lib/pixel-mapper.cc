@@ -351,14 +351,6 @@ namespace rgb_matrix
                 // Compute location of the pixel within the panel.
                 if ( x >= PANEL_WIDTH  ) { while ( x >= PANEL_WIDTH  ) { x -= PANEL_WIDTH;  }}
                 if ( y >= PANEL_HEIGHT ) { while ( y >= PANEL_HEIGHT ) { y -= PANEL_HEIGHT; }}
-
-                if ( y < 16 ) {
-                    *matrix_x = x;
-                    *matrix_y = y;
-                } else {
-                    *matrix_x = x + 16;
-                    *matrix_y = y - 8;
-                }
                 
 
                 // Perform any panel rotation to the pixel.
@@ -388,6 +380,13 @@ namespace rgb_matrix
                 int y_offset = 0;
 
                 //y_offset = PANEL_HEIGHT / 2;
+
+                if ( y < 16 ) {
+                    //*matrix_x = x;
+                    *matrix_y = 32 - y;
+                } else {
+                    *matrix_y = y;
+                }
                 
                 x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
                 
