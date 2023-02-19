@@ -199,7 +199,7 @@ namespace rgb_matrix
                 firstPanel.order = 15;
                 firstPanel.rotate = 0;
                 firstPanel.y_offset = 0;
-                firstPanel.x_offset = 16;
+                firstPanel.x_offset = 0;
                 _panels[ 0 ] = firstPanel;
 
                 Panel secondPanel;
@@ -429,10 +429,10 @@ namespace rgb_matrix
             int parallel_;
             struct Panel {
                 const char* name;
-                int order;
-                int rotate;
-                int y_offset;
-                int x_offset;
+                int order    = 0;
+                int rotate   = 0;
+                int y_offset = 0;
+                int x_offset = 0;
                 // int parallel; hard code to 1
             };
             Panel _panels[ 16 ];
