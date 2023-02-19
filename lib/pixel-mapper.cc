@@ -315,7 +315,7 @@ namespace rgb_matrix
             #define MATRIX_HEIGHT  32
             #define VISIBLE_HEIGHT 128
             #define VISIBLE_WIDTH  64
-            #define CHAIN_LENGTH   16    // start mods for CHAIN_LENGTH...  started at 16 today
+            #define CHAIN_LENGTH   8    // start mods for CHAIN_LENGTH...  started at 16 today
             #define ROWS           4
             #define COLS           2
             #define PANEL_PARALLEL 0
@@ -416,7 +416,7 @@ namespace rgb_matrix
 
                 *matrix_x = x + x_offset;
                 *matrix_y = y + y_offset;
-                printf( " ( %2d, %2d ) x_offset: %3d  y_offset: %d  matrix_x: %3d  matrix_y%3d \n", x, y, x_offset, y_offset, *matrix_x, *matrix_y );
+                printf( " ( %2d, %2d ) x_offset: %3d  y_offset: %3d  matrix_x: %3d  matrix_y%3d \n", x, y, x_offset, y_offset, *matrix_x, *matrix_y );
 
                 // *matrix_x = x;
                 // *matrix_y = /*base_y +*/ y;
