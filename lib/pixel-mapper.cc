@@ -383,7 +383,7 @@ namespace rgb_matrix
                 //y_offset = panel.y_offset;
                
                 if ( y < ( PANEL_HEIGHT )) {
-                    *matrix_x = MATRIX_WIDTH  - 1 - x;
+                    *matrix_x = VISIBLE_WIDTH - 1 - x;
                     *matrix_y = MATRIX_HEIGHT - y - 1;
                 } else {
                     *matrix_x = VISIBLE_WIDTH - x - 1;
