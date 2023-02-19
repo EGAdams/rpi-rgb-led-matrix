@@ -385,7 +385,7 @@ namespace rgb_matrix
                     //*matrix_x = x;
                     *matrix_y = y;
                 } else {
-                    *matrix_y = y + 16;
+                    *matrix_y = 16 - y;
                 }
                 
                 x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
