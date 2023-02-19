@@ -344,21 +344,21 @@ namespace rgb_matrix
                 printf( "input coordinates( %2d, %2d ) row: %d  col: %d  panel.order: %2d, panel.rotate: %3d panel.name: %12s ", x, y, row, col, panel.order, panel.rotate, panel.name );
                 printf( "x: %2d  y: %2d \n", x, y );
                 
-                if ( y < 32 ) {
-                    x = x;
-                    y = y;
-                } else if ( y < 64 ) {
-                    x = x + 64;
-                    y = y - 32;
-                }
 
                 // x = x % PANEL_WIDTH;  // _panel_width;
                 // y = y % PANEL_HEIGHT; // _panel_height;
 
                 // Compute location of the pixel within the panel.
-                // if ( x >= PANEL_WIDTH  ) { while ( x >= PANEL_WIDTH  ) { x -= PANEL_WIDTH;  }}
-                // if ( y >= PANEL_HEIGHT ) { while ( y >= PANEL_HEIGHT ) { y -= PANEL_HEIGHT; }}
+                if ( x >= PANEL_WIDTH  ) { while ( x >= PANEL_WIDTH  ) { x -= PANEL_WIDTH;  }}
+                if ( y >= PANEL_HEIGHT ) { while ( y >= PANEL_HEIGHT ) { y -= PANEL_HEIGHT; }}
 
+                if ( y < 16 ) {
+                    *matrix_x = x;
+                    *matrix_y = y;
+                } else if ( y < 64 ) {
+                    *matrix_x = x + 16;
+                    *matrix_y = y - 8;
+                }
                 
 
                 // Perform any panel rotation to the pixel.
@@ -417,8 +417,8 @@ namespace rgb_matrix
                 
 
             // Update matrix coordinates
-            *matrix_x = x;
-            *matrix_y = /* base_y */ 0 + y;
+            // *matrix_x = x;
+            // *matrix_y = /* base_y */ 0 + y;
 
             }
 
