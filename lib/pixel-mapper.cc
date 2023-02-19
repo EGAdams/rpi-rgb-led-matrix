@@ -216,7 +216,7 @@ namespace rgb_matrix
 
                 Panel fourthPanel;
                 fourthPanel.name = "fourthPanel";
-                fourthPanel.order = 9;
+                fourthPanel.order = 4;
                 fourthPanel.rotate = 0;
                 _panels[ 3 ] = fourthPanel;
 
