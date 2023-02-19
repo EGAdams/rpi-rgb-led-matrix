@@ -387,7 +387,7 @@ namespace rgb_matrix
                     *matrix_y = y;
                 } else {
                     *matrix_y = 16 - y;
-
+                    x_offset = x_offset + 32;
                 }
                 
                 
