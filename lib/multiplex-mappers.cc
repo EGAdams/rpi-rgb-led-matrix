@@ -27,17 +27,18 @@ class MultiplexMapperBase : public MultiplexMapper {
 
     virtual void EditColsRows( int *cols, int *rows ) const {
         printf( "inside EditColsRows() cols: %d  rows: %d                             \n", *cols, *rows );
-        printf( "This method is const, but we sneakily remember the original size     \n" );
-        printf( "of the panels so that we can more easily quantize things.            \n" );
-        printf( "So technically, we're stateful, but let's pretend we're not changing \n" );
-        printf( "state. In the context this is used, it is never accessed in multiple \n" );
-        printf( "threads.                                                             \n" );
+        printf( "This method is const, but we sneakily remember the original size     \n"   );
+        printf( "of the panels so that we can more easily quantize things.            \n"   );
+        printf( "So technically, we're stateful, but let's pretend we're not changing \n"   );
+        printf( "state. In the context this is used, it is never accessed in multiple \n"   );
+        printf( "threads.                                                             \n\n" );
         
         panel_rows_ = *rows;
         panel_cols_ = *cols;
 
         *rows /= panel_stretch_factor_;
         *cols *= panel_stretch_factor_;
+        printf( "leaving EditColsRows() panel_rows: %d  panel_cols: %d                 \n\n", panel_rows_, panel_cols_ );
     }
 
     virtual bool GetSizeMapping(int matrix_width, int matrix_height,

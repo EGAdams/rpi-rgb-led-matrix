@@ -68,6 +68,7 @@ static void DrawLine(Canvas *canvas)
 
 int main(int argc, char *argv[])
 {
+    printf( "starting main\n" );
     RGBMatrix::Options defaults;
     defaults.hardware_mapping = "adafruit-hat"; // or e.g. "adafruit-hat"
     defaults.rows = 32;
@@ -78,19 +79,17 @@ int main(int argc, char *argv[])
     defaults.show_refresh_rate = false;
     defaults.chain_length = 1;
     defaults.parallel = 1;
+    printf( "creating canvas from flags\n" );
     Canvas *canvas = RGBMatrix::CreateFromFlags(&argc, &argv, &defaults);
-    if (canvas == NULL)
-    {
-        return 1;
-    }
+    if ( canvas == NULL ) { return 1; }
 
     // It is always good to set up a signal handler to cleanly exit when we
     // receive a CTRL-C for instance. The DrawOnCanvas() routine is looking
     // for that.
-    signal(SIGTERM, InterruptHandler);
-    signal(SIGINT, InterruptHandler);
+    signal( SIGTERM, InterruptHandler );
+    signal( SIGINT, InterruptHandler  );
 
-    DrawLine(canvas); // Using the canvas.
+    DrawLine( canvas ); // Using the canvas.
     // Animation finished. Shut down the RGB matrix.
     canvas->Clear();
     delete canvas;
