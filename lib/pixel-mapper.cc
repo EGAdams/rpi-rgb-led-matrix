@@ -376,12 +376,12 @@ namespace rgb_matrix
                 // The order needs to be inverted because the matrix library starts with the
                 // origin of an image at the end of the chain and not at the start (where
                 // ordering begins for this transformer).
-                int x_offset = 0; 
-                int y_offset = 0;
+                // int x_offset = 0; 
+                // int y_offset = 0;
 
-                y_offset = PANEL_HEIGHT / 2;
+                //y_offset = PANEL_HEIGHT / 2;
                 
-                // x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
+                //x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
                 
                 // //y_offset = panel.y_offset;
                
@@ -397,15 +397,33 @@ namespace rgb_matrix
                 //                     red, green, blue);
 
 
-                *matrix_x = x + x_offset;
-                *matrix_y = y + y_offset;
-                printf( " ( %2d, %2d ) x_offset: %3d  y_offset: %d  matrix_x: %3d  matrix_y%3d \n", x, y, x_offset, y_offset, *matrix_x, *matrix_y );
+                // *matrix_x = x + x_offset;
+                // *matrix_y = y + y_offset;
+                // printf( " ( %2d, %2d ) x_offset: %3d  y_offset: %d  matrix_x: %3d  matrix_y%3d \n", x, y, x_offset, y_offset, *matrix_x, *matrix_y );
 
                 // *matrix_x = x;
                 // *matrix_y = /*base_y +*/ y;
                     
                 // printf( "pnl_hght: %d  vsbl_wdth: %d  slb_hght: %d bs_y: %d mtrx_wdth: %d mtrx_hght: %d, mtrx_x: %d,   mtrx_y %d \n", 
                 //          MATRIX_HEIGHT, VISIBLE_WIDTH, SLAB_HEIGHT, base_y,  matrix_width, matrix_height, *matrix_x,    *matrix_y );                
+                if ( y < 32 ) {
+                    x = x;
+                    y = y;
+                } else if ( y < 64 ) {
+                    x = x + 64;
+                    y = y - 32;
+                } else if ( y < 96 ) {
+                    x = x;
+                    y = y;
+                } else {
+                    x = x + 64;
+                    y = y - 32;
+                }
+
+            // Update matrix coordinates
+            *matrix_x = x;
+            *matrix_y = /* base_y */ 0 + y;
+
             }
 
             private:
