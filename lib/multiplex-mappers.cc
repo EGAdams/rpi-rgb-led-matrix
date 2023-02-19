@@ -38,14 +38,20 @@ class MultiplexMapperBase : public MultiplexMapper {
 
         *rows /= panel_stretch_factor_;
         *cols *= panel_stretch_factor_;
+
+        printf( "After modifications:  rows: %d  cols: %d                              \n", *rows, *cols               );
         printf( "leaving EditColsRows() panel_rows: %d  panel_cols: %d                 \n\n", panel_rows_, panel_cols_ );
     }
 
     virtual bool GetSizeMapping(int matrix_width, int matrix_height,
                                 int *visible_width, int *visible_height) const {
-        // Matrix width has been altered. Alter it back.
+        printf( "inside GetSizeMapping() matrix_width: %d  matrix_height: %d   \n", matrix_width, matrix_height       );
+        printf( "Matrix width has been altered. Alter it back.                 \n"                                    );
+        printf( "Before altering: visible_width: %d  visible_height: %d        \n", *visible_width, *visible_height   );
         *visible_width = matrix_width / panel_stretch_factor_;
         *visible_height = matrix_height * panel_stretch_factor_;
+        printf( "After altering: visible_width: %d  visible_height: %d         \n", *visible_width, *visible_height   );
+        printf( "returning true from GetSizeMapping..." );
         return true;
     }
 

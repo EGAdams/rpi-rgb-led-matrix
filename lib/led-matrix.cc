@@ -376,7 +376,7 @@ RGBMatrix::Impl::Impl(GPIO *io, const Options &options)
     multiplex_mapper->EditColsRows( &params_.cols, &params_.rows );
   }
 
-  printf( "calling InitHardwareMapping( %s )\n" );
+  printf( "calling InitHardwareMapping( %s )\n", params_.hardware_mapping );
   Framebuffer::InitHardwareMapping( params_.hardware_mapping );
 
   active_ = CreateFrameCanvas();

@@ -322,12 +322,14 @@ namespace rgb_matrix
 
             virtual bool GetSizeMapping( int matrix_width, int matrix_height, int *visible_width, int *visible_height )
                 const {
-                printf( "inside virtual bool GetSizeMapping: matrix_width=%d, matrix_height=%d, *visible_width=%d, *visible_height=%d", matrix_width, matrix_height, *visible_width, *visible_height );
+                printf( "inside virtual bool GetSizeMapping: matrix_width=%d, matrix_height=%d, *visible_width=%d, *visible_height=%d\n", matrix_width, matrix_height, *visible_width, *visible_height );
                 *visible_width = ( matrix_width / MATRIX_WIDTH /* before doubling chain, 64 */ ) * 32;   // Div at 32px boundary
                 *visible_height = ROWS /* before doubling chain, 2 */ * matrix_height;
                 if ( matrix_height % parallel_ != 0 ) { fprintf( stderr, "%s For parallel=%d we would expect the height=%d to be divisible by %d ??\n", GetName(), parallel_, matrix_height, parallel_ );
                     return false; }
 
+                printf( "After altering: visible_width: %d,  visible_height: %d \n", *visible_width, *visible_height );
+                printf( "returning true from virtual bool GetSizeMapping in pixel-mapper.cc ... \n\n"             );
                 return true; }
 
             virtual void MapVisibleToMatrix( int mw, int mH, int x, int y, int *matrix_x, int *matrix_y ) const {
