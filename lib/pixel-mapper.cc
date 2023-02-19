@@ -342,7 +342,15 @@ namespace rgb_matrix
                 //Get the panel information for this pixel.
                 Panel panel = _panels[ panel_index ];  //_cols*row + col];
                 printf( "input coordinates( %2d, %2d ) row: %d  col: %d  panel.order: %2d, panel.rotate: %3d panel.name: %12s ", x, y, row, col, panel.order, panel.rotate, panel.name );
-                printf( "x: %2d  y: %2d \n", x, y );
+                printf( "x: %2d  y: %2d ", x, y );
+                
+                if ( y < 32 ) {
+                    x = x;
+                    y = y;
+                } else if ( y < 64 ) {
+                    x = x + 64;
+                    y = y - 32;
+                }
 
                 // x = x % PANEL_WIDTH;  // _panel_width;
                 // y = y % PANEL_HEIGHT; // _panel_height;
@@ -406,13 +414,7 @@ namespace rgb_matrix
                     
                 // printf( "pnl_hght: %d  vsbl_wdth: %d  slb_hght: %d bs_y: %d mtrx_wdth: %d mtrx_hght: %d, mtrx_x: %d,   mtrx_y %d \n", 
                 //          MATRIX_HEIGHT, VISIBLE_WIDTH, SLAB_HEIGHT, base_y,  matrix_width, matrix_height, *matrix_x,    *matrix_y );                
-                if ( y < 32 ) {
-                    x = x;
-                    y = y;
-                } else if ( y < 64 ) {
-                    x = x + 64;
-                    y = y - 32;
-                }
+                
 
             // Update matrix coordinates
             *matrix_x = x;
