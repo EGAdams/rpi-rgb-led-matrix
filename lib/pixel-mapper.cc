@@ -379,16 +379,17 @@ namespace rgb_matrix
                 int x_offset = 0; 
                 int y_offset = 0;
 
+                x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
                 //y_offset = PANEL_HEIGHT / 2;
 
                 if ( y > 16 ) {
                     //*matrix_x = x;
                     *matrix_y = y;
                 } else {
-                    *matrix_y = 17 - y;
+                    *matrix_y = 16 - y;
+
                 }
                 
-                x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
                 
                 // //y_offset = panel.y_offset;
                
