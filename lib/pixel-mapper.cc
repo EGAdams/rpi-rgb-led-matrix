@@ -286,7 +286,8 @@ namespace rgb_matrix
                 fifteenthPanel.rotate = 0;
                 _panels[ 14 ] = fifteenthPanel;
 
-                Panel sixteenthPanel;            // does this panel even exist?
+                Panel sixteenthPanel;
+                sixteenthPanel.name = "sixteenthPanel";
                 sixteenthPanel.order  = 0;
                 sixteenthPanel.rotate = 0; // start mods...
                 _panels[ 15 ] = sixteenthPanel;
@@ -295,10 +296,10 @@ namespace rgb_matrix
             virtual const char *GetName() const { return "U-mapper"; }
 
             virtual bool SetParameters( int chain, int parallel, const char *param) {
-                if (chain < 2) {  // technically, a chain of 2 would work, but somewhat pointless
-                fprintf( stderr, "U-mapper: need at least --led-chain=4 for useful folding\n");
-                return false;
-                }
+                // if (chain < 2) {  // technically, a chain of 2 would work, but somewhat pointless
+                //     fprintf( stderr, "U-mapper: need at least --led-chain=4 for useful folding\n");
+                //     return false;
+                // }
                 if (chain % 2 != 0 ) {
                 fprintf( stderr, "U-mapper: Chain (--led-chain) needs to be divisible by two\n");
                 return false;
@@ -307,11 +308,11 @@ namespace rgb_matrix
                 return true;
             } 
                                                         
-            #define PANEL_HEIGHT   16
-            #define PANEL_WIDTH    16
+            #define PANEL_HEIGHT   32
+            #define PANEL_WIDTH    32
             #define SLAB_HEIGHT    64
             #define MATRIX_WIDTH   512 // 128
-            #define MATRIX_HEIGHT  16
+            #define MATRIX_HEIGHT  32
             #define VISIBLE_HEIGHT 128
             #define VISIBLE_WIDTH  64
             #define CHAIN_LENGTH   16    // start mods for CHAIN_LENGTH...  started at 16 today
