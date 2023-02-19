@@ -336,6 +336,8 @@ namespace rgb_matrix
                 // Figure out what row and column panel this pixel is within.
                 int row = y / PANEL_HEIGHT; // _panel_height;
                 int col = x / PANEL_WIDTH;  // _panel_width;
+
+
                 
                 // Compute the index of the panel in the panel list.
                 int panel_index = ( COLS * row ) + col;
@@ -353,7 +355,23 @@ namespace rgb_matrix
                 if ( x >= PANEL_WIDTH  ) { while ( x >= PANEL_WIDTH  ) { x -= PANEL_WIDTH;  }}
                 if ( y >= PANEL_HEIGHT ) { while ( y >= PANEL_HEIGHT ) { y -= PANEL_HEIGHT; }}
 
-                
+                // map single panel to matrix
+                int panel_rows_ = PANEL_HEIGHT;
+                int panel_cols_ = PANEL_WIDTH;
+                int single_panel_matrix_x = 0;
+                int single_panel_matrix_y = 0;
+
+                const bool is_top_check = (y % (panel_rows_/2)) < panel_rows_/4;
+                const bool is_left_check = (x < panel_cols_/2);
+                if (is_top_check) {
+                    single_panel_matrix_x = is_left_check ? x+panel_cols_/2 : x+panel_cols_;
+                } else {
+                    single_panel_matrix_x = is_left_check ? x : x + panel_cols_/2;
+                }
+                single_panel_matrix_y = ((y / (panel_rows_/2)) * (panel_rows_/4) + y % (panel_rows_/4));
+
+                x = single_panel_matrix_x;
+                y = single_panel_matrix_y;
 
                 // Perform any panel rotation to the pixel.
                 // NOTE: 90 and 270 degree rotation only possible on 32 row ( square) panels.
