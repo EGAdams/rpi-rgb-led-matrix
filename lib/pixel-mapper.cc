@@ -386,7 +386,7 @@ namespace rgb_matrix
                     *matrix_x = MATRIX_WIDTH  - 1 - x;
                     *matrix_y = MATRIX_HEIGHT - y - 1;
                 } else {
-                    // *matrix_x = VISIBLE_WIDTH - x - 1;
+                    *matrix_x = VISIBLE_WIDTH - x - 1;
                     *matrix_y = SLAB_HEIGHT   - y - 1;
                 }
                 
