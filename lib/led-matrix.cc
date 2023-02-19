@@ -383,11 +383,15 @@ RGBMatrix::Impl::Impl(GPIO *io, const Options &options)
   active_->Clear();
   SetGPIO(io, true);
 
-  printf( "We need to apply the mapping for the panels first.\n " );
+  printf( "We need to apply the mapping for the panels first. \n\n" );
+
   ApplyPixelMapper( multiplex_mapper );
 
   printf( "...followed by higher level mappers that might arrange panels. \n" );
+  
   ApplyNamedPixelMappers( options.pixel_mapper_config, params_.chain_length, params_.parallel );
+
+  printf( "done with ApplyNamedPixelMappers \n\n" );
 }
 
 RGBMatrix::Impl::~Impl() {
