@@ -322,7 +322,7 @@ RGBMatrix::Options::Options() :
   // Nothing to see here.
 }
 
-#define DEBUG_MATRIX_OPTIONS 0
+#define DEBUG_MATRIX_OPTIONS 1
 
 #if DEBUG_MATRIX_OPTIONS
 static void PrintOptions(const RGBMatrix::Options &o) {
@@ -370,24 +370,24 @@ RGBMatrix::Impl::Impl(GPIO *io, const Options &options)
     }
   }
 
-  if (multiplex_mapper) {
-    // The multiplexers might choose to have a different physical layout.
-    // We need to configure that first before setting up the hardware.
+  if ( multiplex_mapper ) {
+    printf( "The multiplexers might choose to have a different physical layout. \n" );
+    printf( "We need to configure that first before setting up the hardware.    \n" );
     multiplex_mapper->EditColsRows(&params_.cols, &params_.rows);
   }
 
-  Framebuffer::InitHardwareMapping(params_.hardware_mapping);
+  printf( "calling InitHardwareMapping( %s )\n" );
+  Framebuffer::InitHardwareMapping( params_.hardware_mapping );
 
   active_ = CreateFrameCanvas();
   active_->Clear();
   SetGPIO(io, true);
 
-  // We need to apply the mapping for the panels first.
-  ApplyPixelMapper(multiplex_mapper);
+  printf( "We need to apply the mapping for the panels first.\n " );
+  ApplyPixelMapper( multiplex_mapper );
 
-  // .. followed by higher level mappers that might arrange panels.
-  ApplyNamedPixelMappers(options.pixel_mapper_config,
-                         params_.chain_length, params_.parallel);
+  printf( "...followed by higher level mappers that might arrange panels. \n" );
+  ApplyNamedPixelMappers( options.pixel_mapper_config, params_.chain_length, params_.parallel );
 }
 
 RGBMatrix::Impl::~Impl() {
@@ -432,6 +432,7 @@ void RGBMatrix::Impl::ApplyNamedPixelMappers(const char *pixel_mapper_config,
   char *const writeable_copy = strdup(pixel_mapper_config);
   const char *const end = writeable_copy + strlen(writeable_copy);
   char *s = writeable_copy;
+  printf( "Applying pixel mappers: '%s'\n", pixel_mapper_config );
   while (s < end) {
     char *const semicolon = strchrnul(s, ';');
     *semicolon = '\0';
@@ -443,6 +444,7 @@ void RGBMatrix::Impl::ApplyNamedPixelMappers(const char *pixel_mapper_config,
       fprintf(stderr, "Stray parameter ':%s' without mapper name ?\n", optional_param_start);
     }
     if (*s) {
+      printf( "Applying mapper '%s'\n", s );
       ApplyPixelMapper(FindPixelMapper(s, chain, parallel, optional_param_start));
     }
     s = semicolon + 1;
