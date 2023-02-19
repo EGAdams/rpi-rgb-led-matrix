@@ -198,7 +198,7 @@ namespace rgb_matrix
                 firstPanel.name = "firstPanel";
                 firstPanel.order = 7;
                 firstPanel.rotate = 0;
-                firstPanel.y_offset;
+                firstPanel.y_offset = 0;
                 firstPanel.x_offset = 16;
                 _panels[ 0 ] = firstPanel;
 
@@ -384,7 +384,7 @@ namespace rgb_matrix
                
                 if ( y < ( PANEL_HEIGHT / 2 )) {
                     //*matrix_x = VISIBLE_WIDTH - 1 - x;
-                    *matrix_y = MATRIX_HEIGHT - y - 1;
+                    *matrix_y = ( PANEL_HEIGHT / 2 ) - y - 1;
                 }
                 
                 // Determine y offset into the source panel based on its parrallel chain value.
