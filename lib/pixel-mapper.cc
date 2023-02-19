@@ -307,13 +307,14 @@ namespace rgb_matrix
                 return true;
             } 
                                                         
-            #define PANEL_HEIGHT  32
-            #define PANEL_WIDTH   32
-            #define SLAB_HEIGHT   64
-            #define MATRIX_WIDTH  128
-            #define MATRIX_HEIGHT 32
-            #define VISIBLE_WIDTH 64
-            #define CHAIN_LENGTH   8    // start mods for CHAIN_LENGTH...  started at 16 today
+            #define PANEL_HEIGHT   16
+            #define PANEL_WIDTH    16
+            #define SLAB_HEIGHT    64
+            #define MATRIX_WIDTH   512 // 128
+            #define MATRIX_HEIGHT  16
+            #define VISIBLE_HEIGHT 128
+            #define VISIBLE_WIDTH  64
+            #define CHAIN_LENGTH   16    // start mods for CHAIN_LENGTH...  started at 16 today
             #define ROWS           4
             #define COLS           2
             #define PANEL_PARALLEL 0
