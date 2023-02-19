@@ -377,6 +377,8 @@ namespace rgb_matrix
                 // origin of an image at the end of the chain and not at the start (where
                 // ordering begins for this transformer).
                 int x_offset, y_offset = 0;
+
+                y_offset = ( panel.order / 2 ) * PANEL_HEIGHT;
                 
                 // x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
                 
