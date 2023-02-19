@@ -383,12 +383,8 @@ namespace rgb_matrix
                 //y_offset = panel.y_offset;
                
                 if ( y < ( PANEL_HEIGHT / 2 )) {
-                    *matrix_x = VISIBLE_WIDTH - 1 - x;
+                    //*matrix_x = VISIBLE_WIDTH - 1 - x;
                     *matrix_y = MATRIX_HEIGHT - y - 1;
-                } else {
-                    // *matrix_x = VISIBLE_WIDTH - x - 1;
-                    // *matrix_y = SLAB_HEIGHT   - y - 1;
-                    *matrix_x = x + x_offset;
                 }
                 
                 // Determine y offset into the source panel based on its parrallel chain value.
@@ -398,7 +394,7 @@ namespace rgb_matrix
                 //                     red, green, blue);
 
 
-                //*matrix_x = x + x_offset;
+                *matrix_x = x + x_offset;
                 //*matrix_y = y + y_offset;
                 printf( " ( %2d, %2d ) x_offset: %3d  y_offset: %d  matrix_x: %3d  matrix_y%3d \n", x, y, x_offset, y_offset, *matrix_x, *matrix_y );
 
