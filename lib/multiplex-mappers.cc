@@ -25,12 +25,14 @@ class MultiplexMapperBase : public MultiplexMapper {
     MultiplexMapperBase(const char *name, int stretch_factor)
         : name_(name), panel_stretch_factor_(stretch_factor) {}
 
-    // This method is const, but we sneakily remember the original size
-    // of the panels so that we can more easily quantize things.
-    // So technically, we're stateful, but let's pretend we're not changing
-    // state. In the context this is used, it is never accessed in multiple
-    // threads.
-    virtual void EditColsRows(int *cols, int *rows) const {
+    virtual void EditColsRows( int *cols, int *rows ) const {
+        printf( "inside EditColsRows() cols: %d  rows: %d                             \n", *cols, *rows );
+        printf( "This method is const, but we sneakily remember the original size     \n" );
+        printf( "of the panels so that we can more easily quantize things.            \n" );
+        printf( "So technically, we're stateful, but let's pretend we're not changing \n" );
+        printf( "state. In the context this is used, it is never accessed in multiple \n" );
+        printf( "threads.                                                             \n" );
+        
         panel_rows_ = *rows;
         panel_cols_ = *cols;
 

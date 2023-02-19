@@ -373,7 +373,7 @@ RGBMatrix::Impl::Impl(GPIO *io, const Options &options)
   if ( multiplex_mapper ) {
     printf( "The multiplexers might choose to have a different physical layout. \n" );
     printf( "We need to configure that first before setting up the hardware.    \n" );
-    multiplex_mapper->EditColsRows(&params_.cols, &params_.rows);
+    multiplex_mapper->EditColsRows( &params_.cols, &params_.rows );
   }
 
   printf( "calling InitHardwareMapping( %s )\n" );
