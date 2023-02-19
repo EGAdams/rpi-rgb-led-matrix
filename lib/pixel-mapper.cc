@@ -412,12 +412,6 @@ namespace rgb_matrix
                 } else if ( y < 64 ) {
                     x = x + 64;
                     y = y - 32;
-                } else if ( y < 96 ) {
-                    x = x;
-                    y = y;
-                } else {
-                    x = x + 64;
-                    y = y - 32;
                 }
 
             // Update matrix coordinates
