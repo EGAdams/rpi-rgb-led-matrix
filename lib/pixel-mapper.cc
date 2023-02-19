@@ -355,7 +355,7 @@ namespace rgb_matrix
                 if ( y < 16 ) {
                     *matrix_x = x;
                     *matrix_y = y;
-                } else if ( y < 64 ) {
+                } else {
                     *matrix_x = x + 16;
                     *matrix_y = y - 8;
                 }
