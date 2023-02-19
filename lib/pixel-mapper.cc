@@ -300,10 +300,10 @@ namespace rgb_matrix
                 //     fprintf( stderr, "U-mapper: need at least --led-chain=4 for useful folding\n");
                 //     return false;
                 // }
-                if (chain % 2 != 0 ) {
-                fprintf( stderr, "U-mapper: Chain (--led-chain) needs to be divisible by two\n");
-                return false;
-                }
+                // if (chain % 2 != 0 ) {
+                // fprintf( stderr, "U-mapper: Chain (--led-chain) needs to be divisible by two\n");
+                // return false;
+                // }
                 parallel_ = parallel;
                 return true;
             } 
