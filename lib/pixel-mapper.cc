@@ -379,15 +379,7 @@ namespace rgb_matrix
                 int x_offset, y_offset = 0;
                 
                 x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
-                // y_offset = panel.y_offset;
-
-                if ( y > 16 ) {
-                    *matrix_y = y;
-                    *matrix_x = x + x_offset
-                } else {
-                    *matrix_y = y;
-                    *matrix_x = x + x_offset
-                }
+                y_offset = panel.y_offset;
                
                 
                 // Determine y offset into the source panel based on its parrallel chain value.
