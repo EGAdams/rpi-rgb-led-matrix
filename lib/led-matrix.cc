@@ -371,8 +371,9 @@ RGBMatrix::Impl::Impl(GPIO *io, const Options &options)
   }
 
   if ( multiplex_mapper ) {
-    printf( "The multiplexers might choose to have a different physical layout. \n" );
-    printf( "We need to configure that first before setting up the hardware.    \n\n" );
+    printf( "\n\nThe multiplexers might choose to have a different physical layout. \n" );
+    printf( "We need to configure that first before setting up the hardware.    \n" );
+    printf( "Calling EditColsRows() on multiplex mapper from inside theRGBMatrix::Impl::Impl constructor... \n\n" );
     multiplex_mapper->EditColsRows( &params_.cols, &params_.rows );
   }
 
@@ -388,7 +389,7 @@ RGBMatrix::Impl::Impl(GPIO *io, const Options &options)
   ApplyPixelMapper( multiplex_mapper );
 
   printf( "...followed by higher level mappers that might arrange panels. \n" );
-  
+
   ApplyNamedPixelMappers( options.pixel_mapper_config, params_.chain_length, params_.parallel );
 
   printf( "done with ApplyNamedPixelMappers \n\n" );
