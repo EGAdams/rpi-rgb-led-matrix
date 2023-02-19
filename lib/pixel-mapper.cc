@@ -198,7 +198,7 @@ namespace rgb_matrix
                 firstPanel.name = "firstPanel";
                 firstPanel.order = 7;
                 firstPanel.rotate = 0;
-                firstPanel.y_offset = 0;
+                firstPanel.y_offset;
                 firstPanel.x_offset = 16;
                 _panels[ 0 ] = firstPanel;
 
@@ -342,15 +342,15 @@ namespace rgb_matrix
                 //Get the panel information for this pixel.
                 Panel panel = _panels[ panel_index ];  //_cols*row + col];
                 printf( "input coordinates( %2d, %2d ) row: %d  col: %d  panel.order: %2d, panel.rotate: %3d panel.name: %12s ", x, y, row, col, panel.order, panel.rotate, panel.name );
-                printf( "x: %2d  y: %2d \n", x, y );
-                
+                printf( "x: %2d  y: %2d ", x, y );
 
+                // Compute location of the pixel within the panel.
                 // x = x % PANEL_WIDTH;  // _panel_width;
                 // y = y % PANEL_HEIGHT; // _panel_height;
 
-                // Compute location of the pixel within the panel.
                 if ( x >= PANEL_WIDTH  ) { while ( x >= PANEL_WIDTH  ) { x -= PANEL_WIDTH;  }}
                 if ( y >= PANEL_HEIGHT ) { while ( y >= PANEL_HEIGHT ) { y -= PANEL_HEIGHT; }}
+
                 
 
                 // Perform any panel rotation to the pixel.
@@ -376,28 +376,11 @@ namespace rgb_matrix
                 // The order needs to be inverted because the matrix library starts with the
                 // origin of an image at the end of the chain and not at the start (where
                 // ordering begins for this transformer).
-                int x_offset = 0; 
-                int y_offset = 0;
-
+                int x_offset, y_offset = 0;
+                
                 x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
-                //y_offset = PANEL_HEIGHT / 2;
-
-                if ( y > 16 ) {
-                    //*matrix_x = x;
-                    *matrix_y = y;
-                    *matrix_x = x + x_offset
-                } else {
-                    *matrix_y = y;
-                    *matrix_x = x + x_offset
-                }
-                
-                
-                // //y_offset = panel.y_offset;
+                y_offset = panel.y_offset;
                
-                // if ( y < ( PANEL_HEIGHT / 2 )) {
-                //     //*matrix_x = VISIBLE_WIDTH - 1 - x;
-                //     *matrix_y = ( PANEL_HEIGHT / 2 ) - y - 1;
-                // }
                 
                 // Determine y offset into the source panel based on its parrallel chain value.
 
@@ -405,22 +388,21 @@ namespace rgb_matrix
                 //                     y_offset + y,
                 //                     red, green, blue);
 
+                // if ( x < 63 && y >  ) {
+                //     // x_offset = x + panel.x_offset;
+                //     // y_offset = y + panel.y_offset;
+                //     y_offset = -32;
+                // } ele
 
-                // *matrix_x = x + x_offset;
-                // *matrix_y = y + y_offset;
-                // printf( " ( %2d, %2d ) x_offset: %3d  y_offset: %d  matrix_x: %3d  matrix_y%3d \n", x, y, x_offset, y_offset, *matrix_x, *matrix_y );
+                *matrix_x = x + x_offset;
+                *matrix_y = y + y_offset;
+                printf( " ( %2d, %2d ) x_offset: %3d  y_offset: %d  matrix_x: %3d  matrix_y%3d \n", x, y, x_offset, y_offset, *matrix_x, *matrix_y );
 
                 // *matrix_x = x;
                 // *matrix_y = /*base_y +*/ y;
                     
                 // printf( "pnl_hght: %d  vsbl_wdth: %d  slb_hght: %d bs_y: %d mtrx_wdth: %d mtrx_hght: %d, mtrx_x: %d,   mtrx_y %d \n", 
                 //          MATRIX_HEIGHT, VISIBLE_WIDTH, SLAB_HEIGHT, base_y,  matrix_width, matrix_height, *matrix_x,    *matrix_y );                
-                
-
-            // Update matrix coordinates
-            // *matrix_x = x;
-            // *matrix_y = /* base_y */ 0 + y;
-
             }
 
             private:
