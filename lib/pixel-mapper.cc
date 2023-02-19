@@ -385,8 +385,10 @@ namespace rgb_matrix
                 if ( y > 16 ) {
                     //*matrix_x = x;
                     *matrix_y = y;
+                    *matrix_x = x + x_offset
                 } else {
-                    *matrix_y = 8 - y;
+                    *matrix_y = y;
+                    *matrix_x = x + x_offset
                 }
                 
                 
@@ -404,7 +406,7 @@ namespace rgb_matrix
                 //                     red, green, blue);
 
 
-                *matrix_x = x + x_offset;
+                // *matrix_x = x + x_offset;
                 // *matrix_y = y + y_offset;
                 // printf( " ( %2d, %2d ) x_offset: %3d  y_offset: %d  matrix_x: %3d  matrix_y%3d \n", x, y, x_offset, y_offset, *matrix_x, *matrix_y );
 
