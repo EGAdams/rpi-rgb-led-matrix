@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
     defaults.cols = 32;
     defaults.brightness = 20;
     // defaults.pixel_mapper_config = "U-mapper";
-    // defaults.multiplexing = 2; // 19 is the Superbowl mapper
+    defaults.multiplexing = 2; // 19 is the Superbowl mapper
     defaults.show_refresh_rate = false;
     defaults.chain_length = 1;
     defaults.parallel = 1;
