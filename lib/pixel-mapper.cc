@@ -381,9 +381,9 @@ namespace rgb_matrix
 
                 //y_offset = PANEL_HEIGHT / 2;
 
-                if ( y < 16 ) {
+                if ( y > 16 ) {
                     //*matrix_x = x;
-                    *matrix_y = 32 - y;
+                    *matrix_y = y - 16;
                 } else {
                     *matrix_y = y;
                 }
