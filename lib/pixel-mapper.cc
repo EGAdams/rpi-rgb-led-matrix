@@ -244,53 +244,53 @@ namespace rgb_matrix
                 eighthPanel.rotate = 0;
                 _panels[ 7 ] = eighthPanel;
 
-                Panel ninthPanel;
-                ninthPanel.name = "ninthPanel";
-                ninthPanel.order  = 7;
-                ninthPanel.rotate = 0;
-                _panels[ 8 ] = ninthPanel;
+                // Panel ninthPanel;
+                // ninthPanel.name = "ninthPanel";
+                // ninthPanel.order  = 7;
+                // ninthPanel.rotate = 0;
+                // _panels[ 8 ] = ninthPanel;
 
-                Panel tenthPanel;
-                tenthPanel.name = "tenthPanel";
-                tenthPanel.order  = 6;
-                tenthPanel.rotate = 0;
-                _panels[ 9 ] = tenthPanel;
+                // Panel tenthPanel;
+                // tenthPanel.name = "tenthPanel";
+                // tenthPanel.order  = 6;
+                // tenthPanel.rotate = 0;
+                // _panels[ 9 ] = tenthPanel;
 
-                Panel eleventhPanel;
-                eleventhPanel.name = "eleventhPanel";
-                eleventhPanel.order  = 5;
-                eleventhPanel.rotate = 0;
-                _panels[ 10 ] = eleventhPanel;
+                // Panel eleventhPanel;
+                // eleventhPanel.name = "eleventhPanel";
+                // eleventhPanel.order  = 5;
+                // eleventhPanel.rotate = 0;
+                // _panels[ 10 ] = eleventhPanel;
 
-                Panel twelfthPanel;
-                twelfthPanel.name = "twelfthPanel";
-                twelfthPanel.order  = 4;
-                twelfthPanel.rotate = 0;
-                _panels[ 11 ] = twelfthPanel;
+                // Panel twelfthPanel;
+                // twelfthPanel.name = "twelfthPanel";
+                // twelfthPanel.order  = 4;
+                // twelfthPanel.rotate = 0;
+                // _panels[ 11 ] = twelfthPanel;
 
-                Panel thirteenthPanel;
-                thirteenthPanel.name = "thirteenthPanel";
-                thirteenthPanel.order  = 3;
-                thirteenthPanel.rotate = 0;
-                _panels[ 12 ] = thirteenthPanel;
+                // Panel thirteenthPanel;
+                // thirteenthPanel.name = "thirteenthPanel";
+                // thirteenthPanel.order  = 3;
+                // thirteenthPanel.rotate = 0;
+                // _panels[ 12 ] = thirteenthPanel;
 
-                Panel fourteenthPanel;
-                fourteenthPanel.name = "fourteenthPanel";
-                fourteenthPanel.order  = 2;
-                fourteenthPanel.rotate = 0;
-                _panels[ 13 ] = fourteenthPanel;
+                // Panel fourteenthPanel;
+                // fourteenthPanel.name = "fourteenthPanel";
+                // fourteenthPanel.order  = 2;
+                // fourteenthPanel.rotate = 0;
+                // _panels[ 13 ] = fourteenthPanel;
 
-                Panel fifteenthPanel;
-                fifteenthPanel.name = "fifteenthPanel";
-                fifteenthPanel.order  = 1;
-                fifteenthPanel.rotate = 0;
-                _panels[ 14 ] = fifteenthPanel;
+                // Panel fifteenthPanel;
+                // fifteenthPanel.name = "fifteenthPanel";
+                // fifteenthPanel.order  = 1;
+                // fifteenthPanel.rotate = 0;
+                // _panels[ 14 ] = fifteenthPanel;
 
-                Panel sixteenthPanel;
-                sixteenthPanel.name = "sixteenthPanel";
-                sixteenthPanel.order  = 0;
-                sixteenthPanel.rotate = 0; // start mods...
-                _panels[ 15 ] = sixteenthPanel;
+                // Panel sixteenthPanel;
+                // sixteenthPanel.name = "sixteenthPanel";
+                // sixteenthPanel.order  = 0;
+                // sixteenthPanel.rotate = 0; // start mods...
+                // _panels[ 15 ] = sixteenthPanel;
             }
 
             virtual const char *GetName() const { return "U-mapper"; }
