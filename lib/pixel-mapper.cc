@@ -211,7 +211,7 @@ namespace rgb_matrix
                 Panel thirdPanel;
                 thirdPanel.name = "thirdPanel";
                 thirdPanel.order = 5;
-                thirdPanel.rotate = 180;
+                thirdPanel.rotate = 0;
                 _panels[ 2 ] = thirdPanel;
 
                 Panel fourthPanel;
@@ -240,7 +240,7 @@ namespace rgb_matrix
 
                 Panel eighthPanel;
                 eighthPanel.name = "eighthPanel";
-                eighthPanel.order = 180;
+                eighthPanel.order = 0;
                 eighthPanel.rotate = 0;
                 _panels[ 7 ] = eighthPanel;
 
