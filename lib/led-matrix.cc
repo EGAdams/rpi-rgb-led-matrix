@@ -319,7 +319,7 @@ RGBMatrix::Options::Options() :
   limit_refresh_rate_hz(0)
 #endif
 {
-  // Nothing to see here.
+  // Nothing to see here. Move along.
 }
 
 #define DEBUG_MATRIX_OPTIONS 1
