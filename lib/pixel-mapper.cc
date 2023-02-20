@@ -216,7 +216,7 @@ namespace rgb_matrix
 
                 Panel fourthPanel;
                 fourthPanel.name = "fourthPanel";
-                fourthPanel.order = 9;
+                fourthPanel.order = 4;
                 fourthPanel.rotate = 0;
                 _panels[ 3 ] = fourthPanel;
 
@@ -400,7 +400,7 @@ namespace rgb_matrix
                 // ordering begins for this transformer).
                 int x_offset, y_offset = 0;
                 
-                x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;
+                x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;  // this is the key line !!!  panel.order MATTERS !!!
                 y_offset = panel.y_offset;
                
                 
