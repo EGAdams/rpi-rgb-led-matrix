@@ -40,7 +40,7 @@ static void DrawOnCanvas(Canvas *canvas)
         float dot_x = cos(a * 2 * M_PI) * r;
         float dot_y = sin(a * 2 * M_PI) * r;
         canvas->SetPixel(center_x + dot_x, center_y + dot_y,
-                         255, 255, 255);
+                         255, 0, 0);
         usleep(1 * 1000); // wait a little to slow down things.
     }
 }
@@ -53,7 +53,7 @@ static void DrawLine(Canvas *canvas)
         for ( int y_position = 0; y_position < 128; y_position++ ) {
             for ( int x_position = 0; x_position < 64; x_position++ ) {
                 // canvas->Fill( 0, 0, 0 ); 
-                canvas->SetPixel( x_position, y_position, 0, 255, 0 );
+                canvas->SetPixel( x_position, y_position, 255, 255, 255 );
                 // printf( "canvas width: %d  canvas height: %d \n", canvas->width(), canvas->height() );
                 usleep ( 1 * 10 * 100 );
             }
