@@ -340,12 +340,12 @@ namespace rgb_matrix
                 
                 // Compute the index of the panel in the panel list.
                 int panel_index = ( COLS * row ) + col;
-                printf( "panel_index: %d  ", panel_index );
+                // printf( "panel_index: %d  ", panel_index );
 
                 //Get the panel information for this pixel.
                 Panel panel = _panels[ panel_index ];  //_cols*row + col];
-                printf( "input coordinates( %3d, %3d ) row: %d  col: %d  panel.order: %2d, panel.rotate: %3d panel.name: %12s ", x, y, row, col, panel.order, panel.rotate, panel.name );
-                printf( "x: %2d  y: %2d ", x, y );
+                // printf( "input coordinates( %3d, %3d ) row: %d  col: %d  panel.order: %2d, panel.rotate: %3d panel.name: %12s ", x, y, row, col, panel.order, panel.rotate, panel.name );
+                // printf( "x: %2d  y: %2d ", x, y );
 
                 // Compute location of the pixel within the panel.
                 // x = x % PANEL_WIDTH;  // _panel_width;
