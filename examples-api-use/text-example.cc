@@ -143,8 +143,34 @@ int main(int argc, char *argv[]) {
     printf("Enter lines. Full screen or empty line clears screen.\n"
            "Supports UTF-8. CTRL-D for exit.\n");
   }
+  
+  canvas->Fill(flood_color.r, flood_color.g, flood_color.b); // clear screen
+    
+    /*if (outline_font) {
+        // The outline font, we need to write with a negative (-2) text-spacing,
+        // as we want to have the same letter pitch as the regular text that
+        // we then write on top.
+        rgb_matrix::DrawText(canvas, *outline_font,
+                            x - 1, y + font.baseline(),
+                            outline_color, &bg_color, line, letter_spacing - 2);
+    } */
 
-  canvas->Fill(flood_color.r, flood_color.g, flood_color.b);
+    // The regular text. Unless we already have filled the background with
+    // the outline font, we also fill the background here.
+
+  Color firstRowColor( 0, 255, 0 );
+  rgb_matrix::DrawText(canvas, font, x, y + font.baseline(), firstRowColor, outline_font ? NULL : &bg_color, "30", letter_spacing );
+  y += font.height();
+
+  Color secondRowColor( 255, 0, 0 );
+  rgb_matrix::DrawText(canvas, font, x, y + font.baseline(), secondRowColor, outline_font ? NULL : &bg_color, "20", letter_spacing );
+  y += font.height();
+
+  Color thirdRowColor( 0, 255, 0 );
+  rgb_matrix::DrawText(canvas, font, x, y + font.baseline(), thirdRowColor, outline_font ? NULL : &bg_color, "30", letter_spacing );
+  y += font.height();
+
+  // initialize line buffer and // start reading from stdin
   char line[1024];
   while (fgets(line, sizeof(line), stdin)) {
     const size_t last = strlen(line);
