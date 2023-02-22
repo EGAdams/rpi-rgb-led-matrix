@@ -160,8 +160,8 @@ int main(int argc, char *argv[]) {
 
   Color firstRowColor( 0, 255, 0 );
   rgb_matrix::Font period_font;
-  if (!period_font.LoadFont( "mspgothic_72_48" )) {
-    fprintf(stderr, "Couldn't load font '%s'\n", bdf_font_file);
+  if (!period_font.LoadFont( "fonts/mspgothic_72_48" )) {
+    fprintf(stderr, "Couldn't load font '%s'\n", "fonts/mspgothic_72_48");
     return 1;
   }
   
