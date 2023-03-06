@@ -11,7 +11,8 @@ def main():
     print("     1. show digits")
     print("     2. git pull")
     print("     3. run the 1st digit script")
-    print("     \n     4. Exit")
+    print("     4. open the fonts menu")
+    print("     \n     5. Exit")
 
     choice = input("Please enter your choice: ")
 
@@ -28,19 +29,21 @@ def main():
         os.system( "git pull" )
         main()
     elif choice == "3":
-        default_options = '--led-multiplexing=2 --led-brightness=1 --led-chain=8 --led-pixel-mapper="U-mapper" --led-gpio-mapping=adafruit-hat --led-brightness=15'
+        default_options = '--led-multiplexing=2 --led-chain=8 --led-pixel-mapper="U-mapper" --led-gpio-mapping=adafruit-hat --led-brightness=15'
         print( "running 1st digit script... " )
         os.system( 'sudo examples-api-use/text-example -f fonts/mspgothic_70_32 ' + default_options )
         main()
 
     elif choice == "4":
+        print( "opening the fonts menu... " )
+        os.system( "python3 font_menu.py" )
+        main()
+
+    elif choice == "5":
         print("Goodbye!")
 
     else:  # if the user enters anything other than 1, 2, 3 or 4 then the program will exit with an error message.
-
         print("Invalid input, please try again.")
 
     return 0
-
-
 main()
