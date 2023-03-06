@@ -29,6 +29,11 @@ def main():
             if choice < 0 or choice > len(files):
                 raise ValueError
 
+            #if choice == 0, exit the program.
+            if choice == 0:
+                print("     Goodbye!")
+                return 0
+
             # run the text example with the chosen font.
             default_options = '--led-multiplexing=2 --led-chain=8 --led-pixel-mapper="U-mapper" --led-gpio-mapping=adafruit-hat --led-brightness=15'
             print("     showing digits with font {}... ".format(files[choice]))

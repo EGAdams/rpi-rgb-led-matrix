@@ -1,0 +1,7 @@
+mspgothic_70_26 deleted
+mspgothic_72_50 is 38px high and 21px wide
+mspgothic_70_28 deleted there was one stray pixel to the right of the 3
+mspgothic_69_30 deleted stray pixel below the 0
+mspgothic_73_32 deleted top is not flat at all
+mspgothic_66_30 might be ok if it was bold 
+

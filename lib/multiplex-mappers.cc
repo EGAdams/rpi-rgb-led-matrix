@@ -26,12 +26,12 @@ class MultiplexMapperBase : public MultiplexMapper {
         : name_(name), panel_stretch_factor_(stretch_factor) {}
 
     virtual void EditColsRows( int *cols, int *rows ) const {
-        printf( "inside EditColsRows() cols: %d  rows: %d                             \n", *cols, *rows );
-        printf( "This method is const, but we sneakily remember the original size     \n"   );
-        printf( "of the panels so that we can more easily quantize things.            \n"   );
-        printf( "So technically, we're stateful, but let's pretend we're not changing \n"   );
-        printf( "state. In the context this is used, it is never accessed in multiple \n"   );
-        printf( "threads.                                                             \n\n" );
+        // printf( "inside EditColsRows() cols: %d  rows: %d                             \n", *cols, *rows );
+        // printf( "This method is const, but we sneakily remember the original size     \n"   );
+        // printf( "of the panels so that we can more easily quantize things.            \n"   );
+        // printf( "So technically, we're stateful, but let's pretend we're not changing \n"   );
+        // printf( "state. In the context this is used, it is never accessed in multiple \n"   );
+        // printf( "threads.                                                             \n\n" );
         
         panel_rows_ = *rows;
         panel_cols_ = *cols;
@@ -46,12 +46,12 @@ class MultiplexMapperBase : public MultiplexMapper {
     virtual bool GetSizeMapping(int matrix_width, int matrix_height,
                                 int *visible_width, int *visible_height) const {
         printf( "inside GetSizeMapping() matrix_width: %d  matrix_height: %d   \n", matrix_width, matrix_height       );
-        printf( "Matrix width has been altered. Alter it back.                 \n"                                    );
-        printf( "Before altering: visible_width: %d  visible_height: %d        \n", *visible_width, *visible_height   );
+        // printf( "Matrix width has been altered. Alter it back.                 \n"                                    );
+        // printf( "Before altering: visible_width: %d  visible_height: %d        \n", *visible_width, *visible_height   );
         *visible_width = matrix_width / panel_stretch_factor_;
         *visible_height = matrix_height * panel_stretch_factor_;
         printf( "After altering: visible_width: %d  visible_height: %d         \n", *visible_width, *visible_height   );
-        printf( "returning true from GetSizeMapping..." );
+        // printf( "returning true from GetSizeMapping..." );
         return true;
     }
 
