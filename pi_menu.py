@@ -9,7 +9,7 @@ def main():
     print( "     Welcome to the main menu" )
     print("     //////////////////////////////\n" )
     print("     1. show digits.")
-    print("     2. Script 2")
+    print("     2. git pull")
     print("     3. Script 3")
     print("     \n     4. Exit")
 
@@ -23,9 +23,9 @@ def main():
         os.system("echo 'hello world'")
         main()
     elif choice == "2":
-        print("You have chosen script 2")
+        print( "syncing with github... " )
         # open a child process to execute script 2
-        os.system("python script2.py")
+        os.system( "git pull" )
         main()
     elif choice == "3":
         print("You have chosen script 3")
