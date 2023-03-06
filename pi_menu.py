@@ -6,7 +6,7 @@ import os
 
 def main():
     print("\n\n\n     //////////////////////////////" )
-    print( "        Welcome to the main menu" )
+    print( "            Welcome to the main menu" )
     print("     //////////////////////////////\n" )
     print("     1. show digits")
     print("     2. git pull")
