@@ -28,7 +28,7 @@ def main():
         os.system( "git pull" )
         main()
     elif choice == "3":
-        default_options = '--led-multiplexing=2 --led-brightness=1 --led-chain=8 --led-pixel-mapper="U-mapper="U-mapper" --led-gpio-mapping=adafruit-hat --led-brightness=15'
+        default_options = '--led-multiplexing=2 --led-brightness=1 --led-chain=8 --led-pixel-mapper="U-mapper" --led-gpio-mapping=adafruit-hat --led-brightness=15'
         print( "running 1st digit script... " )
         os.system( 'sudo examples-api-use/text-example -f fonts/mspgothic_70_32 ' + default_options )
         main()
