@@ -8,9 +8,9 @@ def main():
     print("\n\n\n     //////////////////////////////" )
     print( "     Welcome to the main menu" )
     print("     //////////////////////////////\n" )
-    print("     1. show digits.")
+    print("     1. show digits")
     print("     2. git pull")
-    print("     3. Script 3")
+    print("     3. run the 1st digit script")
     print("     \n     4. Exit")
 
     choice = input("Please enter your choice: ")
@@ -28,9 +28,8 @@ def main():
         os.system( "git pull" )
         main()
     elif choice == "3":
-        print("You have chosen script 3")
-        # open a child process to execute script 3
-        os.system("python script3.py")
+        print( "running 1st digit script... " )
+        os.system( 'sudo examples-api-use/text-example --led-multiplexing=2 --led-brightness=1 --led-chain=8 --led-pixel-mapper="U-mapper" --led-gpio-mapping=adafruit-hat  -f fonts/mspgothic_70_32 --led-brightness=15' )
         main()
 
     elif choice == "4":
