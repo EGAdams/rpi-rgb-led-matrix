@@ -4,4 +4,21 @@ mspgothic_70_28 deleted there was one stray pixel to the right of the 3
 mspgothic_69_30 deleted stray pixel below the 0
 mspgothic_73_32 deleted top is not flat at all
 mspgothic_66_30 might be ok if it was bold 
+mspgothic_70_29 might be ok if it was bold
+mspgothic_72_48 these span almost a full 64x64.  deleted because the left of the 0 is jacked up
+mspgothic_74_32 is pretty close. where the 3 goes up is not flat 5 pixels in a row
+mspgothic might be ok if it was bold
+70_30 horrible, just delete
+mspgothic_70_32 pretty close.  the 3 goes up 2 pixels instead of 5
+70_31 is about the same as the 32
+mspgothic_71_30 is close but smaller
+70_27 is garbage, deleted..
+67_30 is garbage, deleted
+70_25 too small, deleted..
+
+
+
+
+
+
 
