@@ -29,7 +29,7 @@ def main():
         main()
     elif choice == "3":
         print( "running 1st digit script... " )
-        os.system( 'sudo examples-api-use/text-example --led-multiplexing=2 --led-brightness=1 --led-chain=8 --led-pixel-mapper="U-mapper" --led-gpio-mapping=adafruit-hat  -f fonts/mspgothic_70_32 --led-brightness=15' )
+        os.system( 'sudo examples-api-use/text-example -f fonts/mspgothic_70_32 --led-brightness=15' )
         main()
 
     elif choice == "4":

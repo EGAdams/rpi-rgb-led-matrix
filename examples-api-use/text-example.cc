@@ -124,6 +124,12 @@ int main(int argc, char *argv[]) {
     outline_font = font.CreateOutlineFont();
   }
 
+  matrix_options.hardware_mapping = "adafruit-hat";
+  matrix_options.brightness = 15;
+  matrix_options.pixel_mapper_config = "U-mapper";
+  matrix_options.multiplexing = 2;
+  matrix_options.chain_length = 8;
+  
   RGBMatrix *canvas = RGBMatrix::CreateFromOptions(matrix_options, runtime_opt);
   if (canvas == NULL)
     return 1;
