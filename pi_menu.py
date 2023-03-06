@@ -18,7 +18,7 @@ def main():
     if choice == "1":
         print("openning the latest matrix project... ")
         # cd to the directory where the script is located
-        os.chdir( "/home/adamsl/zero_w_projects/temp/rpi-rgb-led-matrix" )
+        os.chdir( "/home/dietpi/rpi-rgb-led-matrix" )
         # open vscode in the directory
         os.system("echo 'hello world'")
         main()
