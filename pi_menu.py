@@ -11,7 +11,7 @@ def main():
     print("     1. show digits.")
     print("     2. Script 2")
     print("     3. Script 3")
-    print("     \n4. Exit")
+    print("     \n     4. Exit")
 
     choice = input("Please enter your choice: ")
 
