@@ -5,13 +5,13 @@
 import os
 
 def main():
-    print("\n\n\n//////////////////////////////" )
-    print( "Welcome to the main menu" )
-    print("//////////////////////////////\n" )
-    print("1. show digits.")
-    print("2. Script 2")
-    print("3. Script 3")
-    print("4. Exit")
+    print("\n\n\n     //////////////////////////////" )
+    print( "     Welcome to the main menu" )
+    print("     //////////////////////////////\n" )
+    print("     1. show digits.")
+    print("     2. Script 2")
+    print("     3. Script 3")
+    print("     \n4. Exit")
 
     choice = input("Please enter your choice: ")
 
