@@ -165,7 +165,7 @@ int main(int argc, char *argv[]) {
     return 1;
   }
   
-  #define PERIOD_SPACING 16
+  #define PERIOD_SPACING 14
   Color period_color( 255, 255, 0 );
   rgb_matrix::DrawText(canvas, period_font, x, y + font.baseline(), period_color,  outline_font ? NULL : &bg_color, ". ", letter_spacing );
   
@@ -174,7 +174,7 @@ int main(int argc, char *argv[]) {
 
   Color secondRowColor( 255, 0, 0 );
   rgb_matrix::DrawText(canvas, period_font, x, y + font.baseline(), period_color,   outline_font ? NULL : &bg_color, ". ", letter_spacing );
-  rgb_matrix::DrawText(canvas, font,        PERIOD_SPACING, y + font.baseline(), secondRowColor, outline_font ? NULL : &bg_color, "20", letter_spacing );
+  rgb_matrix::DrawText(canvas, font,        PERIOD_SPACING, y + font.baseline(), secondRowColor, outline_font ? NULL : &bg_color, "30", letter_spacing );
   y += font.height();
 
   Color thirdRowColor( 0, 255, 0 );
