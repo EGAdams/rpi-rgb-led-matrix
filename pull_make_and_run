@@ -12,5 +12,5 @@ echo "running example... "
 #sudo examples-api-use/minimal-example --led-chain=8 --led-multiplexing=2 --led-pixel-mapper="U-mapper" --led-brightness=1
 #sudo examples-api-use/pixel-mover --led-chain=8 --led-multiplexing=2 --led-pixel-mapper="U-mapper" --led-brightness=15 --led-gpio-mapping=adafruit-hat -t 128
 #sudo examples-api-use/minimal-example --led-brightness=20 --led-chain=16
-sudo examples-api-use/minimal-example --led-brightness=15 --led-chain=8 --led-pixel-mapper="U-mapper"
+sudo examples-api-use/minimal-example --led-brightness=1 --led-chain=8 --led-pixel-mapper="U-mapper"
 #sudo examples-api-use/demo --led-multiplexing=2 --led-brightness=20 --led-chain=8 --led-pixel-mapper="U-mapper" --led-gpio-mapping=adafruit-hat -D 9
