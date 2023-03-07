@@ -155,7 +155,7 @@ int main(int argc, char *argv[]) {
                             outline_color, &bg_color, line, letter_spacing - 2);
     } */
 
-    // The regular text. Unless we already have filled the background with 
+    // The regular text. Unless we already have filled the background with
     // the outline font, we also fill the background here.
 
   Color firstRowColor( 0, 255, 0 );
@@ -166,19 +166,19 @@ int main(int argc, char *argv[]) {
   }
   
   Color period_color( 255, 255, 0 );
-  rgb_matrix::DrawText(canvas, period_font, x, y + font.baseline(), period_color,  outline_font ? NULL : &bg_color, "3", letter_spacing );
+  rgb_matrix::DrawText(canvas, period_font, x, y + font.baseline(), period_color,  outline_font ? NULL : &bg_color, ". ", letter_spacing );
   
-  rgb_matrix::DrawText(canvas, font,        17, y + font.baseline(), firstRowColor, outline_font ? NULL : &bg_color, ".0", letter_spacing );
+  rgb_matrix::DrawText(canvas, font,        17, y + font.baseline(), firstRowColor, outline_font ? NULL : &bg_color, "30", letter_spacing );
   y += font.height();
 
   Color secondRowColor( 255, 0, 0 );
-  rgb_matrix::DrawText(canvas, period_font, x, y + font.baseline(), period_color,   outline_font ? NULL : &bg_color, "0", letter_spacing );
-  rgb_matrix::DrawText(canvas, font,        17, y + font.baseline(), secondRowColor, outline_font ? NULL : &bg_color, "2.", letter_spacing );
+  rgb_matrix::DrawText(canvas, period_font, x, y + font.baseline(), period_color,   outline_font ? NULL : &bg_color, ". ", letter_spacing );
+  rgb_matrix::DrawText(canvas, font,        17, y + font.baseline(), secondRowColor, outline_font ? NULL : &bg_color, "20", letter_spacing );
   y += font.height();
 
   Color thirdRowColor( 0, 255, 0 );
-  rgb_matrix::DrawText(canvas, period_font, x, y + font.baseline(), period_color,  outline_font ? NULL : &bg_color, ".", letter_spacing );
-  rgb_matrix::DrawText(canvas,        font, 17, y + font.baseline(), thirdRowColor, outline_font ? NULL : &bg_color, ".0", letter_spacing );
+  rgb_matrix::DrawText(canvas, period_font, x, y + font.baseline(), period_color,  outline_font ? NULL : &bg_color, ". ", letter_spacing );
+  rgb_matrix::DrawText(canvas,        font, 17, y + font.baseline(), thirdRowColor, outline_font ? NULL : &bg_color, "30", letter_spacing );
   y += font.height();
 
   // initialize line buffer and // start reading from stdin
