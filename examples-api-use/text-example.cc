@@ -155,7 +155,7 @@ int main(int argc, char *argv[]) {
                             outline_color, &bg_color, line, letter_spacing - 2);
     } */
 
-    // The regular text. Unless we already have filled the background with
+    // The regular text. Unless we already have filled the background with 
     // the outline font, we also fill the background here.
 
   Color firstRowColor( 0, 255, 0 );
