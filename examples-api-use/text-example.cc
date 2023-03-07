@@ -165,7 +165,7 @@ int main(int argc, char *argv[]) {
     return 1;
   }
   
-  #define PERIOD_WIDTH 17
+  const int PERIOD_WIDTH = 17;
   Color period_color( 255, 255, 0 );
   rgb_matrix::DrawText(canvas, period_font, x, y + font.baseline(), period_color,  outline_font ? NULL : &bg_color, ". ", letter_spacing );
   
