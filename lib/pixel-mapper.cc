@@ -167,7 +167,7 @@ namespace rgb_matrix
         };
 
 
-///////////////////////////////////////// BEGIN U-Mapper /////////////////////////////////////////
+///////////////////////////////////////// BEGIN 264-Mapper /////////////////////////////////////////
 
 class TwoSixtyFourMapper : public PixelMapper {
 
@@ -331,17 +331,43 @@ class TwoSixtyFourMapper : public PixelMapper {
                                   int *matrix_x, int *matrix_y) const {
                 const int panel_height = matrix_height / parallel_;
                 const int visible_width = (matrix_width / 64) * 32;
-                const int slab_height = 2 * panel_height;   // one folded u-shape
-                const int base_y = (y / slab_height) * panel_height;
-                y %= slab_height;
-                if (y < panel_height) {
-                x += matrix_width / 2;
-                } else {
-                x = visible_width - x - 1;
-                y = slab_height - y - 1;
+                // const int slab_height = 2 * panel_height;   // one folded u-shape
+                // const int base_y = (y / slab_height) * panel_height;
+                // y %= slab_height;
+                // if (y < panel_height) {
+                // x += matrix_width / 2;
+                // } else {
+                // x = visible_width - x - 1;
+                // y = slab_height - y - 1;
+                // }
+                // *matrix_x = x;
+                // *matrix_y = base_y + y;
+                            //     // Figure out what row and column panel this pixel is within.
+                int row = y / PANEL_HEIGHT; // _panel_height;
+                int col = x / PANEL_WIDTH;  // _panel_width;
+                int panel_index = ( COLS * row ) + col;
+                Panel panel = _panels[ panel_index ];  //_cols*row + col];
+                if ( x >= PANEL_WIDTH  ) { while ( x >= PANEL_WIDTH  ) { x -= PANEL_WIDTH;  }}
+                if ( y >= PANEL_HEIGHT ) { while ( y >= PANEL_HEIGHT ) { y -= PANEL_HEIGHT; }}
+                if ( panel.rotate == 90 ) {
+                    int old_x = x;
+                    x = ( PANEL_HEIGHT - 1 ) - y;
+                    y = old_x;
                 }
-                *matrix_x = x;
-                *matrix_y = base_y + y;
+                else if ( panel.rotate == 180 ) {
+                    x = ( PANEL_WIDTH  - 1 ) - x;
+                    y = ( PANEL_HEIGHT - 1 ) - y;
+                }
+                else if ( panel.rotate == 270 ) {
+                    int old_y = y;
+                    y = ( PANEL_WIDTH - 1 ) - x;
+                    x = old_y;
+                }
+                int x_offset, y_offset = 0;
+                x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;  // this is the key line !!!  panel.order MATTERS !!!
+                y_offset = panel.y_offset;
+                *matrix_x = x + x_offset;
+                *matrix_y = y + y_offset;  
             }
 
 
