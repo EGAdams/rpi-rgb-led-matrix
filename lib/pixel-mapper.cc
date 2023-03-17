@@ -289,7 +289,7 @@ class TwoSixtyFourMapper : public PixelMapper {
                 return true;
             } 
                                                         
-            #define PANEL_HEIGHT   32
+            // #define PANEL_HEIGHT   32
             #define PANEL_WIDTH    32
             #define SLAB_HEIGHT    64
             #define MATRIX_WIDTH   128
@@ -343,6 +343,7 @@ class TwoSixtyFourMapper : public PixelMapper {
                 // *matrix_x = x;
                 // *matrix_y = base_y + y;
                             //     // Figure out what row and column panel this pixel is within.
+                #define PANEL_HEIGHT 16 // 32
                 int row = y / PANEL_HEIGHT; // _panel_height;
                 int col = x / PANEL_WIDTH;  // _panel_width;
                 int panel_index = ( COLS * row ) + col;
