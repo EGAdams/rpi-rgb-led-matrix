@@ -174,6 +174,12 @@ class TwoSixtyFourMapper : public PixelMapper {
             public:
             TwoSixtyFourMapper() : parallel_( 1 ) {
 
+                Panel secondPanel;
+                secondPanel.name = "secondPanel";
+                secondPanel.order = 6;
+                secondPanel.rotate = 0;
+                _panels[ 1 ] = secondPanel;
+
                 //initialize the panels
                 Panel firstPanel;
                 firstPanel.name = "firstPanel";
@@ -182,12 +188,6 @@ class TwoSixtyFourMapper : public PixelMapper {
                 firstPanel.y_offset = 0;
                 firstPanel.x_offset = 0;
                 _panels[ 0 ] = firstPanel;
-
-                Panel secondPanel;
-                secondPanel.name = "secondPanel";
-                secondPanel.order = 6;
-                secondPanel.rotate = 0;
-                _panels[ 1 ] = secondPanel;
 
                 Panel thirdPanel;
                 thirdPanel.name = "thirdPanel";
