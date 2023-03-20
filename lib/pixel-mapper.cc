@@ -349,7 +349,7 @@ class TwoSixtyFourMapper : public PixelMapper {
                 int col = x / PANEL_WIDTH;  // _panel_width;
                 
                 int panel_index = ( COLS * row ) + col;
-                printf( "panel index: %d\n", panel_index );
+                printf( "row: %d  col: %d  panel index: %d\n", row, col,  panel_index );
                 
                 Panel panel = _panels[ panel_index ];  //_cols*row + col];
                 if ( x >= PANEL_WIDTH  ) { while ( x >= PANEL_WIDTH  ) { x -= PANEL_WIDTH;  }}
