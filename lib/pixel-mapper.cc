@@ -290,7 +290,7 @@ class TwoSixtyFourMapper : public PixelMapper {
             } 
                                                         
             // #define PANEL_HEIGHT   32
-            #define PANEL_WIDTH    32
+            #define PANEL_WIDTH    16 //32
             #define SLAB_HEIGHT    64
             #define MATRIX_WIDTH   128
             #define MATRIX_HEIGHT  32
@@ -347,8 +347,10 @@ class TwoSixtyFourMapper : public PixelMapper {
                 #define PANEL_HEIGHT 64
                 int row = y / PANEL_HEIGHT; // _panel_height;
                 int col = x / PANEL_WIDTH;  // _panel_width;
-                printf( "panel index: %d\n", ( COLS * row ) + col );
+                
                 int panel_index = ( COLS * row ) + col;
+                printf( "panel index: %d\n", panel_index );
+                
                 Panel panel = _panels[ panel_index ];  //_cols*row + col];
                 if ( x >= PANEL_WIDTH  ) { while ( x >= PANEL_WIDTH  ) { x -= PANEL_WIDTH;  }}
                 if ( y >= PANEL_HEIGHT ) { while ( y >= PANEL_HEIGHT ) { y -= PANEL_HEIGHT; }}
