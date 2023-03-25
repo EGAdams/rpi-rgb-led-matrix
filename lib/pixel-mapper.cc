@@ -257,7 +257,7 @@ class TwoSixtyFourMapper : public PixelMapper {
                 // Figure out what row and column panel this pixel is within.
                 #define PANEL_HEIGHT 64
                 int row = y / PANEL_HEIGHT; // _panel_height;
-                int col = x / PANEL_WIDTH;  // _panel_width;
+                // int col = x / PANEL_WIDTH;  // _panel_width;
 
                 int col = x / PANEL_WIDTH;
                 int panel_index = col * 2 + (y < PANEL_HEIGHT ? 0 : 1);
