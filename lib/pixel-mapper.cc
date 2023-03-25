@@ -176,7 +176,7 @@ class TwoSixtyFourMapper : public PixelMapper {
                 //initialize the panels
                 Panel firstPanel;
                 firstPanel.name = "firstPanel";
-                firstPanel.order = 7;
+                firstPanel.order = 6;
                 firstPanel.rotate = 0;
                 firstPanel.y_offset = 0;
                 firstPanel.x_offset = 0;
@@ -184,7 +184,7 @@ class TwoSixtyFourMapper : public PixelMapper {
 
                 Panel secondPanel;
                 secondPanel.name = "secondPanel";
-                secondPanel.order = 6;
+                secondPanel.order = 7;
                 secondPanel.rotate = 0;
                 _panels[ 1 ] = secondPanel;
 
@@ -214,13 +214,13 @@ class TwoSixtyFourMapper : public PixelMapper {
 
                 Panel seventhPanel;
                 seventhPanel.name = "seventhPanel";
-                seventhPanel.order = 1;
+                seventhPanel.order = 0;
                 seventhPanel.rotate = 0;
                 _panels[ 6 ] = seventhPanel;
 
                 Panel eighthPanel;
                 eighthPanel.name = "eighthPanel";
-                eighthPanel.order = 0;
+                eighthPanel.order = 1;
                 eighthPanel.rotate = 0;
                 _panels[ 7 ] = eighthPanel; }
 
