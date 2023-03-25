@@ -176,7 +176,7 @@ class TwoSixtyFourMapper : public PixelMapper {
                 //initialize the panels
                 Panel firstPanel;
                 firstPanel.name = "firstPanel";
-                firstPanel.order = ;
+                firstPanel.order = 7;
                 firstPanel.rotate = 0;
                 firstPanel.y_offset = 0;
                 firstPanel.x_offset = 0;
@@ -257,13 +257,12 @@ class TwoSixtyFourMapper : public PixelMapper {
                 // Figure out what row and column panel this pixel is within.
                 #define PANEL_HEIGHT 64
                 int row = y / PANEL_HEIGHT; // _panel_height;
-                // int col = x / PANEL_WIDTH;  // _panel_width;
+                int col = x / PANEL_WIDTH;  // _panel_width;
+                // int col = x / PANEL_WIDTH;
 
-                int col = x / PANEL_WIDTH;
-                int panel_index = col * 2 + (y < PANEL_HEIGHT ? 0 : 1);
 
-                
-                // int panel_index = ( COLS * row ) + col;
+                // int panel_index = col * 2 + (y < PANEL_HEIGHT ? 0 : 1);
+                int panel_index = ( COLS * row ) + col;
                 printf( "row: %d  col: %d  panel index: %d\n", row, col,  panel_index );
                 
                 Panel panel = _panels[ panel_index ];  //_cols*row + col];
