@@ -263,7 +263,7 @@ class TwoSixtyFourMapper : public PixelMapper {
                 int panel_index = col * 2 + (y < PANEL_HEIGHT ? 0 : 1);
 
                 
-                int panel_index = ( COLS * row ) + col;
+                // int panel_index = ( COLS * row ) + col;
                 printf( "row: %d  col: %d  panel index: %d\n", row, col,  panel_index );
                 
                 Panel panel = _panels[ panel_index ];  //_cols*row + col];
