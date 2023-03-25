@@ -176,7 +176,7 @@ class TwoSixtyFourMapper : public PixelMapper {
                 //initialize the panels
                 Panel firstPanel;
                 firstPanel.name = "firstPanel";
-                firstPanel.order = 7;
+                firstPanel.order = 0;
                 firstPanel.rotate = 0;
                 firstPanel.y_offset = 0;
                 firstPanel.x_offset = 0;
@@ -184,43 +184,43 @@ class TwoSixtyFourMapper : public PixelMapper {
 
                 Panel secondPanel;
                 secondPanel.name = "secondPanel";
-                secondPanel.order = 6;
+                secondPanel.order = 1;
                 secondPanel.rotate = 0;
                 _panels[ 1 ] = secondPanel;
 
                 Panel thirdPanel;
                 thirdPanel.name = "thirdPanel";
-                thirdPanel.order = 5;
+                thirdPanel.order = 2;
                 thirdPanel.rotate = 0;
                 _panels[ 2 ] = thirdPanel;
 
                 Panel fourthPanel;
                 fourthPanel.name = "fourthPanel";
-                fourthPanel.order = 4;
+                fourthPanel.order = 3;
                 fourthPanel.rotate = 0;
                 _panels[ 3 ] = fourthPanel;
 
                 Panel fifthPanel;
                 fifthPanel.name = "fifthPanel";
-                fifthPanel.order = 3;
+                fifthPanel.order = 4;
                 fifthPanel.rotate = 0;
                 _panels[ 4 ] = fifthPanel;
 
                 Panel sixthPanel;
                 sixthPanel.name = "sixthPanel";
-                sixthPanel.order = 2;
+                sixthPanel.order = 5;
                 sixthPanel.rotate = 0;
                 _panels[ 5 ] = sixthPanel;
 
                 Panel seventhPanel;
                 seventhPanel.name = "seventhPanel";
-                seventhPanel.order = 1;
+                seventhPanel.order = 6;
                 seventhPanel.rotate = 0;
                 _panels[ 6 ] = seventhPanel;
 
                 Panel eighthPanel;
                 eighthPanel.name = "eighthPanel";
-                eighthPanel.order = 0;
+                eighthPanel.order = 7;
                 eighthPanel.rotate = 0;
                 _panels[ 7 ] = eighthPanel; }
 
