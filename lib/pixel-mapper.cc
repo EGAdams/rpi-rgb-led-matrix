@@ -234,10 +234,11 @@ class TwoSixtyFourMapper : public PixelMapper {
             #define MATRIX_HEIGHT  32
             #define VISIBLE_HEIGHT 128
             #define VISIBLE_WIDTH  64
-            #define CHAIN_LENGTH   4 // 8    // start mods for CHAIN_LENGTH...  started at 16 today
+            #define CHAIN_LENGTH   8    // start mods for CHAIN_LENGTH...  started at 16 today
             #define ROWS           4
             #define COLS           2
             #define PANEL_PARALLEL 0
+            #define PANEL_HEIGHT   32 // 64 tuesday after horatio
 
             virtual bool GetSizeMapping(int matrix_width, int matrix_height,
                               int *visible_width, int *visible_height)
@@ -255,7 +256,6 @@ class TwoSixtyFourMapper : public PixelMapper {
                                   int *matrix_x, int *matrix_y ) const {
 
                 // Figure out what row and column panel this pixel is within.
-                #define PANEL_HEIGHT 64
                 int row = y / PANEL_HEIGHT; // _panel_height;
                 int col = x / PANEL_WIDTH;  // _panel_width;
                 // int col = x / PANEL_WIDTH;
@@ -436,7 +436,7 @@ class TwoSixtyFourMapper : public PixelMapper {
             #define MATRIX_HEIGHT  32
             #define VISIBLE_HEIGHT 128
             #define VISIBLE_WIDTH  64
-            #define CHAIN_LENGTH   8    // start mods for CHAIN_LENGTH...  started at 16 today
+            // #define CHAIN_LENGTH   8    // start mods for CHAIN_LENGTH...  started at 16 today
             #define ROWS           4
             #define COLS           2
             #define PANEL_PARALLEL 0
