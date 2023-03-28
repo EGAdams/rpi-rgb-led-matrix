@@ -238,7 +238,7 @@ class TwoSixtyFourMapper : public PixelMapper {
             #define ROWS           4
             #define COLS           2
             #define PANEL_PARALLEL 0
-            #define PANEL_HEIGHT   32 // 64 tuesday after horatio
+            #define PANEL_HEIGHT   64
 
             virtual bool GetSizeMapping(int matrix_width, int matrix_height,
                               int *visible_width, int *visible_height)
