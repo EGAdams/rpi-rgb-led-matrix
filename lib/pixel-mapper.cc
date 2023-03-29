@@ -169,10 +169,8 @@ namespace rgb_matrix
 
 /* //////////////////////////////////////// BEGIN TwoSixtyFourMapper //////////////////////////////////////// */
 class TwoSixtyFourMapper : public PixelMapper {
-
             public:
             TwoSixtyFourMapper() : parallel_( 1 ) {
-
                 //initialize the panels
                 Panel firstPanel;
                 firstPanel.name = "firstPanel";
@@ -249,6 +247,9 @@ class TwoSixtyFourMapper : public PixelMapper {
                     fprintf(stderr, "%s For parallel=%d we would expect the height=%d "
                         "to be divisible by %d ??\n", GetName(), parallel_, matrix_height, parallel_ );
                     return false; }
+
+                // print visible width and height
+                printf( "visible width: %d  visible height: %d", *visible_width, *visible_height );
                 return true; }
 
             virtual void MapVisibleToMatrix( int matrix_width, int matrix_height,
