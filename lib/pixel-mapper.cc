@@ -234,7 +234,7 @@ class TwoSixtyFourMapper : public PixelMapper {
             #define VISIBLE_WIDTH  64
             #define CHAIN_LENGTH   8    // start mods for CHAIN_LENGTH...  started at 16 today
             #define ROWS           4
-            #define COLS           2
+            #define COLS           1
             #define PANEL_PARALLEL 0
             #define PANEL_HEIGHT   32 // 64
 
