@@ -249,6 +249,7 @@ class TwoSixtyFourMapper : public PixelMapper {
                     return false; }
 
                 // print visible width and height
+                printf( "matrix width: %d  matrix height: %d", matrix_width, matrix_height );
                 printf( "visible width: %d  visible height: %d", *visible_width, *visible_height );
                 return true; }
 
