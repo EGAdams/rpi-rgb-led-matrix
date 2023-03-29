@@ -589,6 +589,7 @@ bool RGBMatrix::Impl::ApplyPixelMapper(const PixelMapper *mapper) {
         // exit( 1 );        
         continue;
       } else {
+        printf( "No Error PixelMapper: (%d, %d) -> (%d, %d) [range: " "%dx%d]\n", x, y, orig_x, orig_y, old_width, old_height );
         //if ( !strcmp( mapper->GetName(),"U-mapper" )) {
             //printf( "PixelMapper: ( %d, %d ) -> ( %d, %d ) [ range: %dx%d ]\n", x, y, orig_x, orig_y, old_width, old_height );
         //}
