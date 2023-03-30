@@ -588,7 +588,7 @@ bool RGBMatrix::Impl::ApplyPixelMapper(const PixelMapper *mapper) {
         printf( "Error in PixelMapper: (%d, %d) -> (%d, %d) [range: " "%dx%d]\n", x, y, orig_x, orig_y, old_width, old_height );
         continue;
       } else {
-        printf( "No Error PixelMapper: (%d, %d) -> (%d, %d) [range: " "%dx%d]\n", x, y, orig_x, orig_y, old_width, old_height );
+        // printf( "No Error PixelMapper: (%d, %d) -> (%d, %d) [range: " "%dx%d]\n", x, y, orig_x, orig_y, old_width, old_height );
       }
       const internal::PixelDesignator *orig_designator;
       orig_designator = shared_pixel_mapper_->get(orig_x, orig_y);
