@@ -265,12 +265,11 @@ class TwoSixtyFourMapper : public PixelMapper {
 
                 // int panel_index = col * 2 + (y < PANEL_HEIGHT ? 0 : 1); // bot suggestion back in on tuesday after sleepy day.
                 int panel_index = ( COLS * row ) + col;
-                printf( "row: %d  col: %d  panel index: %d\n", row, col,  panel_index );
                 
                 Panel panel = _panels[ panel_index ];  //_cols*row + col];
                 if ( x >= PANEL_WIDTH  ) { while ( x >= PANEL_WIDTH  ) { x -= PANEL_WIDTH;  }}
                 if ( y >= PANEL_HEIGHT ) { while ( y >= PANEL_HEIGHT ) { y -= PANEL_HEIGHT; }}
-                printf( "x: %d  y: %d\n", x, y );
+                printf( "x: %d, y: %d, row: %d  col: %d  panel index: %d\n", x, y, row, col,  panel_index );
                 // rotations pasted below..
                 int x_offset, y_offset = 0;
                 x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;  // this is the key line !!!  panel.order MATTERS !!!
