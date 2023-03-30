@@ -175,7 +175,7 @@ class TwoSixtyFourMapper : public PixelMapper {
                 Panel firstPanel;
                 firstPanel.name = "firstPanel";
                 firstPanel.order = 2;
-                firstPanel.rotate = 0;
+                firstPanel.rotate = 180;
                 firstPanel.y_offset = 0;
                 firstPanel.x_offset = 0;
                 _panels[ 0 ] = firstPanel;
@@ -270,10 +270,14 @@ class TwoSixtyFourMapper : public PixelMapper {
                 if ( x >= PANEL_WIDTH  ) { while ( x >= PANEL_WIDTH  ) { x -= PANEL_WIDTH;  }}
                 if ( y >= PANEL_HEIGHT ) { while ( y >= PANEL_HEIGHT ) { y -= PANEL_HEIGHT; }}
                 // rotations pasted below..
+                if ( panel.rotate == 180 ) {
+                    x = ( PANEL_WIDTH  - 1 ) - x;
+                    y = ( PANEL_HEIGHT - 1 ) - y;
+                }
                 int x_offset, y_offset = 0;
                 x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;  // this is the key line !!!  panel.order MATTERS !!!
                 y_offset = panel.y_offset;
-                
+
                 printf( "x_offset: %d  y_offset: %d, x: %d, y: %d, row: %d  col: %d  panel index: %d\n", x_offset, y_offset, x, y, row, col,  panel_index );
                 *matrix_x = x + x_offset;
                 *matrix_y = y + y_offset;  
