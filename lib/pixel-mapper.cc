@@ -279,7 +279,7 @@ class OneSixtyFourMapper : public PixelMapper {
                 // }
                 int x_offset, y_offset = 0;
                 if ( y >= 32 ) {
-                    x_offset = -64;
+                    x_offset = 0;
                 } else {
                     x_offset = 0;
                 }
