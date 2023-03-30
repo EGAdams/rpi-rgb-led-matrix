@@ -255,7 +255,9 @@ class OneSixtyFourMapper : public PixelMapper {
             virtual void MapVisibleToMatrix( int matrix_width, int matrix_height,
                                   int x, int y,
                                   int *matrix_x, int *matrix_y ) const {
-
+                
+                int incomming_x = x;
+                int incomming_y = y;
                 // Figure out what row and column panel this pixel is within.
                 int row = y / PANEL_HEIGHT; // _panel_height;
                 int col = x / PANEL_WIDTH;  // _panel_width;
@@ -279,7 +281,7 @@ class OneSixtyFourMapper : public PixelMapper {
 
                 *matrix_x = x + x_offset;
                 *matrix_y = y + y_offset;  
-                printf( "x_offset: %d  y_offset: %d, x: %d, y: %d, row: %d  col: %d  panel index: %d  new_x: %d, new_y: %d\n", x_offset, y_offset, x, y, row, col,  panel_index, *matrix_x, *matrix_y );
+                printf( "x_offset: %d  y_offset: %d, incomming_x: %d, incomming_y: %d, row: %d  col: %d  panel index: %d  new_x: %d, new_y: %d\n", x_offset, y_offset, incomming_x, incomming_y, row, col,  panel_index, *matrix_x, *matrix_y );
             }
 
             private:
