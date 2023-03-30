@@ -280,6 +280,8 @@ class OneSixtyFourMapper : public PixelMapper {
                 int x_offset, y_offset = 0;
                 if ( y >= 32 ) {
                     x_offset = 64;
+                } else {
+                    x_offset = 0;
                 }
                 // x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;  // this is the key line !!!  panel.order MATTERS !!!
                 y_offset = panel.y_offset;
