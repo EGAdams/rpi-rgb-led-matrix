@@ -225,7 +225,7 @@ class OneSixtyFourMapper : public PixelMapper {
 
             virtual bool SetParameters( int chain, int parallel, const char *param) { parallel_ = parallel; return true; } 
                                                         
-            #define PANEL_WIDTH    16 // 32
+            #define PANEL_WIDTH    32
             #define SLAB_HEIGHT    64
             #define MATRIX_WIDTH   128
             #define MATRIX_HEIGHT  32
