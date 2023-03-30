@@ -274,7 +274,7 @@ class OneSixtyFourMapper : public PixelMapper {
                     y = ( PANEL_HEIGHT - 1 ) - y;
                 }
                 int x_offset, y_offset = 0;
-                x_offset = 0; // (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;  // this is the key line !!!  panel.order MATTERS !!!
+                x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;  // this is the key line !!!  panel.order MATTERS !!!
                 y_offset = panel.y_offset;
 
                 *matrix_x = x + x_offset;
