@@ -277,9 +277,9 @@ class OneSixtyFourMapper : public PixelMapper {
                 x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;  // this is the key line !!!  panel.order MATTERS !!!
                 y_offset = panel.y_offset;
 
-                printf( "x_offset: %d  y_offset: %d, x: %d, y: %d, row: %d  col: %d  panel index: %d\n", x_offset, y_offset, x, y, row, col,  panel_index );
                 *matrix_x = x + x_offset;
                 *matrix_y = y + y_offset;  
+                printf( "x_offset: %d  y_offset: %d, x: %d, y: %d, row: %d  col: %d  panel index: %d  new_x: %d, new_y: %d\n", x_offset, y_offset, x, y, row, col,  panel_index, *matrix_x, *matrix_y );
             }
 
             private:
