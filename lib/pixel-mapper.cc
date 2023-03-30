@@ -166,6 +166,136 @@ namespace rgb_matrix
             bool horizontal_;
         };
 
+/* //////////////////////////////////////// BEGIN OneSixtyFourMapper //////////////////////////////////////// */
+class OneSixtyFourMapper : public PixelMapper {
+            public:
+            OneSixtyFourMapper() : parallel_( 1 ) {
+                //initialize the panels
+                Panel firstPanel;
+                firstPanel.name = "firstPanel";
+                firstPanel.order = 2;
+                firstPanel.rotate = 0;
+                firstPanel.y_offset = 0;
+                firstPanel.x_offset = 0;
+                _panels[ 0 ] = firstPanel;
+
+                Panel secondPanel;
+                secondPanel.name = "secondPanel";
+                secondPanel.order = 1;
+                secondPanel.rotate = 0;
+                _panels[ 1 ] = secondPanel;
+
+                Panel thirdPanel;
+                thirdPanel.name = "thirdPanel";
+                thirdPanel.order = 0;
+                thirdPanel.rotate = 0;
+                _panels[ 2 ] = thirdPanel;
+
+                Panel fourthPanel;
+                fourthPanel.name = "fourthPanel";
+                fourthPanel.order = 3;
+                fourthPanel.rotate = 0;
+                _panels[ 3 ] = fourthPanel;
+
+                Panel fifthPanel;
+                fifthPanel.name = "fifthPanel";
+                fifthPanel.order = 4;
+                fifthPanel.rotate = 0;
+                _panels[ 4 ] = fifthPanel;
+
+                Panel sixthPanel;
+                sixthPanel.name = "sixthPanel";
+                sixthPanel.order = 5;
+                sixthPanel.rotate = 0;
+                _panels[ 5 ] = sixthPanel;
+
+                Panel seventhPanel;
+                seventhPanel.name = "seventhPanel";
+                seventhPanel.order = 6;
+                seventhPanel.rotate = 0;
+                _panels[ 6 ] = seventhPanel;
+
+                Panel eighthPanel;
+                eighthPanel.name = "eighthPanel";
+                eighthPanel.order = 7;
+                eighthPanel.rotate = 0;
+                _panels[ 7 ] = eighthPanel; }
+
+            virtual const char *GetName() const { return "164-mapper"; }
+
+            virtual bool SetParameters( int chain, int parallel, const char *param) { parallel_ = parallel; return true; } 
+                                                        
+            #define PANEL_WIDTH    32
+            #define SLAB_HEIGHT    64
+            #define MATRIX_WIDTH   128
+            #define MATRIX_HEIGHT  32
+            #define VISIBLE_HEIGHT 128
+            #define VISIBLE_WIDTH  64
+            #define CHAIN_LENGTH   4 // 8    // start mods for CHAIN_LENGTH...  started at 16 today
+            #define ROWS           4
+            #define COLS           2
+            #define PANEL_PARALLEL 0
+            #define PANEL_HEIGHT   32 // 64
+
+            virtual bool GetSizeMapping(int matrix_width, int matrix_height,
+                              int *visible_width, int *visible_height)
+                const {
+                *visible_width = (matrix_width / 64) * 32;   // Div at 32px boundary
+                *visible_height = 2 * matrix_height;
+                if (matrix_height % parallel_ != 0) {
+                    fprintf(stderr, "%s For parallel=%d we would expect the height=%d "
+                        "to be divisible by %d ??\n", GetName(), parallel_, matrix_height, parallel_ );
+                    return false; }
+
+                // print visible width and height
+                printf( "matrix width: %d  matrix height: %d \n", matrix_width, matrix_height );
+                printf( "visible width: %d  visible height: %d \n", *visible_width, *visible_height );
+                return true; }
+
+            virtual void MapVisibleToMatrix( int matrix_width, int matrix_height,
+                                  int x, int y,
+                                  int *matrix_x, int *matrix_y ) const {
+
+                // Figure out what row and column panel this pixel is within.
+                int row = y / PANEL_HEIGHT; // _panel_height;
+                int col = x / PANEL_WIDTH;  // _panel_width;
+                // int col = x / PANEL_WIDTH;
+
+
+                // int panel_index = col * 2 + (y < PANEL_HEIGHT ? 0 : 1); // bot suggestion back in on tuesday after sleepy day.
+                int panel_index = ( COLS * row ) + col;
+                
+                Panel panel = _panels[ panel_index ];  //_cols*row + col];
+                if ( x >= PANEL_WIDTH  ) { while ( x >= PANEL_WIDTH  ) { x -= PANEL_WIDTH;  }}
+                if ( y >= PANEL_HEIGHT ) { while ( y >= PANEL_HEIGHT ) { y -= PANEL_HEIGHT; }}
+                // rotations pasted below..
+                if ( panel.rotate == 180 ) {
+                    x = ( PANEL_WIDTH  - 1 ) - x;
+                    y = ( PANEL_HEIGHT - 1 ) - y;
+                }
+                int x_offset, y_offset = 0;
+                x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;  // this is the key line !!!  panel.order MATTERS !!!
+                y_offset = panel.y_offset;
+
+                printf( "x_offset: %d  y_offset: %d, x: %d, y: %d, row: %d  col: %d  panel index: %d\n", x_offset, y_offset, x, y, row, col,  panel_index );
+                *matrix_x = x + x_offset;
+                *matrix_y = y + y_offset;  
+            }
+
+            private:
+            int parallel_;
+            struct Panel {
+                const char* name;
+                int order    = 0;
+                int rotate   = 0;
+                int y_offset = 0;
+                int x_offset = 0;
+                // int parallel; hard code to 1
+            };
+            Panel _panels[ 16 ];
+};        
+//////////////////////////////////// END OneSixtyFourMapper ///////////////////////////////////////
+
 
 /* //////////////////////////////////////// BEGIN TwoSixtyFourMapper //////////////////////////////////////// */
 class TwoSixtyFourMapper : public PixelMapper {
@@ -655,6 +785,7 @@ class TwoSixtyFourMapper : public PixelMapper {
             RegisterPixelMapperInternal(result, new VerticalMapper());
             RegisterPixelMapperInternal(result, new MirrorPixelMapper());
             RegisterPixelMapperInternal(result, new TwoSixtyFourMapper());
+            RegisterPixelMapperInternal(result, new OneSixtyFourMapper());
             return result;
         }
 
