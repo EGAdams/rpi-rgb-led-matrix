@@ -262,8 +262,8 @@ class OneSixtyFourMapper : public PixelMapper {
                 // int col = x / PANEL_WIDTH;
 
 
-                // int panel_index = col * 2 + (y < PANEL_HEIGHT ? 0 : 1); // bot suggestion back in on tuesday after sleepy day.
-                int panel_index = ( COLS * row ) + col;
+                int panel_index = col * 2 + (y < PANEL_HEIGHT ? 0 : 1); // bot suggestion back in on tuesday after sleepy day.
+                // int panel_index = ( COLS * row ) + col;
                 
                 Panel panel = _panels[ panel_index ];  //_cols*row + col];
                 if ( x >= PANEL_WIDTH  ) { while ( x >= PANEL_WIDTH  ) { x -= PANEL_WIDTH;  }}
