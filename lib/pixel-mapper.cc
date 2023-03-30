@@ -269,12 +269,12 @@ class TwoSixtyFourMapper : public PixelMapper {
                 Panel panel = _panels[ panel_index ];  //_cols*row + col];
                 if ( x >= PANEL_WIDTH  ) { while ( x >= PANEL_WIDTH  ) { x -= PANEL_WIDTH;  }}
                 if ( y >= PANEL_HEIGHT ) { while ( y >= PANEL_HEIGHT ) { y -= PANEL_HEIGHT; }}
-                printf( "x: %d, y: %d, row: %d  col: %d  panel index: %d\n", x, y, row, col,  panel_index );
                 // rotations pasted below..
                 int x_offset, y_offset = 0;
                 x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;  // this is the key line !!!  panel.order MATTERS !!!
                 y_offset = panel.y_offset;
-                printf( "x_offset: %d  y_offset: %d\n", x_offset, y_offset );
+                
+                printf( "x_offset: %d  y_offset: %d, x: %d, y: %d, row: %d  col: %d  panel index: %d\n", x_offset, y_offset, x, y, row, col,  panel_index );
                 *matrix_x = x + x_offset;
                 *matrix_y = y + y_offset;  
             }
