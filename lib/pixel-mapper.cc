@@ -218,7 +218,7 @@ class OneSixtyFourMapper : public PixelMapper {
             // If the physical pixel is in the lower half of the panel
             else {
                 // Subtract the panel height from the y coordinate
-                out_y -= kPanelHeight;
+                // out_y -= kPanelHeight;
                 // If the physical pixel is in an even column
                 // if (!(x & 0x01)) {
                 // // Mirror the x coordinate
