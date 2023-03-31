@@ -209,8 +209,8 @@ class OneSixtyFourMapper : public PixelMapper {
 
         Panel getPanelOffsets( int x, int y ) const {
             Panel newPanel;
-            if ( y >= 16 ) {
-                newPanel.y_offset = -16;
+            if ( y >= 32 ) {
+                newPanel.y_offset = -32;
                 newPanel.x_offset = 0;
             } else {
                 newPanel.y_offset = 0;
