@@ -168,121 +168,57 @@ namespace rgb_matrix
 
 /* //////////////////////////////////////// BEGIN OneSixtyFourMapper //////////////////////////////////////// */
 class OneSixtyFourMapper : public PixelMapper {
-            public:
-            OneSixtyFourMapper() : parallel_( 1 ) {
-                //initialize the panels
-                Panel firstPanel;
-                firstPanel.name = "firstPanel";
-                firstPanel.order = 2;
-                firstPanel.rotate = 0;
-                firstPanel.y_offset = 0;
-                firstPanel.x_offset = 0;
-                _panels[ 0 ] = firstPanel;
+    public:
+        OneSixtyFourMapper() : parallel_(1) {}
 
-                Panel secondPanel;
-                secondPanel.name = "secondPanel";
-                secondPanel.order = 1;
-                secondPanel.rotate = 0;
-                _panels[ 1 ] = secondPanel;
+        virtual const char *GetName() const { return "164-mapper"; }
 
-                Panel thirdPanel;
-                thirdPanel.name = "thirdPanel";
-                thirdPanel.order = 0;
-                thirdPanel.rotate = 0;
-                _panels[ 2 ] = thirdPanel;
+        virtual bool SetParameters(int chain, int parallel, const char *param) { 
+            parallel_ = parallel;
+            return true; 
+        }
 
-                Panel fourthPanel;
-                fourthPanel.name = "fourthPanel";
-                fourthPanel.order = 3;
-                fourthPanel.rotate = 0;
-                _panels[ 3 ] = fourthPanel;
+        virtual bool GetSizeMapping(int matrix_width, int matrix_height, 
+                                    int *visible_width, int *visible_height ) const {
+            *visible_width = (matrix_width / 64) * 32;   // Div at 32px boundary
+            *visible_height = 2 * matrix_height;
 
-                Panel fifthPanel;
-                fifthPanel.name = "fifthPanel";
-                fifthPanel.order = 4;
-                fifthPanel.rotate = 0;
-                _panels[ 4 ] = fifthPanel;
-
-                Panel sixthPanel;
-                sixthPanel.name = "sixthPanel";
-                sixthPanel.order = 5;
-                sixthPanel.rotate = 0;
-                _panels[ 5 ] = sixthPanel;
-
-                Panel seventhPanel;
-                seventhPanel.name = "seventhPanel";
-                seventhPanel.order = 6;
-                seventhPanel.rotate = 0;
-                _panels[ 6 ] = seventhPanel;
-
-                Panel eighthPanel;
-                eighthPanel.name = "eighthPanel";
-                eighthPanel.order = 7;
-                eighthPanel.rotate = 0;
-                _panels[ 7 ] = eighthPanel; }
-
-            virtual const char *GetName() const { return "164-mapper"; }
-
-            virtual bool SetParameters( int chain, int parallel, const char *param) { parallel_ = parallel; return true; } 
-                                                        
-            #define PANEL_WIDTH    32
-            #define SLAB_HEIGHT    64
-            #define MATRIX_WIDTH   128
-            #define MATRIX_HEIGHT  32
-            #define VISIBLE_HEIGHT 128
-            #define VISIBLE_WIDTH  64
-            #define CHAIN_LENGTH   4 // TODO: this should be 8    // start mods for CHAIN_LENGTH...  started at 16 today
-            #define ROWS           4
-            #define COLS           2
-            #define PANEL_PARALLEL 0
-            #define PANEL_HEIGHT   32 // 64
-
-            virtual bool GetSizeMapping(int matrix_width, int matrix_height,
-                              int *visible_width, int *visible_height)
-                const {
-                *visible_width = (matrix_width / 64) * 32;   // Div at 32px boundary
-                *visible_height = 2 * matrix_height;
-                if (matrix_height % parallel_ != 0) {
-                    fprintf(stderr, "%s For parallel=%d we would expect the height=%d "
+            if (matrix_height % parallel_ != 0) {
+                fprintf(stderr, "%s For parallel=%d we would expect the height=%d "
                         "to be divisible by %d ??\n", GetName(), parallel_, matrix_height, parallel_ );
-                    return false; }
-
-                // print visible width and height
-                printf( "matrix width: %d  matrix height: %d \n", matrix_width, matrix_height );
-                printf( "visible width: %d  visible height: %d \n", *visible_width, *visible_height );
-                return true; }
-
-            virtual void MapVisibleToMatrix( int matrix_width, int matrix_height,
-                                  int x, int y,
-                                  int *matrix_x, int *matrix_y ) const {
-                
-                int incomming_x = x;
-                int incomming_y = y;
-
-                Panel refreshedPanel = getPanelOffsets( x, y );
-                
-                *matrix_x = x + refreshedPanel.x_offset;
-                *matrix_y = y + refreshedPanel.y_offset; 
-
-                printf( "x_offset: %d  y_offset: %d, incomming_x: %d, incomming_y: %d,  new_x: %d, new_y: %d\n", refreshedPanel.x_offset, refreshedPanel.y_offset, incomming_x, incomming_y, *matrix_x, *matrix_y );
+                return false; 
             }
-            
-            Panel getPanelOffsets( int x, int y ) const {
-                Panel newPanel;
-                if ( y >= 32 ) {
-                    newPanel.y_offset = -32;
-                    newPanel.x_offset = 0;
-                } else {
-                    newPanel.y_offset = 0;
-                    newPanel.x_offset = 0;
-                }
-                return newPanel;
-            }
+            printf("matrix width: %d  matrix height: %d\n", matrix_width, matrix_height);
+            printf("visible width: %d  visible height: %d\n", *visible_width, *visible_height);
+            return true; 
+        }
 
-            private:
-            int parallel_;
-            Panel _panels[ 16 ];
-};        
+        virtual void MapVisibleToMatrix(int matrix_width, int matrix_height, 
+                                        int x, int y, int *matrix_x, int *matrix_y ) const {
+            int incoming_x = x;
+            int incoming_y = y;
+            Panel refreshedPanel = getPanelOffsets( x, y );
+            *matrix_x = x + refreshedPanel.x_offset;
+            *matrix_y = y + refreshedPanel.y_offset;
+            printf("Pixel: (%d, %d) Panel: (%d, %d) Offset: (%d, %d) Matrix: (%d, %d)\n",
+                   x, y, incoming_x/64, incoming_y/32, refreshedPanel.x_offset, refreshedPanel.y_offset, *matrix_x, *matrix_y);
+        }
+        
+    private:
+        int parallel_;
+
+        Panel getPanelOffsets( int x, int y ) const {
+            Panel newPanel;
+            if ( y >= 32 ) {
+                newPanel.y_offset = -32;
+                newPanel.x_offset = 0;
+            } else {
+                newPanel.y_offset = 0;
+                newPanel.x_offset = 0;
+            }
+            return newPanel;
+        }
+}; 
 //////////////////////////////////// END OneSixtyFourMapper ///////////////////////////////////////
                 // int incomming_x = x;
                 // int incomming_y = y;
