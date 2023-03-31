@@ -96,6 +96,17 @@ void RegisterPixelMapper(PixelMapper *mapper);
 // Get a list of the names of available pixel mappers.
 std::vector<std::string> GetAvailablePixelMappers();
 
+struct Panel {
+    std::string name;
+    int order;
+    int rotate;
+    int x_offset;
+    int y_offset;
+};
+
+const Panel getPanelOffsets( int x, int y, Panel* panel );
+
+
 // Given a name (e.g. "rotate") and a parameter (e.g. "90"), return the
 // parametrized PixelMapper with that name. Returns NULL if mapper
 // can not be found or parameter is invalid.

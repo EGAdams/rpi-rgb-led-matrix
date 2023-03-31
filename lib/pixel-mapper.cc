@@ -258,54 +258,51 @@ class OneSixtyFourMapper : public PixelMapper {
                 
                 int incomming_x = x;
                 int incomming_y = y;
-                // Figure out what row and column panel this pixel is within.
-                int row = y / PANEL_HEIGHT; // _panel_height;
-                int col = x / PANEL_WIDTH;  // _panel_width;
-                // int col = x / PANEL_WIDTH;
 
-
-                int panel_index = col * 2 + (y < PANEL_HEIGHT ? 0 : 1); // bot suggestion back in on tuesday after sleepy day.
-                // int panel_index = ( COLS * row ) + col;
+                Panel refreshedPanel = getPanelOffsets( x, y );
                 
-                Panel panel = _panels[ panel_index ];  //_cols*row + col];
+                *matrix_x = x + refreshedPanel.x_offset;
+                *matrix_y = y + refreshedPanel.y_offset; 
+
+                printf( "x_offset: %d  y_offset: %d, incomming_x: %d, incomming_y: %d,  new_x: %d, new_y: %d\n", refreshedPanel.x_offset, refreshedPanel.y_offset, incomming_x, incomming_y, *matrix_x, *matrix_y );
+            }
+            
+            Panel getPanelOffsets( int x, int y ) const {
+                Panel newPanel;
+                if ( y >= 32 ) {
+                    newPanel.y_offset = -32;
+                    newPanel.x_offset = 0;
+                } else {
+                    newPanel.y_offset = 0;
+                    newPanel.x_offset = 0;
+                }
+                return newPanel;
+            }
+
+            private:
+            int parallel_;
+            Panel _panels[ 16 ];
+};        
+//////////////////////////////////// END OneSixtyFourMapper ///////////////////////////////////////
+                // int incomming_x = x;
+                // int incomming_y = y;
+                // Figure out what row and column panel this pixel is within.
+                // int row = y / PANEL_HEIGHT; // _panel_height;
+                // int col = x / PANEL_WIDTH;  // _panel_width;
+                // int col = x / PANEL_WIDTH;
+                // int panel_index = col * 2 + (y < PANEL_HEIGHT ? 0 : 1); // bot suggestion back in on tuesday after sleepy day.
+                // int panel_index = ( COLS * row ) + col;
+                // Panel panel = _panels[ panel_index ];  //_cols*row + col];
                 // if ( x >= PANEL_WIDTH  ) { while ( x >= PANEL_WIDTH  ) { x -= PANEL_WIDTH;  }}
                 // if ( y >= PANEL_HEIGHT ) { while ( y >= PANEL_HEIGHT ) { y -= PANEL_HEIGHT; }}
-
+                // x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;  // this is the key line !!!  panel.order MATTERS !!!
+                // 
 
                 // rotations pasted below..
                 // if ( panel.rotate == 180 ) {
                 //     x = ( PANEL_WIDTH  - 1 ) - x;
                 //     y = ( PANEL_HEIGHT - 1 ) - y;
                 // }
-                int x_offset, y_offset = 0;
-                if ( y >= 32 ) {
-                    panel.y_offset = -32;
-                } else {
-                    x_offset = 0;
-                }
-                // x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;  // this is the key line !!!  panel.order MATTERS !!!
-                y_offset = panel.y_offset;
-
-                *matrix_x = x + x_offset;
-                *matrix_y = y + y_offset;  
-                printf( "x_offset: %d  y_offset: %d, incomming_x: %d, incomming_y: %d, row: %d  col: %d  panel index: %d  new_x: %d, new_y: %d\n", x_offset, y_offset, incomming_x, incomming_y, row, col,  panel_index, *matrix_x, *matrix_y );
-            }
-
-            private:
-            int parallel_;
-            struct Panel {
-                const char* name;
-                int order    = 0;
-                int rotate   = 0;
-                int y_offset = 0;
-                int x_offset = 0;
-                // int parallel; hard code to 1
-            };
-            Panel _panels[ 16 ];
-};        
-//////////////////////////////////// END OneSixtyFourMapper ///////////////////////////////////////
-
-
 /* //////////////////////////////////////// BEGIN TwoSixtyFourMapper //////////////////////////////////////// */
 class TwoSixtyFourMapper : public PixelMapper {
             public:
