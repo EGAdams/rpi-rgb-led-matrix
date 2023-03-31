@@ -198,7 +198,7 @@ class OneSixtyFourMapper : public PixelMapper {
 
               // Define some constants for the panel size and configuration
             const int kPanelWidth = 64;
-            const int kPanelHeight = 32;
+            const int kPanelHeight = 64; //32;
             
             // Define some variables for the output coordinates
             int out_x = x;
