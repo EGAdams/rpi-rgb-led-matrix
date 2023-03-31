@@ -198,7 +198,7 @@ class OneSixtyFourMapper : public PixelMapper {
 
               // Define some constants for the panel size and configuration
             const int kPanelWidth = 64;
-            const int kPanelHeight = 64; //32;
+            const int kPanelHeight = 32;
             
             // Define some variables for the output coordinates
             int out_x = x;
@@ -218,7 +218,8 @@ class OneSixtyFourMapper : public PixelMapper {
             // If the physical pixel is in the lower half of the panel
             else {
                 // Subtract the panel height from the y coordinate
-                // out_y -= kPanelHeight;
+                out_y -= kPanelHeight;
+                out_x += kPanelWidth;
                 // If the physical pixel is in an even column
                 // if (!(x & 0x01)) {
                 // // Mirror the x coordinate
