@@ -208,13 +208,17 @@ class OneSixtyFourMapper : public PixelMapper {
             // Apply some transformations based on the physical pixel coordinates
             // These transformations are explained in detail in https://github.com/hzeller/rpi-rgb-led-matrix/blob/master/lib/transformer.cc
             // If the physical pixel is in the upper half of the panel
-            if (y < ( kPanelHeight / 2 )) {
-                out_y += kPanelHeight / 2;
+            if (y < kPanelHeight) {
+                // If the physical pixel is in an odd column
+                // if (x & 0x01) {
+                // // Mirror the x coordinate
+                // out_x = kPanelWidth - 1 - x;
+                // }
             }
             // If the physical pixel is in the lower half of the panel
             else {
                 // Subtract the panel height from the y coordinate
-                //out_y -= ( kPanelHeight / 2 );
+                out_y -= kPanelHeight;
                 out_x += kPanelWidth;
                 // If the physical pixel is in an even column
                 // if (!(x & 0x01)) {
