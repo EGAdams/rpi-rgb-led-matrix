@@ -836,4 +836,55 @@ if (is_top_check) {
         //printf( "matrix_x after: %d  matrix_y after: %d\n", *matrix_x, *matrix_y );
     }
 
+            virtual void MapVisibleToMatrix(int matrix_width, int matrix_height, 
+                                        int x, int y, int *matrix_x, int *matrix_y ) const {
+
+              // Define some constants for the panel size and configuration
+            const int kPanelWidth = 64;
+            const int kPanelHeight = 32;
+            
+            // Define some variables for the output coordinates
+            int out_x = x;
+            int out_y = y;
+
+
+            // Apply some transformations based on the physical pixel coordinates
+            // These transformations are explained in detail in https://github.com/hzeller/rpi-rgb-led-matrix/blob/master/lib/transformer.cc
+            // If the physical pixel is in the upper half of the panel
+            if (y < kPanelHeight) {
+                // If the physical pixel is in an odd column
+                // if (x & 0x01) {
+                // // Mirror the x coordinate
+                // out_x = kPanelWidth - 1 - x;
+                // }
+            }
+            // If the physical pixel is in the lower half of the panel
+            else {
+                // Subtract the panel height from the y coordinate
+                out_y -= kPanelHeight;
+                out_x += kPanelWidth;
+                // If the physical pixel is in an even column
+                // if (!(x & 0x01)) {
+                // // Mirror the x coordinate
+                // out_x = kPanelWidth - 1 - x;
+                // }
+            }
+
+
+            // Return the output coordinates as an object
+            // return {x: out_x, y: out_y};  
+            *matrix_x = out_x;
+            *matrix_y = out_y;
+
+            int incoming_x = x;
+            int incoming_y = y;
+            Panel refreshedPanel = getPanelOffsets( x, y );
+            // *matrix_x = x + refreshedPanel.x_offset;
+            // *matrix_y = y + refreshedPanel.y_offset;
+            printf("Pixel: (%d, %d) Panel: (%d, %d) Offset: (%d, %d) Matrix: (%d, %d)\n",
+                   x, y, incoming_x/64, incoming_y/32, refreshedPanel.x_offset, refreshedPanel.y_offset, *matrix_x, *matrix_y);
+        }
+
+        
+
     
