@@ -211,7 +211,7 @@ class OneSixtyFourMapper : public PixelMapper {
                 out_y -= kPanelHeight; 
                 out_x = matrix_width - 1 - out_x;
             }
-            printf( "physical pixel: (%2d, %2d)  maps to visual: (%2d, %2d) \n", x, y, out_x, out_y );
+            printf( "physical pixel: (%3d, %3d)  maps to visual: (%3d, %3d) \n", x, y, out_x, out_y );
             *matrix_x = out_x;
             *matrix_y = out_y; 
         } 
@@ -556,8 +556,8 @@ class TwoSixtyFourMapper : public PixelMapper {
 
                 //Get the panel information for this pixel.
                 Panel panel = _panels[ panel_index ];  //_cols*row + col];
-                // printf( "input coordinates( %3d, %3d ) row: %d  col: %d  panel.order: %2d, panel.rotate: %3d panel.name: %12s ", x, y, row, col, panel.order, panel.rotate, panel.name );
-                // printf( "x: %2d  y: %2d ", x, y );
+                // printf( "input coordinates( %3d, %3d ) row: %d  col: %d  panel.order: %3d, panel.rotate: %3d panel.name: %12s ", x, y, row, col, panel.order, panel.rotate, panel.name );
+                // printf( "x: %3d  y: %3d ", x, y );
 
                 // Compute location of the pixel within the panel.
                 // x = x % PANEL_WIDTH;  // _panel_width;
@@ -630,7 +630,7 @@ class TwoSixtyFourMapper : public PixelMapper {
 
                 *matrix_x = x + x_offset;
                 *matrix_y = y + y_offset;
-                // printf( " ( %2d, %2d ) x_offset: %3d  y_offset: %3d  matrix_x: %3d  matrix_y%3d \n", x, y, x_offset, y_offset, *matrix_x, *matrix_y );
+                // printf( " ( %3d, %3d ) x_offset: %3d  y_offset: %3d  matrix_x: %3d  matrix_y%3d \n", x, y, x_offset, y_offset, *matrix_x, *matrix_y );
 
                 // *matrix_x = x;
                 // *matrix_y = /*base_y +*/ y;
