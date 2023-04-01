@@ -211,7 +211,7 @@ class OneSixtyFourMapper : public PixelMapper {
                 out_y -= kPanelHeight; 
                 out_x = matrix_width - 1 - out_x;
             }
-            printf( "physical pixel: (%d, %d)  maps to visual: (%d, %d)", x, y, out_x, out_y );
+            printf( "physical pixel: (%d, %d)  maps to visual: (%d, %d) \n", x, y, out_x, out_y );
             *matrix_x = out_x;
             *matrix_y = out_y; 
         } 
