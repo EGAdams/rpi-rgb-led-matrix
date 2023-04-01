@@ -215,7 +215,7 @@ class OneSixtyFourMapper : public PixelMapper {
             else {
                 // Subtract the panel height from the y coordinate
                 out_y -= kPanelHeight;
-                out_x += x - kPanelWidth;
+                out_x += kPanelWidth;
             }
 
             // Return the output coordinates as an object
