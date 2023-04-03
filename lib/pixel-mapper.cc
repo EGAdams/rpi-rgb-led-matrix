@@ -206,7 +206,7 @@ class OneSixtyFourMapper : public PixelMapper {
                 out_y = kPanelHeight - 1 - out_y;
             } else { 
                 // If the physical pixel is in the lower half of the panel 
-                out_y -= kPanelHeight; 
+                out_y = y; // -= kPanelHeight; 
             }
             printf( "physical pixel: ( %3d, %3d )  maps to virtual pixel: ( %3d, %3d ) \n", x, y, out_x, out_y );
             *matrix_x = out_x;
