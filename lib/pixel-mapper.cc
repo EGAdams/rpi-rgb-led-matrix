@@ -227,7 +227,7 @@ class OneSixtyFourMapper : public PixelMapper {
                 *matrix_x = x;
                 *matrix_y = y;
             }
-            printf( "physical pixel: ( %3d, %3d )  maps to virtual pixel: ( %3d, %3d ) \n", x, y, out_x, out_y );
+            printf( "physical pixel: ( %3d, %3d )  maps to virtual pixel: ( %3d, %3d ) \n", x, y /*, out_x, out_y*/ );
             // *matrix_x = out_x;
             // *matrix_y = out_y; 
         }
