@@ -198,9 +198,7 @@ class OneSixtyFourMapper : public PixelMapper {
             const int kPanelWidth = 64; 
             const int kPanelHeight = 32; // Define some variables for the output coordinates 
             int out_x = x; 
-            int out_y = y; 
-            
-            // Apply some transformations based on the physical pixel coordinates 
+            int out_y = y; // Apply some transformations based on the physical pixel coordinates 
             // These transformations are explained in detail in https://github.com/hzeller/rpi-rgb-led-matrix/blob/master/lib/transformer.cc 
             // If the physical pixel is in the upper half of the panel 
             if ( y < kPanelHeight ) { 
@@ -209,12 +207,11 @@ class OneSixtyFourMapper : public PixelMapper {
             } else { 
                 // If the physical pixel is in the lower half of the panel 
                 out_y -= kPanelHeight; 
-                out_x = matrix_width - 1 - out_x;
             }
-            printf( "physical pixel: (%3d, %3d)  maps to visual: (%3d, %3d) \n", x, y, out_x, out_y );
+            printf( "physical pixel: ( %3d, %3d )  maps to virtual pixel: ( %3d, %3d ) \n", x, y, out_x, out_y );
             *matrix_x = out_x;
             *matrix_y = out_y; 
-        } 
+        }
 
     private:
         int parallel_;
