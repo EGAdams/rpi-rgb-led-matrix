@@ -27,7 +27,7 @@ void displayRandomPixels(Canvas *canvas, int width, int height, int num_pixels) 
     canvas->SetPixel(x, y, 255, 0, 0);
 
     // Sleep for a moment to slow down the process
-    usleep(500 * 1000);
+    usleep(50 * 1000);
   }
 }
 
@@ -76,7 +76,7 @@ int main(int argc, char *argv[]) {
     int height = 32 * num_rows_of_panels;
 
     // Number of random pixels to display
-    int num_pixels = 25;
+    int num_pixels = 100;
 
     displayRandomPixels(canvas, width, height, num_pixels);
 
