@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HUB75 Simulator</title>
+  <style>
+    /* Define some styles for the grid and the cells */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(64, 10px);
+      grid-template-rows: repeat(64, 10px);
+      gap: 1px;
+      margin: 10px;
+    }
+
+    .cell {
+      width: 10px;
+      height: 10px;
+      background-color: black;
+    }
+  </style>
+</head>
+<body>
+  <h1>HUB75 Simulator</h1>
+  <p>This is a javascript project that simulates a HUB75 64x64 LED panel.</p>
+  <p>The grid below represents the virtual pixels that we can see.</p>
+  <p>The inputs below represent the physical pixels that are mapped to the virtual pixels.</p>
+  <div class="grid" id="grid">
+    <!-- Create 64x64 cells with ids from "cell-0-0" to "cell-63-63" -->
+    <!-- Use a nested for loop to generate the cells -->
+    <!-- Use string interpolation to create the ids -->
+    <!-- Use document.write() to write the html elements -->
+    <script>
+      for (let i = 0; i < 64; i++) {
+        for (let j = 0; j < 64; j++) {
+          let id = `cell-${i}-${j}`;
+          document.write(`<div class="cell" id="${id}"></div>`);
+        }
+      }
+    </script>
+  </div>
+  <div id="inputs">
+    <!-- Create a set of inputs from (0, 0) to (63, 63) for the simulation test -->
+    <!-- Use a nested for loop to generate the inputs -->
+    <!-- Use string interpolation to create the ids and values -->
+    <!-- Use document.write() to write the html elements -->
+    <script>
+      for (let i = 0; i < 64; i++) {
+        for (let j = 0; j < 64; j++) {
+          let id = `input-${i}-${j}`;
+          let value = `(${i}, ${j})`;
+          document.write(`<input type="text" id="${id}" value="${value}" readonly>`);
+        }
+        document.write("<br>"); // Add a line break after each row
+      }
+    </script>
+  </div>
+  <script src="script.js"></script> <!-- Link to the external javascript file -->
+</body>
+</html>
