@@ -193,16 +193,29 @@ class OneSixtyFourMapper : public PixelMapper {
             return true; 
         }
 
-        virtual void MapVisibleToMatrix(int matrix_width, int matrix_height, 
-                                        int x, int y, int *matrix_x, int *matrix_y ) const {
+        #include <cmath>
+
+        virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
+                                        int x, int y, int *matrix_x, int *matrix_y) const {
             int incoming_x = x;
             int incoming_y = y;
-            Panel refreshedPanel = getPanelOffsets( x, y );
-            *matrix_x = x + refreshedPanel.x_offset;
-            *matrix_y = y + refreshedPanel.y_offset;
+            int panel_width = 64;
+            int panel_height = 32;
+            int panels_per_row = std::ceil(static_cast<float>(matrix_width) / panel_width);
+
+            int panel_index_x = x / panel_width;
+            int panel_index_y = y / panel_height;
+
+            int panel_x = panel_index_x * panel_width;
+            int panel_y = panel_index_y * panel_height;
+
+            *matrix_x = x - panel_x;
+            *matrix_y = y - panel_y + panel_index_y * panel_height;
+
             printf("Pixel: (%d, %d) Panel: (%d, %d) Offset: (%d, %d) Matrix: (%d, %d)\n",
-                   x, y, incoming_x/64, incoming_y/32, refreshedPanel.x_offset, refreshedPanel.y_offset, *matrix_x, *matrix_y);
+                x, y, panel_index_x, panel_index_y, panel_x, panel_y, *matrix_x, *matrix_y);
         }
+
         
     private:
         int parallel_;
