@@ -16,31 +16,35 @@ using rgb_matrix::RGBMatrix;
 
 void drawGridPattern(Canvas *canvas, int width, int height, int grid_size) {
   // Draw horizontal lines
+  int iteration_count = 0;
   for (int y = 0; y < height; y += grid_size) {
     for (int x = 0; x < width; ++x) {
       canvas->SetPixel(x, y, 255, 255, 255);
-      if (x % 100 == 0) {
+      if (iteration_count % 100 == 0) {
         printf("Horizontal: Canvas: (%d, %d)\n", x, y);
       }
+      iteration_count++;
     }
     // Pause for a moment after drawing each horizontal line
-    usleep(50 * 1000); // 50 ms
+    usleep(500 * 1000); // 500 ms
   }
 
   // Draw vertical lines
+  iteration_count = 0;
   for (int x = 0; x < width; x += grid_size) {
     for (int y = 0; y < height; ++y) {
       canvas->SetPixel(x, y, 255, 255, 255);
-      if (y % 100 == 0) {
+      if (iteration_count % 100 == 0) {
         printf("Vertical: Canvas: (%d, %d)\n", x, y);
       }
+      iteration_count++;
     }
     // Pause for a moment after drawing each vertical line
-    usleep(50 * 1000); // 50 ms
+    usleep(500 * 1000); // 500 ms
   }
-
   usleep(600000 * 1000); // 10 minutes
 }
+
 
 
 volatile bool interrupt_received = false;
