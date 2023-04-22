@@ -192,25 +192,32 @@ namespace rgb_matrix
         }
 
         virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
-                                        int x, int y, int *matrix_x, int *matrix_y) const {
+                                int x, int y, int *matrix_x, int *matrix_y) const {
             int panel_width = 64;
-            int panel_height = 32;
+            int panel_height = 64;
+            int panels_per_row = matrix_width / panel_width;
 
             int panel_index_x = x / panel_width;
             int panel_index_y = y / panel_height;
 
+            int panel_x = panel_index_x * panel_width;
             int panel_y = panel_index_y * panel_height;
 
-            *matrix_x = x;
+            *matrix_x = x - panel_x;
+            *matrix_y = y - panel_y;
 
-            if (y % 32 < 16) {
-                // First 16 rows of each 32-row block
-                *matrix_y = y + panel_y;
-            } else {
-                // Second 16 rows of each 32-row block
-                *matrix_y = y % 16 + panel_y + 16;
+            if (y >= 32) {
+                *matrix_x += 32; // Shift x by half the panel width for the lower half of the panel
+                *matrix_y -= 32; // Shift y by half the panel height for the lower half of the panel
             }
+
+            *matrix_x += panel_index_x * panel_width;
+            *matrix_y += panel_index_y * panel_height;
+
+            printf("Pixel: (%d, %d) Panel: (%d, %d) Offset: (%d, %d) Matrix: (%d, %d)\n",
+                x, y, panel_index_x, panel_index_y, panel_x, panel_y, *matrix_x, *matrix_y);
         }
+
 
     private:
         int parallel_;
