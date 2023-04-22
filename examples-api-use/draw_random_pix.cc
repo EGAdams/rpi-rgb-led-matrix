@@ -14,30 +14,19 @@ using rgb_matrix::RGBMatrix;
 #include <cstdlib>
 #include <vector>
 
-void displayRandomPixels(rgb_matrix::RGBMatrix *matrix, const OneSixFourMapper *mapper, int width, int height, int num_pixels) {
-    srand(time(nullptr));
-    
-    std::vector<std::pair<int, int>> pixels;
-    for (int i = 0; i < num_pixels; ++i) {
-        int x = rand() % width;
-        int y = rand() % height;
-        pixels.push_back(std::make_pair(x, y));
-    }
+void displayRandomPixels(Canvas *canvas, int width, int height, int num_pixels) {
+  std::srand(std::time(0));
 
-    for (const auto& pixel : pixels) {
-        int x = pixel.first;
-        int y = pixel.second;
-        
-        int matrix_x, matrix_y;
-        mapper->MapVisibleToMatrix(width, height, x, y, &matrix_x, &matrix_y);
+  for (int i = 0; i < num_pixels; ++i) {
+    int x = std::rand() % width;
+    int y = std::rand() % height;
 
-        matrix->SetPixel(matrix_x, matrix_y, 255, 255, 255); // Set the pixel to white
-        matrix->Update();
-        printf("Visible: (%d, %d) -> Matrix: (%d, %d)\n", x, y, matrix_x, matrix_y);
-        usleep(500000); // Sleep for 500ms
-        matrix->SetPixel(matrix_x, matrix_y, 0, 0, 0); // Clear the pixel
-        matrix->Update();
-    }
+    // Set the pixel color (You can choose any color you want)
+    canvas->SetPixel(x, y, 255, 0, 0);
+
+    // Sleep for a moment to slow down the process
+    usleep(500 * 1000);
+  }
 }
 
 volatile bool interrupt_received = false;
@@ -47,6 +36,7 @@ static void InterruptHandler(int signo)
 }
 
 int main(int argc, char *argv[]) {
+    // ... (initialize canvas and other objects)
     printf( "starting main\n" );
     RGBMatrix::Options defaults;
     defaults.hardware_mapping = "regular"; // or e.g. "adafruit-hat"
@@ -84,14 +74,11 @@ int main(int argc, char *argv[]) {
     // Number of random pixels to display
     int num_pixels = 25;
 
-    displayRandomPixels( canvas /* matrix */, &mapper, width, height, num_pixels);
+    displayRandomPixels(canvas, width, height, num_pixels);
 
-    // Enter your main loop or other code here
-    // ...
-
-    //DrawLine( canvas ); // Using the canvas.
-    // Animation finished. Shut down the RGB matrix.
+    // ... (enter your main loop or other code)
     canvas->Clear();
     delete canvas;
+    return 0;
     return 0;
 }
