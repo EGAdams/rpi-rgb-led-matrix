@@ -18,7 +18,9 @@ void drawGridPattern(Canvas *canvas, int width, int height, int grid_size) {
   // Draw horizontal lines
   for (int y = 0; y < height; y += grid_size) {
     for (int x = 0; x < width; ++x) {
+      // pause 5ms
       canvas->SetPixel(x, y, 255, 255, 255);
+      usleep(5000);
     }
   }
 
@@ -26,6 +28,7 @@ void drawGridPattern(Canvas *canvas, int width, int height, int grid_size) {
   for (int x = 0; x < width; x += grid_size) {
     for (int y = 0; y < height; ++y) {
       canvas->SetPixel(x, y, 255, 255, 255);
+      usleep(5000);
     }
   }
 }
