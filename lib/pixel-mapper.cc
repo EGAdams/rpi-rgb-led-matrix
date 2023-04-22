@@ -180,8 +180,8 @@ namespace rgb_matrix
 
         virtual bool GetSizeMapping(int matrix_width, int matrix_height,
                                     int *visible_width, int *visible_height) const {
-            *visible_width = (matrix_width / 64) * 32;   // Div at 32px boundary
-            *visible_height = 2 * matrix_height;
+            *visible_width = matrix_width;
+            *visible_height = matrix_height;
 
             if (matrix_height % parallel_ != 0) {
                 fprintf(stderr, "%s For parallel=%d we would expect the height=%d "
@@ -193,35 +193,27 @@ namespace rgb_matrix
 
         virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
                                 int x, int y, int *matrix_x, int *matrix_y) const {
-            int panel_width = 64;
-            int panel_height = 64;
-            int panels_per_row = matrix_width / panel_width;
-
-            int panel_index_x = x / panel_width;
-            int panel_index_y = y / panel_height;
-
-            int panel_x = panel_index_x * panel_width;
-            int panel_y = panel_index_y * panel_height;
-
-            *matrix_x = x - panel_x;
-            *matrix_y = y - panel_y;
-
-            if (y >= 32) {
-                *matrix_x += 32; // Shift x by half the panel width for the lower half of the panel
-                *matrix_y -= 32; // Shift y by half the panel height for the lower half of the panel
+            // First, map the X coordinate.
+            if (y % 4 == 0 || y % 4 == 1) {
+                *matrix_x = x;
+            } else {
+                *matrix_x = 63 - x;
             }
 
-            *matrix_x += panel_index_x * panel_width;
-            *matrix_y += panel_index_y * panel_height;
-
-            printf("Pixel: (%d, %d) Panel: (%d, %d) Offset: (%d, %d) Matrix: (%d, %d)\n",
-                x, y, panel_index_x, panel_index_y, panel_x, panel_y, *matrix_x, *matrix_y);
+            // Now, map the Y coordinate.
+            int row_offset = (y / 32) * 32;
+            int y_in_row = y % 32;
+            if (y_in_row < 16) {
+                *matrix_y = y_in_row * 2 + row_offset;
+            } else {
+                *matrix_y = (y_in_row - 16) * 2 + row_offset + 1;
+            }
         }
-
 
     private:
         int parallel_;
     };
+
       
     //////////////////////////////////// END OneSixtyFourMapper ///////////////////////////////////////
 

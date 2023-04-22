@@ -101,5 +101,4 @@ int main(int argc, char *argv[]) {
     canvas->Clear();
     delete canvas;
     return 0;
-    return 0;
 }
