@@ -58,6 +58,8 @@ int main(int argc, char *argv[]) {
     signal( SIGTERM, InterruptHandler );
     signal( SIGINT, InterruptHandler  );
 
+    int num_panels_in_a_row = 1;
+    int num_rows_of_panels = 1;
     // Initialize GPIO, matrix, and canvas
     // ...
 
