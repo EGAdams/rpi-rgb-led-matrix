@@ -277,3 +277,151 @@ virtual void MapVisibleToMatrix(int matrix_width, int matrix_height, int x, int 
 
 
 
+I am building a raspberry pi project from this repository: https://github.com/hzeller/rpi-rgb-led-matrix.
+I am using HUB75 panels and I need you to help me write the software that maps real hardware pixels to 
+virtual pixels that we can see on a 64x64 HUB75 panel.
+You are an expert at mapping these types of panels.  
+You are my programming assistant.
+You are an expert at using JavaScript, CSS, and HTML to help visualize solutions to problems.
+Here is the HTML that we have so far to use for us to communicate and for you to visualize concepts that 
+I am not familiar with.
+``` html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HUB75 Simulator</title>
+  <style>
+    /* Define some styles for the grid and the cells */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(64, 10px);
+      grid-template-rows: repeat(64, 10px);
+      gap: 1px;
+      margin: 10px;
+    }
+
+    .cell {
+      width: 10px;
+      height: 10px;
+      background-color: black;
+    }
+  </style>
+</head>
+<body>
+  <h1>HUB75 Simulator</h1>
+  <p>This is a javascript project that simulates a HUB75 64x64 LED panel.</p>
+  <p>The grid below represents the virtual pixels that we can see.</p>
+  <p>The inputs below represent the physical pixels that are mapped to the virtual pixels.</p>
+  <div class="grid" id="grid">
+    <!-- Create 64x64 cells with ids from "cell-0-0" to "cell-63-63" -->
+    <!-- Use a nested for loop to generate the cells -->
+    <!-- Use string interpolation to create the ids -->
+    <script>
+      for (let i = 0; i < 64; i++) {
+        for (let j = 0; j < 64; j++) {
+          let id = `cell-${i}-${j}`;
+          document.write(`<div class="cell" id="${id}"></div>`);
+        }
+      }
+    </script>
+  </div>
+  <div id="inputs">
+    <!-- Create a set of inputs from (0, 0) to (63, 63) for the simulation test -->
+    <!-- Use a nested for loop to generate the inputs -->
+    <!-- Use string interpolation to create the ids and values -->
+    <!-- Use document.write() to write the html elements -->
+    <script>
+      for (let i = 0; i < 64; i++) {
+        for (let j = 0; j < 64; j++) {
+          let id = `input-${i}-${j}`;
+          let value = `(${i}, ${j})`;
+          document.write(`<input type="text" id="${id}" value="${value}" readonly>`);
+        }
+        document.write("<br>"); // Add a line break after each row
+      }
+    </script>
+  </div>
+  <script src="script.js"></script> <!-- Link to the external javascript file -->
+</body>
+</html>
+```
+
+Here is the javascript that I have so far( script.js ):
+``` javascript 
+// Define a function that maps a physical pixel coordinate to a virtual pixel coordinate
+// This function is based on the MapVisibleToMatrix() function from the https://github.com/hzeller/rpi-rgb-led-matrix/ repository.
+// The function takes two parameters: x and y, which are the physical pixel coordinates.
+// The function returns an object with two properties: x and y, which are the virtual pixel coordinates
+function MapVisibleToMatrix(x, y) {
+  
+  // Define some constants for the panel size and configuration
+  const kPanelWidth = 64;
+  const kPanelHeight = 32;
+  
+  // Define some variables for the output coordinates
+  let out_x = x;
+  let out_y = y;
+
+  // Return the output coordinates as an object
+  return {x: out_x, y: out_y};
+}
+
+// Define a function that simulates the output of the mapping 
+// function for a given input.  This function takes two parameters: 
+// input_id and cell_id, which are the ids of the input element and 
+// the cell element.  The function reads the value of the input 
+// element, which is a physical pixel coordinate.  The function calls
+//  the mapping function to get the virtual pixel coordinate.  
+// The function changes the background color of the cell element that 
+// corresponds to the virtual pixel coordinate
+
+function simulateOutput(input_id, cell_id) {
+  const DELAY = 250;
+  // Get the input element by id
+  let input = document.getElementById(input_id);
+
+  // Get the value of the input element, which is a string like "(x, y)"
+  let value = input.value;
+
+  // Parse the value to get the x and y coordinates as numbers
+  let x = parseInt(value.slice(1, -1).split(", ")[0]);
+  let y = parseInt(value.slice(1, -1).split(", ")[1]);
+  
+  // Call the mapping function to get the virtual pixel coordinate as an object
+  let output = MapVisibleToMatrix(x, y);
+
+  // Get the cell element by id
+  let cell = document.getElementById(cell_id);
+
+  // Set a timeout of 200ms and pass a function that changes the 
+  // background color of the cell element to red as a callback
+  setTimeout(function() {
+    cell.style.backgroundColor = "green";
+  }, DELAY );
+}
+
+// Define a function that simulates all the outputs for all the inputs
+// This function loops through all the input elements and calls the 
+// simulateOutput function for each one
+function simulateAllOutputs() {
+
+  // Loop through all the input elements by using a nested for loop
+  for (let i = 0; i < 64; i++) {
+    for (let j = 0; j < 64; j++) {
+      // Create the ids of the input element and the cell element 
+      // using string interpolation
+      let input_id = `input-${i}-${j}`;
+      let cell_id = `cell-${i}-${j}`;
+
+      // Call the simulateOutput function with these ids as arguments
+      simulateOutput(input_id, cell_id);
+    }
+  }
+}
+
+// Call the simulateAllOutputs function when the window loads
+window.onload = simulateAllOutputs;
+```
+
+At the moment, the MapVisibleToMatrix does nothing.  Can you see why?

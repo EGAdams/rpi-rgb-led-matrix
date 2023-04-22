@@ -4,7 +4,12 @@
         "bitset": "cpp"
     },
     "cSpell.words": [
-        "fprintf"
+        "Adafruit",
+        "commandline",
+        "fprintf",
+        "GPIO",
+        "RGBMATRIX",
+        "SCKL"
     ],
     "liveServer.settings.port": 5501
 }

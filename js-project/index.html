@@ -27,35 +27,39 @@
   <p>The grid below represents the virtual pixels that we can see.</p>
   <p>The inputs below represent the physical pixels that are mapped to the virtual pixels.</p>
   <div class="grid" id="grid">
-    <!-- Create 64x64 cells with ids from "cell-0-0" to "cell-63-63" -->
-    <!-- Use a nested for loop to generate the cells -->
-    <!-- Use string interpolation to create the ids -->
-    <!-- Use document.write() to write the html elements -->
-    <script>
-      for (let i = 0; i < 64; i++) {
-        for (let j = 0; j < 64; j++) {
-          let id = `cell-${i}-${j}`;
-          document.write(`<div class="cell" id="${id}"></div>`);
-        }
-      }
-    </script>
   </div>
   <div id="inputs">
-    <!-- Create a set of inputs from (0, 0) to (63, 63) for the simulation test -->
-    <!-- Use a nested for loop to generate the inputs -->
-    <!-- Use string interpolation to create the ids and values -->
-    <!-- Use document.write() to write the html elements -->
-    <script>
-      for (let i = 0; i < 64; i++) {
-        for (let j = 0; j < 64; j++) {
-          let id = `input-${i}-${j}`;
-          let value = `(${i}, ${j})`;
-          document.write(`<input type="text" id="${id}" value="${value}" readonly>`);
-        }
-        document.write("<br>"); // Add a line break after each row
-      }
-    </script>
   </div>
-  <script src="script.js"></script> <!-- Link to the external javascript file -->
+  <script src="script.js"></script>
+  <script>
+    // Create grid cells
+    const grid = document.getElementById('grid');
+    for (let i = 0; i < 64; i++) {
+      for (let j = 0; j < 64; j++) {
+        let id = `cell-${i}-${j}`;
+        let cell = document.createElement('div');
+        cell.setAttribute('class', 'cell');
+        cell.setAttribute('id', id);
+        grid.appendChild(cell);
+      }
+    }
+
+    // Create input elements
+    const inputs = document.getElementById('inputs');
+    for (let i = 0; i < 64; i++) {
+      for (let j = 0; j < 64; j++) {
+        let id = `input-${i}-${j}`;
+        let value = `(${i}, ${j})`;
+        let input = document.createElement('input');
+        input.setAttribute('type', 'text');
+        input.setAttribute('id', id);
+        input.setAttribute('value', value);
+        input.setAttribute('readonly', true);
+        inputs.appendChild(input);
+      }
+      inputs.appendChild(document.createElement('br'));
+    }
+  </script>
 </body>
 </html>
+

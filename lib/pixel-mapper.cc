@@ -164,7 +164,7 @@ namespace rgb_matrix
 
         private:
             bool horizontal_;
-        };
+    };
 
 /* //////////////////////////////////////// BEGIN OneSixtyFourMapper //////////////////////////////////////// */
 class OneSixtyFourMapper : public PixelMapper {
@@ -325,35 +325,29 @@ class TwoSixtyFourMapper : public PixelMapper {
                 printf( "visible width: %d  visible height: %d \n", *visible_width, *visible_height );
                 return true; }
 
-            virtual void MapVisibleToMatrix( int matrix_width, int matrix_height,
-                                  int x, int y,
-                                  int *matrix_x, int *matrix_y ) const {
+            #include <cmath>
 
-                // Figure out what row and column panel this pixel is within.
-                int row = y / PANEL_HEIGHT; // _panel_height;
-                int col = x / PANEL_WIDTH;  // _panel_width;
-                // int col = x / PANEL_WIDTH;
+            virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
+                                            int x, int y, int *matrix_x, int *matrix_y) const {
+                int incoming_x = x;
+                int incoming_y = y;
+                int panel_width = 64;
+                int panel_height = 32;
+                int panels_per_row = std::ceil(static_cast<float>(matrix_width) / panel_width);
 
+                int panel_index_x = x / panel_width;
+                int panel_index_y = y / panel_height;
 
-                // int panel_index = col * 2 + (y < PANEL_HEIGHT ? 0 : 1); // bot suggestion back in on tuesday after sleepy day.
-                int panel_index = ( COLS * row ) + col;
-                
-                Panel panel = _panels[ panel_index ];  //_cols*row + col];
-                if ( x >= PANEL_WIDTH  ) { while ( x >= PANEL_WIDTH  ) { x -= PANEL_WIDTH;  }}
-                if ( y >= PANEL_HEIGHT ) { while ( y >= PANEL_HEIGHT ) { y -= PANEL_HEIGHT; }}
-                // rotations pasted below..
-                if ( panel.rotate == 180 ) {
-                    x = ( PANEL_WIDTH  - 1 ) - x;
-                    y = ( PANEL_HEIGHT - 1 ) - y;
-                }
-                int x_offset, y_offset = 0;
-                x_offset = (( CHAIN_LENGTH - 1 ) - panel.order ) * PANEL_WIDTH;  // this is the key line !!!  panel.order MATTERS !!!
-                y_offset = panel.y_offset;
+                int panel_x = panel_index_x * panel_width;
+                int panel_y = panel_index_y * panel_height;
 
-                printf( "x_offset: %d  y_offset: %d, x: %d, y: %d, row: %d  col: %d  panel index: %d\n", x_offset, y_offset, x, y, row, col,  panel_index );
-                *matrix_x = x + x_offset;
-                *matrix_y = y + y_offset;  
+                *matrix_x = x - panel_x;
+                *matrix_y = y - panel_y + panel_index_y * panel_height;
+
+                printf("Pixel: (%d, %d) Panel: (%d, %d) Offset: (%d, %d) Matrix: (%d, %d)\n",
+                    x, y, panel_index_x, panel_index_y, panel_x, panel_y, *matrix_x, *matrix_y);
             }
+
 
             private:
             int parallel_;

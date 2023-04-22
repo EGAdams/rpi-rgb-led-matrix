@@ -70,7 +70,7 @@ public:
 
   // Map where a visible pixel (x,y) is mapped to the underlying matrix (x,y).
   //
-  // To be convienently stateless, the first parameters are the full
+  // To be conveniently stateless, the first parameters are the full
   // matrix width and height.
   //
   // So for many multiplexing methods this means to map a panel to a double
