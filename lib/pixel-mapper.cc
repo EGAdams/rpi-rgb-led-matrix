@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <cmath>
 #include <map>
 
 namespace rgb_matrix
@@ -193,7 +193,7 @@ class OneSixtyFourMapper : public PixelMapper {
             return true; 
         }
 
-        #include <cmath>
+        
 
         virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
                                         int x, int y, int *matrix_x, int *matrix_y) const {
@@ -336,8 +336,6 @@ class TwoSixtyFourMapper : public PixelMapper {
                 printf( "matrix width: %d  matrix height: %d \n", matrix_width, matrix_height );
                 printf( "visible width: %d  visible height: %d \n", *visible_width, *visible_height );
                 return true; }
-
-            #include <cmath>
 
             virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
                                             int x, int y, int *matrix_x, int *matrix_y) const {
