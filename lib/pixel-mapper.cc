@@ -169,63 +169,61 @@ namespace rgb_matrix
     /* //////////////////////////////////////// BEGIN OneSixtyFourMapper //////////////////////////////////////// */
     class OneSixtyFourMapper : public PixelMapper {
     public:
-            OneSixtyFourMapper() : parallel_(1) {}
+        OneSixtyFourMapper() : parallel_(1) {}
 
-            virtual const char *GetName() const { return "164-mapper"; }
+        virtual const char *GetName() const { return "164-mapper"; }
 
-            virtual bool SetParameters(int chain, int parallel, const char *param) {
-                parallel_ = parallel;
-                return true;
+        virtual bool SetParameters(int chain, int parallel, const char *param) {
+            parallel_ = parallel;
+            return true;
+        }
+
+        virtual bool GetSizeMapping(int matrix_width, int matrix_height,
+                                    int *visible_width, int *visible_height) const {
+            *visible_width = (matrix_width / 64) * 32;
+            *visible_height = 2 * matrix_height;
+
+            if (matrix_height % parallel_ != 0) {
+                fprintf(stderr, "%s For parallel=%d we would expect the height=%d "
+                        "to be divisible by %d ??\n", GetName(), parallel_, matrix_height, parallel_);
+                return false;
+            }
+            return true;
+        }
+
+        virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
+                                int x, int y, int *matrix_x, int *matrix_y) const {
+            int panel_width = 64;
+            int panel_height = 64;
+            int panels_per_row = matrix_width / panel_width;
+
+            int panel_index_x = x / panel_width;
+            int panel_index_y = y / panel_height;
+
+            int panel_x = panel_index_x * panel_width;
+            int panel_y = panel_index_y * panel_height;
+
+            *matrix_x = x % panel_width;
+            *matrix_y = y % panel_height;
+
+            if (*matrix_y >= 32) {
+                *matrix_x += 32;
+                *matrix_y -= 32;
             }
 
-            virtual bool GetSizeMapping(int matrix_width, int matrix_height,
-                                        int *visible_width, int *visible_height) const {
-                *visible_width = (matrix_width / 64) * 32;   // Div at 32px boundary
-                *visible_height = 2 * matrix_height;
+            *matrix_x += panel_index_x * panel_width;
+            *matrix_y += panel_index_y * panel_height;
 
-                if (matrix_height % parallel_ != 0) {
-                    fprintf(stderr, "%s For parallel=%d we would expect the height=%d "
-                            "to be divisible by %d ??\n", GetName(), parallel_, matrix_height, parallel_);
-                    return false;
-                }
-                return true;
+            // Ensure that the x-coordinate remains within the matrix_width
+            if (*matrix_x >= matrix_width) {
+                *matrix_x -= matrix_width;
             }
+        }
 
-            virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
-                                    int x, int y, int *matrix_x, int *matrix_y) const {
-                int panel_width = 64;
-                int panel_height = 64;
-                int panels_per_row = matrix_width / panel_width;
-
-                int panel_index_x = x / panel_width;
-                int panel_index_y = y / panel_height;
-
-                int panel_x = panel_index_x * panel_width;
-                int panel_y = panel_index_y * panel_height;
-
-                *matrix_x = x - panel_x;
-                *matrix_y = y - panel_y;
-
-                if (y >= 32) {
-                    *matrix_x += 32; // Shift x by half the panel width for the lower half of the panel
-                    *matrix_y -= 32; // Shift y by half the panel height for the lower half of the panel
-                }
-
-                *matrix_x += panel_index_x * panel_width;
-                *matrix_y += panel_index_y * panel_height;
-
-                // Fix negative x-coordinates for second column of panels
-                if (x >= 64) {
-                    *matrix_x += 32;
-                }
-
-                printf("Pixel: (%d, %d) Panel: (%d, %d) Offset: (%d, %d) Matrix: (%d, %d)\n",
-                    x, y, panel_index_x, panel_index_y, panel_x, panel_y, *matrix_x, *matrix_y);
-            }
-
-        private:
-            int parallel_;
+    private:
+        int parallel_;
     };
+
 
 
       
