@@ -22,6 +22,8 @@ void displayRandomPixels(Canvas *canvas, int width, int height, int num_pixels) 
     int y = std::rand() % height;
 
     // Set the pixel color (You can choose any color you want)
+    // print x and y
+    printf( "x: %d, y: %d\n", x, y );
     canvas->SetPixel(x, y, 255, 0, 0);
 
     // Sleep for a moment to slow down the process
@@ -40,7 +42,7 @@ int main(int argc, char *argv[]) {
     printf( "starting main\n" );
     RGBMatrix::Options defaults;
     defaults.hardware_mapping = "regular"; // or e.g. "adafruit-hat"
-    defaults.rows = 32;
+    defaults.rows = 64;
     defaults.cols = 32;
     defaults.brightness = 20;
     defaults.pixel_mapper_config = "164-mapper";
