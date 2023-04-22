@@ -14,20 +14,19 @@ using rgb_matrix::RGBMatrix;
 #include <cstdlib>
 #include <vector>
 
-void displayRandomPixels(Canvas *canvas, int width, int height, int num_pixels) {
-  std::srand(std::time(0));
+void drawGridPattern(Canvas *canvas, int width, int height, int grid_size) {
+  // Draw horizontal lines
+  for (int y = 0; y < height; y += grid_size) {
+    for (int x = 0; x < width; ++x) {
+      canvas->SetPixel(x, y, 255, 255, 255);
+    }
+  }
 
-  for (int i = 0; i < num_pixels; ++i) {
-    int x = std::rand() % width;
-    int y = std::rand() % height;
-
-    // Set the pixel color (You can choose any color you want)
-    // print x and y
-    printf( "x: %d, y: %d\n", x, y );
-    canvas->SetPixel(x, y, 255, 0, 0);
-
-    // Sleep for a moment to slow down the process
-    usleep(5 * 1000);
+  // Draw vertical lines
+  for (int x = 0; x < width; x += grid_size) {
+    for (int y = 0; y < height; ++y) {
+      canvas->SetPixel(x, y, 255, 255, 255);
+    }
   }
 }
 
@@ -73,12 +72,13 @@ int main(int argc, char *argv[]) {
 
     // Replace these values with the actual width and height of your panel
     int width = 64 * num_panels_in_a_row;
-    int height = 32 * num_rows_of_panels;
+    int height = 64 * num_rows_of_panels;
 
     // Number of random pixels to display
     int num_pixels = 1000;
 
-    displayRandomPixels(canvas, width, height, num_pixels);
+    // drawGridPattern(canvas, width, height, 10);
+    drawGridPattern(canvas, width, height, 1);
 
     // ... (enter your main loop or other code)
     canvas->Clear();
