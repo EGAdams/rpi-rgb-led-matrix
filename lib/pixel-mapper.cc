@@ -345,7 +345,7 @@ class TwoSixtyFourMapper : public PixelMapper {
                 int incoming_y = y;
                 int panel_width = 64;
                 int panel_height = 32;
-                int panels_per_row = std::ceil(static_cast<float>(matrix_width) / panel_width);
+                int panels_per_row = ceil(static_cast<float>(matrix_width) / panel_width);
 
                 int panel_index_x = x / panel_width;
                 int panel_index_y = y / panel_height;
