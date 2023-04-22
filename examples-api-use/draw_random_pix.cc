@@ -24,7 +24,7 @@ void drawGridPattern(Canvas *canvas, int width, int height, int grid_size) {
       }
     }
     // Pause for a moment after drawing each horizontal line
-    usleep(500 * 1000); // 500 ms
+    usleep(50 * 1000); // 50 ms
   }
 
   // Draw vertical lines
@@ -36,8 +36,10 @@ void drawGridPattern(Canvas *canvas, int width, int height, int grid_size) {
       }
     }
     // Pause for a moment after drawing each vertical line
-    usleep(500 * 1000); // 500 ms
+    usleep(50 * 1000); // 50 ms
   }
+
+  usleep(600000 * 1000); // 10 minutes
 }
 
 
