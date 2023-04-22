@@ -166,72 +166,72 @@ namespace rgb_matrix
             bool horizontal_;
     };
 
-/* //////////////////////////////////////// BEGIN OneSixtyFourMapper //////////////////////////////////////// */
-class OneSixtyFourMapper : public PixelMapper {
-    public:
-        OneSixtyFourMapper() : parallel_(1) {}
+    /* //////////////////////////////////////// BEGIN OneSixtyFourMapper //////////////////////////////////////// */
+    class OneSixtyFourMapper : public PixelMapper {
+        public:
+            OneSixtyFourMapper() : parallel_(1) {}
 
-        virtual const char *GetName() const { return "164-mapper"; }
+            virtual const char *GetName() const { return "164-mapper"; }
 
-        virtual bool SetParameters(int chain, int parallel, const char *param) { 
-            parallel_ = parallel;
-            return true; 
-        }
-
-        virtual bool GetSizeMapping(int matrix_width, int matrix_height, 
-                                    int *visible_width, int *visible_height ) const {
-            *visible_width = (matrix_width / 64) * 32;   // Div at 32px boundary
-            *visible_height = 2 * matrix_height;
-
-            if (matrix_height % parallel_ != 0) {
-                fprintf(stderr, "%s For parallel=%d we would expect the height=%d "
-                        "to be divisible by %d ??\n", GetName(), parallel_, matrix_height, parallel_ );
-                return false; 
+            virtual bool SetParameters(int chain, int parallel, const char *param) { 
+                parallel_ = parallel;
+                return true; 
             }
-            printf("matrix width: %d  matrix height: %d\n", matrix_width, matrix_height);
-            printf("visible width: %d  visible height: %d\n", *visible_width, *visible_height);
-            return true; 
-        }
 
-        
+            virtual bool GetSizeMapping(int matrix_width, int matrix_height, 
+                                        int *visible_width, int *visible_height ) const {
+                *visible_width = (matrix_width / 64) * 32;   // Div at 32px boundary
+                *visible_height = 2 * matrix_height;
 
-        virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
-                                        int x, int y, int *matrix_x, int *matrix_y) const {
-            int incoming_x = x;
-            int incoming_y = y;
-            int panel_width = 64;
-            int panel_height = 32;
-            int panels_per_row = ceil(static_cast<float>(matrix_width) / panel_width);
-            int panel_index_x = x / panel_width;
-            int panel_index_y = y / panel_height;
-
-            int panel_x = panel_index_x * panel_width;
-            int panel_y = panel_index_y * panel_height;
-
-            *matrix_x = x - panel_x;
-            *matrix_y = y - panel_y + panel_index_y * panel_height;
-
-            printf("Pixel: (%d, %d) Panel: (%d, %d) Offset: (%d, %d) Matrix: (%d, %d)\n",
-                x, y, panel_index_x, panel_index_y, panel_x, panel_y, *matrix_x, *matrix_y);
-        }
-
-        
-    private:
-        int parallel_;
-
-        Panel getPanelOffsets( int x, int y ) const {
-            Panel newPanel;
-            if ( y >= 32 ) {
-                newPanel.y_offset = -32;
-                newPanel.x_offset = 0;
-            } else {
-                newPanel.y_offset = 0;
-                newPanel.x_offset = 0;
+                if (matrix_height % parallel_ != 0) {
+                    fprintf(stderr, "%s For parallel=%d we would expect the height=%d "
+                            "to be divisible by %d ??\n", GetName(), parallel_, matrix_height, parallel_ );
+                    return false; 
+                }
+                printf("matrix width: %d  matrix height: %d\n", matrix_width, matrix_height);
+                printf("visible width: %d  visible height: %d\n", *visible_width, *visible_height);
+                return true; 
             }
-            return newPanel;
-        }
-};;        
-//////////////////////////////////// END OneSixtyFourMapper ///////////////////////////////////////
+
+            virtual void MapVisibleToMatrix(int matrix_width, int matrix_height,
+                                            int x, int y, int *matrix_x, int *matrix_y) const {
+                int incoming_x = x;
+                int incoming_y = y;
+                int panel_width = 64;
+                int panel_height = 32;
+                int panels_per_row = ceil(static_cast<float>(matrix_width) / panel_width);
+
+                int panel_index_x = x / panel_width;
+                int panel_index_y = y / panel_height;
+
+                int panel_x = panel_index_x * panel_width;
+                int panel_y = panel_index_y * panel_height;
+
+                *matrix_x = x - panel_x;
+                *matrix_y = y - panel_y + panel_index_y * panel_height;
+
+                printf("Pixel: (%d, %d) Panel: (%d, %d) Offset: (%d, %d) Matrix: (%d, %d)\n",
+                    x, y, panel_index_x, panel_index_y, panel_x, panel_y, *matrix_x, *matrix_y);
+            }
+
+            
+        private:
+            int parallel_;
+
+            Panel getPanelOffsets( int x, int y ) const {
+                Panel newPanel;
+                if ( y >= 32 ) {
+                    newPanel.y_offset = -32;
+                    newPanel.x_offset = 0;
+                } else {
+                    newPanel.y_offset = 0;
+                    newPanel.x_offset = 0;
+                }
+                return newPanel;
+            }
+    };;        
+    //////////////////////////////////// END OneSixtyFourMapper ///////////////////////////////////////
+
                 // int incoming_x = x;
                 // int incoming_y = y;
                 // Figure out what row and column panel this pixel is within.
