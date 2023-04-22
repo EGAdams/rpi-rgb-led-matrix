@@ -45,9 +45,9 @@ int main(int argc, char *argv[]) {
     defaults.cols = 32;
     defaults.brightness = 20;
     defaults.pixel_mapper_config = "164-mapper";
-    defaults.multiplexing = 0; // 19 is the Superbowl mapper
+    defaults.multiplexing = 0;
     defaults.show_refresh_rate = false;
-    defaults.chain_length = 1;
+    defaults.chain_length = 4;
     defaults.parallel = 1;
     printf( "creating canvas from flags\n" );
     Canvas *canvas = RGBMatrix::CreateFromFlags(&argc, &argv, &defaults);
