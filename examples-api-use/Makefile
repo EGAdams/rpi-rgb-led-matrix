@@ -32,7 +32,7 @@ scrolling-text-example : scrolling-text-example.o
 clock : clock.o
 ledcat : ledcat.o
 pixel-mover : pixel-mover.o
-panel_test      : panel_test.o
+panel_test : panel_test.o
 
 # All the binaries that have the same name as the object file.q
 % : %.o $(RGB_LIBRARY)
