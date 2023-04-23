@@ -1,6 +1,29 @@
 #include <iostream>
 #include <unistd.h>
 #include "../include/led-matrix.h"
+#include <unistd.h>
+
+void DrawBorder(RGBMatrix *matrix, const Color &color) {
+  for (int x = 0; x < matrix->width(); ++x) {
+    matrix->SetPixel(x, 0, color.r, color.g, color.b);
+    matrix->SetPixel(x, matrix->height() - 1, color.r, color.g, color.b);
+  }
+  for (int y = 0; y < matrix->height(); ++y) {
+    matrix->SetPixel(0, y, color.r, color.g, color.b);
+    matrix->SetPixel(matrix->width() - 1, y, color.r, color.g, color.b);
+  }
+}
+
+void DrawArrow(RGBMatrix *matrix, const Color &color) {
+  int center_x = matrix->width() / 2;
+  int center_y = matrix->height() / 2;
+  matrix->SetPixel(center_x, center_y, color.r, color.g, color.b);
+  matrix->SetPixel(center_x - 1, center_y, color.r, color.g, color.b);
+  matrix->SetPixel(center_x + 1, center_y, color.r, color.g, color.b);
+  matrix->SetPixel(center_x, center_y - 1, color.r, color.g, color.b);
+  matrix->SetPixel(center_x, center_y + 1, color.r, color.g, color.b);
+  matrix->SetPixel(center_x - 1, center_y - 1, color.r, color.g, color.b);
+}
 
 using rgb_matrix::Canvas;
 using rgb_matrix::RGBMatrix;
@@ -44,7 +67,16 @@ int main(int argc, char *argv[]) {
     }
 
     // Sleep for a while to keep the pattern visible
-    usleep(10000000); // 10 seconds
+    usleep(2000000); // 10 seconds
+
+    // Draw a border around the panel
+    DrawBorder(matrix, Color(255, 255, 255));
+
+    // Draw an arrow in the center of the panel to indicate orientation
+    DrawArrow(matrix, Color(255, 0, 0));
+
+    // Wait for a while to observe the pattern
+    sleep(10);
 
     // Clean up and exit
     delete matrix;
