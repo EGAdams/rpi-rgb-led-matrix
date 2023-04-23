@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
     matrix_options.hardware_mapping = "regular"; // Set the GPIO mapping
 
     // Create the RGB matrix
-    RGBMatrix *matrix = CreateMatrixFromOptions(matrix_options, argc, &argv);
+    // RGBMatrix *matrix = CreateMatrixFromOptions(matrix_options, argc, &argv);
     if (matrix == nullptr) {
         std::cerr << "Failed to create RGB matrix." << std::endl;
         return 1;
