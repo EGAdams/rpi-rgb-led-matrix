@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LED Panel Mapping Visualization</title>
+  <style>
+    .grid-container {
+      display: inline-block;
+      margin: 10px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(64, 10px);
+      grid-template-rows: repeat(64, 10px);
+      grid-gap: 1px;
+      border: 1px solid #ccc; /* Add this line */
+    }
+    .grid-cell {
+      width: 10px;
+      height: 10px;
+      /* add hover effect */
+      transition: all 0.3s ease-in-out;
+    }
+    .visible-grid-cell {
+      background-color: lightblue;
+    }
+    .internal-grid-cell {
+      background-color: lightgreen;
+    }
+    .highlighted {
+      background-color:  red;
+    }
+    .info {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="grid-container">
+    <h3>Visible Pixel Coordinates</h3>
+    <div id="visible-grid" class="grid"></div>
+  </div>
+  <div class="grid-container">
+    <h3>Internal Panel Coordinates</h3>
+    <div id="internal-grid" class="grid"></div>
+  </div>
+  <form id="input-form">
+    <label for="x-coordinate">X Coordinate:</label>
+    <input type="number" id="x-coordinate" name="x-coordinate" min="0" max="63">
+    <label for="y-coordinate">Y Coordinate:</label>
+    <input type="number" id="y-coordinate" name="y-coordinate" min="0" max="63">
+    <button type="button" id="map-button">Map</button>
+  </form>
+  <button type="button" id="run-test-button">Run Test</button>
+  <div id="info" class="info"></div>
+
+  <script>
+    
+
+    function generateGrids() {
+      const visibleGrid = document.getElementById("visible-grid");
+      const internalGrid = document.getElementById("internal-grid");
+
+      for (let y = 0; y < 64; y++) {
+        for (let x = 0; x < 64; x++) {
+          const visibleCell = document.createElement("div");
+          visibleCell.id = `visible_${x}_${y}`;
+          visibleCell.className = "grid-cell visible-grid-cell";
+          visibleGrid.appendChild(visibleCell);
+
+          const internalCell = document.createElement("div");
+          internalCell.id = `internal_${x}_${y}`;
+          internalCell.className = "grid-cell internal-grid-cell";
+          internalGrid.appendChild(internalCell);
+        }
+      }
+    }
+
+    function clearHighlights() {
+      const highlightedCells = document.querySelectorAll(".highlighted");
+      highlightedCells.forEach(cell => cell.classList.remove("highlighted"));
+    }
+
+    function updateVisualization() {
+      // clearHighlights();
+
+      const x = parseInt(document.getElementById("x-coordinate").value, 10);
+      const y = parseInt(document.getElementById("y-coordinate").value, 10);
+
+      const visibleCell = document.getElementById(`visible_${x}_${y}`);
+      visibleCell.classList.add("highlighted");
+
+      // const mapper = new SimpleMultiplexingMapper();
+      // Replace SimpleMultiplexingMapper with the desired mapper class
+      const mapper = new OneSixtyFourMapper( 64, 64 ); // Or StripMultiplexMapper or any other mapper class
+
+      const internalCoordinates = mapper.mapVisibleToInternal(x, y, 64, 64);
+
+      if (internalCoordinates.x === -1 || internalCoordinates.y === -1) {
+        console.error(`Invalid visible coordinates: (${x}, ${y})`);
+      } else {
+        const internalCell = document.getElementById(`internal_${internalCoordinates.x}_${internalCoordinates.y}`);
+        if (internalCell) {
+          internalCell.classList.add("highlighted");
+        } else {
+          console.error(`Element with ID 'internal_${internalCoordinates.x}_${internalCoordinates.y}' not found.`);
+        }
+      }
+
+      const infoElement = document.getElementById("info");
+      infoElement.innerHTML = `Visible Coordinates: (${x}, ${y})<br>Internal Coordinates: (${internalCoordinates.x}, ${internalCoordinates.y})`;
+    }
+
+    function setupEventListeners() {
+      const mapButton = document.getElementById("map-button");
+      mapButton.addEventListener("click", updateVisualization);
+    }
+
+    function init() {
+      generateGrids();
+      setupEventListeners();
+    }
+
+    init();
+  </script>
+  <script src="test.js"></script>
+  <script src="animationTest.js"></script>
+  <script src="SimpleMultiplexingMapper.js"></script>
+  <script src="CheckerboardMultiplexMapper.js"></script>
+  <script src="StripMultiplexMapper.js"></script>
+  <script src="OneSixtyFourMapper.js"></script>
+</body>
+</html>

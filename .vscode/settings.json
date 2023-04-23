@@ -8,8 +8,10 @@
         "commandline",
         "fprintf",
         "GPIO",
+        "Hblock",
         "RGBMATRIX",
-        "SCKL"
+        "SCKL",
+        "Vblock"
     ],
     "liveServer.settings.port": 5501
 }
