@@ -6,8 +6,19 @@ using rgb_matrix::Canvas;
 using rgb_matrix::RGBMatrix;
 
 int main(int argc, char *argv[]) {
-    // Configure the RGB matrix
     RGBMatrix::Options matrix_options;
+    rgb_matrix::RuntimeOptions runtime_options;
+
+    if (!ParseOptionsFromFlags(&argc, &argv, &matrix_options, &runtime_options)) {
+        return 1;
+    }
+
+    RGBMatrix *matrix = CreateMatrixFromOptions(matrix_options, runtime_options);
+    if (matrix == NULL) {
+        return 1;
+    }
+    // Configure the RGB matrix
+    // RGBMatrix::Options matrix_options;
     matrix_options.rows = 32;         // Set the number of rows of your panel
     matrix_options.cols = 64;         // Set the number of columns of your panel
     matrix_options.chain_length = 1;  // Set the number of chained panels
