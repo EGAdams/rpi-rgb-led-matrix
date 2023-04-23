@@ -24,6 +24,7 @@ int main(int argc, char *argv[]) {
     matrix_options.chain_length = 1;  // Set the number of chained panels
     matrix_options.parallel = 1;      // Set the number of parallel chains
     matrix_options.hardware_mapping = "regular"; // Set the GPIO mapping
+    matrix_options.brightness = 20;
 
     // Create the RGB matrix
     // RGBMatrix *matrix = CreateMatrixFromOptions(matrix_options, argc, &argv);
