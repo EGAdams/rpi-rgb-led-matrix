@@ -24,7 +24,7 @@ $(RGB_LIBRARY): FORCE
 demo : demo-main.o $(RGB_LIBRARY)
 	$(CXX) $< -o $@ $(LDFLAGS)
 
-panel_test:     : panel_test.o
+panel_test      : panel_test.o
 draw_random_pix : draw_random_pix.o
 minimal-example : minimal-example.o
 input-example : input-example.o
