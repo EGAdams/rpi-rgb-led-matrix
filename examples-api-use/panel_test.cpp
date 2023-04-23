@@ -2,7 +2,8 @@
 #include <unistd.h>
 #include "led-matrix.h"
 
-using namespace rgb_matrix;
+using rgb_matrix::Canvas;
+using rgb_matrix::RGBMatrix;
 
 int main(int argc, char *argv[]) {
     // Configure the RGB matrix
