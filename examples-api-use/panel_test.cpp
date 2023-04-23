@@ -3,6 +3,9 @@
 #include "../include/led-matrix.h"
 #include <unistd.h>
 
+using rgb_matrix::Canvas;
+using rgb_matrix::RGBMatrix;
+
 void DrawBorder(RGBMatrix *matrix, const Color &color) {
   for (int x = 0; x < matrix->width(); ++x) {
     matrix->SetPixel(x, 0, color.r, color.g, color.b);
@@ -24,9 +27,6 @@ void DrawArrow(RGBMatrix *matrix, const Color &color) {
   matrix->SetPixel(center_x, center_y + 1, color.r, color.g, color.b);
   matrix->SetPixel(center_x - 1, center_y - 1, color.r, color.g, color.b);
 }
-
-using rgb_matrix::Canvas;
-using rgb_matrix::RGBMatrix;
 
 int main(int argc, char *argv[]) {
     RGBMatrix::Options matrix_options;
