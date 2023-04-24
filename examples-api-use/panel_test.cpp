@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
 
     // Draw a test pattern
     for (int x = 0; x < matrix_options.cols; ++x) {
-        usleep( 50000 )
+        usleep( 50000 );
         for (int y = 0; y < matrix_options.rows; ++y) {
             int red = (x % 8) * 32;
             int green = (y % 8) * 32;
