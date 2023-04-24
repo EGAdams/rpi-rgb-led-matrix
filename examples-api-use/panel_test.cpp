@@ -33,9 +33,6 @@ int main(int argc, char *argv[]) {
     RGBMatrix::Options matrix_options;
     rgb_matrix::RuntimeOptions runtime_options;
 
-
-    if ( matrix == NULL ) { return 1; }
-
     // Configure the RGB matrix
     // RGBMatrix::Options matrix_options;
     matrix_options.rows = 32;         // Set the number of rows of your panel
