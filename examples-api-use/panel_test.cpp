@@ -42,8 +42,8 @@ int main(int argc, char *argv[]) {
     }
     // Configure the RGB matrix
     // RGBMatrix::Options matrix_options;
-    matrix_options.rows = 64;         // Set the number of rows of your panel
-    matrix_options.cols = 64;         // Set the number of columns of your panel
+    matrix_options.rows = 32;         // Set the number of rows of your panel
+    matrix_options.cols = 32;         // Set the number of columns of your panel
     matrix_options.chain_length = 8;  // Set the number of chained panels
     matrix_options.parallel = 1;      // Set the number of parallel chains
     matrix_options.hardware_mapping = "regular"; // Set the GPIO mapping
