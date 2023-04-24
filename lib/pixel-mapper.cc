@@ -169,7 +169,7 @@ namespace rgb_matrix
     /* //////////////////////////////////////// BEGIN OneSixtyFourMapper //////////////////////////////////////// */
     class OneSixtyFourMapper : public PixelMapper {
     public:
-        OneSixtyFourMapper() : parallel_(1) {}
+        OneSixtyFourMapper() : parallel_(1) { printf( "OneSixtyFourMapper constructed\n" ); }
 
         virtual const char *GetName() const { return "164-mapper"; }
 
@@ -180,6 +180,7 @@ namespace rgb_matrix
 
         virtual bool GetSizeMapping(int matrix_width, int matrix_height,
                                     int *visible_width, int *visible_height) const {
+            printf( "OneSixtyFourMapper::GetSizeMapping( %d, %d, %d, %d )\n", matrix_width, matrix_height, *visible_width, *visible_height );
             *visible_width = (matrix_width / 64) * 32;
             *visible_height = 2 * matrix_height;
 
