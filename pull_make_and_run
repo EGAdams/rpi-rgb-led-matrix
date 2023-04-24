@@ -26,4 +26,7 @@ echo "running example... "
 #  1. Rotate:270
 #  2. Mirror:V
 
+#below command worked on april 24, 2023
+#sudo examples-api-use/demo -D 9 --led-no-hardware-pulse --led-multiplexing=1 --led-pixel-mapper="Rotate:180;264-Mapper" --led-gpio-mapping=regular --led-chain=1 --led-cols=64 --led-rows=64 --led-parallel=2 --led-brightness=20
+
 sudo examples-api-use/panel_test --led-no-hardware-pulse --led-multiplexing=1 --led-pixel-mapper="Rotate:270;Mirror:V --led-gpio-mapping=regular 

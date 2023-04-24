@@ -326,6 +326,11 @@ class TwoSixtyFourMapper : public PixelMapper {
                 const {
                 *visible_width = matrix_width; 
                 *visible_height = matrix_height;
+
+                ///////////////////
+                // below was altering the the visible variables!!
+                //////////////////
+
                 // *visible_width = (matrix_width / 64) * 32;   // Div at 32px boundary
                 // *visible_height = 2 * matrix_height;
                 // if (matrix_height % parallel_ != 0) {
