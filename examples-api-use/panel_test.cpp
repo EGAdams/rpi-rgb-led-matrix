@@ -67,7 +67,10 @@ int main(int argc, char *argv[]) {
             int green = 255;
             int blue = 0;
             matrix->SetPixel( x, y, red, green, blue );
-            printf( "x: %d, y: %d \n" , x, y );
+            // only print every 10th pixel
+            if ( x % 10 == 0 ) {
+                printf( "x: %d, y: %d \n" , x, y );
+            }
             usleep( 5000 );
         }
     }
