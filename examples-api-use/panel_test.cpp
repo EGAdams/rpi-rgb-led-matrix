@@ -49,6 +49,7 @@ int main(int argc, char *argv[]) {
     matrix_options.hardware_mapping = "regular"; // Set the GPIO mapping
     matrix_options.brightness = 20;
     matrix_options.multiplexing = 0;
+    matrix_options.pixel_mapper_config = "164-mapper";
 
     // Create the RGB matrix
     // RGBMatrix *matrix = CreateMatrixFromOptions(matrix_options, argc, &argv);
