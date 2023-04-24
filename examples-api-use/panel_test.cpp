@@ -60,13 +60,13 @@ int main(int argc, char *argv[]) {
     printf( "number of cols: %d \n" , matrix_options.cols );
 
     printf( "drawing test pattern now... " );
-    for (int x = 0; x < 64; ++x) {
+    for ( int y = 0; y < 128; ++y ) {
         usleep( 500 );
-        for (int y = 0; y < 128; ++y) {
+        for ( int x = 0; x < 64; ++x ) {
             int red = 0;
             int green = 255;
             int blue = 0;
-            matrix->SetPixel(x, y, red, green, blue);
+            matrix->SetPixel( x, y, red, green, blue );
             printf( "x: %d, y: %d \n" , x, y );
             usleep( 5000 );
         }
