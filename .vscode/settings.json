@@ -6,6 +6,7 @@
     "cSpell.words": [
         "Adafruit",
         "commandline",
+        "errpos",
         "fprintf",
         "GPIO",
         "Hblock",
