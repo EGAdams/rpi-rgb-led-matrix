@@ -9,8 +9,11 @@
         "fprintf",
         "GPIO",
         "Hblock",
+        "ialized",
+        "pwmbits",
         "RGBMATRIX",
         "SCKL",
+        "strchrnul",
         "Vblock"
     ],
     "liveServer.settings.port": 5501

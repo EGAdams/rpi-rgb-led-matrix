@@ -432,14 +432,16 @@ void RGBMatrix::Impl::OutputGPIO(uint64_t output_bits) {
 
 void RGBMatrix::Impl::ApplyNamedPixelMappers(const char *pixel_mapper_config,
                                              int chain, int parallel) {
-  if (pixel_mapper_config == NULL || strlen(pixel_mapper_config) == 0)
+  if ( pixel_mapper_config == NULL || strlen( pixel_mapper_config ) == 0 ) {
+    printf( "No pixel mappers configured. \n" );
     return;
+  }
   char *const writeable_copy = strdup(pixel_mapper_config);
   const char *const end = writeable_copy + strlen(writeable_copy);
   char *s = writeable_copy;
   printf( "Applying pixel mappers: '%s'\n", pixel_mapper_config );
   while (s < end) {
-    char *const semicolon = strchrnul(s, ';');
+    char *const semicolon = strchr(s, ';');
     *semicolon = '\0';
     char *optional_param_start = strchr(s, ':');
     if (optional_param_start) {

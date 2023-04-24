@@ -42,7 +42,8 @@ int main(int argc, char *argv[]) {
     matrix_options.hardware_mapping = "regular"; // Set the GPIO mapping
     matrix_options.brightness = 20;
     matrix_options.multiplexing = 0;
-    // matrix_options.pixel_mapper_config = "164-mapper";
+    matrix_options.pixel_mapper_config = ""; // "164-mapper";
+    matrix_options.panel_type = "";
     if (!ParseOptionsFromFlags(&argc, &argv, &matrix_options, &runtime_options)) { return 1; }
 
     // Create the RGB matrix
@@ -55,12 +56,13 @@ int main(int argc, char *argv[]) {
 
     printf( "drawing test pattern... " );
     for (int x = 0; x < matrix_options.cols; ++x) {
-        usleep( 5000000 );
+        usleep( 500000 );
         for (int y = 0; y < matrix_options.rows; ++y) {
             int red = 0;
             int green = 255;
             int blue = 0;
             matrix->SetPixel(x, y, red, green, blue);
+            printf( "x: %d, y: %d" , x, y );
             usleep( 1000000 );
         }
     }
