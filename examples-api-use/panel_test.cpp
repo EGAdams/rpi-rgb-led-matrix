@@ -29,12 +29,12 @@ using rgb_matrix::RGBMatrix;
 // }
 
 int main(int argc, char *argv[]) {
+    printf( "running panel_test.cpp... \n" );
     RGBMatrix::Options matrix_options;
     rgb_matrix::RuntimeOptions runtime_options;
 
     if (!ParseOptionsFromFlags(&argc, &argv, &matrix_options, &runtime_options)) { return 1; }
 
-    RGBMatrix *matrix = CreateMatrixFromOptions(matrix_options, runtime_options);
     if ( matrix == NULL ) { return 1; }
 
     // Configure the RGB matrix
@@ -49,19 +49,19 @@ int main(int argc, char *argv[]) {
     matrix_options.pixel_mapper_config = "164-mapper";
 
     // Create the RGB matrix
-    // RGBMatrix *matrix = CreateMatrixFromOptions(matrix_options, argc, &argv);
+    RGBMatrix *matrix = CreateMatrixFromOptions( matrix_options, argc, &argv );
     if (matrix == nullptr) {
         std::cerr << "Failed to create RGB matrix." << std::endl;
         return 1;
     }
 
-    // Draw a test pattern
+    printf( "drawing test pattern... " );
     for (int x = 0; x < matrix_options.cols; ++x) {
         usleep( 5000000 );
         for (int y = 0; y < matrix_options.rows; ++y) {
-            int red = (x % 8) * 32;
-            int green = (y % 8) * 32;
-            int blue = ((x + y) % 8) * 32;
+            int red = 0
+            int green = 255;
+            int blue = 0;
             matrix->SetPixel(x, y, red, green, blue);
             usleep( 1000000 );
         }
