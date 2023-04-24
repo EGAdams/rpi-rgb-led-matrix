@@ -42,12 +42,12 @@ int main(int argc, char *argv[]) {
     matrix_options.hardware_mapping = "regular"; // Set the GPIO mapping
     matrix_options.brightness = 20;
     matrix_options.multiplexing = 0;
-    matrix_options.pixel_mapper_config = "164-mapper";
+    // matrix_options.pixel_mapper_config = "164-mapper";
     if (!ParseOptionsFromFlags(&argc, &argv, &matrix_options, &runtime_options)) { return 1; }
 
     // Create the RGB matrix
     // RGBMatrix *matrix = CreateMatrixFromOptions( matrix_options, argc, &argv );
-    RGBMatrix *matrix = CreateMatrixFromOptions (matrix_options, runtime_options);
+    RGBMatrix *matrix = CreateMatrixFromOptions ( matrix_options, runtime_options );
     if (matrix == nullptr) {
         std::cerr << "Failed to create RGB matrix." << std::endl;
         return 1;
