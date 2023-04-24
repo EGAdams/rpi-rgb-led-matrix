@@ -347,10 +347,10 @@ class TwoSixtyFourMapper : public PixelMapper {
                     *matrix_x = incoming_x;
                     *matrix_y = incoming_y;
                 } else {
-                    // *matrix_x = matrix_width - x - 1;
-                    // *matrix_y = matrix_height - y - 1;
-                    *matrix_x = incoming_x;
-                    *matrix_y = incoming_y;
+                    *matrix_x = matrix_width - x - 1;
+                    *matrix_y = matrix_height - y - 1;
+                    // *matrix_x = incoming_x;
+                    // *matrix_y = incoming_y;
                 }
 
                 printf("Pixel: (%d, %d) Panel: (%d, %d)\n", x, y, *matrix_x, *matrix_y);
