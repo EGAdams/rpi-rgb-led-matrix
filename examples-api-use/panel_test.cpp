@@ -33,9 +33,11 @@ int main(int argc, char *argv[]) {
     RGBMatrix::Options matrix_options;
     rgb_matrix::RuntimeOptions runtime_options;
 
+    // last working command:
+    // sudo examples-api-use/panel_test --led-no-hardware-pulse --led-multiplexing=1 --led-pixel-mapper="Rotate:270;Mirror:V"
     // Configure the RGB matrix
     // RGBMatrix::Options matrix_options;
-    matrix_options.rows = 64;         // Set the number of rows of your panel
+    matrix_options.rows = 128;         // Set the number of rows of your panel
     matrix_options.cols = 64;         // Set the number of columns of your panel
     matrix_options.chain_length = 1;  // Set the number of chained panels
     matrix_options.parallel = 1;      // Set the number of parallel chains
@@ -54,7 +56,10 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    printf( "drawing test pattern... " );
+    printf( "number of rows: %d \n" , matrix_options.rows );
+    printf( "number of cols: %d \n" , matrix_options.cols );
+
+    printf( "drawing test pattern now... " );
     for (int x = 0; x < matrix_options.cols; ++x) {
         usleep( 500 );
         for (int y = 0; y < matrix_options.rows; ++y) {

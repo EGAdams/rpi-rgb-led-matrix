@@ -19,4 +19,11 @@ echo "running example... "
 #sudo examples-api-use/panel_test --led-no-hardware-pulse
 #sudo examples-api-use/panel_test --led-no-hardware-pulse
 #sudo examples-api-use/panel_test --led-no-hardware-pulse --led-multiplexing=1 --led-pixel-mapper="Rotate:270;Mirror:V"
-sudo examples-api-use/panel_test --led-no-hardware-pulse --led-multiplexing=1 --led-pixel-mapper="Rotate:270;Mirror:V" --led-parallel=2
+#  Single HUB75 panel (64x64) comes out of the box working with below command.
+#  led-multiplexing is set to 1 and is also named "Stripe"
+#  So we have 3 filters:
+#  3. Stripe
+#  1. Rotate:270
+#  2. Mirror:V
+
+sudo examples-api-use/panel_test --led-no-hardware-pulse --led-multiplexing=1 --led-pixel-mapper="Rotate:270;Mirror:V --led-gpio-mapping=regular 
