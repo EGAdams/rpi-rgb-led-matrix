@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
 
     printf( "drawing test pattern... " );
     for (int x = 0; x < matrix_options.cols; ++x) {
-        usleep( 50000 );
+        usleep( 500 );
         for (int y = 0; y < matrix_options.rows; ++y) {
             int red = 0;
             int green = 255;
