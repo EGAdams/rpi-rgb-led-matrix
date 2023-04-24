@@ -56,6 +56,9 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
+    printf( "number of rows: %d \n" , matrix_options.rows );
+    printf( "number of cols: %d \n" , matrix_options.cols );
+
     printf( "drawing test pattern... " );
     for (int x = 0; x < matrix_options.cols; ++x) {
         usleep( 500 );
