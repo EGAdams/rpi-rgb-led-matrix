@@ -17,4 +17,4 @@ echo "running example... "
 #sudo examples-api-use/minimal-example --led-gpio-mapping=regular --led-brightness=20 --led-chain=8 --led-pixel-mapper="164-mapper" --led-multiplexing=0
 #sudo examples-api-use/draw_random_pix
 #sudo examples-api-use/panel_test --led-no-hardware-pulse
-sudo examples-api-use/panel_test --led-no-hardware-pulse --led-pixel-mapper="Rotate:90"
+sudo examples-api-use/panel_test --led-no-hardware-pulse
