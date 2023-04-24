@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
             int blue = 0;
             matrix->SetPixel(x, y, red, green, blue);
             printf( "x: %d, y: %d \n" , x, y );
-            usleep( 1000 );
+            usleep( 10000 );
         }
     }
 
