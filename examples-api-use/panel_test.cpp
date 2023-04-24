@@ -46,7 +46,8 @@ int main(int argc, char *argv[]) {
     if (!ParseOptionsFromFlags(&argc, &argv, &matrix_options, &runtime_options)) { return 1; }
 
     // Create the RGB matrix
-    RGBMatrix *matrix = CreateMatrixFromOptions( matrix_options, argc, &argv );
+    // RGBMatrix *matrix = CreateMatrixFromOptions( matrix_options, argc, &argv );
+    RGBMatrix *matrix = CreateMatrixFromOptions (matrix_options, runtime_options);
     if (matrix == nullptr) {
         std::cerr << "Failed to create RGB matrix." << std::endl;
         return 1;
