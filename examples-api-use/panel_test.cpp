@@ -59,7 +59,7 @@ int main(int argc, char *argv[]) {
     for (int x = 0; x < matrix_options.cols; ++x) {
         usleep( 5000000 );
         for (int y = 0; y < matrix_options.rows; ++y) {
-            int red = 0
+            int red = 0;
             int green = 255;
             int blue = 0;
             matrix->SetPixel(x, y, red, green, blue);
