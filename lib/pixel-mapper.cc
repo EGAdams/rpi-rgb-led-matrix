@@ -347,9 +347,9 @@ class TwoSixtyFourMapper : public PixelMapper {
                     *matrix_x = incoming_x;
                     *matrix_y = incoming_y;
                 } else {
-                    // *matrix_x = 64 - x - 1;
+                    *matrix_x = 64 - x - 1;
                     // *matrix_y = 128 - y - 1;
-                    *matrix_x = incoming_x;
+                    //*matrix_x = incoming_x;
                     *matrix_y = incoming_y;
                 }
 
