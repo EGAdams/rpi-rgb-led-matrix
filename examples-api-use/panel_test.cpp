@@ -63,20 +63,21 @@ int main(int argc, char *argv[]) {
             int green = (y % 8) * 32;
             int blue = ((x + y) % 8) * 32;
             matrix->SetPixel(x, y, red, green, blue);
+            usleep( 1000 );
         }
     }
 
     // Sleep for a while to keep the pattern visible
-    usleep(2000000); // 10 seconds
+    usleep( 2000000 ); // 10 seconds
 
-    // Draw a border around the panel
-    DrawBorder(matrix, Color(255, 255, 255));
+    // // Draw a border around the panel
+    // DrawBorder(matrix, Color(255, 255, 255));
 
-    // Draw an arrow in the center of the panel to indicate orientation
-    DrawArrow(matrix, Color(255, 0, 0));
+    // // Draw an arrow in the center of the panel to indicate orientation
+    // DrawArrow(matrix, Color(255, 0, 0));
 
-    // Wait for a while to observe the pattern
-    sleep(10);
+    // // Wait for a while to observe the pattern
+    // sleep(10);
 
     // Clean up and exit
     delete matrix;
