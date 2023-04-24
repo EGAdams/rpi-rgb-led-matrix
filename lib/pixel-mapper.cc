@@ -302,7 +302,8 @@ class TwoSixtyFourMapper : public PixelMapper {
                 eighthPanel.name = "eighthPanel";
                 eighthPanel.order = 7;
                 eighthPanel.rotate = 0;
-                _panels[ 7 ] = eighthPanel; }
+                _panels[ 7 ] = eighthPanel; 
+                printf( "264 mapper constructed. \n" ); }
 
             virtual const char *GetName() const { return "264-mapper"; }
 
@@ -323,12 +324,12 @@ class TwoSixtyFourMapper : public PixelMapper {
             virtual bool GetSizeMapping(int matrix_width, int matrix_height,
                               int *visible_width, int *visible_height)
                 const {
-                *visible_width = (matrix_width / 64) * 32;   // Div at 32px boundary
-                *visible_height = 2 * matrix_height;
-                if (matrix_height % parallel_ != 0) {
-                    fprintf(stderr, "%s For parallel=%d we would expect the height=%d "
-                        "to be divisible by %d ??\n", GetName(), parallel_, matrix_height, parallel_ );
-                    return false; }
+                // *visible_width = (matrix_width / 64) * 32;   // Div at 32px boundary
+                // *visible_height = 2 * matrix_height;
+                // if (matrix_height % parallel_ != 0) {
+                //     fprintf(stderr, "%s For parallel=%d we would expect the height=%d "
+                //         "to be divisible by %d ??\n", GetName(), parallel_, matrix_height, parallel_ );
+                //     return false; }
 
                 // print visible width and height
                 printf( "matrix width: %d  matrix height: %d \n", matrix_width, matrix_height );
