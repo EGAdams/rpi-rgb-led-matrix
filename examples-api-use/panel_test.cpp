@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
             int green = (y % 8) * 32;
             int blue = ((x + y) % 8) * 32;
             matrix->SetPixel(x, y, red, green, blue);
-            usleep( 10000 );
+            usleep( 100000 );
         }
     }
 
