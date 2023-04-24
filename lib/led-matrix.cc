@@ -435,20 +435,11 @@ void RGBMatrix::Impl::ApplyNamedPixelMappers(const char *pixel_mapper_config,
   if ( pixel_mapper_config == NULL || strlen( pixel_mapper_config ) == 0 ) {
     printf( "No pixel mappers configured. \n" );
     return;
-  } else {
-    printf( "Applying pixel mappers: '%s'\n", pixel_mapper_config );
-  }
   char *const writeable_copy = strdup(pixel_mapper_config);
   const char *const end = writeable_copy + strlen(writeable_copy);
   char *s = writeable_copy;
-  printf( "Applying pixel mappers: '%s'\n", pixel_mapper_config );
-  
-  // print each value of pixel_mapper_config as a string ... length for now..
-  printf( "pixel_mapper_config.length() = %d\n", strlen(pixel_mapper_config) );
-  
-  
   while (s < end) {
-    char *const semicolon = strchr(s, ';');
+    char *const semicolon = strchrnul(s, ';');
     *semicolon = '\0';
     char *optional_param_start = strchr(s, ':');
     if (optional_param_start) {
@@ -458,7 +449,6 @@ void RGBMatrix::Impl::ApplyNamedPixelMappers(const char *pixel_mapper_config,
       fprintf(stderr, "Stray parameter ':%s' without mapper name ?\n", optional_param_start);
     }
     if (*s) {
-      printf( "Applying mapper '%s'\n", s );
       ApplyPixelMapper(FindPixelMapper(s, chain, parallel, optional_param_start));
     }
     s = semicolon + 1;
