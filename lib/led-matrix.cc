@@ -435,6 +435,8 @@ void RGBMatrix::Impl::ApplyNamedPixelMappers(const char *pixel_mapper_config,
   if ( pixel_mapper_config == NULL || strlen( pixel_mapper_config ) == 0 ) {
     printf( "No pixel mappers configured. \n" );
     return;
+  } else {
+    printf( "Applying pixel mappers: '%s'\n", pixel_mapper_config );
   }
   char *const writeable_copy = strdup(pixel_mapper_config);
   const char *const end = writeable_copy + strlen(writeable_copy);
