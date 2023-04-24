@@ -59,7 +59,7 @@ int main(int argc, char *argv[]) {
     printf( "number of rows: %d \n" , matrix_options.rows );
     printf( "number of cols: %d \n" , matrix_options.cols );
 
-    printf( "drawing test pattern... " );
+    printf( "drawing test pattern now... " );
     for (int x = 0; x < matrix_options.cols; ++x) {
         usleep( 500 );
         for (int y = 0; y < matrix_options.rows; ++y) {
