@@ -443,11 +443,9 @@ void RGBMatrix::Impl::ApplyNamedPixelMappers(const char *pixel_mapper_config,
   char *s = writeable_copy;
   printf( "Applying pixel mappers: '%s'\n", pixel_mapper_config );
   
-  // print each value of pixel_mapper_config as a string
+  // print each value of pixel_mapper_config as a string ... length for now..
   printf( "pixel_mapper_config.length() = %d\n", strlen(pixel_mapper_config) );
-  for (int i = 0; i < strlen(pixel_mapper_config); i++) {
-    printf( "pixel_mapper_config[%d] = %c\n", i, pixel_mapper_config[i] );
-  }
+  
   
   while (s < end) {
     char *const semicolon = strchr(s, ';');
