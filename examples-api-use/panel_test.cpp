@@ -33,6 +33,8 @@ int main(int argc, char *argv[]) {
     RGBMatrix::Options matrix_options;
     rgb_matrix::RuntimeOptions runtime_options;
 
+    // last working command:
+    // sudo examples-api-use/panel_test --led-no-hardware-pulse --led-multiplexing=1 --led-pixel-mapper="Rotate:270;Mirror:V"
     // Configure the RGB matrix
     // RGBMatrix::Options matrix_options;
     matrix_options.rows = 64;         // Set the number of rows of your panel

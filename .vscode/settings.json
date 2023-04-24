@@ -8,6 +8,7 @@
         "commandline",
         "errpos",
         "fprintf",
+        "Freqs",
         "GPIO",
         "Hblock",
         "ialized",
@@ -15,7 +16,8 @@
         "RGBMATRIX",
         "SCKL",
         "strchrnul",
-        "Vblock"
+        "Vblock",
+        "Vliedel"
     ],
     "liveServer.settings.port": 5501
 }
