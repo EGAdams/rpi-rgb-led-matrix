@@ -2,5 +2,22 @@
     "files.associations": {
         "*.ts": "typescript",
         "bitset": "cpp"
-    }
+    },
+    "cSpell.words": [
+        "Adafruit",
+        "commandline",
+        "errpos",
+        "fprintf",
+        "Freqs",
+        "GPIO",
+        "Hblock",
+        "ialized",
+        "pwmbits",
+        "RGBMATRIX",
+        "SCKL",
+        "strchrnul",
+        "Vblock",
+        "Vliedel"
+    ],
+    "liveServer.settings.port": 5501
 }

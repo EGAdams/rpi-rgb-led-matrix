@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HUB75 Simulator</title>
+  <style>
+    /* Define some styles for the grid and the cells */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(64, 10px);
+      grid-template-rows: repeat(64, 10px);
+      gap: 1px;
+      margin: 10px;
+    }
+
+    .cell {
+      width: 10px;
+      height: 10px;
+      background-color: black;
+    }
+  </style>
+</head>
+<body>
+  <h1>HUB75 Simulator</h1>
+  <p>This is a javascript project that simulates a HUB75 64x64 LED panel.</p>
+  <p>The grid below represents the virtual pixels that we can see.</p>
+  <p>The inputs below represent the physical pixels that are mapped to the virtual pixels.</p>
+  <div class="grid" id="grid">
+  </div>
+  <div id="inputs">
+  </div>
+  <script src="script.js"></script>
+  <script>
+    // Create grid cells
+    const grid = document.getElementById('grid');
+    for (let i = 0; i < 64; i++) {
+      for (let j = 0; j < 64; j++) {
+        let id = `cell-${i}-${j}`;
+        let cell = document.createElement('div');
+        cell.setAttribute('class', 'cell');
+        cell.setAttribute('id', id);
+        grid.appendChild(cell);
+      }
+    }
+
+    // Create input elements
+    const inputs = document.getElementById('inputs');
+    for (let i = 0; i < 64; i++) {
+      for (let j = 0; j < 64; j++) {
+        let id = `input-${i}-${j}`;
+        let value = `(${i}, ${j})`;
+        let input = document.createElement('input');
+        input.setAttribute('type', 'text');
+        input.setAttribute('id', id);
+        input.setAttribute('value', value);
+        input.setAttribute('readonly', true);
+        inputs.appendChild(input);
+      }
+      inputs.appendChild(document.createElement('br'));
+    }
+  </script>
+</body>
+</html>
+
