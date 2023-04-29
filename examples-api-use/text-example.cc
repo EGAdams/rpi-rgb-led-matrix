@@ -172,9 +172,10 @@ int main(int argc, char *argv[]) {
     fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT );
     return 1; }
   
-  #define PERIOD_SPACING 10
+  #define PERIOD_SPACING 14
+  #define BEGINNING_SPACE 5
   Color pipe_color( 255, 255, 0 );
-  rgb_matrix::DrawText(canvas, big_number_font, x, y + big_number_font.baseline(), pipe_color,  outline_font ? NULL : &bg_color, "I", letter_spacing );
+  rgb_matrix::DrawText(canvas, big_number_font, x + BEGINNING_SPACE, y + big_number_font.baseline(), pipe_color,  outline_font ? NULL : &bg_color, "I", letter_spacing );
   
   rgb_matrix::DrawText(canvas, big_number_font, x + PERIOD_SPACING, y + big_number_font.baseline(), firstRowColor, outline_font ? NULL : &bg_color, "15", letter_spacing );
   y += big_number_font.height();
@@ -182,7 +183,7 @@ int main(int argc, char *argv[]) {
   printf("Font height before second row: %d\n", big_number_font.height());
 
   Color secondRowColor( 255, 0, 0 );
-  rgb_matrix::DrawText(canvas, big_number_font, x, y + big_number_font.baseline(), secondRowColor, outline_font ? NULL : &bg_color, " 30", letter_spacing );
+  rgb_matrix::DrawText(canvas, big_number_font, x + BEGINNING_SPACE, y + big_number_font.baseline(), secondRowColor, outline_font ? NULL : &bg_color, " 30", letter_spacing );
   
   y += big_number_font.height();
   printf("Font height before third row: %d\n", big_number_font.height());
@@ -194,13 +195,13 @@ int main(int argc, char *argv[]) {
     return 1; }
 
   Color thirdRowColor( 0, 255, 0 );
-  rgb_matrix::DrawText(canvas, little_number_font, x, y + little_number_font.baseline(), thirdRowColor,  outline_font ? NULL : &bg_color, "6 4 4", letter_spacing );
+  rgb_matrix::DrawText(canvas, little_number_font, x + BEGINNING_SPACE, y + little_number_font.baseline(), thirdRowColor,  outline_font ? NULL : &bg_color, "6 4 4", letter_spacing );
 
   y += little_number_font.height();
   printf("Font height before fourth row: %d\n", little_number_font.height());
 
   Color fourthRowColor( 255, 0, 0 );
-  rgb_matrix::DrawText(canvas, little_number_font, x, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "3 6 1", letter_spacing );
+  rgb_matrix::DrawText(canvas, little_number_font, x + BEGINNING_SPACE, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "3 6 1", letter_spacing );
   
   // initialize line buffer and // start reading from stdin
   char line[1024];
