@@ -172,27 +172,26 @@ int main(int argc, char *argv[]) {
     fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT );
     return 1; }
   
-  #define PERIOD_SPACING 14
+  #define PERIOD_SPACING 10
   Color pipe_color( 255, 255, 0 );
-  rgb_matrix::DrawText(canvas, big_number_font, x, y + big_number_font.baseline(), pipe_color,  outline_font ? NULL : &bg_color, "|", letter_spacing );
+  rgb_matrix::DrawText(canvas, big_number_font, x, y + big_number_font.baseline(), pipe_color,  outline_font ? NULL : &bg_color, "I", letter_spacing );
   
-  rgb_matrix::DrawText(canvas, big_number_font, x, y + big_number_font.baseline(), firstRowColor, outline_font ? NULL : &bg_color, "15", letter_spacing );
+  rgb_matrix::DrawText(canvas, big_number_font, x + PERIOD_SPACING, y + big_number_font.baseline(), firstRowColor, outline_font ? NULL : &bg_color, "15", letter_spacing );
   y += big_number_font.height();
   // print font height
   printf("Font height before second row: %d\n", big_number_font.height());
 
   Color secondRowColor( 255, 0, 0 );
-  rgb_matrix::DrawText(canvas, big_number_font, x, y + big_number_font.baseline(), secondRowColor, outline_font ? NULL : &bg_color, "  30", letter_spacing );
+  rgb_matrix::DrawText(canvas, big_number_font, x, y + big_number_font.baseline(), secondRowColor, outline_font ? NULL : &bg_color, " 30", letter_spacing );
+  
   y += big_number_font.height();
+  printf("Font height before third row: %d\n", big_number_font.height());
 
   #define LITTLE_NUMBER_FONT "fonts/little_numbers.bdf"
   rgb_matrix::Font little_number_font;
   if (!little_number_font.LoadFont( LITTLE_NUMBER_FONT )) { 
     fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_NUMBER_FONT );
     return 1; }
-
-  printf("Font height before third row: %d\n", big_number_font.height());
-  y += big_number_font.height();
 
   Color thirdRowColor( 0, 255, 0 );
   rgb_matrix::DrawText(canvas, little_number_font, x, y + little_number_font.baseline(), thirdRowColor,  outline_font ? NULL : &bg_color, "6 4 4", letter_spacing );
