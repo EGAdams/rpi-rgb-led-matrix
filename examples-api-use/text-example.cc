@@ -212,7 +212,7 @@ int main(int argc, char *argv[]) {
   Color fourthRowColor( 255, 0, 0 );
   rgb_matrix::DrawText(canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "3", letter_spacing );
   rgb_matrix::DrawText(canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + SPACE_BETWEEN_SMALL_NUMBERS, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "6", letter_spacing );
-  rgb_matrix::DrawText(canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + ( 2 * SPACE_BETWEEN_SMALL_NUMBERS ), y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "1", letter_spacing );
+  rgb_matrix::DrawText(canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + (( 2 * SPACE_BETWEEN_SMALL_NUMBERS ) + 1 ), y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "1", letter_spacing );
   
   // initialize line buffer and // start reading from stdin
   char line[1024];
