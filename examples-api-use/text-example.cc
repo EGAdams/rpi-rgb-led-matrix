@@ -172,13 +172,13 @@ int main(int argc, char *argv[]) {
     fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT );
     return 1; }
   
-  #define PERIOD_SPACING 16
-  #define SPACE_BEFORE_2ND_NUMBER 7
+  #define SPACE_BEFORE_1ST_NUMBER 14
+  #define SPACE_BEFORE_2ND_NUMBER 6
   #define PIPE_SPACE 1
   Color pipe_color( 255, 255, 0 );
   rgb_matrix::DrawText(canvas, big_number_font, x + PIPE_SPACE, y + big_number_font.baseline(), pipe_color,  outline_font ? NULL : &bg_color, "I", letter_spacing );
   
-  rgb_matrix::DrawText(canvas, big_number_font, x + PERIOD_SPACING, y + big_number_font.baseline(), firstRowColor, outline_font ? NULL : &bg_color, "15", letter_spacing );
+  rgb_matrix::DrawText(canvas, big_number_font, x + SPACE_BEFORE_1ST_NUMBER, y + big_number_font.baseline(), firstRowColor, outline_font ? NULL : &bg_color, "15", letter_spacing );
   y += big_number_font.height();
   // print font height
   printf("Font height before second row: %d\n", big_number_font.height());
