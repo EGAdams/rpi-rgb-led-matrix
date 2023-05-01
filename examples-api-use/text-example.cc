@@ -172,7 +172,7 @@ int main(int argc, char *argv[]) {
     fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT );
     return 1; }
   
-  #define SPACE_BEFORE_1ST_NUMBER 15
+  #define SPACE_BEFORE_1ST_NUMBER 16
   #define SPACE_BEFORE_2ND_NUMBER 6
   #define PIPE_SPACE 1
   #define LETTER_SPACING 1
