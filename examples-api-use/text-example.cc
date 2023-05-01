@@ -185,7 +185,7 @@ int main(int argc, char *argv[]) {
   printf("Font height before second row: %d\n", big_number_font.height());
 
   Color secondRowColor( 255, 0, 0 );
-  rgb_matrix::DrawText(canvas, big_number_font, x + SPACE_BEFORE_2ND_NUMBER, y + big_number_font.baseline(), secondRowColor, outline_font ? NULL : &bg_color, " 30", LETTER_SPACING );
+  rgb_matrix::DrawText(canvas, big_number_font, x + SPACE_BEFORE_2ND_NUMBER, y + big_number_font.baseline(), secondRowColor, outline_font ? NULL : &bg_color, " 30", letter_spacing );
   
   y += big_number_font.height() + 4;
   printf("Font height before third row: %d\n", big_number_font.height());
