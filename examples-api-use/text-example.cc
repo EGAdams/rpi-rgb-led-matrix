@@ -173,7 +173,7 @@ int main(int argc, char *argv[]) {
     return 1; }
   
   #define SPACE_BEFORE_1ST_NUMBER 14
-  #define SPACE_BEFORE_2ND_NUMBER 6
+  #define SPACE_BEFORE_2ND_NUMBER 7
   #define PIPE_SPACE 1
   #define LETTER_SPACING 1
   Color pipe_color( 255, 255, 0 );
