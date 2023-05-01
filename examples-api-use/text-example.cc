@@ -173,7 +173,7 @@ int main(int argc, char *argv[]) {
     return 1; }
   
   #define PERIOD_SPACING 14
-  #define BEGINNING_SPACE 5
+  #define BEGINNING_SPACE 3
   Color pipe_color( 255, 255, 0 );
   rgb_matrix::DrawText(canvas, big_number_font, x + BEGINNING_SPACE, y + big_number_font.baseline(), pipe_color,  outline_font ? NULL : &bg_color, "I", letter_spacing );
   
