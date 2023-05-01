@@ -180,7 +180,7 @@ int main(int argc, char *argv[]) {
   rgb_matrix::DrawText(canvas, big_number_font, x + PIPE_SPACE, y + big_number_font.baseline(), pipe_color,  outline_font ? NULL : &bg_color, "I", letter_spacing );
   
   rgb_matrix::DrawText(canvas, big_number_font, x + SPC_BEFORE_1ST, y + big_number_font.baseline(), firstRowColor, outline_font ? NULL : &bg_color, "1", LETTER_SPACING );
-  rgb_matrix::DrawText(canvas, big_number_font, x + 4,              y, firstRowColor, outline_font ? NULL : &bg_color, "5", LETTER_SPACING );
+  rgb_matrix::DrawText(canvas, big_number_font, x + SPC_BEFORE_1ST, y + big_number_font.baseline(), firstRowColor, outline_font ? NULL : &bg_color, "5", LETTER_SPACING );
   y += big_number_font.height();
   // print font height
   printf("Font height before second row: %d\n", big_number_font.height());
