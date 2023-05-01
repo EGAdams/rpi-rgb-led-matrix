@@ -174,7 +174,7 @@ int main(int argc, char *argv[]) {
   
   #define SPACE_BEFORE_1ST_NUMBER 16
   #define SPACE_BEFORE_2ND_NUMBER 6
-  #define COORDS_FOR_SECOND_NUMBER 28
+  #define COORDS_FOR_SECOND_NUMBER 39
   #define PIPE_SPACE 1
   #define LETTER_SPACING 1
   Color pipe_color( 255, 255, 0 );
