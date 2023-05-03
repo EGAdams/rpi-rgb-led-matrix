@@ -189,10 +189,10 @@ int main(int argc, char *argv[]) {
   // print font height
   printf("Font height before second row: %d\n", big_number_font.height());
 
-  rgb_matrix::DrawText(canvas, big_number_font, x + PIPE_SPACE, y + big_number_font.baseline(), pipe_color,  outline_font ? NULL : &bg_color, "I", letter_spacing );
+  rgb_matrix::DrawText(canvas, big_number_font, x + PIPE_SPACE, y + big_number_font.baseline() + 2, pipe_color,  outline_font ? NULL : &bg_color, "I", letter_spacing );
 
   Color secondRowColor( 255, 0, 0 );
-  rgb_matrix::DrawText(canvas, big_number_font, x + SPACE_BEFORE_2ND_NUMBER, y + big_number_font.baseline(), secondRowColor, outline_font ? NULL : &bg_color, " 30", letter_spacing );
+  rgb_matrix::DrawText(canvas, big_number_font, x + SPACE_BEFORE_2ND_NUMBER, y + big_number_font.baseline() + 2, secondRowColor, outline_font ? NULL : &bg_color, " 30", letter_spacing );
   
   y += big_number_font.height() + 4;
   printf("Font height before third row: %d\n", big_number_font.height());
