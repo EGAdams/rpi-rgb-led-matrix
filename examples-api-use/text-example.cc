@@ -182,8 +182,8 @@ int main(int argc, char *argv[]) {
   Color pipe_color( 255, 255, 0 );
   rgb_matrix::DrawText(canvas, big_number_font, x + PIPE_SPACE, y + big_number_font.baseline(), pipe_color,  outline_font ? NULL : &bg_color, "I", letter_spacing );
   
-  rgb_matrix::DrawText(canvas, big_number_font, x + SPACE_BEFORE_1ST_NUMBER, y + big_number_font.baseline(), firstRowColor, outline_font ? NULL : &bg_color, "1", LETTER_SPACING );
-  rgb_matrix::DrawText(canvas, big_number_font, x + COORDS_FOR_SECOND_NUMBER, y + big_number_font.baseline(), firstRowColor, outline_font ? NULL : &bg_color, "5", LETTER_SPACING );
+  rgb_matrix::DrawText(canvas, big_number_font, x + SPACE_BEFORE_1ST_NUMBER, y + big_number_font.baseline() - 1, firstRowColor, outline_font ? NULL : &bg_color, "1", LETTER_SPACING );
+  rgb_matrix::DrawText(canvas, big_number_font, x + COORDS_FOR_SECOND_NUMBER, y + big_number_font.baseline() - 1, firstRowColor, outline_font ? NULL : &bg_color, "5", LETTER_SPACING );
   
   y += big_number_font.height();
   // print font height
