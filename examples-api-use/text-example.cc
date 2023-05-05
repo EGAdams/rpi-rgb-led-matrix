@@ -204,7 +204,7 @@ int main(int argc, char *argv[]) {
     return 1; }
 
   Color thirdRowColor( 0, 255, 0 );
-  rgb_matrix::DrawText(canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), thirdRowColor,  outline_font ? NULL : &bg_color, "6 4 4", letter_spacing );
+  rgb_matrix::DrawText(canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), thirdRowColor,  outline_font ? NULL : &bg_color, "6 5 4", letter_spacing );
 
   y += little_number_font.height() - 5;
   printf("Font height before fourth row: %d\n", little_number_font.height());
