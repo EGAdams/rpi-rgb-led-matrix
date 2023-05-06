@@ -16,12 +16,20 @@ def run_command(brightness):
         "--led-rows=64",
         f"--led-brightness={brightness}",
     ]
-    subprocess.run(command)
+    return subprocess.Popen(command)
 
 def main():
+    process = None
     for brightness in range(10, 101, 10):
-        run_command(brightness)
+        if process:
+            process.terminate()
+            process.wait()
+        process = run_command(brightness)
         time.sleep(2)
+
+    if process:
+        process.terminate()
+        process.wait()
 
 if __name__ == "__main__":
     main()
