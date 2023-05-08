@@ -150,7 +150,7 @@ int main(int argc, char *argv[]) {
         // The outline font, we need to write with a negative (-2) text-spacing,
         // as we want to have the same letter pitch as the regular text that
         // we then write on top.
-        rgb_matrix::DrawText(canvas, *outline_font,
+        rgb_matrix::DrawText( canvas, *outline_font,
                             x - 1, y + font.baseline(),
                             outline_color, &bg_color, line, letter_spacing - 2);
     } */
@@ -181,21 +181,21 @@ int main(int argc, char *argv[]) {
   #define PIPE_SPACE 1
   #define LETTER_SPACING 1
   Color pipe_color( 255, 255, 0 );
-  rgb_matrix::DrawText(canvas, big_number_font, x + PIPE_SPACE, y + big_number_font.baseline(), pipe_color,  outline_font ? NULL : &bg_color, "I", letter_spacing );
+  rgb_matrix::DrawText( canvas, big_number_font, x + PIPE_SPACE, y + big_number_font.baseline(), pipe_color,  outline_font ? NULL : &bg_color, "I", letter_spacing );
   
-  rgb_matrix::DrawText(canvas, big_number_font, x + SPACE_BEFORE_1ST_NUMBER, y + big_number_font.baseline() - 1, firstRowColor, outline_font ? NULL : &bg_color, "8", LETTER_SPACING );
-  rgb_matrix::DrawText(canvas, big_number_font, x + COORDS_FOR_SECOND_NUMBER, y + big_number_font.baseline() - 1, firstRowColor, outline_font ? NULL : &bg_color, "9", LETTER_SPACING );
+  rgb_matrix::DrawText( canvas, big_number_font, x + SPACE_BEFORE_1ST_NUMBER, y + big_number_font.baseline() - 1, firstRowColor, outline_font ? NULL : &bg_color, "8", LETTER_SPACING );
+  rgb_matrix::DrawText( canvas, big_number_font, x + SPACE_BETWEEN_FIRST_NUMBERS, y + big_number_font.baseline() - 1, firstRowColor, outline_font ? NULL : &bg_color, "9", LETTER_SPACING );
   
   y += big_number_font.height();
   // print font height
   printf("Font height before second row: %d\n", big_number_font.height());
 
-  rgb_matrix::DrawText(canvas, big_number_font, x + PIPE_SPACE, y + big_number_font.baseline() + 2, pipe_color,  outline_font ? NULL : &bg_color, "I", letter_spacing );
+  rgb_matrix::DrawText( canvas, big_number_font, x + PIPE_SPACE, y + big_number_font.baseline() + 2, pipe_color,  outline_font ? NULL : &bg_color, "I", letter_spacing );
 
   Color secondRowColor( 255, 0, 0 );
-//   rgb_matrix::DrawText(canvas, big_number_font, x + SPACE_BEFORE_2ND_NUMBER, y + big_number_font.baseline() + 2, secondRowColor, outline_font ? NULL : &bg_color, " Ad", SPACE_BEFORE_2ND_NUMBER );
-  rgb_matrix::DrawText(canvas, big_number_font, x + SPACE_BEFORE_1ST_NUMBER, y + big_number_font.baseline() - 1, firstRowColor, outline_font ? NULL : &bg_color, "A", LETTER_SPACING );
-  rgb_matrix::DrawText(canvas, big_number_font, x + COORDS_FOR_SECOND_NUMBER, y + big_number_font.baseline() - 1, firstRowColor, outline_font ? NULL : &bg_color, "d", LETTER_SPACING );
+//   rgb_matrix::DrawText( canvas, big_number_font, x + SPACE_BEFORE_2ND_NUMBER, y + big_number_font.baseline() + 2, secondRowColor, outline_font ? NULL : &bg_color, " Ad", SPACE_BEFORE_2ND_NUMBER );
+  rgb_matrix::DrawText( canvas, big_number_font, x + SPACE_BEFORE_1ST_NUMBER, y + big_number_font.baseline() - 1, firstRowColor, outline_font ? NULL : &bg_color, "A", LETTER_SPACING );
+  rgb_matrix::DrawText( canvas, big_number_font, x + COORDS_FOR_SECOND_NUMBER, y + big_number_font.baseline() - 1, firstRowColor, outline_font ? NULL : &bg_color, "d", LETTER_SPACING );
   
   y += big_number_font.height() + 4;
   printf("Font height before third row: %d\n", big_number_font.height());
@@ -207,15 +207,15 @@ int main(int argc, char *argv[]) {
     return 1; }
 
   Color thirdRowColor( 0, 255, 0 );
-  rgb_matrix::DrawText(canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), thirdRowColor,  outline_font ? NULL : &bg_color, "1 2 3", letter_spacing );
+  rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), thirdRowColor,  outline_font ? NULL : &bg_color, "1 2 3", letter_spacing );
 
   y += little_number_font.height() - 5;
   printf("Font height before fourth row: %d\n", little_number_font.height());
 
   Color fourthRowColor( 255, 0, 0 );
-  rgb_matrix::DrawText(canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "4", letter_spacing );
-  rgb_matrix::DrawText(canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + SPACE_BETWEEN_SMALL_NUMBERS, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "5", letter_spacing );
-  rgb_matrix::DrawText(canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + (( 2 * SPACE_BETWEEN_SMALL_NUMBERS )), y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "6", letter_spacing );
+  rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "4", letter_spacing );
+  rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + SPACE_BETWEEN_SMALL_NUMBERS, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "5", letter_spacing );
+  rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + (( 2 * SPACE_BETWEEN_SMALL_NUMBERS )), y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "6", letter_spacing );
   
   // initialize line buffer and // start reading from stdin
   char line[1024];
@@ -233,13 +233,13 @@ int main(int argc, char *argv[]) {
       // The outline font, we need to write with a negative (-2) text-spacing,
       // as we want to have the same letter pitch as the regular text that
       // we then write on top.
-      rgb_matrix::DrawText(canvas, *outline_font,
+      rgb_matrix::DrawText( canvas, *outline_font,
                            x - 1, y + font.baseline(),
                            outline_color, &bg_color, line, letter_spacing - 2);
     }
     // The regular text. Unless we already have filled the background with
     // the outline font, we also fill the background here.
-    rgb_matrix::DrawText(canvas, font, x, y + font.baseline(),
+    rgb_matrix::DrawText( canvas, font, x, y + font.baseline(),
                          color, outline_font ? NULL : &bg_color, line,
                          letter_spacing);
     y += font.height();
