@@ -173,7 +173,7 @@ int main(int argc, char *argv[]) {
     return 1; }
   
   #define SPACE_BEFORE_1ST_NUMBER 16
-  #define SPACE_BEFORE_2ND_NUMBER 6
+  #define SPACE_BEFORE_2ND_NUMBER 2
   #define SPACE_BEFORE_SMALL_NUMBER 7
   #define SPACE_BETWEEN_SMALL_NUMBERS 17
   #define COORDS_FOR_SECOND_NUMBER 38
