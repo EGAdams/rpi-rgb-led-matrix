@@ -177,22 +177,15 @@ int main(int argc, char *argv[]) {
   rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + SPACE_BETWEEN_SMALL_NUMBERS, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "5", letter_spacing );
   rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + (( 2 * SPACE_BETWEEN_SMALL_NUMBERS )), y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "6", letter_spacing );
   char line[1024]; // initialize line buffer and // start reading from stdin
-  while (fgets(line, sizeof(line), stdin)) {
-    const size_t last = strlen(line);
-    if (last > 0) line[last - 1] = '\0';  // remove newline.
-    bool line_empty = strlen(line) == 0;
-    if ((y + font.height() > canvas->height()) || line_empty) {
-      canvas->Fill(flood_color.r, flood_color.g, flood_color.b);
-      y = y_orig; }
-    if (line_empty) { continue; }
-    if (outline_font) {
-      // The outline font, we need to write with a negative (-2) text-spacing,
-      // as we want to have the same letter pitch as the regular text that
-      // we then write on top.
-      rgb_matrix::DrawText( canvas, *outline_font,
-                           x - 1, y + font.baseline(),
-                           outline_color, &bg_color, line, letter_spacing - 2);
-    }
+  bool game_running = true;
+  int loop_count = 0;
+  #define MAX_LOOP_COUNT 10
+  while ( game_running ) {
+    if ( loop_count >  MAX_LOOP_COUNT ) { game_running = false; }
+    printf( "sleeping... " );
+    sleep( 1 );
+    printf( "Loop count: %d\n", loop_count++ );
+  }
     // The regular text. Unless we already have filled the background with
     // the outline font, we also fill the background here.
     rgb_matrix::DrawText( canvas, font, x, y + font.baseline(),
