@@ -1,4 +1,6 @@
 #include "ScoreBoard.h"
+#include "GameState.h"
+
 #include <stdio.h>
 
 ScoreBoard::ScoreBoard(Player* player1,
@@ -6,4 +8,7 @@ ScoreBoard::ScoreBoard(Player* player1,
     : _player1(player1), _player2(player2) {}   
 ScoreBoard::~ScoreBoard() {}
 
-void ScoreBoard::update() { printf( "Updating ScoreBoard...\n" ); }
+void ScoreBoard::update( GameState* gameState )  { 
+    printf( "Updating ScoreBoard...\n" ); 
+    
+    }

@@ -5,8 +5,8 @@
 
 class ScoreBoard {
  public:
-  ScoreBoard(Player* player1, Player* player2 );
-  void update();
+  ScoreBoard( Player* player1, Player* player2 );
+  void update( GameState* gameState );
   ~ScoreBoard();
 
  private:

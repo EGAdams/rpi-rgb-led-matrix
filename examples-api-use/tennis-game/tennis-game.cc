@@ -170,7 +170,7 @@ int main(int argc, char *argv[]) {
   rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + (( 2 * SPACE_BETWEEN_SMALL_NUMBERS )), y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "6", letter_spacing );
   bool game_running = true;
   int loop_count = 0;
-  #define MAX_LOOP_COUNT 10
+  #define MAX_LOOP_COUNT 3
   while ( game_running ) {
     if ( loop_count >  MAX_LOOP_COUNT ) { game_running = false; }
     printf( "sleeping... " );
