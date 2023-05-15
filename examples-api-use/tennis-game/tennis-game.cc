@@ -38,15 +38,12 @@ static bool parseColor(Color *c, const char *str) {
 static bool FullSaturation(const Color &c) {
   return (c.r == 0 || c.r == 255)
     && (c.g == 0 || c.g == 255)
-    && (c.b == 0 || c.b == 255);}
+    && (c.b == 0 || c.b == 255); }
 
 int main(int argc, char *argv[]) {
   RGBMatrix::Options matrix_options;
   rgb_matrix::RuntimeOptions runtime_opt;
-  if (!rgb_matrix::ParseOptionsFromFlags(&argc, &argv,
-                                         &matrix_options, &runtime_opt)) {
-    return usage(argv[0]); }
-
+  if (!rgb_matrix::ParseOptionsFromFlags(&argc, &argv, &matrix_options, &runtime_opt)) { return usage(argv[0]); }
   Color color(255, 255, 0);
   Color bg_color(0, 0, 0);
   Color flood_color(0, 0, 0);
@@ -99,20 +96,16 @@ int main(int argc, char *argv[]) {
   if (!font.LoadFont(bdf_font_file)) {
     fprintf(stderr, "Couldn't load font '%s'\n", bdf_font_file);
     return 1; }
-
-                                                                  
+                                                   
   rgb_matrix::Font *outline_font = NULL;                          // If we want an outline around the font,
-  if (with_outline) { outline_font = font.CreateOutlineFont(); }  // we create a new font with the original font
+  if ( with_outline ) { outline_font = font.CreateOutlineFont(); }  // we create a new font with the original font
                                                                   // as a template that is just an outline font.
   RGBMatrix *canvas = RGBMatrix::CreateFromOptions(matrix_options, runtime_opt);
   if ( canvas == NULL ) { return 1; }
 
   const bool all_extreme_colors = (matrix_options.brightness == 100)
-    && FullSaturation(color)
-    && FullSaturation(bg_color)
-    && FullSaturation(outline_color);
-  if (all_extreme_colors)
-    canvas->SetPWMBits(1);
+    && FullSaturation( color ) && FullSaturation( bg_color ) && FullSaturation( outline_color );
+  if ( all_extreme_colors ) { canvas->SetPWMBits( 1 ); }
   const int x = x_orig;
   int y = y_orig;
 
@@ -156,7 +149,6 @@ int main(int argc, char *argv[]) {
   printf("Font height before second row: %d\n", big_number_font.height());
   rgb_matrix::DrawText( canvas, big_number_font, x + PIPE_SPACE, y + big_number_font.baseline() + 2, pipe_color,  outline_font ? NULL : &bg_color, "I", letter_spacing );
   Color secondRowColor( 255, 0, 0 );
-//   rgb_matrix::DrawText( canvas, big_number_font, x + SPACE_BEFORE_2ND_NUMBER, y + big_number_font.baseline() + 2, secondRowColor, outline_font ? NULL : &bg_color, " Ad", SPACE_BEFORE_2ND_NUMBER );
   rgb_matrix::DrawText( canvas, big_number_font, x + SPACE_BEFORE_1ST_NUMBER, y + big_number_font.baseline() - 1, firstRowColor, outline_font ? NULL : &bg_color, "A", LETTER_SPACING );
   rgb_matrix::DrawText( canvas, big_number_font, x + COORDS_FOR_SECOND_NUMBER, y + big_number_font.baseline() - 1, firstRowColor, outline_font ? NULL : &bg_color, "d", LETTER_SPACING );
   
@@ -176,7 +168,6 @@ int main(int argc, char *argv[]) {
   rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "4", letter_spacing );
   rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + SPACE_BETWEEN_SMALL_NUMBERS, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "5", letter_spacing );
   rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + (( 2 * SPACE_BETWEEN_SMALL_NUMBERS )), y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "6", letter_spacing );
-  char line[1024]; // initialize line buffer and // start reading from stdin
   bool game_running = true;
   int loop_count = 0;
   #define MAX_LOOP_COUNT 10
