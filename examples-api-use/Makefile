@@ -1,10 +1,10 @@
 CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter
 CXXFLAGS=$(CFLAGS)
-OBJECTS=panel_test.o draw_random_pix.o demo-main.o minimal-example.o c-example.o text-example.o tennis-game/tennis-game.o scrolling-text-example.o clock.o ledcat.o input-example.o pixel-mover.o
+OBJECTS=tennis-game/Scoreboard.o tennis-game/Player.o panel_test.o draw_random_pix.o demo-main.o minimal-example.o c-example.o text-example.o tennis-game/tennis-game.o scrolling-text-example.o clock.o ledcat.o input-example.o pixel-mover.o
 BINARIES=panel_test draw_random_pix demo minimal-example c-example text-example tennis-game/tennis-game scrolling-text-example clock ledcat input-example pixel-mover
 
-# Where our library resides. You mostly only need to change the
-# RGB_LIB_DISTRIBUTION, this is where the library is checked out.
+# Where our library resides. It is assumed here that $(RGB_LIB_DISTRIBUTION) has a
+# compiled library in lib/
 RGB_LIB_DISTRIBUTION=..
 RGB_INCDIR=$(RGB_LIB_DISTRIBUTION)/include
 RGB_LIBDIR=$(RGB_LIB_DISTRIBUTION)/lib
@@ -21,9 +21,7 @@ all : $(BINARIES)
 $(RGB_LIBRARY): FORCE
 	$(MAKE) -C $(RGB_LIBDIR)
 
-demo : demo-main.o $(RGB_LIBRARY)
-	$(CXX) $< -o $@ $(LDFLAGS)
-
+# demo : demo-main.o $(RGB_LIBRARY)
 draw_random_pix : draw_random_pix.o
 minimal-example : minimal-example.o
 input-example : input-example.o
@@ -35,7 +33,7 @@ ledcat : ledcat.o
 pixel-mover : pixel-mover.o
 panel_test : panel_test.o
 
-# All the binaries that have the same name as the object file.q
+# All the binaries that have the same name as the object file.
 % : %.o $(RGB_LIBRARY)
 	$(CXX) $< -o $@ $(LDFLAGS)
 
