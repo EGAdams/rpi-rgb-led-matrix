@@ -184,15 +184,7 @@ int main(int argc, char *argv[]) {
     if ( loop_count >  MAX_LOOP_COUNT ) { game_running = false; }
     printf( "sleeping... " );
     sleep( 1 );
-    printf( "Loop count: %d\n", loop_count++ );
-  }
-    // The regular text. Unless we already have filled the background with
-    // the outline font, we also fill the background here.
-    rgb_matrix::DrawText( canvas, font, x, y + font.baseline(),
-                         color, outline_font ? NULL : &bg_color, line,
-                         letter_spacing);
-    y += font.height(); }
-
+    printf( "Loop count: %d\n", loop_count++ ); }
   delete canvas; // Finished. Shut down the RGB matrix.
   return 0;
 }
