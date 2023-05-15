@@ -1,7 +1,7 @@
 CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter
 CXXFLAGS=$(CFLAGS)
 OBJECTS=panel_test.o draw_random_pix.o demo-main.o minimal-example.o c-example.o text-example.o tennis-game.o scrolling-text-example.o clock.o ledcat.o input-example.o pixel-mover.o
-BINARIES=panel_test draw_random_pix demo minimal-example c-example text-example tennis-game.o scrolling-text-example clock ledcat input-example pixel-mover
+BINARIES=panel_test draw_random_pix demo minimal-example c-example text-example tennis-game scrolling-text-example clock ledcat input-example pixel-mover
 
 # Where our library resides. You mostly only need to change the
 # RGB_LIB_DISTRIBUTION, this is where the library is checked out.
