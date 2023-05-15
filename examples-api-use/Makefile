@@ -1,6 +1,6 @@
 CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter
 CXXFLAGS=$(CFLAGS)
-OBJECTS=panel_test.o draw_random_pix.o demo-main.o minimal-example.o c-example.o text-example.o tennis-game.o scrolling-text-example.o clock.o ledcat.o input-example.o pixel-mover.o
+OBJECTS=panel_test.o draw_random_pix.o demo-main.o minimal-example.o c-example.o text-example.o tennis-game/tennis-game.o scrolling-text-example.o clock.o ledcat.o input-example.o pixel-mover.o
 BINARIES=panel_test draw_random_pix demo minimal-example c-example text-example tennis-game scrolling-text-example clock ledcat input-example pixel-mover
 
 # Where our library resides. You mostly only need to change the
@@ -28,7 +28,7 @@ draw_random_pix : draw_random_pix.o
 minimal-example : minimal-example.o
 input-example : input-example.o
 text-example: text-example.o
-tennis-game: tennis-game.o
+tennis-game: tennis-game/tennis-game.o
 scrolling-text-example : scrolling-text-example.o
 clock : clock.o
 ledcat : ledcat.o
