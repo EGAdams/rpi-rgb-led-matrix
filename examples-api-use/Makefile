@@ -35,13 +35,13 @@ ledcat : ledcat.o
 pixel-mover : pixel-mover.o
 panel_test : panel_test.o
 
-CanvasCreator.o : CanvasCreator.cpp
+tennis-game/CanvasCreator.o : tennis-game/CanvasCreator.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
-FontLoader.o : FontLoader.cpp
+tennis-game/FontLoader.o : tennis-game/FontLoader.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
-TextDrawer.o : TextDrawer.cpp
+tennis-game/TextDrawer.o : tennis-game/TextDrawer.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
 
