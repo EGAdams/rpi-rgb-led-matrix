@@ -93,8 +93,8 @@ static int usage(const char *progname) {
 
     printf("Updating ScoreBoard...\n");
 
-    RGBMatrix::Options matrix_options;
-    rgb_matrix::RuntimeOptions runtime_opt;
+    // RGBMatrix::Options matrix_options;
+    // rgb_matrix::RuntimeOptions runtime_opt;
 
     // Create Canvas
     CanvasCreator canvasCreator(matrix_options, runtime_opt);
@@ -114,8 +114,8 @@ static int usage(const char *progname) {
     littleNumberFontLoader.LoadFont(littleNumberFont);
 
     // Draw Text
-    Color color(255, 255, 0);
-    Color bg_color(0, 0, 0);
+    // Color color(255, 255, 0);
+    // Color bg_color(0, 0, 0);
     TextDrawer textDrawer(canvas, font, 0, 0, color, bg_color, "I", 0);
     textDrawer.DrawText();
 
