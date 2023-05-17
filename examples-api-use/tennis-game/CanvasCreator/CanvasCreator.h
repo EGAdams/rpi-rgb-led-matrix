@@ -1,6 +1,6 @@
 #pragma once
-#include <led-matrix.h>
 using namespace rgb_matrix;
+#include "led-matrix.h"
 class CanvasCreator {
 public:
     CanvasCreator(RGBMatrix::Options matrix_options, rgb_matrix::RuntimeOptions runtime_opt);
