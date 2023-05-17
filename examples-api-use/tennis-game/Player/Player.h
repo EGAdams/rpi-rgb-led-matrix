@@ -5,18 +5,13 @@ class Player {
  public:
   Player(int player_number);
   ~Player();
-  void setPoints(int points);
-  int getPoints();
-  void setGames(int games);
-  int getGames();
-  void setSets(int sets);
-  int getSets();
-  void setMatches(int matches);
-  int getMatches();
-  void setMode(int mode);
-  int getMode();
-  void setSetting(int setting);
-  int getSetting();
+  void setPoints(int points);   int getPoints();
+  void setGames(int games);     int getGames();
+  void setSets(int sets);       int getSets();
+  void setMatches(int matches); int getMatches();
+  void setMode(int mode);       int getMode();
+  void setSetting(int setting); int getSetting();
+
   int incrementSetting();
   int number();
 
@@ -29,5 +24,4 @@ class Player {
   int _mode;
   int _setting;
 };
-
 #endif

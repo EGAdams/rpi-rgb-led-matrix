@@ -18,7 +18,6 @@ class ScoreBoard {
   Player*     _player2;
   ScoreBoard* _scoreBoard;
   bool FullSaturation( const Color &c );  // Add this line
-  
 };
 
 #endif

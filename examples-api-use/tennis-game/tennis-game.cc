@@ -83,13 +83,11 @@ int main(int argc, char *argv[]) {
     case 'F':
       if (!parseColor(&flood_color, optarg)) {
         fprintf(stderr, "Invalid background color spec: %s\n", optarg);
-        return usage(argv[0]);
-      }
+        return usage(argv[0]); }
       break;
     default:
       return usage(argv[0]); }}
 
-  
   ///////// Start Game Loop /////////////
   bool game_running = true;
   int loop_count = 0;

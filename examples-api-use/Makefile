@@ -1,6 +1,6 @@
 CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter
 CXXFLAGS=$(CFLAGS)
-OBJECTS=tennis-game/GameState.o tennis-game/ScoreBoard.o tennis-game/Player.o panel_test.o draw_random_pix.o demo-main.o minimal-example.o c-example.o text-example.o tennis-game/tennis-game.o scrolling-text-example.o clock.o ledcat.o input-example.o pixel-mover.o
+OBJECTS=tennis-game/GameTimer.o tennis-game/Logger.o tennis-game/History.o tennis-game/GameState.o tennis-game/ScoreBoard.o tennis-game/Player.o panel_test.o draw_random_pix.o demo-main.o minimal-example.o c-example.o text-example.o tennis-game/tennis-game.o scrolling-text-example.o clock.o ledcat.o input-example.o pixel-mover.o
 BINARIES=panel_test draw_random_pix demo minimal-example c-example text-example tennis-game/tennis-game scrolling-text-example clock ledcat input-example pixel-mover
 
 # Where our library resides. It is assumed here that $(RGB_LIB_DISTRIBUTION) has a
