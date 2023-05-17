@@ -100,8 +100,7 @@ static int usage(const char *progname) {
     CanvasCreator canvasCreator(matrix_options, runtime_opt);
     RGBMatrix* canvas = canvasCreator.CreateCanvas();
 
-    // Load Fonts
-    FontLoader fontLoader("fonts/mspgothic_042623.bdf");
+    FontLoader fontLoader("fonts/mspgothic_042623.bdf"); // Load Fonts
     rgb_matrix::Font font;
     fontLoader.LoadFont(font);
 
@@ -113,13 +112,9 @@ static int usage(const char *progname) {
     rgb_matrix::Font littleNumberFont;
     littleNumberFontLoader.LoadFont(littleNumberFont);
 
-    // Draw Text
-    // Color color(255, 255, 0);
-    // Color bg_color(0, 0, 0);
-    TextDrawer textDrawer(canvas, font, 0, 0, color, bg_color, "I", 0);
+    TextDrawer textDrawer(canvas, font, 0, 0, color, bg_color, "I", 0); // Draw Text
     textDrawer.DrawText();
 
-    // Drawing the rest of the text
     TextDrawer bigNumberDrawer1(canvas, bigNumberFont, 16, bigNumberFont.baseline() - 1, color, bg_color, "8", 1);
     bigNumberDrawer1.DrawText();
 
@@ -130,6 +125,7 @@ static int usage(const char *progname) {
     littleNumberDrawer.DrawText();
 
     delete canvas;
+    
     ///////// Start Game Loop /////////////
     bool game_running = true;
     int loop_count = 0;

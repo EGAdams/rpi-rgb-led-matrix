@@ -31,9 +31,6 @@
 #include "pixel-mapper.h"
 
 namespace rgb_matrix {
-class CanvasCreator;
-class TextDrawer;
-class FontLoader;
 class RGBMatrix;
 class FrameCanvas;   // Canvas for Double- and Multibuffering
 struct RuntimeOptions;
