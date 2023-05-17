@@ -58,6 +58,9 @@ image-example.o : image-example.cc
 image-example: image-example.o $(RGB_LIBRARY)
 	$(CXX) $< -o $@ $(LDFLAGS) $(MAGICK_LDFLAGS)
 
+tennis-game/tennis-game: tennis-game/tennis-game.o tennis-game/CanvasCreator/CanvasCreator.o tennis-game/FontLoader/FontLoader.o tennis-game/TextDrawer/TextDrawer.o
+	$(CXX) $^ -o $@ $(LDFLAGS)
+
 # Since the C example uses the C++ library underneath, which depends on C++
 # runtime stuff, you still have to also link -lstdc++
 c-example : c-example.o $(RGB_LIBRARY)
