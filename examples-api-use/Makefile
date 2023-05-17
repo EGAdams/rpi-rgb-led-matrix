@@ -4,7 +4,7 @@ OBJECTS=tennis-game/CanvasCreator.o tennis-game/FontLoader.o tennis-game/TextDra
 BINARIES=panel_test draw_random_pix demo minimal-example c-example text-example tennis-game/tennis-game scrolling-text-example clock ledcat input-example pixel-mover
 
 # Where our library resides. It is assumed here that $(RGB_LIB_DISTRIBUTION) has a
-# compiled library in lib/
+# compiled library in lib/ 
 RGB_LIB_DISTRIBUTION=..
 RGB_INCDIR=$(RGB_LIB_DISTRIBUTION)/include
 RGB_LIBDIR=$(RGB_LIB_DISTRIBUTION)/lib
