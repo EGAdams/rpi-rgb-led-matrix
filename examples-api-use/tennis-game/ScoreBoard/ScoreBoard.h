@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "led-matrix.h"
 #include "graphics.h"
+#include "GameState.h"
 
 using namespace rgb_matrix;
 
