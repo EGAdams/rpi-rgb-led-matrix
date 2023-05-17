@@ -21,7 +21,7 @@ all : $(BINARIES)
 $(RGB_LIBRARY): FORCE
 	$(MAKE) -C $(RGB_LIBDIR)
 
-# demo : demo-main.o $(RGB_LIBRARY)
+demo : demo-main.o $(RGB_LIBRARY)
 draw_random_pix : draw_random_pix.o
 minimal-example : minimal-example.o
 input-example : input-example.o
