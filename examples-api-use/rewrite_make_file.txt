@@ -1,0 +1,3 @@
+'perfect'
+Please rewrite this make file to include the CanvasCreator, FontLoader, and TextDrawer classes.  You may use the following make file as a template:
+``` make
