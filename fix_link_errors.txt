@@ -1,0 +1,227 @@
+
+Here is the main class that I am running:
+```c++
+#include "led-matrix.h"
+#include "graphics.h"
+#include <getopt.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include "./CanvasCreator/CanvasCreator.h"
+#include "./FontLoader/FontLoader.h"
+#include "./TextDrawer/TextDrawer.h"
+
+using namespace rgb_matrix;
+
+static int usage(const char *progname) {
+    fprintf(stderr, "usage: %s [options]\n", progname);
+    fprintf(stderr, "Reads text from stdin and displays it. "
+            "Empty string: clear screen\n");
+    fprintf(stderr, "Options:\n");
+    fprintf(stderr,
+            "\t-f <font-file>    : Use given font.\n"
+            "\t-x <x-origin>     : X-Origin of displaying text (Default: 0)\n"
+            "\t-y <y-origin>     : Y-Origin of displaying text (Default: 0)\n"
+            "\t-S <spacing>      : Spacing pixels between letters (Default: 0)\n"
+            "\t-C <r,g,b>        : Color. Default 255,255,0\n"
+            "\t-B <r,g,b>        : Font Background-Color. Default 0,0,0\n"
+            "\t-O <r,g,b>        : Outline-Color, e.g. to increase contrast.\n"
+            "\t-F <r,g,b>        : Panel flooding-background color. Default 0,0,0\n"
+            "\n"
+            );
+    rgb_matrix::PrintMatrixFlags(stderr);
+    return 1;}
+
+    static bool parseColor(Color *c, const char *str) {
+    return sscanf(str, "%hhu,%hhu,%hhu", &c->r, &c->g, &c->b) == 3;}
+
+    static bool FullSaturation(const Color &c) {
+    return (c.r == 0 || c.r == 255)
+        && (c.g == 0 || c.g == 255)
+        && (c.b == 0 || c.b == 255); }
+
+    int main(int argc, char *argv[]) {
+    RGBMatrix::Options matrix_options;
+    rgb_matrix::RuntimeOptions runtime_opt;
+    if (!rgb_matrix::ParseOptionsFromFlags(&argc, &argv, &matrix_options, &runtime_opt)) { return usage(argv[0]); }
+    Color color(255, 255, 0);
+    Color bg_color(0, 0, 0);
+    Color flood_color(0, 0, 0);
+    Color outline_color(0,0,0);
+    bool with_outline = false;
+    const char *bdf_font_file = NULL;
+    int x_orig = 0;
+    int y_orig = 0;
+    int letter_spacing = 0;
+
+    int opt;
+    while ((opt = getopt(argc, argv, "x:y:f:C:B:O:S:F:")) != -1) {
+        switch (opt) {
+        case 'x': x_orig = atoi(optarg); break;
+        case 'y': y_orig = atoi(optarg); break;
+        case 'f': bdf_font_file = strdup(optarg); break;
+        case 'S': letter_spacing = atoi(optarg); break;
+        case 'C':
+        if (!parseColor(&color, optarg)) {
+            fprintf(stderr, "Invalid color spec: %s\n", optarg);
+            return usage(argv[0]);
+        }
+        break;
+        case 'B':
+        if (!parseColor(&bg_color, optarg)) {
+            fprintf(stderr, "Invalid background color spec: %s\n", optarg);
+            return usage(argv[0]);
+        }
+        break;
+        case 'O':
+        if (!parseColor(&outline_color, optarg)) {
+            fprintf(stderr, "Invalid outline color spec: %s\n", optarg);
+            return usage(argv[0]);
+        }
+        with_outline = true;
+        break;
+        case 'F':
+        if (!parseColor(&flood_color, optarg)) {
+            fprintf(stderr, "Invalid background color spec: %s\n", optarg);
+            return usage(argv[0]); }
+        break;
+        default:
+        return usage(argv[0]); }}
+
+    printf("Updating ScoreBoard...\n");
+
+    // RGBMatrix::Options matrix_options;
+    // rgb_matrix::RuntimeOptions runtime_opt;
+
+    // Create Canvas
+    CanvasCreator canvasCreator(matrix_options, runtime_opt);
+    RGBMatrix* canvas = canvasCreator.CreateCanvas();
+
+    FontLoader fontLoader("fonts/mspgothic_042623.bdf"); // Load Fonts
+    rgb_matrix::Font font;
+    fontLoader.LoadFont(font);
+
+    FontLoader bigNumberFontLoader("fonts/fgm_27_ee.bdf");
+    rgb_matrix::Font bigNumberFont;
+    bigNumberFontLoader.LoadFont(bigNumberFont);
+
+    FontLoader littleNumberFontLoader("fonts/little_numbers.bdf");
+    rgb_matrix::Font littleNumberFont;
+    littleNumberFontLoader.LoadFont(littleNumberFont);
+
+    TextDrawer textDrawer(canvas, font, 0, 0, color, bg_color, "I", 0); // Draw Text
+    textDrawer.DrawText();
+
+    TextDrawer bigNumberDrawer1(canvas, bigNumberFont, 16, bigNumberFont.baseline() - 1, color, bg_color, "8", 1);
+    bigNumberDrawer1.DrawText();
+
+    TextDrawer bigNumberDrawer2(canvas, bigNumberFont, 38, bigNumberFont.baseline() - 1, color, bg_color, "9", 1);
+    bigNumberDrawer2.DrawText();
+
+    TextDrawer littleNumberDrawer(canvas, littleNumberFont, 7, littleNumberFont.baseline(), color, bg_color, "1 2 3", 0);
+    littleNumberDrawer.DrawText();
+
+    delete canvas;
+    
+    ///////// Start Game Loop /////////////
+    bool game_running = true;
+    int loop_count = 0;
+    #define MAX_LOOP_COUNT 3
+    while ( game_running ) {
+        if ( loop_count >  MAX_LOOP_COUNT ) { game_running = false; }
+        printf( "sleeping... " );
+        sleep( 1 );
+        printf( "Loop count: %d\n", loop_count++ ); }
+    ///////// End Game Loop /////////////
+    
+    return 0;
+}
+```
+
+I have added "using namespace rgb_matrix;" to the top of the file to try to fix the linker error.
+Here is the CanvasCreator class that you wrote and I modified:
+```c++
+#pragma once
+#include "led-matrix.h"
+using namespace rgb_matrix;
+class CanvasCreator {
+public:
+    CanvasCreator(RGBMatrix::Options matrix_options, rgb_matrix::RuntimeOptions runtime_opt);
+    RGBMatrix* CreateCanvas();
+private:
+    RGBMatrix::Options _matrixOptions;
+    rgb_matrix::RuntimeOptions _runtimeOptions;};
+```
+
+Here is my ouput:
+``` outputrebuilding project...
+make -C ./lib
+make[1]: Entering directory '/home/dietpi/rpi-rgb-led-matrix/lib'
+g++ -I../include -W -Wall -Wextra -Wno-unused-parameter -O3 -g -fPIC  -DDEFAULT_HARDWARE='"regular"' -fno-exceptions -std=c++11 -c -o led-matrix.o led-matrix.cc
+ar rcs librgbmatrix.a gpio.o led-matrix.o options-initialize.o framebuffer.o thread.o bdf-font.o graphics.o led-matrix-c.o hardware-mapping.o pixel-mapper.o multiplex-mappers.o content-streamer.o
+g++ -shared -Wl,-soname,librgbmatrix.so.1 -o librgbmatrix.so.1 gpio.o led-matrix.o options-initialize.o framebuffer.o thread.o bdf-font.o graphics.o led-matrix-c.o hardware-mapping.o pixel-mapper.o multiplex-mappers.o content-streamer.o -lpthread  -lrt -lm -lpthread
+make[1]: Leaving directory '/home/dietpi/rpi-rgb-led-matrix/lib'
+make -C examples-api-use
+make[1]: Entering directory '/home/dietpi/rpi-rgb-led-matrix/examples-api-use'
+make -C ../lib
+make[2]: Entering directory '/home/dietpi/rpi-rgb-led-matrix/lib'
+make[2]: Leaving directory '/home/dietpi/rpi-rgb-led-matrix/lib'
+g++ panel_test.o -o panel_test -L../lib -lrgbmatrix -lrt -lm -lpthread
+g++ draw_random_pix.o -o draw_random_pix -L../lib -lrgbmatrix -lrt -lm -lpthread
+g++ minimal-example.o -o minimal-example -L../lib -lrgbmatrix -lrt -lm -lpthread
+cc c-example.o -o c-example -L../lib -lrgbmatrix -lrt -lm -lpthread -lstdc++
+g++ text-example.o -o text-example -L../lib -lrgbmatrix -lrt -lm -lpthread
+g++ -I../include -Wall -O3 -g -Wextra -Wno-unused-parameter -c -o tennis-game/tennis-game.o tennis-game/tennis-game.cc
+tennis-game/tennis-game.cc: In function ‘int main(int, char**)’:
+tennis-game/tennis-game.cc:54:10: warning: variable ‘with_outline’ set but not used [-Wunused-but-set-variable]
+   54 |     bool with_outline = false;
+      |          ^~~~~~~~~~~~
+tennis-game/tennis-game.cc:55:17: warning: variable ‘bdf_font_file’ set but not used [-Wunused-but-set-variable]
+   55 |     const char *bdf_font_file = NULL;
+      |                 ^~~~~~~~~~~~~
+tennis-game/tennis-game.cc:56:9: warning: variable ‘x_orig’ set but not used [-Wunused-but-set-variable]
+   56 |     int x_orig = 0;
+      |         ^~~~~~
+tennis-game/tennis-game.cc:57:9: warning: variable ‘y_orig’ set but not used [-Wunused-but-set-variable]
+   57 |     int y_orig = 0;
+      |         ^~~~~~
+tennis-game/tennis-game.cc:58:9: warning: variable ‘letter_spacing’ set but not used [-Wunused-but-set-variable]
+   58 |     int letter_spacing = 0;
+      |         ^~~~~~~~~~~~~~
+tennis-game/tennis-game.cc: At global scope:
+tennis-game/tennis-game.cc:41:17: warning: ‘bool FullSaturation(const rgb_matrix::Color&)’ defined but not used [-Wunused-function]
+   41 |     static bool FullSaturation(const Color &c) {
+      |                 ^~~~~~~~~~~~~~
+g++ tennis-game/tennis-game.o -o tennis-game/tennis-game -L../lib -lrgbmatrix -lrt -lm -lpthread
+/usr/bin/ld: tennis-game/tennis-game.o: in function `main':
+/home/dietpi/rpi-rgb-led-matrix/examples-api-use/tennis-game/tennis-game.cc:100: undefined reference to `CanvasCreator::CanvasCreator(rgb_matrix::RGBMatrix::Options, rgb_matrix::RuntimeOptions)'
+/usr/bin/ld: /home/dietpi/rpi-rgb-led-matrix/examples-api-use/tennis-game/tennis-game.cc:101: undefined reference to `CanvasCreator::CreateCanvas()'
+/usr/bin/ld: /home/dietpi/rpi-rgb-led-matrix/examples-api-use/tennis-game/tennis-game.cc:103: undefined reference to `FontLoader::FontLoader(char const*)'
+/usr/bin/ld: /home/dietpi/rpi-rgb-led-matrix/examples-api-use/tennis-game/tennis-game.cc:105: undefined reference to `FontLoader::LoadFont(rgb_matrix::Font&)'
+/usr/bin/ld: /home/dietpi/rpi-rgb-led-matrix/examples-api-use/tennis-game/tennis-game.cc:107: undefined reference to `FontLoader::FontLoader(char const*)'
+/usr/bin/ld: /home/dietpi/rpi-rgb-led-matrix/examples-api-use/tennis-game/tennis-game.cc:109: undefined reference to `FontLoader::LoadFont(rgb_matrix::Font&)'
+/usr/bin/ld: /home/dietpi/rpi-rgb-led-matrix/examples-api-use/tennis-game/tennis-game.cc:111: undefined reference to `FontLoader::FontLoader(char const*)'
+/usr/bin/ld: /home/dietpi/rpi-rgb-led-matrix/examples-api-use/tennis-game/tennis-game.cc:113: undefined reference to `FontLoader::LoadFont(rgb_matrix::Font&)'
+/usr/bin/ld: /home/dietpi/rpi-rgb-led-matrix/examples-api-use/tennis-game/tennis-game.cc:115: undefined reference to `TextDrawer::TextDrawer(rgb_matrix::RGBMatrix*, rgb_matrix::Font&, int, int, rgb_matrix::Color const&, rgb_matrix::Color const&, char const*, int)'
+/usr/bin/ld: /home/dietpi/rpi-rgb-led-matrix/examples-api-use/tennis-game/tennis-game.cc:116: undefined reference to `TextDrawer::DrawText()'
+/usr/bin/ld: /home/dietpi/rpi-rgb-led-matrix/examples-api-use/tennis-game/tennis-game.cc:118: undefined reference to `TextDrawer::TextDrawer(rgb_matrix::RGBMatrix*, rgb_matrix::Font&, int, int, rgb_matrix::Color const&, rgb_matrix::Color const&, char const*, int)'
+/usr/bin/ld: /home/dietpi/rpi-rgb-led-matrix/examples-api-use/tennis-game/tennis-game.cc:119: undefined reference to `TextDrawer::DrawText()'
+/usr/bin/ld: /home/dietpi/rpi-rgb-led-matrix/examples-api-use/tennis-game/tennis-game.cc:121: undefined reference to `TextDrawer::TextDrawer(rgb_matrix::RGBMatrix*, rgb_matrix::Font&, int, int, rgb_matrix::Color const&, rgb_matrix::Color const&, char const*, int)'
+/usr/bin/ld: /home/dietpi/rpi-rgb-led-matrix/examples-api-use/tennis-game/tennis-game.cc:122: undefined reference to `TextDrawer::DrawText()'
+/usr/bin/ld: /home/dietpi/rpi-rgb-led-matrix/examples-api-use/tennis-game/tennis-game.cc:124: undefined reference to `TextDrawer::TextDrawer(rgb_matrix::RGBMatrix*, rgb_matrix::Font&, int, int, rgb_matrix::Color const&, rgb_matrix::Color const&, char const*, int)'
+/usr/bin/ld: /home/dietpi/rpi-rgb-led-matrix/examples-api-use/tennis-game/tennis-game.cc:125: undefined reference to `TextDrawer::DrawText()'
+collect2: error: ld returned 1 exit status
+make[1]: *** [Makefile:38: tennis-game/tennis-game] Error 1
+make[1]: Leaving directory '/home/dietpi/rpi-rgb-led-matrix/examples-api-use'
+make: *** [Makefile:16: lib/librgbmatrix.a] Error 2
+running example...
+sudo: examples-api-use/tennis-game/tennis-game: command not found
+```
+Since you wrote the MakeFile, can you tell me why I am getting errors in the output?
+
+'perfect'
+Why didn't I have to do that for the ScoreBoard, Player, GameState, or GameTimer objects?  Is it because they are using a different namespace?
+
+
+"Can you explain the reason why the Makefile does not require the inclusion of ScoreBoard, Player, GameState, or GameTimer objects in the same manner as CanvasCreator, FontLoader, and TextDrawer objects? Is it because these objects belong to a different namespace?"

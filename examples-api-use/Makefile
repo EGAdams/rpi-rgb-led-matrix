@@ -26,12 +26,24 @@ draw_random_pix : draw_random_pix.o
 minimal-example : minimal-example.o
 input-example : input-example.o
 text-example: text-example.o
-tennis-game: tennis-game/tennis-game.o
+# tennis-game: tennis-game/tennis-game.o
+tennis-game/tennis-game : tennis-game/tennis-game.o CanvasCreator.o FontLoader.o TextDrawer.o
+	$(CXX) $^ -o $@ $(LDFLAGS)
 scrolling-text-example : scrolling-text-example.o
 clock : clock.o
 ledcat : ledcat.o
 pixel-mover : pixel-mover.o
 panel_test : panel_test.o
+
+CanvasCreator.o : CanvasCreator.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+FontLoader.o : FontLoader.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+TextDrawer.o : TextDrawer.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
 
 # All the binaries that have the same name as the object file.
 % : %.o $(RGB_LIBRARY)
