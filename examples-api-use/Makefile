@@ -27,7 +27,7 @@ minimal-example : minimal-example.o
 input-example : input-example.o
 text-example: text-example.o
 # tennis-game: tennis-game/tennis-game.o
-tennis-game/tennis-game : tennis-game/tennis-game.o CanvasCreator.o FontLoader.o TextDrawer.o
+tennis-game: tennis-game/tennis-game.o tennis-game/CanvasCreator/CanvasCreator.o tennis-game/FontLoader/FontLoader.o tennis-game/TextDrawer/TextDrawer.o
 	$(CXX) $^ -o $@ $(LDFLAGS)
 scrolling-text-example : scrolling-text-example.o
 clock : clock.o
