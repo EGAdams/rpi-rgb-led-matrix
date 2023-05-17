@@ -1,8 +1,9 @@
 #pragma once
 
-#include <led-matrix.h>
-#include "Color.h"
+#include "led-matrix.h"
+#include "graphics.h"
 
+using namespace rgb_matrix;
 class TextDrawer {
 public:
     TextDrawer(RGBMatrix* canvas, rgb_matrix::Font& font, int x, int y, const Color& color, const Color& bg_color, const char* text, int letter_spacing);

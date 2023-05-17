@@ -1,6 +1,8 @@
 #pragma once
 
-#include <led-matrix.h>
+#include "led-matrix.h"
+
+using namespace rgb_matrix;
 
 class CanvasCreator {
 public:
