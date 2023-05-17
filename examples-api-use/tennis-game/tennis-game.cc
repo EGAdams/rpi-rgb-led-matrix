@@ -10,9 +10,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include "./CanvasCreator/CanvasCreator.h"
-#include "./FontLoader/FontLoader.h"
-#include "./TextDrawer/TextDrawer.h"
+#include "CanvasCreator/CanvasCreator.h"
+#include "FontLoader/FontLoader.h"
+#include "TextDrawer/TextDrawer.h"
 
 using namespace rgb_matrix;
 
@@ -125,7 +125,7 @@ static int usage(const char *progname) {
     littleNumberDrawer.DrawText();
 
     delete canvas;
-    
+
     ///////// Start Game Loop /////////////
     bool game_running = true;
     int loop_count = 0;
