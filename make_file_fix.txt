@@ -1,0 +1,352 @@
+You are a world-class C++ developer.
+You are my programming assistant.
+
+I need you to help me debug an error in my link process.  I think the compilation is correct, but the link fails.
+
+Here is the output of the Linux "tree" command from the root of my project:
+``` output of tree command
+.
+├── COPYING
+├── CheckerBoardMultiplexMapper.js
+├── Makefile
+├── OneSixtyFourMapper.js
+├── README.md
+├── SimpleMultiplexingMapper.js
+├── StripMultiplexMapper.js
+├── adapter
+│   ├── README.md
+│   ├── active-3
+│   │   ├── Makefile
+│   │   ├── README.md
+│   │   ├── active3-rpi-hub75-adapter-cache.lib
+│   │   ├── active3-rpi-hub75-adapter-fab.zip
+│   │   ├── active3-rpi-hub75-adapter.kicad_pcb
+│   │   ├── active3-rpi-hub75-adapter.pro
+│   │   ├── active3-rpi-hub75-adapter.sch
+│   │   └── schematic.pdf
+│   ├── kicad-scripts
+│   │   ├── kicad-fab.py
+│   │   └── makefile.inc
+│   ├── passive-3
+│   │   ├── Makefile
+│   │   ├── README.md
+│   │   ├── passive3-rpi-hub75-adapter-cache.lib
+│   │   ├── passive3-rpi-hub75-adapter-fab.zip
+│   │   ├── passive3-rpi-hub75-adapter.kicad_pcb
+│   │   ├── passive3-rpi-hub75-adapter.pro
+│   │   └── passive3-rpi-hub75-adapter.sch
+│   └── passive-rpi1
+│       ├── Makefile
+│       ├── README.md
+│       ├── passive-rpi-hub75-adapter-cache.lib
+│       ├── passive-rpi-hub75-adapter-fab.zip
+│       ├── passive-rpi-hub75-adapter.kicad_pcb
+│       ├── passive-rpi-hub75-adapter.pro
+│       └── passive-rpi-hub75-adapter.sch
+├── animationTest.js
+├── bindings
+│   ├── README.md
+│   ├── c#
+│   │   ├── Makefile
+│   │   ├── README.md
+│   │   ├── RGBLedCanvas.cs
+│   │   ├── RGBLedFont.cs
+│   │   ├── RGBLedMatrix.cs
+│   │   └── examples
+│   │       ├── Makefile
+│   │       ├── font-example.cs
+│   │       ├── matrix-rain.cs
+│   │       ├── minimal-example.cs
+│   │       └── pulsing-brightness.cs
+│   └── python
+│       ├── Makefile
+│       ├── README.md
+│       ├── rgbmatrix
+│       │   ├── Makefile
+│       │   ├── __init__.py
+│       │   ├── core.cpp
+│       │   ├── core.pxd
+│       │   ├── core.pyx
+│       │   ├── cppinc.pxd
+│       │   ├── graphics.cpp
+│       │   ├── graphics.pxd
+│       │   └── graphics.pyx
+│       ├── samples
+│       │   ├── gif-viewer.py
+│       │   ├── graphics.py
+│       │   ├── grayscale-block.py
+│       │   ├── image-draw.py
+│       │   ├── image-scroller.py
+│       │   ├── image-viewer.py
+│       │   ├── pulsing-brightness.py
+│       │   ├── pulsing-colors.py
+│       │   ├── rotating-block-generator.py
+│       │   ├── runtext.py
+│       │   ├── samplebase.py
+│       │   └── simple-square.py
+│       └── setup.py
+├── debug_mapper_prompt.txt
+├── examples-api-use
+│   ├── Makefile
+│   ├── README.md
+│   ├── break_update_into_classes.txt
+│   ├── c-example.c
+│   ├── clock.cc
+│   ├── demo-main.cc
+│   ├── draw_random_pix.cc
+│   ├── image-example.cc
+│   ├── input-example
+│   ├── input-example.cc
+│   ├── led_brightness_test.py
+│   ├── ledcat.cc
+│   ├── minimal-example.cc
+│   ├── panel_test
+│   ├── panel_test.cpp
+│   ├── pixel-mover.cc
+│   ├── rewrite_make_file.txt
+│   ├── runtext.ppm
+│   ├── runtext16.ppm
+│   ├── scrolling-text-example.cc
+│   ├── temp.txt
+│   ├── tennis-game
+│   │   ├── CanvasCreator
+│   │   │   ├── CanvasCreator.cpp
+│   │   │   └── CanvasCreator.h
+│   │   ├── FontLoader
+│   │   │   ├── FontLoader.cpp
+│   │   │   └── FontLoader.h
+│   │   ├── GameState
+│   │   │   ├── GameState.cpp
+│   │   │   └── GameState.h
+│   │   ├── GameTimer
+│   │   │   ├── GameTimer.cpp
+│   │   │   └── GameTimer.h
+│   │   ├── History
+│   │   │   ├── History.cpp
+│   │   │   └── History.h
+│   │   ├── Logger
+│   │   │   ├── Logger.cpp
+│   │   │   └── Logger.h
+│   │   ├── Player
+│   │   │   ├── Player.cpp
+│   │   │   └── Player.h
+│   │   ├── ScoreBoard
+│   │   │   ├── ScoreBoard.cpp
+│   │   │   └── ScoreBoard.h
+│   │   ├── TextDrawer
+│   │   │   ├── TextDrawer.cpp
+│   │   │   └── TextDrawer.h
+│   │   └── tennis-game.cc
+│   └── text-example.cc
+├── excluded_fonts.txt
+├── favicon.ico
+├── fix_link_errors.txt
+├── font_menu.py
+├── fonts
+│   ├── 10x20.bdf
+│   ├── 4x6.bdf
+│   ├── 5x7.bdf
+│   ├── 5x8.bdf
+│   ├── 6x10.bdf
+│   ├── 6x12.bdf
+│   ├── 6x13.bdf
+│   ├── 6x13B.bdf
+│   ├── 6x13O.bdf
+│   ├── 6x9.bdf
+│   ├── 7x13.bdf
+│   ├── 7x13B.bdf
+│   ├── 7x13O.bdf
+│   ├── 7x14.bdf
+│   ├── 7x14B.bdf
+│   ├── 8x13.bdf
+│   ├── 8x13B.bdf
+│   ├── 8x13O.bdf
+│   ├── 9x15.bdf
+│   ├── 9x15B.bdf
+│   ├── 9x18.bdf
+│   ├── 9x18B.bdf
+│   ├── AUTHORS
+│   ├── README
+│   ├── README.md
+│   ├── clR6x12.bdf
+│   ├── fgm_27_ee.bdf
+│   ├── fgm_27_ee.fon
+│   ├── fgm_27_ee_may_3_bak.fon
+│   ├── franklin_gothic_medium_27_eastern_european.fon
+│   ├── helvR12.bdf
+│   ├── little_numbers.bdf
+│   ├── little_numbers.fon
+│   ├── little_numbers_may_3_bak.fon
+│   ├── mspgothic
+│   ├── mspgothic_030623.bdf
+│   ├── mspgothic_030623.fon
+│   ├── mspgothic_042623.bdf
+│   ├── mspgothic_042623.fon
+│   ├── mspgothic_small_numbers.fon
+│   ├── texgyre-27.bdf
+│   └── tom-thumb.bdf
+├── img
+│   ├── Makefile
+│   ├── Vmapper_Z_192x160_3x5.jpg
+│   ├── active3-pcb-config-default.png
+│   ├── active3-pcb-config-pin4.png
+│   ├── active3-pcb-config-pin8.png
+│   ├── active3-pcb.png
+│   ├── active3-schematic.png
+│   ├── adafruit-64x64-back.jpg
+│   ├── adafruit-64x64-front.jpg
+│   ├── adafruit-mod.jpg
+│   ├── chained-64x64.jpg
+│   ├── coordinates.png
+│   ├── coordinates.svg
+│   ├── hub75-other.jpg
+│   ├── hub75.jpg
+│   ├── idc-hub75-connector.jpg
+│   ├── passive-rpi1-pcb.png
+│   ├── passive3-pcb.png
+│   ├── pixelpusher-vid.jpg
+│   ├── powerbar.jpg
+│   ├── raspberry-gpio.jpg
+│   ├── running-vid.jpg
+│   ├── text-ghosting.jpg
+│   ├── text-no-ghosting.jpg
+│   ├── three-parallel-panels-soic.jpg
+│   ├── time-display.jpg
+│   ├── user-action-shot.jpg
+│   └── wire-up-icon.png
+├── include
+│   ├── canvas.h
+│   ├── content-streamer.h
+│   ├── graphics.h
+│   ├── led-matrix-c.h
+│   ├── led-matrix.h
+│   ├── pixel-mapper.h
+│   ├── thread.h
+│   └── threaded-canvas-manipulator.h
+├── js-project
+│   ├── index.html
+│   └── script.js
+├── lib
+│   ├── Makefile
+│   ├── bdf-font.cc
+│   ├── content-streamer.cc
+│   ├── framebuffer-internal.h
+│   ├── framebuffer.cc
+│   ├── gpio-bits.h
+│   ├── gpio.cc
+│   ├── gpio.h
+│   ├── graphics.cc
+│   ├── hardware-mapping.c
+│   ├── hardware-mapping.h
+│   ├── led-matrix-c.cc
+│   ├── led-matrix.cc
+│   ├── makefile_backup.txt
+│   ├── multiplex-mappers-internal.h
+│   ├── multiplex-mappers.cc
+│   ├── notes.cpp
+│   ├── options-initialize.cc
+│   ├── pixel-mapper.cc
+│   ├── the_friday_tool.py
+│   ├── thread.cc
+│   ├── utf8-internal.h
+│   └── wip.cc
+├── pi_menu.py
+├── pull_make_and_run
+├── temp.txt
+├── test.js
+├── the_friday_tool.py
+├── the_simulation.html
+├── utils
+│   ├── Makefile
+│   ├── README.md
+│   ├── led-image-viewer.cc
+│   ├── text-scroller.cc
+│   └── video-viewer.cc
+├── wiring.md
+└── y_mod_check.js
+```
+
+The make file path is "examples-api-use/Makefile".
+
+Here is the contents of "examples-api-use/Makefile":
+``` make file
+CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter
+CXXFLAGS=$(CFLAGS)
+OBJECTS=tennis-game/CanvasCreator.o tennis-game/FontLoader.o tennis-game/TextDrawer.o tennis-game/GameTimer.o tennis-game/Logger.o tennis-game/History.o tennis-game/GameState.o tennis-game/ScoreBoard.o tennis-game/Player.o panel_test.o draw_random_pix.o demo-main.o minimal-example.o c-example.o text-example.o tennis-game/tennis-game.o scrolling-text-example.o clock.o ledcat.o input-example.o pixel-mover.o
+BINARIES=panel_test draw_random_pix demo minimal-example c-example text-example tennis-game/tennis-game scrolling-text-example clock ledcat input-example pixel-mover
+
+# Where our library resides. It is assumed here that $(RGB_LIB_DISTRIBUTION) has a
+# compiled library in lib/ 
+RGB_LIB_DISTRIBUTION=..
+RGB_INCDIR=$(RGB_LIB_DISTRIBUTION)/include
+RGB_LIBDIR=$(RGB_LIB_DISTRIBUTION)/lib
+RGB_LIBRARY_NAME=rgbmatrix
+RGB_LIBRARY=$(RGB_LIBDIR)/lib$(RGB_LIBRARY_NAME).a
+LDFLAGS+=-L$(RGB_LIBDIR) -l$(RGB_LIBRARY_NAME) -lrt -lm -lpthread
+
+# To compile image-example
+MAGICK_CXXFLAGS?=$(shell GraphicsMagick++-config --cppflags --cxxflags)
+MAGICK_LDFLAGS?=$(shell GraphicsMagick++-config --ldflags --libs)
+
+all : $(BINARIES)
+
+$(RGB_LIBRARY): FORCE
+	$(MAKE) -C $(RGB_LIBDIR)
+
+demo : demo-main.o $(RGB_LIBRARY)
+draw_random_pix : draw_random_pix.o
+minimal-example : minimal-example.o
+input-example : input-example.o
+text-example: text-example.o
+# tennis-game: tennis-game/tennis-game.o
+tennis-game: tennis-game/tennis-game.o tennis-game/CanvasCreator.o tennis-game/FontLoader.o tennis-game/TextDrawer.o
+	$(CXX) $^ -o $@ $(LDFLAGS)
+scrolling-text-example : scrolling-text-example.o
+clock : clock.o
+ledcat : ledcat.o
+pixel-mover : pixel-mover.o
+panel_test : panel_test.o
+
+# tennis-game/CanvasCreator.o : tennis-game/CanvasCreator/CanvasCreator.cpp
+# 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+# tennis-game/FontLoader.o : tennis-game/FontLoader/FontLoader.cpp
+# 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+# tennis-game/TextDrawer.o : tennis-game/TextDrawer/TextDrawer.cpp
+# 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+tennis-game/CanvasCreator/CanvasCreator.o : tennis-game/CanvasCreator/CanvasCreator.cpp
+tennis-game/FontLoader/FontLoader.o : tennis-game/FontLoader/FontLoader.cpp
+tennis-game/TextDrawer/TextDrawer.o : tennis-game/TextDrawer/TextDrawer.cpp
+
+# All the binaries that have the same name as the object file.
+% : %.o $(RGB_LIBRARY)
+	$(CXX) $< -o $@ $(LDFLAGS)
+
+image-example.o : image-example.cc
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) $(MAGICK_CXXFLAGS) -c -o $@ $<
+
+image-example: image-example.o $(RGB_LIBRARY)
+	$(CXX) $< -o $@ $(LDFLAGS) $(MAGICK_LDFLAGS)
+
+tennis-game/tennis-game: tennis-game/tennis-game.o tennis-game/CanvasCreator/CanvasCreator.o tennis-game/FontLoader/FontLoader.o tennis-game/TextDrawer/TextDrawer.o
+	$(CXX) $^ -o $@ $(LDFLAGS)
+
+# Since the C example uses the C++ library underneath, which depends on C++
+# runtime stuff, you still have to also link -lstdc++
+c-example : c-example.o $(RGB_LIBRARY)
+	$(CC) $< -o $@ $(LDFLAGS) -lstdc++
+
+%.o : %.cc
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+%.o : %.c
+	$(CC) -I$(RGB_INCDIR) $(CFLAGS) -c -o $@ $<
+
+clean:
+	rm -f $(OBJECTS) $(BINARIES)
+
+FORCE:
+.PHONY: FORCE
+```

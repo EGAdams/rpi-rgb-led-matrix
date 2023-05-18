@@ -35,18 +35,18 @@ ledcat : ledcat.o
 pixel-mover : pixel-mover.o
 panel_test : panel_test.o
 
-# tennis-game/CanvasCreator.o : tennis-game/CanvasCreator/CanvasCreator.cpp
-# 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+tennis-game/CanvasCreator.o : tennis-game/CanvasCreator/CanvasCreator.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
-# tennis-game/FontLoader.o : tennis-game/FontLoader/FontLoader.cpp
-# 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+tennis-game/FontLoader.o : tennis-game/FontLoader/FontLoader.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
-# tennis-game/TextDrawer.o : tennis-game/TextDrawer/TextDrawer.cpp
-# 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+tennis-game/TextDrawer.o : tennis-game/TextDrawer/TextDrawer.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
-tennis-game/CanvasCreator/CanvasCreator.o : tennis-game/CanvasCreator/CanvasCreator.cpp
-tennis-game/FontLoader/FontLoader.o : tennis-game/FontLoader/FontLoader.cpp
-tennis-game/TextDrawer/TextDrawer.o : tennis-game/TextDrawer/TextDrawer.cpp
+# tennis-game/CanvasCreator/CanvasCreator.o : tennis-game/CanvasCreator/CanvasCreator.cpp
+# tennis-game/FontLoader/FontLoader.o : tennis-game/FontLoader/FontLoader.cpp
+# tennis-game/TextDrawer/TextDrawer.o : tennis-game/TextDrawer/TextDrawer.cpp
 
 # All the binaries that have the same name as the object file.
 % : %.o $(RGB_LIBRARY)
