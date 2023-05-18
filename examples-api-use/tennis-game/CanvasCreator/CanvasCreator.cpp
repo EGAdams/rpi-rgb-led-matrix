@@ -1,6 +1,7 @@
 #include "CanvasCreator.h"
 
-CanvasCreator::CanvasCreator(RGBMatrix::Options matrix_options, rgb_matrix::RuntimeOptions runtime_opt) : _matrixOptions(matrix_options), _runtimeOptions(runtime_opt) {}
+CanvasCreator::CanvasCreator(RGBMatrix::Options matrix_options, rgb_matrix::RuntimeOptions runtime_opt) : 
+    _matrixOptions(matrix_options), _runtimeOptions(runtime_opt) {}
 
 RGBMatrix* CanvasCreator::CreateCanvas() {
     RGBMatrix* canvas = RGBMatrix::CreateFromOptions(_matrixOptions, _runtimeOptions);
