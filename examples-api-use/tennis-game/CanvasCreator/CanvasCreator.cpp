@@ -11,3 +11,5 @@ RGBMatrix* CanvasCreator::CreateCanvas() {
     }
     return canvas;
 }
+
+//
