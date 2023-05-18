@@ -1,5 +1,5 @@
 #pragma once
-#include "led-matrix.h"
+#include "CanvasCreator.h"
 
 using namespace rgb_matrix;
 
