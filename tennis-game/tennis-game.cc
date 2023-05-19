@@ -136,6 +136,7 @@ static int usage(const char *progname) {
         printf( "Loop count: %d\n", loop_count++ ); }
     ///////// End Game Loop /////////////
 
+    printf( "Deleting canvas...\n" )
     delete canvas; // Clean up
     return 0;
 }
