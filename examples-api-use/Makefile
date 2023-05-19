@@ -1,10 +1,10 @@
 CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter
 CXXFLAGS=$(CFLAGS)
-OBJECTS=tennis-game/CanvasCreator.o tennis-game/FontLoader.o tennis-game/TextDrawer.o tennis-game/GameTimer.o tennis-game/Logger.o tennis-game/History.o tennis-game/GameState.o tennis-game/ScoreBoard.o tennis-game/Player.o panel_test.o draw_random_pix.o demo-main.o minimal-example.o c-example.o text-example.o tennis-game/tennis-game.o scrolling-text-example.o clock.o ledcat.o input-example.o pixel-mover.o
-BINARIES=panel_test draw_random_pix demo minimal-example c-example text-example tennis-game/tennis-game scrolling-text-example clock ledcat input-example pixel-mover
+OBJECTS=panel_test.o draw_random_pix.o demo-main.o minimal-example.o c-example.o text-example.o scrolling-text-example.o clock.o ledcat.o input-example.o pixel-mover.o
+BINARIES=panel_test draw_random_pix demo minimal-example c-example text-example scrolling-text-example clock ledcat input-example pixel-mover
 
 # Where our library resides. It is assumed here that $(RGB_LIB_DISTRIBUTION) has a
-# compiled library in lib/ 
+# compiled library in lib/
 RGB_LIB_DISTRIBUTION=..
 RGB_INCDIR=$(RGB_LIB_DISTRIBUTION)/include
 RGB_LIBDIR=$(RGB_LIB_DISTRIBUTION)/lib
@@ -26,27 +26,11 @@ draw_random_pix : draw_random_pix.o
 minimal-example : minimal-example.o
 input-example : input-example.o
 text-example: text-example.o
-# tennis-game: tennis-game/tennis-game.o
-tennis-game: tennis-game/tennis-game.o tennis-game/CanvasCreator.o tennis-game/FontLoader.o tennis-game/TextDrawer.o
-	$(CXX) $^ -o $@ $(LDFLAGS)
 scrolling-text-example : scrolling-text-example.o
 clock : clock.o
 ledcat : ledcat.o
 pixel-mover : pixel-mover.o
 panel_test : panel_test.o
-
-tennis-game/CanvasCreator.o : tennis-game/CanvasCreator/CanvasCreator.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-tennis-game/FontLoader.o : tennis-game/FontLoader/FontLoader.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-tennis-game/TextDrawer.o : tennis-game/TextDrawer/TextDrawer.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-# tennis-game/CanvasCreator/CanvasCreator.o : tennis-game/CanvasCreator/CanvasCreator.cpp
-# tennis-game/FontLoader/FontLoader.o : tennis-game/FontLoader/FontLoader.cpp
-# tennis-game/TextDrawer/TextDrawer.o : tennis-game/TextDrawer/TextDrawer.cpp
 
 # All the binaries that have the same name as the object file.
 % : %.o $(RGB_LIBRARY)
@@ -57,9 +41,6 @@ image-example.o : image-example.cc
 
 image-example: image-example.o $(RGB_LIBRARY)
 	$(CXX) $< -o $@ $(LDFLAGS) $(MAGICK_LDFLAGS)
-
-tennis-game/tennis-game: tennis-game/tennis-game.o tennis-game/CanvasCreator/CanvasCreator.o tennis-game/FontLoader/FontLoader.o tennis-game/TextDrawer/TextDrawer.o
-	$(CXX) $^ -o $@ $(LDFLAGS)
 
 # Since the C example uses the C++ library underneath, which depends on C++
 # runtime stuff, you still have to also link -lstdc++

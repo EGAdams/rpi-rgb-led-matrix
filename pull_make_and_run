@@ -31,4 +31,4 @@ echo "running example... "
 #sudo examples-api-use/demo -D 9 --led-no-hardware-pulse --led-multiplexing=1 --led-pixel-mapper="Rotate:180;264-Mapper" --led-gpio-mapping=regular --led-chain=1 --led-cols=64 --led-rows=64 --led-parallel=2 --led-brightness=20
 #sudo examples-api-use/text-example -f fonts/mspgothic_042623.bdf --led-no-hardware-pulse --led-multiplexing=1 --led-gpio-mapping=regular --led-parallel=2 --led-pixel-mapper="Rotate:180;264-Mapper" --led-cols=64 --led-rows=64 --led-brightness=35
 
-sudo tennis-game/tennis-game -f fonts/mspgothic_042623.bdf --led-no-hardware-pulse --led-multiplexing=1 --led-gpio-mapping=regular --led-parallel=2 --led-pixel-mapper="Rotate:180;264-Mapper" --led-cols=64 --led-rows=64 --led-brightness=35
+sudo tennis-game -f fonts/mspgothic_042623.bdf --led-no-hardware-pulse --led-multiplexing=1 --led-gpio-mapping=regular --led-parallel=2 --led-pixel-mapper="Rotate:180;264-Mapper" --led-cols=64 --led-rows=64 --led-brightness=35
