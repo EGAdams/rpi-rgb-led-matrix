@@ -2,6 +2,7 @@ clear
 echo "synching git...  "
 git pull
 echo "rebuilding project..."
+cd tennis-game
 make
 #
 #
@@ -28,5 +29,6 @@ echo "running example... "
 
 #below command worked on april 24, 2023
 #sudo examples-api-use/demo -D 9 --led-no-hardware-pulse --led-multiplexing=1 --led-pixel-mapper="Rotate:180;264-Mapper" --led-gpio-mapping=regular --led-chain=1 --led-cols=64 --led-rows=64 --led-parallel=2 --led-brightness=20
+#sudo examples-api-use/text-example -f fonts/mspgothic_042623.bdf --led-no-hardware-pulse --led-multiplexing=1 --led-gpio-mapping=regular --led-parallel=2 --led-pixel-mapper="Rotate:180;264-Mapper" --led-cols=64 --led-rows=64 --led-brightness=35
 
-sudo examples-api-use/panel_test --led-no-hardware-pulse --led-multiplexing=1 --led-pixel-mapper="Rotate:270;Mirror:V --led-gpio-mapping=regular 
+sudo tennis-game/tennis-game -f fonts/mspgothic_042623.bdf --led-no-hardware-pulse --led-multiplexing=1 --led-gpio-mapping=regular --led-parallel=2 --led-pixel-mapper="Rotate:180;264-Mapper" --led-cols=64 --led-rows=64 --led-brightness=35
