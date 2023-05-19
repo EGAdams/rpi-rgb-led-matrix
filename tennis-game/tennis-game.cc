@@ -128,7 +128,7 @@ static int usage(const char *progname) {
     ///////// Start Game Loop /////////////
     bool game_running = true;
     int loop_count = 0;
-    #define MAX_LOOP_COUNT 3
+    #define MAX_LOOP_COUNT 2
     while ( game_running ) {
         if ( loop_count >  MAX_LOOP_COUNT ) { game_running = false; }
         printf( "sleeping... " );
@@ -136,7 +136,7 @@ static int usage(const char *progname) {
         printf( "Loop count: %d\n", loop_count++ ); }
     ///////// End Game Loop /////////////
 
-    printf( "Deleting canvas...\n" )
+    printf( "Deleting canvas...\n" );
     delete canvas; // Clean up
     return 0;
 }
