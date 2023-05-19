@@ -125,8 +125,6 @@ static int usage(const char *progname) {
     TextDrawer littleNumberDrawer(canvas, littleNumberFont, 7, littleNumberFont.baseline(), color, bg_color, "1 2 3", 0);
     littleNumberDrawer.DrawText();
 
-    delete canvas;
-
     ///////// Start Game Loop /////////////
     bool game_running = true;
     int loop_count = 0;
@@ -138,5 +136,6 @@ static int usage(const char *progname) {
         printf( "Loop count: %d\n", loop_count++ ); }
     ///////// End Game Loop /////////////
 
+    delete canvas; // Clean up
     return 0;
 }
