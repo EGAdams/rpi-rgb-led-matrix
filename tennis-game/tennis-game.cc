@@ -137,6 +137,6 @@ static int usage(const char *progname) {
         sleep( 1 );
         printf( "Loop count: %d\n", loop_count++ ); }
     ///////// End Game Loop /////////////
-    
+
     return 0;
 }

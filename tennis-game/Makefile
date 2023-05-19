@@ -1,7 +1,7 @@
 CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter
 CXXFLAGS=$(CFLAGS)
-OBJECTS=CanvasCreator.o FontLoader.o TextDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o panel_test.o draw_random_pix.o demo-main.o minimal-example.o c-example.o text-example.o tennis-game.o scrolling-text-example.o clock.o ledcat.o input-example.o pixel-mover.o
-BINARIES=panel_test draw_random_pix demo minimal-example c-example text-example tennis-game scrolling-text-example clock ledcat input-example pixel-mover
+OBJECTS=CanvasCreator.o FontLoader.o TextDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game.o
+BINARIES=tennis-game
 
 # Where our library resides. It is assumed here that $(RGB_LIB_DISTRIBUTION) has a
 # compiled library in lib/
@@ -21,19 +21,8 @@ all : $(BINARIES)
 $(RGB_LIBRARY): FORCE
 	$(MAKE) -C $(RGB_LIBDIR)
 
-demo : demo-main.o $(RGB_LIBRARY)
-draw_random_pix : draw_random_pix.o
-minimal-example : minimal-example.o
-input-example : input-example.o
-text-example: text-example.o
-# tennis-game: tennis-game.o
 tennis-game: tennis-game.o CanvasCreator.o FontLoader.o TextDrawer.o
 	$(CXX) $^ -o $@ $(LDFLAGS)
-scrolling-text-example : scrolling-text-example.o
-clock : clock.o
-ledcat : ledcat.o
-pixel-mover : pixel-mover.o
-panel_test : panel_test.o
 
 CanvasCreator.o : CanvasCreator/CanvasCreator.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
@@ -44,33 +33,8 @@ FontLoader.o : FontLoader/FontLoader.cpp
 TextDrawer.o : TextDrawer/TextDrawer.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
-# CanvasCreator/CanvasCreator.o : CanvasCreator/CanvasCreator.cpp
-# FontLoader/FontLoader.o : FontLoader/FontLoader.cpp
-# TextDrawer/TextDrawer.o : TextDrawer/TextDrawer.cpp
-
-# All the binaries that have the same name as the object file.
-% : %.o $(RGB_LIBRARY)
-	$(CXX) $< -o $@ $(LDFLAGS)
-
-image-example.o : image-example.cc
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) $(MAGICK_CXXFLAGS) -c -o $@ $<
-
-image-example: image-example.o $(RGB_LIBRARY)
-	$(CXX) $< -o $@ $(LDFLAGS) $(MAGICK_LDFLAGS)
-
-tennis-game: tennis-game.o CanvasCreator/CanvasCreator.o FontLoader/FontLoader.o TextDrawer/TextDrawer.o
-	$(CXX) $^ -o $@ $(LDFLAGS)
-
-# Since the C example uses the C++ library underneath, which depends on C++
-# runtime stuff, you still have to also link -lstdc++
-c-example : c-example.o $(RGB_LIBRARY)
-	$(CC) $< -o $@ $(LDFLAGS) -lstdc++
-
-%.o : %.cc
+tennis-game.o : tennis-game.cc
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-%.o : %.c
-	$(CC) -I$(RGB_INCDIR) $(CFLAGS) -c -o $@ $<
 
 clean:
 	rm -f $(OBJECTS) $(BINARIES)
