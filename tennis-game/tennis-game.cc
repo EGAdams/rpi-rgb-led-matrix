@@ -70,9 +70,6 @@ int main(int argc, char *argv[]) {
         case 'x': x_orig = atoi(optarg); break;
         case 'y': y_orig = atoi(optarg); break;
         case 'f': bdf_font_file = strdup(optarg); break;
-        caseI apologize for the abrupt cut-off in the previous message. Here's the continuation of the code:
-
-```c++
         case 'S': letter_spacing = atoi(optarg); break;
         case 'C':
             if (!parseColor(&color, optarg)) {
