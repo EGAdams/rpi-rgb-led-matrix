@@ -1,6 +1,6 @@
 CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter
 CXXFLAGS=$(CFLAGS)
-OBJECTS=NumberDrawer.o CanvasCreator.o FontLoader.o TextDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game.o
+OBJECTS=CanvasCreator.o FontLoader.o NumberDrawer.o TextDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game.o
 BINARIES=tennis-game
 
 # Where our library resides. It is assumed here that $(RGB_LIB_DISTRIBUTION) has a
