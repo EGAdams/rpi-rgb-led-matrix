@@ -119,20 +119,11 @@ int main(int argc, char *argv[]) {
     rgb_matrix::Font littleNumberFont;
     littleNumberFontLoader.LoadFont(littleNumberFont);
 
-    TextDrawer textDrawer(canvas, font, 0, 0, color, bg_color, "I", 0); // Draw Text
-    textDrawer.DrawText();
+    NumberDrawer bigNumberDrawer(canvas, bigNumberFont, NumberDrawer::BIG, color, bg_color);
+    bigNumberDrawer.DrawNumber("8", 16, bigNumberFont.baseline() - 1);
 
-    TextDrawer bigNumberDrawer1(canvas, bigNumberFont, 16, bigNumberFont.baseline() - 1, color, bg_color, "8", 1);
-    bigNumberDrawer1.DrawText();
-
-    TextDrawer bigNumberDrawer2(canvas, bigNumberFont, 38, bigNumberFont.baseline() - 1, color, bg_color, "9", 1);
-    bigNumberDrawer2.DrawText();
-
-    TextDrawer littleNumberDrawer(canvas, littleNumberFont, 7, littleNumberFont.baseline(), color, bg_color, "1 2 3", 0);
-    littleNumberDrawer.DrawText();
-
-    TextDrawer littleNumberDrawer4(canvas, littleNumberFont, 7 + (2 * 17), littleNumberFont.baseline(), color, bg_color, "6", 0);
-    littleNumberDrawer4.DrawText();
+    NumberDrawer smallNumberDrawer(canvas, littleNumberFont, NumberDrawer::SMALL, color, bg_color);
+    smallNumberDrawer.DrawNumber("1 2 3", 7, littleNumberFont.baseline());
 
     ///////// Start Game Loop /////////////
     bool game_running = true;

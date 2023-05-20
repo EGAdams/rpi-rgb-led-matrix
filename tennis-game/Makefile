@@ -1,6 +1,6 @@
 CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter
 CXXFLAGS=$(CFLAGS)
-OBJECTS=CanvasCreator.o FontLoader.o TextDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game.o
+OBJECTS=NumberDrawer.o CanvasCreator.o FontLoader.o TextDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game.o
 BINARIES=tennis-game
 
 # Where our library resides. It is assumed here that $(RGB_LIB_DISTRIBUTION) has a
@@ -28,6 +28,9 @@ CanvasCreator.o : CanvasCreator/CanvasCreator.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
 FontLoader.o : FontLoader/FontLoader.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+NumberDrawer.o : NumberDrawer/NumberDrawer.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
 TextDrawer.o : TextDrawer/TextDrawer.cpp
