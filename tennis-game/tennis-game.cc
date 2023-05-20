@@ -13,6 +13,7 @@
 #include "CanvasCreator/CanvasCreator.h"
 #include "FontLoader/FontLoader.h"
 #include "TextDrawer/TextDrawer.h"
+#include "NumberDrawer/NumberDrawer.h"
 
 using namespace rgb_matrix;
 
