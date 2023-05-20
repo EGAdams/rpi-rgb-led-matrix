@@ -21,7 +21,7 @@ all : $(BINARIES)
 $(RGB_LIBRARY): FORCE
 	$(MAKE) -C $(RGB_LIBDIR)
 
-tennis-game: tennis-game.o CanvasCreator.o FontLoader.o TextDrawer.o
+tennis-game: tennis-game.o CanvasCreator.o FontLoader.o TextDrawer.o NumberDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o $(RGB_LIBRARY)	
 	$(CXX) $^ -o $@ $(LDFLAGS)
 
 CanvasCreator.o : CanvasCreator/CanvasCreator.cpp
