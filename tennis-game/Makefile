@@ -22,8 +22,8 @@ $(RGB_LIBRARY): FORCE
 	$(MAKE) -C $(RGB_LIBDIR)
 
 tennis-game: $(OBJECTS)
-	$(CXX) $^ -o $@ $(LDFLAGS)
-
+    $(CXX) $^ -o $@ $(LDFLAGS)
+	
 CanvasCreator.o : CanvasCreator/CanvasCreator.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 

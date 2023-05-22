@@ -12,18 +12,14 @@ public:
 
     NumberDrawer(RGBMatrix* canvas, const rgb_matrix::Font* font, Size size, const Color& color, const Color& bg_color);
 
-
-
-
     void DrawNumber(const std::string& number, int x, int y);
 
 private:
     RGBMatrix* canvas_;
-    const rgb_matrix::Font* font_; // Change this line
+    const rgb_matrix::Font* font_; // Changed this from a reference to a pointer
     Size size_;
     Color color_;
     Color bg_color_;
 };
-
 
 #endif // NUMBER_DRAWER_H
