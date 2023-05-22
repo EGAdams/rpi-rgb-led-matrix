@@ -1,7 +1,8 @@
 {
     "files.associations": {
         "*.ts": "typescript",
-        "bitset": "cpp"
+        "bitset": "cpp",
+        "xstring": "cpp"
     },
     "cSpell.words": [
         "Adafruit",
