@@ -15,7 +15,7 @@ void GameTimer::gameDelay( int milliseconds ) {
     // std::cout << "Sleeping for " << milliseconds << " milliseconds" << std::endl;
     std::this_thread::sleep_for( std::chrono::milliseconds( milliseconds ));
 #else
-    delay( milliseconds );
+    // delay( milliseconds );
 #endif
 }
 GameTimer::~GameTimer() {
