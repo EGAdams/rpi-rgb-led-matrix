@@ -19,7 +19,7 @@ public:
 
 private:
     RGBMatrix* canvas_;
-    const rgb_matrix::Font& font_; // Change this line
+    const rgb_matrix::Font* font_; // Change this line
     Size size_;
     Color color_;
     Color bg_color_;
