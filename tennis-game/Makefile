@@ -45,7 +45,7 @@ Arduino.o : Arduino/Arduino.cpp
 Logger.o : Logger/Logger.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
-Logger.o : History/History.cpp
+History.o : History/History.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
 tennis-game.o : tennis-game.cpp
