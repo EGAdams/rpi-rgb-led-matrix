@@ -2,8 +2,8 @@
 #define History_h
 
 #include <stack>
-#include "GameState.h"
-#include "Logger.h"
+#include "../GameState/GameState.h"
+#include "../Logger/Logger.h"
 
 class History {
  public:
