@@ -1,4 +1,5 @@
 #include "GameTimer.h"
+#include "Arduino.h"
 
 #if defined _WIN32 || defined _WIN64
 #include <chrono>
