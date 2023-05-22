@@ -1,3 +1,6 @@
+
+#include "NumberDrawer.h"
+
 class NumberDrawer {
 public:
     enum Size { BIG, SMALL };
