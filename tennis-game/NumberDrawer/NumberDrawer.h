@@ -10,13 +10,13 @@ class NumberDrawer {
 public:
     enum Size { BIG, SMALL };
 
-    NumberDrawer(RGBMatrix* canvas, const rgb_matrix::Font& font, Size size, const Color& color, const Color& bg_color);
+    NumberDrawer(RGBMatrix* canvas, const rgb_matrix::Font* font, Size size, const Color& color, const Color& bg_color);
 
     void DrawNumber(const std::string& number, int x, int y);
 
 private:
     RGBMatrix* canvas_;
-    rgb_matrix::Font font_;
+    const rgb_matrix::Font* font_;
     Size size_;
     Color color_;
     Color bg_color_;
