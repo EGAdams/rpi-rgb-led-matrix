@@ -42,6 +42,9 @@ GameTimer.o : GameTimer/GameTimer.cpp
 Arduino.o : Arduino/Arduino.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
+Logger.o : Logger/Logger.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
 tennis-game.o : tennis-game.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
