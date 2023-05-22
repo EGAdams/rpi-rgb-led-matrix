@@ -36,6 +36,9 @@ NumberDrawer.o : NumberDrawer/NumberDrawer.cpp
 TextDrawer.o : TextDrawer/TextDrawer.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
+GameTimer.o : GameTimer/GameTimer.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
 tennis-game.o : tennis-game.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
