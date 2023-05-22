@@ -10,7 +10,8 @@ class NumberDrawer {
 public:
     enum Size { BIG, SMALL };
 
-    NumberDrawer(RGBMatrix* canvas, const rgb_matrix::Font& font, Size size, const Color& color, const Color& bg_color);
+    NumberDrawer(RGBMatrix* canvas, const rgb_matrix::Font* font, Size size, const Color& color, const Color& bg_color);
+
 
 
 
