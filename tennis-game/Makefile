@@ -21,7 +21,7 @@ all : $(BINARIES)
 $(RGB_LIBRARY): FORCE
 	$(MAKE) -C $(RGB_LIBDIR)
 
-tennis-game: tennis-game.o CanvasCreator.o FontLoader.o TextDrawer.o NumberDrawer
+tennis-game: $(OBJECTS)
 	$(CXX) $^ -o $@ $(LDFLAGS)
 
 CanvasCreator.o : CanvasCreator/CanvasCreator.cpp
@@ -36,7 +36,10 @@ NumberDrawer.o : NumberDrawer/NumberDrawer.cpp
 TextDrawer.o : TextDrawer/TextDrawer.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
-tennis-game.o : tennis-game.cc
+GameTimer.o : GameTimer/GameTimer.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+tennis-game.o : tennis-game.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
 clean:
