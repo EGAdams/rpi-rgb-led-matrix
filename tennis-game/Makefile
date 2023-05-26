@@ -54,6 +54,9 @@ History.o : History/History.cpp
 ScoreBoard.o : ScoreBoard/ScoreBoard.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
+Player.o : Player/Player.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
 tennis-game.o : tennis-game.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 

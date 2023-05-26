@@ -1,7 +1,7 @@
 #pragma once
 
-#include "led-matrix.h"
-#include "graphics.h"
+#include "../../include/led-matrix.h"
+#include "../../include/graphics.h"
 
 using namespace rgb_matrix;
 class TextDrawer {

@@ -1,8 +1,8 @@
 #ifndef NUMBER_DRAWER_H
 #define NUMBER_DRAWER_H
 
-#include "led-matrix.h"
-#include "graphics.h"
+#include "../../include/led-matrix.h"
+#include "../../include/graphics.h"
 
 using namespace rgb_matrix;
 

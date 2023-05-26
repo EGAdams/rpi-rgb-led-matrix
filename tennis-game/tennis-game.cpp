@@ -3,8 +3,8 @@
 // This code is public domain
 // (but note, that the led-matrix library this depends on is GPL v2)
 
-#include "led-matrix.h"
-#include "graphics.h"
+#include "../include/led-matrix.h"
+#include "../include/graphics.h"
 #include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -41,11 +41,11 @@ static bool parseColor(Color *c, const char *str) {
     return sscanf(str, "%hhu,%hhu,%hhu", &c->r, &c->g, &c->b) == 3;
 }
 
-static bool FullSaturation(const Color &c) {
-    return (c.r == 0 || c.r == 255)
-        && (c.g == 0 || c.g == 255)
-        && (c.b == 0 || c.b == 255);
-}
+// static bool FullSaturation(const Color &c) {
+//     return (c.r == 0 || c.r == 255)
+//         && (c.g == 0 || c.g == 255)
+//         && (c.b == 0 || c.b == 255);
+// }
 
 int main(int argc, char *argv[]) {
     RGBMatrix::Options matrix_options;
@@ -119,11 +119,12 @@ int main(int argc, char *argv[]) {
     FontLoader littleNumberFontLoader("fonts/little_numbers.bdf");
     rgb_matrix::Font littleNumberFont;
     littleNumberFontLoader.LoadFont(littleNumberFont);
+    // create new big number drawer
+    NumberDrawer bigNumberDrawer(canvas, &bigNumberFont, NumberDrawer::BIG, color, bg_color);
 
-    NumberDrawer bigNumberDrawer(canvas, bigNumberFont, NumberDrawer::BIG, color, bg_color);
     bigNumberDrawer.DrawNumber("8", 16, bigNumberFont.baseline() - 1);
 
-    NumberDrawer smallNumberDrawer(canvas, littleNumberFont, NumberDrawer::SMALL, color, bg_color);
+    NumberDrawer smallNumberDrawer(canvas, &littleNumberFont, NumberDrawer::SMALL, color, bg_color);
     smallNumberDrawer.DrawNumber("1 2 3", 7, littleNumberFont.baseline());
 
     ///////// Start Game Loop /////////////

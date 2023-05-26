@@ -1,7 +1,8 @@
 #pragma once
 
-#include <led-matrix.h>
-#include "graphics.h"
+#include "../../include/led-matrix.h"
+#include "../../include/graphics.h"
+
 class FontLoader {
 public:
     FontLoader(const char* fontFile);

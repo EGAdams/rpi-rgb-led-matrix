@@ -1,5 +1,5 @@
 
-#include "led-matrix.h"
+#include "../../include/led-matrix.h"
 
 using namespace rgb_matrix;
 

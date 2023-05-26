@@ -4,8 +4,8 @@
 #include <ctime>
 #include <iostream>
 #include <regex>
+#define LOG_FILE_PATH "log.txt"
 
-#if defined _WIN32 || defined _WIN64
 Logger::Logger( std::string constructor_name ) : _constructor_name( constructor_name ) {
     std::cout << "constructing the Logger for " + constructor_name + "..." << std::endl;
     _log_file.open( LOG_FILE_PATH, std::ios::out | std::ios::app );
@@ -57,8 +57,4 @@ bool Logger::inArray( int supposed_random_number ) {
     }
     return false;
 }
-#else
-Logger::Logger( String path ) {}
-Logger::~Logger() {}
-void Logger::logUpdate( String message, String caller = "unknown" ) {}
-#endif
+
