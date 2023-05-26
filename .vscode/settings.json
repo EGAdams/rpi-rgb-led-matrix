@@ -10,6 +10,7 @@
         "errpos",
         "fprintf",
         "Freqs",
+        "GAMEOBJECT",
         "GPIO",
         "Hblock",
         "ialized",
@@ -21,7 +22,8 @@
         "strchrnul",
         "TRANSLATECONSTANT",
         "Vblock",
-        "Vliedel"
+        "Vliedel",
+        "Plyr"
     ],
     "liveServer.settings.port": 5501
 }

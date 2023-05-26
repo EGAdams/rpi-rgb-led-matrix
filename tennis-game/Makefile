@@ -1,6 +1,6 @@
 CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter
 CXXFLAGS=$(CFLAGS)
-OBJECTS=PinState.o PinInterface.o TranslateConstant.o POINT_LEDs.o Arduino.o CanvasCreator.o FontLoader.o NumberDrawer.o TextDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game.o
+OBJECTS=Reset.o SetLeds.o TieLeds.o WinSequences.o Mode2Functions.o MatchWinSequence.o TennisConstants.o GameLeds.o GameModes.o GameObject.o PinState.o PinInterface.o TranslateConstant.o PointLeds.o Arduino.o CanvasCreator.o FontLoader.o NumberDrawer.o TextDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game.o
 BINARIES=tennis-game
 
 # Where our library resides. It is assumed here that $(RGB_LIB_DISTRIBUTION) has a
@@ -42,6 +42,15 @@ GameTimer.o : GameTimer/GameTimer.cpp
 GameState.o : GameState/GameState.cpp
 	$(CXX) -I$(RGB_INCDIR) -I../Arduino $(CXXFLAGS) -c -o $@ $<
 
+GameObject.o : GameObject/GameObject.cpp
+	$(CXX) -I$(RGB_INCDIR) -I../Arduino $(CXXFLAGS) -c -o $@ $<
+
+GameModes.o : GameModes/GameModes.cpp
+	$(CXX) -I$(RGB_INCDIR) -I../Arduino $(CXXFLAGS) -c -o $@ $<
+
+GameLeds.o : GameLeds/GameLeds.cpp
+	$(CXX) -I$(RGB_INCDIR) -I../Arduino $(CXXFLAGS) -c -o $@ $<
+
 Arduino.o : Arduino/Arduino.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
@@ -63,10 +72,31 @@ PinInterface.o : PinInterface/PinInterface.cpp
 TranslateConstant.o : TranslateConstant/TranslateConstant.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
-POINT_LEDs.o : POINT_LEDs/POINT_LEDs.cpp
+PointLeds.o : PointLeds/PointLeds.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
 PinState.o : PinState/PinState.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+TennisConstants.o : TennisConstants/TennisConstants.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+Mode1Functions.o : Mode1Functions/Mode1Functions.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+Mode2Functions.o : Mode2Functions/Mode2Functions.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+WinSequences.o : WinSequences/WinSequences.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+SetLeds.o : SetLeds/SetLeds.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+TieLeds.o : TieLeds/TieLeds.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+Reset.o : Reset/Reset.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
 tennis-game.o : tennis-game.cpp
