@@ -16,7 +16,7 @@ public:
 
 private:
     RGBMatrix* canvas_;
-    const rgb_matrix::Font* font_; // Changed this from a reference to a pointer
+    const rgb_matrix::Font* font_;
     Size size_;
     Color color_;
     Color bg_color_;

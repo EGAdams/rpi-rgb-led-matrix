@@ -9,17 +9,19 @@
 using namespace rgb_matrix;
 
 class ScoreBoard {
- public:
-  ScoreBoard( Player* player1, Player* player2 );
-  ~ScoreBoard();
-  void update( GameState* gameState, RGBMatrix::Options matrix_options, rgb_matrix::RuntimeOptions runtime_opt );
-  // bool FullSaturation( const Color &c );
+  public:
+      ScoreBoard( Player* player1, Player* player2, GameState* gameState, RGBMatrix::Options matrix_options, rgb_matrix::RuntimeOptions runtime_opt );
+      ~ScoreBoard();
+      void update();
 
- private:
-  Player*     _player1;
-  Player*     _player2;
-  ScoreBoard* _scoreBoard;
-  bool FullSaturation( const Color &c );  // Add this line
+  private:
+      Player*                     _player1;
+      Player*                     _player2;
+      GameState*                  _gameState;
+      ScoreBoard*                 _scoreBoard;
+      RGBMatrix::Options          _matrix_options;
+      rgb_matrix::RuntimeOptions  _runtime_opt;
+      bool FullSaturation( const Color &c );
 };
 
 #endif

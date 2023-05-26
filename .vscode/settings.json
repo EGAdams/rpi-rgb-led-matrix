@@ -13,10 +13,13 @@
         "GPIO",
         "Hblock",
         "ialized",
+        "PININTERFACE",
+        "PINSTATE",
         "pwmbits",
         "RGBMATRIX",
         "SCKL",
         "strchrnul",
+        "TRANSLATECONSTANT",
         "Vblock",
         "Vliedel"
     ],

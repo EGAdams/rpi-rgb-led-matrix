@@ -1,8 +1,16 @@
 #include "ScoreBoard.h"
 #include <stdio.h>
 
-ScoreBoard::ScoreBoard(Player* player1, Player* player2)
-    : _player1(player1), _player2(player2) {}
+ScoreBoard::ScoreBoard( Player*                    player1,
+                        Player*                    player2,
+                        GameState*                 gameState,
+                        RGBMatrix::Options         matrix_options,
+                        rgb_matrix::RuntimeOptions runtime_opt )
+    :   _player1(        player1 ),
+        _player2(        player2 ),
+        _gameState (     gameState ),
+        _matrix_options( matrix_options ),
+        _runtime_opt(    runtime_opt    ) {}
 ScoreBoard::~ScoreBoard() {}
 
 bool ScoreBoard::FullSaturation( const Color &c ) {
@@ -10,18 +18,18 @@ bool ScoreBoard::FullSaturation( const Color &c ) {
         && (c.g == 0 || c.g == 255)
         && (c.b == 0 || c.b == 255); }
 
-void ScoreBoard::update(GameState* gameState, RGBMatrix::Options matrix_options, rgb_matrix::RuntimeOptions runtime_opt)  {
+void ScoreBoard::update()  {
     printf( "Updating ScoreBoard...\n" );
     const char *bdf_font_file = "fonts/mspgothic_042623.bdf";
     rgb_matrix::Font font; /* Load font. This needs to be a filename with a bdf bitmap font. */
     if (!font.LoadFont( bdf_font_file )) {
         fprintf(stderr, "Couldn't load font '%s'\n", bdf_font_file);
         exit( 1 ); }
-    bool with_outline = false;                                 
+    bool with_outline = false;
     rgb_matrix::Font *outline_font = NULL;                            // If we want an outline around the font,
     if ( with_outline ) { outline_font = font.CreateOutlineFont(); }  // we create a new font with the original font
                                                                       // as a template that is just an outline font.
-    RGBMatrix *canvas = RGBMatrix::CreateFromOptions(matrix_options, runtime_opt);
+    RGBMatrix *canvas = RGBMatrix::CreateFromOptions( _matrix_options, _runtime_opt);
     if ( canvas == NULL ) {
         printf( "Couldn't create RGBMatrix object.  exiting... \n" );
         exit( 1 ); }
@@ -29,7 +37,7 @@ void ScoreBoard::update(GameState* gameState, RGBMatrix::Options matrix_options,
     Color bg_color(0, 0, 0);
     Color flood_color(0, 0, 0);
     Color outline_color( 0,0,0 );
-    const bool all_extreme_colors = (matrix_options.brightness == 100)
+    const bool all_extreme_colors = (_matrix_options.brightness == 100)
         && this->FullSaturation( color ) && this->FullSaturation( bg_color ) && this->FullSaturation( outline_color );
     if ( all_extreme_colors ) { canvas->SetPWMBits( 1 ); }
     const int x = 0;

@@ -34,26 +34,14 @@ static int usage(const char *progname) {
             "\n"
             );
     rgb_matrix::PrintMatrixFlags(stderr);
-    return 1;
-}
+    return 1; }
 
-static bool parseColor(Color *c, const char *str) {
-    return sscanf(str, "%hhu,%hhu,%hhu", &c->r, &c->g, &c->b) == 3;
-}
-
-// static bool FullSaturation(const Color &c) {
-//     return (c.r == 0 || c.r == 255)
-//         && (c.g == 0 || c.g == 255)
-//         && (c.b == 0 || c.b == 255);
-// }
+static bool parseColor(Color *c, const char *str) { return sscanf(str, "%hhu,%hhu,%hhu", &c->r, &c->g, &c->b) == 3; }
 
 int main(int argc, char *argv[]) {
     RGBMatrix::Options matrix_options;
     rgb_matrix::RuntimeOptions runtime_opt;
-    if (!rgb_matrix::ParseOptionsFromFlags(&argc, &argv, &matrix_options, &runtime_opt)) {
-        return usage(argv[0]);
-    }
-
+    if (!rgb_matrix::ParseOptionsFromFlags(&argc, &argv, &matrix_options, &runtime_opt)) { return usage(argv[0]); }
     Color color(255, 255, 0);
     Color bg_color(0, 0, 0);
     Color flood_color(0, 0, 0);
@@ -102,32 +90,33 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    printf("Updating ScoreBoard...\n");
+    // printf("Updating ScoreBoard...\n");
 
-    // Create Canvas
-    CanvasCreator canvasCreator(matrix_options, runtime_opt);
-    RGBMatrix* canvas = canvasCreator.CreateCanvas();
+    // // Create Canvas
+    // CanvasCreator canvasCreator(matrix_options, runtime_opt);
+    // RGBMatrix* canvas = canvasCreator.CreateCanvas();
 
-    FontLoader fontLoader("fonts/mspgothic_042623.bdf"); // Load Fonts
-    rgb_matrix::Font font;
-    fontLoader.LoadFont(font);
+    // FontLoader fontLoader("fonts/mspgothic_042623.bdf"); // Load Fonts
+    // rgb_matrix::Font font;
+    // fontLoader.LoadFont(font);
 
-    FontLoader bigNumberFontLoader("fonts/fgm_27_ee.bdf");
-    rgb_matrix::Font bigNumberFont;
-    bigNumberFontLoader.LoadFont(bigNumberFont);
+    // FontLoader bigNumberFontLoader("fonts/fgm_27_ee.bdf");
+    // rgb_matrix::Font bigNumberFont;
+    // bigNumberFontLoader.LoadFont(bigNumberFont);
 
-    FontLoader littleNumberFontLoader("fonts/little_numbers.bdf");
-    rgb_matrix::Font littleNumberFont;
-    littleNumberFontLoader.LoadFont(littleNumberFont);
-    // create new big number drawer
-    NumberDrawer bigNumberDrawer(canvas, &bigNumberFont, NumberDrawer::BIG, color, bg_color);
+    // FontLoader littleNumberFontLoader("fonts/little_numbers.bdf");
+    // rgb_matrix::Font littleNumberFont;
+    // littleNumberFontLoader.LoadFont(littleNumberFont);
+    // // create new big number drawer
+    // NumberDrawer bigNumberDrawer(canvas, &bigNumberFont, NumberDrawer::BIG, color, bg_color);
 
-    bigNumberDrawer.DrawNumber("8", 16, bigNumberFont.baseline() - 1);
+    // bigNumberDrawer.DrawNumber("8", 16, bigNumberFont.baseline() - 1);
 
-    NumberDrawer smallNumberDrawer(canvas, &littleNumberFont, NumberDrawer::SMALL, color, bg_color);
-    smallNumberDrawer.DrawNumber("1 2 3", 7, littleNumberFont.baseline());
+    // NumberDrawer smallNumberDrawer(canvas, &littleNumberFont, NumberDrawer::SMALL, color, bg_color);
+    // smallNumberDrawer.DrawNumber("1 2 3", 7, littleNumberFont.baseline());
 
     ///////// Start Game Loop /////////////
+
     bool game_running = true;
     int loop_count = 0;
     #define MAX_LOOP_COUNT 6
@@ -138,7 +127,5 @@ int main(int argc, char *argv[]) {
         printf( "Loop count: %d\n", loop_count++ ); }
     ///////// End Game Loop /////////////
 
-    printf( "Deleting canvas...\n" );
-    delete canvas; // Clean up
     return 0;
 }
