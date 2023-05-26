@@ -1,10 +1,10 @@
 #ifndef SCOREBOARD_H
 #define SCOREBOARD_H
 
-#include "Player.h"
+#include "../Player/Player.h"
 #include "led-matrix.h"
 #include "graphics.h"
-#include "GameState.h"
+#include "../GameState/GameState.h"
 
 using namespace rgb_matrix;
 
