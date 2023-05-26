@@ -1,5 +1,7 @@
 #ifndef GameTimer_h
 #define GameTimer_h
+#include <chrono>
+#include <thread>
 
 class GameTimer {
  public:
