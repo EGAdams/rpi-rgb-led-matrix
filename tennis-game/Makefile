@@ -39,6 +39,9 @@ TextDrawer.o : TextDrawer/TextDrawer.cpp
 GameTimer.o : GameTimer/GameTimer.cpp
 	$(CXX) -I$(RGB_INCDIR) -I../Arduino $(CXXFLAGS) -c -o $@ $<
 
+GameState.o : GameState/GameState.cpp
+	$(CXX) -I$(RGB_INCDIR) -I../Arduino $(CXXFLAGS) -c -o $@ $<
+
 Arduino.o : Arduino/Arduino.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
