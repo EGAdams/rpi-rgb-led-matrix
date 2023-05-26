@@ -1,9 +1,8 @@
 #include "ScoreBoard.h"
-#include "GameState.h"
 #include <stdio.h>
 
 ScoreBoard::ScoreBoard(Player* player1, Player* player2)
-    : _player1(player1), _player2(player2) {}   
+    : _player1(player1), _player2(player2) {}
 ScoreBoard::~ScoreBoard() {}
 
 bool ScoreBoard::FullSaturation( const Color &c ) {
@@ -11,8 +10,8 @@ bool ScoreBoard::FullSaturation( const Color &c ) {
         && (c.g == 0 || c.g == 255)
         && (c.b == 0 || c.b == 255); }
 
-void ScoreBoard::update(GameState* gameState, RGBMatrix::Options matrix_options, rgb_matrix::RuntimeOptions runtime_opt)  { 
-    printf( "Updating ScoreBoard...\n" ); 
+void ScoreBoard::update(GameState* gameState, RGBMatrix::Options matrix_options, rgb_matrix::RuntimeOptions runtime_opt)  {
+    printf( "Updating ScoreBoard...\n" );
     const char *bdf_font_file = "fonts/mspgothic_042623.bdf";
     rgb_matrix::Font font; /* Load font. This needs to be a filename with a bdf bitmap font. */
     if (!font.LoadFont( bdf_font_file )) {
@@ -45,10 +44,10 @@ void ScoreBoard::update(GameState* gameState, RGBMatrix::Options matrix_options,
 
     #define BIG_NUMBER_FONT "fonts/fgm_27_ee.bdf"
     rgb_matrix::Font big_number_font;
-    if (!big_number_font.LoadFont( BIG_NUMBER_FONT )) { 
+    if (!big_number_font.LoadFont( BIG_NUMBER_FONT )) {
         fprintf( stderr, "Couldn't load font '%s'. exiting... \n", BIG_NUMBER_FONT );
         exit( 1 ); }
-    
+
     #define SPACE_BEFORE_1ST_NUMBER 16
     #define SPACE_BEFORE_2ND_NUMBER 2
     #define SPACE_BEFORE_SMALL_NUMBER 7
@@ -67,13 +66,13 @@ void ScoreBoard::update(GameState* gameState, RGBMatrix::Options matrix_options,
     Color secondRowColor( 255, 0, 0 );
     rgb_matrix::DrawText( canvas, big_number_font, x + SPACE_BEFORE_1ST_NUMBER, y + big_number_font.baseline() - 1, firstRowColor, outline_font ? NULL : &bg_color, "A", LETTER_SPACING );
     rgb_matrix::DrawText( canvas, big_number_font, x + COORDS_FOR_SECOND_NUMBER, y + big_number_font.baseline() - 1, firstRowColor, outline_font ? NULL : &bg_color, "d", LETTER_SPACING );
-    
+
     y += big_number_font.height() + 4;
     printf("Font height before third row: %d\n", big_number_font.height());
 
     #define LITTLE_NUMBER_FONT "fonts/little_numbers.bdf"
     rgb_matrix::Font little_number_font;
-    if (!little_number_font.LoadFont( LITTLE_NUMBER_FONT )) { 
+    if (!little_number_font.LoadFont( LITTLE_NUMBER_FONT )) {
         fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_NUMBER_FONT );
         exit( 1 ); }
     Color thirdRowColor( 0, 255, 0 );
@@ -83,6 +82,6 @@ void ScoreBoard::update(GameState* gameState, RGBMatrix::Options matrix_options,
     Color fourthRowColor( 255, 0, 0 );
     rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "4", 0 /* letter_spacing */ );
     rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + SPACE_BETWEEN_SMALL_NUMBERS, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "5", 0 /* letter_spacing */ );
-    rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + (( 2 * SPACE_BETWEEN_SMALL_NUMBERS )), y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "6", 0 /* letter_spacing */ );   
+    rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + (( 2 * SPACE_BETWEEN_SMALL_NUMBERS )), y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "6", 0 /* letter_spacing */ );
     delete canvas; // Finished. Shut down the RGB matrix.
 }
