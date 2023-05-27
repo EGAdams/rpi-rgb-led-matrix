@@ -70,9 +70,9 @@ int main(int argc, char *argv[]) {
     int loop_count = 0;
     #define MAX_LOOP_COUNT 60
     #define SCORE_DELAY    2
-    #define A_SPACE        13
+    #define A_SPACE        14
     #define FOUR_SPACE     14
-    #define THREE_SPACE    13
+    #define THREE_SPACE    15
     while ( game_running ) {
         if ( loop_count >  MAX_LOOP_COUNT ) { game_running = false; }
         pipeDrawer.DrawNumber(      " ", 1,  bigNumberFont.baseline());
@@ -82,6 +82,24 @@ int main(int argc, char *argv[]) {
         pipeDrawer.DrawNumber(      "I", 1,  bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "1", 16, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
+
+        #define LITTLE_NUMBER_FONT "fonts/little_numbers.bdf"
+        rgb_matrix::Font little_number_font;
+        if (!little_number_font.LoadFont( LITTLE_NUMBER_FONT )) {
+            fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_NUMBER_FONT );
+            return 1; }
+
+        Color thirdRowColor( 0, 255, 0 );
+        rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), thirdRowColor,  outline_font ? NULL : &bg_color, "1 2 3", letter_spacing );
+
+        y += little_number_font.height() - 5;
+        printf("Font height before fourth row: %d\n", little_number_font.height());
+
+        Color fourthRowColor( 255, 0, 0 );
+        rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "4", letter_spacing );
+        rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + SPACE_BETWEEN_SMALL_NUMBERS, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "5", letter_spacing );
+        rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + (( 2 * SPACE_BETWEEN_SMALL_NUMBERS )), y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "6", letter_spacing );
+
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b); // clear screen
 
