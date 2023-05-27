@@ -29,19 +29,13 @@ void showLittleNumbers( rgb_matrix::Canvas *canvas ) {
     rgb_matrix::Font little_number_font;
     if (!little_number_font.LoadFont( LITTLE_NUMBER_FONT )) {
         fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_NUMBER_FONT );
-        // exit 0
         exit( 1 ); }
-
     int x = 0;
     int y = START_ROW;
     rgb_matrix::Font *outline_font = NULL;
-
     Color thirdRowColor( 0, 255, 0 );
     rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), thirdRowColor,  outline_font ? NULL : &background_color, "1 2 3", letter_spacing );
-
     y += little_number_font.height() - 5;
-    printf("Font height before fourth row: %d\n", little_number_font.height());
-
     Color fourthRowColor( 255, 0, 0 );
     rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &background_color, "4", letter_spacing );
     rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + SPACE_BETWEEN_SMALL_NUMBERS, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &background_color, "5", letter_spacing );
