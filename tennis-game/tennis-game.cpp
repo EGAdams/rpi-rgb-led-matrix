@@ -66,13 +66,13 @@ int main(int argc, char *argv[]) {
     ///////// Start Game Loop /////////////
     bool game_running = true;
     int loop_count = 0;
-    #define MAX_LOOP_COUNT 6
+    #define MAX_LOOP_COUNT 60
     while ( game_running ) {
         if ( loop_count >  MAX_LOOP_COUNT ) { game_running = false; }
         printf( "sleeping... " );
         sleep( 1 );
-        bigNumberDrawer.DrawNumber("0", 16, bigNumberFont.baseline() - 1);
-        bigNumberDrawer.DrawNumber("0", 38, bigNumberFont.baseline() - 1);
+        bigNumberDrawer.DrawNumber("0", 16, bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber("0", 38, bigNumberFont.baseline());
         printf( "Loop count: %d\n", loop_count++ ); }
     ///////// End Game Loop /////////////
     delete canvas;
