@@ -74,6 +74,10 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber("I", 1, bigNumberFont.baseline());
         bigNumberDrawer.DrawNumber("0", 16, bigNumberFont.baseline());
         bigNumberDrawer.DrawNumber("0", 38, bigNumberFont.baseline());
+
+        bigNumberDrawer.DrawNumber("I", 1, bigNumberFont.height());
+        bigNumberDrawer.DrawNumber("1", 16, bigNumberFont.height());
+        bigNumberDrawer.DrawNumber("0", 38, bigNumberFont.height());
         printf( "Loop count: %d\n", loop_count++ ); }
     ///////// End Game Loop /////////////
     delete canvas;
