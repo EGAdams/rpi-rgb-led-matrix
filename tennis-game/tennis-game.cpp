@@ -19,6 +19,29 @@ using namespace rgb_matrix;
 
 static bool parseColor(Color *c, const char *str) { return sscanf(str, "%hhu,%hhu,%hhu", &c->r, &c->g, &c->b) == 3; }
 
+void showLittleNumbers() {
+    #define LITTLE_NUMBER_FONT "fonts/little_numbers.bdf"
+    rgb_matrix::Font little_number_font;
+    if (!little_number_font.LoadFont( LITTLE_NUMBER_FONT )) {
+        fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_NUMBER_FONT );
+        return 1; }
+
+    int x = 0;
+    int y = bigNumberFont.baseline() + bigNumberFont.height();
+    rgb_matrix::Font *outline_font = NULL;
+
+    Color thirdRowColor( 0, 255, 0 );
+    rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), thirdRowColor,  outline_font ? NULL : &background_color, "1 2 3", letter_spacing );
+
+    y += little_number_font.height() - 5;
+    printf("Font height before fourth row: %d\n", little_number_font.height());
+
+    Color fourthRowColor( 255, 0, 0 );
+    rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &background_color, "4", letter_spacing );
+    rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + SPACE_BETWEEN_SMALL_NUMBERS, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &background_color, "5", letter_spacing );
+    rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + (( 2 * SPACE_BETWEEN_SMALL_NUMBERS )), y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &background_color, "6", letter_spacing );
+}
+
 int main(int argc, char *argv[]) {
     RGBMatrix::Options matrix_options;
     rgb_matrix::RuntimeOptions runtime_opt;
@@ -85,26 +108,7 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( "1", 16, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
 
-        #define LITTLE_NUMBER_FONT "fonts/little_numbers.bdf"
-        rgb_matrix::Font little_number_font;
-        if (!little_number_font.LoadFont( LITTLE_NUMBER_FONT )) {
-            fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_NUMBER_FONT );
-            return 1; }
-
-        int x = 0;
-        int y = bigNumberFont.baseline() + bigNumberFont.height();
-        rgb_matrix::Font *outline_font = NULL;
-
-        Color thirdRowColor( 0, 255, 0 );
-        rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), thirdRowColor,  outline_font ? NULL : &background_color, "1 2 3", letter_spacing );
-
-        y += little_number_font.height() - 5;
-        printf("Font height before fourth row: %d\n", little_number_font.height());
-
-        Color fourthRowColor( 255, 0, 0 );
-        rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &background_color, "4", letter_spacing );
-        rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + SPACE_BETWEEN_SMALL_NUMBERS, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &background_color, "5", letter_spacing );
-        rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + (( 2 * SPACE_BETWEEN_SMALL_NUMBERS )), y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &background_color, "6", letter_spacing );
+        showLittleNumbers();
 
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b); // clear screen
