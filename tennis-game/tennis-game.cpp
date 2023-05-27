@@ -91,10 +91,13 @@ int main(int argc, char *argv[]) {
             fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_NUMBER_FONT );
             return 1; }
 
+        int x = 0;
+        int y = bigNumberFont.baseline() + bigNumberFont.height();
+        rgb_matrix::Font *outline_font = NULL;
+
         Color thirdRowColor( 0, 255, 0 );
         rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), thirdRowColor,  outline_font ? NULL : &background_color, "1 2 3", letter_spacing );
 
-        int y = bigNumberFont.baseline() + bigNumberFont.height();
         y += little_number_font.height() - 5;
         printf("Font height before fourth row: %d\n", little_number_font.height());
 
