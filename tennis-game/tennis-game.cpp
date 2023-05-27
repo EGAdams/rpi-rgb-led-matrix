@@ -21,6 +21,10 @@ static bool parseColor(Color *c, const char *str) { return sscanf(str, "%hhu,%hh
 
 void showLittleNumbers() {
     #define LITTLE_NUMBER_FONT "fonts/little_numbers.bdf"
+    #define SPACE_BEFORE_SMALL_NUMBER 7
+    #define SPACE_BETWEEN_SMALL_NUMBERS 17
+    Color background_color(0, 0, 0);
+    int letter_spacing = 0;
     rgb_matrix::Font little_number_font;
     if (!little_number_font.LoadFont( LITTLE_NUMBER_FONT )) {
         fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_NUMBER_FONT );
@@ -96,8 +100,7 @@ int main(int argc, char *argv[]) {
     #define A_SPACE        14
     #define FOUR_SPACE     14
     #define THREE_SPACE    15
-    #define SPACE_BEFORE_SMALL_NUMBER 7
-    #define SPACE_BETWEEN_SMALL_NUMBERS 17
+
     while ( game_running ) {
         if ( loop_count >  MAX_LOOP_COUNT ) { game_running = false; }
         pipeDrawer.DrawNumber(      " ", 1,  bigNumberFont.baseline());
