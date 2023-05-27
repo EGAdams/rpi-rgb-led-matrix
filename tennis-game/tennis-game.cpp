@@ -25,10 +25,7 @@ int main(int argc, char *argv[]) {
     if (!rgb_matrix::ParseOptionsFromFlags(&argc, &argv, &matrix_options, &runtime_opt)) {
         return 0;
     } else {
-        printf("Matrix options:\n");
-        matrix_options.Print();
-        printf("Runtime options:\n");
-        runtime_opt.Print();
+        printf( "Matrix options parsed.\n" )
     }
     Color color(255, 255, 0);
     Color bg_color(0, 0, 0);
