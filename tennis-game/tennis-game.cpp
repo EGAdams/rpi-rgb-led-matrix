@@ -72,7 +72,7 @@ int main(int argc, char *argv[]) {
         printf( "sleeping... " );
         sleep( 1 );
         bigNumberDrawer.DrawNumber("0", 16, bigNumberFont.baseline() - 1);
-        bigNumberDrawer.DrawNumber("0", 26, bigNumberFont.baseline() - 1);
+        bigNumberDrawer.DrawNumber("0", 36, bigNumberFont.baseline() - 1);
         printf( "Loop count: %d\n", loop_count++ ); }
     ///////// End Game Loop /////////////
     delete canvas;
