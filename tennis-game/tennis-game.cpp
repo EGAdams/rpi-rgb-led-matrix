@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
     // create new big number drawer
     NumberDrawer bigNumberDrawer(canvas, &bigNumberFont, NumberDrawer::BIG, color, bg_color);
 
-    bigNumberDrawer.DrawNumber("8", 16, bigNumberFont.baseline() - 1);
+    // bigNumberDrawer.DrawNumber("8", 16, bigNumberFont.baseline() - 1);
 
     // NumberDrawer smallNumberDrawer(canvas, &littleNumberFont, NumberDrawer::SMALL, color, bg_color);
     // smallNumberDrawer.DrawNumber("1 2 3", 7, littleNumberFont.baseline());
@@ -71,6 +71,7 @@ int main(int argc, char *argv[]) {
         if ( loop_count >  MAX_LOOP_COUNT ) { game_running = false; }
         printf( "sleeping... " );
         sleep( 1 );
+        bigNumberDrawer.DrawNumber("I", 1, bigNumberFont.baseline());
         bigNumberDrawer.DrawNumber("0", 16, bigNumberFont.baseline());
         bigNumberDrawer.DrawNumber("0", 38, bigNumberFont.baseline());
         printf( "Loop count: %d\n", loop_count++ ); }
