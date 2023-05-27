@@ -9,10 +9,10 @@ ScoreBoard::ScoreBoard( Player*                    player1,
         _gameState (     gameState ) {}
 ScoreBoard::~ScoreBoard() {}
 
-bool ScoreBoard::FullSaturation( const Color &c ) {
-    return (c.r == 0 || c.r == 255)
-        && (c.g == 0 || c.g == 255)
-        && (c.b == 0 || c.b == 255); }
+// bool ScoreBoard::FullSaturation( const Color &c ) {
+//     return (c.r == 0 || c.r == 255)
+//         && (c.g == 0 || c.g == 255)
+//         && (c.b == 0 || c.b == 255); }
 
 void ScoreBoard::update()  {
     printf( "Updating ScoreBoard...\n" );
