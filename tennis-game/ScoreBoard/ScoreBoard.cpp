@@ -143,5 +143,5 @@ void ScoreBoard::update()  {
     // rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "4", 0 /* letter_spacing */ );
     // rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + SPACE_BETWEEN_SMALL_NUMBERS, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "5", 0 /* letter_spacing */ );
     // rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + (( 2 * SPACE_BETWEEN_SMALL_NUMBERS )), y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &bg_color, "6", 0 /* letter_spacing */ );
-    delete canvas; // Finished. Shut down the RGB matrix.
+    //delete canvas; // Finished. Shut down the RGB matrix.
 }

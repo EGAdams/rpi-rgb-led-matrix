@@ -75,5 +75,6 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber("0", 26, bigNumberFont.baseline() - 1);
         printf( "Loop count: %d\n", loop_count++ ); }
     ///////// End Game Loop /////////////
+    delete canvas;
     return 0;
 }
