@@ -73,6 +73,8 @@ int main(int argc, char *argv[]) {
     #define A_SPACE        14
     #define FOUR_SPACE     14
     #define THREE_SPACE    15
+    #define SPACE_BEFORE_SMALL_NUMBER 7
+    #define SPACE_BETWEEN_SMALL_NUMBERS 17
     while ( game_running ) {
         if ( loop_count >  MAX_LOOP_COUNT ) { game_running = false; }
         pipeDrawer.DrawNumber(      " ", 1,  bigNumberFont.baseline());
