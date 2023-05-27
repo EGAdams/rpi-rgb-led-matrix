@@ -23,7 +23,7 @@ void showLittleNumbers( rgb_matrix::Canvas *canvas ) {
     #define LITTLE_NUMBER_FONT "fonts/little_numbers.bdf"
     #define SPACE_BEFORE_SMALL_NUMBER   7
     #define SPACE_BETWEEN_SMALL_NUMBERS 17
-    #define START_ROW                   80
+    #define START_ROW                   86
     Color background_color(0, 0, 0);
     int letter_spacing = 0;
     rgb_matrix::Font little_number_font;
@@ -93,7 +93,7 @@ int main(int argc, char *argv[]) {
     int loop_count = 0;
     #define MAX_LOOP_COUNT 60
     #define SCORE_DELAY    2
-    #define A_SPACE        14
+    #define A_SPACE        13
     #define FOUR_SPACE     14
     #define THREE_SPACE    15
 
