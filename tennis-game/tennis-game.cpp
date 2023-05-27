@@ -19,7 +19,7 @@ using namespace rgb_matrix;
 
 static bool parseColor(Color *c, const char *str) { return sscanf(str, "%hhu,%hhu,%hhu", &c->r, &c->g, &c->b) == 3; }
 
-void showLittleNumbers() {
+void showLittleNumbers( rgb_matrix::Canvas *canvas ) {
     #define LITTLE_NUMBER_FONT "fonts/little_numbers.bdf"
     #define SPACE_BEFORE_SMALL_NUMBER   7
     #define SPACE_BETWEEN_SMALL_NUMBERS 17
@@ -113,7 +113,7 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( "1", 16, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
 
-        showLittleNumbers();
+        showLittleNumbers( canvas );
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b); // clear screen
 
@@ -127,7 +127,7 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( "1", 16, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
 
-        showLittleNumbers();
+        showLittleNumbers( canvas );
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b); // clear screen
 
@@ -141,7 +141,7 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( "1", 16, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
 
-        showLittleNumbers();
+        showLittleNumbers( canvas );
         sleep( SCORE_DELAY );
         canvas->Fill( flood_color.r, flood_color.g, flood_color.b ); // clear screen
 
@@ -155,7 +155,7 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( "1", 16, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
 
-        showLittleNumbers();
+        showLittleNumbers( canvas );
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
 
@@ -169,7 +169,7 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( "1", 16, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
 
-        showLittleNumbers();
+        showLittleNumbers( canvas );
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
 
@@ -183,7 +183,7 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( "1", 16, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "5", 38, bigNumberFont.baseline() + bigNumberFont.height());
 
-        showLittleNumbers();
+        showLittleNumbers( canvas );
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
 
@@ -197,7 +197,7 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( "2", 16, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
 
-        showLittleNumbers();
+        showLittleNumbers( canvas );
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
 
@@ -211,7 +211,7 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( "3", THREE_SPACE, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
 
-        showLittleNumbers();
+        showLittleNumbers( canvas );
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
 
@@ -225,7 +225,7 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( "3", THREE_SPACE, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
 
-        showLittleNumbers();
+        showLittleNumbers( canvas );
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
 
@@ -239,7 +239,7 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( "3", THREE_SPACE, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
 
-        showLittleNumbers();
+        showLittleNumbers( canvas );
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
 
@@ -252,7 +252,7 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( "3", THREE_SPACE, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
 
-        showLittleNumbers();
+        showLittleNumbers( canvas );
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
 
@@ -265,7 +265,7 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( "3", THREE_SPACE, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
 
-        showLittleNumbers();
+        showLittleNumbers( canvas );
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
 
@@ -278,7 +278,7 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( "3", THREE_SPACE, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
 
-        showLittleNumbers();
+        showLittleNumbers( canvas );
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
 
@@ -291,7 +291,7 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( "4", FOUR_SPACE, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
 
-        showLittleNumbers();
+        showLittleNumbers( canvas );
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
 
@@ -304,7 +304,7 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( "A", A_SPACE, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "d", 38, bigNumberFont.baseline() + bigNumberFont.height());
 
-        showLittleNumbers();
+        showLittleNumbers( canvas );
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
 
@@ -317,7 +317,7 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( "A", A_SPACE, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "d", 38, bigNumberFont.baseline() + bigNumberFont.height());
 
-        showLittleNumbers();
+        showLittleNumbers( canvas );
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
 
@@ -330,7 +330,7 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( "A", A_SPACE, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "d", 38, bigNumberFont.baseline() + bigNumberFont.height());
 
-        showLittleNumbers();
+        showLittleNumbers( canvas );
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
 
@@ -343,7 +343,7 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( "A", A_SPACE, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "d", 38, bigNumberFont.baseline() + bigNumberFont.height());
 
-        showLittleNumbers();
+        showLittleNumbers( canvas );
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
 
@@ -356,7 +356,7 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( "A", A_SPACE, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "d", 38, bigNumberFont.baseline() + bigNumberFont.height());
 
-        showLittleNumbers();
+        showLittleNumbers( canvas );
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
 
