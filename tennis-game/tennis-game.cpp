@@ -22,7 +22,6 @@ static bool parseColor(Color *c, const char *str) { return sscanf(str, "%hhu,%hh
 int main(int argc, char *argv[]) {
     RGBMatrix::Options matrix_options;
     rgb_matrix::RuntimeOptions runtime_opt;
-    if (!rgb_matrix::ParseOptionsFromFlags(&argc, &argv, &matrix_options, &runtime_opt)) { return usage(argv[0]); }
     Color color(255, 255, 0);
     Color bg_color(0, 0, 0);
     Color flood_color(0, 0, 0);
@@ -37,8 +36,7 @@ int main(int argc, char *argv[]) {
 
     printf("Updating ScoreBoard...\n");
 
-    // Create Canvas
-    CanvasCreator canvasCreator(matrix_options, runtime_opt);
+    CanvasCreator canvasCreator(matrix_options, runtime_opt); // Create Canvas
     RGBMatrix* canvas = canvasCreator.CreateCanvas();
 
     FontLoader fontLoader("fonts/mspgothic_042623.bdf"); // Load Fonts
@@ -71,6 +69,5 @@ int main(int argc, char *argv[]) {
         sleep( 1 );
         printf( "Loop count: %d\n", loop_count++ ); }
     ///////// End Game Loop /////////////
-
     return 0;
 }
