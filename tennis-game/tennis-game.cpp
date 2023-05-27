@@ -23,7 +23,7 @@ void showLittleNumbers( rgb_matrix::Canvas *canvas ) {
     #define LITTLE_NUMBER_FONT "fonts/little_numbers.bdf"
     #define SPACE_BEFORE_SMALL_NUMBER   7
     #define SPACE_BETWEEN_SMALL_NUMBERS 17
-    #define START_ROW                   50
+    #define START_ROW                   80
     Color background_color(0, 0, 0);
     int letter_spacing = 0;
     rgb_matrix::Font little_number_font;
