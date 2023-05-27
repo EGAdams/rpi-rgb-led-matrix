@@ -99,6 +99,32 @@ int main(int argc, char *argv[]) {
 
     while ( game_running ) {
         if ( loop_count >  MAX_LOOP_COUNT ) { game_running = false; }
+        pipeDrawer.DrawNumber(      "I", 1,  bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber( "0", 16, bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline());
+
+        pipeDrawer.DrawNumber(      " ", 1,  bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber( "0", 16, bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
+
+        showLittleNumbers( canvas );
+        sleep( SCORE_DELAY );
+        canvas->Fill(flood_color.r, flood_color.g, flood_color.b); // clear screen
+
+
+        pipeDrawer.DrawNumber(      " ", 1,  bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber( "0", 16, bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline());
+
+        pipeDrawer.DrawNumber(      "I", 1,  bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber( "0", 16, bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
+
+        showLittleNumbers( canvas );
+        sleep( SCORE_DELAY );
+        canvas->Fill(flood_color.r, flood_color.g, flood_color.b); // clear screen
+
+
         pipeDrawer.DrawNumber(      " ", 1,  bigNumberFont.baseline());
         bigNumberDrawer.DrawNumber( "0", 16, bigNumberFont.baseline());
         bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline());
@@ -110,7 +136,6 @@ int main(int argc, char *argv[]) {
         showLittleNumbers( canvas );
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b); // clear screen
-
 
 
         pipeDrawer.DrawNumber(      "I", 1, bigNumberFont.baseline());
@@ -354,7 +379,7 @@ int main(int argc, char *argv[]) {
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
 
-        printf( "Loop count: %d\n", loop_count++ ); }
+        loop_count++; }
     ///////// End Game Loop /////////////
     delete canvas;
     return 0;
