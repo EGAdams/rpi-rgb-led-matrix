@@ -54,41 +54,41 @@ int main(int argc, char *argv[]) {
     int letter_spacing = 0;
 
     int opt;
-    while ((opt = getopt(argc, argv, "x:y:f:C:B:O:S:F:")) != -1) {
-        switch (opt) {
-        case 'x': x_orig = atoi(optarg); break;
-        case 'y': y_orig = atoi(optarg); break;
-        case 'f': bdf_font_file = strdup(optarg); break;
-        case 'S': letter_spacing = atoi(optarg); break;
-        case 'C':
-            if (!parseColor(&color, optarg)) {
-                fprintf(stderr, "Invalid color spec: %s\n", optarg);
-                return usage(argv[0]);
-            }
-            break;
-        case 'B':
-            if (!parseColor(&bg_color, optarg)) {
-                fprintf(stderr, "Invalid background color spec: %s\n", optarg);
-                return usage(argv[0]);
-            }
-            break;
-        case 'O':
-            if (!parseColor(&outline_color, optarg)) {
-                fprintf(stderr, "Invalid outline color spec: %s\n", optarg);
-                return usage(argv[0]);
-            }
-            with_outline = true;
-            break;
-        case 'F':
-            if (!parseColor(&flood_color, optarg)) {
-                fprintf(stderr, "Invalid background color spec: %s\n", optarg);
-                return usage(argv[0]);
-            }
-            break;
-        default:
-            return usage(argv[0]);
-        }
-    }
+    // while ((opt = getopt(argc, argv, "x:y:f:C:B:O:S:F:")) != -1) {
+    //     switch (opt) {
+    //     case 'x': x_orig = atoi(optarg); break;
+    //     case 'y': y_orig = atoi(optarg); break;
+    //     case 'f': bdf_font_file = strdup(optarg); break;
+    //     case 'S': letter_spacing = atoi(optarg); break;
+    //     case 'C':
+    //         if (!parseColor(&color, optarg)) {
+    //             fprintf(stderr, "Invalid color spec: %s\n", optarg);
+    //             return usage(argv[0]);
+    //         }
+    //         break;
+    //     case 'B':
+    //         if (!parseColor(&bg_color, optarg)) {
+    //             fprintf(stderr, "Invalid background color spec: %s\n", optarg);
+    //             return usage(argv[0]);
+    //         }
+    //         break;
+    //     case 'O':
+    //         if (!parseColor(&outline_color, optarg)) {
+    //             fprintf(stderr, "Invalid outline color spec: %s\n", optarg);
+    //             return usage(argv[0]);
+    //         }
+    //         with_outline = true;
+    //         break;
+    //     case 'F':
+    //         if (!parseColor(&flood_color, optarg)) {
+    //             fprintf(stderr, "Invalid background color spec: %s\n", optarg);
+    //             return usage(argv[0]);
+    //         }
+    //         break;
+    //     default:
+    //         return usage(argv[0]);
+    //     }
+    // }
 
     printf("Updating ScoreBoard...\n");
 
