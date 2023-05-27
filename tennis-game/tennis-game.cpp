@@ -71,11 +71,19 @@ int main(int argc, char *argv[]) {
         if ( loop_count >  MAX_LOOP_COUNT ) { game_running = false; }
         printf( "sleeping... " );
         sleep( 1 );
-        bigNumberDrawer.DrawNumber("I", 1, bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber(" ", 1, bigNumberFont.baseline());
         bigNumberDrawer.DrawNumber("0", 16, bigNumberFont.baseline());
         bigNumberDrawer.DrawNumber("0", 38, bigNumberFont.baseline());
 
         bigNumberDrawer.DrawNumber("I", 1,  bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber("1", 16, bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber("0", 38, bigNumberFont.baseline() + bigNumberFont.height());
+        sleep( 1 );
+        bigNumberDrawer.DrawNumber("I", 1, bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber("0", 16, bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber("0", 38, bigNumberFont.baseline());
+
+        bigNumberDrawer.DrawNumber("0", 1,  bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber("1", 16, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber("0", 38, bigNumberFont.baseline() + bigNumberFont.height());
         printf( "Loop count: %d\n", loop_count++ ); }
