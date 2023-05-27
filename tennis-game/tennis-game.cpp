@@ -69,6 +69,7 @@ int main(int argc, char *argv[]) {
     bool game_running = true;
     int loop_count = 0;
     #define MAX_LOOP_COUNT 60
+    #define SCORE_DELAY    2
     while ( game_running ) {
         if ( loop_count >  MAX_LOOP_COUNT ) { game_running = false; }
         pipeDrawer.DrawNumber(      " ", 1,  bigNumberFont.baseline());
@@ -78,8 +79,10 @@ int main(int argc, char *argv[]) {
         pipeDrawer.DrawNumber(      "I", 1,  bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "1", 16, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
-        sleep( 1 );
+        sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b); // clear screen
+
+
 
         pipeDrawer.DrawNumber(      "I", 1, bigNumberFont.baseline());
         bigNumberDrawer.DrawNumber( "0", 16, bigNumberFont.baseline());
@@ -88,8 +91,10 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( " ", 1,  bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "1", 16, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
-        sleep( 1 );
+        sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b); // clear screen
+
+
 
         pipeDrawer.DrawNumber(      "I", 1, bigNumberFont.baseline());
         bigNumberDrawer.DrawNumber( "1", 16, bigNumberFont.baseline());
@@ -98,8 +103,10 @@ int main(int argc, char *argv[]) {
         pipeDrawer.DrawNumber(      " ", 1,  bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "1", 16, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
-        sleep( 1 );
+        sleep( SCORE_DELAY );
         canvas->Fill( flood_color.r, flood_color.g, flood_color.b ); // clear screen
+
+
 
         pipeDrawer.DrawNumber(      "I", 1, bigNumberFont.baseline());
         bigNumberDrawer.DrawNumber( "1", 16, bigNumberFont.baseline());
@@ -108,7 +115,79 @@ int main(int argc, char *argv[]) {
         pipeDrawer.DrawNumber(      " ", 1,  bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "1", 16, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
-        sleep( 1 );
+        sleep( SCORE_DELAY );
+        canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
+
+
+
+        pipeDrawer.DrawNumber(      " ", 1, bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber( "1", 16, bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber( "5", 38, bigNumberFont.baseline());
+
+        pipeDrawer.DrawNumber(      "I", 1,  bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber( "1", 16, bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
+        sleep( SCORE_DELAY );
+        canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
+
+
+
+        pipeDrawer.DrawNumber(      " ", 1, bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber( "1", 16, bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber( "5", 38, bigNumberFont.baseline());
+
+        pipeDrawer.DrawNumber(      "I", 1,  bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber( "1", 16, bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber( "5", 38, bigNumberFont.baseline() + bigNumberFont.height());
+        sleep( SCORE_DELAY );
+        canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
+
+
+
+        pipeDrawer.DrawNumber(      " ", 1, bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber( "1", 16, bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber( "5", 38, bigNumberFont.baseline());
+
+        pipeDrawer.DrawNumber(      "I", 1,  bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber( "2", 16, bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
+        sleep( SCORE_DELAY );
+        canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
+
+
+
+        pipeDrawer.DrawNumber(      "I", 1, bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber( "1", 16, bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber( "5", 38, bigNumberFont.baseline());
+
+        pipeDrawer.DrawNumber(      " ", 1,  bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber( "2", 16, bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
+        sleep( SCORE_DELAY );
+        canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
+
+
+
+        pipeDrawer.DrawNumber(      "I", 1, bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber( "2", 16, bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline());
+
+        pipeDrawer.DrawNumber(      " ", 1,  bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber( "2", 16, bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
+        sleep( SCORE_DELAY );
+        canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
+
+
+
+        pipeDrawer.DrawNumber(      "I", 1, bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber( "3", 16, bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline());
+
+        pipeDrawer.DrawNumber(      " ", 1,  bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber( "2", 16, bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
+        sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
 
         printf( "Loop count: %d\n", loop_count++ ); }
