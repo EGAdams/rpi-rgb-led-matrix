@@ -17,25 +17,6 @@
 
 using namespace rgb_matrix;
 
-static int usage(const char *progname) {
-    fprintf(stderr, "usage: %s [options]\n", progname);
-    fprintf(stderr, "Reads text from stdin and displays it. "
-            "Empty string: clear screen\n");
-    fprintf(stderr, "Options:\n");
-    fprintf(stderr,
-            "\t-f <font-file>    : Use given font.\n"
-            "\t-x <x-origin>     : X-Origin of displaying text (Default: 0)\n"
-            "\t-y <y-origin>     : Y-Origin of displaying text (Default: 0)\n"
-            "\t-S <spacing>      : Spacing pixels between letters (Default: 0)\n"
-            "\t-C <r,g,b>        : Color. Default 255,255,0\n"
-            "\t-B <r,g,b>        : Font Background-Color. Default 0,0,0\n"
-            "\t-O <r,g,b>        : Outline-Color, e.g. to increase contrast.\n"
-            "\t-F <r,g,b>        : Panel flooding-background color. Default 0,0,0\n"
-            "\n"
-            );
-    rgb_matrix::PrintMatrixFlags(stderr);
-    return 1; }
-
 static bool parseColor(Color *c, const char *str) { return sscanf(str, "%hhu,%hhu,%hhu", &c->r, &c->g, &c->b) == 3; }
 
 int main(int argc, char *argv[]) {
@@ -52,43 +33,7 @@ int main(int argc, char *argv[]) {
     int x_orig = 0;
     int y_orig = 0;
     int letter_spacing = 0;
-
     int opt;
-    // while ((opt = getopt(argc, argv, "x:y:f:C:B:O:S:F:")) != -1) {
-    //     switch (opt) {
-    //     case 'x': x_orig = atoi(optarg); break;
-    //     case 'y': y_orig = atoi(optarg); break;
-    //     case 'f': bdf_font_file = strdup(optarg); break;
-    //     case 'S': letter_spacing = atoi(optarg); break;
-    //     case 'C':
-    //         if (!parseColor(&color, optarg)) {
-    //             fprintf(stderr, "Invalid color spec: %s\n", optarg);
-    //             return usage(argv[0]);
-    //         }
-    //         break;
-    //     case 'B':
-    //         if (!parseColor(&bg_color, optarg)) {
-    //             fprintf(stderr, "Invalid background color spec: %s\n", optarg);
-    //             return usage(argv[0]);
-    //         }
-    //         break;
-    //     case 'O':
-    //         if (!parseColor(&outline_color, optarg)) {
-    //             fprintf(stderr, "Invalid outline color spec: %s\n", optarg);
-    //             return usage(argv[0]);
-    //         }
-    //         with_outline = true;
-    //         break;
-    //     case 'F':
-    //         if (!parseColor(&flood_color, optarg)) {
-    //             fprintf(stderr, "Invalid background color spec: %s\n", optarg);
-    //             return usage(argv[0]);
-    //         }
-    //         break;
-    //     default:
-    //         return usage(argv[0]);
-    //     }
-    // }
 
     printf("Updating ScoreBoard...\n");
 
