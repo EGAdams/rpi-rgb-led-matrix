@@ -16,14 +16,15 @@
         "ialized",
         "PININTERFACE",
         "PINSTATE",
+        "Plyr",
+        "privs",
         "pwmbits",
         "RGBMATRIX",
         "SCKL",
         "strchrnul",
         "TRANSLATECONSTANT",
         "Vblock",
-        "Vliedel",
-        "Plyr"
+        "Vliedel"
     ],
     "liveServer.settings.port": 5501
 }

@@ -28,30 +28,19 @@
 #define HIGH 1
 #define BLINK 2
 
-#if defined _WIN32
+
 ///////////////////////////////////////  START WINDOWS SIMULATOR //////////////////////////////////
-    #define SIMULATION 1
-    #define PLAYER_BUTTONS 202
-    #define ROTARY 150
-    #define LOG_FILE_PATH          "C:\\Users\\EG\\Desktop\\2022\\june\\4th_week\\test.txt"
-    #define PIN_FILE_PATH          "C:\\Users\\EG\\Desktop\\2022\\june\\2nd_week\\tennis_cpp\\pin_data\\"
-    #define GAME_STATE_UPDATE_PATH "C:\\Users\\EG\\Desktop\\2022\\june\\2nd_week\\tennis_cpp\\game_state_data\\"
-    #define MATCH_WIN_FLASH_DELAY  200
-    #define BATTERY_TEST_DELAY      500
-    #define BATTERY_TEST_FLASH_COUNT 5
-    #include <iostream>
+#define SIMULATION 1
+#define PLAYER_BUTTONS 202
+#define ROTARY 150
+#define LOG_FILE_PATH          "C:\\Users\\EG\\Desktop\\2022\\june\\4th_week\\test.txt"
+#define PIN_FILE_PATH          "C:\\Users\\EG\\Desktop\\2022\\june\\2nd_week\\tennis_cpp\\pin_data\\"
+#define GAME_STATE_UPDATE_PATH "C:\\Users\\EG\\Desktop\\2022\\june\\2nd_week\\tennis_cpp\\game_state_data\\"
+#define MATCH_WIN_FLASH_DELAY  200
+#define BATTERY_TEST_DELAY      500
+#define BATTERY_TEST_FLASH_COUNT 5
+#include <iostream>
 //////////////////////////////////// END WINDOWS SIMULATION /////////////////////////////////////
-#else
-///////////////////////////////////   START ARDUINO /////////////////////////////////////////////
-    #define SIMULATION 0
-    #define PLAYER_BUTTONS A10 // A14 // A10  // A2  //  Changed from A2 to A10. A2 is for PCB #1, A10 is for PCB #2.
-    #define ROTARY A12 // A15 changed to A12
-    #define LOG_FILE_PATH "unkown file system"
-    #define MATCH_WIN_FLASH_DELAY    200
-    #define BATTERY_TEST_DELAY       30000
-    #define BATTERY_TEST_FLASH_COUNT 15 // ( 2 * BATTERY_TEST_BLINK_DELAY * BATTERY_TEST_FLASH_COUNT = 2 * 1,000ms + 15,000ms = 30s)
-////////////////////////////////////  END ARDUINO /////////////////////////////////////////////////
-#endif
 
 
 #define UNDO  39

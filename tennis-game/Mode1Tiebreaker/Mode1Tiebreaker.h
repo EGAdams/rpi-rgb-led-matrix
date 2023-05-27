@@ -3,16 +3,17 @@
 #include "../Arduino/Arduino.h"
 #include "../GameLeds/GameLeds.h"
 #include "../GameLeds/GameLeds.h"
+#include "../GameTimer/GameTimer.h"
 #include "../PointLeds/PointLeds.h"
 #include "../PinInterface/PinInterface.h"
 #include "../Player/Player.h"
 #include "../ServeLeds/ServeLeds.h"
 #include "../SetLeds/SetLeds.h"
-#include "WatchTimer.h"
-#include "GameTimer.h"
-#include "MODE_1_TIEBREAKER.h"
-#include "MODE_1_WIN_SEQUENCES.h"
-#include "UNDO.h"
+#include "../WatchTimer/WatchTimer.h"
+#include "../Mode1Tiebreaker/Mode1Tiebreaker.h"
+#include "../WinSequences/WinSequences.h"
+#include "../Undo/Undo.h"
+#include "../Inputs/Inputs.h"
 
 class Mode1TieBreaker {
  public:

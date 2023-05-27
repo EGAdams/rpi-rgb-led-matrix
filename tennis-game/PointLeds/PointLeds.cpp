@@ -1,4 +1,4 @@
-#include "POINT_LEDs.h"
+#include "PointLeds.h"
 
 PointLeds::PointLeds( Player* player1,
     Player* player2,

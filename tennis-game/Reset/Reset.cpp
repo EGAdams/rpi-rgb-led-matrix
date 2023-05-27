@@ -1,7 +1,4 @@
-#include "RESET.h"
-#include "Arduino.h"
-#include "DIGI_V6_15.h"
-#include "PinInterface.h"
+#include "Reset.h"
 
 Reset::Reset( Player* player1,
     Player* player2,
@@ -59,11 +56,11 @@ void Reset::resetScoreboard() {
     _logger->logUpdate( "turning tie leds off... ", __FUNCTION__ );
     tieLEDsOff();
 
-    _gameState->setTieBreak( 0 );      
-    _gameState->setSetTieBreak( 0 );   
-    _gameState->setServeSwitch( 1 );   
-    _gameState->setServe( 0 );        
-    _gameState->setPlayerButton( 0 );  
+    _gameState->setTieBreak( 0 );
+    _gameState->setSetTieBreak( 0 );
+    _gameState->setServeSwitch( 1 );
+    _gameState->setServe( 0 );
+    _gameState->setPlayerButton( 0 );
     _gameState->setStarted(
         /*1*/ 0 );  // gameStart = true; TODO: the placing of this is questionable
     GameTimer::gameDelay( 200 );  // delay( 200 );
@@ -80,13 +77,13 @@ void Reset::refresh() {
 }
 
 void Reset::tieLEDsOn() {
-    _gameState->setTieLEDsOn( 1 );  
+    _gameState->setTieLEDsOn( 1 );
     _pinInterface->pinDigitalWrite( P1_TIEBREAKER, HIGH );
     _pinInterface->pinDigitalWrite( P2_TIEBREAKER, HIGH );
 }
 
 void Reset::tieLEDsOff() {
-    _gameState->setTieLEDsOn( 0 ); 
+    _gameState->setTieLEDsOn( 0 );
     _pinInterface->pinDigitalWrite( P1_TIEBREAKER, LOW );
     _pinInterface->pinDigitalWrite( P2_TIEBREAKER, LOW );
 }

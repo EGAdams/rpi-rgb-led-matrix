@@ -90,27 +90,27 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    // printf("Updating ScoreBoard...\n");
+    printf("Updating ScoreBoard...\n");
 
-    // // Create Canvas
-    // CanvasCreator canvasCreator(matrix_options, runtime_opt);
-    // RGBMatrix* canvas = canvasCreator.CreateCanvas();
+    // Create Canvas
+    CanvasCreator canvasCreator(matrix_options, runtime_opt);
+    RGBMatrix* canvas = canvasCreator.CreateCanvas();
 
-    // FontLoader fontLoader("fonts/mspgothic_042623.bdf"); // Load Fonts
-    // rgb_matrix::Font font;
-    // fontLoader.LoadFont(font);
+    FontLoader fontLoader("fonts/mspgothic_042623.bdf"); // Load Fonts
+    rgb_matrix::Font font;
+    fontLoader.LoadFont(font);
 
-    // FontLoader bigNumberFontLoader("fonts/fgm_27_ee.bdf");
-    // rgb_matrix::Font bigNumberFont;
-    // bigNumberFontLoader.LoadFont(bigNumberFont);
+    FontLoader bigNumberFontLoader("fonts/fgm_27_ee.bdf");
+    rgb_matrix::Font bigNumberFont;
+    bigNumberFontLoader.LoadFont(bigNumberFont);
 
     // FontLoader littleNumberFontLoader("fonts/little_numbers.bdf");
     // rgb_matrix::Font littleNumberFont;
     // littleNumberFontLoader.LoadFont(littleNumberFont);
-    // // create new big number drawer
-    // NumberDrawer bigNumberDrawer(canvas, &bigNumberFont, NumberDrawer::BIG, color, bg_color);
+    // create new big number drawer
+    NumberDrawer bigNumberDrawer(canvas, &bigNumberFont, NumberDrawer::BIG, color, bg_color);
 
-    // bigNumberDrawer.DrawNumber("8", 16, bigNumberFont.baseline() - 1);
+    bigNumberDrawer.DrawNumber("8", 16, bigNumberFont.baseline() - 1);
 
     // NumberDrawer smallNumberDrawer(canvas, &littleNumberFont, NumberDrawer::SMALL, color, bg_color);
     // smallNumberDrawer.DrawNumber("1 2 3", 7, littleNumberFont.baseline());

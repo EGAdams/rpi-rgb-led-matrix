@@ -6,6 +6,9 @@
 #include "../GameTimer/GameTimer.h"
 #include "../PinInterface/PinInterface.h"
 #include "../Inputs/Inputs.h"
+#include "../Logger/Logger.h"
+#include "../Reset/Reset.h"
+
 class Inputs {
  public:
   Inputs(Player* player1,

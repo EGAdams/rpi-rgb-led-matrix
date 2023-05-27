@@ -1,11 +1,13 @@
 #ifndef RESET_h
 #define RESET_h
 
-#include "Arduino.h"
-#include "GameState.h"
-#include "GameTimer.h"
-#include "PinInterface.h"
-#include "Logger.h"
+#include "../Arduino/Arduino.h"
+#include "../GameState/GameState.h"
+#include "../GameTimer/GameTimer.h"
+#include "../PinInterface/PinInterface.h"
+#include "../Logger/Logger.h"
+#include "../TennisConstants/TennisConstants.h"
+#include "../PinInterface/PinInterface.h"
 
 class Reset {
  public:

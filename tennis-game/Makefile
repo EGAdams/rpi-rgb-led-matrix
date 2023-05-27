@@ -1,6 +1,6 @@
 CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter
 CXXFLAGS=$(CFLAGS)
-OBJECTS=Reset.o SetLeds.o TieLeds.o WinSequences.o Mode2Functions.o MatchWinSequence.o TennisConstants.o GameLeds.o GameModes.o GameObject.o PinState.o PinInterface.o TranslateConstant.o PointLeds.o Arduino.o CanvasCreator.o FontLoader.o NumberDrawer.o TextDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game.o
+OBJECTS=SubjectManager.o WebLiquidCrystal.o WatchTimer.o Inputs.o Mode1Tiebreaker.o Mode1Score.o Mode1Functions.o ServeLeds.o Undo.o BatteryTest.o Reset.o SetLeds.o TieLeds.o Mode1WinSequences.o Mode2Functions.o MatchWinSequence.o TennisConstants.o GameLeds.o GameModes.o GameObject.o PinState.o PinInterface.o TranslateConstant.o PointLeds.o Arduino.o CanvasCreator.o FontLoader.o NumberDrawer.o TextDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game.o
 BINARIES=tennis-game
 
 # Where our library resides. It is assumed here that $(RGB_LIB_DISTRIBUTION) has a
@@ -87,7 +87,7 @@ Mode1Functions.o : Mode1Functions/Mode1Functions.cpp
 Mode2Functions.o : Mode2Functions/Mode2Functions.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
-WinSequences.o : WinSequences/WinSequences.cpp
+Mode1WinSequences.o : WinSequences/WinSequences.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
 SetLeds.o : SetLeds/SetLeds.cpp
@@ -97,6 +97,36 @@ TieLeds.o : TieLeds/TieLeds.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
 Reset.o : Reset/Reset.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+MatchWinSequence.o : MatchWinSequence/MatchWinSequence.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+BatteryTest.o : BatteryTest/BatteryTest.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+WebLiquidCrystal.o : WebLiquidCrystal/WebLiquidCrystal.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+Undo.o : Undo/Undo.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+ServeLeds.o : ServeLeds/ServeLeds.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+Mode1Score.o : Mode1Score/Mode1Score.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+Mode1Tiebreaker.o : Mode1Tiebreaker/Mode1Tiebreaker.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+Inputs.o : Inputs/Inputs.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+WatchTimer.o : WatchTimer/WatchTimer.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+SubjectManager.o : SubjectManager/SubjectManager.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
 tennis-game.o : tennis-game.cpp

@@ -5,13 +5,14 @@
 #include "../GameLeds/GameLeds.h"
 #include "../GameState/GameState.h"
 #include "../GameTimer/GameTimer.h"
-#include "MODE_1_TIEBREAKER.h"
-#include "MODE_1_WIN_SEQUENCES.h"
-#include "POINT_LEDs.h"
-#include "PinInterface.h"
-#include "Player.h"
-#include "SET_LEDs.h"
-#include "UNDO.h"
+#include "../Mode1Tiebreaker/Mode1Tiebreaker.h"
+#include "../WinSequences/WinSequences.h"
+#include "../PointLeds/PointLeds.h"
+#include "../PinInterface/PinInterface.h"
+#include "../Player/Player.h"
+#include "../SetLeds/SetLeds.h"
+#include "../Undo/Undo.h"
+#include "../TennisConstants/TennisConstants.h"
 
 #if defined _WIN32 || defined _WIN64
     #include <iostream>

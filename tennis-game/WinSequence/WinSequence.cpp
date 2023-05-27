@@ -1,7 +1,8 @@
 #include "WinSequence.h"
-#if defined _WIN32 || defined _WIN64
-    #include <iostream>
-#endif
+#include <iostream>
+
+/* TODO: seriously consider changing the filename to match the class name.
+already cost us .5 hour */
 
 WinSequence::WinSequence()  {}
 WinSequence::~WinSequence() {}
@@ -29,5 +30,5 @@ void WinSequence::run( Player* player, GameState* gameState, GameLeds* gameLeds,
             std::cout << "set games to " << games_in_memory << std::endl;
             std::cout << "done running win sequence. " << std::endl;
         #endif
-    } // end LOOP_GAME_LAMP_WIN loop    
+    } // end LOOP_GAME_LAMP_WIN loop
 }

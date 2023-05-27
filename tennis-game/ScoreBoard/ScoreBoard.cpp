@@ -3,14 +3,10 @@
 
 ScoreBoard::ScoreBoard( Player*                    player1,
                         Player*                    player2,
-                        GameState*                 gameState,
-                        RGBMatrix::Options         matrix_options,
-                        rgb_matrix::RuntimeOptions runtime_opt )
+                        GameState*                 gameState )
     :   _player1(        player1 ),
         _player2(        player2 ),
-        _gameState (     gameState ),
-        _matrix_options( matrix_options ),
-        _runtime_opt(    runtime_opt    ) {}
+        _gameState (     gameState ) {}
 ScoreBoard::~ScoreBoard() {}
 
 bool ScoreBoard::FullSaturation( const Color &c ) {
@@ -29,7 +25,7 @@ void ScoreBoard::update()  {
     rgb_matrix::Font *outline_font = NULL;                            // If we want an outline around the font,
     if ( with_outline ) { outline_font = font.CreateOutlineFont(); }  // we create a new font with the original font
                                                                       // as a template that is just an outline font.
-    RGBMatrix *canvas = RGBMatrix::CreateFromOptions( _matrix_options, _runtime_opt);
+    RGBMatrix *canvas = RGBMatrix::CreateFromOptions( _matrix_options, _runtime_opt );
     if ( canvas == NULL ) {
         printf( "Couldn't create RGBMatrix object.  exiting... \n" );
         exit( 1 ); }

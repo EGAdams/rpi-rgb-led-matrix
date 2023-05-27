@@ -14,6 +14,8 @@
 #include "../SubjectManager/SubjectManager.h"
 #include "../WebLiquidCrystal/WebLiquidCrystal.h"
 #include <map>
+#include "../../include/led-matrix.h"
+#include "../../include/graphics.h"
 
 class GameObject {
  public:
@@ -47,9 +49,5 @@ class GameObject {
   SubjectManager* _subjectManager;
   Logger* _logger;
   History* _history;
-#if defined _WIN32 || defined _WIN64
-  std::map<std::string, int> _pin_map;
-#endif
-};
-
+  std::map<std::string, int> _pin_map; };
 #endif
