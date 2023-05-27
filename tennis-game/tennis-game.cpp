@@ -21,17 +21,19 @@ static bool parseColor(Color *c, const char *str) { return sscanf(str, "%hhu,%hh
 
 void showLittleNumbers() {
     #define LITTLE_NUMBER_FONT "fonts/little_numbers.bdf"
-    #define SPACE_BEFORE_SMALL_NUMBER 7
+    #define SPACE_BEFORE_SMALL_NUMBER   7
     #define SPACE_BETWEEN_SMALL_NUMBERS 17
+    #define START_ROW                   50
     Color background_color(0, 0, 0);
     int letter_spacing = 0;
     rgb_matrix::Font little_number_font;
     if (!little_number_font.LoadFont( LITTLE_NUMBER_FONT )) {
         fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_NUMBER_FONT );
-        return 1; }
+        // exit 0
+        exit( 1 ); }
 
     int x = 0;
-    int y = bigNumberFont.baseline() + bigNumberFont.height();
+    int y = START_ROW;
     rgb_matrix::Font *outline_font = NULL;
 
     Color thirdRowColor( 0, 255, 0 );
