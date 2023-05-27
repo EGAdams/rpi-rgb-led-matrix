@@ -70,6 +70,7 @@ int main(int argc, char *argv[]) {
     int loop_count = 0;
     #define MAX_LOOP_COUNT 60
     #define SCORE_DELAY    2
+    #define A_SPACE        14
     while ( game_running ) {
         if ( loop_count >  MAX_LOOP_COUNT ) { game_running = false; }
         pipeDrawer.DrawNumber(      " ", 1,  bigNumberFont.baseline());
@@ -237,7 +238,7 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline());
 
         pipeDrawer.DrawNumber(      "I", 1,  bigNumberFont.baseline() + bigNumberFont.height());
-        bigNumberDrawer.DrawNumber( "A", 16, bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber( "A", A_SPACE, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "d", 38, bigNumberFont.baseline() + bigNumberFont.height());
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
@@ -248,40 +249,40 @@ int main(int argc, char *argv[]) {
         bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline());
 
         pipeDrawer.DrawNumber(      " ", 1,  bigNumberFont.baseline() + bigNumberFont.height());
-        bigNumberDrawer.DrawNumber( "A", 16, bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber( "A", A_SPACE, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "d", 38, bigNumberFont.baseline() + bigNumberFont.height());
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
 
 
         pipeDrawer.DrawNumber(      "I", 1, bigNumberFont.baseline());
-        bigNumberDrawer.DrawNumber( "A", 16, bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber( "A", A_SPACE, bigNumberFont.baseline());
         bigNumberDrawer.DrawNumber( "d", 38, bigNumberFont.baseline());
 
         pipeDrawer.DrawNumber(      " ", 1,  bigNumberFont.baseline() + bigNumberFont.height());
-        bigNumberDrawer.DrawNumber( "A", 16, bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber( "A", A_SPACE, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "d", 38, bigNumberFont.baseline() + bigNumberFont.height());
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
 
 
         pipeDrawer.DrawNumber(      " ", 1, bigNumberFont.baseline());
-        bigNumberDrawer.DrawNumber( "A", 16, bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber( "A", A_SPACE, bigNumberFont.baseline());
         bigNumberDrawer.DrawNumber( "d", 38, bigNumberFont.baseline());
 
         pipeDrawer.DrawNumber(      "I", 1,  bigNumberFont.baseline() + bigNumberFont.height());
-        bigNumberDrawer.DrawNumber( "A", 16, bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber( "A", A_SPACE, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "d", 38, bigNumberFont.baseline() + bigNumberFont.height());
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
 
 
         pipeDrawer.DrawNumber(      "I", 1, bigNumberFont.baseline());
-        bigNumberDrawer.DrawNumber( "A", 16, bigNumberFont.baseline());
+        bigNumberDrawer.DrawNumber( "A", A_SPACE, bigNumberFont.baseline());
         bigNumberDrawer.DrawNumber( "d", 38, bigNumberFont.baseline());
 
-        pipeDrawer.DrawNumber(      "I", 1,  bigNumberFont.baseline() + bigNumberFont.height());
-        bigNumberDrawer.DrawNumber( "A", 16, bigNumberFont.baseline() + bigNumberFont.height());
+        pipeDrawer.DrawNumber(      " ", 1,  bigNumberFont.baseline() + bigNumberFont.height());
+        bigNumberDrawer.DrawNumber( "A", A_SPACE, bigNumberFont.baseline() + bigNumberFont.height());
         bigNumberDrawer.DrawNumber( "d", 38, bigNumberFont.baseline() + bigNumberFont.height());
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b ); // clear screen
