@@ -4,6 +4,7 @@
 #include "../Player/Player.h"
 #include "../GameState/GameState.h"
 #include "../NumberDrawer/NumberDrawer.h"
+#include <string.h>
 
 
 #define PLAYER_1_SERVE 1
@@ -23,6 +24,6 @@ class ScoreBoard {
       NumberDrawer _pipeDrawer;
       void         _showLittleNumbers();
       void         _drawPlayerScore( Player* player );
-      string       _translate( int raw_score );
+      std::string  _translate( int raw_score );
 };
 #endif
