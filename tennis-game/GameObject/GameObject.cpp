@@ -26,7 +26,7 @@ GameObject::GameObject() {
     _webLiquidCrystal = new WebLiquidCrystal();
     _gameTimer = new GameTimer();
     _player1 = new Player( 1 );
-    _player2 = new Player( 1 );
+    _player2 = new Player( 2 );
     _pinState = new PinState( _pin_map );
     _pinInterface = new PinInterface( _pinState );
     _history = new History();

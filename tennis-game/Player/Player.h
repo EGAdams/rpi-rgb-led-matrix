@@ -13,7 +13,7 @@ class Player {
   void setSetting(int setting); int getSetting();
 
   int incrementSetting();
-  int number();
+  int number(); // only set during construction
 
  private:
   int _playerNumber;

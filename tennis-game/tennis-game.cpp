@@ -14,37 +14,50 @@
 #include "FontLoader/FontLoader.h"
 #include "TextDrawer/TextDrawer.h"
 #include "NumberDrawer/NumberDrawer.h"
+#include "ScoreBoard/ScoreBoard.h"
+#include "GameObject/GameObject.h"
+
 
 using namespace rgb_matrix;
 
 static bool parseColor(Color *c, const char *str) { return sscanf(str, "%hhu,%hhu,%hhu", &c->r, &c->g, &c->b) == 3; }
 
-void showLittleNumbers( rgb_matrix::Canvas *canvas ) {
-    #define LITTLE_NUMBER_FONT "fonts/little_numbers.bdf"
-    #define SPACE_BEFORE_SMALL_NUMBER   7
-    #define SPACE_BETWEEN_SMALL_NUMBERS 17
-    #define START_ROW                   86
-    Color background_color(0, 0, 0);
-    int letter_spacing = 0;
-    rgb_matrix::Font little_number_font;
-    if (!little_number_font.LoadFont( LITTLE_NUMBER_FONT )) {
-        fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_NUMBER_FONT );
-        exit( 1 ); }
-    int x = 0;
-    int y = START_ROW;
-    rgb_matrix::Font *outline_font = NULL;
-    Color thirdRowColor( 0, 255, 0 );
-    rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), thirdRowColor,  outline_font ? NULL : &background_color, "1 2 3", letter_spacing );
-    y += little_number_font.height() - 5;
-    Color fourthRowColor( 255, 0, 0 );
-    rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &background_color, "4", letter_spacing );
-    rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + SPACE_BETWEEN_SMALL_NUMBERS, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &background_color, "5", letter_spacing );
-    rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + (( 2 * SPACE_BETWEEN_SMALL_NUMBERS )), y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &background_color, "6", letter_spacing );
-}
-
 int main(int argc, char *argv[]) {
     RGBMatrix::Options matrix_options;
+    // print matrix options
+    printf( "Matrix options:\n" );
+    printf( "  rows: %d\n", matrix_options.rows );
+    printf( "  chain_length: %d\n", matrix_options.chain_length );
+    printf( "  parallel: %d\n", matrix_options.parallel );
+    printf( "  pwm_bits: %d\n", matrix_options.pwm_bits );
+    printf( "  pwm_lsb_nanoseconds: %d\n", matrix_options.pwm_lsb_nanoseconds );
+
+
     rgb_matrix::RuntimeOptions runtime_opt;
+    // print runtime options
+    printf( "Runtime options:\n" );
+    printf( "  daemon: %d\n", runtime_opt.daemon );
+    printf( "  do_gpio_init: %d\n", runtime_opt.do_gpio_init );
+    printf( "  drop_privileges: %d\n", runtime_opt.drop_privileges );
+    printf( "  gpio_slowdown: %d\n", runtime_opt.gpio_slowdown );
+    printf( "  hardware_mapping: %s\n", runtime_opt.hardware_mapping );
+    printf( "  led_rgb_sequence: %s\n", runtime_opt.led_rgb_sequence );
+    printf( "  limit_refresh_rate_hz: %d\n", runtime_opt.limit_refresh_rate_hz );
+    printf( "  show_refresh_rate: %d\n", runtime_opt.show_refresh_rate );
+    printf( "  inverse_colors: %d\n", runtime_opt.inverse_colors );
+    printf( "  led_rgb_sequence: %s\n", runtime_opt.led_rgb_sequence );
+    printf( "  pwm_bits: %d\n", runtime_opt.pwm_bits );
+    printf( "  pwm_dither_bits: %d\n", runtime_opt.pwm_dither_bits );
+    printf( "  pwm_lsb_nanoseconds: %d\n", runtime_opt.pwm_lsb_nanoseconds );
+    printf( "  pwm_slowdown_gpio: %d\n", runtime_opt.pwm_slowdown_gpio );
+    printf( "  rgb_sequence: %s\n", runtime_opt.rgb_sequence );
+    printf( "  row_address_type: %d\n", runtime_opt.row_address_type );
+    printf( "  scan_mode: %d\n", runtime_opt.scan_mode );
+    printf( "  show_refresh_rate: %d\n", runtime_opt.show_refresh_rate );
+    printf( "  swap_green_blue: %d\n", runtime_opt.swap_green_blue );
+    printf( "  multiplexing: %d\n", runtime_opt.multiplexing );
+    printf( "  panel_type: %d\n", runtime_opt.panel_type );
+
     if (!rgb_matrix::ParseOptionsFromFlags(&argc, &argv, &matrix_options, &runtime_opt)) {
         return 0;
     } else {
@@ -80,8 +93,7 @@ int main(int argc, char *argv[]) {
     // rgb_matrix::Font littleNumberFont;
     // littleNumberFontLoader.LoadFont(littleNumberFont);
     // create new big number drawer
-    NumberDrawer bigNumberDrawer( canvas, &bigNumberFont, NumberDrawer::BIG, big_number_color, background_color );
-    NumberDrawer pipeDrawer(      canvas, &bigNumberFont, NumberDrawer::BIG, pipe_color,       background_color );
+
 
     // bigNumberDrawer.DrawNumber("8", 16, bigNumberFont.baseline() - 1);
 
@@ -97,20 +109,19 @@ int main(int argc, char *argv[]) {
     #define FOUR_SPACE     14
     #define THREE_SPACE    15
 
+    GameObject gameObject;
+
+
     while ( game_running ) {
         if ( loop_count >  MAX_LOOP_COUNT ) { game_running = false; }
-        pipeDrawer.DrawNumber(      "I", 1,  bigNumberFont.baseline());
-        bigNumberDrawer.DrawNumber( "0", 16, bigNumberFont.baseline());
-        bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline());
+        gameObject.setPlayer1Score( "0" );
+        gameObject.setPlayer2Score( "0" );
+        _player1->setScore( "0" );
+        _player2->setScore( "0" );
+        _scoreboard->update();
 
-        pipeDrawer.DrawNumber(      " ", 1,  bigNumberFont.baseline() + bigNumberFont.height());
-        bigNumberDrawer.DrawNumber( "0", 16, bigNumberFont.baseline() + bigNumberFont.height());
-        bigNumberDrawer.DrawNumber( "0", 38, bigNumberFont.baseline() + bigNumberFont.height());
-
-        showLittleNumbers( canvas );
         sleep( SCORE_DELAY );
         canvas->Fill(flood_color.r, flood_color.g, flood_color.b); // clear screen
-
 
         pipeDrawer.DrawNumber(      " ", 1,  bigNumberFont.baseline());
         bigNumberDrawer.DrawNumber( "0", 16, bigNumberFont.baseline());

@@ -3,6 +3,11 @@
 
 #include "../Player/Player.h"
 #include "../GameState/GameState.h"
+#include "../NumberDrawer/NumberDrawer.h"
+
+
+#define PLAYER_1_SERVE 1
+#define PLAYER_2_SERVE 2
 
 class ScoreBoard {
   public:
@@ -11,9 +16,13 @@ class ScoreBoard {
       void update();
 
   private:
-      Player*                    _player1;
-      Player*                    _player2;
-      GameState*                 _gameState;
+      Player*      _player1;
+      Player*      _player2;
+      GameState*   _gameState;
+      NumberDrawer _bigNumberDrawer;
+      NumberDrawer _pipeDrawer;
+      void         _showLittleNumbers();
+      void         _drawPlayerScore( Player* player );
+      string       _translate( int raw_score );
 };
-
 #endif
