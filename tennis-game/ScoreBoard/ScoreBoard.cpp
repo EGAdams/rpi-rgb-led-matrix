@@ -8,7 +8,6 @@ ScoreBoard::ScoreBoard( Player*                    player1,
     :   _player1(        player1 ),
         _player2(        player2 ),
         _gameState (     gameState ) {
-            printf( "Creating ScoreBoard...\n" );
             _bigNumberDrawer( canvas, &bigNumberFont, NumberDrawer::BIG, big_number_color, background_color );
             _pipeDrawer(      canvas, &bigNumberFont, NumberDrawer::BIG, pipe_color, background_color );
             }
@@ -27,7 +26,7 @@ void _drawPlayerScore( Player *player ) {
     _bigNumberDrawer.DrawNumber( score.substr( 0, 1 ), 16, bigNumberFont.baseline() + vertical_offset);
     _bigNumberDrawer.DrawNumber( score.substr( 1, 1 ), 38, bigNumberFont.baseline() + vertical_offset);  }
 
-void _translate( int raw_score ){
+std::string _translate( int raw_score ){
     switch ( raw_score ) {
     case 0:  return "00";
     case 1:  return "10";
