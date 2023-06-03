@@ -2,40 +2,39 @@
 #include <stdio.h>
 #include <string.h>
 
-ScoreBoard::ScoreBoard( Player*                    player1,
-                        Player*                    player2,
-                        GameState*                 gameState )
-    :   _player1(        player1 ),
-        _player2(        player2 ),
-        _gameState (     gameState ) {
-            _bigNumberDrawer( canvas, &bigNumberFont, NumberDrawer::BIG, big_number_color, background_color );
-            _pipeDrawer(      canvas, &bigNumberFont, NumberDrawer::BIG, pipe_color, background_color );
-            }
-ScoreBoard::~ScoreBoard() {}
+ScoreBoard::ScoreBoard(Player* player1, Player* player2, GameState* gameState,
+                       RGBMatrix* canvas, const rgb_matrix::Font* font, const Color& color, const Color& bg_color) 
+: _player1(player1), _player2(player2), _gameState(gameState), 
+  _bigNumberDrawer(canvas, font, NumberDrawer::BIG, color, bg_color),
+  _pipeDrawer(canvas, font, NumberDrawer::BIG, color, bg_color) {
+}
 
-void ScoreBoard::update()  {
+void ScoreBoard::update() {
     _drawPlayerScore( _player1 );
-    _drawPlayerScore( _player2 ); }
+    _drawPlayerScore( _player2 );
+}
 
-private:
-void _drawPlayerScore( Player *player ) {
+void ScoreBoard::_drawPlayerScore(Player* player) {
     int vertical_offset = player->number() == 1 ? 0 : bigNumberFont.height();
-    string serve_bar = _gameState->getServe() == PLAYER_2_SERVE ? " " : "I";
-    pipeDrawer.DrawNumber(       serve_bar, 1,  bigNumberFont.baseline());
-    int score =_translate( player->getPoints());
-    _bigNumberDrawer.DrawNumber( score.substr( 0, 1 ), 16, bigNumberFont.baseline() + vertical_offset);
-    _bigNumberDrawer.DrawNumber( score.substr( 1, 1 ), 38, bigNumberFont.baseline() + vertical_offset);  }
+    std::string serve_bar = _gameState->getServe() == PLAYER_2_SERVE ? " " : "I";
+    _pipeDrawer.DrawNumber(serve_bar, 1, bigNumberFont.baseline());
+    int score = _translate(player->getPoints());
+    _bigNumberDrawer.DrawNumber(score.substr(0, 1), 16, bigNumberFont.baseline() + vertical_offset);
+    _bigNumberDrawer.DrawNumber(score.substr(1, 1), 38, bigNumberFont.baseline() + vertical_offset);
+}
 
-std::string _translate( int raw_score ){
-    switch ( raw_score ) {
-    case 0:  return "00";
-    case 1:  return "10";
-    case 2:  return "15";
-    case 3:  return "30";
-    case 4:  return "40";
-    case 5:  return "Ad";
-    case 99: return "Ad"; }}
-
+std::string ScoreBoard::_translate(int raw_score) {
+    switch (raw_score) {
+    case 0: return "00";
+    case 1: return "10";
+    case 2: return "15";
+    case 3: return "30";
+    case 4: return "40";
+    case 5: return "Ad";
+    case 99: return "Ad";
+    default: return "00";
+    }
+}
 
 void _showLittleNumbers( rgb_matrix::Canvas *canvas ) {
     #define LITTLE_NUMBER_FONT "fonts/little_numbers.bdf"
@@ -59,5 +58,3 @@ void _showLittleNumbers( rgb_matrix::Canvas *canvas ) {
     rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + SPACE_BETWEEN_SMALL_NUMBERS, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &background_color, "0", letter_spacing );
     rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + (( 2 * SPACE_BETWEEN_SMALL_NUMBERS )), y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &background_color, "0", letter_spacing );
 }
-
-showLittleNumbers( canvas );
