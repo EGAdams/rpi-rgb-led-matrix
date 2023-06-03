@@ -15,11 +15,11 @@ public:
     void DrawNumber(const std::string& number, int x, int y);
 
 private:
-    RGBMatrix* canvas_;
-    const rgb_matrix::Font* font_;
-    Size size_;
-    Color color_;
-    Color bg_color_;
+    RGBMatrix* _canvas;
+    const rgb_matrix::Font* _font;
+    Size _size;
+    Color _color;
+    Color _bg_color;
 };
 
 #endif // NUMBER_DRAWER_H

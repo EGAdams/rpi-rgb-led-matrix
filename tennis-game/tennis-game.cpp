@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include "CanvasCreator/CanvasCreator.h"
+
 #include "FontLoader/FontLoader.h"
 #include "TextDrawer/TextDrawer.h"
 #include "NumberDrawer/NumberDrawer.h"
@@ -24,7 +24,6 @@ static bool parseColor(Color *c, const char *str) { return sscanf(str, "%hhu,%hh
 
 int main(int argc, char *argv[]) {
     RGBMatrix::Options matrix_options;
-    // print matrix options
     printf( "Matrix options:\n" );
     printf( "  rows: %d\n", matrix_options.rows );
     printf( "  chain_length: %d\n", matrix_options.chain_length );
@@ -32,9 +31,7 @@ int main(int argc, char *argv[]) {
     printf( "  pwm_bits: %d\n", matrix_options.pwm_bits );
     printf( "  pwm_lsb_nanoseconds: %d\n", matrix_options.pwm_lsb_nanoseconds );
 
-
     rgb_matrix::RuntimeOptions runtime_opt;
-    // print runtime options
     printf( "Runtime options:\n" );
     printf( "  daemon: %d\n", runtime_opt.daemon );
     printf( "  do_gpio_init: %d\n", runtime_opt.do_gpio_init );
@@ -75,19 +72,6 @@ int main(int argc, char *argv[]) {
     int y_orig = 0;
     int letter_spacing = 0;
     int opt;
-    printf("Updating ScoreBoard...\n");
-
-    // Create Canvas
-    CanvasCreator canvasCreator(matrix_options, runtime_opt);
-    RGBMatrix* canvas = canvasCreator.CreateCanvas();
-
-    FontLoader fontLoader("fonts/mspgothic_042623.bdf"); // Load Fonts
-    rgb_matrix::Font font;
-    fontLoader.LoadFont(font);
-
-    FontLoader bigNumberFontLoader("fonts/fgm_27_ee.bdf");
-    rgb_matrix::Font bigNumberFont;
-    bigNumberFontLoader.LoadFont(bigNumberFont);
 
     // FontLoader littleNumberFontLoader("fonts/little_numbers.bdf");
     // rgb_matrix::Font littleNumberFont;

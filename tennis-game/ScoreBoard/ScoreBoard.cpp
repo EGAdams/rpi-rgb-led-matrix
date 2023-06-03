@@ -1,12 +1,27 @@
 #include "ScoreBoard.h"
-#include <stdio.h>
-#include <string.h>
 
-ScoreBoard::ScoreBoard(Player* player1, Player* player2, GameState* gameState,
-                       RGBMatrix* canvas, const rgb_matrix::Font* font, const Color& color, const Color& bg_color) 
-: _player1(player1), _player2(player2), _gameState(gameState), 
-  _bigNumberDrawer(canvas, font, NumberDrawer::BIG, color, bg_color),
-  _pipeDrawer(canvas, font, NumberDrawer::BIG, color, bg_color) {
+ScoreBoard::ScoreBoard(Player* player1, Player* player2, GameState* gameState ) 
+: _player1(player1), _player2(player2), _gameState(gameState) {
+    printf("Constructing ScoreBoard...\n");
+
+    // seems like the only logical place to create the canvas
+    CanvasCreator canvasCreator(matrix_options, runtime_opt);
+    RGBMatrix* canvas = canvasCreator.CreateCanvas();
+
+    FontLoader fontLoader("fonts/mspgothic_042623.bdf"); // Load Fonts
+    rgb_matrix::Font font;
+    fontLoader.LoadFont(font);
+
+    FontLoader bigNumberFontLoader("fonts/fgm_27_ee.bdf");
+    rgb_matrix::Font bigNumberFont;
+    bigNumberFontLoader.LoadFont(bigNumberFont);
+    if (!_big_number_font.LoadFont( BIG_NUMBER_FONT )) { 
+        fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT );
+        exit( 1 ); }
+    Color color( 255, 255, 0 );
+    Color bg_color( 0, 0, 0);
+    _bigNumberDrawer = new NumberDrawer( canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color);
+    _pipeDrawer      = new NumberDrawer( canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color);
 }
 
 void ScoreBoard::update() {
@@ -15,13 +30,14 @@ void ScoreBoard::update() {
 }
 
 void ScoreBoard::_drawPlayerScore(Player* player) {
-    int vertical_offset = player->number() == 1 ? 0 : bigNumberFont.height();
+    int vertical_offset = player->number() == 1 ? 0 : _big_number_font.height();
     std::string serve_bar = _gameState->getServe() == PLAYER_2_SERVE ? " " : "I";
-    _pipeDrawer.DrawNumber(serve_bar, 1, bigNumberFont.baseline());
-    int score = _translate(player->getPoints());
-    _bigNumberDrawer.DrawNumber(score.substr(0, 1), 16, bigNumberFont.baseline() + vertical_offset);
-    _bigNumberDrawer.DrawNumber(score.substr(1, 1), 38, bigNumberFont.baseline() + vertical_offset);
+    _pipeDrawer->DrawNumber(serve_bar, 1, _big_number_font.baseline());
+    std::string score = _translate(player->getPoints());
+    _bigNumberDrawer->DrawNumber(score.substr(0, 1), 16, _big_number_font.baseline() + vertical_offset);
+    _bigNumberDrawer->DrawNumber(score.substr(1, 1), 38, _big_number_font.baseline() + vertical_offset);
 }
+
 
 std::string ScoreBoard::_translate(int raw_score) {
     switch (raw_score) {

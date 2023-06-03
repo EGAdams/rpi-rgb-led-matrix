@@ -1,8 +1,7 @@
 #include "NumberDrawer.h"
 
 NumberDrawer::NumberDrawer(RGBMatrix* canvas, const rgb_matrix::Font* font, Size size, const Color& color, const Color& bg_color)
-    : canvas_(canvas), font_(font), size_(size), color_(color), bg_color_(bg_color) {}
+    : _canvas( canvas ), _font( font ), _size( size ), _color( color ), _bg_color( bg_color ) {}
 
-void NumberDrawer::DrawNumber(const std::string& number, int x, int y) {
-    rgb_matrix::DrawText(canvas_, *font_, x, y, color_, &bg_color_, number.c_str(), 0);
-}
+void NumberDrawer::DrawNumber( const std::string& number, int x, int y ) {
+    rgb_matrix::DrawText( _canvas, *_font, x, y, _color, &_bg_color, number.c_str(), 0);}
