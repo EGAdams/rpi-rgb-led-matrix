@@ -29,6 +29,7 @@ class GameObject {
              GameModes* gameModes,
              ScoreBoard* scoreBoard,
              WebLiquidCrystal* lcd);
+             
   GameObject();
   ~GameObject();
   void start();

@@ -37,23 +37,23 @@ int main(int argc, char *argv[]) {
     printf( "  do_gpio_init: %d\n", runtime_opt.do_gpio_init );
     printf( "  drop_privileges: %d\n", runtime_opt.drop_privileges );
     printf( "  gpio_slowdown: %d\n", runtime_opt.gpio_slowdown );
-    printf( "  hardware_mapping: %s\n", runtime_opt.hardware_mapping );
-    printf( "  led_rgb_sequence: %s\n", runtime_opt.led_rgb_sequence );
-    printf( "  limit_refresh_rate_hz: %d\n", runtime_opt.limit_refresh_rate_hz );
-    printf( "  show_refresh_rate: %d\n", runtime_opt.show_refresh_rate );
-    printf( "  inverse_colors: %d\n", runtime_opt.inverse_colors );
-    printf( "  led_rgb_sequence: %s\n", runtime_opt.led_rgb_sequence );
-    printf( "  pwm_bits: %d\n", runtime_opt.pwm_bits );
-    printf( "  pwm_dither_bits: %d\n", runtime_opt.pwm_dither_bits );
-    printf( "  pwm_lsb_nanoseconds: %d\n", runtime_opt.pwm_lsb_nanoseconds );
-    printf( "  pwm_slowdown_gpio: %d\n", runtime_opt.pwm_slowdown_gpio );
-    printf( "  rgb_sequence: %s\n", runtime_opt.rgb_sequence );
-    printf( "  row_address_type: %d\n", runtime_opt.row_address_type );
-    printf( "  scan_mode: %d\n", runtime_opt.scan_mode );
-    printf( "  show_refresh_rate: %d\n", runtime_opt.show_refresh_rate );
-    printf( "  swap_green_blue: %d\n", runtime_opt.swap_green_blue );
-    printf( "  multiplexing: %d\n", runtime_opt.multiplexing );
-    printf( "  panel_type: %d\n", runtime_opt.panel_type );
+    // printf( "  hardware_mapping: %s\n", runtime_opt.hardware_mapping );
+    // printf( "  led_rgb_sequence: %s\n", runtime_opt.led_rgb_sequence );
+    // printf( "  limit_refresh_rate_hz: %d\n", runtime_opt.limit_refresh_rate_hz );
+    // printf( "  show_refresh_rate: %d\n", runtime_opt.show_refresh_rate );
+    // printf( "  inverse_colors: %d\n", runtime_opt.inverse_colors );
+    // printf( "  led_rgb_sequence: %s\n", runtime_opt.led_rgb_sequence );
+    // printf( "  pwm_bits: %d\n", runtime_opt.pwm_bits );
+    // printf( "  pwm_dither_bits: %d\n", runtime_opt.pwm_dither_bits );
+    // printf( "  pwm_lsb_nanoseconds: %d\n", runtime_opt.pwm_lsb_nanoseconds );
+    // printf( "  pwm_slowdown_gpio: %d\n", runtime_opt.pwm_slowdown_gpio );
+    // printf( "  rgb_sequence: %s\n", runtime_opt.rgb_sequence );
+    // printf( "  row_address_type: %d\n", runtime_opt.row_address_type );
+    // printf( "  scan_mode: %d\n", runtime_opt.scan_mode );
+    // printf( "  show_refresh_rate: %d\n", runtime_opt.show_refresh_rate );
+    // printf( "  swap_green_blue: %d\n", runtime_opt.swap_green_blue );
+    // printf( "  multiplexing: %d\n", runtime_opt.multiplexing );
+    // printf( "  panel_type: %d\n", runtime_opt.panel_type );
 
     if (!rgb_matrix::ParseOptionsFromFlags(&argc, &argv, &matrix_options, &runtime_opt)) {
         return 0;
@@ -95,11 +95,8 @@ int main(int argc, char *argv[]) {
 
     GameObject gameObject;
 
-
     while ( game_running ) {
         if ( loop_count >  MAX_LOOP_COUNT ) { game_running = false; }
-        gameObject.setPlayer1Score( "0" );
-        gameObject.setPlayer2Score( "0" );
         _player1->setScore( "0" );
         _player2->setScore( "0" );
         _scoreboard->update();
