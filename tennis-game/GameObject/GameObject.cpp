@@ -41,6 +41,7 @@ GameObject::GameObject() {
     _scoreBoard = new ScoreBoard( _player1, _player2, _gameState );
     _subjectManager = new SubjectManager();
     _logger = new Logger( "GameObject" );
+    std::cout << "GameObject constructed." << std::endl;
 }
 
 GameObject::~GameObject() {};

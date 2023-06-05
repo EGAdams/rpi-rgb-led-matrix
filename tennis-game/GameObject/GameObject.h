@@ -40,10 +40,8 @@ class GameObject {
   void loopGame();
   void playerScore( int playerNumber );
   static void _signalHandler( int signal );
-
   static volatile int gSignalStatus;
   
-
  private:
   Player* _player1;
   Player* _player2;

@@ -32,11 +32,8 @@ int main( int argc, char *argv[]) {
     #define THREE_SPACE    15
     
     std::cout << "creating GameObject..." << std::endl;
-    GameObject* gameObject;
+    GameObject* gameObject = new GameObject();
     std::cout << "done creating game object." << std::endl;
-
-    int current_player_button = _gameState->getPlayerButton();
-    std::cout << "current_player_button: " << current_player_button << std::endl;
 
     int randomPlayer = 1;
     std::signal( SIGINT, GameObject::_signalHandler );
