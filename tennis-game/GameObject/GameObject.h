@@ -39,7 +39,7 @@ class GameObject {
   PinInterface* getPinInterface();
   void loopGame();
   void playerScore( int playerNumber );
-  void _signalHandler( int signal );
+  static void _signalHandler( int signal );
 
  private:
   Player* _player1;
@@ -55,6 +55,6 @@ class GameObject {
   SubjectManager* _subjectManager;
   Logger* _logger;
   History* _history;
-  int _gSignalStatus = 0;
+  static volatile int _gSignalStatus;
   std::map<std::string, int> _pin_map; };
 #endif
