@@ -24,17 +24,25 @@ GameModes::GameModes( Player* player1,
 }
 
 void GameModes::gameStart() {
+    std::cout << "inside gameStart() checking if gameStared = zero or not..." << std::endl;
     if ( _gameState->getStarted() == 0 ) {  // if not started...
+        std::cout << "setting player points... " << std::endl;
         _player1->setPoints( 0 );             // p1Points = 0;
         _player2->setPoints( 0 );             // p2Points = 0;
+        std::cout << "setting player games... " << std::endl;
         _player1->setGames( 0 );              // p1Games = 0;
         _player2->setGames( 0 );              // p2Games = 0;
+        std::cout << "setting player sets... " << std::endl;
         _player1->setSets( 0 );               // p1Sets = 0;
         _player2->setSets( 0 );               // p2Sets = 0;
+        std::cout << "updating points... " << std::endl;
         _pointLeds.updatePoints();          // UpdatePoints();
+        std::cout << "updating games... " << std::endl;
         _gameLeds.updateGames();            // UpdateGames();
+        std::cout << "updating sets... " << std::endl;
         _setLeds.updateSets();              // UpdateSets();
         _gameState->setTieBreakOnly( 0 );     // tieBreakOnly = false;
+        std::cout << "setting started to 1... " << std::endl;
         _gameState->setStarted( 1 ); }}          // gameStart = false; // set to started.
 
 void GameModes::mode1() {
