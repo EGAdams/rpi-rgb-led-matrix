@@ -3,10 +3,65 @@
 ScoreBoard::ScoreBoard(Player* player1, Player* player2, GameState* gameState ) 
 : _player1(player1), _player2(player2), _gameState(gameState) {
     printf("Constructing ScoreBoard...\n");
+    // if (!rgb_matrix::ParseOptionsFromFlags(&argc, &argv, &matrix_options, &runtime_opt)) {
+    //     return 0;
+    // } else {
+    //     printf( "Matrix options parsed.\n" );
+    // }
+    Color pipe_color(255, 255, 0); // yellow
+    Color background_color(0, 0, 0);
+    Color big_number_color(0, 255, 0); // green
+    Color outline_color(0,0,0);
 
     // seems like the only logical place to create the canvas
+    RGBMatrix::Options matrix_options;
+    matrix_options.hardware_mapping = "regular";  // or e.g. "adafruit-hat"
+    matrix_options.rows = 32;
+    matrix_options.chain_length = 1;
+    matrix_options.parallel = 1;
+    matrix_options.show_refresh_rate = false;
+    matrix_options.disable_hardware_pulsing = false;
+    matrix_options.brightness = 35; // best for demo videos in largo
+    matrix_options.pwm_bits = 11;
+
+    rgb_matrix::RuntimeOptions runtime_opt;
+    runtime_opt.drop_privileges = 0;
+    runtime_opt.gpio_slowdown = 2;
+    runtime_opt.daemon = 0;
+    runtime_opt.do_gpio_init = 1;
+
+    printf( "Matrix options:\n" );
+    printf( "  rows: %d\n", matrix_options.rows );
+    printf( "  chain_length: %d\n", matrix_options.chain_length );
+    printf( "  parallel: %d\n", matrix_options.parallel );
+    printf( "  pwm_bits: %d\n", matrix_options.pwm_bits );
+    printf( "  pwm_lsb_nanoseconds: %d\n", matrix_options.pwm_lsb_nanoseconds );
+
+    printf( "Runtime options:\n" );
+    printf( "  daemon: %d\n", runtime_opt.daemon );
+    printf( "  do_gpio_init: %d\n", runtime_opt.do_gpio_init );
+    printf( "  drop_privileges: %d\n", runtime_opt.drop_privileges );
+    printf( "  gpio_slowdown: %d\n", runtime_opt.gpio_slowdown );
+    // printf( "  hardware_mapping: %s\n", runtime_opt.hardware_mapping );
+    // printf( "  led_rgb_sequence: %s\n", runtime_opt.led_rgb_sequence );
+    // printf( "  limit_refresh_rate_hz: %d\n", runtime_opt.limit_refresh_rate_hz );
+    // printf( "  show_refresh_rate: %d\n", runtime_opt.show_refresh_rate );
+    // printf( "  inverse_colors: %d\n", runtime_opt.inverse_colors );
+    // printf( "  led_rgb_sequence: %s\n", runtime_opt.led_rgb_sequence );
+    // printf( "  pwm_bits: %d\n", runtime_opt.pwm_bits );
+    // printf( "  pwm_dither_bits: %d\n", runtime_opt.pwm_dither_bits );
+    // printf( "  pwm_lsb_nanoseconds: %d\n", runtime_opt.pwm_lsb_nanoseconds );
+    // printf( "  pwm_slowdown_gpio: %d\n", runtime_opt.pwm_slowdown_gpio );
+    // printf( "  rgb_sequence: %s\n", runtime_opt.rgb_sequence );
+    // printf( "  row_address_type: %d\n", runtime_opt.row_address_type );
+    // printf( "  scan_mode: %d\n", runtime_opt.scan_mode );
+    // printf( "  show_refresh_rate: %d\n", runtime_opt.show_refresh_rate );
+    // printf( "  swap_green_blue: %d\n", runtime_opt.swap_green_blue );
+    // printf( "  multiplexing: %d\n", runtime_opt.multiplexing );
+    // printf( "  panel_type: %d\n", runtime_opt.panel_type );
+    
     CanvasCreator canvasCreator(matrix_options, runtime_opt);
-    RGBMatrix* canvas = canvasCreator.CreateCanvas();
+    _canvas = canvasCreator.CreateCanvas();
 
     FontLoader fontLoader("fonts/mspgothic_042623.bdf"); // Load Fonts
     rgb_matrix::Font font;
@@ -20,27 +75,33 @@ ScoreBoard::ScoreBoard(Player* player1, Player* player2, GameState* gameState )
         exit( 1 ); }
     Color color( 255, 255, 0 );
     Color bg_color( 0, 0, 0);
-    _bigNumberDrawer = new NumberDrawer( canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color);
-    _pipeDrawer      = new NumberDrawer( canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color);
-}
+    _bigNumberDrawer = new NumberDrawer( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color);
+    _pipeDrawer      = new NumberDrawer( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color); 
+    update(); }
+
+ScoreBoard::~ScoreBoard() {
+    delete _bigNumberDrawer;
+    delete _pipeDrawer;
+    delete _canvas; }
 
 void ScoreBoard::update() {
     _drawPlayerScore( _player1 );
-    _drawPlayerScore( _player2 );
-}
+    _drawPlayerScore( _player2 ); }
+
+void ScoreBoard::clearScreen() {
+    Color flood_color(0, 0, 0); _canvas->Fill (flood_color.r, flood_color.g, flood_color.b ); }  // clear screen
 
 void ScoreBoard::_drawPlayerScore(Player* player) {
     int vertical_offset = player->number() == 1 ? 0 : _big_number_font.height();
-    std::string serve_bar = _gameState->getServe() == PLAYER_2_SERVE ? " " : "I";
+    std::string serve_bar = _gameState->getServe() == PLAYER_2_SERVE ? " " : "I"; // or use p1sv and swap
     _pipeDrawer->DrawNumber(serve_bar, 1, _big_number_font.baseline());
     std::string score = _translate(player->getPoints());
     _bigNumberDrawer->DrawNumber(score.substr(0, 1), 16, _big_number_font.baseline() + vertical_offset);
-    _bigNumberDrawer->DrawNumber(score.substr(1, 1), 38, _big_number_font.baseline() + vertical_offset);
-}
+    _bigNumberDrawer->DrawNumber(score.substr(1, 1), 38, _big_number_font.baseline() + vertical_offset); }
 
 
-std::string ScoreBoard::_translate(int raw_score) {
-    switch (raw_score) {
+std::string ScoreBoard::_translate( int raw_score ) {
+    switch ( raw_score ) {
     case 0: return "00";
     case 1: return "10";
     case 2: return "15";
@@ -48,9 +109,7 @@ std::string ScoreBoard::_translate(int raw_score) {
     case 4: return "40";
     case 5: return "Ad";
     case 99: return "Ad";
-    default: return "00";
-    }
-}
+    default: return "00"; }}
 
 void _showLittleNumbers( rgb_matrix::Canvas *canvas ) {
     #define LITTLE_NUMBER_FONT "fonts/little_numbers.bdf"

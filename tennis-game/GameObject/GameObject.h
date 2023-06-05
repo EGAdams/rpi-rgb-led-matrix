@@ -17,6 +17,8 @@
 #include "../../include/led-matrix.h"
 #include "../../include/graphics.h"
 
+#define PLAYER_1 1
+#define PLAYER_2 2
 class GameObject {
  public:
   GameObject(Player* player1,
@@ -35,6 +37,7 @@ class GameObject {
   void start();
   PinInterface* getPinInterface();
   void loopGame();
+  void playerScore( int playerNumber );
 
  private:
   Player* _player1;

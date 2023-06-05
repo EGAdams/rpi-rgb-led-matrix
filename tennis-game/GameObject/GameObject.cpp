@@ -25,8 +25,8 @@ GameObject::GameObject( Player* player1,
 GameObject::GameObject() {
     _webLiquidCrystal = new WebLiquidCrystal();
     _gameTimer = new GameTimer();
-    _player1 = new Player( 1 );
-    _player2 = new Player( 2 );
+    _player1 = new Player( PLAYER_1 );
+    _player2 = new Player( PLAYER_2 );
     _pinState = new PinState( _pin_map );
     _pinInterface = new PinInterface( _pinState );
     _history = new History();
@@ -49,6 +49,8 @@ void GameObject::loopGame() {
     GameTimer::gameDelay( 25 );
     _subjectManager->gameStateUpdate( _gameState, _player1, _player2 );
 }
+
+
 
 PinInterface* GameObject::getPinInterface() { return _pinInterface; }
 

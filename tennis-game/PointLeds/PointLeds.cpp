@@ -14,6 +14,9 @@ PointLeds::PointLeds( Player* player1,
 PointLeds::~PointLeds() {}
 
 void PointLeds::updatePoints() {
+    _scoreBoard->update();
+    return;
+    
     switch ( _player1->getPoints() ) {
     case 0:
         // draw "00"

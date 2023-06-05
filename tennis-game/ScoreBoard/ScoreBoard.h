@@ -30,5 +30,7 @@ private:
     void _showLittleNumbers();
     void _drawPlayerScore( Player* player );
     std::string _translate( int raw_score );
+    RGBMatrix* _canvas;
+    void clearScreen();
 };
 #endif
