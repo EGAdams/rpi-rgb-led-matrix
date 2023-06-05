@@ -14,7 +14,9 @@ PointLeds::PointLeds( Player* player1,
 PointLeds::~PointLeds() {}
 
 void PointLeds::updatePoints() {
+    std::cout << "calling _scoreBoard->update()... " << std::endl;
     _scoreBoard->update();
+    std::cout << "done calling _scoreBoard->update()... " << std::endl;
     return;
     
     switch ( _player1->getPoints() ) {

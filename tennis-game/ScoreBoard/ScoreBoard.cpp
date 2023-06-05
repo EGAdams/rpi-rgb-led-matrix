@@ -88,6 +88,7 @@ ScoreBoard::~ScoreBoard() {
     delete _canvas; }
 
 void ScoreBoard::update() {
+    std::cout << "inside ScoreBoard::update(), calling _drawPlayerScore..." << std::endl;
     _drawPlayerScore( _player1 );
     _drawPlayerScore( _player2 ); }
 
