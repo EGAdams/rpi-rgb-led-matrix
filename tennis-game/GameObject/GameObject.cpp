@@ -42,12 +42,10 @@ GameObject::GameObject() {
 }
 
 GameObject::~GameObject() {};
-void GameObject::_signalHandler(int signal) { _gSignalStatus = signal; }
-volatile int GameObject::_gSignalStatus = 0;
+void GameObject::_signalHandler(int signal) { GameObject::gSignalStatus = signal; }
+volatile int GameObject::gSignalStatus = 0;
 
 void GameObject::loopGame() {
-    std::signal( SIGINT, GameObject::_signalHandler );
-    while ( _gSignalStatus != SIGINT ) {
         std::cout << "reading reset from loopGame()..." << std::endl;
         _gameInputs->readReset();
         std::cout << "reading rotary from loopGame()..." << std::endl;
@@ -58,12 +56,12 @@ void GameObject::loopGame() {
         GameTimer::gameDelay( GAME_LOOP_DELAY );
         std::cout << "updating game state..." << std::endl;
         _subjectManager->gameStateUpdate( _gameState, _player1, _player2 );
-        std::cout << "end of loopGame()." << std::endl; }}
+        std::cout << "end of loopGame()." << std::endl; }
 
 void GameObject::playerScore( int playerNumber ) { 
     std::cout << "GameObject::playerScore( " << playerNumber << " )" << std::endl;
-    std::cout << "updating game state.. - setting player button to " << playerNumber << " ..." << std::endl;
-    _gameState->setPlayerButton( playerNumber ); }    
+    std::cout << "updating game state...  setting player button to " << playerNumber << " ..." << std::endl;
+    _gameState->setPlayerButton( playerNumber ); }
 
 PinInterface* GameObject::getPinInterface() { return _pinInterface; }
 

@@ -41,6 +41,9 @@ class GameObject {
   void playerScore( int playerNumber );
   static void _signalHandler( int signal );
 
+  static volatile int gSignalStatus;
+  
+
  private:
   Player* _player1;
   Player* _player2;
@@ -55,6 +58,5 @@ class GameObject {
   SubjectManager* _subjectManager;
   Logger* _logger;
   History* _history;
-  static volatile int _gSignalStatus;
   std::map<std::string, int> _pin_map; };
 #endif
