@@ -1,5 +1,4 @@
 You are a world-class C++ debugger.
-
 Your task will be to debug a C++ project compiler error.
 
 The links to the relevant files are:
