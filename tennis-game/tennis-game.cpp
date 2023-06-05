@@ -18,9 +18,7 @@
 #include "ScoreBoard/ScoreBoard.h"
 #include "GameObject/GameObject.h"
 
-
 using namespace rgb_matrix;
-
 static bool parseColor(Color *c, const char *str) { return sscanf(str, "%hhu,%hhu,%hhu", &c->r, &c->g, &c->b) == 3; }
 
 int main( int argc, char *argv[]) {

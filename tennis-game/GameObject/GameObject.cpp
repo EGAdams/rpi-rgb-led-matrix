@@ -46,10 +46,10 @@ void GameObject::_signalHandler(int signal) { GameObject::gSignalStatus = signal
 volatile int GameObject::gSignalStatus = 0;
 
 void GameObject::loopGame() {
-        std::cout << "reading reset from loopGame()..." << std::endl;
-        _gameInputs->readReset();
-        std::cout << "reading rotary from loopGame()..." << std::endl;
-        int rotaryValue = _gameInputs->readRotary();
+        // std::cout << "reading reset from loopGame()..." << std::endl;
+        // _gameInputs->readReset();
+        // std::cout << "reading rotary from loopGame()..." << std::endl;
+        int rotaryValue = 1; // int rotaryValue = _gameInputs->readRotary(); TODO: actually read rotary
         std::cout << "rotaryValue: " << rotaryValue << ".  setting game mode to " << rotaryValue << "." << std::endl;
         _gameModes->setGameMode( rotaryValue );
         std::cout << "delaying for " << GAME_LOOP_DELAY << " milliseconds..." << std::endl;
