@@ -31,7 +31,7 @@ int main( int argc, char *argv[]) {
     #define FOUR_SPACE     14
     #define THREE_SPACE    15
 
-    GameObject gameObject;
+    GameObject* gameObject;
 
     int randomPlayer = 1;
     std::signal( SIGINT, GameObject::_signalHandler );
@@ -40,9 +40,9 @@ int main( int argc, char *argv[]) {
         
         sleep( SCORE_DELAY );
         randomPlayer = rand() % 2 + 1; // generate random player between 1 and 2
-        gameObject.playerScore( randomPlayer );
+        gameObject->playerScore( randomPlayer );
         sleep( SCORE_DELAY );
-        gameObject.loopGame();
+        gameObject->loopGame();
 
         // pipeDrawer.DrawNumber(      " ", 1,  bigNumberFont.baseline());
         // bigNumberDrawer.DrawNumber( "0", 16, bigNumberFont.baseline());
