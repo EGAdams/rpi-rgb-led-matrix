@@ -3,62 +3,63 @@
 ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState ) 
 : _player1( player1 ), _player2( player2 ), _gameState( gameState ) {
     printf( "Constructing ScoreBoard...\n" );
-    Color pipe_color( 255, 255, 0 ); // yellow
-    Color background_color( 0, 0, 0 );
-    Color big_number_color( 0, 255, 0 ); // green
-    Color outline_color( 0, 0, 0 );
-    RGBMatrix::Options matrix_options; // seems like the only logical place to create the canvas
-    matrix_options.hardware_mapping = "regular";  // or e.g. "adafruit-hat"
-    matrix_options.pixel_mapper_config = "Rotate:180;264-Mapper"; // or e.g. "U-mapper"
-    matrix_options.rows = 64;
-    matrix_options.cols = 64;
-    matrix_options.chain_length = 1;
-    matrix_options.parallel = 2;
-    matrix_options.show_refresh_rate = false;
-    matrix_options.disable_hardware_pulsing = true; // --led-no-hardware-pulse
-    matrix_options.brightness = 35; // best for demo videos in largo
-    matrix_options.pwm_bits = 11;
-    matrix_options.multiplexing = 1;
-    rgb_matrix::RuntimeOptions runtime_opt;
-    runtime_opt.drop_privileges = 0;
-    runtime_opt.gpio_slowdown = 2;
-    runtime_opt.daemon = 0;
-    runtime_opt.do_gpio_init = 1;
+    // Color pipe_color( 255, 255, 0 ); // yellow
+    // Color background_color( 0, 0, 0 );
+    // Color big_number_color( 0, 255, 0 ); // green
+    // Color outline_color( 0, 0, 0 );
+    // RGBMatrix::Options matrix_options; // seems like the only logical place to create the canvas
+    // matrix_options.hardware_mapping = "regular";  // or e.g. "adafruit-hat"
+    // matrix_options.pixel_mapper_config = "Rotate:180;264-Mapper"; // or e.g. "U-mapper"
+    // matrix_options.rows = 64;
+    // matrix_options.cols = 64;
+    // matrix_options.chain_length = 1;
+    // matrix_options.parallel = 2;
+    // matrix_options.show_refresh_rate = false;
+    // matrix_options.disable_hardware_pulsing = true; // --led-no-hardware-pulse
+    // matrix_options.brightness = 35; // best for demo videos in largo
+    // matrix_options.pwm_bits = 11;
+    // matrix_options.multiplexing = 1;
+    // rgb_matrix::RuntimeOptions runtime_opt;
+    // runtime_opt.drop_privileges = 0;
+    // runtime_opt.gpio_slowdown = 2;
+    // runtime_opt.daemon = 0;
+    // runtime_opt.do_gpio_init = 1;
 
-    printf( "Matrix options:\n" );
-    printf( "  rows: %d\n", matrix_options.rows );
-    printf( "  chain_length: %d\n", matrix_options.chain_length );
-    printf( "  parallel: %d\n", matrix_options.parallel );
-    printf( "  pwm_bits: %d\n", matrix_options.pwm_bits );
-    printf( "  pwm_lsb_nanoseconds: %d\n", matrix_options.pwm_lsb_nanoseconds );
+    // printf( "Matrix options:\n" );
+    // printf( "  rows: %d\n", matrix_options.rows );
+    // printf( "  chain_length: %d\n", matrix_options.chain_length );
+    // printf( "  parallel: %d\n", matrix_options.parallel );
+    // printf( "  pwm_bits: %d\n", matrix_options.pwm_bits );
+    // printf( "  pwm_lsb_nanoseconds: %d\n", matrix_options.pwm_lsb_nanoseconds );
 
-    printf( "Runtime options:\n" );
-    printf( "  daemon: %d\n", runtime_opt.daemon );
-    printf( "  do_gpio_init: %d\n", runtime_opt.do_gpio_init );
-    printf( "  drop_privileges: %d\n", runtime_opt.drop_privileges );
-    printf( "  gpio_slowdown: %d\n", runtime_opt.gpio_slowdown );
+    // printf( "Runtime options:\n" );
+    // printf( "  daemon: %d\n", runtime_opt.daemon );
+    // printf( "  do_gpio_init: %d\n", runtime_opt.do_gpio_init );
+    // printf( "  drop_privileges: %d\n", runtime_opt.drop_privileges );
+    // printf( "  gpio_slowdown: %d\n", runtime_opt.gpio_slowdown );
         
-    CanvasCreator canvasCreator(matrix_options, runtime_opt);
-    _canvas = canvasCreator.CreateCanvas();
-    FontLoader fontLoader("fonts/mspgothic_042623.bdf"); // Load Fonts
-    rgb_matrix::Font font;
-    fontLoader.LoadFont(font);
-    FontLoader bigNumberFontLoader("fonts/fgm_27_ee.bdf");
-    rgb_matrix::Font bigNumberFont;
-    bigNumberFontLoader.LoadFont(bigNumberFont);
-    if (!_big_number_font.LoadFont( BIG_NUMBER_FONT )) { 
-        fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT );
-        exit( 1 ); }
-    Color color( 255, 255, 0 );
-    Color bg_color( 0, 0, 0 );
-    _bigNumberDrawer = new NumberDrawer( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color);
-    _pipeDrawer      = new NumberDrawer( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color); 
+    // CanvasCreator canvasCreator(matrix_options, runtime_opt);
+    // _canvas = canvasCreator.CreateCanvas();
+    // FontLoader fontLoader("fonts/mspgothic_042623.bdf"); // Load Fonts
+    // rgb_matrix::Font font;
+    // fontLoader.LoadFont(font);
+    // FontLoader bigNumberFontLoader("fonts/fgm_27_ee.bdf");
+    // rgb_matrix::Font bigNumberFont;
+    // bigNumberFontLoader.LoadFont(bigNumberFont);
+    // if (!_big_number_font.LoadFont( BIG_NUMBER_FONT )) { 
+    //     fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT );
+    //     exit( 1 ); }
+    // Color color( 255, 255, 0 );
+    // Color bg_color( 0, 0, 0 );
+    // _bigNumberDrawer = new NumberDrawer( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color);
+    // _pipeDrawer      = new NumberDrawer( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color); 
     update(); }
 
 ScoreBoard::~ScoreBoard() {
-    delete _bigNumberDrawer;
-    delete _pipeDrawer;
-    delete _canvas; }
+    // delete _bigNumberDrawer;
+    // delete _pipeDrawer;
+    // delete _canvas; 
+}
 
 void ScoreBoard::update() {
     std::cout << "inside ScoreBoard::update(), calling _drawPlayerScore..." << std::endl;
@@ -72,24 +73,29 @@ void ScoreBoard::update() {
         return; }
     std::cout << "player1 points: " << _player1->getPoints() << std::endl;
     std::cout << "player2 points: " << _player2->getPoints() << std::endl;
-    _drawPlayerScore( _player1 );
-    _drawPlayerScore( _player2 ); }
+    // _drawPlayerScore( _player1 );
+    // _drawPlayerScore( _player2 ); 
+}
 
 void ScoreBoard::clearScreen() {
-    Color flood_color( 0, 0, 0 ); _canvas->Fill (flood_color.r, flood_color.g, flood_color.b ); }  // clear screen
+    std::cout << "clearing screen..." << std::endl;
+    // Color flood_color( 0, 0, 0 ); _canvas->Fill (flood_color.r, flood_color.g, flood_color.b ); 
+}  // clear screen
 
 void ScoreBoard::_drawPlayerScore(Player* player) {
     std::cout << "determining vertical offset..." << std::endl;
-    int vertical_offset = player->number() == 1 ? 0 : _big_number_font.height();
+    //int vertical_offset = player->number() == 1 ? 0 : _big_number_font.height();
+    int vertical_offset = 0;
     std::cout << "determining serve bar..." << std::endl;
     std::string serve_bar = _gameState->getServe() == PLAYER_2_SERVE ? " " : "I"; // or use p1sv and swap
     std::cout << "actually drawing serve bar..." << std::endl;
-    _pipeDrawer->DrawNumber(serve_bar, 1, _big_number_font.baseline());
+    // _pipeDrawer->DrawNumber(serve_bar, 1, _big_number_font.baseline());
     std::cout << "translating score..." << std::endl;
     std::string score = _translate(player->getPoints());
     std::cout << "drawing score with bigNumberDrawer objects..." << std::endl;
-    _bigNumberDrawer->DrawNumber(score.substr( 0, 1), 16, _big_number_font.baseline() + vertical_offset);
-    _bigNumberDrawer->DrawNumber(score.substr(1, 1), 38, _big_number_font.baseline() + vertical_offset); }
+    // _bigNumberDrawer->DrawNumber(score.substr( 0, 1), 16, _big_number_font.baseline() + vertical_offset);
+    // _bigNumberDrawer->DrawNumber(score.substr(1, 1), 38, _big_number_font.baseline() + vertical_offset); 
+}
 
 
 std::string ScoreBoard::_translate( int raw_score ) {
