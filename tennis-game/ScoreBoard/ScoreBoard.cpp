@@ -1,20 +1,13 @@
 #include "ScoreBoard.h"
 
-ScoreBoard::ScoreBoard(Player* player1, Player* player2, GameState* gameState ) 
-: _player1(player1), _player2(player2), _gameState(gameState) {
-    printf("Constructing ScoreBoard...\n");
-    // if (!rgb_matrix::ParseOptionsFromFlags(&argc, &argv, &matrix_options, &runtime_opt)) {
-    //     return 0;
-    // } else {
-    //     printf( "Matrix options parsed.\n" );
-    // }
-    Color pipe_color(255, 255, 0); // yellow
-    Color background_color(0, 0, 0);
-    Color big_number_color(0, 255, 0); // green
-    Color outline_color(0,0,0);
-
-    // seems like the only logical place to create the canvas
-    RGBMatrix::Options matrix_options;
+ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState ) 
+: _player1( player1 ), _player2( player2 ), _gameState( gameState ) {
+    printf( "Constructing ScoreBoard...\n" );
+    Color pipe_color( 255, 255, 0 ); // yellow
+    Color background_color( 0, 0, 0 );
+    Color big_number_color( 0, 255, 0 ); // green
+    Color outline_color( 0, 0, 0 );
+    RGBMatrix::Options matrix_options; // seems like the only logical place to create the canvas
     matrix_options.hardware_mapping = "regular";  // or e.g. "adafruit-hat"
     matrix_options.pixel_mapper_config = "Rotate:180;264-Mapper"; // or e.g. "U-mapper"
     matrix_options.rows = 64;
@@ -26,7 +19,6 @@ ScoreBoard::ScoreBoard(Player* player1, Player* player2, GameState* gameState )
     matrix_options.brightness = 35; // best for demo videos in largo
     matrix_options.pwm_bits = 11;
     matrix_options.multiplexing = 1;
-
     rgb_matrix::RuntimeOptions runtime_opt;
     runtime_opt.drop_privileges = 0;
     runtime_opt.gpio_slowdown = 2;
@@ -45,31 +37,12 @@ ScoreBoard::ScoreBoard(Player* player1, Player* player2, GameState* gameState )
     printf( "  do_gpio_init: %d\n", runtime_opt.do_gpio_init );
     printf( "  drop_privileges: %d\n", runtime_opt.drop_privileges );
     printf( "  gpio_slowdown: %d\n", runtime_opt.gpio_slowdown );
-    // printf( "  hardware_mapping: %s\n", runtime_opt.hardware_mapping );
-    // printf( "  led_rgb_sequence: %s\n", runtime_opt.led_rgb_sequence );
-    // printf( "  limit_refresh_rate_hz: %d\n", runtime_opt.limit_refresh_rate_hz );
-    // printf( "  show_refresh_rate: %d\n", runtime_opt.show_refresh_rate );
-    // printf( "  inverse_colors: %d\n", runtime_opt.inverse_colors );
-    // printf( "  led_rgb_sequence: %s\n", runtime_opt.led_rgb_sequence );
-    // printf( "  pwm_bits: %d\n", runtime_opt.pwm_bits );
-    // printf( "  pwm_dither_bits: %d\n", runtime_opt.pwm_dither_bits );
-    // printf( "  pwm_lsb_nanoseconds: %d\n", runtime_opt.pwm_lsb_nanoseconds );
-    // printf( "  pwm_slowdown_gpio: %d\n", runtime_opt.pwm_slowdown_gpio );
-    // printf( "  rgb_sequence: %s\n", runtime_opt.rgb_sequence );
-    // printf( "  row_address_type: %d\n", runtime_opt.row_address_type );
-    // printf( "  scan_mode: %d\n", runtime_opt.scan_mode );
-    // printf( "  show_refresh_rate: %d\n", runtime_opt.show_refresh_rate );
-    // printf( "  swap_green_blue: %d\n", runtime_opt.swap_green_blue );
-    // printf( "  multiplexing: %d\n", runtime_opt.multiplexing );
-    // printf( "  panel_type: %d\n", runtime_opt.panel_type );
-    
+        
     CanvasCreator canvasCreator(matrix_options, runtime_opt);
     _canvas = canvasCreator.CreateCanvas();
-
     FontLoader fontLoader("fonts/mspgothic_042623.bdf"); // Load Fonts
     rgb_matrix::Font font;
     fontLoader.LoadFont(font);
-
     FontLoader bigNumberFontLoader("fonts/fgm_27_ee.bdf");
     rgb_matrix::Font bigNumberFont;
     bigNumberFontLoader.LoadFont(bigNumberFont);
@@ -77,7 +50,7 @@ ScoreBoard::ScoreBoard(Player* player1, Player* player2, GameState* gameState )
         fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT );
         exit( 1 ); }
     Color color( 255, 255, 0 );
-    Color bg_color( 0, 0, 0);
+    Color bg_color( 0, 0, 0 );
     _bigNumberDrawer = new NumberDrawer( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color);
     _pipeDrawer      = new NumberDrawer( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color); 
     update(); }
@@ -99,7 +72,7 @@ void ScoreBoard::update() {
     _drawPlayerScore( _player2 ); }
 
 void ScoreBoard::clearScreen() {
-    Color flood_color(0, 0, 0); _canvas->Fill (flood_color.r, flood_color.g, flood_color.b ); }  // clear screen
+    Color flood_color( 0, 0, 0 ); _canvas->Fill (flood_color.r, flood_color.g, flood_color.b ); }  // clear screen
 
 void ScoreBoard::_drawPlayerScore(Player* player) {
     std::cout << "determining vertical offset..." << std::endl;
@@ -111,7 +84,7 @@ void ScoreBoard::_drawPlayerScore(Player* player) {
     std::cout << "translating score..." << std::endl;
     std::string score = _translate(player->getPoints());
     std::cout << "drawing score with bigNumberDrawer objects..." << std::endl;
-    _bigNumberDrawer->DrawNumber(score.substr(0, 1), 16, _big_number_font.baseline() + vertical_offset);
+    _bigNumberDrawer->DrawNumber(score.substr( 0, 1), 16, _big_number_font.baseline() + vertical_offset);
     _bigNumberDrawer->DrawNumber(score.substr(1, 1), 38, _big_number_font.baseline() + vertical_offset); }
 
 
@@ -131,7 +104,7 @@ void _showLittleNumbers( rgb_matrix::Canvas *canvas ) {
     #define SPACE_BEFORE_SMALL_NUMBER   7
     #define SPACE_BETWEEN_SMALL_NUMBERS 17
     #define START_ROW                   86
-    Color background_color(0, 0, 0);
+    Color background_color( 0, 0, 0 );
     int letter_spacing = 0;
     rgb_matrix::Font little_number_font;
     if (!little_number_font.LoadFont( LITTLE_NUMBER_FONT )) {
@@ -146,5 +119,4 @@ void _showLittleNumbers( rgb_matrix::Canvas *canvas ) {
     Color fourthRowColor( 255, 0, 0 );
     rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &background_color, "0", letter_spacing );
     rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + SPACE_BETWEEN_SMALL_NUMBERS, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &background_color, "0", letter_spacing );
-    rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + (( 2 * SPACE_BETWEEN_SMALL_NUMBERS )), y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &background_color, "0", letter_spacing );
-}
+    rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + (( 2 * SPACE_BETWEEN_SMALL_NUMBERS )), y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &background_color, "0", letter_spacing ); }
