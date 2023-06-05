@@ -2,6 +2,7 @@
 #include <csignal>
 #include <chrono>
 #include <thread>
+#include <iostream>
 
 GameObject::GameObject( Player* player1,
     Player* player2,
@@ -26,6 +27,7 @@ GameObject::GameObject( Player* player1,
 }
 
 GameObject::GameObject() {
+    std::cout << "Constructing GameObject..." << std::endl;
     _webLiquidCrystal = new WebLiquidCrystal();
     _gameTimer = new GameTimer();
     _player1 = new Player( PLAYER_1 );
@@ -42,7 +44,7 @@ GameObject::GameObject() {
 }
 
 GameObject::~GameObject() {};
-void GameObject::_signalHandler(int signal) { GameObject::gSignalStatus = signal; }
+void GameObject::_signalHandler( int signal ) { GameObject::gSignalStatus = signal; }
 volatile int GameObject::gSignalStatus = 0;
 
 void GameObject::loopGame() {
@@ -61,6 +63,8 @@ void GameObject::loopGame() {
 void GameObject::playerScore( int playerNumber ) { 
     std::cout << "GameObject::playerScore( " << playerNumber << " )" << std::endl;
     std::cout << "updating game state...  setting player button to " << playerNumber << " ..." << std::endl;
+    int current_player_button = _gameState->getPlayerButton();
+    std::cout << "current_player_button: " << current_player_button << std::endl;
     _gameState->setPlayerButton( playerNumber ); }
 
 PinInterface* GameObject::getPinInterface() { return _pinInterface; }

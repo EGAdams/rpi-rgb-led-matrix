@@ -1,7 +1,9 @@
 #include "GameState.h"
+#include <iostream>
 
 GameState::~GameState() {}
 GameState::GameState() {
+    std::cout << "Constructing GameState..." << std::endl;
     _pointFlash = 0;
     _serve = 0;
     _tieBreak = 0;

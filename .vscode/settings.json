@@ -81,5 +81,6 @@
         "Vblock",
         "Vliedel"
     ],
-    "liveServer.settings.port": 5501
+    "liveServer.settings.port": 5501,
+    "cmake.sourceDirectory": "/home/adamsl/zero_w_projects/temp/rpi-rgb-led-matrix"
 }

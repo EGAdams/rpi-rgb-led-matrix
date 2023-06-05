@@ -19,7 +19,7 @@ class GameState {
   int getTieLEDsOn();
   void setServeSwitch(int serveSwitch);
   int getServeSwitch();
-  void setPlayerButton(int playerButton);
+  void setPlayerButton( int playerButton );
   int getPlayerButton();
   void setUndo(int undo);
   int getUndo();
