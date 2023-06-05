@@ -16,13 +16,16 @@ ScoreBoard::ScoreBoard(Player* player1, Player* player2, GameState* gameState )
     // seems like the only logical place to create the canvas
     RGBMatrix::Options matrix_options;
     matrix_options.hardware_mapping = "regular";  // or e.g. "adafruit-hat"
-    matrix_options.rows = 32;
+    matrix_options.pixel_mapper_config = "Rotate:180;264-Mapper"; // or e.g. "U-mapper"
+    matrix_options.rows = 64;
+    matrix_options.cols = 64;
     matrix_options.chain_length = 1;
-    matrix_options.parallel = 1;
+    matrix_options.parallel = 2;
     matrix_options.show_refresh_rate = false;
-    matrix_options.disable_hardware_pulsing = false;
+    matrix_options.disable_hardware_pulsing = true; // --led-no-hardware-pulse
     matrix_options.brightness = 35; // best for demo videos in largo
     matrix_options.pwm_bits = 11;
+    matrix_options.multiplexing = 1;
 
     rgb_matrix::RuntimeOptions runtime_opt;
     runtime_opt.drop_privileges = 0;
