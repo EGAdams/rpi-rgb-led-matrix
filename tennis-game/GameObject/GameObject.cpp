@@ -1,4 +1,7 @@
 #include "GameObject.h"
+#include <csignal>
+#include <chrono>
+#include <thread>
 
 GameObject::GameObject( Player* player1,
     Player* player2,
@@ -39,18 +42,34 @@ GameObject::GameObject() {
 }
 
 GameObject::~GameObject() {};
+void GameObject::_signalHandler( int signal ) { _gSignalStatus = signal; }
 
 void GameObject::loopGame() {
+    volatile std::sig_atomic_t gSignalStatus;
+    std::signal( SIGINT, _signalHandler );
+    while ( gSignalStatus != SIGINT ) {
+    
+
+    std::cout << "reading reset from loopGame()..." << std::endl;
     _gameInputs->readReset();
     std::cout << "reading rotary from loopGame()..." << std::endl;
     int rotaryValue = _gameInputs->readRotary();
     std::cout << "rotaryValue: " << rotaryValue << ".  setting game mode to " << rotaryValue << "." << std::endl;
     _gameModes->setGameMode( rotaryValue );
+    std::cout << "delaying for " << GAME_LOOP_DELAY << " milliseconds..." << std::endl;
     GameTimer::gameDelay( GAME_LOOP_DELAY );
+    std::cout << "updating game state..." << std::endl;
     _subjectManager->gameStateUpdate( _gameState, _player1, _player2 );
+    std::cout << "end of loopGame()." << std::endl;
+    // if ctrl-c is pressed, exit the program cleanly
+
 }
 
-void GameObject::playerScore( int playerNumber ) { _gameState->setPlayerButton( playerNumber ); }    
+
+void GameObject::playerScore( int playerNumber ) { 
+    std::cout << "GameObject::playerScore( " << playerNumber << " )" << std::endl;
+    std::cout << "updating game state.. - setting player button to " << playerNumber << " ..." << std::endl;
+    _gameState->setPlayerButton( playerNumber ); }    
 
 PinInterface* GameObject::getPinInterface() { return _pinInterface; }
 
