@@ -96,10 +96,15 @@ void ScoreBoard::clearScreen() {
     Color flood_color(0, 0, 0); _canvas->Fill (flood_color.r, flood_color.g, flood_color.b ); }  // clear screen
 
 void ScoreBoard::_drawPlayerScore(Player* player) {
+    std::cout << "determining vertical offset..." << std::endl;
     int vertical_offset = player->number() == 1 ? 0 : _big_number_font.height();
+    std::cout << "determining serve bar..." << std::endl;
     std::string serve_bar = _gameState->getServe() == PLAYER_2_SERVE ? " " : "I"; // or use p1sv and swap
+    std::cout << "actually drawing serve bar..." << std::endl;
     _pipeDrawer->DrawNumber(serve_bar, 1, _big_number_font.baseline());
+    std::cout << "translating score..." << std::endl;
     std::string score = _translate(player->getPoints());
+    std::cout << "drawing score with bigNumberDrawer objects..." << std::endl;
     _bigNumberDrawer->DrawNumber(score.substr(0, 1), 16, _big_number_font.baseline() + vertical_offset);
     _bigNumberDrawer->DrawNumber(score.substr(1, 1), 38, _big_number_font.baseline() + vertical_offset); }
 
