@@ -89,6 +89,10 @@ ScoreBoard::~ScoreBoard() {
 
 void ScoreBoard::update() {
     std::cout << "inside ScoreBoard::update(), calling _drawPlayerScore..." << std::endl;
+    // check _player for null
+    if ( _player1 == NULL ) {
+        std::cout << "player1 is null" << std::endl; 
+        return; }
     std::cout << "player1 points: " << _player1->getPoints() << std::endl;
     std::cout << "player2 points: " << _player2->getPoints() << std::endl;
     _drawPlayerScore( _player1 );
