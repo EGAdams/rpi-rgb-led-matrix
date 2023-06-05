@@ -19,6 +19,7 @@
 
 #define PLAYER_1 1
 #define PLAYER_2 2
+#define GAME_LOOP_DELAY 250
 class GameObject {
  public:
   GameObject(Player* player1,

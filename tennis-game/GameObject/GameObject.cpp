@@ -46,11 +46,11 @@ void GameObject::loopGame() {
     int rotaryValue = _gameInputs->readRotary();
     std::cout << "rotaryValue: " << rotaryValue << ".  setting game mode to " << rotaryValue << "." << std::endl;
     _gameModes->setGameMode( rotaryValue );
-    GameTimer::gameDelay( 25 );
+    GameTimer::gameDelay( GAME_LOOP_DELAY );
     _subjectManager->gameStateUpdate( _gameState, _player1, _player2 );
 }
 
-
+void GameObject::playerScore( int playerNumber ) { _gameState->setPlayerButton( playerNumber ); }    
 
 PinInterface* GameObject::getPinInterface() { return _pinInterface; }
 

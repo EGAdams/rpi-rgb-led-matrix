@@ -62,7 +62,7 @@ void Mode1Functions::mode1ButtonFunction() {
         _undo.mode1Undo( _history );
         break;
     }
-    _gameState->setPlayerButton( 0 );
+    _gameState->setPlayerButton( 0 ); // reset player button here!
 }
 
 void Mode1Functions::mode1ServeFunction() {
