@@ -22,16 +22,16 @@
 #define GAME_LOOP_DELAY 250
 class GameObject {
  public:
-  GameObject(Player* player1,
-             Player* player2,
-             PinState* pinState,
-             PinInterface* pinInterface,
-             GameState* gameState,
-             GameTimer* gameTimer,
-             Inputs* gameInputs,
-             GameModes* gameModes,
-             ScoreBoard* scoreBoard,
-             WebLiquidCrystal* lcd);
+  GameObject( Player* player1,
+              Player* player2,
+              PinState* pinState,
+              PinInterface* pinInterface,
+              GameState* gameState,
+              GameTimer* gameTimer,
+              Inputs* gameInputs,
+              GameModes* gameModes,
+              ScoreBoard* scoreBoard,
+              WebLiquidCrystal* lcd );
              
   GameObject();
   ~GameObject();

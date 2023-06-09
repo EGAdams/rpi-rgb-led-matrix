@@ -13,6 +13,7 @@ Player::~Player() {}
 void Player::setPoints(int points) {
   _points = points;
 }
+
 int Player::getPoints() {
   return _points;
 }

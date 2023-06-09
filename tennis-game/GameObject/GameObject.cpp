@@ -66,7 +66,10 @@ void GameObject::playerScore( int playerNumber ) {
     std::cout << "updating game state...  setting player button to " << playerNumber << " ..." << std::endl;
     int current_player_button = _gameState->getPlayerButton();
     std::cout << "current_player_button: " << current_player_button << std::endl;
-    _gameState->setPlayerButton( playerNumber ); }
+    _gameState->setPlayerButton( playerNumber ); 
+    current_player_button = _gameState->getPlayerButton();
+    std::cout << "current_player_button: " << current_player_button << std::endl;
+}
 
 PinInterface* GameObject::getPinInterface() { return _pinInterface; }
 

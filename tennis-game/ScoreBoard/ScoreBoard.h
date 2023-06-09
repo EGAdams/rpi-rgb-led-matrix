@@ -28,7 +28,7 @@ private:
     NumberDrawer* _bigNumberDrawer;
     NumberDrawer* _pipeDrawer;
     rgb_matrix::Font _big_number_font;
-    void _showLittleNumbers();
+    // void _showLittleNumbers(); commented out for testing
     void _drawPlayerScore( Player* player );
     std::string _translate( int raw_score );
     RGBMatrix* _canvas;
