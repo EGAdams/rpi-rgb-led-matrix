@@ -60,7 +60,7 @@ void GameObject::loopGame() {
         GameTimer::gameDelay( GAME_LOOP_DELAY );
         std::cout << "updating game state..." << std::endl;
         _subjectManager->gameStateUpdate( _gameState, _player1, _player2 );
-        std::cout << "end of loopGame()." << std::endl; }
+        std::cout << "end of loopGame().\n\n\n\n" << std::endl; }
 
 void GameObject::playerScore( int playerNumber ) { 
     std::cout << "GameObject::playerScore( " << playerNumber << " )" << std::endl;
