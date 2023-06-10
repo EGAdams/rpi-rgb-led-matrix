@@ -70,7 +70,9 @@ void ScoreBoard::update() {
     _drawPlayerScore( _player2 );
 }
 
-void ScoreBoard::clearScreen() { std::cout << "clearing screen..." << std::endl; }  // clear screen
+void ScoreBoard::clearScreen() { 
+    Color flood_color( 0, 0, 0 ); _canvas->Fill (flood_color.r, flood_color.g, flood_color.b ); // clear screen
+    std::cout << "screen cleared." << std::endl; }
 
 void ScoreBoard::_drawPlayerScore(Player* player) {
     std::cout << "determining vertical offset..." << std::endl;
