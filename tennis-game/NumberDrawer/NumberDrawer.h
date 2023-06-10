@@ -10,9 +10,9 @@ class NumberDrawer {
 public:
     enum Size { BIG, SMALL };
 
-    NumberDrawer(RGBMatrix* canvas, const rgb_matrix::Font* font, Size size, const Color& color, const Color& bg_color);
+    NumberDrawer( RGBMatrix* canvas, const rgb_matrix::Font* font, Size size, const Color& color, const Color& bg_color );
 
-    void DrawNumber(const std::string& number, int x, int y);
+    void DrawNumber( const std::string& number, int x, int y );
 
 private:
     RGBMatrix* _canvas;
