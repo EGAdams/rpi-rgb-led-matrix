@@ -77,8 +77,8 @@ void ScoreBoard::clearScreen() {
 void ScoreBoard::_drawPlayerScore(Player* player) {
     std::cout << "determining vertical offset..." << std::endl;
     int vertical_offset = player->number() == 1 ? 0 : _big_number_font.height();
+    std::string serve_bar = _gameState->getServe() == player->number() ? "I" : " "; // or use p1sv and swap
     std::cout << "determining serve bar..." << std::endl;
-    std::string serve_bar = _gameState->getServe() == PLAYER_2_SERVE ? " " : "I"; // or use p1sv and swap
     std::cout << "actually drawing serve bar.  it is: " << serve_bar << std::endl;
     _pipeDrawer->DrawNumber(serve_bar, 1, _big_number_font.baseline());
     std::cout << "translating score..." << std::endl;
