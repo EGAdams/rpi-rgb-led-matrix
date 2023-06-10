@@ -81,7 +81,8 @@ void ScoreBoard::_drawPlayerScore(Player* player) {
     std::cout << "player number: " << player->number() << std::endl;
     std::cout << "_gameState->getServe(): " << _gameState->getServe() << std::endl;
     std::string serve_bar = _gameState->getServe() == player->number() ? "I" : " "; // or use p1sv and swap
-    std::cout << "player: " << player->number() << "  actually drawing serve bar.  it is: " << serve_bar << std::endl;
+    std::cout << "*** Drawing server bar for Player " << ( player->number() == 0 ? "1" : "2" ) << " ***" << std::endl;
+    std::cout << "Serve bar is: " << serve_bar << std::endl;
     _pipeDrawer->DrawNumber(serve_bar, 1, _big_number_font.baseline());
     std::cout << "translating score..." << std::endl;
     std::string score = _translate(player->getPoints());
