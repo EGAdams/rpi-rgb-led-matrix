@@ -22,15 +22,15 @@
 #define GAME_LOOP_DELAY 250
 class GameObject {
  public:
-  GameObject( Player* player1,
-              Player* player2,
-              PinState* pinState,
+  GameObject( Player*       player1,
+              Player*       player2,
+              PinState*     pinState,
               PinInterface* pinInterface,
-              GameState* gameState,
-              GameTimer* gameTimer,
-              Inputs* gameInputs,
-              GameModes* gameModes,
-              ScoreBoard* scoreBoard,
+              GameState*    gameState,
+              GameTimer*    gameTimer,
+              Inputs*       gameInputs,
+              GameModes*    gameModes,
+              ScoreBoard*   scoreBoard,
               WebLiquidCrystal* lcd );
              
   GameObject();
@@ -41,20 +41,21 @@ class GameObject {
   void playerScore( int playerNumber );
   static void _signalHandler( int signal );
   static volatile int gSignalStatus;
+  ScoreBoard* getScoreBoard();
   
  private:
-  Player* _player1;
-  Player* _player2;
-  PinState* _pinState;
-  PinInterface* _pinInterface;
-  GameState* _gameState;
-  GameTimer* _gameTimer;
-  Inputs* _gameInputs;
-  GameModes* _gameModes;
-  ScoreBoard* _scoreBoard;
+  Player*           _player1;
+  Player*           _player2;
+  PinState*         _pinState;
+  PinInterface*     _pinInterface;
+  GameState*        _gameState;
+  GameTimer*        _gameTimer;
+  Inputs*           _gameInputs;
+  GameModes*        _gameModes;
+  ScoreBoard*       _scoreBoard;
   WebLiquidCrystal* _webLiquidCrystal;
-  SubjectManager* _subjectManager;
-  Logger* _logger;
-  History* _history;
+  SubjectManager*   _subjectManager;
+  Logger*           _logger;
+  History*          _history;
   std::map<std::string, int> _pin_map; };
 #endif

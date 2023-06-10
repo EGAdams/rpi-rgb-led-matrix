@@ -14,6 +14,7 @@ class PointLeds {
   ~PointLeds();
   void updatePoints();
   void updateTBPoints();
+  void setScoreBoard( ScoreBoard* scoreBoard );
 
  private:
   Player* _player1;

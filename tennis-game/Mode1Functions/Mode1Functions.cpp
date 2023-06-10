@@ -38,12 +38,12 @@ void Mode1Functions::mode1ButtonFunction() {
         _mode1Score.mode1P1Score();
         break;
 
-    case 2: // UNDO button pressed
+    case 3: // UNDO button pressed
         GameTimer::gameDelay( _gameState->getButtonDelay() );
         _undo.mode1Undo( _history );  // Mode1Undo();
         break;
 
-    case 3: // Player 2 Score
+    case 2: // Player 2 Score
         _undo.setMode1Undo( _history );
         if ( _gameState->getPointFlash() == 1 ) {
             _gameState->setPointFlash( 0 );

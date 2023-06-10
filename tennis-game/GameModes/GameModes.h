@@ -39,6 +39,7 @@ class GameModes {
   void mode4();
   void noCode();
   void setGameMode(int rotaryPosition);
+  void setScoreBoards( ScoreBoard* scoreBoard );
 
  private:
   Player* _player1;

@@ -1,11 +1,12 @@
 #include "GameModes.h"
 
 GameModes::~GameModes() {}
-GameModes::GameModes( Player* player1,
-    Player* player2,
+GameModes::GameModes( 
+    Player*       player1,
+    Player*       player2,
     PinInterface* pinInterface,
-    GameState* gameState,
-    History* history )
+    GameState*    gameState,
+    History*      history )
     : _player1( player1 ),
     _player2( player2 ),
     _pinInterface( pinInterface ),
@@ -22,6 +23,11 @@ GameModes::GameModes( Player* player1,
     _mode2Functions( player1, player2, pinInterface, gameState ) {
     _logger = new Logger( "test.txt" );
 }
+
+void GameModes::setScoreBoards( ScoreBoard* scoreBoard ) {
+    _pointLeds.setScoreBoard( scoreBoard );
+    _gameLeds.setScoreBoard(  scoreBoard );
+    _setLeds.setScoreBoard(   scoreBoard ); }
 
 void GameModes::gameStart() {
     std::cout << "inside gameStart() checking if gameStarted = zero or not..." << std::endl;

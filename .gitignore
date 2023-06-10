@@ -3,3 +3,11 @@
 *~
 *.so
 tennis-game/tennis-game
+tennis-game/GameModes/pin_data*
+tennis-game/Inputs/pin_data*
+tennis-game/SetLeds/pin_data*
+tennis-game/SetLeds/pin_data*
+tennis-game/ScoreBoard/pin_data*
+tennis-game/PointLeds/pin_data*
+tennis-game/Mode1Functions/pin_data*
+

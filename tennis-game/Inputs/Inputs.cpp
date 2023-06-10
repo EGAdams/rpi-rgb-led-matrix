@@ -22,9 +22,16 @@ void Inputs::readReset() {
         _reset.resetScoreboard(); }}
 
 void Inputs::readUndoButton() {
+    return; // DISABLED
     if ( _pinInterface->pinDigitalRead( UNDO ) == LOW ) {
-        if ( SIMULATION == 0 ) { while ( _pinInterface->pinDigitalRead( UNDO ) == LOW ) { GameTimer::gameDelay( 25 ); }} // Wait for the button to be released
-        _gameState->setUndo( 1 ); }}
+        if ( SIMULATION == 0 ) { 
+            while ( _pinInterface->pinDigitalRead( UNDO ) == LOW ) { 
+                GameTimer::gameDelay( 25 ); 
+            }
+        } // Wait for the button to be released
+        _gameState->setUndo( 1 ); 
+    }
+}
 
 int Inputs::readRotary() {  // TODO: make this one read.
     _gameState->setRotaryPosition( 0 );  // int rotaryPosition = 0;
@@ -45,6 +52,7 @@ int Inputs::readRotary() {  // TODO: make this one read.
     return _gameState->getRotaryPosition(); }
 
 void Inputs::readPlayerButtons() {
+    return; // DISABLED
     int anlgPlyrBtnVal = _pinInterface->pinAnalogRead( PLAYER_BUTTONS );
     #if defined _WIN32 || defined _WIN64
         std::cout << "\n\n\n\n\nplayer button read: " << anlgPlyrBtnVal << std::endl;

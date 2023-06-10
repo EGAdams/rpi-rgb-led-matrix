@@ -4,8 +4,12 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
 : _player1( player1 ), _player2( player2 ), _gameState( gameState ) {
     printf( "Constructing ScoreBoard...\n" );
 
-    std::cout << "player1 points: " << _player1->getPoints() << std::endl;
-    std::cout << "player2 points: " << _player2->getPoints() << std::endl;
+    // print the machine addresses of the _player1 and _player2 objects
+    std::cout << "player1 address: " << _player1 << std::endl;
+    std::cout << "player2 address: " << _player2 << std::endl;
+
+    std::cout << "player1 points: "  << _player1->getPoints() << std::endl;
+    std::cout << "player2 points: "  << _player2->getPoints() << std::endl;
 
     update(); }
 

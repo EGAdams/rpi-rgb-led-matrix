@@ -7,6 +7,8 @@ SetLeds::SetLeds(Player* player1, Player* player2, PinInterface* pinInterface)
 
 SetLeds::~SetLeds() {}
 
+void SetLeds::setScoreBoard( ScoreBoard* scoreBoard ) { _scoreBoard = scoreBoard; }
+
 void SetLeds::updateSets() {
   switch (_player1->getSets() ) {
     case 0:

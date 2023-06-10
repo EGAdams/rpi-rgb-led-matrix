@@ -39,6 +39,7 @@ GameObject::GameObject() {
     _gameInputs = new Inputs( _player1, _player2, _pinInterface, _gameState );
     _gameModes =  new GameModes( _player1, _player2, _pinInterface, _gameState, _history );
     _scoreBoard = new ScoreBoard( _player1, _player2, _gameState );
+    _gameModes->setScoreBoards( _scoreBoard );
     _subjectManager = new SubjectManager();
     _logger = new Logger( "GameObject" );
     std::cout << "GameObject constructed." << std::endl;
@@ -72,5 +73,7 @@ void GameObject::playerScore( int playerNumber ) {
 }
 
 PinInterface* GameObject::getPinInterface() { return _pinInterface; }
+
+ScoreBoard* GameObject::getScoreBoard() { return _scoreBoard; }
 
 void GameObject::start() {}
