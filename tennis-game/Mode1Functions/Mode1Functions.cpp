@@ -23,6 +23,7 @@ void Mode1Functions::setScoreBoard( ScoreBoard* scoreBoard ) {
 }
 
 void Mode1Functions::mode1ButtonFunction() {
+    std::cout << "inside mode1ButtonFunction().  player button: " << _gameState->getPlayerButton() << std::endl;
     switch ( _gameState->getPlayerButton() ) {
     case 0:
         break;

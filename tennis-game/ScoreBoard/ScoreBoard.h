@@ -11,8 +11,8 @@
 #include <stdio.h>
 #include <iostream>
 
-#define PLAYER_1_SERVE 1
-#define PLAYER_2_SERVE 2
+#define PLAYER_1_SERVE 0
+#define PLAYER_2_SERVE 1
 #define BIG_NUMBER_FONT "fonts/fgm_27_ee.bdf"
 
 class ScoreBoard {

@@ -17,8 +17,8 @@
 #include "../../include/led-matrix.h"
 #include "../../include/graphics.h"
 
-#define PLAYER_1 1
-#define PLAYER_2 2
+#define PLAYER_1 0
+#define PLAYER_2 1
 #define GAME_LOOP_DELAY 250
 class GameObject {
  public:

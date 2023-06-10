@@ -17,11 +17,11 @@ void ServeLeds::updateServeLED() {
 void ServeLeds::serveSwitch() {
   if (_gameState->getServeSwitch() /* serveSwitch */ >= 2) {
     if (_gameState->getServe() /* serve */ == 0) {
-      _gameState->setServe(1);  // serve = 1;
+      _gameState->setServe( 1 );  // serve = 1;
     } else {
-      _gameState->setServe(0);  // serve = 0;
+      _gameState->setServe( 0 );  // serve = 0;
     }
-    _gameState->setServeSwitch(0);  // serveSwitch = 0;
+    _gameState->setServeSwitch ( 0 );  // serveSwitch = 0;
   }
   updateServeLED();
 }

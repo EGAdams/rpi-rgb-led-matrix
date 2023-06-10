@@ -11,6 +11,7 @@ SubjectManager::~SubjectManager() {}
 
 #if defined _WIN32 || defined _WIN64
 void SubjectManager::gameStateUpdate( GameState* gameState, Player* player1, Player* player2 ) {
+    return;  // short circuit this function for Pi development
     std::string update_path = GAME_STATE_UPDATE_PATH;
     std::string stringifiedGameState( "{" );
     stringifiedGameState += "\"toggle\": \"" + std::to_string( gameState->getToggle() ) + "\",\n";
