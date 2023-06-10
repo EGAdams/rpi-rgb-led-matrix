@@ -34,6 +34,7 @@ class Mode1Score {
   void mode1P2Games();
   void mode1TBP2Games();
   void mode1SetTBP2Games();
+  void setScoreBoard( ScoreBoard* scoreBoard );
 
  private:
   Player* _player1;

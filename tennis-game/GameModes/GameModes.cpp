@@ -27,7 +27,8 @@ GameModes::GameModes(
 void GameModes::setScoreBoards( ScoreBoard* scoreBoard ) {
     _pointLeds.setScoreBoard( scoreBoard );
     _gameLeds.setScoreBoard(  scoreBoard );
-    _setLeds.setScoreBoard(   scoreBoard ); }
+    _setLeds.setScoreBoard(   scoreBoard ); 
+    _mode1Functions.setScoreBoard( scoreBoard );}
 
 void GameModes::gameStart() {
     std::cout << "inside gameStart() checking if gameStarted = zero or not..." << std::endl;

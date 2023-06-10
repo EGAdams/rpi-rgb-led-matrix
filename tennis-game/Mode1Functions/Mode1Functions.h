@@ -14,25 +14,27 @@ class History;
 
 class Mode1Functions {
  public:
-  Mode1Functions(Player* player1,
-                 Player* player2,
-                 PinInterface* pinInterface,
-                 GameState* gameState,
-                 History* history);
-  ~Mode1Functions();
-  void mode1ButtonFunction();
-  void mode1ServeFunction();
-  void pointFlash();
+    Mode1Functions(Player* player1,
+                    Player* player2,
+                    PinInterface* pinInterface,
+                    GameState* gameState,
+                    History* history);
+    ~Mode1Functions();
+    void mode1ButtonFunction();
+    void mode1ServeFunction();
+    void pointFlash();
+    void setScoreBoard( ScoreBoard* scoreBoard );
 
  private:
-  Player* _player1;
-  Player* _player2;
-  GameState* _gameState;
-  History* _history;
-  Undo _undo;
-  PointLeds _pointLeds;
-  Mode1Score _mode1Score;
-  ServeLeds _serveLeds;
+    Player*    _player1;
+    Player*    _player2;
+    GameState* _gameState;
+    History*   _history;
+    Undo       _undo;
+    PointLeds  _pointLeds;
+    Mode1Score _mode1Score;
+    ServeLeds  _serveLeds;
+    ScoreBoard* _scoreBoard;
 };
 
 #endif

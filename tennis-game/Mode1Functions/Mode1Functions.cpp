@@ -16,6 +16,12 @@ Mode1Functions::Mode1Functions( Player* player1,
 
 Mode1Functions::~Mode1Functions() {}
 
+void Mode1Functions::setScoreBoard( ScoreBoard* scoreBoard ) {
+    _scoreBoard = scoreBoard;
+    _pointLeds.setScoreBoard( scoreBoard );
+    _mode1Score.setScoreBoard( scoreBoard );
+}
+
 void Mode1Functions::mode1ButtonFunction() {
     switch ( _gameState->getPlayerButton() ) {
     case 0:

@@ -17,6 +17,10 @@ Mode1Score::Mode1Score( Player* player1,
     _undo( player1, player2, pinInterface, gameState ) {}
 Mode1Score::~Mode1Score() {}
 
+void Mode1Score::setScoreBoard( ScoreBoard* scoreBoard ) {
+    _pointLeds.setScoreBoard( scoreBoard );
+}
+
 void Mode1Score::mode1P1Score() {
     if ( _player1->getPoints() >= 3 ) {
         if ( _player1->getPoints() == _player2->getPoints() ) {
