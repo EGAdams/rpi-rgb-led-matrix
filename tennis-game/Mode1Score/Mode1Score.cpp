@@ -42,7 +42,7 @@ void Mode1Score::mode1P1Score() {
         }
     }
     std::cout << "player 1 points: " << _player1->getPoints() << std::endl;
-    
+
     _pointLeds.updatePoints();
 }
 
@@ -75,6 +75,7 @@ void Mode1Score::mode1P2Score() {
 /////////////////////////////////////// MODE 1 GAMES //////////////////////////////////////////////
 void Mode1Score::mode1P1Games() {
     _gameLeds.updateGames();
+    std::cout << "inside mode1P1Games().  setting serve switch..." << std::endl;
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
     
     if ( _player1->getGames() >= 6 ) {

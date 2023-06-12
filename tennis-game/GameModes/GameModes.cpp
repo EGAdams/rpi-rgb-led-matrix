@@ -176,11 +176,12 @@ void GameModes::setGameMode( int rotaryPosition ) {
         _player2->setPoints( 100 );
         _pointLeds.updatePoints();
         if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
-
+        std::cout << "setting serve to 1..." << std::endl;
         _gameState->setServe( 1 );
         _serveLeds.updateServeLED();
         if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
 
+        std::cout << "setting serve to 0..." << std::endl;
         _gameState->setServe( 0 );
         _serveLeds.updateServeLED();
         if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
