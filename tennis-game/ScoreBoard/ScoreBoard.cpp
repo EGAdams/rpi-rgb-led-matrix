@@ -75,18 +75,18 @@ void ScoreBoard::clearScreen() {
     std::cout << "screen cleared." << std::endl; }
 
 void ScoreBoard::_drawPlayerScore(Player* player) {
-    //std::cout << "determining vertical offset..." << std::endl;
+    std::cout << "determining vertical offset..." << std::endl;
     int vertical_offset = player->number() == 1 ? 0 : _big_number_font.height();
-    //std::cout << "determining serve bar..." << std::endl;
-    //std::cout << "player number: " << player->number() << std::endl;
+    std::cout << "determining serve bar..." << std::endl;
+    std::cout << "player number: " << player->number() << std::endl;
     std::cout << "_gameState->getServe(): " << _gameState->getServe() << std::endl;
     std::string serve_bar = _gameState->getServe() == player->number() ? "I" : " "; // or use p1sv and swap
     std::cout << "*** Drawing server bar for Player " << ( player->number() == 0 ? "1" : "2" ) << " ***" << std::endl;
     std::cout << "Serve bar is: " << serve_bar << std::endl;
     _pipeDrawer->DrawNumber(serve_bar, 1, _big_number_font.baseline());
-    // std::cout << "translating score..." << std::endl;
+    std::cout << "translating score..." << std::endl;
     std::string score = _translate(player->getPoints());
-    // std::cout << "drawing score with bigNumberDrawer objects..." << std::endl;
+    std::cout << "drawing score with bigNumberDrawer objects..." << std::endl;
     _bigNumberDrawer->DrawNumber(score.substr( 0, 1), 16, _big_number_font.baseline() + vertical_offset);
     _bigNumberDrawer->DrawNumber(score.substr(1, 1), 38, _big_number_font.baseline() + vertical_offset); 
 }
