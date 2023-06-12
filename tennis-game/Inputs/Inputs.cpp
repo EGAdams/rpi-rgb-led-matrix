@@ -54,9 +54,7 @@ int Inputs::readRotary() {  // TODO: make this one read.
 void Inputs::readPlayerButtons() {
     return; // DISABLED
     int anlgPlyrBtnVal = _pinInterface->pinAnalogRead( PLAYER_BUTTONS );
-    #if defined _WIN32 || defined _WIN64
-        std::cout << "\n\n\n\n\nplayer button read: " << anlgPlyrBtnVal << std::endl;
-    #endif
+    std::cout << "\n\n\n\n\nplayer button read: " << anlgPlyrBtnVal << std::endl;
     if ( anlgPlyrBtnVal <= 1000 ) {  // if one of the player buttons is pressed...
         GameTimer::gameDelay( 20 );
         if ( anlgPlyrBtnVal <= 50 ) {                                _gameState->setPlayerButton( 1 ); }

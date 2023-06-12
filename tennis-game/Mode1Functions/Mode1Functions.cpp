@@ -40,7 +40,14 @@ void Mode1Functions::mode1ButtonFunction() {
             _pointLeds.updatePoints();
         }
         GameTimer::gameDelay( _gameState->getButtonDelay() );
-        _player1->setPoints( _player1->getPoints() + 1 );
+        // if serving, increment score.  if not serving, set serve to 1 and don't increment score.
+        if ( _gameState->getServe() == 0 ) {
+            _player1->setPoints( _player1->getPoints() + 1 );
+        } else {
+            _gameState->setServe( 0 );
+        }
+
+        //_player1->setPoints( _player1->getPoints() + 1 );
         _undo.memory();
         _mode1Score.mode1P1Score();
         break;
@@ -59,7 +66,13 @@ void Mode1Functions::mode1ButtonFunction() {
             _pointLeds.updatePoints();
         }
         GameTimer::gameDelay( _gameState->getButtonDelay() );
-        _player2->setPoints( _player2->getPoints() + 1 );
+        // if serving, increment score.  if not serving, set serve to 1 and don't increment score.
+        if ( _gameState->getServe() == 1 ) {
+            _player2->setPoints( _player2->getPoints() + 1 );
+        } else {
+            _gameState->setServe( 1 );
+        }
+        //_player2->setPoints( _player2->getPoints() + 1 );
         _undo.memory();
         _mode1Score.mode1P2Score();
         break;

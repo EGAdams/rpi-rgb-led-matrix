@@ -41,6 +41,8 @@ void Mode1Score::mode1P1Score() {
             _gameState->setToggle( 0 );
         }
     }
+    std::cout << "player 1 points: " << _player1->getPoints() << std::endl;
+    
     _pointLeds.updatePoints();
 }
 
