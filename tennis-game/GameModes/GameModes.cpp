@@ -25,9 +25,9 @@ GameModes::GameModes(
 }
 
 void GameModes::setScoreBoards( ScoreBoard* scoreBoard ) {
-    _pointLeds.setScoreBoard( scoreBoard );
-    _gameLeds.setScoreBoard(  scoreBoard );
-    _setLeds.setScoreBoard(   scoreBoard ); 
+    _pointLeds.setScoreBoard(      scoreBoard );
+    _gameLeds.setScoreBoard(       scoreBoard );
+    _setLeds.setScoreBoard(        scoreBoard ); 
     _mode1Functions.setScoreBoard( scoreBoard );}
 
 void GameModes::gameStart() {
@@ -101,10 +101,10 @@ void GameModes::testStart() { if ( _gameState->getStarted() == 0 ) {  /* if not 
 
 void GameModes::noCode() {
     _player1->setPoints( _player1->getPoints() + 1 );  // p1Points++;
-    _pointLeds.updatePoints();                       // UpdatePoints();
+    _pointLeds.updatePoints();                        // UpdatePoints();
     GameTimer::gameDelay( 1000 );
-    _player1->setPoints( _player1->getPoints() - 1 );  // p1Points--;
-    _pointLeds.updatePoints();                       // UpdatePoints();
+    _player1->setPoints( _player1->getPoints() - 1 ); // p1Points--;
+    _pointLeds.updatePoints();                        // UpdatePoints();
     GameTimer::gameDelay( 1000 ); }
 
 void GameModes::setGameMode( int rotaryPosition ) {
