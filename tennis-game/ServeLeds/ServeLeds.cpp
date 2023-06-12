@@ -6,14 +6,14 @@ ServeLeds::~ServeLeds() {}
 
 void ServeLeds::updateServeLED() {
   if (_gameState->getServe() /* serve */ == 0) {
-    if( _gameState->getCurrentAction().find("2 scored") != std::string::npos ) { // ERROR trap.
+    if( _gameState->getCurrentAction().find( "2 scored" ) != std::string::npos ) { // ERROR trap.
       std::cout << "*** ERROR: Player 2 scored yet we are turning player 1 server bar on.  exiting program... ***" << std::endl;
       exit( 1 ); }  
 
     _pinInterface->pinDigitalWrite(P1_SERVE, HIGH);
     _pinInterface->pinDigitalWrite(P2_SERVE, LOW);
   } else {
-    if( _gameState->getCurrentAction().find("1 scored") != std::string::npos ) { // ERROR trap.
+    if( _gameState->getCurrentAction().find( "1 scored" ) != std::string::npos ) { // ERROR trap.
       std::cout << "*** ERROR: Player 1 to scored yet we are turning player 2 serve bar on.  exiting program... ***" << std::endl;
       exit( 1 ); } 
 
@@ -35,6 +35,6 @@ void ServeLeds::serveSwitch() {
     std::cout << "serveSwitch() setting serveSwitch to 0" << std::endl;
     _gameState->setServeSwitch( 0 );  // serveSwitch = 0;
   }
-  std::cout << "updateServeLED() called from serveSwitch()" << std::endl;
+  std::cout << "calling updateServeLED() from serveSwitch()... " << std::endl;
   updateServeLED();
 }

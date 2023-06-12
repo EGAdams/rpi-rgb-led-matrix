@@ -41,10 +41,12 @@ void Mode1Functions::mode1ButtonFunction() {
         }
         GameTimer::gameDelay( _gameState->getButtonDelay() );
         // if serving, increment score.  if not serving, set serve to 1 and don't increment score.
-        if ( _gameState->getServe() == 0 ) {
+        if ( _gameState->getServe() == PLAYER_ONE_SERVE ) {
+            std::cout << "player 1 scored.  Incrementing player 1 score..." << std::endl;
             _player1->setPoints( _player1->getPoints() + 1 );
         } else {
-            _gameState->setServe( 0 );
+            std::cout << "player 1 scored.  Setting server bar for player 1..." << std::endl;
+            _gameState->setServe( PLAYER_ONE_SERVE );
         }
 
         //_player1->setPoints( _player1->getPoints() + 1 );
@@ -67,10 +69,12 @@ void Mode1Functions::mode1ButtonFunction() {
         }
         GameTimer::gameDelay( _gameState->getButtonDelay() );
         // if serving, increment score.  if not serving, set serve to 1 and don't increment score.
-        if ( _gameState->getServe() == 1 ) {
+        if ( _gameState->getServe() == PLAYER_TWO_SERVE ) {
+            std::cout << "player 2 scored.  Incrementing player 2 score..." << std::endl;
             _player2->setPoints( _player2->getPoints() + 1 );
         } else {
-            _gameState->setServe( 1 );
+            std::cout << "player 2 scored.  Setting server bar for player 2..." << std::endl;
+            _gameState->setServe( PLAYER_TWO_SERVE );
         }
         //_player2->setPoints( _player2->getPoints() + 1 );
         _undo.memory();
