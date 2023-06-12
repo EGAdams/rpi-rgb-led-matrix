@@ -77,8 +77,11 @@ void Mode1Functions::mode1ButtonFunction() {
             _gameState->setServe( PLAYER_TWO_SERVE );
         }
         //_player2->setPoints( _player2->getPoints() + 1 );
+        std::cout << "calling _undo.memory() from mode1ButtonFunction()... " << std::endl;
         _undo.memory();
+        std::cout << "calling _mode1Score.mode1P2Score() from mode1ButtonFunction()... " << std::endl;
         _mode1Score.mode1P2Score();
+        std::cout << "done calling _mode1Score.mode1P2Score() from mode1ButtonFunction()... " << std::endl;
         break;
 
     case 4:
