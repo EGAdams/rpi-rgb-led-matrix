@@ -84,7 +84,7 @@ void ScoreBoard::_drawPlayerScore(Player* player) {
     std::cout << "*** Drawing server bar for Player " << ( player->number() == 0 ? "1" : "2" ) << " ***" << std::endl;
     std::cout << "Serve bar is: " << serve_bar << std::endl;
     _pipeDrawer->DrawNumber(serve_bar, 1, _big_number_font.baseline());
-    std::cout << "translating score..." << std::endl;
+    std::cout << "translating score " << player->getPoints() << "..." << std::endl;
     std::string score = _translate(player->getPoints());
     std::cout << "drawing score: " << score << " with bigNumberDrawer objects..." << std::endl;
     _bigNumberDrawer->DrawNumber(score.substr( 0, 1), 16, _big_number_font.baseline() + vertical_offset);
