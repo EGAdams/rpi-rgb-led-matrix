@@ -34,7 +34,8 @@ void ServeLeds::serveSwitch() {
     }
     std::cout << "serveSwitch() setting serveSwitch to 0" << std::endl;
     _gameState->setServeSwitch( 0 );  // serveSwitch = 0;
+
+    std::cout << "calling updateServeLED() from serveSwitch()... " << std::endl;
+    updateServeLED();
   }
-  std::cout << "calling updateServeLED() from serveSwitch()... " << std::endl;
-  updateServeLED();
 }
