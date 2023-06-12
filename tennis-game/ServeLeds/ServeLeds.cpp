@@ -24,6 +24,7 @@ void ServeLeds::updateServeLED() {
 }
 
 void ServeLeds::serveSwitch() {
+  std::cout << "inside serveSwitch()..." << std::endl;
   if (_gameState->getServeSwitch() /* serveSwitch */ >= 2) {
     if (_gameState->getServe() /* serve */ == 0) {
       std::cout << "serveSwitch() setting serve to 1" << std::endl;
