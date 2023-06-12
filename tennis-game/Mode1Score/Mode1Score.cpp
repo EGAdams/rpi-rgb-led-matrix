@@ -108,6 +108,7 @@ void Mode1Score::mode1P1Games() {
                 GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
                 _player1->setPoints( 0 );
                 _player2->setPoints( 0 );
+                _gameState->setServeSwitch( 0 );
             }
         }
     } else {
@@ -116,6 +117,7 @@ void Mode1Score::mode1P1Games() {
         GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
         _player1->setPoints( 0 );
         _player2->setPoints( 0 );
+        _gameState->setServeSwitch( 0 );
     }
 }
 
@@ -145,6 +147,7 @@ void Mode1Score::mode1P2Games() {
                     GameTimer::gameDelay( _gameState->getWinDelay());
                     _player1->setPoints( 0 );
                     _player2->setPoints( 0 );
+                    _gameState->setServeSwitch( 0 );
                 }
                 _player1->setGames( 0 );
                 _player2->setGames( 0 );
@@ -155,6 +158,7 @@ void Mode1Score::mode1P2Games() {
                 GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
                 _player1->setPoints( 0 );
                 _player2->setPoints( 0 );
+                _gameState->setServeSwitch( 0 );
             }
         }
     }
