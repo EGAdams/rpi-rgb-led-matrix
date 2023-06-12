@@ -44,8 +44,11 @@ void Undo::setMode1Undo( History* history ) {
     gameState.setP2SetsMem( _gameState->getP2SetsMem() );
     gameState.setPlayer1Matches( _player1->getMatches() );
     gameState.setPlayer2Matches( _player2->getMatches() );
+    std::cout << "setting serve to " << _gameState->getServe() << std::endl;
     gameState.setServe( _gameState->getServe() );
+    std::cout << "setting serve switch to " << _gameState->getServeSwitch() << std::endl;
     gameState.setServeSwitch( _gameState->getServeSwitch() );
+    std::cout << "done setting serve and serve switch." << std::endl;
     gameState.setUndo( _gameState->getUndo() );
     gameState.setStarted( _gameState->getStarted() );
     gameState.setPointFlash( _gameState->getPointFlash() );

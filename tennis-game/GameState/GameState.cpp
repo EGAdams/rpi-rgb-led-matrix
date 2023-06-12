@@ -83,11 +83,11 @@ int GameState::getPointFlash() {
     return _pointFlash;
 }
 void GameState::setServe( int serve ) {
-    std::cout << "setting serve: " << serve << std::endl;
+    std::cout << "setting serve in GameState: " << serve << std::endl;
     _serve = serve;
 }
 int GameState::getServe() {
-    std::cout << "getting serve: " << _serve << std::endl;
+    std::cout << "getting serve in GameState: " << _serve << std::endl;
     return _serve;
 }
 void GameState::setTieBreak( int tieBreak ) {
