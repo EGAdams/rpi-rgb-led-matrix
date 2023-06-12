@@ -56,6 +56,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
     update(); }
 
 ScoreBoard::~ScoreBoard() {
+    std::cout << "destructing ScoreBoard..." << std::endl;
     delete _bigNumberDrawer;
     delete _pipeDrawer;
     delete _canvas; }
