@@ -64,7 +64,7 @@ void GameObject::loopGame() {
 
 void GameObject::playerScore( int playerNumber ) { 
     std::cout << "GameObject::playerScore( " << playerNumber << " )" << std::endl;
-    std::cout << "updating game state...  setting player button to " << playerNumber << " ..." << std::endl;
+    // std::cout << "updating game state...  setting player button to " << playerNumber << " ..." << std::endl;
     int current_player_button = _gameState->getPlayerButton();
     std::cout << "current_player_button: " << current_player_button << std::endl;
     _gameState->setPlayerButton( playerNumber ); 

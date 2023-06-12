@@ -31,7 +31,7 @@ void GameModes::setScoreBoards( ScoreBoard* scoreBoard ) {
     _mode1Functions.setScoreBoard( scoreBoard );}
 
 void GameModes::gameStart() {
-    std::cout << "inside gameStart() checking if gameStarted = zero or not..." << std::endl;
+    // std::cout << "inside gameStart() checking if gameStarted = zero or not..." << std::endl;
     if ( _gameState->getStarted() == 0 ) {  // if not started...
         std::cout << "setting player points... " << std::endl;
         _player1->setPoints( 0 );             // p1Points = 0;
