@@ -75,10 +75,10 @@ void ScoreBoard::clearScreen() {
     std::cout << "screen cleared." << std::endl; }
 
 void ScoreBoard::_drawPlayerScore(Player* player) {
-    int vertical_offset = player->number() == 1 ? 0 : _big_number_font.height();
+    std::cout << "inside drawPlayerScore for player: " << player->number() << std::endl;
+    int vertical_offset = player->number() == 0 ? 0 : _big_number_font.height();
     std::cout << "vertical offset: " << vertical_offset << std::endl;
     std::cout << "determining serve bar..." << std::endl;
-    std::cout << "player number: " << player->number() << std::endl;
     std::cout << "_gameState->getServe(): " << _gameState->getServe() << std::endl;
     std::string serve_bar = _gameState->getServe() == player->number() ? "I" : " "; // or use p1sv and swap
     std::cout << "Serve bar is: " << serve_bar << std::endl;
