@@ -74,7 +74,7 @@ void Mode1Score::mode1P2Score() {
 void Mode1Score::mode1P1Games() {
     _gameLeds.updateGames();
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
-    std::cout << "serve switch set to: " << _gameState->getServeSwitch() << std::endl;
+    
     if ( _player1->getGames() >= 6 ) {
         if ( _player1->getGames() == 6 && _player2->getGames() == 6 ) {
             _gameState->setTieBreak( 1 );

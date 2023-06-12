@@ -37,7 +37,7 @@ int main( int argc, char *argv[]) {
         if ( loop_count >  MAX_LOOP_COUNT ) { game_running = false; }
         sleep( SCORE_DELAY );
         randomPlayer = rand() % 2 + 1; // generate random player between 1 and 2
-        std::cout << "randomPlayer: " << randomPlayer << std::endl;
+        std::cout << "\n\n\n*** Player " << randomPlayer << " scored ***\n" << std::endl;
         gameObject->playerScore( randomPlayer );
         sleep( SCORE_DELAY );
         gameObject->loopGame();
