@@ -31,7 +31,7 @@ int main( int argc, char *argv[]) {
     std::cout << "creating GameObject..." << std::endl;
     GameObject* gameObject = new GameObject();
     std::cout << "done creating game object.  sleeping for a few...\n\n\n\n\n" << std::endl;
-    sleep( 5 );
+    sleep( 3 );
     int randomPlayer = 1;
     std::signal( SIGINT, GameObject::_signalHandler );
     /*/// Begin Game Loop ///*/ while ( game_running && GameObject::gSignalStatus != SIGINT ) { 
