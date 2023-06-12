@@ -66,9 +66,12 @@ void GameModes::mode1() {
         _undo.mode1Undo( _history );
     }  // Mode1Undo();
 
+    std::cout << "calling readPlayerButtons()... " << std::endl;
     _inputs.readPlayerButtons();  // digital read on player buttons.  sets playerButton if tripped.
-    _serveLeds.serveSwitch();     // ServeSwitch(); // if serveSwitch >= 2,
-    // serveSwitch = 0; and toggle serve variable
+    std::cout << "Player button read.  player button: " << _gameState->getPlayerButton() << std::endl;
+    std::cout << "calling serveLeds serveSwitch()... " << std::endl;
+    _serveLeds.serveSwitch();     // ServeSwitch(); // if serveSwitch >= 2, serveSwitch = 0; and toggle serve variable
+    std::cout << "after serveLeds serveSwitch().  serveSwitch: " << _gameState->getServeSwitch() << std::endl;
 
     if ( _gameState->getTieBreak() == 1 ) {
         _mode1TieBreaker.tieBreaker();
