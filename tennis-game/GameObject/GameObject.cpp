@@ -63,6 +63,7 @@ void GameObject::loopGame() {
         std::cout << "end of loopGame().\n\n\n\n" << std::endl; }
 
 void GameObject::playerScore( int playerNumber ) { 
+    _gameState->setCurrentAction( "Updating state after player " + std::to_string( playerNumber ) + " scored." );
     std::cout << "GameObject::playerScore( " << playerNumber << " )" << std::endl;
     // std::cout << "updating game state...  setting player button to " << playerNumber << " ..." << std::endl;
     int current_player_button = _gameState->getPlayerButton();

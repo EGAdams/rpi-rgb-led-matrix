@@ -50,7 +50,10 @@ void GameModes::gameStart() {
         _setLeds.updateSets();              // UpdateSets();
         _gameState->setTieBreakOnly( 0 );     // tieBreakOnly = false;
         std::cout << "setting started to 1... " << std::endl;
-        _gameState->setStarted( 1 ); }}          // gameStart = false; // set to started.
+        _gameState->setStarted( 1 ); 
+    } else {
+        std::cout << "Game already started. " << std::endl;
+    }}
 
 void GameModes::mode1() {
     std::cout << "inside game mode 1." << std::endl;

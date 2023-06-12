@@ -43,6 +43,9 @@ GameState::GameState() {
     _player2_matches = 0;
 }
 
+void GameState::setCurrentAction( std::string currentAction ) { _currentAction = currentAction; }
+std::string GameState::getCurrentAction() { return _currentAction; }
+
 void GameState::setGameWinPulseCount( int gameWinPulseCount ) {
     _gameWinPulseCount = gameWinPulseCount;
 }

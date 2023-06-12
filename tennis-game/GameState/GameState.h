@@ -2,11 +2,14 @@
 #define GAMESTATE_H
 
 #include "../Player/Player.h"
+#include <string>
 
 class GameState {
  public:
   GameState();
   ~GameState();
+  void setCurrentAction(std::string currentAction);
+  std::string getCurrentAction();
   void setWinDelay(int winDelay);
   int getWinDelay();
   void setPointFlash(int pointFlash);
@@ -123,6 +126,7 @@ class GameState {
   int _gameWinPulseCount;
   int _setTieBreakMem;
   int _tieBreakMem;
+  std::string _currentAction;
 };
 
 #endif

@@ -6,10 +6,17 @@ ServeLeds::~ServeLeds() {}
 
 void ServeLeds::updateServeLED() {
   if (_gameState->getServe() /* serve */ == 0) {
-    std::cout << "updateServeLED() setting P1_SERVE to HIGH" << std::endl;
+    if( _gameState->getCurrentAction().find("2 scored") != std::string::npos ) { // ERROR trap.
+      std::cout << "*** ERROR: Player to score yet we are updating player 1.  exiting program... ***" << std::endl;
+      exit(1); }  
+
     _pinInterface->pinDigitalWrite(P1_SERVE, HIGH);
     _pinInterface->pinDigitalWrite(P2_SERVE, LOW);
   } else {
+    if( _gameState->getCurrentAction().find("1 scored") != std::string::npos ) { // ERROR trap.
+      std::cout << "*** ERROR: Player to score yet we are updating player 2.  exiting program... ***" << std::endl;
+      exit(1); } 
+
     std::cout << "updateServeLED() setting P2_SERVE to HIGH" << std::endl;
     _pinInterface->pinDigitalWrite(P1_SERVE, LOW);
     _pinInterface->pinDigitalWrite(P2_SERVE, HIGH);
