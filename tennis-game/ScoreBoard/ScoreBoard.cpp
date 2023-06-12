@@ -86,7 +86,7 @@ void ScoreBoard::_drawPlayerScore(Player* player) {
     _pipeDrawer->DrawNumber(serve_bar, 1, _big_number_font.baseline());
     std::cout << "translating score..." << std::endl;
     std::string score = _translate(player->getPoints());
-    std::cout << "drawing score with bigNumberDrawer objects..." << std::endl;
+    std::cout << "drawing score: " << score << " with bigNumberDrawer objects..." << std::endl;
     _bigNumberDrawer->DrawNumber(score.substr( 0, 1), 16, _big_number_font.baseline() + vertical_offset);
     _bigNumberDrawer->DrawNumber(score.substr(1, 1), 38, _big_number_font.baseline() + vertical_offset); 
 }
