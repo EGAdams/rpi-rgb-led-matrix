@@ -105,6 +105,7 @@ int ScoreBoard::_characterOffset( std::string character ) {
     switch ( char_offset ) {
     case 3: return -1;
     case 4: return -4;
+    case 5: return -1;
     default: return 0; }}
 
 std::string ScoreBoard::_translate( int raw_score ) {
