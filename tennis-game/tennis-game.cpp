@@ -26,7 +26,7 @@ int main( int argc, char *argv[]) {
     #define A_SPACE        13
     #define FOUR_SPACE     14
     #define THREE_SPACE    15
-    #define SCORE_DELAY    .2
+    #define SCORE_DELAY    .35
     
     std::cout << "creating GameObject..." << std::endl;
     GameObject* gameObject = new GameObject();

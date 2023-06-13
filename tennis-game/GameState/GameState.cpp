@@ -15,15 +15,10 @@ GameState::GameState() {
     _undo = 0;
     _freezePlayerButton = 0;
     
-    _winDelay           = 1000; // WIN_DELAY;
-    _buttonDelay        = 300;  // BUTTON_DELAY;
-    #if defined _WIN32 || defined _WIN64
+    _winDelay           = 500; // WIN_DELAY;
+    _buttonDelay        = 300; // BUTTON_DELAY;
     _flashDelay         = 250;
     _gameFlashDelay     = 250;
-    #else
-    _flashDelay         = 1000; // FLASH_DELAY;
-    _gameFlashDelay     = 1000; // GAME_FLASH_DELAY;
-    #endif
     _gameWinPulseCount = 4;
     _tieBreakMem = 0;
     _setTieBreakMem = 0;

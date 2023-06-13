@@ -74,6 +74,7 @@ void Mode1Score::mode1P2Score() {
 
 /////////////////////////////////////// MODE 1 GAMES //////////////////////////////////////////////
 void Mode1Score::mode1P1Games() {
+    std::cout << "inside mode1P1Games().  updating game leds..." << std::endl;
     _gameLeds.updateGames();
     std::cout << "inside mode1P1Games().  setting serve switch..." << std::endl;
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
@@ -126,7 +127,9 @@ void Mode1Score::mode1P1Games() {
 }
 
 void Mode1Score::mode1P2Games() {
+    std::cout << "inside mode1P2Games().  updtating game leds..." << std::endl;
     _gameLeds.updateGames();
+    std::cout << "inside mode1P2Games().  setting serve switch..." << std::endl;
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
     std::cout << "serve switch set to: " << _gameState->getServeSwitch() << std::endl;
     if ( _player2->getGames()  >= 6 ) {
