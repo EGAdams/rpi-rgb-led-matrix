@@ -96,7 +96,7 @@ void ScoreBoard::_drawPlayerScore(Player* player) {
 int ScoreBoard::_characterOffset( std::string character ) {
     int char_offset = 0;
     if ( character == "A" ) {
-        return -6;
+        return -4;
     } else if ( character == "d" ) {
         return 0;
     } else {
@@ -104,7 +104,7 @@ int ScoreBoard::_characterOffset( std::string character ) {
 
     switch ( char_offset ) {
     case 3: return -1;
-    case 4: return -6;
+    case 4: return -4;
     default: return 0; }}
 
 std::string ScoreBoard::_translate( int raw_score ) {
