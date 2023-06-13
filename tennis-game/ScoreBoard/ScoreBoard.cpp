@@ -87,10 +87,25 @@ void ScoreBoard::_drawPlayerScore(Player* player) {
     std::cout << "translating score " << player->getPoints() << "..." << std::endl;
     std::string score = _translate(player->getPoints());
     std::cout << "drawing score: " << score << " with bigNumberDrawer objects..." << std::endl;
-    _bigNumberDrawer->DrawNumber(score.substr( 0, 1), 16, _big_number_font.baseline() + vertical_offset);
-    _bigNumberDrawer->DrawNumber(score.substr(1, 1), 38, _big_number_font.baseline() + vertical_offset); 
-}
+    int baseline = _big_number_font.baseline();
+    int first_offset  = _characterOffset( score.substr( 0, 1 ));
+    int second_offset = _characterOffset( score.substr( 1, 1 ));
+    _bigNumberDrawer->DrawNumber(score.substr( 0, 1 ), first_offset  + 16, baseline + vertical_offset );
+    _bigNumberDrawer->DrawNumber(score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset ); }
 
+int ScoreBoard::_characterOffset( std::string character ) {
+    int char_offset = 0;
+    if ( character == "A" ) {
+        return -6;
+    } else if ( character == "d" ) {
+        return 0;
+    } else {
+        char_offset = std::stoi( character ); }
+
+    switch ( char_offset ) {
+    case 3: return -1;
+    case 4: return -6;
+    default: return 0; }}
 
 std::string ScoreBoard::_translate( int raw_score ) {
     switch ( raw_score ) {

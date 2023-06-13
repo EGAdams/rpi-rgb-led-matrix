@@ -30,6 +30,7 @@ private:
     rgb_matrix::Font _big_number_font;
     void _showLittleNumbers();
     void _drawPlayerScore( Player* player );
+    int  _characterOffset( std::string character );
     std::string _translate( int raw_score );
     RGBMatrix* _canvas;
     void clearScreen();
