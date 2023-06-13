@@ -95,6 +95,7 @@ void Mode1Score::mode1P1Games() {
                 } else if ( _player1->getSets() == 2 ) {
                     _mode1WinSequences.p1MatchWinSequence();
                 } else {
+                    std::cout << "*** calling p1SetWinSequence() ***" << std::endl;
                     _mode1WinSequences.p1SetWinSequence();
                     _setLeds.updateSets();
                     GameTimer::gameDelay( _gameState->getWinDelay());
@@ -104,6 +105,7 @@ void Mode1Score::mode1P1Games() {
                 _player1->setGames( 0 );
                 _player2->setGames( 0 );
             } else {
+                std::cout << "*** calling p1GameWinSequence() ***" << std::endl;
                 _mode1WinSequences.p1GameWinSequence();
                 _gameLeds.updateGames();
                 GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
@@ -115,6 +117,7 @@ void Mode1Score::mode1P1Games() {
             }
         }
     } else {
+        std::cout << "*** calling p1GameWinSequence() ***" << std::endl;
         _mode1WinSequences.p1GameWinSequence();
         _gameLeds.updateGames();
         GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
@@ -149,6 +152,7 @@ void Mode1Score::mode1P2Games() {
                 else if ( _player2->getSets() == 2 ) {
                     _mode1WinSequences.p2MatchWinSequence();
                 }  else {
+                    std::cout << "inside mode1P2Games().  calling p2SetWinSequence()..." << std::endl;
                     _mode1WinSequences.p2SetWinSequence();
                     _setLeds.updateSets();
                     GameTimer::gameDelay( _gameState->getWinDelay());
@@ -162,6 +166,7 @@ void Mode1Score::mode1P2Games() {
                 _player2->setGames( 0 );
             }
             else {
+                std::cout << "inside mode1P2Games().  calling p2GameWinSequence()..." << std::endl;
                 _mode1WinSequences.p2GameWinSequence();
                 _gameLeds.updateGames();
                 GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
