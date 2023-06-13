@@ -23,10 +23,10 @@ int main( int argc, char *argv[]) {
     bool game_running = true;
     int loop_count = 0;
     #define MAX_LOOP_COUNT 60
-    #define SCORE_DELAY    1
     #define A_SPACE        13
     #define FOUR_SPACE     14
     #define THREE_SPACE    15
+    #define SCORE_DELAY    .2
     
     std::cout << "creating GameObject..." << std::endl;
     GameObject* gameObject = new GameObject();
