@@ -50,5 +50,7 @@ int main( int argc, char *argv[]) {
         gameObject->loopGame();  // handle the player score flag
         loop_count++; 
     } ///////// End Game Loop /////////
-    return 0;
-}
+    std::cout << "game loop exited.  loop_count: " << loop_count << std::endl;
+    if ( loop_count > MAX_LOOP_COUNT ) {
+        std::cout << "MAX_LOOP_COUNT reached.  Exiting...\n\n\n\n\n" << std::endl; }
+    return 0; }
