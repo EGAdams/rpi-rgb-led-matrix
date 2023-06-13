@@ -19,12 +19,11 @@ Mode1Functions::~Mode1Functions() {}
 void Mode1Functions::setScoreBoard( ScoreBoard* scoreBoard ) {
     _scoreBoard = scoreBoard;
     _pointLeds.setScoreBoard( scoreBoard );
-    _mode1Score.setScoreBoard( scoreBoard );
-}
+    _mode1Score.setScoreBoard( scoreBoard ); }
 
 void Mode1Functions::mode1ButtonFunction() {
     std::cout << "inside mode1ButtonFunction().  player button: " << _gameState->getPlayerButton() << std::endl;
-    switch ( _gameState->getPlayerButton() ) {
+    switch ( _gameState->getPlayerButton()) {
     case 0:
         break;
 
@@ -35,19 +34,18 @@ void Mode1Functions::mode1ButtonFunction() {
         _undo.setMode1Undo( _history );
         if ( _gameState->getPointFlash() == 1 ) {
             _gameState->setPointFlash( 0 );
-            _player1->setPoints( _gameState->getP1PointsMem() );
-            _player2->setPoints( _gameState->getP2PointsMem() );
+            _player1->setPoints( _gameState->getP1PointsMem());
+            _player2->setPoints( _gameState->getP2PointsMem());
             _pointLeds.updatePoints();
         }
-        GameTimer::gameDelay( _gameState->getButtonDelay() );
+        GameTimer::gameDelay( _gameState->getButtonDelay());
         // if serving, increment score.  if not serving, set serve to 1 and don't increment score.
         if ( _gameState->getServe() == PLAYER_ONE_SERVE ) {
             std::cout << "player 1 scored.  Incrementing player 1 score..." << std::endl;
             _player1->setPoints( _player1->getPoints() + 1 );
         } else {
             std::cout << "player 1 scored.  Setting server bar for player 1..." << std::endl;
-            _gameState->setServe( PLAYER_ONE_SERVE );
-        }
+            _gameState->setServe( PLAYER_ONE_SERVE ); }
 
         //_player1->setPoints( _player1->getPoints() + 1 );
         _undo.memory();
@@ -55,7 +53,7 @@ void Mode1Functions::mode1ButtonFunction() {
         break;
 
     case 3: // UNDO button pressed
-        GameTimer::gameDelay( _gameState->getButtonDelay() );
+        GameTimer::gameDelay( _gameState->getButtonDelay());
         _undo.mode1Undo( _history );  // Mode1Undo();
         break;
 
@@ -63,11 +61,11 @@ void Mode1Functions::mode1ButtonFunction() {
         _undo.setMode1Undo( _history );
         if ( _gameState->getPointFlash() == 1 ) {
             _gameState->setPointFlash( 0 );
-            _player1->setPoints( _gameState->getP1PointsMem() );
-            _player2->setPoints( _gameState->getP2PointsMem() );
+            _player1->setPoints( _gameState->getP1PointsMem());
+            _player2->setPoints( _gameState->getP2PointsMem());
             _pointLeds.updatePoints();
         }
-        GameTimer::gameDelay( _gameState->getButtonDelay() );
+        GameTimer::gameDelay( _gameState->getButtonDelay());
         // if serving, increment score.  if not serving, set serve to 1 and don't increment score.
         if ( _gameState->getServe() == PLAYER_TWO_SERVE ) {
             std::cout << "player 2 scored.  Incrementing player 2 score..." << std::endl;
@@ -85,17 +83,15 @@ void Mode1Functions::mode1ButtonFunction() {
         break;
 
     case 4:
-        GameTimer::gameDelay( _gameState->getButtonDelay() );
+        GameTimer::gameDelay( _gameState->getButtonDelay());
         _undo.mode1Undo( _history );
         break;
     }
-    _gameState->setPlayerButton( 0 ); // reset player button here!
-}
+    _gameState->setPlayerButton( 0 ); } // reset player button here!
 
 void Mode1Functions::mode1ServeFunction() {
     _undo.setMode1Undo( _history );
-    _serveLeds.serveSwitch();
-}
+    _serveLeds.serveSwitch(); }
 
 void Mode1Functions::pointFlash() {
     if ( _gameState->getPointFlash() == 1 ) {
@@ -104,7 +100,7 @@ void Mode1Functions::pointFlash() {
                 _player1->setPoints( 99 );
                 _pointLeds.updatePoints();
             #else
-            if ( _gameState->getNow() - _gameState->getPreviousTime() > _gameState->getFlashDelay() ) {
+            if ( _gameState->getNow() - _gameState->getPreviousTime() > _gameState->getFlashDelay()) {
                 if ( _gameState->getToggle() == 0 ) {
                     _player1->setPoints( 99 );      // turn  4th LED off
                     _pointLeds.updatePoints();
@@ -112,12 +108,10 @@ void Mode1Functions::pointFlash() {
                 }
                 else {
                     _player1->setPoints(
-                    _gameState->getP1PointsMem() ); // turn 4th LED on
+                    _gameState->getP1PointsMem()); // turn 4th LED on
                     _pointLeds.updatePoints();
-                    _gameState->setToggle( 0 );
-                }
-                _gameState->setPreviousTime( _gameState->getNow() );
-            }
+                    _gameState->setToggle( 0 ); }
+                _gameState->setPreviousTime( _gameState->getNow()); }
             #endif
         }
 
@@ -126,20 +120,16 @@ void Mode1Functions::pointFlash() {
                 _player2->setPoints( 99 );
                 _pointLeds.updatePoints();
             #else
-                if ( _gameState->getNow() - _gameState->getPreviousTime() > _gameState->getFlashDelay() ) {
+                if ( _gameState->getNow() - _gameState->getPreviousTime() > _gameState->getFlashDelay()) {
                     if ( _gameState->getToggle() == 0 ) {
                         _player2->setPoints( 99 );      // turn  4th LED off
                         _pointLeds.updatePoints();
                         _gameState->setToggle( 1 );
                     } else {
                         _player2->setPoints(
-                        _gameState->getP2PointsMem() ); // turn 4th LED on
+                        _gameState->getP2PointsMem()); // turn 4th LED on
                         _pointLeds.updatePoints();
-                        _gameState->setToggle( 0 );
-                    }
-                    _gameState->setPreviousTime( _gameState->getNow() );
-                }
+                        _gameState->setToggle( 0 ); }
+                    _gameState->setPreviousTime( _gameState->getNow()); }
             #endif
-        }
-    }
-}
+        }}}
