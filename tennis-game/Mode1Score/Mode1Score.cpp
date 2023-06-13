@@ -110,6 +110,7 @@ void Mode1Score::mode1P1Games() {
                 _player2->setPoints( 0 );
                 _gameState->setServeSwitch( 1 );
                 _gameState->setServe( 0 );
+                _pointLeds.updatePoints();
             }
         }
     } else {
@@ -120,6 +121,7 @@ void Mode1Score::mode1P1Games() {
         _player2->setPoints( 0 );
         _gameState->setServeSwitch( 1 );
         _gameState->setServe( 0 );
+        _pointLeds.updatePoints();
     }
 }
 
@@ -151,6 +153,7 @@ void Mode1Score::mode1P2Games() {
                     _player2->setPoints( 0 );
                     _gameState->setServeSwitch( 1 );
                     _gameState->setServe( 0 );
+                    _pointLeds.updatePoints();
                 }
                 _player1->setGames( 0 );
                 _player2->setGames( 0 );
@@ -163,6 +166,7 @@ void Mode1Score::mode1P2Games() {
                 _player2->setPoints( 0 );
                 _gameState->setServeSwitch( 1 );
                 _gameState->setServe( 0 );
+                _pointLeds.updatePoints();
             }
         }
     }
