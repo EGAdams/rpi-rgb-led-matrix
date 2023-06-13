@@ -110,13 +110,7 @@ void Mode1Score::mode1P1Games() {
         std::cout << "*** calling p1GameWinSequence() ***" << std::endl;
         _mode1WinSequences.p1GameWinSequence();
         _gameLeds.updateGames();
-        GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
-        _player1->setPoints( 0 );
-        _player2->setPoints( 0 );
-        _gameState->setServeSwitch( 1 );
-        _gameState->setServe( 0 );
-        _pointLeds.updatePoints();
-    }}
+        _resetGame(); }}
 
 void Mode1Score::mode1P2Games() {
     std::cout << "inside mode1P2Games().  updtating game leds..." << std::endl;
@@ -145,35 +139,19 @@ void Mode1Score::mode1P2Games() {
                     _mode1WinSequences.p2SetWinSequence();
                     _setLeds.updateSets();
                     GameTimer::gameDelay( _gameState->getWinDelay());
-                    _player1->setPoints( 0 );
-                    _player2->setPoints( 0 );
-                    _gameState->setServeSwitch( 1 );
-                    _gameState->setServe( 0 );
-                    _pointLeds.updatePoints();
+                    _resetGame();
                 }
                 _player1->setGames( 0 );
                 _player2->setGames( 0 );
-            }
-            else {
+            } else {
                 std::cout << "inside mode1P2Games().  calling p2GameWinSequence()..." << std::endl;
                 _mode1WinSequences.p2GameWinSequence();
                 _gameLeds.updateGames();
-                GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
-                _player1->setPoints( 0 );
-                _player2->setPoints( 0 );
-                _gameState->setServeSwitch( 1 );
-                _gameState->setServe( 0 );
-                _pointLeds.updatePoints();
-            }
-        }
-    }
-    else {
+                _resetGame(); }}
+    } else {
         _mode1WinSequences.p2GameWinSequence();
         _gameLeds.updateGames();
-        GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
-        _player1->setPoints( 0 );
-        _player2->setPoints( 0 );
-    }}
+        _resetGame(); }}
 ////////////////////////////////// END MODE 1 GAMES ///////////////////////////////////////////////
 
 void Mode1Score::mode1TBP1Games() {
