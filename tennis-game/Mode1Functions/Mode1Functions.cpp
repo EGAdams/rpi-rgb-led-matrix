@@ -19,7 +19,8 @@ Mode1Functions::~Mode1Functions() {}
 void Mode1Functions::setScoreBoard( ScoreBoard* scoreBoard ) {
     _scoreBoard = scoreBoard;
     _pointLeds.setScoreBoard( scoreBoard );
-    _mode1Score.setScoreBoard( scoreBoard ); }
+    _mode1Score.setScoreBoard( scoreBoard ); 
+    }
 
 void Mode1Functions::mode1ButtonFunction() {
     std::cout << "inside mode1ButtonFunction().  player button: " << _gameState->getPlayerButton() << std::endl;
@@ -47,7 +48,6 @@ void Mode1Functions::mode1ButtonFunction() {
             std::cout << "player 1 scored.  Setting server bar for player 1..." << std::endl;
             _gameState->setServe( PLAYER_ONE_SERVE ); }
 
-        //_player1->setPoints( _player1->getPoints() + 1 );
         _undo.memory();
         _mode1Score.mode1P1Score();
         break;

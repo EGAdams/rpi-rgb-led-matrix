@@ -61,6 +61,8 @@ ScoreBoard::~ScoreBoard() {
     delete _pipeDrawer;
     delete _canvas; }
 
+bool ScoreBoard::hasCanvas() { return _canvas != NULL; }
+
 void ScoreBoard::update() {
     std::cout << "inside ScoreBoard::update(), calling _drawPlayerScore..." << std::endl;
     clearScreen();

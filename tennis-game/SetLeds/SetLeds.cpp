@@ -2,49 +2,83 @@
 #include "../Arduino/Arduino.h"
 #include "../TennisConstants/TennisConstants.h"
 
-SetLeds::SetLeds(Player* player1, Player* player2, PinInterface* pinInterface)
-    : _player1(player1), _player2(player2), _pinInterface(pinInterface) {}
+SetLeds::SetLeds( Player* player1, Player* player2, PinInterface* pinInterface )
+    : _player1( player1 ), _player2( player2 ), _pinInterface( pinInterface) {}
 
-SetLeds::~SetLeds() {}
+SetLeds::~SetLeds(){}
 
 void SetLeds::setScoreBoard( ScoreBoard* scoreBoard ) { _scoreBoard = scoreBoard; }
 
+#define PLAYER_1_ZERO_SETS 0
+#define PLAYER_1_ONE_SET   1
+#define PLAYER_1_TWO_SETS  2
+#define PLAYER_2_ZERO_SETS 0
+#define PLAYER_2_ONE_SET   1
+#define PLAYER_2_TWO_SETS  2
+
 void SetLeds::updateSets() {
   switch (_player1->getSets() ) {
-    case 0:
-      _pinInterface->pinDigitalWrite(P1_SETS_LED1, LOW);
-      _pinInterface->pinDigitalWrite(P1_SETS_LED2, LOW);
-      break;
-    case 1:
-      _pinInterface->pinDigitalWrite(P1_SETS_LED1, HIGH);
-      _pinInterface->pinDigitalWrite(P1_SETS_LED2, LOW);
-      break;
-    case 2:
-      _pinInterface->pinDigitalWrite(P1_SETS_LED1, HIGH);
-      _pinInterface->pinDigitalWrite(P1_SETS_LED2, HIGH);
-      break;
+
+    case PLAYER_1_ZERO_SETS:
+        if ( _scoreBoard->hasCanvas() ) {
+            std::cout << "scoreboard has canvas.  updating..." << std::endl;
+            _scoreBoard->update();
+        } else {
+            _pinInterface->pinDigitalWrite( P1_SETS_LED1, LOW );
+            _pinInterface->pinDigitalWrite( P1_SETS_LED2, LOW ); } break;
+
+    case PLAYER_1_ONE_SET:
+        if ( _scoreBoard->hasCanvas() ) {
+            std::cout << "scoreboard has canvas.  updating..." << std::endl;
+            _scoreBoard->update();
+        } else {
+            _pinInterface->pinDigitalWrite( P1_SETS_LED1, HIGH );
+            _pinInterface->pinDigitalWrite( P1_SETS_LED2, LOW ); } break;
+
+    case PLAYER_1_TWO_SETS:
+        if ( _scoreBoard->hasCanvas() ) {
+            std::cout << "scoreboard has canvas.  updating..." << std::endl;
+            _scoreBoard->update();
+        } else {
+            _pinInterface->pinDigitalWrite( P1_SETS_LED1, HIGH );
+            _pinInterface->pinDigitalWrite( P1_SETS_LED2, HIGH ); } break;
     case 3:
-      _pinInterface->pinDigitalWrite(P1_SETS_LED1, HIGH);
-      _pinInterface->pinDigitalWrite(P1_SETS_LED2, HIGH);
-      break;
+        if ( _scoreBoard->hasCanvas() ) {
+            std::cout << "scoreboard has canvas.  updating..." << std::endl;
+            _scoreBoard->update();
+        } else {
+            _pinInterface->pinDigitalWrite( P1_SETS_LED1, HIGH );
+            _pinInterface->pinDigitalWrite( P1_SETS_LED2, HIGH ); } break;
   }
 
   switch (_player2->getSets()) {
-    case 0:
-      _pinInterface->pinDigitalWrite(P2_SETS_LED1, LOW);
-      _pinInterface->pinDigitalWrite(P2_SETS_LED2, LOW);
-      break;
-    case 1:
-      _pinInterface->pinDigitalWrite(P2_SETS_LED1, HIGH);
-      _pinInterface->pinDigitalWrite(P2_SETS_LED2, LOW);
-      break;
-    case 2:
-      _pinInterface->pinDigitalWrite(P2_SETS_LED1, HIGH);
-      _pinInterface->pinDigitalWrite(P2_SETS_LED2, HIGH);
-      break;
+    case PLAYER_2_ZERO_SETS:
+        if ( _scoreBoard->hasCanvas() ) {
+            std::cout << "scoreboard has canvas.  updating..." << std::endl;
+            _scoreBoard->update();
+        } else {
+            _pinInterface->pinDigitalWrite( P2_SETS_LED1, LOW );
+            _pinInterface->pinDigitalWrite( P2_SETS_LED2, LOW ); } break;
+            
+    case PLAYER_2_ONE_SET:
+        if ( _scoreBoard->hasCanvas() ) {
+            std::cout << "scoreboard has canvas.  updating..." << std::endl;
+            _scoreBoard->update();
+        } else {
+            _pinInterface->pinDigitalWrite( P2_SETS_LED1, HIGH );
+            _pinInterface->pinDigitalWrite( P2_SETS_LED2, LOW ); } break;
+
+    case PLAYER_2_TWO_SETS:
+        if ( _scoreBoard->hasCanvas() ) {
+            std::cout << "scoreboard has canvas.  updating..." << std::endl;
+            _scoreBoard->update();
+        } else {
+            _pinInterface->pinDigitalWrite( P2_SETS_LED1, HIGH );
+            _pinInterface->pinDigitalWrite( P2_SETS_LED2, HIGH ); } break;
     case 3:
-      _pinInterface->pinDigitalWrite(P2_SETS_LED1, HIGH);
-      _pinInterface->pinDigitalWrite(P2_SETS_LED2, HIGH);
-      break;
-  }
-}
+        if ( _scoreBoard->hasCanvas() ) {
+            std::cout << "scoreboard has canvas.  updating..." << std::endl;
+            _scoreBoard->update();
+        } else {
+            _pinInterface->pinDigitalWrite( P2_SETS_LED1, HIGH );
+            _pinInterface->pinDigitalWrite( P2_SETS_LED2, HIGH ); } break; }}

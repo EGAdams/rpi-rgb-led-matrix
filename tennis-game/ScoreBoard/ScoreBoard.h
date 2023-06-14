@@ -20,6 +20,7 @@ public:
     ScoreBoard( Player* player1, Player* player2, GameState* gameState );       
     ~ScoreBoard();
     void update();
+    bool hasCanvas();
     
 private:
     Player* _player1;
