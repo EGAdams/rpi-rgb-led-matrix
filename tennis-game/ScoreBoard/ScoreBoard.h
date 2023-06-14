@@ -21,6 +21,8 @@ public:
     ~ScoreBoard();
     void update();
     bool hasCanvas();
+    void clearScreen();
+    void drawGames();
     
 private:
     Player* _player1;
@@ -34,6 +36,5 @@ private:
     int  _characterOffset( std::string character );
     std::string _translate( int raw_score );
     RGBMatrix* _canvas;
-    void clearScreen();
 };
 #endif
