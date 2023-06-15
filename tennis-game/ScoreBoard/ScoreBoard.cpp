@@ -39,31 +39,33 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
     printf( "  gpio_slowdown: %d\n", runtime_opt.gpio_slowdown );
         
     CanvasCreator canvasCreator(matrix_options, runtime_opt);
-    _canvas = canvasCreator.CreateCanvas();
-    FontLoader fontLoader("fonts/mspgothic_042623.bdf"); // Load Fonts
+    _canvas = canvasCreator.createCanvas();
+
+    FontLoader fontLoader( "fonts/mspgothic_042623.bdf" ); // Load Fonts
     rgb_matrix::Font font;
     fontLoader.LoadFont(font);
-    FontLoader bigNumberFontLoader("fonts/fgm_27_ee.bdf");
+
+    FontLoader bigNumberFontLoader( "fonts/fgm_27_ee.bdf" );
     rgb_matrix::Font bigNumberFont;
     bigNumberFontLoader.LoadFont(bigNumberFont);
     if (!_big_number_font.LoadFont( BIG_NUMBER_FONT )) { 
         fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT );
         exit( 1 ); }
+
     Color color( 255, 255, 0 );
     Color bg_color( 0, 0, 0 );
-    _bigNumberDrawer = new NumberDrawer( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color);
-    _pipeDrawer      = new NumberDrawer( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color); 
+    _bigNumberDrawer   = new NumberDrawer( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color );
+    _smallNumberDrawer = new NumberDrawer( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color );
+    _pipeDrawer        = new NumberDrawer( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color ); 
+    _setDrawer         = new SetDrawer(    _canvas, _gameState                                            );
     update(); }
 
 ScoreBoard::~ScoreBoard() {
     std::cout << "destructing ScoreBoard..." << std::endl;
     delete _bigNumberDrawer;
-    delete _pipeDrawer;
-    delete _canvas; }
+    delete _pipeDrawer; }
 
-void ScoreBoard::drawGames() {
-    std::cout << "inside ScoreBoard::drawGames()" << std::endl;
-}
+void ScoreBoard::drawGames() { std::cout << "inside ScoreBoard::drawGames()" << std::endl; }
 
 bool ScoreBoard::hasCanvas() { return _canvas != NULL; }
 
@@ -74,30 +76,26 @@ void ScoreBoard::update() {
     std::cout << "player2 points: " << _player2->getPoints() << std::endl;
     _drawPlayerScore( _player1 );
     _drawPlayerScore( _player2 );
-}
+    _setDrawer->drawSets(); }
 
 void ScoreBoard::clearScreen() { 
     Color flood_color( 0, 0, 0 ); _canvas->Fill (flood_color.r, flood_color.g, flood_color.b ); // clear screen
     std::cout << "screen cleared." << std::endl; }
 
 void ScoreBoard::_drawPlayerScore(Player* player) {
-    std::cout << "inside drawPlayerScore for player: " << player->number() << std::endl;
     int vertical_offset = player->number() == 0 ? 0 : _big_number_font.height();
-    std::cout << "vertical offset: " << vertical_offset << std::endl;
-    std::cout << "determining serve bar..." << std::endl;
-    std::cout << "_gameState->getServe(): " << _gameState->getServe() << std::endl;
     std::string serve_bar = _gameState->getServe() == player->number() ? "I" : " "; // or use p1sv and swap
-    std::cout << "Serve bar is: " << serve_bar << std::endl;
-    std::cout << "*** Drawing server bar for Player " << ( player->number() == 0 ? "1" : "2" ) << " ***" << std::endl;
     _pipeDrawer->DrawNumber(serve_bar, 1, _big_number_font.baseline() + vertical_offset );
-    std::cout << "translating score " << player->getPoints() << "..." << std::endl;
     std::string score = _translate(player->getPoints());
-    std::cout << "drawing score: " << score << " with bigNumberDrawer objects..." << std::endl;
     int baseline = _big_number_font.baseline();
     int first_offset  = _characterOffset( score.substr( 0, 1 ));
     int second_offset = _characterOffset( score.substr( 1, 1 ));
     _bigNumberDrawer->DrawNumber(score.substr( 0, 1 ), first_offset  + 16, baseline + vertical_offset );
     _bigNumberDrawer->DrawNumber(score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset ); }
+
+void ScoreBoard::_drawPlayerSets( Player* player ) {
+    std::cout << "inside ScoreBoard::_drawPlayerSets()" << std::endl;
+}
 
 int ScoreBoard::_characterOffset( std::string character ) {
     int char_offset = 0;
@@ -124,25 +122,3 @@ std::string ScoreBoard::_translate( int raw_score ) {
     case 5: return "Ad";
     case 99: return "Ad";
     default: return "00"; }}
-
-void _showLittleNumbers( rgb_matrix::Canvas *canvas ) {
-    #define LITTLE_NUMBER_FONT "fonts/little_numbers.bdf"
-    #define SPACE_BEFORE_SMALL_NUMBER   7
-    #define SPACE_BETWEEN_SMALL_NUMBERS 17
-    #define START_ROW                   86
-    Color background_color( 0, 0, 0 );
-    int letter_spacing = 0;
-    rgb_matrix::Font little_number_font;
-    if (!little_number_font.LoadFont( LITTLE_NUMBER_FONT )) {
-        fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_NUMBER_FONT );
-        exit( 1 ); }
-    int x = 0;
-    int y = START_ROW;
-    rgb_matrix::Font *outline_font = NULL;
-    Color thirdRowColor( 0, 255, 0 );
-    rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), thirdRowColor,  outline_font ? NULL : &background_color, "0 0 0", letter_spacing );
-    y += little_number_font.height() - 5;
-    Color fourthRowColor( 255, 0, 0 );
-    rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &background_color, "0", letter_spacing );
-    rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + SPACE_BETWEEN_SMALL_NUMBERS, y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &background_color, "0", letter_spacing );
-    rgb_matrix::DrawText( canvas, little_number_font, x + SPACE_BEFORE_SMALL_NUMBER + (( 2 * SPACE_BETWEEN_SMALL_NUMBERS )), y + little_number_font.baseline(), fourthRowColor, outline_font ? NULL : &background_color, "0", letter_spacing ); }

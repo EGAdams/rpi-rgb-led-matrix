@@ -8,7 +8,5 @@ GameLeds::GameLeds( Player* player1, Player* player2, PinInterface* pinInterface
 void GameLeds::setScoreBoard(ScoreBoard* scoreBoard) { _scoreBoard = scoreBoard; }
 
 void GameLeds::updateGames() {
-    if ( _scoreBoard->hasCanvas()) {
-        _scoreBoard->clearScreen();
-        _scoreBoard->drawGames();
+    if ( _scoreBoard->hasCanvas()) { _scoreBoard->drawGames(); // clear games 1st? 
     } else { _gameLedTranslator->drawGameLeds(); }}

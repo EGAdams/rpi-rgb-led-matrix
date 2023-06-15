@@ -17,7 +17,5 @@ class SetLeds {
   Player*       _player1;
   Player*       _player2;
   PinInterface* _pinInterface;
-  ScoreBoard*   _scoreBoard;
-};
-
+  ScoreBoard*   _scoreBoard; };
 #endif

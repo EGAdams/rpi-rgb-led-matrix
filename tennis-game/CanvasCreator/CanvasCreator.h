@@ -6,7 +6,7 @@ using namespace rgb_matrix;
 class CanvasCreator {
 public:
     CanvasCreator(RGBMatrix::Options matrix_options, rgb_matrix::RuntimeOptions runtime_opt);
-    RGBMatrix* CreateCanvas();
+    RGBMatrix* createCanvas();
 
 private:
     RGBMatrix::Options         _matrixOptions;

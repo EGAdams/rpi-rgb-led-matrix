@@ -3,11 +3,17 @@
 
 #include "../Player/Player.h"
 #include <string>
+#include <iostream>
+#include <map>
 
 class GameState {
  public:
   GameState();
   ~GameState();
+  std::map< std::string, int > getSetHistory();
+  std::map< std::string, int > getGameHistory();
+  void setSetHistory(  std::map< std::string, int > set_history  );
+  void setGameHistory( std::map< std::string, int > game_history );
   void setCurrentAction(std::string currentAction);
   std::string getCurrentAction();
   void setWinDelay(int winDelay);
@@ -127,6 +133,8 @@ class GameState {
   int _setTieBreakMem;
   int _tieBreakMem;
   std::string _currentAction;
+  std::map< std::string, int > _set_history;
+  std::map< std::string, int > _game_history;
 };
 
 #endif

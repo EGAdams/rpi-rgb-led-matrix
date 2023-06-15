@@ -1,5 +1,4 @@
 #include "GameState.h"
-#include <iostream>
 
 GameState::~GameState() {}
 GameState::GameState() {
@@ -38,16 +37,16 @@ GameState::GameState() {
     _player2_matches = 0;
 }
 
+std::map< std::string, int > GameState::getSetHistory() { return _set_history;   }
+std::map< std::string, int > GameState::getGameHistory() { return _game_history; }
+void GameState::setSetHistory( std::map< std::string, int > set_history ) { _set_history = set_history; }
+void GameState::setGameHistory( std::map< std::string, int > game_history ) { _game_history = game_history; }
 void GameState::setCurrentAction( std::string currentAction ) { _currentAction = currentAction; }
 std::string GameState::getCurrentAction() { return _currentAction; }
 
-void GameState::setGameWinPulseCount( int gameWinPulseCount ) {
-    _gameWinPulseCount = gameWinPulseCount;
-}
+void GameState::setGameWinPulseCount( int gameWinPulseCount ) { _gameWinPulseCount = gameWinPulseCount; }
 
-int GameState::getGameWinPulseCount() {
-    return _gameWinPulseCount;
-}
+int GameState::getGameWinPulseCount() { return _gameWinPulseCount; }
 
 void GameState::setButtonDelay( int buttonDelay ) {
     _buttonDelay = buttonDelay;
