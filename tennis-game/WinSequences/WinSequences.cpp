@@ -15,6 +15,11 @@ Mode1WinSequences::Mode1WinSequences( Player* player1,
     _reset( player1, player2, pinInterface, gameState ),
     _undo( player1, player2, pinInterface, gameState ) {}
 
+void Mode1WinSequences::setScoreBoard( ScoreBoard* scoreBoard ) {
+    _pointLeds.setScoreBoard( scoreBoard );
+    _gameLeds.setScoreBoard(  scoreBoard );
+    _setLeds.setScoreBoard(   scoreBoard ); }
+
 void Mode1WinSequences::p1GameWinSequence() {
     std::cout << "p1GameWinSequence()" << std::endl;
     _undo.memory();

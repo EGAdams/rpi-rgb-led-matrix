@@ -13,6 +13,7 @@
 #include "../SetLeds/SetLeds.h"
 #include "../MatchWinSequence/MatchWinSequence.h"
 #include "../Undo/Undo.h"
+#include "../ScoreBoard/ScoreBoard.h"
 
 class Mode1WinSequences {
  public:
@@ -21,6 +22,7 @@ class Mode1WinSequences {
                     PinInterface* pinInterface,
                     GameState* gameState);
   ~Mode1WinSequences();
+  void setScoreBoard( ScoreBoard* scoreBoard );
   void p1GameWinSequence();
   void p1SetWinSequence();
   void p1MatchWinSequence();
