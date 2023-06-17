@@ -48,6 +48,5 @@ class Mode1Score {
     SetLeds _setLeds;
     Mode1WinSequences _mode1WinSequences;
     Undo _undo;
-};
-
+    ScoreBoard* _scoreBoard; };
 #endif

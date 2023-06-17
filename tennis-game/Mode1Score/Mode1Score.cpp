@@ -17,7 +17,9 @@ Mode1Score::Mode1Score( Player* player1,
     _undo( player1, player2, pinInterface, gameState ) {}
 Mode1Score::~Mode1Score() {}
 
-void Mode1Score::setScoreBoard( ScoreBoard* scoreBoard ) { _pointLeds.setScoreBoard( scoreBoard ); }
+void Mode1Score::setScoreBoard( ScoreBoard* scoreBoard ) { 
+    _pointLeds.setScoreBoard( scoreBoard ); 
+    _gameLeds.setScoreBoard(  scoreBoard ); }
 
 void Mode1Score::_resetGame() {
      GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
