@@ -26,10 +26,10 @@ void SetDrawer::drawSets() {
     int y = START_ROW; 
     int x = 0;
     Color thirdRowColor(0, 255, 0);
-    drawTextOnCanvas(x + SMALL_BEFORE, y, thirdRowColor, "0 0 0");
+    drawTextOnCanvas(x + SMALL_BEFORE, y, thirdRowColor, "1 2 3");
     y += _little_font.height() - 5;
     Color fourthRowColor(255, 0, 0);
-    drawTextOnCanvas(x + SMALL_BEFORE, y, fourthRowColor, "0 0 0");
+    drawTextOnCanvas(x + SMALL_BEFORE, y, fourthRowColor, "4 5 6");
     // drawTextOnCanvas(x + SMALL_BEFORE, y, fourthRowColor, "0");
     // drawTextOnCanvas(x + SMALL_BEFORE + SMALL_BETWEEN, y, fourthRowColor, "0");
     // drawTextOnCanvas(x + SMALL_BEFORE + (2 * SMALL_BETWEEN), y, fourthRowColor, "0");
