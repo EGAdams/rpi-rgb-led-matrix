@@ -38,16 +38,16 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
     printf( "  drop_privileges: %d\n", runtime_opt.drop_privileges );
     printf( "  gpio_slowdown: %d\n", runtime_opt.gpio_slowdown );
         
-    CanvasCreator canvasCreator(matrix_options, runtime_opt);
+    CanvasCreator canvasCreator( matrix_options, runtime_opt );
     _canvas = canvasCreator.createCanvas();
 
     FontLoader fontLoader( "fonts/mspgothic_042623.bdf" ); // Load Fonts
     rgb_matrix::Font font;
-    fontLoader.LoadFont(font);
+    fontLoader.LoadFont( font );
 
     FontLoader bigNumberFontLoader( "fonts/fgm_27_ee.bdf" );
     rgb_matrix::Font bigNumberFont;
-    bigNumberFontLoader.LoadFont(bigNumberFont);
+    bigNumberFontLoader.LoadFont( bigNumberFont );
     if (!_big_number_font.LoadFont( BIG_NUMBER_FONT )) { 
         fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT );
         exit( 1 ); }
@@ -63,7 +63,9 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
 ScoreBoard::~ScoreBoard() {
     std::cout << "destructing ScoreBoard..." << std::endl;
     delete _bigNumberDrawer;
-    delete _pipeDrawer; }
+    delete _pipeDrawer; 
+    delete _setDrawer; 
+    delete _smallNumberDrawer; }
 
 void ScoreBoard::drawGames() {  std::cout << "inside ScoreBoard::drawGames()" << std::endl; }
 

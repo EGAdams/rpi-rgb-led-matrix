@@ -17,6 +17,7 @@ class SetDrawer {
     SetDrawer( RGBMatrix* canvas, GameState* gameState );
     ~SetDrawer();
     void drawSets();
+    void drawTextOnCanvas( int x, int y, const Color& color, const std::string& text );
 
  private:
     GameState*          _gameState; 
