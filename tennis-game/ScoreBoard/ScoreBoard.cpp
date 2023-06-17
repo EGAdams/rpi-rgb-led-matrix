@@ -65,7 +65,7 @@ ScoreBoard::~ScoreBoard() {
     delete _bigNumberDrawer;
     delete _pipeDrawer; }
 
-void ScoreBoard::drawGames() { std::cout << "inside ScoreBoard::drawGames()" << std::endl; }
+void ScoreBoard::drawGames() {  std::cout << "inside ScoreBoard::drawGames()" << std::endl; }
 
 bool ScoreBoard::hasCanvas() { return _canvas != NULL; }
 

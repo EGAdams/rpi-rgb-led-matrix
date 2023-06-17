@@ -10,5 +10,5 @@ void GameLeds::setScoreBoard( ScoreBoard* scoreBoard ) { _scoreBoard = scoreBoar
 void GameLeds::updateGames() {
     if ( _scoreBoard        == NULL ) { std::cout << "*** ERROR: scoreBoard is null. ***  exiting... " << std::endl; exit( 1 ); }
     if ( _gameLedTranslator == NULL ) { std::cout << "*** ERROR: _gameLedTranslator is null. ***  exiting... " << std::endl; exit( 1 ); }   
-    if ( _scoreBoard->hasCanvas()) { _scoreBoard->drawGames(); // clear games 1st? 
+    if ( _scoreBoard->hasCanvas()) { _scoreBoard->update();
     } else { _gameLedTranslator->drawGameLeds(); }}
