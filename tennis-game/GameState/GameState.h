@@ -136,5 +136,4 @@ class GameState {
   std::map< std::string, int > _set_history;
   std::map< std::string, int > _game_history;
 };
-
 #endif
