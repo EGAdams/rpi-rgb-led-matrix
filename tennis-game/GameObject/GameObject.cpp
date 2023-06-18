@@ -30,14 +30,18 @@ GameObject::GameObject() {
     std::cout << "Constructing GameObject..." << std::endl;
     _webLiquidCrystal = new WebLiquidCrystal();
     _gameTimer = new GameTimer();
+    std::cout << "constructing players... " << std::endl;
     _player1 = new Player( PLAYER_1 );
     _player2 = new Player( PLAYER_2 );
     _pinState = new PinState( _pin_map );
     _pinInterface = new PinInterface( _pinState );
+    std::cout << "constructing history object..." << std::endl;
     _history = new History();
+    std::cout << "constructing gamestate object..." << std::endl;
     _gameState = new GameState();
     _gameInputs = new Inputs( _player1, _player2, _pinInterface, _gameState );
     _gameModes =  new GameModes( _player1, _player2, _pinInterface, _gameState, _history );
+    std::cout << "constructing scoreboard object..." << std::endl;
     _scoreBoard = new ScoreBoard( _player1, _player2, _gameState );
     _gameModes->setScoreBoards( _scoreBoard );
     _subjectManager = new SubjectManager();
