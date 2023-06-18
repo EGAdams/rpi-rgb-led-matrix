@@ -100,8 +100,8 @@ void Mode1Score::mode1P1Games() {
                     _setLeds.updateSets();
                     GameTimer::gameDelay( _gameState->getWinDelay());
                     _resetGame(); }
-                _player1->setGames( 0 );
-                _player2->setGames( 0 );
+                    _player1->setGames( 0 );
+                    _player2->setGames( 0 );
             } else {
                 std::cout << "*** calling p1GameWinSequence() ***" << std::endl;
                 _mode1WinSequences.p1GameWinSequence();

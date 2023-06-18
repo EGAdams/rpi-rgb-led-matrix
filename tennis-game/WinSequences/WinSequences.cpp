@@ -36,6 +36,7 @@ void Mode1WinSequences::p1GameWinSequence() {
 
 void Mode1WinSequences::p1SetWinSequence() {
     std::cout << "p1SetWinSequence()" << std::endl;
+    
     _undo.memory();  // Memory();
 
     for ( int currentPulseCount = 0;

@@ -20,11 +20,11 @@
 
 class Mode1Score {
  public:
-    Mode1Score(Player* player1,
+    Mode1Score( Player* player1,
                 Player* player2,
                 PinInterface* pinInterface,
                 GameState* gameState,
-                History* history);
+                History* history );
     ~Mode1Score();
     void mode1P1Score();
     void mode1P1Games();

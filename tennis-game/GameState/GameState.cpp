@@ -2,6 +2,7 @@
 
 GameState::~GameState() {}
 GameState::GameState() { std::cout << "Constructing GameState..." << std::endl;
+    _game_number = 1;
     _pointFlash = 0;
     _serve = 0;
     _tieBreak = 0;
@@ -17,30 +18,16 @@ GameState::GameState() { std::cout << "Constructing GameState..." << std::endl;
     _flashDelay         = 250;
     _gameFlashDelay     = 250;
     _gameWinPulseCount = 4;
-    _tieBreakMem = 0;
-    _setTieBreakMem = 0;
-    _p1PointsMem = 0;
-    _p2PointsMem = 0;
-    _p1GamesMem = 0;
-    _p2GamesMem = 0;
-    _p1SetsMem = 0;
-    _p2SetsMem = 0;
-    _player1_points  = 0;
-    _player2_points  = 0;
-    _player1_games   = 0;
-    _player2_games   = 0;
-    _player1_sets    = 0;
-    _player2_sets    = 0;
-    _player1_matches = 0;
-    _player2_matches = 0; 
-    _set_history = { { "p1", 0 }, { "p2", 0 } };
-    _game_history = { { "p1", 0 }, { "p2", 0 } };
-}
+    _tieBreakMem     = 0;
+    _setTieBreakMem  = 0;
+    _p1PointsMem     = 0; _p2PointsMem     = 0;
+    _p1GamesMem      = 0; _p2GamesMem      = 0;
+    _p1SetsMem       = 0; _p2SetsMem       = 0;
+    _player1_points  = 0; _player2_points  = 0;
+    _player1_games   = 0; _player2_games   = 0;
+    _player1_sets    = 0; _player2_sets    = 0;
+    _player1_matches = 0; _player2_matches = 0; }
 
-std::map< std::string, int > GameState::getSetHistory() { return _set_history;   }
-std::map< std::string, int > GameState::getGameHistory() { return _game_history; }
-void GameState::setSetHistory( std::map< std::string, int > set_history ) { _set_history = set_history; }
-void GameState::setGameHistory( std::map< std::string, int > game_history ) { _game_history = game_history; }
 void GameState::setCurrentAction( std::string currentAction ) { _currentAction = currentAction; }
 std::string GameState::getCurrentAction() { return _currentAction; }
 void GameState::setGameWinPulseCount( int gameWinPulseCount ) { _gameWinPulseCount = gameWinPulseCount; }
@@ -119,3 +106,7 @@ int GameState::getPlayer1Matches() { return _player1_matches; }
 void GameState::setPlayer1Matches( int player1Matches ) { _player1_matches = player1Matches; }
 int GameState::getPlayer2Matches() { return _player2_matches; }
 void GameState::setPlayer2Matches( int player2Matches ) { _player2_matches = player2Matches; }
+std::map<int, int> GameState::getPlayer1SetHistory() { return _player1_set_history; }
+void GameState::setPlayer1SetHistory( std::map<int, int> player1_set_history ) { _player1_set_history = player1_set_history; }
+std::map<int, int> GameState::getPlayer2SetHistory() { return _player2_set_history; }
+void GameState::setPlayer2SetHistory( std::map<int, int> player2_set_history ) { _player2_set_history = player2_set_history; }
