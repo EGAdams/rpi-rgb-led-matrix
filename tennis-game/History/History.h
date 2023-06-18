@@ -7,15 +7,13 @@
 
 class History {
  public:
-  History();
-  ~History();
-  void push(GameState gameState);
-  GameState pop();
-  int size();
+    History();
+    ~History();
+    void push( GameState gameState );
+    GameState pop();
+    int size();
 
  private:
-  std::stack<GameState> _history;
-  Logger* _logger;
-};
-
+    std::stack< GameState > _history;
+    Logger* _logger; };
 #endif

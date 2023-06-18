@@ -33,8 +33,9 @@ void Undo::setMode1Undo( History* history ) {
     gameState.setServe( _gameState->getServe());
     std::cout << "setting serve switch to " << _gameState->getServeSwitch() << std::endl;
     gameState.setServeSwitch( _gameState->getServeSwitch());
-    std::cout << "done setting serve and serve switch." << std::endl;
+    std::cout << "done setting serve and serve switch.  setting undo..." << std::endl;
     gameState.setUndo( _gameState->getUndo());
+    std::cout << "done setting undo.  setting started..." << std::endl;
     gameState.setStarted( _gameState->getStarted());
     gameState.setPointFlash( _gameState->getPointFlash());
     gameState.setRotaryPosition( _gameState->getRotaryPosition());
@@ -48,9 +49,12 @@ void Undo::setMode1Undo( History* history ) {
     gameState.setSetTieBreakMem( _gameState->getSetTieBreakMem());
     gameState.setTieBreakOnly( _gameState->getTieBreakOnly());
     gameState.setTieBreakMem( _gameState->getTieBreakMem());
+    std::cout << "setting set histories..." << std::endl;
     gameState.setPlayer1SetHistory( _player1->getSetHistory());
     gameState.setPlayer2SetHistory( _player2->getSetHistory());
-    history->push( gameState ); }
+    std::cout << "done setting set histories.  pushing gamestate to history..." << std::endl;
+    history->push( gameState ); 
+    std::cout << "done pushing gamestate to history." << std::endl; }
 
 void Undo::mode1Undo( History* history ) {
     GameTimer::gameDelay( 250 );
