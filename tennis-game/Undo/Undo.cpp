@@ -12,13 +12,13 @@ Undo::Undo( Player* player1, Player* player2, PinInterface* pinInterface, GameSt
 Undo::~Undo(){};
 
 void Undo::memory() {
-    _gameState->setP1PointsMem(    _player1->getPoints()); _gameState->setP2PointsMem( _player2->getPoints());
-    _gameState->setP1GamesMem(     _player1->getGames());  _gameState->setP2GamesMem(  _player2->getGames());
-    _gameState->setP1SetsMem(      _player1->getSets());   _gameState->setP2SetsMem(   _player2->getSets());
-    _gameState->setTieBreakMem(    _gameState->getTieBreak());
-    _gameState->setSetTieBreakMem( _gameState->getSetTieBreak());
-    _gameState->setSetHistory(     _player1->getSetHistory());
-    }
+    _gameState->setP1PointsMem(       _player1->getPoints()); _gameState->setP2PointsMem( _player2->getPoints());
+    _gameState->setP1GamesMem(        _player1->getGames());  _gameState->setP2GamesMem(  _player2->getGames());
+    _gameState->setP1SetsMem(         _player1->getSets());   _gameState->setP2SetsMem(   _player2->getSets());
+    _gameState->setTieBreakMem(       _gameState->getTieBreak());
+    _gameState->setSetTieBreakMem(    _gameState->getSetTieBreak());
+    _gameState->setPlayer1SetHistory( _player1->getSetHistory());
+    _gameState->setPlayer2SetHistory( _player2->getSetHistory()); }
 
 void Undo::setMode1Undo( History* history ) {
     GameState gameState;

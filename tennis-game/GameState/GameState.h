@@ -10,8 +10,8 @@ class GameState {
  public:
     GameState();
     ~GameState();
-    void setSetHistory(  std::map< std::string, int > set_history  ); std::map< std::string, int > getSetHistory();
-    void setGameHistory( std::map< std::string, int > game_history ); std::map< std::string, int > getGameHistory();
+    void setSetHistory(  std::map< int, int > set_history  ); std::map< int, int > getSetHistory();
+    void setGameHistory( std::map< int, int > game_history ); std::map< int, int > getGameHistory();
     void setCurrentAction(std::string currentAction );                std::string getCurrentAction();
     void setWinDelay( int winDelay);                      int getWinDelay();
     void setPointFlash( int pointFlash);                  int getPointFlash();
@@ -51,8 +51,8 @@ class GameState {
     void setPlayer2Sets( int player2Sets );               int getPlayer2Sets();
     void setPlayer1Matches( int player1Matches );         int getPlayer1Matches();
     void setPlayer2Matches( int player2Matches );         int getPlayer2Matches();
-    void setPlayer1SetHistory( std::map<int, int> _player1_set_history ); std::map<int, int> getPlayer1SetHistory(); 
-    void setPlayer2SetHistory( std::map<int, int> _player2_set_history ); std::map<int, int> getPlayer2SetHistory();
+    void setPlayer1SetHistory( std::map< int, int> _player1_set_history ); std::map< int, int> getPlayer1SetHistory(); 
+    void setPlayer2SetHistory( std::map< int, int> _player2_set_history ); std::map< int, int> getPlayer2SetHistory();
    
  private:
     int _game_number;
@@ -88,6 +88,6 @@ class GameState {
     int _setTieBreakMem;
     int _tieBreakMem;
     std::string _currentAction;
-    std::map<int, int> _player1_set_history;
-    std::map<int, int> _player2_set_history; };
+    std::map< int, int> _player1_set_history;
+    std::map< int, int> _player2_set_history; };
 #endif
