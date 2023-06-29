@@ -7,7 +7,6 @@ Player::Player( int playerNumber ) : _playerNumber( playerNumber ) {
 Player::~Player() {}
 void Player::setSets( GameState* gameState, int sets ) { 
     this->setSetHistory(      gameState->getCurrentSet(), _games );
-    gameState->setSetHistory( gameState->getCurrentSet(), _games );
     gameState->setCurrentSet( gameState->getCurrentSet() + 1     );
     _sets = sets; }
 int Player::getSets() { return _sets; }

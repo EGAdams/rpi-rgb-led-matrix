@@ -187,8 +187,8 @@ void Mode1TieBreaker::mode1TBP2Games() {
     GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
 
     if ( _player2->getGames() == 15 ) {
-        _player1->setSet( _gameState->getCurrentSet(), _player1->getGames());
-        _player2->setSet( _gameState->getCurrentSet(), _player2->getGames());
+        _player1->setSetHistory( _gameState->getCurrentSet(), _player1->getGames());
+        _player2->setSetHistory( _gameState->getCurrentSet(), _player2->getGames());
         _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
         _player2->setSets( _gameState, _player2->getSets() + 1 );
         if ( _player2->getSets() == _player1->getSets() ) {
@@ -200,8 +200,8 @@ void Mode1TieBreaker::mode1TBP2Games() {
             _mode1WinSequences.p2SetWinSequence();
             endTieBreak(); }}
     if ( _player2->getGames() >= 10 && ( _player2->getGames() - _player1->getGames() ) > 1 ) {
-        _player1->setSet( _gameState->getCurrentSet(), _player1->getGames());
-        _player2->setSet( _gameState->getCurrentSet(), _player2->getGames());
+        _player1->setSetHistory( _gameState->getCurrentSet(), _player1->getGames());
+        _player2->setSetHistory( _gameState->getCurrentSet(), _player2->getGames());
         _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
         _player2->setSets( _gameState, _player2->getSets() + 1 );
         if ( _player2->getSets() == _player1->getSets() ) {
@@ -218,8 +218,8 @@ void Mode1TieBreaker::mode1SetTBP2Games() {
     _gameLeds.updateGames();
     GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
     if ( _player2->getGames() == 7 ) {
-        _player1->setSet( _gameState->getCurrentSet(), _player1->getGames());
-        _player2->setSet( _gameState->getCurrentSet(), _player2->getGames());
+        _player1->setSetHistory( _gameState->getCurrentSet(), _player1->getGames());
+        _player2->setSetHistory( _gameState->getCurrentSet(), _player2->getGames());
         _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
         _player2->setSets( _gameState, _player2->getSets() + 1 );
         // _setLeds.updateSets();
@@ -233,8 +233,8 @@ void Mode1TieBreaker::mode1SetTBP1Games() {
     _gameLeds.updateGames();
     GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
     if ( _player1->getGames() == 7 ) {
-        _player1->setSet( _gameState->getCurrentSet(), _player1->getGames());
-        _player2->setSet( _gameState->getCurrentSet(), _player2->getGames());
+        _player1->setSetHistory( _gameState->getCurrentSet(), _player1->getGames());
+        _player2->setSetHistory( _gameState->getCurrentSet(), _player2->getGames());
         _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
         _player1->setSets( _gameState, _player1->getSets() + 1 );
         // _setLeds.updateSets();                // blinking one to many

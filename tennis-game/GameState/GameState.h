@@ -10,7 +10,7 @@ class GameState {
  public:
     GameState();
     ~GameState();
-    void setSetHistory(  int set, int games  );               std::map< int, int > getSetHistory();
+    void setSetHistory(  std::map< int, int > set_history  ); std::map< int, int > getSetHistory();
     void setGameHistory( std::map< int, int > game_history ); std::map< int, int > getGameHistory();
     void setCurrentAction(std::string currentAction        ); std::string getCurrentAction();
     void setCurrentSet( int current_set );                int getCurrentSet();

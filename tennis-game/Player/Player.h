@@ -2,7 +2,7 @@
 #define Player_h
 #include <map>
 #include "../GameState/GameState.h"
-
+class GameState;
 class Player {
  public:
     Player( int player_number );
