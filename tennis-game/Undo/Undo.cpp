@@ -71,9 +71,9 @@ void Undo::mode1Undo( History* history ) {
     _gameState->setP1GamesMem( gameState.getP1GamesMem());
     _player2->setGames( gameState.getPlayer2Games());
     _gameState->setP2GamesMem( gameState.getP2GamesMem());
-    _player1->setSets( gameState.getPlayer1Sets());
+    _player1->setSets( &gameState, gameState.getPlayer1Sets());
     _gameState->setP1SetsMem( gameState.getP1SetsMem());
-    _player2->setSets( gameState.getPlayer2Sets());
+    _player2->setSets( &gameState, gameState.getPlayer2Sets());
     _gameState->setP2SetsMem( gameState.getP2SetsMem());
     _player1->setMatches( gameState.getPlayer1Matches());
     _player2->setMatches( gameState.getPlayer2Matches());

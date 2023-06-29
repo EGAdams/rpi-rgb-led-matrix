@@ -1,7 +1,7 @@
 #include "ScoreBoard.h"
 
-ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState ) 
-: _player1( player1 ), _player2( player2 ), _gameState( gameState ) {
+ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState ): 
+    _player1( player1 ), _player2( player2 ), _gameState( gameState ) {
     printf( "Constructing ScoreBoard...\n" );
     Color pipe_color( 255, 255, 0 ); // yellow
     Color background_color( 0, 0, 0 );
@@ -24,34 +24,27 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
     runtime_opt.gpio_slowdown = 2;
     runtime_opt.daemon = 0;
     runtime_opt.do_gpio_init = 1;
-
     printf( "Matrix options:\n" );
     printf( "  rows: %d\n", matrix_options.rows );
     printf( "  chain_length: %d\n", matrix_options.chain_length );
     printf( "  parallel: %d\n", matrix_options.parallel );
     printf( "  pwm_bits: %d\n", matrix_options.pwm_bits );
     printf( "  pwm_lsb_nanoseconds: %d\n", matrix_options.pwm_lsb_nanoseconds );
-
     printf( "Runtime options:\n" );
     printf( "  daemon: %d\n", runtime_opt.daemon );
     printf( "  do_gpio_init: %d\n", runtime_opt.do_gpio_init );
     printf( "  drop_privileges: %d\n", runtime_opt.drop_privileges );
     printf( "  gpio_slowdown: %d\n", runtime_opt.gpio_slowdown );
-        
     CanvasCreator canvasCreator( matrix_options, runtime_opt );
     _canvas = canvasCreator.createCanvas();
-
     FontLoader fontLoader( "fonts/mspgothic_042623.bdf" ); // Load Fonts
     rgb_matrix::Font font;
     fontLoader.LoadFont( font );
-
     FontLoader bigNumberFontLoader( "fonts/fgm_27_ee.bdf" );
     rgb_matrix::Font bigNumberFont;
     bigNumberFontLoader.LoadFont( bigNumberFont );
     if (!_big_number_font.LoadFont( BIG_NUMBER_FONT )) { 
-        fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT );
-        exit( 1 ); }
-
+        fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT ); exit( 1 );}
     Color color( 255, 255, 0 );
     Color bg_color( 0, 0, 0 );
     _bigNumberDrawer   = new NumberDrawer( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color );
@@ -61,7 +54,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
     update(); }
 
 ScoreBoard::~ScoreBoard() {
-    std::cout << "destructing ScoreBoard..." << std::endl;
+    std::cout << "destroying ScoreBoard..." << std::endl;
     delete _bigNumberDrawer;
     delete _pipeDrawer; 
     delete _setDrawer; 
@@ -92,12 +85,11 @@ void ScoreBoard::_drawPlayerScore(Player* player) {
     int baseline = _big_number_font.baseline();
     int first_offset  = _characterOffset( score.substr( 0, 1 ));
     int second_offset = _characterOffset( score.substr( 1, 1 ));
-    _bigNumberDrawer->DrawNumber(score.substr( 0, 1 ), first_offset  + 16, baseline + vertical_offset );
-    _bigNumberDrawer->DrawNumber(score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset ); }
+    _bigNumberDrawer->DrawNumber( score.substr( 0, 1 ), first_offset  + 16, baseline + vertical_offset );
+    _bigNumberDrawer->DrawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset ); }
 
-void ScoreBoard::_drawPlayerSets( Player* player ) {
-    std::cout << "inside ScoreBoard::_drawPlayerSets()" << std::endl;
-}
+void ScoreBoard::_drawPlayerSets( Player* player ) { 
+    std::cout << "inside ScoreBoard::_drawPlayerSets()" << std::endl; }
 
 int ScoreBoard::_characterOffset( std::string character ) {
     int char_offset = 0;
@@ -105,8 +97,7 @@ int ScoreBoard::_characterOffset( std::string character ) {
         return -4;
     } else if ( character == "d" ) {
         return 0;
-    } else {
-        char_offset = std::stoi( character ); }
+    } else { char_offset = std::stoi( character ); }
 
     switch ( char_offset ) {
     case 3: return -1;

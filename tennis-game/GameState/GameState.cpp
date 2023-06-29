@@ -2,7 +2,7 @@
 
 GameState::~GameState() {}
 GameState::GameState() { std::cout << "Constructing GameState..." << std::endl;
-    _game_number = 1;
+    _current_set = 1;
     _pointFlash = 0;
     _serve = 0;
     _tieBreak = 0;
@@ -28,6 +28,8 @@ GameState::GameState() { std::cout << "Constructing GameState..." << std::endl;
     _player1_sets    = 0; _player2_sets    = 0;
     _player1_matches = 0; _player2_matches = 0; }
 
+void GameState::setCurrentSet( int current_set ) { _current_set = current_set; }
+int GameState::getCurrentSet() { return _current_set; }
 void GameState::setCurrentAction( std::string currentAction ) { _currentAction = currentAction; }
 std::string GameState::getCurrentAction() { return _currentAction; }
 void GameState::setGameWinPulseCount( int gameWinPulseCount ) { _gameWinPulseCount = gameWinPulseCount; }

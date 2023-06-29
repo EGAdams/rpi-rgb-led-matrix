@@ -94,8 +94,8 @@ void Reset::zeroPlayerValues() {
     _player2->setPoints( 0 );
     _player1->setGames( 0 );
     _player2->setGames( 0 );
-    _player1->setSets( 0 );
-    _player2->setSets( 0 );
+    _player1->setSets( _gameState, 0 );
+    _player2->setSets( _gameState, 0 );
     _player1->setMatches( 0 );
     _player2->setMatches( 0 );
 }

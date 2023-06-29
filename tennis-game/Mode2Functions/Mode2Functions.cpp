@@ -52,12 +52,12 @@ void Mode2Functions::m2Loop() {
       // _player1 Sets
       case 2:
         _player1->incrementSetting();
-        _player1->setSets(_player1->getSetting());
-        _setLeds.updateSets();                      // UpdateSets();
-        if (_player1->getSetting() > 1 /* p1Setting > 1 */) {
-          _player1->setSetting(0);  // p1Setting = 0;
-          _player1->setSets(0);
-          _player1->setMode(0);     // modeP1 = 0;
+        _player1->setSets( _gameState, _player1->getSetting());
+        _setLeds.updateSets();                      
+        if (_player1->getSetting() > 1 ) {
+          _player1->setSetting( 0 );  
+          _player1->setSets( _gameState, 0 );
+          _player1->setMode( 0 );     
         }
         break;
     }
@@ -68,7 +68,7 @@ void Mode2Functions::m2Loop() {
         // _player2->incrementSetting();
         _player2->setPoints(
             _player2->incrementSetting());
-        _pointLeds.updatePoints();          // UpdatePoints();
+        _pointLeds.updatePoints();         
         if (_player2->getSetting() > 4 ) {
           _player2->setSetting(0);
           _player2->setPoints(0);
@@ -93,20 +93,16 @@ void Mode2Functions::m2Loop() {
       // _player2 Sets
       case 2:
         // p2Setting++;
-        _player2->setSets(_player2->incrementSetting());  // p2Sets = p2Setting;
+        _player2->setSets( _gameState, _player2->incrementSetting());  // p2Sets = p2Setting;
         _setLeds.updateSets();
-        if (_player2->getSetting() > 1 /* p2Setting > 1 */) {
-          _player2->setSetting(0);  // p2Setting = 0;
-          _player2->setSets(0);
-          _player2->setMode(0);     /* modeP2 = 0; */
+        if (_player2->getSetting() > 1 ) {
+          _player2->setSetting(0);  
+          _player2->setSets(_gameState, 0 );
+          _player2->setMode( 0 );   
         }
     }
-    _gameState->setPreviousTime(_gameState->getNow());  //  previous_time = now;
-  } else {
-    // Serial.println( "elapsed_time: " + to_string( elapsed_time ));
-    // Serial.println("*** DID NOT ENTER BECAUSE NOT ENOUGH TIME HAS PASSED
-    // ***");
-  }
+    _gameState->setPreviousTime(_gameState->getNow());  
+  } else { /* Serial.println("*** DID NOT ENTER BECAUSE NOT ENOUGH TIME HAS PASSED */ }
 }
 
 void Mode2Functions::m2PlayerButtons(int playerButton) {

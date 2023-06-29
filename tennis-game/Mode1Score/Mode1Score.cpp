@@ -53,23 +53,16 @@ void Mode1Score::mode1P2Score() {
     if ( _player2->getPoints() >= 3 ) {
         if ( _player2->getPoints() == _player1->getPoints() ) {  // Tie, Back to Deuce
             _player1->setPoints( 3 );
-            _player2->setPoints( 3 );
-        }
-
-        // Game win Scenario
-        else if ( _player2->getPoints() > 3 && ( _player2->getPoints() - _player1->getPoints()) > 1 ) {                                // Game win Scenario
+            _player2->setPoints( 3 );    // Game win Scenario Below
+        } else if ( _player2->getPoints() > 3 && ( _player2->getPoints() - _player1->getPoints()) > 1 ) {                                // Game win Scenario
             _player2->setGames( _player2->getGames() + 1 );
             _undo.memory();
             _pointLeds.updatePoints();
-            mode1P2Games();
-        }
-
+            mode1P2Games(); }
         if ( _player2->getPoints() == 4 ) {
             _gameState->setPointFlash( 1 );
             _gameState->setPreviousTime( GameTimer::gameMillis());
-            _gameState->setToggle( 0 );
-        }
-    }
+            _gameState->setToggle( 0 ); }}
     _pointLeds.updatePoints(); }
 
 /////////////////////////////////////// MODE 1 GAMES //////////////////////////////////////////////
@@ -86,7 +79,7 @@ void Mode1Score::mode1P1Games() {
         }
         if ( _gameState->getTieBreak() == 0 ) {
             if (( _player1->getGames() - _player2->getGames() ) > 1 ) {
-                _player1->setSets( _player1->getSets() + 1 );
+                _player1->setSets( _gameState, _player1->getSets() + 1 );
                 _setLeds.updateSets();
                 if ( _player1->getSets() == _player2->getSets() ) {
                     _mode1WinSequences.p1TBSetWinSequence();
@@ -128,7 +121,7 @@ void Mode1Score::mode1P2Games() {
         }
         if ( _gameState->getTieBreak() == 0 ) {
             if (( _player2->getGames() - _player1->getGames() ) > 1 ) {
-                _player2->setSets( _player2->getSets() + 1 );
+                _player2->setSets( _gameState, _player2->getSets() + 1 );
                 _setLeds.updateSets();
                 if ( _player2->getSets() == _player1->getSets() ) {
                     _mode1WinSequences.p2TBSetWinSequence();
@@ -162,7 +155,7 @@ void Mode1Score::mode1TBP1Games() {
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
     GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
     if ( _player1->getGames() == 15 ) {
-        _player1->setSets( _player1->getSets() + 1 );
+        _player1->setSets( _gameState, _player1->getSets() + 1 );
 
         if ( _player2->getSets() == _player1->getSets() ) {
             _mode1TieBreaker.endTieBreak();
@@ -176,7 +169,7 @@ void Mode1Score::mode1TBP1Games() {
         }}
     if ( _player1->getGames() >= 10 &&
         ( _player1->getGames() - _player2->getGames() ) > 1 ) {
-        _player1->setSets( _player1->getSets() + 1 );
+        _player1->setSets( _gameState, _player1->getSets() + 1 );
         if ( _player2->getSets() == _player1->getSets() ) {
             _mode1TieBreaker.endTieBreak();
             _mode1WinSequences.p1TBSetWinSequence();
@@ -192,7 +185,7 @@ void Mode1Score::mode1SetTBP1Games() {
     _gameLeds.updateGames();
     GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
     if ( _player1->getGames() == 7 ) {
-        _player1->setSets( _player1->getSets() + 1 );
+        _player1->setSets( _gameState, _player1->getSets() + 1 );
         _setLeds.updateSets();
         GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
         _mode1WinSequences.p1SetTBWinSequence();
@@ -206,37 +199,32 @@ void Mode1Score::mode1TBP2Games() {
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
     GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
     if ( _player2->getGames() == 15 ) {
-        _player2->setSets( _player2->getSets() + 1 );
-
+        _player2->setSets( _gameState, _player2->getSets() + 1 );
         if ( _player2->getSets() == _player1->getSets() ) {
             _mode1TieBreaker.endTieBreak();
             _mode1WinSequences.p2TBSetWinSequence();
             _gameState->setSetTieBreak( 1 );
             _mode1TieBreaker.setTieBreakEnable();
-        }
-        else {
+        } else {
             _mode1WinSequences.p2SetWinSequence();
-            _mode1TieBreaker.endTieBreak();
-        }}
+            _mode1TieBreaker.endTieBreak(); }}
     if ( _player2->getGames() >= 10 &&
         ( _player2->getGames() - _player1->getGames() ) > 1 ) {
-        _player2->setSets( _player2->getSets() + 1 );
+        _player2->setSets( _gameState, _player2->getSets() + 1 );
         if ( _player2->getSets() == _player1->getSets() ) {
             _mode1TieBreaker.endTieBreak();
             _mode1WinSequences.p2TBSetWinSequence();
             _gameState->setSetTieBreak( 1 );
             _mode1TieBreaker.setTieBreakEnable();
-        }
-        else {
+        } else {
             _mode1WinSequences.p2SetWinSequence();
-            _mode1TieBreaker.endTieBreak();
-        }}}
+            _mode1TieBreaker.endTieBreak(); }}}
 
 void Mode1Score::mode1SetTBP2Games() {
     _gameLeds.updateGames();
     GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
     if ( _player2->getGames() == 7 ) {
-        _player2->setSets( _player2->getSets() + 1 );
+        _player2->setSets( _gameState, _player2->getSets() + 1 );
         _setLeds.updateSets();
         GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
         _mode1WinSequences.p2SetTBWinSequence();

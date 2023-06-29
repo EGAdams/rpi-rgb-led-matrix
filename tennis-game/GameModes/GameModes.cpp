@@ -40,8 +40,8 @@ void GameModes::gameStart() {
         _player1->setGames( 0 );              // p1Games = 0;
         _player2->setGames( 0 );              // p2Games = 0;
         std::cout << "setting player sets... " << std::endl;
-        _player1->setSets( 0 );               // p1Sets = 0;
-        _player2->setSets( 0 );               // p2Sets = 0;
+        _player1->setSets( _gameState, 0 );               // p1Sets = 0;
+        _player2->setSets( _gameState, 0 );               // p2Sets = 0;
         std::cout << "updating points... " << std::endl;
         _pointLeds.updatePoints();          // UpdatePoints();
         std::cout << "updating games... " << std::endl;
@@ -63,8 +63,7 @@ void GameModes::mode1() {
         std::cout << "undo button pressed!" << std::endl;
         _gameState->setUndo( 0 );
         std::cout << "calling mode1Undo( _history )... " << std::endl;
-        _undo.mode1Undo( _history );
-    }  // Mode1Undo();
+        _undo.mode1Undo( _history ); }
     std::cout << "calling readPlayerButtons()... " << std::endl;
     _inputs.readPlayerButtons();  // digital read on player buttons.  sets playerButton if tripped.
     std::cout << "Player button read.  player button: " << _gameState->getPlayerButton() << std::endl;
@@ -180,22 +179,22 @@ void GameModes::setGameMode( int rotaryPosition ) {
         _pinInterface->pinDigitalWrite( P2_SERVE, LOW);
         if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
 
-        _player1->setSets( 1 );
+        _player1->setSets( _gameState, 1 );
         _setLeds.updateSets();
         if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
-        _player1->setSets( 2 );
+        _player1->setSets( _gameState, 2 );
         _setLeds.updateSets();
         if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
-        _player1->setSets( 0 );
+        _player1->setSets( _gameState, 0 );
         _setLeds.updateSets();
         if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
-        _player2->setSets( 1 );
+        _player2->setSets( _gameState, 1 );
         _setLeds.updateSets();
         if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
-        _player2->setSets( 2 );
+        _player2->setSets( _gameState, 2 );
         _setLeds.updateSets();
         if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
-        _player2->setSets( 0 );
+        _player2->setSets( _gameState, 0 );
         _setLeds.updateSets();
         _player1->setGames( 99 );
         _player2->setGames( 99 );

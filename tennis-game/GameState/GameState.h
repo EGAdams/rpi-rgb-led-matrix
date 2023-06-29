@@ -10,9 +10,10 @@ class GameState {
  public:
     GameState();
     ~GameState();
-    void setSetHistory(  std::map< int, int > set_history  ); std::map< int, int > getSetHistory();
+    void setSetHistory(  int set, int games  );               std::map< int, int > getSetHistory();
     void setGameHistory( std::map< int, int > game_history ); std::map< int, int > getGameHistory();
-    void setCurrentAction(std::string currentAction );                std::string getCurrentAction();
+    void setCurrentAction(std::string currentAction        ); std::string getCurrentAction();
+    void setCurrentSet( int current_set );                int getCurrentSet();
     void setWinDelay( int winDelay);                      int getWinDelay();
     void setPointFlash( int pointFlash);                  int getPointFlash();
     void setServe( int serve );                           int getServe();
@@ -55,7 +56,7 @@ class GameState {
     void setPlayer2SetHistory( std::map< int, int> _player2_set_history ); std::map< int, int> getPlayer2SetHistory();
    
  private:
-    int _game_number;
+    int _current_set;
     int _player1_points;  int _player2_points;
     int _player1_games;   int _player2_games;
     int _player1_sets;    int _player2_sets;
