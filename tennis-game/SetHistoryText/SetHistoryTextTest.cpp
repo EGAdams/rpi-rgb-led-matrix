@@ -30,17 +30,17 @@ class SetHistoryTextTest : public ::testing::Test {
 };
 
 TEST_F( SetHistoryTextTest, TestGetSetHistoryText ) {
-    std::map< int, int > set_history = {{ 1, 15 }, { 2, 10 }};
+    std::map< int, int > set_history = {{ 0, 15 }, { 1, 10 }, { 2, 40 }};
     gameState->setPlayer1SetHistory( set_history );
-    set_history = {{ 1, 4 }, { 2, 5 }};
+    set_history = {{ 0, 4 }, { 1, 5 }, { 2, 30 }};
     gameState->setPlayer2SetHistory( set_history );
 
 
     
     std::string result = setHistoryText->getSetHistoryText( 1 );
-    ASSERT_EQ(result, "5 10 ");
+    ASSERT_EQ(result, "15 10 40 ");
     result = setHistoryText->getSetHistoryText( 2 );
-    ASSERT_EQ(result, "4 5 ");
+    ASSERT_EQ(result, "4 5 30 ");
 }
 
 int main(int argc, char** argv) {
