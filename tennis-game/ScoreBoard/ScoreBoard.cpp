@@ -74,7 +74,7 @@ void ScoreBoard::update() {
     _setDrawer->drawSets(); }
 
 void ScoreBoard::clearScreen() { 
-    Color flood_color( 0, 0, 0 ); _canvas->Fill (flood_color.r, flood_color.g, flood_color.b ); // clear screen
+    Color flood_color( 0, 0, 0 ); _canvas->Fill (flood_color.r, flood_color.g, flood_color.b );
     std::cout << "screen cleared." << std::endl; }
 
 void ScoreBoard::_drawPlayerScore(Player* player) {
