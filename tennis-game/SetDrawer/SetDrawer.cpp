@@ -1,7 +1,7 @@
 #include "SetDrawer.h"
 
 SetDrawer::SetDrawer(RGBMatrix* canvas, GameState* gameState) : 
-    _canvas( canvas ), _gameState( gameState ) {
+    _canvas( canvas ), _gameState( gameState ), _setHistoryText( gameState ) {
     FontLoader smallNumberFontLoader( LITTLE_FONT );
     rgb_matrix::Font smallNumberFont;
     smallNumberFontLoader.LoadFont( smallNumberFont );
@@ -20,8 +20,10 @@ void SetDrawer::drawTextOnCanvas( int x, int y, const Color& color, const std::s
 void SetDrawer::drawSets() {
     int y = START_ROW; 
     int x = 0;
+    std::string playerOneSetString = _setHistoryText.getSetHistoryText( PLAYER_ONE );
+    std::string playerTwoSetString = _setHistoryText.getSetHistoryText( PLAYER_TWO );
     Color thirdRowColor( 0, 255, 0 );
-    drawTextOnCanvas( x + SMALL_BEFORE, y, thirdRowColor, "1 2 3" );
+    drawTextOnCanvas( x + SMALL_BEFORE, y, thirdRowColor, playerOneSetString );
     y += _little_font.height() - 5;
     Color fourthRowColor( 255, 0, 0 );
-    drawTextOnCanvas( x + SMALL_BEFORE, y, fourthRowColor, "4 5 6" ); }
+    drawTextOnCanvas( x + SMALL_BEFORE, y, fourthRowColor, playerTwoSetString ); }
