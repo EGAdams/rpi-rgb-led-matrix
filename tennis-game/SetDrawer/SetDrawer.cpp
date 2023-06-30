@@ -22,6 +22,8 @@ void SetDrawer::drawSets() {
     int x = 0;
     std::string playerOneSetString = _setHistoryText.getSetHistoryText( PLAYER_ONE );
     std::string playerTwoSetString = _setHistoryText.getSetHistoryText( PLAYER_TWO );
+    std::cout << "playerOneSetString: " << playerOneSetString << std::endl;
+    std::cout << "playerTwoSetString: " << playerTwoSetString << std::endl;
     Color thirdRowColor( 0, 255, 0 );
     drawTextOnCanvas( x + SMALL_BEFORE, y, thirdRowColor, playerOneSetString );
     y += _little_font.height() - 5;

@@ -2,6 +2,7 @@
 #define SET_HISTORY_TEXT_H
 
 #include <string>
+#include <map>
 #include "../GameState/GameState.h"
 
 class SetHistoryText {
