@@ -22,7 +22,7 @@ void Mode1WinSequences::setScoreBoard( ScoreBoard* scoreBoard ) {
     _setLeds.setScoreBoard(   scoreBoard );}
 
 void Mode1WinSequences::p1GameWinSequence() {
-    std::cout << "p1GameWinSequence()" << std::endl;
+    std::cout << "*** inside WinSequences class.  p1GameWinSequence() ***" << std::endl;
     _undo.memory();
     int pulse_count = _gameState->getGameWinPulseCount();
     for ( int currentPulseCount = 0; currentPulseCount < pulse_count; currentPulseCount++ ) {
