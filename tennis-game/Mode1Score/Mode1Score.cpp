@@ -93,6 +93,7 @@ void Mode1Score::mode1P1Games() {
                     _setLeds.updateSets();
                     GameTimer::gameDelay( _gameState->getWinDelay());
                     _resetGame(); }
+                    std::cout << "*** setting games to 0 ***" << std::endl;
                     _player1->setGames( 0 );
                     _player2->setGames( 0 );
             } else {
@@ -131,12 +132,13 @@ void Mode1Score::mode1P2Games() {
                 else if ( _player2->getSets() == 2 ) {
                     _mode1WinSequences.p2MatchWinSequence();
                 }  else {
-                    std::cout << "inside mode1P2Games().  calling p2SetWinSequence()..." << std::endl;
+                    std::cout << "** inside mode1P2Games().  calling p2SetWinSequence()... ***" << std::endl;
                     _mode1WinSequences.p2SetWinSequence();
                     _setLeds.updateSets();
                     GameTimer::gameDelay( _gameState->getWinDelay());
                     _resetGame();
                 }
+                std::cout << "inside mode1P2Games().  setting games to 0..." << std::endl;
                 _player1->setGames( 0 );
                 _player2->setGames( 0 );
             } else {
