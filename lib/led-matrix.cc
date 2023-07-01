@@ -765,7 +765,8 @@ void RGBMatrix::Clear() {
 }
 
 void RGBMatrix::Fill(uint8_t red, uint8_t green, uint8_t blue) {
-  impl_->active_->Fill(red, green, blue);
+    printf( "*** inside led-matrix.cc RGBMatrix::Fill( ... *** \n" );
+    impl_->active_->Fill(red, green, blue);
 }
 
 // FrameCanvas implementation of Canvas
