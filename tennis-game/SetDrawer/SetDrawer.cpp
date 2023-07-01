@@ -20,6 +20,7 @@ void SetDrawer::drawTextOnCanvas( int x, int y, const Color& color, const std::s
 void SetDrawer::drawSets() {
     int y = START_ROW; 
     int x = 0;
+    std::cout << "*** inside SetDrawer drawing sets..." << std::endl;
     std::string playerOneSetString = _setHistoryText.getSetHistoryText( PLAYER_ONE );
     std::string playerTwoSetString = _setHistoryText.getSetHistoryText( PLAYER_TWO );
     std::cout << "playerOneSetString: " << playerOneSetString << std::endl;

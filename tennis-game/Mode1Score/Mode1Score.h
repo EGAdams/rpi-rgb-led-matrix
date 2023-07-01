@@ -13,10 +13,7 @@
 #include "../SetLeds/SetLeds.h"
 #include "../Undo/Undo.h"
 #include "../TennisConstants/TennisConstants.h"
-
-#if defined _WIN32 || defined _WIN64
-    #include <iostream>
-#endif
+#include <iostream>
 
 class Mode1Score {
  public:

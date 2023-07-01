@@ -72,13 +72,15 @@ void Mode1Score::mode1P1Games() {
     std::cout << "inside mode1P1Games().  setting serve switch..." << std::endl;
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
     
-    if ( _player1->getGames() >= 6 ) {
-        if ( _player1->getGames() == 6 && _player2->getGames() == 6 ) {
+    if ( _player1->getGames() >= GAMES_TO_WIN_SET ) {
+        if ( _player1->getGames() == GAMES_TO_WIN_SET && _player2->getGames() == GAMES_TO_WIN_SET ) {
             _gameState->setTieBreak( 1 );
             _mode1TieBreaker.tieBreakEnable();
         }
         if ( _gameState->getTieBreak() == 0 ) {
+            std::cout << "*** tie break is zero.  checking if p1 games - p2 games > 1... ***" << std::endl;
             if (( _player1->getGames() - _player2->getGames() ) > 1 ) {
+                std::cout << "*** setting sets for player 1... ***" << std::endl;
                 _player1->setSets( _gameState, _player1->getSets() + 1 );
                 _setLeds.updateSets();
                 if ( _player1->getSets() == _player2->getSets() ) {
@@ -115,8 +117,8 @@ void Mode1Score::mode1P2Games() {
     std::cout << "inside mode1P2Games().  setting serve switch..." << std::endl;
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
     std::cout << "serve switch set to: " << _gameState->getServeSwitch() << std::endl;
-    if ( _player2->getGames()  >= 6 ) {
-        if ( _player2->getGames()  == 6 && _player1->getGames() == 6 ) {
+    if ( _player2->getGames()  >= GAMES_TO_WIN_SET ) {
+        if ( _player2->getGames()  == GAMES_TO_WIN_SET && _player1->getGames() == GAMES_TO_WIN_SET ) {
             _gameState->setTieBreak( 1 );
             _mode1TieBreaker.tieBreakEnable();
         }
