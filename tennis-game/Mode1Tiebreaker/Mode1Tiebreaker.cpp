@@ -105,7 +105,7 @@ void Mode1TieBreaker::tieBreakEnable() {
     _player2->setPoints( 99 );
     std::cout << "*** calling _pointLeds.updatePoints() from inside tieBreakEnable()... ***" << std::endl;
     _pointLeds.updatePoints();
-    std::cout << "*** after update points in tie breker!!! *** " << std::endl;
+    std::cout << "*** after update points in tie breaker!!! *** " << std::endl;
     _gameState->setServeSwitch( 1 );
     _gameState->setServe( 0 );
     _serveLeds.serveSwitch();
