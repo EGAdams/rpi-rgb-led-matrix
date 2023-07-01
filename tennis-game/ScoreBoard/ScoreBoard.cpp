@@ -67,6 +67,7 @@ bool ScoreBoard::hasCanvas() { return _canvas != NULL; }
 void ScoreBoard::update() {
     std::cout << "inside ScoreBoard::update(), calling _drawPlayerScore..." << std::endl;
     clearScreen();
+    std::cout << "getting player points..." << std::endl;
     std::cout << "player1 points: " << _player1->getPoints() << std::endl;
     std::cout << "player2 points: " << _player2->getPoints() << std::endl;
     _drawPlayerScore( _player1 );
