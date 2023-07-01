@@ -75,16 +75,16 @@ void ScoreBoard::update() {
     _setDrawer->drawSets(); }
 
 void ScoreBoard::clearScreen() { 
-    std::cout << "inside ScoreBoard::clearScreen()" << std::endl;
-    std::cout << "*** the clear screen delay... ***" << std::endl;
-    GameTimer::gameDelay( 500 );
-    std::cout << "*** done with the clear screen delay... ***" << std::endl;
-    GameTimer::gameDelay( 500 );
+    // std::cout << "inside ScoreBoard::clearScreen()" << std::endl;
+    // std::cout << "*** the clear screen delay... ***" << std::endl;
+    // GameTimer::gameDelay( 500 );
+    // std::cout << "*** done with the clear screen delay... ***" << std::endl;
+    // GameTimer::gameDelay( 500 );
 
     // if _canvas is null, exit
     if( _canvas == NULL ) { std::cout << "*** ERROR: canvas is null.  exiting... ***" << std::endl; exit( 1 ); }
     if ( !_canvas ) { std::cout << "*** ERROR: canvas == NULL.  exiting... ***" << std::endl; exit( 1 ); }
-    Color flood_color( 0, 0, 0 ); _canvas->Fill ( flood_color.r, flood_color.g, flood_color.b );
+    //Color flood_color( 0, 0, 0 ); _canvas->Fill ( flood_color.r, flood_color.g, flood_color.b );
     std::cout << "screen cleared." << std::endl; }
 
 void ScoreBoard::_drawPlayerScore(Player* player) {
