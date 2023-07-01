@@ -75,6 +75,7 @@ void Mode1Score::mode1P1Games() {
     if ( _player1->getGames() >= GAMES_TO_WIN_SET ) {
         if ( _player1->getGames() == GAMES_TO_WIN_SET && _player2->getGames() == GAMES_TO_WIN_SET ) {
             _gameState->setTieBreak( 1 );
+            std::cout << "*** calling tieBreakEnable() from inside Mode1Score::mode1P1Games()... ***" << std::endl; 
             _mode1TieBreaker.tieBreakEnable();
         }
         if ( _gameState->getTieBreak() == 0 ) {
@@ -120,6 +121,7 @@ void Mode1Score::mode1P2Games() {
     if ( _player2->getGames()  >= GAMES_TO_WIN_SET ) {
         if ( _player2->getGames()  == GAMES_TO_WIN_SET && _player1->getGames() == GAMES_TO_WIN_SET ) {
             _gameState->setTieBreak( 1 );
+            std::cout << "*** calling tieBreakEnable() from inside Mode1Score::mode1P2Games()... ***" << std::endl;
             _mode1TieBreaker.tieBreakEnable();
         }
         if ( _gameState->getTieBreak() == 0 ) {
