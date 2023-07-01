@@ -76,6 +76,7 @@ void ScoreBoard::update() {
 
 void ScoreBoard::clearScreen() { 
     std::cout << "inside ScoreBoard::clearScreen()" << std::endl;
+    if ( !_canvas ) { std::cout << "*** ERROR: canvas is null.  exiting... ***" << std::endl; exit( 1 ); }
     Color flood_color( 0, 0, 0 ); _canvas->Fill (flood_color.r, flood_color.g, flood_color.b );
     std::cout << "screen cleared." << std::endl; }
 
