@@ -358,7 +358,7 @@ class TwoSixtyFourMapper : public PixelMapper {
                     // *matrix_y = incoming_y;
                 }
 
-                printf("Pixel: (%d, %d) Panel: (%d, %d)\n", x, y, *matrix_x, *matrix_y);
+                // printf("Pixel: (%d, %d) Panel: (%d, %d)\n", x, y, *matrix_x, *matrix_y);
             }
 
 
