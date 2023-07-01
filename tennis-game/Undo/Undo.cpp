@@ -9,7 +9,9 @@ Undo::Undo( Player* player1, Player* player2, PinInterface* pinInterface, GameSt
     _serveLeds( pinInterface, gameState ),
     _tieLeds( pinInterface ) {
         _logger = new Logger( "Undo" ); };
-Undo::~Undo(){};
+Undo::~Undo(){
+    std::cout << "*** Undo destructor called. ***" << std::endl;
+    delete _logger; };
 
 void Undo::memory() {
     _gameState->setP1PointsMem(       _player1->getPoints()); _gameState->setP2PointsMem( _player2->getPoints());

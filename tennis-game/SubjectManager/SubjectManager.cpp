@@ -7,7 +7,10 @@
 SubjectManager::SubjectManager() {
     _logger = new Logger( "SubjectManager" );
 }
-SubjectManager::~SubjectManager() {}
+SubjectManager::~SubjectManager() {
+    std::cout << "*** SubjectManager destructor called. ***" << std::endl;
+    delete _logger;
+}
 
 #if defined _WIN32 || defined _WIN64
 void SubjectManager::gameStateUpdate( GameState* gameState, Player* player1, Player* player2 ) {

@@ -1,6 +1,9 @@
 #include "WinSequences.h"
 
-Mode1WinSequences::~Mode1WinSequences() {}
+Mode1WinSequences::~Mode1WinSequences() {
+    std::cout << "*** Mode1WinSequences destructor called. ***" << std::endl;
+    delete _setWin; }
+    
 Mode1WinSequences::Mode1WinSequences( Player* player1,
     Player* player2,
     PinInterface* pinInterface,

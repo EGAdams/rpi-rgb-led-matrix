@@ -1,6 +1,9 @@
 #include "GameLeds.h"
 
-GameLeds::~GameLeds() {}
+GameLeds::~GameLeds() {
+    std::cout << "*** GameLeds destructor called. ***" << std::endl;
+    delete _gameLedTranslator; }
+
 GameLeds::GameLeds( Player* player1, Player* player2, PinInterface* pinInterface )
     : _player1( player1), _player2( player2 ), _pinInterface( pinInterface ) {
     _gameLedTranslator = new GameLedTranslator( player1, player2, pinInterface ); }

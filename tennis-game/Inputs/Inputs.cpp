@@ -14,7 +14,9 @@ Inputs::Inputs( Player* player1,
     _gameState( gameState ),
     _reset( player1, player2, pinInterface, gameState ) {
     _logger = new Logger( "Inputs" ); }
-Inputs::~Inputs() {};
+Inputs::~Inputs() {
+    std::cout << "*** Inputs destructor called. ***" << std::endl;
+    delete _logger; }
 
 void Inputs::readReset() {
     if ( _pinInterface->pinDigitalRead( RESET ) == LOW ) {

@@ -1,6 +1,9 @@
 #include "GameModes.h"
 
-GameModes::~GameModes() {}
+GameModes::~GameModes() {
+    std::cout << "*** GameModes destructor called. ***" << std::endl;
+    delete _logger; }
+    
 GameModes::GameModes( 
     Player*       player1,
     Player*       player2,
