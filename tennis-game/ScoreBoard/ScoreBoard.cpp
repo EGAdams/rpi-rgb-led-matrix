@@ -83,7 +83,7 @@ void ScoreBoard::clearScreen() {
     // GameTimer::gameDelay( 500 );
 
     // if _canvas is null, exit
-    if ( !_canvas ) { std::cout << "*** ERROR: canvas == NULL.  exiting... ***" << std::endl; exit( 1 ); }
+    if ( !hasCanvas()) { std::cout << "*** ERROR: canvas == NULL.  exiting... ***" << std::endl; exit( 1 ); }
     Color flood_color( 0, 0, 0 ); _canvas->Fill( flood_color.r, flood_color.g, flood_color.b );
     std::cout << "screen cleared." << std::endl; }
 
