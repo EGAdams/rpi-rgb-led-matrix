@@ -10,7 +10,7 @@ class SetHistoryText {
     SetHistoryText( GameState* gameState );
     ~SetHistoryText();
     std::string getSetHistoryText( int player );
-    std::string _buildString( int player );
+    std::string _buildString(      int player );
 
  private: 
     GameState*          _gameState; };
