@@ -100,6 +100,7 @@ void Mode1TieBreaker::mode1SetTBButtonFunction() {
 void Mode1TieBreaker::setTieBreaker() { _undo.memory(); mode1SetTBButtonFunction(); }
 
 void Mode1TieBreaker::tieBreakEnable() {
+    std::cout << "*** tieBreakEnable() called. ***" << std::endl;
     _player1->setPoints( 99 );
     _player2->setPoints( 99 );
     _pointLeds.updatePoints();
