@@ -1,14 +1,13 @@
 #include "SetWin.h"
 
-SetWin::SetWin( Undo* undo, GameState* gameState, SetLeds* setLeds ): _undo( undo ), _gameState( gameState ), _setLeds( setLeds ) {}
+SetWin::SetWin( Undo* undo, GameState* gameState, SetLeds* setLeds ): 
+    _undo( undo ), _gameState( gameState ), _setLeds( setLeds ) {}
 SetWin::~SetWin() {}
 
 void SetWin::execute( Player* player ) {
     std::cout << "SetWin::execute()" << std::endl;
     _undo->memory();
     std::cout << "updating player sets" << std::endl;
-    // player->setSets( _gameState, 0 );
-    // _setLeds->updateSets();
     player->setSets( _gameState, _gameState->getP1SetsMem());
     _setLeds->updateSets();
     std::cout << "setting player games to 0" << std::endl;

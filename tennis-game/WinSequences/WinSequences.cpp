@@ -35,7 +35,9 @@ void Mode1WinSequences::p1GameWinSequence() {
     _player1->setPoints( 0 );
     _player2->setPoints( 0 );}
 
-void Mode1WinSequences::p1SetWinSequence() { _setWin->execute( _player1 ); }
+void Mode1WinSequences::p1SetWinSequence() { 
+    std::cout << "*** executing _setWin->execute for player one... ***" << std::endl;
+    _setWin->execute( _player1 ); }
 
 void Mode1WinSequences::p1MatchWinSequence() {
     _undo.memory();
@@ -60,8 +62,10 @@ void Mode1WinSequences::p2GameWinSequence() {
     _player1->setPoints( 0 );
     _player2->setPoints( 0 );}
 
-void Mode1WinSequences::p2SetWinSequence() { _setWin->execute( _player2 ); }
-    // std::cout << "p2SetWinSequence()" << std::endl;
+void Mode1WinSequences::p2SetWinSequence() { 
+     std::cout << "*** executing _setWin->execute... ***" << std::endl;
+    _setWin->execute( _player2 ); }
+   
     // _undo.memory();  
     // for ( int currentPulseCount = 0; currentPulseCount < SET_WIN_PULSE_COUNT; currentPulseCount++ ) {
     //     _player2->setSets( _gameState, 0 );
