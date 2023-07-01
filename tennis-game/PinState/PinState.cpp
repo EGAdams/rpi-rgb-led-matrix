@@ -5,7 +5,7 @@ PinState::~PinState() {}
 
 int PinState::getPinState( std::string pin ) {
     if ( _translateConstant.get_translated_constant( std::stoi( pin ) ) == "ROTARY" ) {
-        std::string pin_file_path = "pin_data";
+        std::string pin_file_path = "pin_data/";
         std::cout << "translating pin: " << pin << "... " << std::endl;
         std::ifstream pin_file( pin_file_path + _translateConstant.get_translated_constant( std::stoi( pin ) ) + ".txt" );
         pin_file >> pin;
@@ -20,7 +20,7 @@ int PinState::getPinState( std::string pin ) {
 
 void PinState::setPinState( std::string pin, int state ) {
     _pin_map[ pin ] = state;
-    std::string pin_file_path = "pin_data";
+    std::string pin_file_path = "pin_data/";
     std::ofstream pin_file( pin_file_path + _translateConstant.get_translated_constant( std::stoi( pin ) ) + ".txt" );
     pin_file << state;
     pin_file.close();

@@ -8,16 +8,16 @@ class Player {
     Player( int player_number );
     ~Player();
     
-    void setPoints(      int points );     int getPoints();
-    void setGames(       int games );      int getGames();
-    void setMatches(     int matches );    int getMatches();
-    void setMode(        int mode );       int getMode();
-    void setSetting(     int setting );    int getSetting();
+    void setPoints(      int points                       ); int getPoints();
+    void setGames(       int games                        ); int getGames();
+    void setMatches(     int matches                      ); int getMatches();
+    void setMode(        int mode                         ); int getMode();
+    void setSetting(     int setting                      ); int getSetting();
     void setSet(         int set_number,   int set_value  ); int getSet(  int set_number  );
     void setGame(        int game_number,  int game_value ); int getGame( int game_number );
     void setSets(        GameState* state, int sets       ); int getSets();
-    void setSetHistory(  int set, int score ); std::map< int, int> getSetHistory();
-    void setGameHistory( std::map< int, int> gameHistory ); std::map< int, int> getGameHistory();
+    void setSetHistory(  int set, int score               ); std::map< int, int> getSetHistory();
+    void setGameHistory( int game, int score              ); std::map< int, int> getGameHistory();
     int incrementSetting();
     int number(); // only set during construction
 
