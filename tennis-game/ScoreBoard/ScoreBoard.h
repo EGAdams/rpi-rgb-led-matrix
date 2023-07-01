@@ -1,6 +1,7 @@
 #ifndef SCOREBOARD_H
 #define SCOREBOARD_H
 
+#include "../GameTimer/GameTimer.h"
 #include "../Player/Player.h"
 #include "../GameState/GameState.h"
 #include "../NumberDrawer/NumberDrawer.h"

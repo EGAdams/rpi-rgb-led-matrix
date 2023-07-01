@@ -76,6 +76,11 @@ void ScoreBoard::update() {
 
 void ScoreBoard::clearScreen() { 
     std::cout << "inside ScoreBoard::clearScreen()" << std::endl;
+    std::cout << "the clear screen delay..." << std::endl;
+    GameTimer::gameDelay( 250 );
+    std::cout << "done with the clear screen delay..." << std::endl;
+    GameTimer::gameDelay( 250 );
+
     // if _canvas is null, exit
     if( _canvas == NULL ) { std::cout << "*** ERROR: canvas is null.  exiting... ***" << std::endl; exit( 1 ); }
     if ( !_canvas ) { std::cout << "*** ERROR: canvas == NULL.  exiting... ***" << std::endl; exit( 1 ); }
