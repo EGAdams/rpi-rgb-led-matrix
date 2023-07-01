@@ -24,14 +24,17 @@ void Mode1WinSequences::setScoreBoard( ScoreBoard* scoreBoard ) {
 void Mode1WinSequences::p1GameWinSequence() {
     std::cout << "*** inside WinSequences class.  p1GameWinSequence() ***" << std::endl;
     _undo.memory();
-    int pulse_count = _gameState->getGameWinPulseCount();
-    for ( int currentPulseCount = 0; currentPulseCount < pulse_count; currentPulseCount++ ) {
-        _player1->setGames( 99 );
-        _gameLeds.updateGames();
-        GameTimer::gameDelay( _gameState->getGameFlashDelay());
-        _player1->setGames( _gameState->getP1GamesMem());
-        _gameLeds.updateGames();
-        GameTimer::gameDelay( _gameState->getGameFlashDelay());}
+    // int pulse_count = _gameState->getGameWinPulseCount();
+    // for ( int currentPulseCount = 0; currentPulseCount < pulse_count; currentPulseCount++ ) {
+    //     _player1->setGames( 99 );
+    //     _gameLeds.updateGames();
+    //     GameTimer::gameDelay( _gameState->getGameFlashDelay());
+    //     _player1->setGames( _gameState->getP1GamesMem());
+    //     _gameLeds.updateGames();
+    //     GameTimer::gameDelay( _gameState->getGameFlashDelay());}
+    std::cout << "*** delaying game after p1GameWinSequence()... ***" << std::endl;
+    GameTimer::gameDelay( 2000 );
+    std::cout << "*** done delaying game after p1GameWinSequence()  setting points to zero... ***" << std::endl;
     _player1->setPoints( 0 );
     _player2->setPoints( 0 );}
 
@@ -59,6 +62,9 @@ void Mode1WinSequences::p2GameWinSequence() {
     //     _player2->setGames( _gameState->getP2GamesMem());
     //     _gameLeds.updateGames();                          
     //     GameTimer::gameDelay( _gameState->getGameFlashDelay());}
+    std::cout << "*** delaying game after p2GameWinSequence()... ***" << std::endl;
+    GameTimer::gameDelay( 2000 );
+    std::cout << "*** done delaying game after p2GameWinSequence()  setting points to zero... ***" << std::endl;
     _player1->setPoints( 0 );
     _player2->setPoints( 0 );}
 
