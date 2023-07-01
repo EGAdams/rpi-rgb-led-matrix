@@ -13,7 +13,8 @@ Mode1WinSequences::Mode1WinSequences( Player* player1,
     _gameLeds( player1, player2, pinInterface ),
     _setLeds( player1, player2, pinInterface ),
     _reset( player1, player2, pinInterface, gameState ),
-    _undo( player1, player2, pinInterface, gameState ) {}
+    _undo( player1, player2, pinInterface, gameState ) {
+        _setWin = new SetWin( &_undo, _gameState, &_setLeds );}
 
 void Mode1WinSequences::setScoreBoard( ScoreBoard* scoreBoard ) {
     _pointLeds.setScoreBoard( scoreBoard );
@@ -34,20 +35,7 @@ void Mode1WinSequences::p1GameWinSequence() {
     _player1->setPoints( 0 );
     _player2->setPoints( 0 );}
 
-void Mode1WinSequences::p1SetWinSequence() {
-    std::cout << "p1SetWinSequence()" << std::endl;
-    _undo.memory();  
-    for ( int currentPulseCount = 0; currentPulseCount < SET_WIN_PULSE_COUNT; currentPulseCount++ ) {
-        _player1->setSets( _gameState, 0 );
-        _setLeds.updateSets();
-        GameTimer::gameDelay( _gameState->getFlashDelay());
-        _player1->setSets( _gameState, _gameState->getP1SetsMem());
-        _setLeds.updateSets();
-        GameTimer::gameDelay( _gameState->getFlashDelay());}
-    _player1->setGames( 0 );
-    _player2->setGames( 0 );
-    _gameLeds.updateGames();  
-    _setLeds.updateSets();}
+void Mode1WinSequences::p1SetWinSequence() { _setWin->execute( _player1 ); }
 
 void Mode1WinSequences::p1MatchWinSequence() {
     _undo.memory();
@@ -72,20 +60,20 @@ void Mode1WinSequences::p2GameWinSequence() {
     _player1->setPoints( 0 );
     _player2->setPoints( 0 );}
 
-void Mode1WinSequences::p2SetWinSequence() {
-    std::cout << "p2SetWinSequence()" << std::endl;
-    _undo.memory();  
-    for ( int currentPulseCount = 0; currentPulseCount < SET_WIN_PULSE_COUNT; currentPulseCount++ ) {
-        _player2->setSets( _gameState, 0 );
-        _setLeds.updateSets();
-        GameTimer::gameDelay( _gameState->getFlashDelay());
-        _player2->setSets( _gameState, _gameState->getP2SetsMem());
-        _setLeds.updateSets();
-        GameTimer::gameDelay( _gameState->getFlashDelay()); }
-    _player1->setGames( 0 );
-    _player2->setGames( 0 );
-    _gameLeds.updateGames();  
-    _setLeds.updateSets();}
+void Mode1WinSequences::p2SetWinSequence() { _setWin->execute( _player2 ); }
+    // std::cout << "p2SetWinSequence()" << std::endl;
+    // _undo.memory();  
+    // for ( int currentPulseCount = 0; currentPulseCount < SET_WIN_PULSE_COUNT; currentPulseCount++ ) {
+    //     _player2->setSets( _gameState, 0 );
+    //     _setLeds.updateSets();
+    //     GameTimer::gameDelay( _gameState->getFlashDelay());
+    //     _player2->setSets( _gameState, _gameState->getP2SetsMem());
+    //     _setLeds.updateSets();
+    //     GameTimer::gameDelay( _gameState->getFlashDelay()); }
+    // _player1->setGames( 0 );
+    // _player2->setGames( 0 );
+    // _gameLeds.updateGames();  
+    // _setLeds.updateSets();}
 
 void Mode1WinSequences::p2MatchWinSequence() {
     _undo.memory();               

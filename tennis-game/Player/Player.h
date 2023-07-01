@@ -8,6 +8,7 @@ class Player {
     Player( int player_number );
     ~Player();
     
+    void setOpponent(    Player* opponent                 ); Player* getOpponent();
     void setPoints(      int points                       ); int getPoints();
     void setGames(       int games                        ); int getGames();
     void setMatches(     int matches                      ); int getMatches();
@@ -22,6 +23,7 @@ class Player {
     int number(); // only set during construction
 
  private:
+    Player* _opponent;
     int _playerNumber;
     int _points;
     int _games;

@@ -6,7 +6,6 @@
 #include "../GameState/GameState.h"
 #include "../GameLeds/GameLeds.h"
 #include "../GameTimer/GameTimer.h"
-
 class GameWinSequence {
 
  public:
