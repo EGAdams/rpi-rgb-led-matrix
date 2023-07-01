@@ -5,7 +5,7 @@ SetWin::SetWin( Undo* undo, GameState* gameState, SetLeds* setLeds ):
 SetWin::~SetWin() {}
 
 void SetWin::execute( Player* player ) {
-    std::cout << "SetWin::execute()" << std::endl;
+    std::cout << "*** SetWin::execute() ***" << std::endl;
     _undo->memory();
     std::cout << "updating player sets" << std::endl;
     player->setSets( _gameState, _gameState->getP1SetsMem());
@@ -13,4 +13,5 @@ void SetWin::execute( Player* player ) {
     std::cout << "setting player games to 0" << std::endl;
     player->setGames( 0 ); player->getOpponent()->setGames( 0 );
     std::cout << "updating set leds" << std::endl;
-    _setLeds->updateSets(); }
+    _setLeds->updateSets(); 
+    std::cout << "*** end of SetWin::execute() ***" << std::endl; }
