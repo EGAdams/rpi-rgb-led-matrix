@@ -48,17 +48,17 @@ void Mode1WinSequences::p1MatchWinSequence() {
     _reset.resetScoreboard();}
 
 void Mode1WinSequences::p2GameWinSequence() {
-    std::cout << "p2GameWinSequence()" << std::endl;
+    std::cout << "*** inside WnSequences class.  executing p2GameWinSequence()... ***" << std::endl;
     _undo.memory();  
-    for ( int currentPulseCount = 0;
-        currentPulseCount < _gameState->getGameWinPulseCount();
-        currentPulseCount++ ) {
-        _player2->setGames( 99 );
-        _gameLeds.updateGames();  
-        GameTimer::gameDelay( _gameState->getGameFlashDelay());
-        _player2->setGames( _gameState->getP2GamesMem());
-        _gameLeds.updateGames();                          
-        GameTimer::gameDelay( _gameState->getGameFlashDelay());}
+    // for ( int currentPulseCount = 0;
+    //     currentPulseCount < _gameState->getGameWinPulseCount();
+    //     currentPulseCount++ ) {
+    //     _player2->setGames( 99 );
+    //     _gameLeds.updateGames();  
+    //     GameTimer::gameDelay( _gameState->getGameFlashDelay());
+    //     _player2->setGames( _gameState->getP2GamesMem());
+    //     _gameLeds.updateGames();                          
+    //     GameTimer::gameDelay( _gameState->getGameFlashDelay());}
     _player1->setPoints( 0 );
     _player2->setPoints( 0 );}
 
