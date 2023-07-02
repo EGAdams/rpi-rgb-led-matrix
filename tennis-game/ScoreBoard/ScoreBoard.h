@@ -11,6 +11,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <iostream>
+#include <memory>
 
 #define PLAYER_1_SERVE  0
 #define PLAYER_2_SERVE  1
@@ -29,12 +30,12 @@ private:
     Player*          _player1;
     Player*          _player2;
     GameState*       _gameState;
-    NumberDrawer*    _smallNumberDrawer;
-    NumberDrawer*    _bigNumberDrawer;
-    NumberDrawer*    _pipeDrawer;
     rgb_matrix::Font _big_number_font;
-    SetDrawer*       _setDrawer;
-    RGBMatrix* _canvas;
+    std::unique_ptr<NumberDrawer>    _smallNumberDrawer;
+    std::unique_ptr<NumberDrawer>    _bigNumberDrawer;
+    std::unique_ptr<NumberDrawer>    _pipeDrawer;
+    std::unique_ptr<SetDrawer>       _setDrawer;
+    std::unique_ptr<RGBMatrix>       _canvas;
 
     void _drawPlayerScore(  Player* player        );
     void _drawPlayerSets(   Player* player        );

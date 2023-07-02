@@ -47,18 +47,15 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT ); exit( 1 );}
     Color color( 255, 255, 0 );
     Color bg_color( 0, 0, 0 );
-    _bigNumberDrawer   = new NumberDrawer( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color );
-    _smallNumberDrawer = new NumberDrawer( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color );
-    _pipeDrawer        = new NumberDrawer( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color ); 
-    _setDrawer         = new SetDrawer(    _canvas, _gameState                                            );
+    _bigNumberDrawer   = std::make_unique<NumberDrawer>( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color );
+    _smallNumberDrawer = std::make_unique<NumberDrawer>( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color );
+    _pipeDrawer        = std::make_unique<NumberDrawer>( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color ); 
+    _setDrawer         = std::make_unique<SetDrawer>(    _canvas, _gameState                                            );
     update(); }
 
 ScoreBoard::~ScoreBoard() {
     std::cout << "destroying ScoreBoard..." << std::endl;
-    delete _bigNumberDrawer;
-    delete _pipeDrawer; 
-    delete _setDrawer; 
-    delete _smallNumberDrawer; }
+    delete _canvas.get(); }
 
 void ScoreBoard::drawGames() {  std::cout << "inside ScoreBoard::drawGames()" << std::endl; }
 
