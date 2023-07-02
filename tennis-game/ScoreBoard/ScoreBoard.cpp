@@ -36,7 +36,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
     printf( "  drop_privileges: %d\n", runtime_opt.drop_privileges );
     printf( "  gpio_slowdown: %d\n", runtime_opt.gpio_slowdown );
     CanvasCreator canvasCreator( matrix_options, runtime_opt );
-    _canvas = canvasCreator.createCanvas();
+    _canvas = std::unique_ptr<rgb_matrix::RGBMatrix>( canvasCreator.createCanvas());
     FontLoader fontLoader( "fonts/mspgothic_042623.bdf" ); // Load Fonts
     rgb_matrix::Font font;
     fontLoader.LoadFont( font );
