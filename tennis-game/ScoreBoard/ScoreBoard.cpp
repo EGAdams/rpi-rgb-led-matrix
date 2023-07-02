@@ -47,10 +47,10 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT ); exit( 1 );}
     Color color( 255, 255, 0 );
     Color bg_color( 0, 0, 0 );
-    _bigNumberDrawer   = std::make_unique<NumberDrawer>( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color );
-    _smallNumberDrawer = std::make_unique<NumberDrawer>( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color );
-    _pipeDrawer        = std::make_unique<NumberDrawer>( _canvas, &_big_number_font, NumberDrawer::BIG, color, bg_color ); 
-    _setDrawer         = std::make_unique<SetDrawer>(    _canvas, _gameState                                            );
+    _bigNumberDrawer   = std::make_unique<NumberDrawer>( _canvas.get(), &_big_number_font, NumberDrawer::BIG, color, bg_color );
+    _smallNumberDrawer = std::make_unique<NumberDrawer>( _canvas.get(), &_big_number_font, NumberDrawer::BIG, color, bg_color );
+    _pipeDrawer        = std::make_unique<NumberDrawer>( _canvas.get(), &_big_number_font, NumberDrawer::BIG, color, bg_color ); 
+    _setDrawer         = std::make_unique<SetDrawer>(    _canvas.get(), _gameState                                            );
     update(); }
 
 ScoreBoard::~ScoreBoard() {
