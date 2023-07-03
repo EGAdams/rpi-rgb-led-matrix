@@ -59,7 +59,7 @@ void Undo::setMode1Undo( History* history ) {
     std::cout << "done pushing gamestate to history." << std::endl; }
 
 void Undo::mode1Undo( History* history ) {
-    GameTimer::gameDelay( 250 );
+    GameTimer::gameDelay( 100 );
     if ( history->size() == 0 ) { return; }
     #if defined _WIN32 || defined _WIN64
         std::cout << "inside mode1Undo.  history->size()==" << history->size() << std::endl;
