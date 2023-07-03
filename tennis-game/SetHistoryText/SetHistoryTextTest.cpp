@@ -31,12 +31,11 @@ class SetHistoryTextTest : public ::testing::Test {
     ScoreBoard* scoreboard; };
 
 TEST_F( SetHistoryTextTest, TestGetSetHistoryText ) {
-    // std::map< int, int > set_history = {{ 0, 15 }, { 1, 10 }, { 2, 40 }};
     player_1->setSetHistory( SET_HISTORY_COLUMN_1, 4 );
     player_1->setSetHistory( SET_HISTORY_COLUMN_2, 6 );
     player_1->setSetHistory( SET_HISTORY_COLUMN_3, 2 );
     gameState->setPlayer1SetHistory( player_1->getSetHistory());
-    // set_history = {{ 0, 4 }, { 1, 5 }, { 2, 30 }};
+
     player_2->setSetHistory( SET_HISTORY_COLUMN_1, 2 );
     player_2->setSetHistory( SET_HISTORY_COLUMN_2, 5 );
     player_2->setSetHistory( SET_HISTORY_COLUMN_3, 3 );
@@ -44,7 +43,7 @@ TEST_F( SetHistoryTextTest, TestGetSetHistoryText ) {
 
     std::cout << "updating scoreboard..." << std::endl;
     scoreboard->update();
-    
+
     ASSERT_EQ( 1, 1 );
     std::cout << "sleeping for 5 seconds...\n\n" << std::endl;
     GameTimer* gameTimer = new GameTimer();
