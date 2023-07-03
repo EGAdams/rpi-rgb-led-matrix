@@ -5,7 +5,7 @@
 #include <map>
 #include "../GameState/GameState.h"
 #include "../TennisConstants/TennisConstants.h"
-#include "../Player/Player.h"
+
 class SetHistoryText {
  public:
     SetHistoryText( GameState* gameState );

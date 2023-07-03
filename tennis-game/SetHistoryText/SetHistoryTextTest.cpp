@@ -1,6 +1,9 @@
 #include "../googletest/googletest/include/gtest/gtest.h"
 #include "./SetHistoryText.h"
 #include "../Player/Player.h"
+#include "../ScoreBoard/ScoreBoard.h"
+#include "../GameTimer/GameTimer.h"
+
 
 class SetHistoryTextTest : public ::testing::Test {
  protected:
@@ -11,18 +14,21 @@ class SetHistoryTextTest : public ::testing::Test {
         gameState = new GameState();
         player_1 = new Player( PLAYER_1_INITIALIZED );
         player_2 = new Player( PLAYER_2_INITIALIZED ); // got players defined, now set echother as opponents...
-        setHistoryText = new SetHistoryText( gameState ); }
+        setHistoryText = new SetHistoryText( gameState ); 
+        scoreboard = new ScoreBoard( player_1, player_2, gameState ); }
 
     void TearDown() override { // Code here will be called immediately after each test (right before the destructor).
         delete setHistoryText;
         delete player_1;
         delete player_2;
-        delete gameState; }
+        delete gameState; 
+        delete scoreboard; }
 
     GameState* gameState;
     Player* player_1;
     Player* player_2;
-    SetHistoryText* setHistoryText; };
+    SetHistoryText* setHistoryText;
+    ScoreBoard* scoreboard; };
 
 TEST_F( SetHistoryTextTest, TestGetSetHistoryText ) {
     // std::map< int, int > set_history = {{ 0, 15 }, { 1, 10 }, { 2, 40 }};
@@ -36,7 +42,15 @@ TEST_F( SetHistoryTextTest, TestGetSetHistoryText ) {
     player_2->setSetHistory( SET_HISTORY_COLUMN_3, 3 );
     gameState->setPlayer2SetHistory( player_2->getSetHistory());
 
+    std::cout << "updating scoreboard..." << std::endl;
+    scoreboard->update();
+    
     ASSERT_EQ( 1, 1 );
+    std::cout << "sleeping for 5 seconds...\n\n" << std::endl;
+    GameTimer* gameTimer = new GameTimer();
+    gameTimer->gameDelay( 5000 );
+    std::cout << "done sleeping.  end of test." << std::endl;
+
     // std::string result = setHistoryText->getSetHistoryText( 1 );
     // ASSERT_EQ(result, "15 10 40 ");
     // result = setHistoryText->getSetHistoryText( 2 );
