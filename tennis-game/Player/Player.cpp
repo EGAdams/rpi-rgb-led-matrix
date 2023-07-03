@@ -16,6 +16,12 @@ void Player::setSets( GameState* gameState, int sets ) {
     gameState->setPlayer1SetHistory( this->getSetHistory());
     gameState->setPlayer2SetHistory( _opponent->getSetHistory());
     std::cout << "*** jul3 player " << _playerNumber << " set: " << gameState->getCurrentSet() << " is: " << _set_history[ gameState->getCurrentSet() ] << std::endl;
+    std::cout << "//////////////////////////////////////////////////////////////////////////////////////////////////////////" << std::endl;
+    std::cout << "making sure opponent set history is set: " << _opponent->getSetHistory()[ gameState->getCurrentSet() ] << std::endl;
+    std::cout << "making sure this player set history is set: " << this->getSetHistory()[ gameState->getCurrentSet() ] << std::endl;
+    std::cout << "//////////////////////////////////////////////////////////////////////////////////////////////////////////" << std::endl;
+
+    
     std::cout << "*** setting curent set to: " << gameState->getCurrentSet() + 1 << " ***" << std::endl;
     gameState->setCurrentSet( gameState->getCurrentSet() + 1 );
     std::cout << "end of setSets method.  setting sets to: " << sets << std::endl;
