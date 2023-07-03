@@ -27,6 +27,6 @@ TEST_F( SetHistoryTextTest, TestGetSetHistoryText ) {
     result = setHistoryText->getSetHistoryText( 2 );
     ASSERT_EQ(result, "4 5 30 "); }
 
-// int main(int argc, char** argv) {
-//     ::testing::InitGoogleTest(&argc, argv);
-//     return RUN_ALL_TESTS(); }
+int main(int argc, char** argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS(); }

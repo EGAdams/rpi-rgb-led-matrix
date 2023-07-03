@@ -35,9 +35,6 @@ $(RGB_LIBRARY): FORCE
 tennis-game: $(MAIN_OBJECTS)
 	$(CXX) $^ -o $@ $(LDFLAGS)
 
-ScoreBoardSetTest: $(TEST_OBJECTS) ScoreBoardSetTest.o 
-	$(CXX) $^ -o $@ $(LDFLAGS)
-
 SetHistoryTextTest: $(TEST_OBJECTS) SetHistoryText.o 
 	$(CXX) $^ -o $@ $(LDFLAGS)
 
