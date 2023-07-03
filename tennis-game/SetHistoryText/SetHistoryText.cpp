@@ -11,7 +11,7 @@ std::string SetHistoryText::_buildString( int player ) {
     std::map< int, int > setHistory = player == 1 ? 
         _gameState->getPlayer1SetHistory() : _gameState->getPlayer2SetHistory();
     std::string setHistoryText = ""; 
-    for ( long unsigned int i = 0; i < setHistory.size()-1; i++ ) {
+    for ( long unsigned int i = 0; i < TOTAL_SETS; i++ ) {
         setHistoryText += std::to_string( setHistory[ i ] );
         setHistoryText += " "; }
     return setHistoryText; }

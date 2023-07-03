@@ -26,6 +26,7 @@
 #define SET_HISTORY_COLUMN_1     1
 #define SET_HISTORY_COLUMN_2     2
 #define SET_HISTORY_COLUMN_3     3
+#define TOTAL_SETS               3
 
 // #define INPUT 0 // not in windows.. ouch!!
 // #define OUTPUT 0
