@@ -107,13 +107,13 @@ void Mode1Score::mode1P1Games() {
                 _mode1WinSequences.p1GameWinSequence();
                 _gameLeds.updateGames();
                 _resetGame();
-            }
-        }
+            }}
     } else {
         std::cout << "*** calling p1GameWinSequence() ***" << std::endl;
         _mode1WinSequences.p1GameWinSequence();
         _gameLeds.updateGames();
-        _resetGame(); }}
+        _resetGame(); }
+    _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );}
 
 void Mode1Score::mode1P2Games() {
     std::cout << "inside mode1P2Games().  updtating game leds..." << std::endl;
@@ -156,7 +156,8 @@ void Mode1Score::mode1P2Games() {
     } else {
         _mode1WinSequences.p2GameWinSequence();
         _gameLeds.updateGames();
-        _resetGame(); }}
+        _resetGame(); }
+    _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );}
 ////////////////////////////////// END MODE 1 GAMES ///////////////////////////////////////////////
 
 void Mode1Score::mode1TBP1Games() {

@@ -10,9 +10,9 @@ void Player::setOpponent( Player* opponent ) { _opponent = opponent; }
 Player* Player::getOpponent() { return _opponent; }
 void Player::setSets( GameState* gameState, int sets ) {
     std::cout << "Player::setSets()  passed in sets var: " << sets << std::endl;
-    std::cout << "setting history for player " << _playerNumber << " set " << gameState->getCurrentSet() << " to " << _games << std::endl; 
-    this->setSetHistory(      gameState->getCurrentSet(), _games );
-    gameState->setCurrentSet( gameState->getCurrentSet() + 1     );
+    std::cout << "setting set history for player " << _playerNumber << " set " << gameState->getCurrentSet() << " to " << _games << std::endl; 
+    this->setSetHistory( gameState->getCurrentSet(), _games );
+    _opponent->setSetHistory( gameState->getCurrentSet(), _opponent->getGames() );
     std::cout << "end of setSets method.  setting sets to: " << sets << std::endl;
     _sets = sets; }                                          int Player::getSets() {    return _sets;    }
 void Player::setPoints(int points) { _points = points; }     int Player::getPoints() {  return _points;  }
