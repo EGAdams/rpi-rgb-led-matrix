@@ -56,8 +56,8 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
 ScoreBoard::~ScoreBoard() {
     std::cout << "destroying ScoreBoard..." << std::endl;
     if ( _canvas != NULL ) {
-        std::cout << "deleting _canvas..." << std::endl;
-        delete _canvas.get();
+        std::cout << "NOT deleting _canvas..." << std::endl;
+        // delete _canvas.get();
     } else { std::cout << "*** WARNING: _canvas == NULL, not deleting. ***" << std::endl; }}
 
 void ScoreBoard::drawGames() {  std::cout << "inside ScoreBoard::drawGames()" << std::endl; }
