@@ -20,6 +20,7 @@ Mode1Score::~Mode1Score() {}
 void Mode1Score::setScoreBoard( ScoreBoard* scoreBoard ) { 
     _pointLeds.setScoreBoard(         scoreBoard ); 
     _gameLeds.setScoreBoard(          scoreBoard ); 
+    _setLeds.setScoreBoard(           scoreBoard );
     _mode1WinSequences.setScoreBoard( scoreBoard ); }
 
 void Mode1Score::_resetGame() {
