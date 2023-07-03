@@ -21,40 +21,29 @@ class ScoreBoardSetTest : public ::testing::Test {
         delete player_2;
         delete player_1;
         delete gameState; 
-        delete scoreboard; 
-        delete gameTimer; }
+        delete scoreboard; }
 
     Player*         player_1;
     Player*         player_2;
     GameState*      gameState;
     SetHistoryText* setHistoryText; 
     ScoreBoard*     scoreboard; 
-    GameTimer*      gameTimer; };
+    GameTimer       gameTimer; };
 
 TEST_F( ScoreBoardSetTest, TestScoreBoardSet ) {
-    // std::map< int, int > set_history = {{ 0, 3 }, { 1, 2 }, { 2, 4 }};
     player_1->setSetHistory( SET_HISTORY_COLUMN_1, 5 );
     player_1->setSetHistory( SET_HISTORY_COLUMN_2, 4 );
     player_1->setSetHistory( SET_HISTORY_COLUMN_3, 2 );
     gameState->setPlayer1SetHistory( player_1->getSetHistory());
-    // set_history = {{ 0, 4 }, { 1, 5 }, { 2, 30 }};
     player_2->setSetHistory( SET_HISTORY_COLUMN_1, 4 );
     player_2->setSetHistory( SET_HISTORY_COLUMN_2, 5 );
     player_2->setSetHistory( SET_HISTORY_COLUMN_3, 30 );
-
     gameState->setPlayer2SetHistory( player_2->getSetHistory());
     scoreboard->update();
-
-    std::cout << "sets should be showing.  delaying 5 seconds..."
-    GameTimer gameTimer = new GameTimer();
+    std::cout << "sets should be showing.  delaying 5 seconds..." << std::endl;
+    GameTimer gameTimer;
     gameTimer.gameDelay( 5000 );
-    std::cout << "done delaying.  end of test."
-
-    // std::string result = setHistoryText->getSetHistoryText( 1 );
-    // ASSERT_EQ(result, "15 10 40 ");
-    // result = setHistoryText->getSetHistoryText( 2 );
-    // ASSERT_EQ(result, "4 5 30 "); 
-}
+    std::cout << "done delaying.  end of test." << std::endl; }
 
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
