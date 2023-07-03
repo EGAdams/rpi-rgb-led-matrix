@@ -110,9 +110,11 @@ int GameState::getPlayer2Matches() { return _player2_matches; }
 void GameState::setPlayer2Matches( int player2Matches ) { _player2_matches = player2Matches; }
 std::map<int, int> GameState::getPlayer1SetHistory() { 
     std::cout << "getting player1_set_history in GameState..." << std::endl;
+    std::cout << "jul3 player1_set_history[ 1 ]: " << _player1_set_history[ 1 ] << std::endl;
     return _player1_set_history; }
 void GameState::setPlayer1SetHistory( std::map<int, int> player1_set_history ) { _player1_set_history = player1_set_history; }
 std::map<int, int> GameState::getPlayer2SetHistory() { 
     std::cout << "getting player2_set_history in GameState..." << std::endl;
+    std::cout << "jul3 player2_set_history[ 1 ]: " << _player2_set_history[ 1 ] << std::endl;
     return _player2_set_history; }
 void GameState::setPlayer2SetHistory( std::map<int, int> player2_set_history ) { _player2_set_history = player2_set_history; }
