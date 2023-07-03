@@ -121,6 +121,7 @@ void Mode1Score::mode1P2Games() {
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
     std::cout << "serve switch set to: " << _gameState->getServeSwitch() << std::endl;
     if ( _player2->getGames()  >= GAMES_TO_WIN_SET ) {
+        std::cout << "*** //////////////////////////////// GAMES_TO_WIN_SET reached //////////////////////////////// ***" << std::endl;
         if ( _player2->getGames()  == GAMES_TO_WIN_SET && _player1->getGames() == GAMES_TO_WIN_SET ) {
             _gameState->setTieBreak( 1 );
             std::cout << "*** calling tieBreakEnable() from inside Mode1Score::mode1P2Games()... ***" << std::endl;
