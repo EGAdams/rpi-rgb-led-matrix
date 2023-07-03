@@ -22,7 +22,7 @@ using namespace rgb_matrix;
 int main( int argc, char *argv[]) {
     bool game_running = true;
     int loop_count = 0;
-    #define MAX_LOOP_COUNT 300
+    #define MAX_LOOP_COUNT 100
     #define A_SPACE        13
     #define FOUR_SPACE     14
     #define THREE_SPACE    15
