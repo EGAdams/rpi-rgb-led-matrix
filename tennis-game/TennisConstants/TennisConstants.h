@@ -21,7 +21,11 @@
 #define TIE_BREAK_WATCH_INTERVAL 50
 #define BATTERY_TEST_BLINK_DELAY 1000
 #define GAMES_TO_WIN_SET         6
-
+#define PLAYER_1_INITIALIZED     0
+#define PLAYER_2_INITIALIZED     1
+#define SET_HISTORY_COLUMN_1     1
+#define SET_HISTORY_COLUMN_2     2
+#define SET_HISTORY_COLUMN_3     3
 
 // #define INPUT 0 // not in windows.. ouch!!
 // #define OUTPUT 0

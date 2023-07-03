@@ -31,8 +31,8 @@ GameObject::GameObject() {
     _webLiquidCrystal = new WebLiquidCrystal();
     _gameTimer = new GameTimer();
     std::cout << "constructing players... " << std::endl;
-    _player1 = new Player( PLAYER_1 ); 
-    _player2 = new Player( PLAYER_2 ); // got players defined, now set echother as opponents...
+    _player1 = new Player( PLAYER_1_INITIALIZED ); 
+    _player2 = new Player( PLAYER_2_INITIALIZED ); // got players defined, now set echother as opponents...
     _player2->setOpponent( _player1 ); _player1->setOpponent( _player2 );
     _pinState = new PinState( _pin_map );
     _pinInterface = new PinInterface( _pinState );

@@ -4,6 +4,8 @@
 #include <string>
 #include <map>
 #include "../GameState/GameState.h"
+#include "../TennisConstants/TennisConstants.h"
+#include "../Player/Player.h"
 
 class SetHistoryText {
  public:
@@ -13,5 +15,5 @@ class SetHistoryText {
     std::string _buildString(      int player );
 
  private: 
-    GameState*          _gameState; };
+    GameState* _gameState; };
 #endif

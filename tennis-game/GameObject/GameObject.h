@@ -16,9 +16,8 @@
 #include <map>
 #include "../../include/led-matrix.h"
 #include "../../include/graphics.h"
+#include "../TennisConstants/TennisConstants.h"
 
-#define PLAYER_1 0
-#define PLAYER_2 1
 #define GAME_LOOP_DELAY 250
 class GameObject {
  public:
