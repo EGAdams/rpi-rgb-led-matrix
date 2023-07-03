@@ -18,7 +18,7 @@
 #include "../../include/graphics.h"
 #include "../TennisConstants/TennisConstants.h"
 
-#define GAME_LOOP_DELAY 250
+#define GAME_LOOP_DELAY 100 // 250
 class GameObject {
  public:
   GameObject( Player*       player1,
