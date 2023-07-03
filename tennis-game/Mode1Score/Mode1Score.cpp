@@ -80,6 +80,8 @@ void Mode1Score::mode1P1Games() {
         }
         if ( _gameState->getTieBreak() == 0 ) {
             std::cout << "*** tie break is zero.  checking if p1 games - p2 games > 1... ***" << std::endl;
+            if( !_player1 || !_player2 ) { std::cout << "*** ERROR: player1 or player2 is NULL.  exiting... ***" << std::endl; exit( 1 ); }
+            std::cout << "*** player1 games: " << _player1->getGames() << " player2 games: " << _player2->getGames() << std::endl;
             if (( _player1->getGames() - _player2->getGames() ) > 1 ) {
                 std::cout << "*** setting sets for player 1... ***" << std::endl;
                 _player1->setSets( _gameState, _player1->getSets() + 1 );
