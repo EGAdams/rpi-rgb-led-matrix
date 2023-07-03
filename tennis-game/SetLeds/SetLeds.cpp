@@ -17,7 +17,9 @@ void SetLeds::setScoreBoard( ScoreBoard* scoreBoard ) { _scoreBoard = scoreBoard
 #define PLAYER_2_TWO_SETS  2
 
 void SetLeds::updateSets() {
-  switch (_player1->getSets() ) {
+  std::cout << "inside SetLeds::updateSets()" << std::endl;
+  std::cout << "player1 sets: " << _player1->getSets() << std::endl;
+  switch ( _player1->getSets() ) {
 
     case PLAYER_1_ZERO_SETS:
         if ( _scoreBoard->hasCanvas() ) {

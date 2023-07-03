@@ -84,7 +84,7 @@ void Mode1Score::mode1P1Games() {
             std::cout << "*** player1 games: " << _player1->getGames() << " player2 games: " << _player2->getGames() << std::endl;
             if (( _player1->getGames() - _player2->getGames() ) > 1 ) {
                 std::cout << "*** setting sets for player 1... ***" << std::endl;
-                _player1->setSets( _gameState, _player1->getSets() + 1 );
+                _player1->setSets( _gameState, _player1->getSets() + 1 ); /// <-------------<< bug here!
                 _setLeds.updateSets();
                 if ( _player1->getSets() == _player2->getSets() ) {
                     _mode1WinSequences.p1TBSetWinSequence();
