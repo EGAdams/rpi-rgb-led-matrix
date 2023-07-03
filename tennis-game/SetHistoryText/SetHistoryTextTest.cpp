@@ -3,7 +3,7 @@
 
 class SetHistoryTextTest : public ::testing::Test {
  protected:
-    SetHistoryTextTest() {} // You can do set-up work for each test here.
+    SetHistoryTextTest() {}           // You can do set-up work for each test here.
     ~SetHistoryTextTest() override {} // You can do clean-up work that doesn't throw exceptions here.
        
     void SetUp() override { // Code here will be called immediately after the constructor (right before each test).
