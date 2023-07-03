@@ -21,9 +21,7 @@ void SetLeds::updateSets() {
   std::cout << "player1 sets: " << _player1->getSets() << std::endl;
   if( !_scoreBoard ) {
     std::cout << "scoreboard is null" << std::endl;
-  } else {
-    std::cout << "scoreboard is not null" << std::endl;
-  }
+  } else { std::cout << "scoreboard is not null" << std::endl;  }
   switch ( _player1->getSets() ) {
 
     case PLAYER_1_ZERO_SETS:
