@@ -7,13 +7,13 @@
 #include "../NumberDrawer/NumberDrawer.h"
 #include "../FontLoader/FontLoader.h"
 #include "../SetHistoryText/SetHistoryText.h"
+#include "../TennisConstants/TennisConstants.h"
 
 #define SMALL_BEFORE  7
 #define SMALL_BETWEEN 17
 #define START_ROW     86
 #define LITTLE_FONT   "fonts/little_numbers.bdf"
-#define PLAYER_ONE    1
-#define PLAYER_TWO    2
+
 
 class SetDrawer {
  public:

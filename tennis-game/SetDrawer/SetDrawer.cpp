@@ -21,8 +21,8 @@ void SetDrawer::drawSets() {
     int y = START_ROW; 
     int x = 0;
     std::cout << "*** inside SetDrawer drawing sets..." << std::endl;
-    std::string playerOneSetString = _setHistoryText.getSetHistoryText( PLAYER_ONE );
-    std::string playerTwoSetString = _setHistoryText.getSetHistoryText( PLAYER_TWO );
+    std::string playerOneSetString = _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX );
+    std::string playerTwoSetString = _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX );
     std::cout << "playerOneSetString: " << playerOneSetString << std::endl;
     std::cout << "playerTwoSetString: " << playerTwoSetString << std::endl;
     Color thirdRowColor( 0, 255, 0 );
