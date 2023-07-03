@@ -17,6 +17,9 @@ void Player::setSets( GameState* gameState, int sets ) {
     gameState->setPlayer2SetHistory( _opponent->getSetHistory());
     std::cout << "*** setting curent set to: " << gameState->getCurrentSet() + 1 << " ***" << std::endl;
     gameState->setCurrentSet( gameState->getCurrentSet() + 1 );
+    if ( _set_history[ 1 ] == 0 ) {
+        std::cout << "*** ERROR: set history for player " << _playerNumber << " set 1 is 0 ***" << std::endl;
+        std::cout << "exiting..." << std::endl; exit( 1 ); }
     std::cout << "end of setSets method.  setting sets to: " << sets << std::endl;
     _sets = sets; }                                          int Player::getSets() {    return _sets;    }
 void Player::setPoints(int points) { _points = points; }     int Player::getPoints() {  return _points;  }
