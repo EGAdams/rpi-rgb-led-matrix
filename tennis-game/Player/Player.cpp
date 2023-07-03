@@ -13,6 +13,7 @@ void Player::setSets( GameState* gameState, int sets ) {
     std::cout << "setting set history for player " << _playerNumber << " set " << gameState->getCurrentSet() << " to " << _games << std::endl; 
     this->setSetHistory( gameState->getCurrentSet(), _games );
     _opponent->setSetHistory( gameState->getCurrentSet(), _opponent->getGames() );
+    gameState->setCurrentSet( gameState->getCurrentSet() + 1 );
     std::cout << "end of setSets method.  setting sets to: " << sets << std::endl;
     _sets = sets; }                                          int Player::getSets() {    return _sets;    }
 void Player::setPoints(int points) { _points = points; }     int Player::getPoints() {  return _points;  }
