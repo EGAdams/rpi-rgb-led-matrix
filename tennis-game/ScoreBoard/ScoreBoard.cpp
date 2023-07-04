@@ -102,7 +102,7 @@ void ScoreBoard::_drawPlayerScore(Player* player) {
     int baseline = _big_number_font.baseline();
     int first_offset  = _characterOffset( score.substr( 0, 1 ));
     int second_offset = _characterOffset( score.substr( 1, 1 ));
-    if( player->number() == PLAYER_ONE_SET_INDEX ) {
+    if( player->number() == PLAYER_1_INITIALIZED ) {
         _playerOneScoreDrawer->DrawNumber( score.substr( 0, 1 ), first_offset  + 16, baseline + vertical_offset );
         _playerOneScoreDrawer->DrawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset );
     } else {
