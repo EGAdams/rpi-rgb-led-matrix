@@ -52,5 +52,8 @@ int main( int argc, char *argv[]) {
     } ///////// End Game Loop /////////
     std::cout << "game loop exited.  loop_count: " << loop_count << std::endl;
     if ( loop_count > MAX_LOOP_COUNT ) {
+        // sleep for 5 seconds
+        std::cout << "sleeping for 5 seconds..." << std::endl;
+        sleep( 120 );
         std::cout << "MAX_LOOP_COUNT reached.  Exiting...\n\n\n\n\n" << std::endl; }
     return 0; }
