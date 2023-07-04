@@ -107,8 +107,7 @@ void ScoreBoard::_drawPlayerScore(Player* player) {
         _playerOneScoreDrawer->DrawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset );
     } else {
         _playerTwoScoreDrawer->DrawNumber( score.substr( 0, 1 ), first_offset  + 16, baseline + vertical_offset );
-        _playerTwoScoreDrawer->DrawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset );
-    }
+        _playerTwoScoreDrawer->DrawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset ); }}
 
 void ScoreBoard::_drawPlayerSets( Player* player ) { 
     std::cout << "inside ScoreBoard::_drawPlayerSets()" << std::endl; }
