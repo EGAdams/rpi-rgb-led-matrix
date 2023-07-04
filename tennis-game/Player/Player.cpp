@@ -21,9 +21,9 @@ void Player::setSets( GameState* gameState, int sets ) {
     std::cout << "making sure this player set history is set: " << this->getSetHistory()[ gameState->getCurrentSet() ] << std::endl;
     std::cout << "//////////////////////////////////////////////////////////////////////////////////////////////////////////" << std::endl;
 
-    
-    std::cout << "*** setting curent set to: " << gameState->getCurrentSet() + 1 << " ***" << std::endl;
-    gameState->setCurrentSet( gameState->getCurrentSet() + 1 );
+    // if ( sets)
+    // std::cout << "*** setting curent set to: " << gameState->getCurrentSet() + 1 << " ***" << std::endl;
+    // gameState->setCurrentSet( gameState->getCurrentSet() + 1 );
     std::cout << "end of setSets method.  setting sets to: " << sets << std::endl;
     _sets = sets; }                                          int Player::getSets() {    return _sets;    }
 void Player::setPoints(int points) { _points = points; }     int Player::getPoints() {  return _points;  }

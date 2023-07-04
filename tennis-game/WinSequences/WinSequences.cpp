@@ -43,7 +43,9 @@ void Mode1WinSequences::p1GameWinSequence() {
 
 void Mode1WinSequences::p1SetWinSequence() { 
     std::cout << "*** executing _setWin->execute for player one... ***" << std::endl;
-    _setWin->execute( _player1 ); }
+    _setWin->execute( _player1 ); 
+    std::cout << "*** setting curent set to: " << _gameState->getCurrentSet() + 1 << " ***" << std::endl;
+    _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 ); }
 
 void Mode1WinSequences::p1MatchWinSequence() {
     _undo.memory();
@@ -73,7 +75,9 @@ void Mode1WinSequences::p2GameWinSequence() {
 
 void Mode1WinSequences::p2SetWinSequence() { 
      std::cout << "*** executing _setWin->execute... ***" << std::endl;
-    _setWin->execute( _player2 ); }
+    _setWin->execute( _player2 ); 
+    std::cout << "*** setting curent set to: " << _gameState->getCurrentSet() + 1 << " ***" << std::endl;
+    _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );}
    
     // _undo.memory();  
     // for ( int currentPulseCount = 0; currentPulseCount < SET_WIN_PULSE_COUNT; currentPulseCount++ ) {
