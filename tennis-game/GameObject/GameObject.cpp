@@ -58,6 +58,7 @@ void GameObject::loopGame() {
         // std::cout << "reading reset from loopGame()..." << std::endl;
         // _gameInputs->readReset();
         // std::cout << "reading rotary from loopGame()..." << std::endl;
+        std::cout << "*** //////////// jul3 starting another loop.  current set is: " << _gameState->getCurrentSet() << " ////////////////// ***" << std::endl;
         int rotaryValue = 1; // int rotaryValue = _gameInputs->readRotary(); TODO: actually read rotary
         std::cout << "rotaryValue: " << rotaryValue << ".  setting game mode to " << rotaryValue << "." << std::endl;
         _gameModes->setGameMode( rotaryValue );  // mode1() called here
