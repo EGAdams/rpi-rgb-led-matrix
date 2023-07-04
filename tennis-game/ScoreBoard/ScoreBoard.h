@@ -32,7 +32,8 @@ private:
     GameState*       _gameState;
     rgb_matrix::Font _big_number_font;
     std::unique_ptr<NumberDrawer>    _smallNumberDrawer;
-    std::unique_ptr<NumberDrawer>    _bigNumberDrawer;
+    std::unique_ptr<NumberDrawer>    _playerOneScoreDrawer;
+    std::unique_ptr<NumberDrawer>    _playerTwoScoreDrawer;
     std::unique_ptr<NumberDrawer>    _pipeDrawer;
     std::unique_ptr<SetDrawer>       _setDrawer;
     std::unique_ptr<RGBMatrix>       _canvas;

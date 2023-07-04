@@ -5,7 +5,8 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
     printf( "Constructing ScoreBoard...\n" );
     Color pipe_color( 255, 255, 0 ); // yellow
     Color background_color( 0, 0, 0 );
-    Color big_number_color( 0, 255, 0 ); // green
+    Color player_one_score_color( 0, 255, 0 ); // green
+    Color player_two_score_color( 255, 0, 0 ); // red
     Color outline_color( 0, 0, 0 );
     RGBMatrix::Options matrix_options; // seems like the only logical place to create the canvas
     matrix_options.hardware_mapping = "regular";  // or e.g. "adafruit-hat"
@@ -47,7 +48,11 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT ); exit( 1 );}
     Color color( 255, 255, 0 );
     Color bg_color( 0, 0, 0 );
-    _bigNumberDrawer   = std::make_unique<NumberDrawer>( _canvas.get(), &_big_number_font, NumberDrawer::BIG, color, bg_color );
+    _playerOneScoreDrawer   = std::make_unique<NumberDrawer>( 
+        _canvas.get(), &_big_number_font, NumberDrawer::BIG, player_one_score_color, bg_color );
+    _playerTwoScoreDrawer   = std::make_unique<NumberDrawer>( 
+        _canvas.get(), &_big_number_font, NumberDrawer::BIG, player_two_score_color, bg_color );
+    
     _smallNumberDrawer = std::make_unique<NumberDrawer>( _canvas.get(), &_big_number_font, NumberDrawer::BIG, color, bg_color );
     _pipeDrawer        = std::make_unique<NumberDrawer>( _canvas.get(), &_big_number_font, NumberDrawer::BIG, color, bg_color ); 
     _setDrawer         = std::make_unique<SetDrawer>(    _canvas.get(), _gameState                                            );
@@ -97,8 +102,8 @@ void ScoreBoard::_drawPlayerScore(Player* player) {
     int baseline = _big_number_font.baseline();
     int first_offset  = _characterOffset( score.substr( 0, 1 ));
     int second_offset = _characterOffset( score.substr( 1, 1 ));
-    _bigNumberDrawer->DrawNumber( score.substr( 0, 1 ), first_offset  + 16, baseline + vertical_offset );
-    _bigNumberDrawer->DrawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset ); }
+    _playerOneScoreDrawer->DrawNumber( score.substr( 0, 1 ), first_offset  + 16, baseline + vertical_offset );
+    _playerTwoScoreDrawer->DrawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset ); }
 
 void ScoreBoard::_drawPlayerSets( Player* player ) { 
     std::cout << "inside ScoreBoard::_drawPlayerSets()" << std::endl; }
