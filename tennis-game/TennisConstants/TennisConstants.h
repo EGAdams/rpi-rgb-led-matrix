@@ -23,9 +23,9 @@
 #define GAMES_TO_WIN_SET         6
 #define PLAYER_1_INITIALIZED     0
 #define PLAYER_2_INITIALIZED     1
-#define SET_HISTORY_COLUMN_1     0
-#define SET_HISTORY_COLUMN_2     1
-#define SET_HISTORY_COLUMN_3     2
+#define SET_HISTORY_COLUMN_1     1
+#define SET_HISTORY_COLUMN_2     2
+#define SET_HISTORY_COLUMN_3     3
 #define TOTAL_SETS               3
 #define PLAYER_ONE_SET_INDEX     1
 #define PLAYER_TWO_SET_INDEX     2

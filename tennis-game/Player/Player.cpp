@@ -36,7 +36,7 @@ int Player::number() { return _playerNumber; }
 
 void Player::setSetHistory( int set, int games ) {
     std::cout << "*** Player::setSetHistory() player: " << number() << " set: " << set << "  games: " << games << " ***" << std::endl;
-    _set_history[  set  ] = games; } 
+    _set_history[  set - 1 ] = games; } 
 std::map< int, int> Player::getSetHistory() {  return _set_history; }
 
 void Player::setGameHistory( int game, int score ) { _game_history[ game ] = score; } std::map< int, int> Player::getGameHistory() { return _game_history;}

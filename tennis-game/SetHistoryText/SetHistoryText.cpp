@@ -8,7 +8,7 @@ std::string SetHistoryText::getSetHistoryText( int player ) {
     return setHistoryText; }
 
 std::string SetHistoryText::_buildString( int player ) {
-    std::map< int, int > setHistory = player == 1 ? 
+    std::map< int, int > setHistory = player == PLAYER_ONE_SET_INDEX ? 
         _gameState->getPlayer1SetHistory() : _gameState->getPlayer2SetHistory();
     std::string setHistoryText = ""; 
     for ( long unsigned int i = 0; i < TOTAL_SETS; i++ ) {
