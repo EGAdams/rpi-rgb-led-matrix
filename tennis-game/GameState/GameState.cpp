@@ -28,8 +28,12 @@ GameState::GameState() { std::cout << "Constructing GameState..." << std::endl;
     _player1_sets    = 0; _player2_sets    = 0;
     _player1_matches = 0; _player2_matches = 0; }
 
-void GameState::setCurrentSet( int current_set ) { _current_set = current_set; }
-int GameState::getCurrentSet() { return _current_set; }
+void GameState::setCurrentSet( int current_set ) { 
+    std::cout << "*** /// jul3 setting current set in GameState: " << current_set << " /// ***" << std::endl;
+    _current_set = current_set; }
+int GameState::getCurrentSet() { 
+    std::cout << "*** /// jul3 getting current set in GameState: " << _current_set << " /// ***" << std::endl;
+    return _current_set; }
 void GameState::setCurrentAction( std::string currentAction ) { _currentAction = currentAction; }
 std::string GameState::getCurrentAction() { return _currentAction; }
 void GameState::setGameWinPulseCount( int gameWinPulseCount ) { _gameWinPulseCount = gameWinPulseCount; }
