@@ -62,7 +62,7 @@ ScoreBoard::~ScoreBoard() {
     std::cout << "destroying ScoreBoard..." << std::endl;
     if ( _canvas != NULL ) {
         std::cout << "NOT deleting _canvas..." << std::endl;
-        // delete _canvas.get();
+        // delete _canvas.get(); // this causes some error.  only one scoreBoard is created anyway.
     } else { std::cout << "*** WARNING: _canvas == NULL, not deleting. ***" << std::endl; }}
 
 void ScoreBoard::drawGames() {  std::cout << "inside ScoreBoard::drawGames()" << std::endl; }
@@ -80,16 +80,10 @@ void ScoreBoard::update() {
     std::cout << "inside ScoreBoard::update(), calling _drawPlayerScore..." << std::endl;
     _drawPlayerScore( _player1 );
     _drawPlayerScore( _player2 );
+    _player1->setSet( _gameState->getCurrentSet(), _player1->getSets());
     _setDrawer->drawSets(); }
 
 void ScoreBoard::clearScreen() { 
-    // std::cout << "inside ScoreBoard::clearScreen()" << std::endl;
-    // std::cout << "*** the clear screen delay... ***" << std::endl;
-    // GameTimer::gameDelay( 500 );
-    // std::cout << "*** done with the clear screen delay... ***" << std::endl;
-    // GameTimer::gameDelay( 500 );
-
-    // if _canvas is null, exit
     if ( !hasCanvas()) { std::cout << "*** ERROR: canvas == NULL.  exiting... ***" << std::endl; exit( 1 ); }
     Color flood_color( 0, 0, 0 ); _canvas->Fill( flood_color.r, flood_color.g, flood_color.b );
     std::cout << "screen cleared." << std::endl; }
