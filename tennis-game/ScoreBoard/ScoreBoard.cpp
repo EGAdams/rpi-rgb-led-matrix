@@ -80,7 +80,8 @@ void ScoreBoard::update() {
     std::cout << "inside ScoreBoard::update(), calling _drawPlayerScore..." << std::endl;
     _drawPlayerScore( _player1 );
     _drawPlayerScore( _player2 );
-    _player1->setSet( _gameState->getCurrentSet(), _player1->getSets());
+    _player1->setSets( _gameState, _player1->getSets());
+    _player2->setSets( _gameState, _player2->getSets());
     _setDrawer->drawSets(); }
 
 void ScoreBoard::clearScreen() { 
