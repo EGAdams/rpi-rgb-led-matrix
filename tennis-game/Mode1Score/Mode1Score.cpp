@@ -91,7 +91,7 @@ void Mode1Score::mode1P1Games() {
                     _mode1WinSequences.p1TBSetWinSequence();
                     _gameState->setSetTieBreak( 1 );
                     _mode1TieBreaker.setTieBreakEnable();
-                } else if ( _player1->getSets() == 2 ) {
+                } else if ( _player1->getSets() == SETS_TO_WIN_MATCH ) {
                     _mode1WinSequences.p1MatchWinSequence();
                 } else {
                     std::cout << "*** calling p1SetWinSequence() ***" << std::endl;
@@ -136,7 +136,7 @@ void Mode1Score::mode1P2Games() {
                     _gameState->setSetTieBreak( 1 );
                     _mode1TieBreaker.setTieBreakEnable();
                 }
-                else if ( _player2->getSets() == 2 ) {
+                else if ( _player2->getSets() == SETS_TO_WIN_MATCH ) {
                     _mode1WinSequences.p2MatchWinSequence();
                 }  else {
                     std::cout << "** inside mode1P2Games().  calling p2SetWinSequence()... ***" << std::endl;

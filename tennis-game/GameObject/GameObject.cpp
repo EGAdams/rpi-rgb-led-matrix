@@ -58,7 +58,7 @@ void GameObject::loopGame() {
         // std::cout << "reading reset from loopGame()..." << std::endl;
         // _gameInputs->readReset();
         // std::cout << "reading rotary from loopGame()..." << std::endl;
-        std::cout << "*** //////////// jul3 starting another loop.  current set is: " << _gameState->getCurrentSet() << " ////////////////// ***" << std::endl;
+        std::cout << "*** //////////// starting another loop.  current set is: " << _gameState->getCurrentSet() << " ////////////////// ***" << std::endl;
         int rotaryValue = 1; // int rotaryValue = _gameInputs->readRotary(); TODO: actually read rotary
         std::cout << "rotaryValue: " << rotaryValue << ".  setting game mode to " << rotaryValue << "." << std::endl;
         _gameModes->setGameMode( rotaryValue );  // mode1() called here
@@ -66,7 +66,7 @@ void GameObject::loopGame() {
         GameTimer::gameDelay( GAME_LOOP_DELAY );
         std::cout << "updating game state..." << std::endl;
         _subjectManager->gameStateUpdate( _gameState, _player1, _player2 );
-        std::cout << "end of loopGame().\n\n\n\n" << std::endl; }
+        std::cout << "end of loopGame().\n\n" << std::endl; }
 
 void GameObject::playerScore( int playerNumber ) { 
     _gameState->setCurrentAction( "Updating state after player " + std::to_string( playerNumber ) + " scored." );
