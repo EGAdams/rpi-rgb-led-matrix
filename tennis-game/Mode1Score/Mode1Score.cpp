@@ -68,17 +68,13 @@ void Mode1Score::mode1P2Score() {
 
 /////////////////////////////////////// MODE 1 GAMES //////////////////////////////////////////////
 void Mode1Score::mode1P1Games() {
-    // std::cout << "inside mode1P1Games().  updating game leds..." << std::endl;
     _gameLeds.updateGames();
-    // std::cout << "inside mode1P1Games().  setting serve switch..." << std::endl;
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
-    
     if ( _player1->getGames() >= GAMES_TO_WIN_SET ) {
         if ( _player1->getGames() == GAMES_TO_WIN_SET && _player2->getGames() == GAMES_TO_WIN_SET ) {
             _gameState->setTieBreak( 1 );
-            // std::cout << "*** calling tieBreakEnable() from inside Mode1Score::mode1P1Games()... ***" << std::endl; 
-            _mode1TieBreaker.tieBreakEnable();
-        }
+            _mode1TieBreaker.tieBreakEnable(); }
+
         if ( _gameState->getTieBreak() == 0 ) {
             std::cout << "*** tie break is zero.  checking if p1 games - p2 games > 1... ***" << std::endl;
             if( !_player1 || !_player2 ) { std::cout << "*** ERROR: player1 or player2 is NULL.  exiting... ***" << std::endl; exit( 1 ); }

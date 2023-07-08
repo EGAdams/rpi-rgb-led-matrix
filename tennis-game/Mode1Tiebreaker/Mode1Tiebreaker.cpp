@@ -101,8 +101,8 @@ void Mode1TieBreaker::setTieBreaker() { _undo.memory(); mode1SetTBButtonFunction
 
 void Mode1TieBreaker::tieBreakEnable() {
     std::cout << "*** tieBreakEnable() called. ***" << std::endl;
-    _player1->setPoints( 99 );
-    _player2->setPoints( 99 );
+    _player1->setPoints( 5 );
+    _player2->setPoints( 5 );
     // std::cout << "*** calling _pointLeds.updatePoints() from inside tieBreakEnable()... ***" << std::endl;
     _pointLeds.updatePoints();
     std::cout << "*** after update points in tie breaker!!! *** " << std::endl;
@@ -127,8 +127,8 @@ void Mode1TieBreaker::tieBreakEnable() {
     tieLEDsOn(); } // not coming on?
 
 void Mode1TieBreaker::setTieBreakEnable() {
-    _player1->setPoints( 99 );
-    _player2->setPoints( 99 );
+    _player1->setPoints( 4 );
+    _player2->setPoints( 4 );
     _pointLeds.updatePoints();
     _gameState->setServeSwitch( 1 );
     _gameState->setServe( 0 );
