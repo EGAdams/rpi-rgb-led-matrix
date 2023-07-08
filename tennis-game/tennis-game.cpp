@@ -11,6 +11,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <csignal>
+#include <map>
 #include "FontLoader/FontLoader.h"
 #include "TextDrawer/TextDrawer.h"
 #include "NumberDrawer/NumberDrawer.h"
@@ -30,6 +31,7 @@ int main( int argc, char *argv[]) {
     
     std::cout << "creating GameObject..." << std::endl;
     GameObject* gameObject = new GameObject();
+    GameState*  gameState  = new GameState();
     std::cout << "done creating game object.  sleeping...\n\n\n\n\n" << std::endl;
     sleep( 1 );
     std::cout << "done sleeping.  calling gameObject->loopGame()..." << std::endl;
@@ -48,7 +50,25 @@ int main( int argc, char *argv[]) {
         gameObject->playerScore( randomPlayer );  // flip the player score flag
         sleep( SCORE_DELAY );
         gameObject->loopGame();  // handle the player score flag
-        loop_count++; 
+        loop_count++;
+        std::cout << "player 1 points: " << gameState->getPlayer1Points() << std::endl;
+        std::cout << "player 2 points: " << gameState->getPlayer2Points() << std::endl;
+        std::cout << "player 1 games: "  << gameState->getPlayer1Games()  << std::endl;
+        std::cout << "player 2 games: "  << gameState->getPlayer2Games()  << std::endl;
+        std::cout << "player 1 sets: "   << gameState->getPlayer1Sets()   << std::endl;
+        std::cout << "player 2 sets: "   << gameState->getPlayer2Sets()   << std::endl;
+        std::cout << "current set: "     << gameState->getCurrentSet()    << std::endl;
+        std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
+        // std::cout << "player1_set_history[ 1 ]: " << _player1_set_history[ 1 ] << std::endl;
+        // std::cout << "player1_set_history[ 2 ]: " << _player1_set_history[ 2 ] << std::endl;
+        // std::cout << "player1_set_history[ 3 ]: " << _player1_set_history[ 3 ] << std::endl;
+        std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
+        // std::cout << "player2_set_history[ 1 ]: " << _player2_set_history[ 1 ] << std::endl;
+        // std::cout << "player2_set_history[ 2 ]: " << _player2_set_history[ 2 ] << std::endl;
+        // std::cout << "player2_set_history[ 3 ]: " << _player2_set_history[ 3 ] << std::endl;
+
+        getchar(); // wait for user input
+
     } ///////// End Game Loop /////////
     std::cout << "game loop exited.  loop_count: " << loop_count << std::endl;
     if ( loop_count > MAX_LOOP_COUNT ) {

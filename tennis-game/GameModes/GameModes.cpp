@@ -59,7 +59,7 @@ void GameModes::gameStart() {
     }}
 
 void GameModes::mode1() {
-    std::cout << "inside game mode 1." << std::endl;
+    //  std::cout << "inside game mode 1." << std::endl;
     _gameState->setNow( GameTimer::gameMillis());          
     _inputs.readUndoButton();
     if ( _gameState->getUndo() == 1 ) {  // undo button pressed
@@ -67,12 +67,12 @@ void GameModes::mode1() {
         _gameState->setUndo( 0 );
         std::cout << "calling mode1Undo( _history )... " << std::endl;
         _undo.mode1Undo( _history ); }
-    std::cout << "calling readPlayerButtons()... " << std::endl;
+    // std::cout << "calling readPlayerButtons()... " << std::endl;
     _inputs.readPlayerButtons();  // digital read on player buttons.  sets playerButton if tripped.
-    std::cout << "Player button read.  player button: " << _gameState->getPlayerButton() << std::endl;
-    std::cout << "calling serveLeds serveSwitch()... " << std::endl;
+    // std::cout << "Player button read.  player button: " << _gameState->getPlayerButton() << std::endl;
+    // std::cout << "calling serveLeds serveSwitch()... " << std::endl;
     _serveLeds.serveSwitch(); // if serveSwitch >= 2, serveSwitch = 0; and toggle serve variable
-    std::cout << "after serveLeds serveSwitch().  serveSwitch: " << _gameState->getServeSwitch() << std::endl;
+    // std::cout << "after serveLeds serveSwitch().  serveSwitch: " << _gameState->getServeSwitch() << std::endl;
     if ( _gameState->getTieBreak()    == 1 ) { _mode1TieBreaker.tieBreaker(); }   // TieBreaker();
     if ( _gameState->getSetTieBreak() == 1 ) { _mode1TieBreaker.setTieBreaker();  // SetTieBreaker();
     } else { _mode1Functions.mode1ButtonFunction(); _mode1Functions.pointFlash(); }}
@@ -168,12 +168,12 @@ void GameModes::setGameMode( int rotaryPosition ) {
         _player2->setPoints( 100 );
         _pointLeds.updatePoints();
         if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
-        std::cout << "setting serve to 1..." << std::endl;
+        // std::cout << "setting serve to 1..." << std::endl;
         _gameState->setServe( 1 );
         _serveLeds.updateServeLED();
         if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
 
-        std::cout << "setting serve to 0..." << std::endl;
+        // std::cout << "setting serve to 0..." << std::endl;
         _gameState->setServe( 0 );
         _serveLeds.updateServeLED();
         if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };

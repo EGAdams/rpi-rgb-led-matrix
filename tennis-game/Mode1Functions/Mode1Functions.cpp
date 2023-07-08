@@ -22,15 +22,13 @@ void Mode1Functions::setScoreBoard( ScoreBoard* scoreBoard ) {
     _mode1Score.setScoreBoard( scoreBoard ); }
 
 void Mode1Functions::mode1ButtonFunction() {
-    std::cout << "inside mode1ButtonFunction().  player button: " << _gameState->getPlayerButton() << std::endl;
+    // std::cout << "inside mode1ButtonFunction().  player button: " << _gameState->getPlayerButton() << std::endl;
     switch ( _gameState->getPlayerButton()) {
     case 0:
         break;
 
     case 1: // Player 1 Score
-        #if defined _WIN32 || defined _WIN64
-            std::cout << "player 1 scored.  setting mode 1 undo..." << std::endl;
-        #endif
+        std::cout << "player 1 scored.  setting mode 1 undo..." << std::endl;
         _undo.setMode1Undo( _history );
         if ( _gameState->getPointFlash() == 1 ) {
             _gameState->setPointFlash( 0 );
@@ -43,10 +41,10 @@ void Mode1Functions::mode1ButtonFunction() {
         if ( _gameState->getServe() == PLAYER_ONE_SERVE ) {
             std::cout << "player 1 scored.  Incrementing player 1 score..." << std::endl;
             _player1->setPoints( _player1->getPoints() + 1 );
+            _gameState->setPlayer1Points( _player1->getPoints());
         } else {
             std::cout << "player 1 scored.  Setting server bar for player 1..." << std::endl;
             _gameState->setServe( PLAYER_ONE_SERVE ); }
-
         _undo.memory();
         _mode1Score.mode1P1Score();
         break;
@@ -69,16 +67,17 @@ void Mode1Functions::mode1ButtonFunction() {
         if ( _gameState->getServe() == PLAYER_TWO_SERVE ) {
             std::cout << "player 2 scored.  Incrementing player 2 score..." << std::endl;
             _player2->setPoints( _player2->getPoints() + 1 );
+            _gameState->setPlayer2Points( _player2->getPoints());
         } else {
             std::cout << "player 2 scored.  Setting server bar for player 2..." << std::endl;
             _gameState->setServe( PLAYER_TWO_SERVE );
         }
         //_player2->setPoints( _player2->getPoints() + 1 );
-        std::cout << "calling _undo.memory() from mode1ButtonFunction()... " << std::endl;
+        // std::cout << "calling _undo.memory() from mode1ButtonFunction()... " << std::endl;
         _undo.memory();
-        std::cout << "calling _mode1Score.mode1P2Score() from mode1ButtonFunction()... " << std::endl;
+        // std::cout << "calling _mode1Score.mode1P2Score() from mode1ButtonFunction()... " << std::endl;
         _mode1Score.mode1P2Score();
-        std::cout << "done calling _mode1Score.mode1P2Score() from mode1ButtonFunction()... " << std::endl;
+        // std::cout << "done calling _mode1Score.mode1P2Score() from mode1ButtonFunction()... " << std::endl;
         break;
 
     case 4:

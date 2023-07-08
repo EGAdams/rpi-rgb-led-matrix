@@ -41,6 +41,7 @@ class GameObject {
   static void _signalHandler( int signal );
   static volatile int gSignalStatus;
   ScoreBoard* getScoreBoard();
+  GameState* getGameState();
   
  private:
   Player*           _player1;

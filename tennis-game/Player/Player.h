@@ -2,10 +2,11 @@
 #define Player_h
 #include <map>
 #include "../GameState/GameState.h"
+#include "../TennisConstants/TennisConstants.h"
 class GameState;
 class Player {
  public:
-    Player( int player_number );
+    Player( GameState* gameState, int player_number );
     ~Player();
     
     void setOpponent(    Player* opponent                 ); Player* getOpponent();
@@ -23,8 +24,9 @@ class Player {
     int number(); // only set during construction
 
  private:
-    Player* _opponent;
+    GameState* _gameState;
     int _playerNumber;
+    Player* _opponent;
     int _points;
     int _games;
     int _sets;

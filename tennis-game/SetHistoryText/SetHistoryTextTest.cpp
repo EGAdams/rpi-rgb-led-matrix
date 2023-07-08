@@ -12,8 +12,8 @@ class SetHistoryTextTest : public ::testing::Test {
        
     void SetUp() override { // Code here will be called immediately after the constructor (right before each test).
         gameState = new GameState();
-        player_1 = new Player( PLAYER_1_INITIALIZED );
-        player_2 = new Player( PLAYER_2_INITIALIZED ); // got players defined, now set echother as opponents...
+        player_1 = new Player( gameState, PLAYER_1_INITIALIZED );
+        player_2 = new Player( gameState, PLAYER_2_INITIALIZED ); // got players defined, now set echother as opponents...
         setHistoryText = new SetHistoryText( gameState ); 
         scoreboard = new ScoreBoard( player_1, player_2, gameState ); }
 

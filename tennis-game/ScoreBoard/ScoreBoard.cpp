@@ -4,7 +4,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
     _player1( player1 ), _player2( player2 ), _gameState( gameState ) {
     printf( "Constructing ScoreBoard...\n" );
     if ( MATRIX_DISABLED ) { 
-        printf( "MATRIX_DISABLED is true.  Skipping matrix setup...\n" );
+        // printf( "MATRIX_DISABLED is true.  Skipping matrix setup...\n" );
     } else { 
         printf( "MATRIX_DISABLED is false.  Setting up matrix...\n" );
         Color pipe_color( 255, 255, 0 ); // yellow
@@ -76,26 +76,25 @@ bool ScoreBoard::hasCanvas() {
     } else { std::cout << "*** WARNING: canvas is NULL ***" << std::endl; return false; }}
 
 void ScoreBoard::update() {
-    std::cout << "inside ScoreBoard::update(), calling clearScreen()..." << std::endl;
+    // std::cout << "inside ScoreBoard::update(), calling clearScreen()..." << std::endl;
     clearScreen();
-    std::cout << "getting player points..." << std::endl;
+    // std::cout << "getting player points..." << std::endl;
     std::cout << "player1 points: " << _player1->getPoints() << std::endl;
     std::cout << "player2 points: " << _player2->getPoints() << std::endl;
-    std::cout << "inside ScoreBoard::update(), calling _drawPlayerScore..." << std::endl;
+    // std::cout << "inside ScoreBoard::update(), calling _drawPlayerScore..." << std::endl;
     if ( !MATRIX_DISABLED ) {
         _drawPlayerScore( _player1 );
         _drawPlayerScore( _player2 );
-    } else { std::cout << "MATRIX_DISABLED is true.  Skipping _drawPlayerScore..." << std::endl; }
-    std::cout << "inside ScoreBoard::update(), calling setSets for players..." << std::endl;
-    _player1->setSets( _gameState, _player1->getSets());
-    _player2->setSets( _gameState, _player2->getSets());
+    } else { /*std::cout << "MATRIX_DISABLED is true.  Skipping _drawPlayerScore..." << std::endl; */ }
+    // std::cout << "inside ScoreBoard::update(), calling setSets for players..." << std::endl;
+    
     if ( !MATRIX_DISABLED ) {
         _setDrawer->drawSets();
-    } else { std::cout << "MATRIX_DISABLED is true.  Skipping _setDrawer->drawSets()..." << std::endl; }}
+    } else { /* std::cout << "MATRIX_DISABLED is true.  Skipping _setDrawer->drawSets()..." << std::endl; */ }}
 
 void ScoreBoard::clearScreen() { 
     if ( MATRIX_DISABLED ) {
-        std::cout << "clearScreen called, no matrix." << std::endl;
+        // std::cout << "clearScreen called, no matrix." << std::endl;
     } else {
         if ( !hasCanvas()) { std::cout << "*** ERROR: canvas == NULL.  exiting... ***" << std::endl; exit( 1 ); }
         Color flood_color( 0, 0, 0 ); _canvas->Fill( flood_color.r, flood_color.g, flood_color.b ); 

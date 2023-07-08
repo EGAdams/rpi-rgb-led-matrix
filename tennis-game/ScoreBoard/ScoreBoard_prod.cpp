@@ -62,7 +62,7 @@ ScoreBoard::~ScoreBoard() {
     delete _canvas; }
 
 void ScoreBoard::update() {
-    std::cout << "inside ScoreBoard::update(), calling _drawPlayerScore..." << std::endl;
+    // std::cout << "inside ScoreBoard::update(), calling _drawPlayerScore..." << std::endl;
     // std::cout << "checking if player2 is null..." << std::endl;
     if ( _player2 == NULL ) {
         std::cout << "player1 is null" << std::endl; 

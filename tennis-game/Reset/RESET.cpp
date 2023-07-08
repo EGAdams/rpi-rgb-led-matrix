@@ -61,14 +61,14 @@ void Reset::resetScoreboard() {
 
     _gameState->setTieBreak( 0 );
     _gameState->setSetTieBreak( 0 );
-    std::cout << "setting serve switch and serve inside RESET.cpp..." << std::endl;
+    // std::cout << "setting serve switch and serve inside RESET.cpp..." << std::endl;
     _gameState->setServeSwitch( 1 );
     _gameState->setServe( 0 );
     _gameState->setPlayerButton( 0 );
     _gameState->setStarted(
         /*1*/ 0 );  // gameStart = true; TODO: the placing of this is questionable
     GameTimer::gameDelay( 200 );  // delay( 200 );
-    _logger->logUpdate( "done resetting game.", __FUNCTION__ );
+    // _logger->logUpdate( "done resetting game.", __FUNCTION__ );
 }
 
 void Reset::refresh() {

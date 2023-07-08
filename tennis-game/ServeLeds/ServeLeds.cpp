@@ -24,19 +24,19 @@ void ServeLeds::updateServeLED() {
 }
 
 void ServeLeds::serveSwitch() {
-  std::cout << "inside serveSwitch()..." << std::endl;
+//   std::cout << "inside serveSwitch()..." << std::endl;
   if (_gameState->getServeSwitch() /* serveSwitch */ >= 2) {
     if (_gameState->getServe() /* serve */ == 0) {
-      std::cout << "serveSwitch() setting serve to 1" << std::endl;
+    //   std::cout << "serveSwitch() setting serve to 1" << std::endl;
       _gameState->setServe( 1 );  // serve = 1;
     } else {
-      std::cout << "serveSwitch() setting serve to 0" << std::endl;
+    //   std::cout << "serveSwitch() setting serve to 0" << std::endl;
       _gameState->setServe( 0 );  // serve = 0;
     }
-    std::cout << "serveSwitch() setting serveSwitch to 0" << std::endl;
+    // std::cout << "serveSwitch() setting serveSwitch to 0" << std::endl;
     _gameState->setServeSwitch( 0 );  // serveSwitch = 0;
 
-    std::cout << "calling updateServeLED() from serveSwitch()... " << std::endl;
+    // std::cout << "calling updateServeLED() from serveSwitch()... " << std::endl;
     updateServeLED();
   }
 }

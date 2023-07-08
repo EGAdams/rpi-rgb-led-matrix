@@ -56,7 +56,7 @@ void Mode1WinSequences::p1MatchWinSequence() {
     _reset.resetScoreboard();}
 
 void Mode1WinSequences::p2GameWinSequence() {
-    std::cout << "*** inside WnSequences class.  executing p2GameWinSequence()... ***" << std::endl;
+    std::cout << "*** inside WinSequences class.  executing p2GameWinSequence()... ***" << std::endl;
     _undo.memory();  
     // for ( int currentPulseCount = 0;
     //     currentPulseCount < _gameState->getGameWinPulseCount();
