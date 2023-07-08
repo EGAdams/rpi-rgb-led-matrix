@@ -66,8 +66,7 @@ int main( int argc, char *argv[]) {
         // std::cout << "player2_set_history[ 1 ]: " << _player2_set_history[ 1 ] << std::endl;
         // std::cout << "player2_set_history[ 2 ]: " << _player2_set_history[ 2 ] << std::endl;
         // std::cout << "player2_set_history[ 3 ]: " << _player2_set_history[ 3 ] << std::endl;
-
-        getchar(); // wait for user input
+        // getchar(); // wait for user input
 
     } ///////// End Game Loop /////////
     std::cout << "game loop exited.  loop_count: " << loop_count << std::endl;
