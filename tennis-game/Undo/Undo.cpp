@@ -31,13 +31,13 @@ void Undo::setMode1Undo( History* history ) {
     gameState.setPlayer1Sets( _player1->getSets()); gameState.setP1SetsMem( _gameState->getP1SetsMem());
     gameState.setPlayer2Sets( _player2->getSets()); gameState.setP2SetsMem( _gameState->getP2SetsMem());
     gameState.setPlayer1Matches( _player1->getMatches()); gameState.setPlayer2Matches( _player2->getMatches());
-    std::cout << "setting serve to " << _gameState->getServe() << std::endl;
+    // std::cout << "setting serve to " << _gameState->getServe() << std::endl;
     gameState.setServe( _gameState->getServe());
-    std::cout << "setting serve switch to " << _gameState->getServeSwitch() << std::endl;
+    // std::cout << "setting serve switch to " << _gameState->getServeSwitch() << std::endl;
     gameState.setServeSwitch( _gameState->getServeSwitch());
-    std::cout << "done setting serve and serve switch.  setting undo..." << std::endl;
+    // std::cout << "done setting serve and serve switch.  setting undo..." << std::endl;
     gameState.setUndo( _gameState->getUndo());
-    std::cout << "done setting undo.  setting started..." << std::endl;
+    // std::cout << "done setting undo.  setting started..." << std::endl;
     gameState.setStarted( _gameState->getStarted());
     gameState.setPointFlash( _gameState->getPointFlash());
     gameState.setRotaryPosition( _gameState->getRotaryPosition());

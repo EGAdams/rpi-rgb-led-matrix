@@ -9,13 +9,13 @@ Player::~Player() {}
 void Player::setOpponent( Player* opponent ) { _opponent = opponent; }                                  
 Player* Player::getOpponent() { return _opponent; }
 void Player::setSets( GameState* gameState, int sets ) {  // sets sets and set history for both players
-    std::cout << "Player::setSets()  passed in sets var: " << sets << std::endl;
-    std::cout << "setting set history for player " << _playerNumber + 1 << " set " << gameState->getCurrentSet() << " to " << _games << std::endl; 
+    // std::cout << "Player::setSets()  passed in sets var: " << sets << std::endl;
+    // std::cout << "setting set history for player " << _playerNumber + 1 << " set " << gameState->getCurrentSet() << " to " << _games << std::endl; 
     this->setSetHistory(      gameState->getCurrentSet(), _games               );
     _opponent->setSetHistory( gameState->getCurrentSet(), _opponent->getGames());
     gameState->setPlayer1SetHistory( this->getSetHistory());
     gameState->setPlayer2SetHistory( _opponent->getSetHistory());
-    std::cout << "end of setSets method.  setting sets to: " << sets << std::endl;
+    // std::cout << "end of setSets method.  setting sets to: " << sets << std::endl;
     _sets = sets; }                                          int Player::getSets() {    return _sets;    }
 void Player::setPoints(int points) { _points = points; }     int Player::getPoints() {  return _points;  }
 void Player::setGames( int games ) { 
@@ -30,13 +30,13 @@ int Player::incrementSetting() { return ++_setting; }
 int Player::number() { return _playerNumber; }
 
 void Player::setSetHistory( int set, int games ) {
-    std::cout << "*** Player::setSetHistory() player: " << number() + 1 << " set: " << set << "  games: " << games << " ***" << std::endl;
+    // std::cout << "*** Player::setSetHistory() player: " << number() + 1 << " set: " << set << "  games: " << games << " ***" << std::endl;
     _set_history[  set ] = games; 
     number() == PLAYER_1_INITIALIZED ? 
         _gameState->setPlayer1SetHistory( _set_history ) : _gameState->setPlayer2SetHistory( _set_history ); } 
 std::map< int, int> Player::getSetHistory() { 
-    std::cout << "*** Player::getSetHistory() player: " << number() + 1 << " set: " << _gameState->getCurrentSet() << "  games: " << _games << " ***" << std::endl;
-    std::cout << "returning set history... " << std::endl;
+    // std::cout << "*** Player::getSetHistory() player: " << number() + 1 << " set: " << _gameState->getCurrentSet() << "  games: " << _games << " ***" << std::endl;
+    // std::cout << "returning set history... " << std::endl;
     return _set_history; }
 
 void Player::setGameHistory( int game, int score ) { _game_history[ game ] = score; } std::map< int, int> Player::getGameHistory() { return _game_history;}

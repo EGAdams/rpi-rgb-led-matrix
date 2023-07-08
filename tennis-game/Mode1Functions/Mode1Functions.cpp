@@ -69,7 +69,7 @@ void Mode1Functions::mode1ButtonFunction() {
             _player2->setPoints( _player2->getPoints() + 1 );
             _gameState->setPlayer2Points( _player2->getPoints());
         } else {
-            std::cout << "player 2 scored.  Setting server bar for player 2..." << std::endl;
+            // std::cout << "player 2 scored.  Setting server bar for player 2..." << std::endl;
             _gameState->setServe( PLAYER_TWO_SERVE );
         }
         //_player2->setPoints( _player2->getPoints() + 1 );

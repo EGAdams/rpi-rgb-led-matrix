@@ -63,7 +63,7 @@ void GameObject::loopGame() {
         _gameModes->setGameMode( rotaryValue );  // mode1() called here <--- entry point !! --------------<<
         std::cout << "delaying for " << GAME_LOOP_DELAY << " milliseconds..." << std::endl;
         GameTimer::gameDelay( GAME_LOOP_DELAY );
-        std::cout << "updating game state..." << std::endl;
+        // std::cout << "updating game state..." << std::endl;
         _subjectManager->gameStateUpdate( _gameState, _player1, _player2 );
         std::cout << "end of loopGame().\n" << std::endl; }
 
