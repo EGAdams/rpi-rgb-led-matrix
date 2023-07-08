@@ -30,7 +30,7 @@
 #define PLAYER_ONE_SET_INDEX     0
 #define PLAYER_TWO_SET_INDEX     1
 #define SETS_TO_WIN_MATCH        3
-#define MATRIX_DISABLED          0
+#define MATRIX_DISABLED          1
 
 // #define INPUT 0 // not in windows.. ouch!!
 // #define OUTPUT 0
