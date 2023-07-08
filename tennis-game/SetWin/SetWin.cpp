@@ -7,8 +7,8 @@ SetWin::~SetWin() {}
 void SetWin::execute( Player* player ) {
     std::cout << "*** SetWin::execute() ***" << std::endl;
     _undo->memory();
-    std::cout << "updating player sets" << std::endl;
-    player->setSets( _gameState, _gameState->getP1SetsMem());
+    // std::cout << "updating player sets" << std::endl;
+    // player->setSets( _gameState, _gameState->getP1SetsMem());
     _setLeds->updateSets();
     std::cout << "setting player games to 0" << std::endl;
     player->setGames( 0 ); player->getOpponent()->setGames( 0 );
