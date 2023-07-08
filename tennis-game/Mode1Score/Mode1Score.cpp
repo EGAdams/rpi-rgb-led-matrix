@@ -56,7 +56,7 @@ void Mode1Score::mode1P2Score() {
             _player2->setPoints( 3 );    // Game win Scenario Below
         } else if ( _player2->getPoints() > 3 && ( _player2->getPoints() - _player1->getPoints()) > 1 ) {                                // Game win Scenario
             // Game win Scenario
-            _player1->setGames( _player1->getGames() + 1 );
+            _player2->setGames( _player2->getGames() + 1 );
             _undo.memory();
             _pointLeds.updatePoints();
             mode1P2Games(); }
@@ -118,7 +118,6 @@ void Mode1Score::mode1P1Games() {
         std::cout << "*** calling p1GameWinSequence() ***" << std::endl;
         _gameState->setPlayer1SetHistory( _player1->getSetHistory());
         _gameState->setPlayer2SetHistory( _player2->getSetHistory());
-        _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
         _mode1WinSequences.p1GameWinSequence();
         _gameLeds.updateGames();
         _resetGame(); }}
@@ -170,11 +169,9 @@ void Mode1Score::mode1P2Games() {
                 _gameLeds.updateGames();
                 _resetGame(); }}
     } else {
-        _player2->setGames( _player2->getGames() + 1 );
-        _mode1WinSequences.p2GameWinSequence();
+        _mode1WinSequences.p2GameWinSequence();  // sets player points to zero
         _gameState->setPlayer1SetHistory( _player1->getSetHistory());
         _gameState->setPlayer2SetHistory( _player2->getSetHistory());
-        _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
         _gameLeds.updateGames();
         _resetGame(); }}
 ////////////////////////////////// END MODE 1 GAMES ///////////////////////////////////////////////

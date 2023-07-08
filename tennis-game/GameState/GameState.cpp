@@ -110,18 +110,20 @@ int GameState::getPlayer2Matches() { return _player2_matches; }
 void GameState::setPlayer2Matches( int player2Matches ) { _player2_matches = player2Matches; }
 std::map<int, int> GameState::getPlayer1SetHistory() { 
     std::cout << "getting player1_set_history in GameState..." << std::endl;
-    std::cout << "player1_set_history[ 1 ]: " << _player1_set_history[ 1 ] << std::endl;
-    std::cout << "player1_set_history[ 2 ]: " << _player1_set_history[ 2 ] << std::endl;
-    std::cout << "player1_set_history[ 3 ]: " << _player1_set_history[ 3 ] << std::endl;
+    std::cout << "player1_set_history: " << _player1_set_history[ 1 ];
+    std::cout << " " << _player1_set_history[ 2 ];
+    std::cout << " " << _player1_set_history[ 3 ] << std::endl;
     return _player1_set_history; }
 void GameState::setPlayer1SetHistory( std::map<int, int> player1_set_history ) { 
     _player1_set_history = player1_set_history; 
+    std::cout << "set player1_set_history in GameState..." << std::endl;
+    std::cout << "breakpoint here!" << std::endl;
 }
 std::map<int, int> GameState::getPlayer2SetHistory() { 
     std::cout << "getting player2_set_history in GameState..." << std::endl;
-    std::cout << "player2_set_history[ 1 ]: " << _player2_set_history[ 1 ] << std::endl;
-    std::cout << "player2_set_history[ 2 ]: " << _player2_set_history[ 2 ] << std::endl;
-    std::cout << "player2_set_history[ 3 ]: " << _player2_set_history[ 3 ] << std::endl;
+    std::cout << "player2_set_history: " << _player2_set_history[ 1 ];
+    std::cout << " " << _player2_set_history[ 2 ];
+    std::cout << " " << _player2_set_history[ 3 ] << std::endl;
     return _player2_set_history; }
 void GameState::setPlayer2SetHistory( std::map<int, int> player2_set_history ) { 
     _player2_set_history = player2_set_history;}

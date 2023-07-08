@@ -30,8 +30,8 @@ int main( int argc, char *argv[]) {
     #define SCORE_DELAY    .15
     
     std::cout << "creating GameObject..." << std::endl;
-    GameObject* gameObject = new GameObject();
-    GameState*  gameState  = new GameState();
+    GameState*  gameState  = new GameState();  // make this 1st!!! cost me 3 days of debugging
+    GameObject* gameObject = new GameObject( gameState );
     std::cout << "done creating game object.  sleeping...\n\n\n\n\n" << std::endl;
     sleep( 1 );
     std::cout << "done sleeping.  calling gameObject->loopGame()..." << std::endl;
@@ -51,13 +51,13 @@ int main( int argc, char *argv[]) {
         sleep( SCORE_DELAY );
         gameObject->loopGame();  // handle the player score flag
         loop_count++;
-        std::cout << "player 1 points: " << gameState->getPlayer1Points() << std::endl;
-        std::cout << "player 2 points: " << gameState->getPlayer2Points() << std::endl;
-        std::cout << "player 1 games: "  << gameState->getPlayer1Games()  << std::endl;
-        std::cout << "player 2 games: "  << gameState->getPlayer2Games()  << std::endl;
-        std::cout << "player 1 sets: "   << gameState->getPlayer1Sets()   << std::endl;
-        std::cout << "player 2 sets: "   << gameState->getPlayer2Sets()   << std::endl;
-        std::cout << "current set: "     << gameState->getCurrentSet()    << std::endl;
+        std::cout << "player 1 points: " << gameState->getPlayer1Points();
+        std::cout << "  player 2 points: " << gameState->getPlayer2Points() << std::endl;
+        std::cout << "player 1 games:  "  << gameState->getPlayer1Games();
+        std::cout << "  player 2 games:  "  << gameState->getPlayer2Games()  << std::endl;
+        std::cout << "player 1 sets:   "   << gameState->getPlayer1Sets();
+        std::cout << "  player 2 sets:   "   << gameState->getPlayer2Sets();
+        std::cout << "     current set: "     << gameState->getCurrentSet()      << std::endl;
         std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
         // std::cout << "player1_set_history[ 1 ]: " << _player1_set_history[ 1 ] << std::endl;
         // std::cout << "player1_set_history[ 2 ]: " << _player1_set_history[ 2 ] << std::endl;

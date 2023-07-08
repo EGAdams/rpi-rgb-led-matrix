@@ -68,7 +68,7 @@ void Mode1WinSequences::p2GameWinSequence() {
     //     _gameLeds.updateGames();                          
     //     GameTimer::gameDelay( _gameState->getGameFlashDelay());}
     std::cout << "*** delaying game after p2GameWinSequence()... ***" << std::endl;
-    GameTimer::gameDelay( 2000 );
+    GameTimer::gameDelay( 1000 );
     std::cout << "*** done delaying game after p2GameWinSequence()  setting points to zero... ***" << std::endl;
     _player1->setPoints( 0 );
     _player2->setPoints( 0 );}

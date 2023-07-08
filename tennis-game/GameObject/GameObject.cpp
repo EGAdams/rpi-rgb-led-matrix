@@ -26,11 +26,10 @@ GameObject::GameObject( Player* player1,
     _webLiquidCrystal = lcd;
 }
 
-GameObject::GameObject() {
+GameObject::GameObject( GameState* gameState ) : _gameState( gameState ) {
     std::cout << "Constructing GameObject..." << std::endl;
     _webLiquidCrystal = new WebLiquidCrystal();
     _gameTimer = new GameTimer();
-    _gameState = new GameState();
     std::cout << "constructing players... " << std::endl;
     _player1 = new Player( _gameState, PLAYER_1_INITIALIZED ); 
     _player2 = new Player( _gameState, PLAYER_2_INITIALIZED ); // got players defined, now set echother as opponents...
@@ -66,7 +65,7 @@ void GameObject::loopGame() {
         GameTimer::gameDelay( GAME_LOOP_DELAY );
         std::cout << "updating game state..." << std::endl;
         _subjectManager->gameStateUpdate( _gameState, _player1, _player2 );
-        std::cout << "end of loopGame().\n\n" << std::endl; }
+        std::cout << "end of loopGame().\n" << std::endl; }
 
 GameState* GameObject::getGameState() { return _gameState; }
 

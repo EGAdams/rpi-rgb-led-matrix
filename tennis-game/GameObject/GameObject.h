@@ -32,7 +32,7 @@ class GameObject {
               ScoreBoard*   scoreBoard,
               WebLiquidCrystal* lcd );
              
-  GameObject();
+  GameObject( GameState* gameState );
   ~GameObject();
   void start();
   PinInterface* getPinInterface();
