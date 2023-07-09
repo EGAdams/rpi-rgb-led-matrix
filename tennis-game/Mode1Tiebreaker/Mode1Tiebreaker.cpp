@@ -229,7 +229,8 @@ void Mode1TieBreaker::mode1SetTBP2Games() {
         // GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
         _mode1WinSequences.p2SetTBWinSequence();
         tieLEDsOff();
-        _mode1WinSequences.p2MatchWinSequence(); }
+        _mode1WinSequences.p2MatchWinSequence(); 
+        _gameState->stopGameRunning(); }
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 ); }
 
 void Mode1TieBreaker::mode1SetTBP1Games() {
@@ -244,5 +245,6 @@ void Mode1TieBreaker::mode1SetTBP1Games() {
         // GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
         _mode1WinSequences.p1SetTBWinSequence();
         tieLEDsOff();
-        _mode1WinSequences.p1MatchWinSequence(); }
+        _mode1WinSequences.p1MatchWinSequence(); 
+        _gameState->stopGameRunning(); }
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 ); }

@@ -10,6 +10,8 @@ class GameState {
  public:
     GameState();
     ~GameState();
+    void stopGameRunning();
+    int gameRunning();
     void setSetHistory(  std::map< int, int > set_history  ); std::map< int, int > getSetHistory();
     void setGameHistory( std::map< int, int > game_history ); std::map< int, int > getGameHistory();
     void setCurrentAction(std::string currentAction        ); std::string getCurrentAction();
@@ -88,6 +90,7 @@ class GameState {
     int _gameWinPulseCount;
     int _setTieBreakMem;
     int _tieBreakMem;
+    int _gameRunning;
     std::string _currentAction;
     std::map< int, int> _player1_set_history;
     std::map< int, int> _player2_set_history; };

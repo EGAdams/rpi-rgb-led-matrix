@@ -42,7 +42,7 @@ int main( int argc, char *argv[]) {
 
     int randomPlayer = 1;
     std::signal( SIGINT, GameObject::_signalHandler );
-    /*/// Begin Game Loop ///*/ while ( game_running && GameObject::gSignalStatus != SIGINT ) { 
+    /*/// Begin Game Loop ///*/ while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { 
         if ( loop_count >  MAX_LOOP_COUNT ) { game_running = false; }
         sleep( SCORE_DELAY );
         randomPlayer = rand() % 2 + 1; // generate random player between 1 and 2

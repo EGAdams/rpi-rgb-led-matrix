@@ -2,6 +2,7 @@
 
 GameState::~GameState() {}
 GameState::GameState() { std::cout << "Constructing GameState..." << std::endl;
+    _gameRunning = 1;
     _current_set = 1;
     _pointFlash = 0;
     _serve = 0;
@@ -28,6 +29,8 @@ GameState::GameState() { std::cout << "Constructing GameState..." << std::endl;
     _player1_sets    = 0; _player2_sets    = 0;
     _player1_matches = 0; _player2_matches = 0; }
 
+int GameState::gameRunning() { return _gameRunning; }
+void GameState::stopGameRunning() { _gameRunning = 0; }
 void GameState::setCurrentSet( int current_set ) { 
     std::cout << "gamestate current set: " << _current_set << std::endl;
     std::cout << "Now setting current set in GameState to: " << current_set << std::endl;

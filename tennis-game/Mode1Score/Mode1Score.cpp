@@ -91,6 +91,7 @@ void Mode1Score::mode1P1Games() {
                 } else if ( _player1->getSets() == SETS_TO_WIN_MATCH ) {
                     std::cout << "*** calling p1MatchWinSequence() ***" << std::endl;
                     _mode1WinSequences.p1MatchWinSequence();             // <-------------<< Match Win
+                    _gameState->stopGameRunning();
                 } else {                                                 // <-------------<< Set Win
                     std::cout << "*** /// calling p1SetWinSequence() point gap is 2 /// ***" << std::endl;
                     _gameState->setPlayer1SetHistory( _player1->getSetHistory());
@@ -142,6 +143,7 @@ void Mode1Score::mode1P2Games() {
                 }
                 else if ( _player2->getSets() == SETS_TO_WIN_MATCH ) {
                     _mode1WinSequences.p2MatchWinSequence();
+                    _gameState->stopGameRunning();
                 }  else {
                     std::cout << "** inside mode1P2Games().  calling p2SetWinSequence()... ***" << std::endl;
                     _player2->setGames( _player2->getGames() );
@@ -161,7 +163,6 @@ void Mode1Score::mode1P2Games() {
                 _player2->setGames( 0 );
             } else {
                 std::cout << "inside mode1P2Games().  calling p2GameWinSequence()..." << std::endl;
-                
                 _gameState->setPlayer1SetHistory( _player1->getSetHistory());
                 _gameState->setPlayer2SetHistory( _player2->getSetHistory());
                 _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
@@ -225,7 +226,7 @@ void Mode1Score::mode1SetTBP1Games() {
         _mode1WinSequences.p1SetTBWinSequence();
         _mode1TieBreaker.tieLEDsOff();
         _mode1WinSequences.p1MatchWinSequence();
-    }
+        _gameState->stopGameRunning(); }
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 ); }
 
 void Mode1Score::mode1TBP2Games() {
@@ -271,5 +272,6 @@ void Mode1Score::mode1SetTBP2Games() {
         GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
         _mode1WinSequences.p2SetTBWinSequence();
         _mode1TieBreaker.tieLEDsOff();
-        _mode1WinSequences.p2MatchWinSequence(); }
+        _mode1WinSequences.p2MatchWinSequence(); 
+        _gameState->stopGameRunning(); }
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 ); }
