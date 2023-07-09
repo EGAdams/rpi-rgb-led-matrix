@@ -53,9 +53,6 @@ GameObject::~GameObject() {};
 void GameObject::_signalHandler( int signal ) { GameObject::gSignalStatus = signal; }
 volatile int GameObject::gSignalStatus = 0;
 
-void GameObject::stopGameRunning() { _gameRunning = 0; }
-int GameObject::gameRunning() { return _gameRunning; }
-
 void GameObject::loopGame() {
         // std::cout << "reading reset from loopGame()..." << std::endl;
         // _gameInputs->readReset();

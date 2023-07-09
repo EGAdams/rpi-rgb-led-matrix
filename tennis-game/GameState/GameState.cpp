@@ -1,7 +1,8 @@
 #include "GameState.h"
 
 GameState::~GameState() {}
-GameState::GameState() { std::cout << "Constructing GameState..." << std::endl;
+GameState::GameState() { 
+    std::cout << "Constructing GameState..." << std::endl;
     _gameRunning = 1;
     _current_set = 1;
     _pointFlash = 0;
