@@ -21,7 +21,6 @@
 using namespace rgb_matrix;
 
 int main( int argc, char *argv[]) {
-    bool game_running = true;
     int loop_count = 0;
     #define MAX_LOOP_COUNT 350
     #define A_SPACE        13
@@ -43,7 +42,7 @@ int main( int argc, char *argv[]) {
     int randomPlayer = 1;
     std::signal( SIGINT, GameObject::_signalHandler );
     /*/// Begin Game Loop ///*/ while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { 
-        if ( loop_count >  MAX_LOOP_COUNT ) { game_running = false; }
+        if ( loop_count >  MAX_LOOP_COUNT ) { gameState->stopGameRunning(); }
         sleep( SCORE_DELAY );
         randomPlayer = rand() % 2 + 1; // generate random player between 1 and 2
         std::cout << "\n*** Player " << randomPlayer << " scored ***\n" << std::endl;
@@ -68,7 +67,6 @@ int main( int argc, char *argv[]) {
         // std::cout << "player2_set_history[ 3 ]: " << _player2_set_history[ 3 ] << std::endl;
         // getchar(); // wait for user input
         std::cout << "end of game loop.  loop_count: " << loop_count << std::endl;
-        if ( gameState->getCurrentSet() == 4 ) { game_running = false; }
     } ///////// End Game Loop /////////
     std::cout << "game loop exited.  loop_count: " << loop_count << std::endl;
     if ( loop_count > MAX_LOOP_COUNT ) {
