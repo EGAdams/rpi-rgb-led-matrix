@@ -4,7 +4,7 @@
 #include "../Arduino/Arduino.h"
 
 //  Written by Chris Bean for Teensy 4.1 only
-//  re-written in C++ by EG in June 2022
+//  re-written in C++ by EG in June 2022 
 
 #define GAME_FLASH_DELAY         1000
 #define FLASH_DELAY              1000
