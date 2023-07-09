@@ -107,7 +107,6 @@ void Mode1Score::mode1P1Games() {
                 std::cout << "*** calling p1GameWinSequence() ***" << std::endl;
                 _gameState->setPlayer1SetHistory( _player1->getSetHistory());
                 _gameState->setPlayer2SetHistory( _player2->getSetHistory());
-                _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
                 _mode1WinSequences.p1GameWinSequence();  // sets player points to zero
                 _gameLeds.updateGames();
                 _resetGame();
