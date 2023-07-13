@@ -30,3 +30,4 @@ void SetDrawer::drawSets() {
     y += _little_font.height() - 5;
     Color fourthRowColor( 255, 0, 0 );
     drawTextOnCanvas( x + SMALL_BEFORE, y, fourthRowColor, playerTwoSetString ); }
+

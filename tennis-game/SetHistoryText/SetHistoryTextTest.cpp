@@ -4,7 +4,6 @@
 #include "../ScoreBoard/ScoreBoard.h"
 #include "../GameTimer/GameTimer.h"
 
-
 class SetHistoryTextTest : public ::testing::Test {
  protected:
     SetHistoryTextTest() {}           // You can do set-up work for each test here.
