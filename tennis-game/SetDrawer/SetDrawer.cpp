@@ -7,14 +7,14 @@ SetDrawer::SetDrawer( RGBMatrix* canvas, GameState* gameState ) :
     smallNumberFontLoader.LoadFont( smallNumberFont );
     if ( !_little_font.LoadFont( LITTLE_FONT )) { 
         fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_FONT ); exit( 1 ); }}
-
+    
 SetDrawer::~SetDrawer() { std::cout << "destructing SetDrawer..." << std::endl; }
 
 void SetDrawer::drawTextOnCanvas( int x, int y, const Color& color, const std::string& text ) {
     Color background_color( 0, 0, 0 );
     int letter_spacing = 0;
     rgb_matrix::Font* outline_font = NULL;
-    rgb_matrix::DrawText( _canvas, _little_font, x, y + _little_font.baseline(), color, outline_font ? 
+    rgb_matrix::DrawText( _canvas, _little_font, x, y + _little_font.baseline(), color, outline_font ?
                           NULL : &background_color, text.c_str(), letter_spacing ); }
 
 void SetDrawer::drawSets() {
@@ -23,8 +23,22 @@ void SetDrawer::drawSets() {
     std::cout << "*** inside SetDrawer drawing sets..." << std::endl;
     std::string playerOneSetString = _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX );
     std::string playerTwoSetString = _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX );
-    std::cout << "playerOneSetString: " << playerOneSetString << std::endl;
-    std::cout << "playerTwoSetString: " << playerTwoSetString << std::endl;
+    Color thirdRowColor( 0, 255, 0 );
+    drawTextOnCanvas( x + SMALL_BEFORE, y, thirdRowColor, playerOneSetString );
+    y += _little_font.height() - 5;
+    Color fourthRowColor( 255, 0, 0 );
+    drawTextOnCanvas( x + SMALL_BEFORE, y, fourthRowColor, playerTwoSetString ); }
+
+void SetDrawer::drawBlinkSets( int playerToBlink ) {
+    int y = START_ROW; int x = 0; int set = _gameState->getCurrentSet();
+    std::string playerOneSetString = ""; std::string playerTwoSetString = ""; // set inside if statement
+    std::cout << "*** inside SetDrawer drawing BLINK sets..." << std::endl;
+    if ( playerToBlink == PLAYER_1_INITIALIZED ) { // Blink player 1
+        playerOneSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX ), set );
+        playerTwoSetString = _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX );
+    } else {                                      // Blink player 2
+        playerOneSetString = _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX );
+        playerTwoSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX ), set ); }
     Color thirdRowColor( 0, 255, 0 );
     drawTextOnCanvas( x + SMALL_BEFORE, y, thirdRowColor, playerOneSetString );
     y += _little_font.height() - 5;
@@ -33,9 +47,6 @@ void SetDrawer::drawSets() {
 
 std::string SetDrawer::cloaker( std::string stringToCloak, int sectionToCloak ) {
     if ( sectionToCloak < 1 || sectionToCloak > 3 ) { return "Invalid section number";}
-
-    // The position of the digit in the string is 2 times the 
-    // section number minus 2 (because the first digit is at position 0)
-    int pos = 2 * (sectionToCloak - 1);
-    stringToCloak[pos] = ' '; // Replace the character at the calculated position with a space
+    int pos = 2 * ( sectionToCloak - 1 ); // The pos of the digit in the string is ( 2 * section number - 2 ) ( the 1st digit is at position 0 )
+    stringToCloak[ pos ] = ' ';           // Replace the character at the calculated position with a space
     return stringToCloak;}

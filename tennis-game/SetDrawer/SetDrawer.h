@@ -19,9 +19,11 @@
 class SetDrawer {
  public:
     SetDrawer( RGBMatrix* canvas, GameState* gameState );
+    SetDrawer();
     ~SetDrawer();
     std::string  cloaker( std::string stringToCloak, int sectionToCloak );
     void drawSets();
+    void drawBlinkSets( int player);
     void drawTextOnCanvas( int x, int y, const Color& color, const std::string& text );
 
  private: 

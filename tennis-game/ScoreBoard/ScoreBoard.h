@@ -27,19 +27,18 @@ public:
     void drawGames();
     
 private:
-    Player*          _player1;
-    Player*          _player2;
-    GameState*       _gameState;
-    rgb_matrix::Font _big_number_font;
-    std::unique_ptr<NumberDrawer>    _smallNumberDrawer;
-    std::unique_ptr<NumberDrawer>    _playerOneScoreDrawer;
-    std::unique_ptr<NumberDrawer>    _playerTwoScoreDrawer;
-    std::unique_ptr<NumberDrawer>    _pipeDrawer;
-    std::unique_ptr<SetDrawer>       _setDrawer;
-    std::unique_ptr<RGBMatrix>       _canvas;
+    Player*                        _player1;
+    Player*                        _player2;
+    GameState*                     _gameState;
+    rgb_matrix::Font               _big_number_font;
+    std::unique_ptr<NumberDrawer>  _smallNumberDrawer;
+    std::unique_ptr<NumberDrawer>  _playerOneScoreDrawer;
+    std::unique_ptr<NumberDrawer>  _playerTwoScoreDrawer;
+    std::unique_ptr<NumberDrawer>  _pipeDrawer;
+    std::unique_ptr<SetDrawer>     _setDrawer;
+    std::unique_ptr<RGBMatrix>     _canvas;
 
     void _drawPlayerScore(  Player* player        );
-    void _drawPlayerSets(   Player* player        );
     int  _characterOffset(  std::string character );
     std::string _translate( int raw_score         ); };
 #endif

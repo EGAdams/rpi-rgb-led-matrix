@@ -79,14 +79,19 @@ void ScoreBoard::update() {
     clearScreen();
     std::cout << "player1 points: " << _player1->getPoints() << std::endl;
     std::cout << "player2 points: " << _player2->getPoints() << std::endl;
-    if ( !MATRIX_DISABLED ) {
-        _drawPlayerScore( _player1 );
-        _drawPlayerScore( _player2 );
-    } else { /*std::cout << "MATRIX_DISABLED is true.  Skipping _drawPlayerScore..." << std::endl; */ }
+    if ( MATRIX_DISABLED ) {
+        /*std::cout << "MATRIX_DISABLED is true.  Skipping _drawPlayerScore..." << std::endl; */
+    } else { _drawPlayerScore( _player1 ); _drawPlayerScore( _player2 ); }
     
-    if ( !MATRIX_DISABLED ) {
-        _setDrawer->drawSets();
-    } else { /* std::cout << "MATRIX_DISABLED is true.  Skipping _setDrawer->drawSets()..." << std::endl; */ }}
+    if ( MATRIX_DISABLED ) {
+        /* std::cout << "MATRIX_DISABLED is true.  Skipping _setDrawer->drawSets()..." << std::endl; */
+    } else {
+        bool blink = _gameState->getCurrentAction().find( "blink" ) != std::string::npos;
+        if ( blink ) {
+            int playerToBlink = _gameState->getCurrentAction().find( "player1" ) != std::string::npos ? 
+                PLAYER_1_INITIALIZED : PLAYER_2_INITIALIZED;
+            _setDrawer->drawBlinkSets( playerToBlink );
+        } else { _setDrawer->drawSets(); }}}
 
 void ScoreBoard::clearScreen() { 
     if ( MATRIX_DISABLED ) {
@@ -96,7 +101,7 @@ void ScoreBoard::clearScreen() {
         Color flood_color( 0, 0, 0 ); _canvas->Fill( flood_color.r, flood_color.g, flood_color.b ); 
         std::cout << "screen cleared." << std::endl; }}
 
-void ScoreBoard::_drawPlayerScore(Player* player) {
+void ScoreBoard::_drawPlayerScore( Player* player ) {
     int vertical_offset = player->number() == 0 ? 0 : _big_number_font.height();
     std::string serve_bar = _gameState->getServe() == player->number() ? "I" : " "; // or p1 serve and swap
     _pipeDrawer->DrawNumber(serve_bar, 1, _big_number_font.baseline() + vertical_offset );
@@ -110,9 +115,6 @@ void ScoreBoard::_drawPlayerScore(Player* player) {
     } else {
         _playerTwoScoreDrawer->DrawNumber( score.substr( 0, 1 ), first_offset  + 16, baseline + vertical_offset );
         _playerTwoScoreDrawer->DrawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset ); }}
-
-void ScoreBoard::_drawPlayerSets( Player* player ) { 
-    std::cout << "inside ScoreBoard::_drawPlayerSets()" << std::endl; }
 
 int ScoreBoard::_characterOffset( std::string character ) {
     int char_offset = 0;
