@@ -2,6 +2,7 @@
 #define SET_MANAGER_H
 
 #include <iostream>
+#include <string>
 #include "../GameState/GameState.h"
 #include "../Player/Player.h"
 #include "../NumberDrawer/NumberDrawer.h"
@@ -19,6 +20,7 @@ class SetDrawer {
  public:
     SetDrawer( RGBMatrix* canvas, GameState* gameState );
     ~SetDrawer();
+    std::string  cloaker( std::string stringToCloak, int sectionToCloak );
     void drawSets();
     void drawTextOnCanvas( int x, int y, const Color& color, const std::string& text );
 

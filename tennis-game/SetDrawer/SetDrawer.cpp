@@ -31,3 +31,11 @@ void SetDrawer::drawSets() {
     Color fourthRowColor( 255, 0, 0 );
     drawTextOnCanvas( x + SMALL_BEFORE, y, fourthRowColor, playerTwoSetString ); }
 
+std::string SetDrawer::cloaker( std::string stringToCloak, int sectionToCloak ) {
+    if ( sectionToCloak < 1 || sectionToCloak > 3 ) { return "Invalid section number";}
+
+    // The position of the digit in the string is 2 times the 
+    // section number minus 2 (because the first digit is at position 0)
+    int pos = 2 * (sectionToCloak - 1);
+    stringToCloak[pos] = ' '; // Replace the character at the calculated position with a space
+    return stringToCloak;}
