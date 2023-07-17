@@ -16,14 +16,15 @@ Mode1WinSequences::Mode1WinSequences( Player* player1, Player* player2, PinInter
     _undo( player1, player2, pinInterface, gameState ) { 
         _setWin = new SetWin( &_undo, _gameState, &_setLeds );}
 
-void Mode1WinSequences::setScoreBoard( ScoreBoard* scoreBoard ) {
+void Mode1WinSequences::setScoreBoards( ScoreBoard* scoreBoard ) {
     _pointLeds.setScoreBoard( scoreBoard );
     _gameLeds.setScoreBoard(  scoreBoard );
-    _setLeds.setScoreBoard(   scoreBoard );}
+    _setLeds.setScoreBoard(   scoreBoard );
+    _scoreBoard =             scoreBoard; } // set mine too!
 
 void Mode1WinSequences::p1GameWinSequence() {
-    GameWinSequence gameWinSequence( _scoreBoard ); 
-    gameWinSequence.run( _player1, _gameState, &_gameLeds, _player1->getGames());
+    GameWinSequence gameWinSequence; 
+    gameWinSequence.run( _player1, _gameState, &_gameLeds, _scoreBoard, _player1->getGames());
     std::cout << "*** inside WinSequences class.  p1GameWinSequence() ***" << std::endl;
     _undo.memory();
     std::cout << "*** delaying game after p1GameWinSequence()... ***" << std::endl;

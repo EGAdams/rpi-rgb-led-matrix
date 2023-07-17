@@ -9,10 +9,8 @@
 class GameWinSequence {
 
  public:
-  GameWinSequence( ScoreBoard* scoreBoard );
+  GameWinSequence();
   ~GameWinSequence();
-  void run( Player* player, GameState* gameState, GameLeds* gameLeds, int games_in_memory );
-
- private:
- ScoreBoard* _scoreBoard; };
+  void run( Player* player, GameState* gameState, 
+            GameLeds* gameLeds, ScoreBoard* scoreBoard, int games_in_memory ); };
 #endif

@@ -24,7 +24,7 @@ class Mode1WinSequences {
                         PinInterface* pinInterface,
                         GameState* gameState);
     ~Mode1WinSequences();
-    void setScoreBoard( ScoreBoard* scoreBoard );
+    void setScoreBoards( ScoreBoard* scoreBoard );
     void p1GameWinSequence();
     void p1SetWinSequence();
     void p1MatchWinSequence();
