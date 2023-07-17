@@ -30,13 +30,13 @@ void SetDrawer::drawSets() {
     drawTextOnCanvas( x + SMALL_BEFORE, y, fourthRowColor, playerTwoSetString ); }
 
 void SetDrawer::drawBlinkSets( int playerToBlink ) {
-    int y = START_ROW; int x = 0; int set = _gameState->getCurrentSet();
+    int y = START_ROW; int x = 0; int set = _gameState->getCurrentSet();      // init coords and set
     std::string playerOneSetString = ""; std::string playerTwoSetString = ""; // set inside if statement
     std::cout << "*** inside SetDrawer drawing BLINK sets..." << std::endl;
     if ( playerToBlink == PLAYER_1_INITIALIZED ) { // Blink player 1
         playerOneSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX ), set );
         playerTwoSetString = _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX );
-    } else {                                      // Blink player 2
+    } else {                                       // Blink player 2
         playerOneSetString = _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX );
         playerTwoSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX ), set ); }
     Color thirdRowColor( 0, 255, 0 );

@@ -84,7 +84,7 @@ void ScoreBoard::update() {
     } else { _drawPlayerScore( _player1 ); _drawPlayerScore( _player2 ); }
     
     if ( MATRIX_DISABLED ) {
-        /* std::cout << "MATRIX_DISABLED is true.  Skipping _setDrawer->drawSets()..." << std::endl; */
+        std::cout << "MATRIX_DISABLED is true.  Skipping _setDrawer->drawSets()..." << std::endl;
     } else {
         bool blink = _gameState->getCurrentAction().find( "blink" ) != std::string::npos;
         if ( blink ) {

@@ -6,6 +6,7 @@
 #include "../GameLeds/GameLeds.h"
 #include "../GameState/GameState.h"
 #include "../GameTimer/GameTimer.h"
+#include "../GameWinSequence/GameWinSequence.h"
 #include "../PointLeds/PointLeds.h"
 #include "../PinInterface/PinInterface.h"
 #include "../Player/Player.h"
@@ -52,6 +53,5 @@ class Mode1WinSequences {
     Reset _reset;
     Undo _undo;
     SetWin* _setWin;
-};
-
+    ScoreBoard* _scoreBoard; };
 #endif

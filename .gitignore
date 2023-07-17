@@ -11,3 +11,9 @@ tennis-game/ScoreBoard/pin_data*
 tennis-game/PointLeds/pin_data*
 tennis-game/Mode1Functions/pin_data*
 tennis-game/pin_data*
+examples-api-use/scrolling-text-example
+examples-api-use/panel_test
+examples-api-use/ledcat
+examples-api-use/clock
+examples-api-use/c-example
+tennis-game/googletest

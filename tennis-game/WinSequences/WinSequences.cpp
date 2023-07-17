@@ -22,6 +22,8 @@ void Mode1WinSequences::setScoreBoard( ScoreBoard* scoreBoard ) {
     _setLeds.setScoreBoard(   scoreBoard );}
 
 void Mode1WinSequences::p1GameWinSequence() {
+    GameWinSequence gameWinSequence( _scoreBoard ); 
+    gameWinSequence.run( _player1, _gameState, &_gameLeds, _player1->getGames());
     std::cout << "*** inside WinSequences class.  p1GameWinSequence() ***" << std::endl;
     _undo.memory();
     std::cout << "*** delaying game after p1GameWinSequence()... ***" << std::endl;
