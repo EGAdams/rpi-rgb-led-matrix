@@ -14,8 +14,10 @@ void GameWinSequence::run( Player* player, GameState* gameState,
             gameState->setCurrentAction( "blink" );
             scoreBoard->update();
             std::cout << "uncloaking ... " << std::endl;
+            GameTimer::gameDelay( gameState->getGameFlashDelay());  /*** wait ***/
             gameState->setCurrentAction( "normal operation" );
-            scoreBoard->update(); }                                 // end of blink sequence
+            scoreBoard->update(); 
+            GameTimer::gameDelay( gameState->getGameFlashDelay());  /*** wait ***/ }                                 // end of blink sequence
             if ( TESTING == 1 ) { std::cout << "test is done.  shutting down..." << std::endl; 
             exit( 0 ); }
     } else {
