@@ -3,10 +3,10 @@
 ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState ): 
     _player1( player1 ), _player2( player2 ), _gameState( gameState ) {
     printf( "Constructing ScoreBoard...\n" );
-    if ( MATRIX_DISABLED ) { 
-        // printf( "MATRIX_DISABLED is true.  Skipping matrix setup...\n" );
+    if ( MATRIX_DISABLED == 0 ) { 
+        // printf( "MATRIX_DISABLED == 0 is true.  Skipping matrix setup...\n" );
     } else { 
-        printf( "MATRIX_DISABLED is false.  Setting up matrix...\n" );
+        printf( "MATRIX_DISABLED == 0 is false.  Setting up matrix...\n" );
         Color pipe_color( 255, 255, 0 ); // yellow
         Color background_color( 0, 0, 0 );
         Color player_one_score_color( 0, 255, 0 ); // green
@@ -79,12 +79,12 @@ void ScoreBoard::update() {
     clearScreen();
     std::cout << "player1 points: " << _player1->getPoints() << std::endl;
     std::cout << "player2 points: " << _player2->getPoints() << std::endl;
-    if ( MATRIX_DISABLED ) {
-        /*std::cout << "MATRIX_DISABLED is true.  Skipping _drawPlayerScore..." << std::endl; */
+    if ( MATRIX_DISABLED == 0 ) {
+        std::cout << "MATRIX_DISABLED == 0 is true.  Skipping _drawPlayerScore..." << std::endl;
     } else { _drawPlayerScore( _player1 ); _drawPlayerScore( _player2 ); }
     
-    if ( MATRIX_DISABLED ) {
-        std::cout << "MATRIX_DISABLED is true.  Skipping _setDrawer->drawSets()..." << std::endl;
+    if ( MATRIX_DISABLED == 0 ) {
+        std::cout << "MATRIX_DISABLED == 0 is true.  Skipping _setDrawer->drawSets()..." << std::endl;
     } else {
         bool blink = _gameState->getCurrentAction().find( "blink" ) != std::string::npos;
         if ( blink ) {
@@ -94,7 +94,7 @@ void ScoreBoard::update() {
         } else { _setDrawer->drawSets(); }}}
 
 void ScoreBoard::clearScreen() { 
-    if ( MATRIX_DISABLED ) {
+    if ( MATRIX_DISABLED == 0 ) {
         // std::cout << "clearScreen called, no matrix." << std::endl;
     } else {
         if ( !hasCanvas()) { std::cout << "*** ERROR: canvas == NULL.  exiting... ***" << std::endl; exit( 1 ); }
