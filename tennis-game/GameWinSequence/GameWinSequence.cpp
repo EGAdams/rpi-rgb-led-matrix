@@ -17,9 +17,7 @@ void GameWinSequence::run( Player* player, GameState* gameState,
             GameTimer::gameDelay( gameState->getGameFlashDelay());  /*** wait ***/
             gameState->setCurrentAction( "normal operation" );
             scoreBoard->update(); 
-            GameTimer::gameDelay( gameState->getGameFlashDelay());  /*** wait ***/ }                                 // end of blink sequence
-            if ( TESTING == 1 ) { std::cout << "test is done.  shutting down..." << std::endl; 
-            exit( 0 ); }
+            GameTimer::gameDelay( gameState->getGameFlashDelay());  /*** wait ***/ }}
     } else {
         std::cout << "GameWinSequence::run() hasCanvas() == false" << std::endl;
         for ( int blink_sequence_count = 0; blink_sequence_count < LOOP_GAME_LAMP_WIN; blink_sequence_count++ ) {  
