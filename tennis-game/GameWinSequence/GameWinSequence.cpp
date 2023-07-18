@@ -5,6 +5,8 @@ GameWinSequence::~GameWinSequence() {}
 
 void GameWinSequence::run( Player* player, GameState* gameState, 
                            GameLeds* gameLeds, ScoreBoard* scoreBoard, int games_in_memory ) {
+    
+    if ( TESTING == 1 ) { std::cout << "GameWinSequence::run() TESTING == 1" << std::endl; }
     if ( scoreBoard->hasCanvas()) {
         std::cout << "GameWinSequence::run() hasCanvas() == true" << std::endl;
         for ( int blink_sequence_count = 0; blink_sequence_count < LOOP_GAME_LAMP_WIN; blink_sequence_count++ ) {
@@ -13,8 +15,9 @@ void GameWinSequence::run( Player* player, GameState* gameState,
             scoreBoard->update();
             std::cout << "uncloaking ... " << std::endl;
             gameState->setCurrentAction( "normal operation" );
-            scoreBoard->update();
-        }
+            scoreBoard->update(); }                                 // end of blink sequence
+            if ( TESTING == 1 ) { std::cout << "test is done.  shutting down..." << std::endl; 
+            exit( 0 ); }
     } else {
         std::cout << "GameWinSequence::run() hasCanvas() == false" << std::endl;
         for ( int blink_sequence_count = 0; blink_sequence_count < LOOP_GAME_LAMP_WIN; blink_sequence_count++ ) {  

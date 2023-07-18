@@ -76,6 +76,7 @@ bool ScoreBoard::hasCanvas() {
     } else { std::cout << "*** WARNING: canvas is NULL ***" << std::endl; return false; }}
 
 void ScoreBoard::update() {
+    std::cout << "gamestate current action: " << _gameState->getCurrentAction() << std::endl;
     clearScreen();
     std::cout << "player1 points: " << _player1->getPoints() << std::endl;
     std::cout << "player2 points: " << _player2->getPoints() << std::endl;
@@ -88,6 +89,7 @@ void ScoreBoard::update() {
     } else {
         bool blink = _gameState->getCurrentAction().find( "blink" ) != std::string::npos;
         if ( blink ) {
+            std::cout << "blink is true, calling _setDrawer->drawBlinkSets()..." << std::endl;
             int playerToBlink = _gameState->getCurrentAction().find( "player1" ) != std::string::npos ? 
                 PLAYER_1_INITIALIZED : PLAYER_2_INITIALIZED;
             _setDrawer->drawBlinkSets( playerToBlink );
