@@ -47,6 +47,8 @@ void Mode1WinSequences::p1MatchWinSequence() {
     _reset.resetScoreboard();}
 
 void Mode1WinSequences::p2GameWinSequence() {
+    GameWinSequence gameWinSequence; 
+    gameWinSequence.run( _player2, _gameState, &_gameLeds, _scoreBoard, _player2->getGames());
     std::cout << "*** inside WinSequences class.  executing p2GameWinSequence()... ***" << std::endl;
     _undo.memory();  
     std::cout << "*** delaying game after p2GameWinSequence()... ***" << std::endl;
@@ -70,38 +72,45 @@ void Mode1WinSequences::p2MatchWinSequence() {
     _reset.resetScoreboard();}
 
 void Mode1WinSequences::p1TBGameWinSequence() {
-    _undo.memory();  
-    for ( int currentPulseCount = 0;
-        currentPulseCount < _gameState->getGameWinPulseCount();
-        currentPulseCount++ ) {
-        _player1->setSets( _gameState, 0 );
-        _setLeds.updateSets();
-        GameTimer::gameDelay( _gameState->getFlashDelay());
-        _player1->setSets(    _gameState, _gameState->getP1SetsMem());
-        _setLeds.updateSets();
-        GameTimer::gameDelay( _gameState->getFlashDelay());}
+    _undo.memory();
+    if ( _scoreBoard->hasCanvas()) {
+        GameWinSequence gameWinSequence; 
+        gameWinSequence.run( _player1, _gameState, &_gameLeds, _scoreBoard, _player1->getGames());
+    } else {
+        for ( int currentPulseCount = 0; currentPulseCount < _gameState->getGameWinPulseCount(); 
+                currentPulseCount++ ) {
+                _player1->setSets( _gameState, 0 );
+                _setLeds.updateSets();
+                GameTimer::gameDelay( _gameState->getFlashDelay());
+                _player1->setSets(    _gameState, _gameState->getP1SetsMem());
+                _setLeds.updateSets();
+                GameTimer::gameDelay( _gameState->getFlashDelay());}}
     tieLEDsOff();
     _gameState->setTieBreak( 0 );
     _player1->setGames( 0 );
     _player2->setGames( 0 );
     _gameLeds.updateGames();}
 
-void Mode1WinSequences::p2TBGameWinSequence() {
+void Mode1WinSequences::p2TBGameWinSequence() {     
     _undo.memory();  
-    for ( int currentPulseCount = 0;
-        currentPulseCount < _gameState->getGameWinPulseCount();
-        currentPulseCount++ ) {
-        _player2->setSets( _gameState, 0 );
-        _setLeds.updateSets();
-        GameTimer::gameDelay( _gameState->getFlashDelay());
-        _player2->setSets( _gameState, _gameState->getP2SetsMem());
-        _setLeds.updateSets();
-        GameTimer::gameDelay( _gameState->getFlashDelay());}
+    if ( _scoreBoard->hasCanvas()) {     // the matrix is active
+        GameWinSequence gameWinSequence; 
+        gameWinSequence.run( _player2, _gameState, &_gameLeds, _scoreBoard, _player2->getGames());
+    } else {
+        for ( int currentPulseCount = 0;
+            currentPulseCount < _gameState->getGameWinPulseCount();
+            currentPulseCount++ ) {
+            _player2->setSets( _gameState, 0 );
+            _setLeds.updateSets();
+            GameTimer::gameDelay( _gameState->getFlashDelay());
+            _player2->setSets( _gameState, _gameState->getP2SetsMem());
+            _setLeds.updateSets();
+            GameTimer::gameDelay( _gameState->getFlashDelay()); }}
     tieLEDsOff();
     _gameState->setTieBreak( 0 );
     _player1->setGames( 0 );
     _player2->setGames( 0 );
-    _gameLeds.updateGames();}    
+    _gameLeds.updateGames(); }    
 
 ////////////////////////////////// SET WIN SEQUENCES //////////////////////////////////////////////
 void Mode1WinSequences::p1TBSetWinSequence() {  // for entering set t/b
