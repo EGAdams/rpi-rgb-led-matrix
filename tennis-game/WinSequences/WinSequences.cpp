@@ -23,6 +23,7 @@ void Mode1WinSequences::setScoreBoards( ScoreBoard* scoreBoard ) {
     _scoreBoard =             scoreBoard; } // set mine too!
 
 void Mode1WinSequences::p1GameWinSequence() {
+    std::cout << "//////////////////////// p1GameWinSequence() ////////////////////////" << std::endl;
     GameWinSequence gameWinSequence; 
     gameWinSequence.run( _player1, _gameState, &_gameLeds, _scoreBoard, _player1->getGames());
     std::cout << "*** inside WinSequences class.  p1GameWinSequence() ***" << std::endl;

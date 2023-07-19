@@ -68,6 +68,7 @@ void Mode1Score::mode1P2Score() {
 
 /////////////////////////////////////// MODE 1 GAMES //////////////////////////////////////////////
 void Mode1Score::mode1P1Games() {
+    std::cout << "*** inside mode1P1Games() ***" << std::endl;
     _gameLeds.updateGames();
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
     if ( _player1->getGames() >= GAMES_TO_WIN_SET ) {
