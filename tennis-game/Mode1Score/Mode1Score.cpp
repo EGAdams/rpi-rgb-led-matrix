@@ -41,7 +41,7 @@ void Mode1Score::mode1P1Score() {
             // Game win Scenario
             _player1->setGames( _player1->getGames() + 1 );
             _undo.memory();
-            _pointLeds.updatePoints();
+            // _pointLeds.updatePoints();
             mode1P1Games(); }
         if ( _player1->getPoints() == 4 ) {
             _gameState->setPointFlash( 1 );
@@ -58,7 +58,7 @@ void Mode1Score::mode1P2Score() {
             // Game win Scenario
             _player2->setGames( _player2->getGames() + 1 );
             _undo.memory();
-            _pointLeds.updatePoints();
+            // _pointLeds.updatePoints();
             mode1P2Games(); }
         if ( _player2->getPoints() == 4 ) {
             _gameState->setPointFlash( 1 );
