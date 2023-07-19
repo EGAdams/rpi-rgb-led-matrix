@@ -13,7 +13,6 @@ void GameWinSequence::run( Player* player, GameState* gameState,
             std::cout << "cloaking ... " << std::endl;
             player->number() == PLAYER_1_INITIALIZED ? gameState->setCurrentAction( "player1 blink" ) 
                                 : gameState->setCurrentAction( "player2 blink" );
-            gameState->setCurrentAction( "blink" );
             scoreBoard->update();
             std::cout << "uncloaking ... " << std::endl;
             GameTimer::gameDelay( gameState->getGameFlashDelay());  /*** wait ***/
