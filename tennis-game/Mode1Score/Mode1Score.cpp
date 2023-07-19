@@ -68,13 +68,12 @@ void Mode1Score::mode1P2Score() {
 
 /////////////////////////////////////// MODE 1 GAMES //////////////////////////////////////////////
 void Mode1Score::mode1P1Games() {
-    _gameLeds.updateGames();
+    // _gameLeds.updateGames();
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
     if ( _player1->getGames() >= GAMES_TO_WIN_SET ) {
         if ( _player1->getGames() == GAMES_TO_WIN_SET && _player2->getGames() == GAMES_TO_WIN_SET ) {
             _gameState->setTieBreak( 1 );
             _mode1TieBreaker.tieBreakEnable(); }
-
         if ( _gameState->getTieBreak() == 0 ) {
             std::cout << "*** tie break is zero.  checking if p1 games - p2 games > 1... ***" << std::endl;
             if( !_player1 || !_player2 ) { std::cout << "*** ERROR: player1 or player2 is NULL.  exiting... ***" << std::endl; exit( 1 ); }
@@ -106,23 +105,23 @@ void Mode1Score::mode1P1Games() {
                     _player2->setGames( 0 );
             } else {    // no set win, no match win, no tie break. just a regular game win.
                 std::cout << "*** calling p1GameWinSequence() ***" << std::endl;
+                _gameLeds.updateGames();
                 _gameState->setPlayer1SetHistory( _player1->getSetHistory());
                 _gameState->setPlayer2SetHistory( _player2->getSetHistory());
                 _mode1WinSequences.p1GameWinSequence();  // sets player points to zero
-                _gameLeds.updateGames();
                 _resetGame();
             }}
     } else {
         std::cout << "*** calling p1GameWinSequence() ***" << std::endl;
+        _gameLeds.updateGames();
         _gameState->setPlayer1SetHistory( _player1->getSetHistory());
         _gameState->setPlayer2SetHistory( _player2->getSetHistory());
         _mode1WinSequences.p1GameWinSequence();
-        _gameLeds.updateGames();
         _resetGame(); }}
 
 void Mode1Score::mode1P2Games() {
     // std::cout << "inside mode1P2Games().  updtating game leds..." << std::endl;
-    _gameLeds.updateGames();
+    // _gameLeds.updateGames();
     // std::cout << "inside mode1P2Games().  setting serve switch..." << std::endl;
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
     // std::cout << "serve switch set to: " << _gameState->getServeSwitch() << std::endl;
@@ -163,17 +162,17 @@ void Mode1Score::mode1P2Games() {
                 _player2->setGames( 0 );
             } else {
                 std::cout << "inside mode1P2Games().  calling p2GameWinSequence()..." << std::endl;
+                _gameLeds.updateGames();
                 _gameState->setPlayer1SetHistory( _player1->getSetHistory());
                 _gameState->setPlayer2SetHistory( _player2->getSetHistory());
                 _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
                 _mode1WinSequences.p2GameWinSequence();
-                _gameLeds.updateGames();
                 _resetGame(); }
     } else {
+        _gameLeds.updateGames();
         _mode1WinSequences.p2GameWinSequence();  // sets player points to zero
         _gameState->setPlayer1SetHistory( _player1->getSetHistory());
         _gameState->setPlayer2SetHistory( _player2->getSetHistory());
-        _gameLeds.updateGames();
         _resetGame(); }}
 ////////////////////////////////// END MODE 1 GAMES ///////////////////////////////////////////////
 
