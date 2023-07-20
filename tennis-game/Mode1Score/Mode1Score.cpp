@@ -41,10 +41,12 @@ void Mode1Score::mode1P1Score() {
             _undo.memory();
             // _pointLeds.updatePoints();
             mode1P1Games(); }
-        if ( _player1->getPoints() == 4 ) {
+        if ( _player1->getPoints() == 4 ) {  // TODO: do we get here if previous "else if" happens? jul20
+            std::cout << "inside mode1P1Score().  points == 4.  setting point flash to 1..." << std::endl;
             _gameState->setPointFlash( 1 );
             _gameState->setPreviousTime( GameTimer::gameMillis());
             _gameState->setToggle( 0 ); }}
+    std::cout << "inside mode1P1Score().  updating points..." << std::endl;
     _pointLeds.updatePoints(); }
 
 void Mode1Score::mode1P2Score() {
@@ -58,11 +60,13 @@ void Mode1Score::mode1P2Score() {
             // _pointLeds.updatePoints();
             mode1P2Games(); }
         if ( _player2->getPoints() == 4 ) {
+            std::cout << "inside mode1P2Score().  points == 4.  setting point flash to 1..." << std::endl;
             _gameState->setPointFlash( 1 );
             _gameState->setPreviousTime( GameTimer::gameMillis());
             _gameState->setToggle( 0 ); }}
+    std::cout << "inside mode1P2Score().  updating points..." << std::endl;
     _pointLeds.updatePoints(); }
-    
+
 /////////////////////////////////////// MODE 1 GAMES //////////////////////////////////////////////
 void Mode1Score::mode1P1Games() {
     // _gameLeds.updateGames();

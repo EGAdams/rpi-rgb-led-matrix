@@ -18,9 +18,9 @@ void PointLeds::setScoreBoard( ScoreBoard* scoreBoard ) {
     _scoreBoard = scoreBoard; }
 
 void PointLeds::updatePoints() {
-    // std::cout << "calling _scoreBoard->update() from inside PointLeds... " << std::endl;
+    std::cout << "calling _scoreBoard->update() from inside PointLeds... " << std::endl;
     _scoreBoard->update();
-    // std::cout << "done calling _scoreBoard->update()... \n\n" << std::endl;
+    std::cout << "done calling _scoreBoard->update()... \n\n" << std::endl;
     return;
     
     switch ( _player1->getPoints()) {

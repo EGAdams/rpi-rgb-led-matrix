@@ -103,7 +103,7 @@ void Mode1TieBreaker::tieBreakEnable() {
     std::cout << "*** tieBreakEnable() called. ***" << std::endl;
     _player1->setPoints( 5 );
     _player2->setPoints( 5 );
-    // std::cout << "*** calling _pointLeds.updatePoints() from inside tieBreakEnable()... ***" << std::endl;
+    std::cout << "*** calling _pointLeds.updatePoints() from inside tieBreakEnable()... ***" << std::endl;
     _pointLeds.updatePoints();
     std::cout << "*** after update points in tie breaker!!! *** " << std::endl;
     _gameState->setServeSwitch( 1 );
@@ -129,6 +129,7 @@ void Mode1TieBreaker::tieBreakEnable() {
 void Mode1TieBreaker::setTieBreakEnable() {
     _player1->setPoints( 4 );
     _player2->setPoints( 4 );
+    std::cout << "*** calling _pointLeds.updatePoints() from inside setTieBreakEnable()... ***" << std::endl;
     _pointLeds.updatePoints();
     _gameState->setServeSwitch( 1 );
     _gameState->setServe( 0 );
@@ -152,6 +153,7 @@ void Mode1TieBreaker::endTieBreak() {
     _player2->setPoints( 0 );
     _player1->setGames( 0 );
     _player2->setGames( 0 );
+    std::cout << "*** calling _pointLeds.updatePoints() from inside endTieBreak()... ***" << std::endl;
     _pointLeds.updatePoints();
     _gameLeds.updateGames();
     _gameState->setTieBreak( 0 );

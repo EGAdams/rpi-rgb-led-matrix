@@ -25,28 +25,25 @@ void Mode2Functions::m2Loop() {
 
       // _player1 Points
       case 0:
-        _player1->incrementSetting();                 // p1Setting++;
-        _player1->setPoints(_player1->getSetting());  //  p1Points = p1Setting;
-        _pointLeds.updatePoints();                    // UpdatePoints();
-        if (_player1->getSetting() > 3) /* p1Setting > 3 */ {
-          _player1->setSetting(0);  // p1Setting = 0;
-          _player1->setPoints(0);   // p1Points = 0;
-          _player1->setMode(1);     // modeP1 = 1;
-          // Serial.println( "_player1 set to mode 1" );
-        }
+        _player1->incrementSetting();
+        _player1->setPoints(_player1->getSetting());
+        std::cout << "player1 points: " << _player1->getPoints() << std::endl;
+        _pointLeds.updatePoints();
+        if ( _player1->getSetting() > 3 ) {
+          _player1->setSetting( 0 );
+          _player1->setPoints( 0 );
+          _player1->setMode( 1 ); }
         break;
 
       // _player1 Games
       case 1:
-        _player1->incrementSetting();                // p1Setting++;
-        _player1->setGames(_player1->getSetting());  // p1Games = p1Setting;
-        _gameLeds.updateGames();                     // UpdateGames();
-        if (_player1->getSetting() > 6 /* p1Setting > 6 */) {
-          _player1->setSetting(0);  // p1Setting = 0;
-          _player1->setGames(0);    // p1Games = 0;
-          _player1->setMode(2);     //   modeP1 = 2;
-          // Serial.println( "_player1 set to mode 2" );
-        }
+        _player1->incrementSetting();
+        _player1->setGames(_player1->getSetting());
+        _gameLeds.updateGames();
+        if (_player1->getSetting() > 6 ) {
+          _player1->setSetting( 0 );
+          _player1->setGames( 0 );
+          _player1->setMode( 2 ); }
         break;
 
       // _player1 Sets
@@ -65,14 +62,14 @@ void Mode2Functions::m2Loop() {
     // _player2 Points
     switch (_player2->getMode() ) {
       case 0:
-        // _player2->incrementSetting();
         _player2->setPoints(
-            _player2->incrementSetting());
+        _player2->incrementSetting());
+        std::cout << "player2 points: " << _player2->getPoints() << std::endl;
         _pointLeds.updatePoints();         
         if (_player2->getSetting() > 4 ) {
-          _player2->setSetting(0);
-          _player2->setPoints(0);
-          _player2->setMode(1);
+          _player2->setSetting( 0 );
+          _player2->setPoints( 0 );
+          _player2->setMode( 1 );
         }
         break;
 
@@ -84,9 +81,9 @@ void Mode2Functions::m2Loop() {
             _player2->incrementSetting());  // p2Games = p2Setting;
         _gameLeds.updateGames();            // UpdateGames();
         if (_player2->getSetting() > 7) /* p2Setting > 7 */ {
-          _player2->setSetting(0);  // p2Setting = 0;
-          _player2->setGames(0);    // p2Games = 0;
-          _player2->setMode(2);     // modeP2 = 2;
+          _player2->setSetting( 0 );  // p2Setting = 0;
+          _player2->setGames( 0 );    // p2Games = 0;
+          _player2->setMode( 2 );     // modeP2 = 2;
         }
         break;
 
@@ -96,7 +93,7 @@ void Mode2Functions::m2Loop() {
         _player2->setSets( _gameState, _player2->incrementSetting());  // p2Sets = p2Setting;
         _setLeds.updateSets();
         if (_player2->getSetting() > 1 ) {
-          _player2->setSetting(0);  
+          _player2->setSetting( 0 );  
           _player2->setSets(_gameState, 0 );
           _player2->setMode( 0 );   
         }
@@ -142,7 +139,7 @@ void Mode2Functions::m2PlayerButtons(int playerButton) {
       //      Mode2Button4();
       break;
   }
-  _gameState->setPlayerButton(0);  // playerButton = 0;
+  _gameState->setPlayerButton( 0 );  // playerButton = 0;
 }
 
 // void Mode2Button1() {
