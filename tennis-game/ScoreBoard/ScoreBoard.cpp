@@ -138,7 +138,7 @@ std::string ScoreBoard::_translate( int raw_score ) {
     case 1:               return "15";
     case 2:               return "30";
     case 3:               return "40";
-    case SCORE_CASE_4:    return "Ad";
+    case SCORE_CASE_4:    return "40"; // jul20 TODO: just a test!
     case SCORE_CASE_5:    return "Ad";
     case UNDEFINED_SCORE: return "99";
     default:              return "00"; }}

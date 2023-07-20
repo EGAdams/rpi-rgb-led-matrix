@@ -50,7 +50,7 @@ void Mode1Score::mode1P1Score() {
     _pointLeds.updatePoints(); }
 
 void Mode1Score::mode1P2Score() {
-    if ( _player2->getPoints() >= 3 ) {
+    if ( _player2->getPoints() >= 3 ) { // either a win, or an advantage
         if ( _player2->getPoints() == _player1->getPoints()) {  // Tie, Back to Deuce
             _player1->setPoints( 3 );
             _player2->setPoints( 3 );    // Game win Scenario Below
