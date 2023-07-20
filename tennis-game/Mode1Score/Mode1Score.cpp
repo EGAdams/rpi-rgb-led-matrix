@@ -46,8 +46,8 @@ void Mode1Score::mode1P1Score() {
             _gameState->setPointFlash( 1 );
             _gameState->setPreviousTime( GameTimer::gameMillis());
             _gameState->setToggle( 0 ); }}
-    std::cout << "inside mode1P1Score().  updating points..." << std::endl;
-    _pointLeds.updatePoints(); }
+    std::cout << "inside mode1P1Score(). ( commented out ) updating points..." << std::endl;
+    /* _pointLeds.updatePoints(); july 20 */ }
 
 void Mode1Score::mode1P2Score() {
     if ( _player2->getPoints() >= 3 ) {
@@ -64,8 +64,8 @@ void Mode1Score::mode1P2Score() {
             _gameState->setPointFlash( 1 );
             _gameState->setPreviousTime( GameTimer::gameMillis());
             _gameState->setToggle( 0 ); }}
-    std::cout << "inside mode1P2Score().  updating points..." << std::endl;
-    _pointLeds.updatePoints(); }
+    std::cout << "inside mode1P2Score().  ( commented out ) updating points..." << std::endl;
+    /* _pointLeds.updatePoints(); jul20 */ }
 
 /////////////////////////////////////// MODE 1 GAMES //////////////////////////////////////////////
 void Mode1Score::mode1P1Games() {
