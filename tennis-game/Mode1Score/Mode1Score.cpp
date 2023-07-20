@@ -34,12 +34,10 @@ void Mode1Score::_resetGame() {
 void Mode1Score::mode1P1Score() {
     if ( _player1->getPoints() >= 3 ) {
         if ( _player1->getPoints() == _player2->getPoints()) {
-            // Tie, Back to Deuce
-            _player1->setPoints( 3 );
+            _player1->setPoints( 3 ); // Tie, Back to Deuce
             _player2->setPoints( 3 );
-        } else if ( _player1->getPoints() > 3 && ( _player1->getPoints() - _player2->getPoints()) > 1 ) {
-            // Game win Scenario
-            _player1->setGames( _player1->getGames() + 1 );
+        } else if ( _player1->getPoints() > 3 && ( _player1->getPoints() - _player2->getPoints()) > 1 ) {  
+            _player1->setGames( _player1->getGames() + 1 ); // Game win Scenario
             _undo.memory();
             // _pointLeds.updatePoints();
             mode1P1Games(); }
@@ -54,9 +52,8 @@ void Mode1Score::mode1P2Score() {
         if ( _player2->getPoints() == _player1->getPoints()) {  // Tie, Back to Deuce
             _player1->setPoints( 3 );
             _player2->setPoints( 3 );    // Game win Scenario Below
-        } else if ( _player2->getPoints() > 3 && ( _player2->getPoints() - _player1->getPoints()) > 1 ) {                                // Game win Scenario
-            // Game win Scenario
-            _player2->setGames( _player2->getGames() + 1 );
+        } else if ( _player2->getPoints() > 3 && ( _player2->getPoints() - _player1->getPoints()) > 1 ) {
+            _player2->setGames( _player2->getGames() + 1 ); // Game win Scenario
             _undo.memory();
             // _pointLeds.updatePoints();
             mode1P2Games(); }
@@ -65,7 +62,7 @@ void Mode1Score::mode1P2Score() {
             _gameState->setPreviousTime( GameTimer::gameMillis());
             _gameState->setToggle( 0 ); }}
     _pointLeds.updatePoints(); }
-
+    
 /////////////////////////////////////// MODE 1 GAMES //////////////////////////////////////////////
 void Mode1Score::mode1P1Games() {
     // _gameLeds.updateGames();

@@ -134,11 +134,11 @@ int ScoreBoard::_characterOffset( std::string character ) {
 
 std::string ScoreBoard::_translate( int raw_score ) {
     switch ( raw_score ) {
-    case 0: return "00";
-    case 1: return "15";
-    case 2: return "30";
-    case 3: return "40";
-    case 4: return "Ad";
-    case 5: return "Ad";
-    case 99: return "Ad";
-    default: return "00"; }}
+    case 0:               return "00";
+    case 1:               return "15";
+    case 2:               return "30";
+    case 3:               return "40";
+    case SCORE_CASE_4:    return "Ad";
+    case SCORE_CASE_5:    return "Ad";
+    case UNDEFINED_SCORE: return "99";
+    default:              return "00"; }}

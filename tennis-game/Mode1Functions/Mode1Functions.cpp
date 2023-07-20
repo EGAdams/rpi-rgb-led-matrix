@@ -32,7 +32,7 @@ void Mode1Functions::mode1ButtonFunction() {
             _gameState->setPointFlash( 0 );
             _player1->setPoints( _gameState->getP1PointsMem());
             _player2->setPoints( _gameState->getP2PointsMem());
-            _pointLeds.updatePoints();
+            // _pointLeds.updatePoints(); jul20
         }
         GameTimer::gameDelay( _gameState->getButtonDelay());
         // if serving, increment score.  if not serving, set serve to 1 and don't increment score.
