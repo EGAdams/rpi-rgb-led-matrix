@@ -38,8 +38,8 @@ GameObject::GameObject( GameState* gameState ) : _gameState( gameState ) {
     _pinInterface = new PinInterface( _pinState );
     std::cout << "constructing history object..." << std::endl;
     _history = new History();
-    std::cout << "constructing gamestate object..." << std::endl;
     _gameInputs = new Inputs( _player1, _player2, _pinInterface, _gameState );
+    std::cout << "constructing gameModes object..." << std::endl;
     _gameModes =  new GameModes( _player1, _player2, _pinInterface, _gameState, _history );
     std::cout << "constructing scoreboard object..." << std::endl;
     _scoreBoard = new ScoreBoard( _player1, _player2, _gameState );
@@ -64,8 +64,7 @@ void GameObject::loopGame() {
         // std::cout << "delaying for " << GAME_LOOP_DELAY << " milliseconds..." << std::endl;
         GameTimer::gameDelay( GAME_LOOP_DELAY );
         // std::cout << "updating game state..." << std::endl;
-        _subjectManager->gameStateUpdate( _gameState, _player1, _player2 );
-        std::cout << "end of loopGame().\n" << std::endl; }
+        _subjectManager->gameStateUpdate( _gameState, _player1, _player2 ); }
 
 GameState* GameObject::getGameState() { return _gameState; }
 
