@@ -48,7 +48,7 @@ int main( int argc, char *argv[]) {
         // get input from user
         std::cout << "enter 1 or 2 to score for player 1 or 2: ";
         std::cin >> player;
-        std::cout << "\n\n\n\n\n\n*** Player " << player << " scored ***\n" << std::endl;
+        std::cout << "\n\n\n\n\n\n\n*** Player " << player << " scored ***\n" << std::endl;
         gameObject->playerScore( player );  // flip the player score flag
         sleep( SCORE_DELAY );
         gameObject->loopGame();  // handle the player score flag
