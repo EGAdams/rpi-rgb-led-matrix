@@ -46,7 +46,7 @@ int main( int argc, char *argv[]) {
         sleep( SCORE_DELAY );
         // player = rand() % 2 + 1; // generate random player between 1 and 2
         // get input from user
-        std::cout << "enter 1 or 2 to score for player 1 or 2: ";
+        std::cout << "\n\n\n\nenter 1 or 2 to score for player 1 or 2: ";
         std::cin >> player;
         std::cout << "\n\n\n\n\n\n\n*** Player " << player << " scored ***\n" << std::endl;
         gameObject->playerScore( player );  // flip the player score flag

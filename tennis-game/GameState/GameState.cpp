@@ -33,8 +33,8 @@ GameState::GameState() {
 int GameState::gameRunning() { return _gameRunning; }
 void GameState::stopGameRunning() { _gameRunning = 0; }
 void GameState::setCurrentSet( int current_set ) { 
-    std::cout << "gamestate current set: " << _current_set << std::endl;
-    std::cout << "Now setting current set in GameState to: " << current_set << std::endl;
+    std::cout << "\ngamestate current set: " << _current_set << "\n" << std::endl;
+    std::cout << "Now setting current set in GameState to: " << current_set << "\n" << std::endl;
     _current_set = current_set; }
 int GameState::getCurrentSet() { return _current_set; }
 void GameState::setCurrentAction( std::string currentAction ) { _currentAction = currentAction; }
