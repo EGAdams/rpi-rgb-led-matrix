@@ -31,41 +31,27 @@ void Mode1Score::_resetGame() {
     _gameState->setServe( 0 );
     _pointLeds.updatePoints(); }
 
-void Mode1Score::mode1P1Score() {
-    if ( _player1->getPoints() >= 3 ) {
-        if ( _player1->getPoints() == _player2->getPoints()) {
-            _player1->setPoints( 3 ); // Tie, Back to Deuce
-            _player2->setPoints( 3 );
-        } else if ( _player1->getPoints() > 3 && ( _player1->getPoints() - _player2->getPoints()) > 1 ) {  
-            _player1->setGames( _player1->getGames() + 1 ); // Game win Scenario
+void Mode1Score::updateScore( Player* currentPlayer ) {
+    Player* otherPlayer = currentPlayer->getOpponent();
+    if ( currentPlayer->getPoints() >= 3 ) {
+        if ( currentPlayer->getPoints() == otherPlayer->getPoints()) {
+            currentPlayer->setPoints( 3 );
+            otherPlayer->setPoints( 3 );
+        } else if ( currentPlayer->getPoints() > 3 && ( currentPlayer->getPoints() - otherPlayer->getPoints()) > 1) {
+            currentPlayer->setGames( currentPlayer->getGames() + 1);
             _undo.memory();
-            // _pointLeds.updatePoints();
-            mode1P1Games(); }
-        if ( _player1->getPoints() == 4 ) {  // TODO: do we get here if previous "else if" happens? jul20
-            std::cout << "inside mode1P1Score().  points == 4.  setting point flash to 1..." << std::endl;
+            currentPlayer->number() == 1 ? mode1P1Games() : mode1P2Games(); }
+        if ( currentPlayer->getPoints() == 4 ) {
+            std::cout << "inside updateScore().  points == 4.  setting point flash to 1..." << std::endl;
             _gameState->setPointFlash( 1 );
             _gameState->setPreviousTime( GameTimer::gameMillis());
             _gameState->setToggle( 0 ); }}
-    std::cout << "inside mode1P1Score().  updating points..." << std::endl;
+            
+    std::cout << "inside updateScore().  updating points..." << std::endl;
     _pointLeds.updatePoints(); }
 
-void Mode1Score::mode1P2Score() {
-    if ( _player2->getPoints() >= 3 ) { // either a win, or an advantage
-        if ( _player2->getPoints() == _player1->getPoints()) {  // Tie, Back to Deuce
-            _player1->setPoints( 3 );
-            _player2->setPoints( 3 );    // Game win Scenario Below
-        } else if ( _player2->getPoints() > 3 && ( _player2->getPoints() - _player1->getPoints()) > 1 ) {
-            _player2->setGames( _player2->getGames() + 1 ); // Game win Scenario
-            _undo.memory();
-            // _pointLeds.updatePoints();
-            mode1P2Games(); }
-        if ( _player2->getPoints() == 4 ) {
-            std::cout << "inside mode1P2Score().  points == 4.  setting point flash to 1..." << std::endl;
-            _gameState->setPointFlash( 1 );
-            _gameState->setPreviousTime( GameTimer::gameMillis());
-            _gameState->setToggle( 0 ); }}
-    std::cout << "inside mode1P2Score().  updating points..." << std::endl;
-    _pointLeds.updatePoints(); }
+void Mode1Score::mode1P1Score() { updateScore( _player1 );}
+void Mode1Score::mode1P2Score() { updateScore( _player2 );}
 
 /////////////////////////////////////// MODE 1 GAMES //////////////////////////////////////////////
 void Mode1Score::mode1P1Games() {

@@ -32,6 +32,7 @@ class Mode1Score {
     void mode1TBP2Games();
     void mode1SetTBP2Games();
     void setScoreBoard( ScoreBoard* scoreBoard );
+    void updateScore(   Player* currentPlayer  );
 
  private:
     void _resetGame();
