@@ -100,8 +100,7 @@ void ScoreBoard::clearScreen() {
         // std::cout << "clearScreen called, no matrix." << std::endl;
     } else {
         if ( !hasCanvas()) { std::cout << "*** ERROR: canvas == NULL.  exiting... ***" << std::endl; exit( 1 ); }
-        Color flood_color( 0, 0, 0 ); _canvas->Fill( flood_color.r, flood_color.g, flood_color.b ); 
-        std::cout << "screen cleared." << std::endl; }}
+        Color flood_color( 0, 0, 0 ); _canvas->Fill( flood_color.r, flood_color.g, flood_color.b ); }}
 
 void ScoreBoard::_drawPlayerScore( Player* player ) {
     int vertical_offset = player->number() == 0 ? 0 : _big_number_font.height();
