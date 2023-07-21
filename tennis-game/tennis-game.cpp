@@ -39,14 +39,17 @@ int main( int argc, char *argv[]) {
     std::cout << "done calling loopGame().  sleeping...\n\n\n\n\n" << std::endl;
     sleep( 1 );
 
-    int randomPlayer = 1;
+    int player = 1;
     std::signal( SIGINT, GameObject::_signalHandler );
     /*/// Begin Game Loop ///*/ while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { 
         if ( loop_count >  MAX_LOOP_COUNT ) { gameState->stopGameRunning(); }
         sleep( SCORE_DELAY );
-        randomPlayer = rand() % 2 + 1; // generate random player between 1 and 2
-        std::cout << "\n*** Player " << randomPlayer << " scored ***\n" << std::endl;
-        gameObject->playerScore( randomPlayer );  // flip the player score flag
+        // player = rand() % 2 + 1; // generate random player between 1 and 2
+        // get input from user
+        std::cout << "enter 1 or 2 to score for player 1 or 2: ";
+        std::cin >> player;
+        std::cout << "\n*** Player " << player << " scored ***\n" << std::endl;
+        gameObject->playerScore( player );  // flip the player score flag
         sleep( SCORE_DELAY );
         gameObject->loopGame();  // handle the player score flag
         loop_count++;
