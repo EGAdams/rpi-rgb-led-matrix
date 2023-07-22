@@ -99,12 +99,13 @@ void Mode2Functions::m2PlayerButtons(int playerButton) {
 
     case 1:
       _player1->setSetting(_player1->getSetting() + 1);
-      _gameState->setNow(_gameState->getNow() + 10000); 
+      _gameState->setNow(_gameState->getNow() + 10000 ); 
       break;
 
     case 2:
       _player1->setSetting(_player1->getSetting() - 1);
-      _gameState->setNow(_gameState->getNow() + 10000);
+      _gameState->setNow(_gameState->getNow() + 10000 );
+      break;
 
     case 3:
       _player2->setSetting(_player2->getSetting() + 1);
@@ -113,6 +114,6 @@ void Mode2Functions::m2PlayerButtons(int playerButton) {
 
     case 4:
       _player1->setSetting(_player1->getSetting() - 1);
-      _gameState->setNow(_gameState->getNow() + 10000);
+      _gameState->setNow(_gameState->getNow() + 10000 );
       break; }
   _gameState->setPlayerButton( 0 );  }
