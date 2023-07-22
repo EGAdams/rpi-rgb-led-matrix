@@ -21,7 +21,7 @@ void Mode2Functions::m2Loop() {
       case 0:
         _player1->incrementSetting();
         _player1->setPoints(_player1->getSetting());
-        std::cout << "player1 points: " << _player1->getPoints() << std::endl;
+        std::cout << "inside m2Loop...  player1 points: " << _player1->getPoints() << std::endl;
         _pointLeds.updatePoints();
         if ( _player1->getSetting() > 3 ) {
           _player1->setSetting( 0 );
@@ -57,7 +57,7 @@ void Mode2Functions::m2Loop() {
       case 0:
         _player2->setPoints(
         _player2->incrementSetting());
-        std::cout << "player2 points: " << _player2->getPoints() << std::endl;
+        std::cout << "inside m2Loop...  player2 points: " << _player2->getPoints() << std::endl;
         _pointLeds.updatePoints();         
         if (_player2->getSetting() > 4 ) {
           _player2->setSetting( 0 );

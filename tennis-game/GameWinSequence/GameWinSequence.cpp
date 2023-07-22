@@ -6,7 +6,8 @@ GameWinSequence::~GameWinSequence() {}
 void GameWinSequence::run( Player* player, GameState* gameState, 
                            GameLeds* gameLeds, ScoreBoard* scoreBoard, int games_in_memory ) {
     
-    if ( TESTING == 1 ) { std::cout << "GameWinSequence::run() TESTING == 1" << std::endl; }
+    if ( MATRIX_DISABLED == 1 ) { 
+        std::cout << "GameWinSequence::run() MATRIX_DISABLED == 1, returning... " << std::endl; return; }
     if ( scoreBoard->hasCanvas()) {
         std::cout << "GameWinSequence::run() hasCanvas() == true" << std::endl;
         for ( int blink_sequence_count = 0; blink_sequence_count < LOOP_GAME_LAMP_WIN; blink_sequence_count++ ) {
