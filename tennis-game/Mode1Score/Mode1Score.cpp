@@ -37,7 +37,7 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
         if ( currentPlayer->getPoints() == otherPlayer->getPoints()) {
             currentPlayer->setPoints( 3 );
             otherPlayer->setPoints( 3 );
-        } else if ( currentPlayer->getPoints() > 3 && ( currentPlayer->getPoints() - otherPlayer->getPoints()) > 1) {
+        } else if ( currentPlayer->getPoints() > 3 && ( currentPlayer->getPoints() - otherPlayer->getPoints()) > 1 ) {
             currentPlayer->setGames( currentPlayer->getGames() + 1);
             _undo.memory();
             currentPlayer->number() == 1 ? mode1P1Games() : mode1P2Games(); }
@@ -46,12 +46,12 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
             _gameState->setPointFlash( 1 );
             _gameState->setPreviousTime( GameTimer::gameMillis());
             _gameState->setToggle( 0 ); }}
-            
     std::cout << "inside updateScore().  updating points..." << std::endl;
     _pointLeds.updatePoints(); }
 
 void Mode1Score::mode1P1Score() { updateScore( _player1 );}
 void Mode1Score::mode1P2Score() { updateScore( _player2 );}
+
 
 /////////////////////////////////////// MODE 1 GAMES //////////////////////////////////////////////
 void Mode1Score::mode1P1Games() {
