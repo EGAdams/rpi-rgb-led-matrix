@@ -80,14 +80,14 @@ bool ScoreBoard::hasCanvas() {
 void ScoreBoard::update() {
     std::cout << "gamestate current action: " << _gameState->getCurrentAction() << std::endl;
     clearScreen();
-    std::cout << "player1 points: " << _player1->getPoints() << std::endl;
-    std::cout << "player2 points: " << _player2->getPoints() << std::endl;
+    std::cout << "inside ScoreBoard::update()  player1 points: " << _player1->getPoints() << std::endl;
+    std::cout << "inside ScoreBoard::update()  player2 points: " << _player2->getPoints() << std::endl;
     if ( MATRIX_DISABLED == 1 ) {
-        std::cout << "MATRIX_DISABLED == 1 is true.  Skipping _drawPlayerScore..." << std::endl;
+        // std::cout << "MATRIX_DISABLED == 1 is true.  Skipping _drawPlayerScore..." << std::endl;
     } else { _drawPlayerScore( _player1 ); _drawPlayerScore( _player2 ); }
     
     if ( MATRIX_DISABLED == 1 ) {
-        std::cout << "MATRIX_DISABLED == 1 is true.  Skipping _setDrawer->drawSets()..." << std::endl;
+        // std::cout << "MATRIX_DISABLED == 1 is true.  Skipping _setDrawer->drawSets()..." << std::endl;
     } else {
         bool blink = _gameState->getCurrentAction().find( "blink" ) != std::string::npos;
         if ( blink ) {
@@ -112,12 +112,15 @@ void ScoreBoard::_drawPlayerScore( Player* player ) {
     int baseline = _big_number_font.baseline();
     int first_offset  = _characterOffset( score.substr( 0, 1 ));
     int second_offset = _characterOffset( score.substr( 1, 1 ));
-    if( player->number() == PLAYER_1_INITIALIZED ) {
-        _playerOneScoreDrawer->DrawNumber( score.substr( 0, 1 ), first_offset  + 16, baseline + vertical_offset );
-        _playerOneScoreDrawer->DrawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset );
+    if( MATRIX_DISABLED == 1 ) {
+
     } else {
-        _playerTwoScoreDrawer->DrawNumber( score.substr( 0, 1 ), first_offset  + 16, baseline + vertical_offset );
-        _playerTwoScoreDrawer->DrawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset ); }}
+        if( player->number() == PLAYER_1_INITIALIZED ) {
+            _playerOneScoreDrawer->DrawNumber( score.substr( 0, 1 ), first_offset  + 16, baseline + vertical_offset );
+            _playerOneScoreDrawer->DrawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset );
+        } else {
+            _playerTwoScoreDrawer->DrawNumber( score.substr( 0, 1 ), first_offset  + 16, baseline + vertical_offset );
+            _playerTwoScoreDrawer->DrawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset ); }}}
 
 int ScoreBoard::_characterOffset( std::string character ) {
     int char_offset = 0;

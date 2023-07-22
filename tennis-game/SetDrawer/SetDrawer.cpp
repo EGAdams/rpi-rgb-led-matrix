@@ -24,10 +24,14 @@ void SetDrawer::drawSets() {
     std::string playerOneSetString = _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX );
     std::string playerTwoSetString = _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX );
     Color thirdRowColor( 0, 255, 0 );
-    drawTextOnCanvas( x + SMALL_BEFORE, y, thirdRowColor, playerOneSetString );
-    y += _little_font.height() - 5;
-    Color fourthRowColor( 255, 0, 0 );
-    drawTextOnCanvas( x + SMALL_BEFORE, y, fourthRowColor, playerTwoSetString ); }
+    if ( MATRIX_DISABLED ) {
+        std::cout << playerOneSetString << std::endl;
+        std::cout << playerTwoSetString << std::endl;
+    } else {
+        drawTextOnCanvas( x + SMALL_BEFORE, y, thirdRowColor, playerOneSetString );
+        y += _little_font.height() - 5;
+        Color fourthRowColor( 255, 0, 0 );
+        drawTextOnCanvas( x + SMALL_BEFORE, y, fourthRowColor, playerTwoSetString ); }}
 
 void SetDrawer::drawBlinkSets( int playerToBlink ) {
     int y = START_ROW; int x = 0; int set = _gameState->getCurrentSet();      // init coords and set
