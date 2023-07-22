@@ -83,7 +83,7 @@ void Mode1Functions::pointFlash() {
         if ( _player1->getPoints() > 3 ) {
             if ( _gameState->getNow() - _gameState->getPreviousTime() > _gameState->getFlashDelay()) {
                 if ( _gameState->getToggle() == 0 ) {
-                    _player1->setPoints( SCORE_CASE_5 );      
+                    _player1->setPoints( SCORE_CASE_4 );      
                     _pointLeds.updatePoints();
                     _gameState->setToggle( 1 );
                 } else {
@@ -96,7 +96,7 @@ void Mode1Functions::pointFlash() {
         if ( _player2->getPoints() > 3 ) {
                 if ( _gameState->getNow() - _gameState->getPreviousTime() > _gameState->getFlashDelay()) {
                     if ( _gameState->getToggle() == 0 ) {
-                        _player2->setPoints( SCORE_CASE_5 );      
+                        _player2->setPoints( SCORE_CASE_4 );      
                         _pointLeds.updatePoints();
                         _gameState->setToggle( 1 );
                     } else {
