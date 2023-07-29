@@ -1,90 +1,99 @@
-#include "gtest/gtest.h"
-#include "gmock/gmock.h"
 #include "Mode1Score.h"
-
-// Assuming that Player, GameState, PinInterface, and History are interfaces,
-// we can create mock classes for them
-class MockPlayer : public IPlayer {
-    public:
-    MOCK_METHOD(void, setOpponent, (IPlayer*), (override));
-    MOCK_METHOD(IPlayer*, getOpponent, (), (override));
-    MOCK_METHOD(void, setPoints, (int), (override));
-    MOCK_METHOD(int, getPoints, (), (override));
-    MOCK_METHOD(void, setSets, ( IGameState* gameState, int game_value ), (override));
-    // get sets
-    MOCK_METHOD( int, getSets, (), (override));
-    // set games
-    MOCK_METHOD(void, setGames, (int), (override));
-    // get games
-    MOCK_METHOD(int, getGames, (), (override));
-    // set matches
-    MOCK_METHOD(void, setMatches, (int), (override));
-    // get matches
-    MOCK_METHOD(int, getMatches, (), (override));
-    // set mode
-    MOCK_METHOD(void, setMode, (int), (override));
-    // get mode
-    MOCK_METHOD(int, getMode, (), (override));
-    // set setting
-    MOCK_METHOD(void, setSetting, (int), (override));
-    // get setting  
-    MOCK_METHOD(int, getSetting, (), (override));
-    // increment setting
-    MOCK_METHOD(int, incrementSetting, (), (override));
-    // number
-    MOCK_METHOD(int, number, (), (override));
-    // set set history
-    MOCK_METHOD(void, setSetHistory, (int, int), (override));
-    // get set history
-    MOCK_METHOD(void, setGameHistory, (int, int), (override));
-    // set serve switch
-    MOCK_METHOD(void, setServeSwitch, (int), (override));
-    // get serve switch
-    MOCK_METHOD(int, getServeSwitch, (), (override));
-    // get set history
-    MOCK_METHOD(std::map< int, int>, getSetHistory, (), (override));
-
-    
-};
-
-class MockGameState : public GameState {
-    // Similarly, add method declarations here
-};
-
-class MockPinInterface : public PinInterface {
-    // Add method declarations here
-};
-
-class MockHistory : public History {
-    // Add method declarations here
-};
-
 class Mode1ScoreTest : public ::testing::Test {
 protected:
-    MockPlayer player1;
-    MockPlayer player2;
-    MockPinInterface pinInterface;
-    MockGameState gameState;
-    MockHistory history;
+    IPlayer* _player1;
+    IPlayer* _player2;
+    PinInterface* _pinInterface;
+    GameState* _gameState;
+    History* _history;
+    Mode1Score* _mode1Score;
 
-    std::unique_ptr<Mode1Score> mode1Score;
-
-    void SetUp() override {
-        mode1Score = std::make_unique<Mode1Score>(&player1, &player2, &pinInterface, &gameState, &history);
-    }
+    void SetUp() override;
+    void TearDown() override;
 };
 
-TEST_F(Mode1ScoreTest, TestUpdateScore) {
-    // Arrange
-    ON_CALL(player1, getPoints()).WillByDefault(::testing::Return(3));
-    ON_CALL(player2, getPoints()).WillByDefault(::testing::Return(2));
-
-    // Act
-    mode1Score->updateScore(&player1);
-
-    // Assert
-    // Assuming that setPoints is a method in the Player interface and it changes the internal state of the player
-    EXPECT_CALL(player1, setPoints(4)).Times(1);
+void Mode1ScoreTest::SetUp() {
+    _player1 = new MockPlayer();
+    _player2 = new MockPlayer();
+    _pinInterface = new MockPinInterface();
+    _gameState = new MockGameState();
+    _history = new MockHistory();
+    _mode1Score = new Mode1Score(_player1, _player2, _pinInterface, _gameState, _history);
 }
 
-// Continue with other tests...
+// Tear down the test fixture
+void Mode1ScoreTest::TearDown() {
+    delete _mode1Score;
+    delete _history;
+    delete _gameState;
+    delete _pinInterface;
+    delete _player2;
+    delete _player1;
+}
+
+// Test case: TestMode1P1Score_LessThan3Points
+TEST_F(Mode1ScoreTest, TestMode1P1Score_LessThan3Points) {
+    _player1->setPoints(2);
+    _player2->setPoints(1);
+    _mode1Score->updateScore(_player1);
+    EXPECT_EQ(_player1->getPoints(), 2);
+    EXPECT_EQ(_player2->getPoints(), 1);
+    // Check other changes made by the method
+}
+
+// Test case: Mode1P1ScoreTest
+TEST_F(Mode1ScoreTest, Mode1P1ScoreTest) {
+    // Test implementation here
+}
+
+// Test case: TestMode1P1Score_LessThan3Points
+TEST_F(Mode1ScoreTest, TestMode1P1Score_LessThan3Points) {
+    _player1->setPoints(2);
+    _player2->setPoints(1);
+    _mode1Score->updateScore(_player1);
+    EXPECT_EQ(_player1->getPoints(), 2);
+    EXPECT_EQ(_player2->getPoints(), 1);
+    // Check other changes made by the method
+}
+
+// Test case: TestMode1P1Score_3Points_LessThan3PointsP2
+TEST_F(Mode1ScoreTest, TestMode1P1Score_3Points_LessThan3PointsP2) {
+    _player1->setPoints(3);
+    _player2->setPoints(2);
+    _mode1Score->updateScore(_player1);
+    EXPECT_EQ(_player1->getPoints(), 3);
+    EXPECT_EQ(_player2->getPoints(), 2);
+    // Check other changes made by the method
+}
+
+// Test case: TestMode1P1Score_3Points_EqualPoints
+TEST_F(Mode1ScoreTest, TestMode1P1Score_3Points_EqualPoints) {
+    _player1->setPoints(3);
+    _player2->setPoints(3);
+    _mode1Score->updateScore(_player1);
+    EXPECT_EQ(_player1->getPoints(), 3);
+    EXPECT_EQ(_player2->getPoints(), 3);
+    // Check other changes made by the method
+}
+
+// Test case: TestMode1P1Score_MoreThan3Points_DifferenceMoreThan1
+TEST_F(Mode1ScoreTest, TestMode1P1Score_MoreThan3Points_DifferenceMoreThan1) {
+    _player1->setPoints(5);
+    _player2->setPoints(3);
+    _mode1Score->updateScore(_player1);
+    EXPECT_EQ(_player1->getPoints(), 5);
+    EXPECT_EQ(_player2->getPoints(), 3);
+    EXPECT_EQ(_player1->getGames(), 1); // Assuming getGames starts from 0
+    // Check other changes made by the method
+}
+
+// Test case: TestMode1P1Score_4Points
+TEST_F(Mode1ScoreTest, TestMode1P1Score_4Points) {
+    _player1->setPoints(4);
+    _player2->setPoints(2);
+    _mode1Score->updateScore(_player1);
+    EXPECT_EQ(_player1->getPoints(), 4);
+    EXPECT_EQ(_player2->getPoints(), 2);
+    EXPECT_EQ(_gameState->getPointFlash(), 1); // Assuming getPointFlash returns the current pointFlash
+    // Check other changes made by the method
+}

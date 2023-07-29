@@ -3,7 +3,12 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/tennis-game/Player/*",
+                "${workspaceFolder}/tennis-game/Mode1Score/**",
+                "${workspaceFolder}/tennis-game/googletest/googletest/include/**",
+                "${workspaceFolder}/tennis-game/googletest/googlemock/**",
+                "${workspaceFolder}/tennis-game/googletest/googletest/include/gtest/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang",
