@@ -19,8 +19,8 @@
 
 class Mode1WinSequences {
  public:
-    Mode1WinSequences(Player* player1,
-                        Player* player2,
+    Mode1WinSequences(  IPlayer* player1,
+                        IPlayer* player2,
                         PinInterface* pinInterface,
                         GameState* gameState);
     ~Mode1WinSequences();
@@ -43,8 +43,8 @@ class Mode1WinSequences {
     void tieLEDsOff();
 
  private:
-    Player* _player1;
-    Player* _player2;
+    IPlayer* _player1;
+    IPlayer* _player2;
     PinInterface* _pinInterface;
     GameState* _gameState;
     PointLeds _pointLeds;

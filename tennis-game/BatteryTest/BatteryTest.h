@@ -9,13 +9,13 @@
 
 class BatteryTest {
  public:
-  BatteryTest( Player* player1, Player* player2, PinInterface* pinInterface, PointLeds* pointLeds, Inputs* inputs );
+  BatteryTest( IPlayer* player1, IPlayer* player2, PinInterface* pinInterface, PointLeds* pointLeds, Inputs* inputs );
   ~BatteryTest();
   void execute();
 
 private:
-  Player*        _player1;
-  Player*        _player2;
+  IPlayer*        _player1;
+  IPlayer*        _player2;
   PinInterface*  _pinInterface;
   PointLeds*     _pointLeds;
   Inputs*        _inputs;

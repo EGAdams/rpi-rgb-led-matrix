@@ -90,5 +90,9 @@
         "Vliedel"
     ],
     "liveServer.settings.port": 5501,
-    "cmake.sourceDirectory": "/home/adamsl/zero_w_projects/temp/rpi-rgb-led-matrix"
+    "cmake.sourceDirectory": "/home/adamsl/zero_w_projects/temp/rpi-rgb-led-matrix",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.autopep8"
+    },
+    "python.formatting.provider": "none"
 }

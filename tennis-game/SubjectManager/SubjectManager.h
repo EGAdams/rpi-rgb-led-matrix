@@ -8,7 +8,7 @@ class SubjectManager {
 public:
     SubjectManager();
     ~SubjectManager();
-    void gameStateUpdate( GameState* gameState, Player* player1, Player* player2 );
+    void gameStateUpdate( GameState* gameState, IPlayer* player1, IPlayer* player2 );
 private:
     Logger* _logger;
 };

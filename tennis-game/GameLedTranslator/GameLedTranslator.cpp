@@ -1,7 +1,7 @@
 #include "GameLedTranslator.h"
 
 GameLedTranslator::~GameLedTranslator() {}
-GameLedTranslator::GameLedTranslator( Player* player1, Player* player2, PinInterface* pinInterface )
+GameLedTranslator::GameLedTranslator( IPlayer* player1, IPlayer* player2, PinInterface* pinInterface )
     : _player1( player1 ), _player2( player2 ), _pinInterface( pinInterface ) {}
 
 void GameLedTranslator::setScoreBoard(ScoreBoard* scoreBoard) { _scoreBoard = scoreBoard; }

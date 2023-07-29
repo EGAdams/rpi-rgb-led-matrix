@@ -7,7 +7,7 @@ already cost us .5 hour */
 WinSequence::WinSequence()  {}
 WinSequence::~WinSequence() {}
 
-void WinSequence::run( Player* player, GameState* gameState, GameLeds* gameLeds, int games_in_memory ) {
+void WinSequence::run( IPlayer* player, GameState* gameState, GameLeds* gameLeds, int games_in_memory ) {
 	#if defined _WIN32 || defined _WIN64
     	std::cout << "games_in_memory: " << games_in_memory << std::endl;
 	#endif

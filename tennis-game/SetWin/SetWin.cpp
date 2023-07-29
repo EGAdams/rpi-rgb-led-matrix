@@ -4,7 +4,7 @@ SetWin::SetWin( Undo* undo, GameState* gameState, SetLeds* setLeds ):
     _undo( undo ), _gameState( gameState ), _setLeds( setLeds ) {}
 SetWin::~SetWin() {}
 
-void SetWin::execute( Player* player ) {
+void SetWin::execute( IPlayer* player ) {
     std::cout << "*** SetWin::execute() ***" << std::endl;
     _undo->memory();
     _setLeds->updateSets();

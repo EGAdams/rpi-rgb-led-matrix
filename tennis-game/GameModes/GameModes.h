@@ -26,11 +26,11 @@ class History;
 #endif
 class GameModes {
  public:
-  GameModes(Player* player1,
-            Player* player2,
-            PinInterface* pinInterface,
-            GameState* gameState,
-            History* history);
+  GameModes( IPlayer*       player1,
+             IPlayer*       player2,
+             PinInterface*  pinInterface,
+             GameState*     gameState,
+             History*       history );
   ~GameModes();
   void gameStart();
   void testStart();
@@ -42,8 +42,8 @@ class GameModes {
   void setScoreBoards( ScoreBoard* scoreBoard );
 
  private:
-  Player* _player1;
-  Player* _player2;
+  IPlayer* _player1;
+  IPlayer* _player2;
   PinInterface* _pinInterface;
   GameState* _gameState;
   History* _history;

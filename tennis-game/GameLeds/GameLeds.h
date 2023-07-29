@@ -10,14 +10,14 @@
 
 class GameLeds {
  public:
-  GameLeds(Player* player1, Player* player2, PinInterface* pinInterface);
+  GameLeds( IPlayer* player1, IPlayer* player2, PinInterface* pinInterface );
   ~GameLeds();
   void updateGames();
   void setScoreBoard( ScoreBoard* scoreBoard );
 
  private:
-  Player*            _player1;
-  Player*            _player2;
+  IPlayer*            _player1;
+  IPlayer*            _player2;
   PinInterface*      _pinInterface;
   ScoreBoard*        _scoreBoard;
   GameLedTranslator* _gameLedTranslator;

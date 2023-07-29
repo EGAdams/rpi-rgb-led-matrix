@@ -11,6 +11,6 @@ class GameWinSequence {
  public:
   GameWinSequence();
   ~GameWinSequence();
-  void run( Player* player, GameState* gameState, 
+  void run( IPlayer* player, GameState* gameState, 
             GameLeds* gameLeds, ScoreBoard* scoreBoard, int games_in_memory ); };
 #endif

@@ -1,7 +1,7 @@
 #include "Reset.h"
 
-Reset::Reset( Player* player1,
-    Player* player2,
+Reset::Reset( IPlayer* player1,
+    IPlayer* player2,
     PinInterface* pinInterface,
     GameState* gameState )
     : _player1( player1 ),

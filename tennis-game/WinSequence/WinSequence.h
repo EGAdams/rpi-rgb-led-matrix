@@ -12,7 +12,7 @@ class WinSequence {
  public:
   WinSequence();
   ~WinSequence();
-  void run( Player* player, GameState* gameState, GameLeds* gameLeds, int games_in_memory );
+  void run( IPlayer* player, GameState* gameState, GameLeds* gameLeds, int games_in_memory );
 
  private:
 

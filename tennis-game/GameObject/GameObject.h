@@ -21,8 +21,8 @@
 #define GAME_LOOP_DELAY 100
 class GameObject {
  public:
-  GameObject( Player*       player1,
-              Player*       player2,
+  GameObject( IPlayer*       player1,
+              IPlayer*       player2,
               PinState*     pinState,
               PinInterface* pinInterface,
               GameState*    gameState,
@@ -44,8 +44,8 @@ class GameObject {
   GameState* getGameState();
   
  private:
-  Player*           _player1;
-  Player*           _player2;
+  IPlayer*           _player1;
+  IPlayer*           _player2;
   PinState*         _pinState;
   PinInterface*     _pinInterface;
   GameState*        _gameState;

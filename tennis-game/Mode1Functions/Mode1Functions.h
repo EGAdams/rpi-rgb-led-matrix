@@ -17,8 +17,8 @@ class History;
 
 class Mode1Functions {
  public:
-    Mode1Functions(Player* player1,
-                    Player* player2,
+    Mode1Functions( IPlayer* player1,
+                    IPlayer* player2,
                     PinInterface* pinInterface,
                     GameState* gameState,
                     History* history);
@@ -29,8 +29,8 @@ class Mode1Functions {
     void setScoreBoard( ScoreBoard* scoreBoard );
 
  private:
-    Player*    _player1;
-    Player*    _player2;
+    IPlayer*    _player1;
+    IPlayer*    _player2;
     GameState* _gameState;
     History*   _history;
     Undo       _undo;

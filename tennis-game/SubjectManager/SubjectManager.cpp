@@ -59,5 +59,5 @@ void SubjectManager::gameStateUpdate( GameState* gameState, Player* player1, Pla
     game_state_file.close();
 }
 #else // if NOT _WIN32
-    void SubjectManager::gameStateUpdate( GameState* gameState, Player* player1, Player* player2 ){}
+    void SubjectManager::gameStateUpdate( GameState* gameState, IPlayer* player1, IPlayer* player2 ){}
 #endif

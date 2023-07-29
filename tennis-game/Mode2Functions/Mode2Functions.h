@@ -13,17 +13,17 @@
 
 class Mode2Functions {
  public:
-  Mode2Functions(Player* player1,
-                 Player* player2,
-                 PinInterface* pinInterface,
-                 GameState* gameState);
+  Mode2Functions( IPlayer* player1,
+                  IPlayer* player2,
+                  PinInterface* pinInterface,
+                  GameState* gameState);
   ~Mode2Functions();
   void m2Loop();
   void m2PlayerButtons(int playerButton);
 
  private:
-  Player* _player1;
-  Player* _player2;
+  IPlayer* _player1;
+  IPlayer* _player2;
   GameState* _gameState;
   PointLeds _pointLeds;
   GameLeds _gameLeds;

@@ -4,7 +4,7 @@ Mode1WinSequences::~Mode1WinSequences() {
     std::cout << "*** Mode1WinSequences destructor called. ***" << std::endl;
     delete _setWin; }
     
-Mode1WinSequences::Mode1WinSequences( Player* player1, Player* player2, PinInterface* pinInterface,
+Mode1WinSequences::Mode1WinSequences( IPlayer* player1, IPlayer* player2, PinInterface* pinInterface,
                                       GameState* gameState ): 
     _player1( player1 ), _player2( player2 ),
     _pinInterface( pinInterface ),

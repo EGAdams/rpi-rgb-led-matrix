@@ -5,8 +5,8 @@ GameModes::~GameModes() {
     delete _logger; }
     
 GameModes::GameModes( 
-    Player*       player1,
-    Player*       player2,
+    IPlayer*       player1,
+    IPlayer*       player2,
     PinInterface* pinInterface,
     GameState*    gameState,
     History*      history )
