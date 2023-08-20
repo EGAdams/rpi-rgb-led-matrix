@@ -14,6 +14,7 @@
 #include "../Undo/Undo.h"
 #include "../TennisConstants/TennisConstants.h"
 #include <iostream>
+#include "../../tennis-game/googletest/googletest/include/gtest/gtest.h" 
 
 class Mode1Score {
  public:
