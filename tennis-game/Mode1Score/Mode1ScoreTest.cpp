@@ -16,11 +16,12 @@ void Mode1ScoreTest::SetUp() {
     _gameState = new GameState();
     _player1 = new Player( _gameState, PLAYER_1_INITIALIZED );
     _player2 = new Player( _gameState, PLAYER_2_INITIALIZED );
+    _player1->setOpponent( _player2 ); _player2->setOpponent( _player1 );
     std::map<std::string, int> pin_map;
     PinState* pin_state = new PinState( pin_map );
     _pinInterface = new PinInterface( pin_state );
     _history = new History();
-    _mode1Score = new Mode1Score(_player1, _player2, _pinInterface, _gameState, _history);
+    _mode1Score = new Mode1Score( _player1, _player2, _pinInterface, _gameState, _history );
 }
 
 // Tear down the test fixture
