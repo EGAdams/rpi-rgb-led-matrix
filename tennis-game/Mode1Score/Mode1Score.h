@@ -8,6 +8,7 @@
 #include "../Mode1Tiebreaker/Mode1Tiebreaker.h"
 #include "../WinSequences/WinSequences.h"
 #include "../PointLeds/PointLeds.h"
+#include "../PinState/PinState.h"
 #include "../PinInterface/PinInterface.h"
 #include "../Player/Player.h"
 #include "../SetLeds/SetLeds.h"

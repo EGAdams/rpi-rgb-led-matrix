@@ -13,10 +13,12 @@ protected:
 };
 
 void Mode1ScoreTest::SetUp() {
-    _player1 = new Player( PLAYER_1_INITIALIZED );
-    _player2 = new Player( PLAYER_2_INITIALIZED );
-    _pinInterface = new PinInterface();
     _gameState = new GameState();
+    _player1 = new Player( _gameState, PLAYER_1_INITIALIZED );
+    _player2 = new Player( _gameState, PLAYER_2_INITIALIZED );
+    std::map<std::string, int> pin_map;
+    PinState* pin_state = new PinState( pin_map );
+    _pinInterface = new PinInterface( pin_state );
     _history = new History();
     _mode1Score = new Mode1Score(_player1, _player2, _pinInterface, _gameState, _history);
 }
