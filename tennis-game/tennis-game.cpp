@@ -11,6 +11,9 @@
 #include <string.h>
 #include <unistd.h>
 #include <csignal>
+#include <iostream>
+#include <fstream>
+#include <sstream>
 #include <map>
 #include "FontLoader/FontLoader.h"
 #include "TextDrawer/TextDrawer.h"
@@ -20,61 +23,70 @@
 
 using namespace rgb_matrix;
 
-int main( int argc, char *argv[]) {
+
+int main() {
     int loop_count = 0;
     #define MAX_LOOP_COUNT 350
     #define A_SPACE        13
     #define FOUR_SPACE     14
     #define THREE_SPACE    15
     #define SCORE_DELAY    .15
-    
-    std::cout << "creating GameObject..." << std::endl;
-    GameState*  gameState  = new GameState();  // make this 1st!!! cost me 3 days of debugging
-    GameObject* gameObject = new GameObject( gameState );
-    std::cout << "done creating game object.  sleeping...\n\n\n\n\n" << std::endl;
-    sleep( 1 );
-    std::cout << "done sleeping.  calling gameObject->loopGame()..." << std::endl;
-    gameObject->loopGame();
 
-    std::cout << "done calling loopGame().  sleeping...\n\n\n\n\n" << std::endl;
-    sleep( 1 );
+    std::ifstream configFile("config.txt");
+    if (!configFile.is_open()) {
+        std::cerr << "Unable to open config.txt" << std::endl;
+        return 1;
+    }
 
-    int player = 1;
-    std::signal( SIGINT, GameObject::_signalHandler );
-    /*/// Begin Game Loop ///*/ while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { 
-        if ( loop_count >  MAX_LOOP_COUNT ) { gameState->stopGameRunning(); }
-        sleep( SCORE_DELAY );
-        // player = rand() % 2 + 1; // generate random player between 1 and 2
-        // get input from user
-        std::cout << "\n\nenter 1 or 2 to score for player 1 or 2: ";
-        std::cin >> player;
-        std::cout << "\n\n\n\n\n\n\n*** Player " << player << " scored ***\n" << std::endl;
-        gameObject->playerScore( player );  // flip the player score flag
-        sleep( SCORE_DELAY );
-        gameObject->loopGame();  // handle the player score flag
-        loop_count++;
-        std::cout << "player 1 points: " << gameState->getPlayer1Points();
-        std::cout << "  player 2 points: " << gameState->getPlayer2Points() << std::endl;
-        std::cout << "player 1 games:  "  << gameState->getPlayer1Games();
-        std::cout << "  player 2 games:  "  << gameState->getPlayer2Games()  << std::endl;
-        std::cout << "player 1 sets:   "   << gameState->getPlayer1Sets();
-        std::cout << "  player 2 sets:   "   << gameState->getPlayer2Sets();
-        std::cout << "     current set: "     << gameState->getCurrentSet()      << std::endl;
-        std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
-        // std::cout << "player1_set_history[ 1 ]: " << _player1_set_history[ 1 ] << std::endl;
-        // std::cout << "player1_set_history[ 2 ]: " << _player1_set_history[ 2 ] << std::endl;
-        // std::cout << "player1_set_history[ 3 ]: " << _player1_set_history[ 3 ] << std::endl;
-        std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
-        // std::cout << "player2_set_history[ 1 ]: " << _player2_set_history[ 1 ] << std::endl;
-        // std::cout << "player2_set_history[ 2 ]: " << _player2_set_history[ 2 ] << std::endl;
-        // std::cout << "player2_set_history[ 3 ]: " << _player2_set_history[ 3 ] << std::endl;
-        // getchar(); // wait for user input
-        std::cout << "end of game loop.  loop_count: " << loop_count << std::endl;
-    } ///////// End Game Loop /////////
-    std::cout << "game loop exited.  loop_count: " << loop_count << std::endl;
-    if ( loop_count > MAX_LOOP_COUNT ) {
-        // sleep for 5 seconds
-        std::cout << "sleeping for 5 seconds..." << std::endl;
-        sleep( 120 );
-        std::cout << "MAX_LOOP_COUNT reached.  Exiting...\n\n\n\n\n" << std::endl; }
-    return 0; }
+    std::string line;
+    while (std::getline(configFile, line)) {
+        // Check if the line starts a new test
+        if (line.find("test") != std::string::npos) {
+            int player1_score = 0, player1_sets = 0, player1_games = 0;
+            int player2_score = 0, player2_sets = 0, player2_games = 0;
+
+            // Read configuration for this test
+            while (std::getline(configFile, line) && line.find("// run game") == std::string::npos) {
+                std::istringstream iss(line);
+                std::string arg, val;
+                iss >> arg >> val;
+                if (arg == "--player1_score") {
+                    player1_score = std::stoi(val);
+                } else if (arg == "--player2_score") {
+                    player2_score = std::stoi(val);
+                } else if (arg == "--player1_sets") {
+                    player1_sets = std::stoi(val);
+                } else if (arg == "--player2_sets") {
+                    player2_sets = std::stoi(val);
+                } else if (arg == "--player1_games") {
+                    player1_games = std::stoi(val);
+                } else if (arg == "--player2_games") {
+                    player2_games = std::stoi(val);
+                }
+            }
+
+            // Now, set up the game state and run the test
+            std::cout << "creating GameObject..." << std::endl;
+            GameState*  gameState  = new GameState();  
+            gameState->setPlayer1Points(player1_score);
+            gameState->setPlayer2Points(player2_score);
+            gameState->setPlayer1Sets(player1_sets);
+            gameState->setPlayer2Sets(player2_sets);
+            gameState->setPlayer1Games(player1_games);
+            gameState->setPlayer2Games(player2_games);
+            GameObject* gameObject = new GameObject(gameState);
+
+            // ... Rest of the game logic ...
+
+            gameObject->playerScore( PLAYER_1_INITIALIZED ); 
+            gameObject->playerScore( PLAYER_2_INITIALIZED );
+
+            // Once the game ends, reset it for the next test
+            delete gameState;
+            delete gameObject;
+        }
+    }
+
+    configFile.close();
+    return 0; 
+}

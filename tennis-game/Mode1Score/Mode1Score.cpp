@@ -32,6 +32,8 @@ void Mode1Score::_resetGame() {
     _pointLeds.updatePoints(); }
 
 void Mode1Score::updateScore( IPlayer* currentPlayer ) {
+    if ( _gameState->getTieBreak()    == 1 ) { _mode1TieBreaker.tieBreaker();    } // TieBreaker();
+    if ( _gameState->getSetTieBreak() == 1 ) { _mode1TieBreaker.setTieBreaker(); } // SetTieBreaker();
     IPlayer* otherPlayer = currentPlayer->getOpponent();
     if ( currentPlayer->getPoints() >= 3 ) {
         if ( currentPlayer->getPoints() == otherPlayer->getPoints()) {

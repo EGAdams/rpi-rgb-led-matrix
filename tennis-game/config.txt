@@ -1,0 +1,23 @@
+test 1:
+--player1_score 3
+--player2_score 3
+--player1_sets 2
+--player2_sets 3
+--player1_games 2
+--player2_games 3
+// run game...
+// check results...
+// show results...
+// reset test
+
+test 2:
+--player1_score 2
+--player2_score 1
+--player1_sets 1
+--player2_sets 4
+--player1_games 5
+--player2_games 1
+// run game...
+// check results...
+// show results...
+// reset test
