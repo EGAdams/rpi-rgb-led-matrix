@@ -1,4 +1,4 @@
-## 
+## Visible Tests presumably run by a Python script
 ## 
 ## Test 1: Game Points and Game Win
 ```

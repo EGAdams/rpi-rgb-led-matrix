@@ -30,13 +30,28 @@ int main() {
     #define A_SPACE        13
     #define FOUR_SPACE     14
     #define THREE_SPACE    15
-    #define SCORE_DELAY    1
+    #define SCORE_DELAY    3
 
     std::ifstream configFile("config.md" );
     if (!configFile.is_open()) {
         std::cerr << "Unable to open config.md" << std::endl;
         return 1;
     }
+
+    std::cout << "creating GameState..." << std::endl;
+    GameState*  gameState  = new GameState();  
+    std::cout << "creating GameObject..." << std::endl;
+    GameObject* gameObject = new GameObject( gameState );
+    std::cout << "creating players..." << std::endl;
+    IPlayer* player1 = new Player( gameState, PLAYER_1_INITIALIZED );
+    IPlayer* player2 = new Player( gameState, PLAYER_2_INITIALIZED );
+    std::cout << "setting opponents..." << std::endl;
+    player1->setOpponent( player2 ); player2->setOpponent( player1 );
+    std::map<std::string, int> pin_map;
+    PinState* pin_state = new PinState( pin_map );
+    PinInterface* pinInterface = new PinInterface( pin_state );
+    History* history = new History();
+    Mode1Score* mode1Score = new Mode1Score( player1, player2, pinInterface, gameState, history );
 
     std::string line;
     while ( std::getline( configFile, line )) {
@@ -67,18 +82,9 @@ int main() {
                 } else if ( arg == "--player1_games" ) {
                     player1_games = std::stoi( val );
                 } else if ( arg == "--player2_games" ) {
-                    player2_games = std::stoi( val );
-                }
-            }
+                    player2_games = std::stoi( val ); }}
 
             // Now, set up the game state and run the test
-            std::cout << "creating GameState..." << std::endl;
-            GameState*  gameState  = new GameState();  
-            std::cout << "creating players..." << std::endl;
-            IPlayer* player1 = new Player( gameState, PLAYER_1_INITIALIZED );
-            IPlayer* player2 = new Player( gameState, PLAYER_2_INITIALIZED );
-            std::cout << "setting opponents..." << std::endl;
-            player1->setOpponent( player2 ); player2->setOpponent( player1 );
             std::cout << "setting points in gamestate..." << std::endl;
             gameState->setPlayer1Points( player1_score );
             gameState->setPlayer2Points( player2_score );
@@ -88,8 +94,6 @@ int main() {
             std::cout << "setting games in gamestate..." << std::endl;
             gameState->setPlayer1Games( player1_games );
             gameState->setPlayer2Games( player2_games );
-            std::cout << "creating GameObject..." << std::endl;
-            GameObject* gameObject = new GameObject( gameState );
             std::cout << "setting player states..." << std::endl;
             player1->setPoints( player1_score );
             player2->setPoints( player2_score );
@@ -99,14 +103,15 @@ int main() {
             player2->setSets( gameState, player2_sets );
             std::cout << "simulating player 1 score..." << std::endl;
             gameObject->playerScore( PLAYER_1_INITIALIZED );
+            mode1Score->updateScore( player1 );
             sleep( SCORE_DELAY );          
-            delete gameState;  // delete all of the "newed" objects for the next test
-            delete gameObject;
-            delete player1;
-            delete player2;
         }
     }
 
+    delete gameState;  // delete all of the "newed" objects
+    delete gameObject;
+    delete player1;
+    delete player2;
     configFile.close();
     return 0; 
 }
