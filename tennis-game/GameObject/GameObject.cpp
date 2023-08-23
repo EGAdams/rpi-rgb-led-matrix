@@ -27,21 +27,16 @@ GameObject::GameObject( IPlayer* player1,
 }
 
 GameObject::GameObject( GameState* gameState ) : _gameState( gameState ) {
-    std::cout << "Constructing GameObject..." << std::endl;
     _webLiquidCrystal = new WebLiquidCrystal();
     _gameTimer = new GameTimer();
-    std::cout << "constructing players... " << std::endl;
     _player1 = new Player( _gameState, PLAYER_1_INITIALIZED ); 
     _player2 = new Player( _gameState, PLAYER_2_INITIALIZED ); // got players defined, now set echother as opponents...
     _player2->setOpponent( _player1 ); _player1->setOpponent( _player2 );
     _pinState = new PinState( _pin_map );
     _pinInterface = new PinInterface( _pinState );
-    std::cout << "constructing history object..." << std::endl;
     _history = new History();
     _gameInputs = new Inputs( _player1, _player2, _pinInterface, _gameState );
-    std::cout << "constructing gameModes object..." << std::endl;
     _gameModes =  new GameModes( _player1, _player2, _pinInterface, _gameState, _history );
-    std::cout << "constructing scoreboard object..." << std::endl;
     _scoreBoard = new ScoreBoard( _player1, _player2, _gameState );
     _gameModes->setScoreBoards( _scoreBoard );
     _subjectManager = new SubjectManager();

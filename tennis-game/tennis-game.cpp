@@ -52,7 +52,7 @@ int main() {
     PinInterface* pinInterface = new PinInterface( pin_state );
     History* history = new History();
     Mode1Score* mode1Score = new Mode1Score( player1, player2, pinInterface, gameState, history );
-    mode1Score->setScoreBoard( new ScoreBoard( player1, player2, gameState ));
+    mode1Score->setScoreBoard( gameObject->getScoreBoard());
     gameState->setCurrentAction( "testing" );
 
     std::string line;
