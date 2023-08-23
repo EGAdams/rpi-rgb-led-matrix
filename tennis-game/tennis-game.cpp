@@ -106,7 +106,7 @@ int main() {
             player1->setPoints( player1_score );
             player2->setPoints( player2_score );
             std::cout << "player points now set to: player1: " << player1->getPoints() << ", player2: " << player2->getPoints() << std::endl;
-            mode1Score->updateScore( player1 );
+            scoreBoard->update();
             sleep( SCORE_DELAY );          
             player1->setGames( player1_games );
             player2->setGames( player2_games );
@@ -119,7 +119,12 @@ int main() {
             std::cout << "updating score for player 1.  player 1 score is: " << player1->getPoints() << std::endl;
             player1->setPoints( player1->getPoints() + 1 ); // simulate player 1 scoring!!
             mode1Score->updateScore( player1 );
-            sleep( SCORE_DELAY );          
+            sleep( SCORE_DELAY );
+            player1->setSets( gameState, 0 );
+            player2->setSets( gameState, 0 );
+            player1->setGames( 0 );
+            player2->setGames( 0 );
+            scoreBoard->update();      
         }
     }
 
