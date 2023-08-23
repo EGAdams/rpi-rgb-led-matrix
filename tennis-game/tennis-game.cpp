@@ -106,12 +106,12 @@ int main() {
             player1->setPoints( player1_score );
             player2->setPoints( player2_score );
             std::cout << "player points now set to: player1: " << player1->getPoints() << ", player2: " << player2->getPoints() << std::endl;
-            scoreBoard->update();
-            sleep( SCORE_DELAY );          
             player1->setGames( player1_games );
             player2->setGames( player2_games );
             player1->setSets( gameState, player1_sets );
             player2->setSets( gameState, player2_sets );
+            scoreBoard->update();
+            sleep( SCORE_DELAY );          
             std::cout << "simulating player 1 score..." << std::endl;
             gameObject->playerScore( PLAYER_1_INITIALIZED );
             std::cout << "clearing scoreboard before updating..." << std::endl;
