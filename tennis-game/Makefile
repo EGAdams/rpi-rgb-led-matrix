@@ -6,9 +6,7 @@ GTEST_LIBDIR=$(GTEST_DIR)/build/lib
 #-lgtest_main -lgtest -lpthread <-- this is the order that works
 GTEST_LIBS=-lgtest_main -lgtest -lpthread
 
-
 CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter
-# CXXFLAGS=$(CFLAGS)
 CXXFLAGS=$(CFLAGS) -I$(GTEST_INCDIR)
 # OBJECTS=SetHistoryTextTest.o SetHistoryText.o SetDrawer.o GameLedTranslator.o SubjectManager.o WebLiquidCrystal.o WatchTimer.o Inputs.o Mode1Tiebreaker.o Mode1Score.o Mode1Functions.o ServeLeds.o Undo.o BatteryTest.o Reset.o SetLeds.o TieLeds.o Mode1WinSequences.o Mode2Functions.o MatchWinSequence.o TennisConstants.o GameLeds.o GameModes.o GameObject.o PinState.o PinInterface.o TranslateConstant.o PointLeds.o Arduino.o CanvasCreator.o FontLoader.o NumberDrawer.o TextDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game.o
 BINARIES=tennis-game Mode1ScoreTest
@@ -20,11 +18,7 @@ RGB_INCDIR=$(RGB_LIB_DISTRIBUTION)/include
 RGB_LIBDIR=$(RGB_LIB_DISTRIBUTION)/lib
 RGB_LIBRARY_NAME=rgbmatrix
 RGB_LIBRARY=$(RGB_LIBDIR)/lib$(RGB_LIBRARY_NAME).a
-# LDFLAGS+=-L$(RGB_LIBDIR) -l$(RGB_LIBRARY_NAME) -lrt -lm -lpthread
-# LDFLAGS+=-L$(GTEST_LIBDIR) $(GTEST_LIBS) -lrt -lm -lpthread
-# LDFLAGS+=-L$(RGB_LIBDIR) -l$(RGB_LIBRARY_NAME) -L$(GTEST_LIBDIR) $(GTEST_LIBS) -lrt -lm -lpthread
 LDFLAGS+=-L$(RGB_LIBDIR) -l$(RGB_LIBRARY_NAME) -lrt -lm -lpthread -L$(GTEST_LIBDIR) $(GTEST_LIBS)
-
 
 # To compile image-example
 MAGICK_CXXFLAGS?=$(shell GraphicsMagick++-config --cppflags --cxxflags)

@@ -7,7 +7,7 @@
 #define LOG_FILE_PATH "log.txt"
 
 Logger::Logger( std::string constructor_name ) : _constructor_name( constructor_name ) {
-    std::cout << "constructing the Logger for " + constructor_name + "..." << std::endl;
+    // std::cout << "constructing the Logger for " + constructor_name + "..." << std::endl;
     _log_file.open( LOG_FILE_PATH, std::ios::out | std::ios::app );
 }
 

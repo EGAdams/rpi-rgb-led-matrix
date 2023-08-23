@@ -30,60 +30,80 @@ int main() {
     #define A_SPACE        13
     #define FOUR_SPACE     14
     #define THREE_SPACE    15
-    #define SCORE_DELAY    .15
+    #define SCORE_DELAY    1
 
-    std::ifstream configFile("config.txt");
+    std::ifstream configFile("config.md" );
     if (!configFile.is_open()) {
-        std::cerr << "Unable to open config.txt" << std::endl;
+        std::cerr << "Unable to open config.md" << std::endl;
         return 1;
     }
 
     std::string line;
-    while (std::getline(configFile, line)) {
+    while ( std::getline( configFile, line )) {
         // Check if the line starts a new test
-        if (line.find("test") != std::string::npos) {
+        if ( line.find( "## Test " ) != std::string::npos ) {
+            // print the line
+            // replace "## Test " with "Test "
+            line = line.replace( 0, 8, "" );
+            std::cout << "\n\n///////////////////////////////////////////////////////////////////////" << std::endl;
+            std::cout << "Running test: " << line << std::endl;
+            std::cout << "///////////////////////////////////////////////////////////////////////\n" << std::endl;
             int player1_score = 0, player1_sets = 0, player1_games = 0;
             int player2_score = 0, player2_sets = 0, player2_games = 0;
 
             // Read configuration for this test
-            while (std::getline(configFile, line) && line.find("// run game") == std::string::npos) {
-                std::istringstream iss(line);
+            while ( std::getline( configFile, line ) && line.find( "// run game" ) == std::string::npos ) {
+                std::istringstream iss(line );
                 std::string arg, val;
                 iss >> arg >> val;
-                if (arg == "--player1_score") {
-                    player1_score = std::stoi(val);
-                } else if (arg == "--player2_score") {
-                    player2_score = std::stoi(val);
-                } else if (arg == "--player1_sets") {
-                    player1_sets = std::stoi(val);
-                } else if (arg == "--player2_sets") {
-                    player2_sets = std::stoi(val);
-                } else if (arg == "--player1_games") {
-                    player1_games = std::stoi(val);
-                } else if (arg == "--player2_games") {
-                    player2_games = std::stoi(val);
+                if ( arg == "--player1_score" ) {
+                    player1_score = std::stoi( val );
+                } else if ( arg == "--player2_score" ) {
+                    player2_score = std::stoi( val );
+                } else if ( arg == "--player1_sets" ) {
+                    player1_sets = std::stoi( val );
+                } else if ( arg == "--player2_sets" ) {
+                    player2_sets = std::stoi( val );
+                } else if ( arg == "--player1_games" ) {
+                    player1_games = std::stoi( val );
+                } else if ( arg == "--player2_games" ) {
+                    player2_games = std::stoi( val );
                 }
             }
 
             // Now, set up the game state and run the test
-            std::cout << "creating GameObject..." << std::endl;
+            std::cout << "creating GameState..." << std::endl;
             GameState*  gameState  = new GameState();  
-            gameState->setPlayer1Points(player1_score);
-            gameState->setPlayer2Points(player2_score);
-            gameState->setPlayer1Sets(player1_sets);
-            gameState->setPlayer2Sets(player2_sets);
-            gameState->setPlayer1Games(player1_games);
-            gameState->setPlayer2Games(player2_games);
-            GameObject* gameObject = new GameObject(gameState);
-
-            // ... Rest of the game logic ...
-
-            gameObject->playerScore( PLAYER_1_INITIALIZED ); 
-            gameObject->playerScore( PLAYER_2_INITIALIZED );
-
-            // Once the game ends, reset it for the next test
-            delete gameState;
+            std::cout << "creating players..." << std::endl;
+            IPlayer* player1 = new Player( gameState, PLAYER_1_INITIALIZED );
+            IPlayer* player2 = new Player( gameState, PLAYER_2_INITIALIZED );
+            std::cout << "setting opponents..." << std::endl;
+            player1->setOpponent( player2 ); player2->setOpponent( player1 );
+            std::cout << "setting points in gamestate..." << std::endl;
+            gameState->setPlayer1Points( player1_score );
+            gameState->setPlayer2Points( player2_score );
+            std::cout << "setting sets in gamestate..." << std::endl;
+            gameState->setPlayer1Sets( player1_sets );
+            gameState->setPlayer2Sets( player2_sets );
+            std::cout << "setting games in gamestate..." << std::endl;
+            gameState->setPlayer1Games( player1_games );
+            gameState->setPlayer2Games( player2_games );
+            std::cout << "creating GameObject..." << std::endl;
+            GameObject* gameObject = new GameObject( gameState );
+            std::cout << "setting player states..." << std::endl;
+            player1->setPoints( player1_score );
+            player2->setPoints( player2_score );
+            player1->setGames( player1_games );
+            player2->setGames( player2_games );
+            player1->setSets( gameState, player1_sets );
+            player2->setSets( gameState, player2_sets );
+            std::cout << "simulating player 1 score..." << std::endl;
+            gameObject->playerScore( PLAYER_1_INITIALIZED );
+            sleep( SCORE_DELAY );          
+            delete gameState;  // delete all of the "newed" objects for the next test
             delete gameObject;
+            delete player1;
+            delete player2;
         }
     }
 
