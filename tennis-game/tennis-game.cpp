@@ -52,6 +52,8 @@ int main() {
     PinInterface* pinInterface = new PinInterface( pin_state );
     History* history = new History();
     Mode1Score* mode1Score = new Mode1Score( player1, player2, pinInterface, gameState, history );
+    mode1Score->setScoreBoard( new ScoreBoard( player1, player2, gameState ));
+    gameState->setCurrentAction( "testing" );
 
     std::string line;
     while ( std::getline( configFile, line )) {
@@ -103,6 +105,7 @@ int main() {
             player2->setSets( gameState, player2_sets );
             std::cout << "simulating player 1 score..." << std::endl;
             gameObject->playerScore( PLAYER_1_INITIALIZED );
+            std::cout << "gamestate current action: " << gameState->getCurrentAction() << std::endl;
             mode1Score->updateScore( player1 );
             sleep( SCORE_DELAY );          
         }
