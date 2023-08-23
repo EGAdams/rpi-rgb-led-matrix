@@ -78,7 +78,6 @@ bool ScoreBoard::hasCanvas() {
     } else { std::cout << "*** WARNING: canvas is NULL ***" << std::endl; return false; }}
 
 void ScoreBoard::update() {
-    
     std::cout << "inside ScoreBoard::update() ... " << std::endl;
     std::cout << "gamestate current action: " << _gameState->getCurrentAction() << std::endl;
     clearScreen();
@@ -99,9 +98,10 @@ void ScoreBoard::update() {
 
 void ScoreBoard::clearScreen() { 
     if ( MATRIX_DISABLED == 1 ) {
-        // std::cout << "clearScreen called, no matrix." << std::endl;
+        std::cout << "clearScreen called, no matrix." << std::endl;
     } else {
         if ( !hasCanvas()) { std::cout << "*** ERROR: canvas == NULL.  exiting... ***" << std::endl; exit( 1 ); }
+        std::cout << "clearScreen called, hasCanvas() is good.  clearing matrix...." << std::endl;
         Color flood_color( 0, 0, 0 ); _canvas->Fill( flood_color.r, flood_color.g, flood_color.b ); }}
 
 void ScoreBoard::_drawPlayerScore( IPlayer* player ) {
