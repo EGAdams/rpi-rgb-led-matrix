@@ -84,6 +84,7 @@ void ScoreBoard::update() {
     std::cout << "inside ScoreBoard::update()  player1 points: " << _player1->getPoints() << std::endl;
     std::cout << "inside ScoreBoard::update()  player2 points: " << _player2->getPoints() << std::endl;
     _drawPlayerScore( _player1 ); _drawPlayerScore( _player2 );
+    _setDrawer->drawSets();
     
     if ( MATRIX_DISABLED == 1 ) {
         std::cout << "MATRIX_DISABLED == 1 is true.  skipping blink..." << std::endl;
