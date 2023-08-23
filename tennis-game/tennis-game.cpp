@@ -20,6 +20,7 @@
 #include "NumberDrawer/NumberDrawer.h"
 #include "ScoreBoard/ScoreBoard.h"
 #include "GameObject/GameObject.h"
+#include "Inputs/Inputs.h"
 
 using namespace rgb_matrix;
 
@@ -41,7 +42,6 @@ int main() {
     std::cout << "creating GameState..." << std::endl;
     GameState*  gameState  = new GameState();  
     std::cout << "creating GameObject..." << std::endl;
-    GameObject* gameObject = new GameObject( gameState );
     std::cout << "creating players..." << std::endl;
     IPlayer* player1 = new Player( gameState, PLAYER_1_INITIALIZED );
     IPlayer* player2 = new Player( gameState, PLAYER_2_INITIALIZED );
@@ -52,7 +52,13 @@ int main() {
     PinInterface* pinInterface = new PinInterface( pin_state );
     History* history = new History();
     Mode1Score* mode1Score = new Mode1Score( player1, player2, pinInterface, gameState, history );
-    mode1Score->setScoreBoard( gameObject->getScoreBoard());
+    GameTimer* gameTimer = new GameTimer();
+    Inputs* gameInputs = new Inputs( player1, player2, pinInterface, gameState );
+    GameModes* gameModes = new GameModes( player1, player2, pinInterface, gameState, history );
+    ScoreBoard* scoreBoard = new ScoreBoard( player1, player2, gameState );
+    WebLiquidCrystal* lcd = new WebLiquidCrystal();
+    GameObject* gameObject = new GameObject( player1, player2, pin_state, pinInterface, gameState, gameTimer, gameInputs, gameModes, scoreBoard, lcd );
+    mode1Score->setScoreBoard( scoreBoard );
     gameState->setCurrentAction( "testing" );
 
     std::string line;
