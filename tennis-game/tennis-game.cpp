@@ -96,9 +96,10 @@ int main() {
             std::cout << "setting games in gamestate..." << std::endl;
             gameState->setPlayer1Games( player1_games );
             gameState->setPlayer2Games( player2_games );
-            std::cout << "setting player states..." << std::endl;
+            std::cout << "setting player points; player1: " << player1_score << ", player2: " << player2_score << std::endl;
             player1->setPoints( player1_score );
             player2->setPoints( player2_score );
+            std::cout << "player points now set to: player1: " << player1->getPoints() << ", player2: " << player2->getPoints() << std::endl;
             mode1Score->updateScore( player1 );
             player1->setGames( player1_games );
             player2->setGames( player2_games );
