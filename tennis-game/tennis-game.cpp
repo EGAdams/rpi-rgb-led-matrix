@@ -107,6 +107,7 @@ int main() {
             gameObject->playerScore( PLAYER_1_INITIALIZED );
             std::cout << "clearing scoreboard before updating..." << std::endl;
             mode1Score->getScoreBoard()->clearScreen();
+            std::cout << "updating score for player 1.  player 1 score is: " << player1->getPoints() << std::endl;
             mode1Score->updateScore( player1 );
             sleep( SCORE_DELAY );          
         }
