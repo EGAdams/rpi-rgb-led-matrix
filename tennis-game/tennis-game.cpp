@@ -99,6 +99,7 @@ int main() {
             std::cout << "setting player states..." << std::endl;
             player1->setPoints( player1_score );
             player2->setPoints( player2_score );
+            mode1Score->updateScore( player1 );
             player1->setGames( player1_games );
             player2->setGames( player2_games );
             player1->setSets( gameState, player1_sets );
