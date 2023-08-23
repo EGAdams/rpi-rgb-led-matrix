@@ -86,8 +86,9 @@ void ScoreBoard::update() {
     _drawPlayerScore( _player1 ); _drawPlayerScore( _player2 );
     
     if ( MATRIX_DISABLED == 1 ) {
-        // std::cout << "MATRIX_DISABLED == 1 is true.  skipping blink..." << std::endl;
+        std::cout << "MATRIX_DISABLED == 1 is true.  skipping blink..." << std::endl;
     } else {
+        std::cout << "MATRIX_DISABLED == 1 is false.  checking for blink in action..." << std::endl;
         bool blink = _gameState->getCurrentAction().find( "blink" ) != std::string::npos;
         if ( blink ) {
             std::cout << "blink is true, calling _setDrawer->drawBlinkSets()..." << std::endl;
