@@ -105,7 +105,8 @@ int main() {
             player2->setSets( gameState, player2_sets );
             std::cout << "simulating player 1 score..." << std::endl;
             gameObject->playerScore( PLAYER_1_INITIALIZED );
-            std::cout << "gamestate current action: " << gameState->getCurrentAction() << std::endl;
+            std::cout << "clearing scoreboard before updating..." << std::endl;
+            mode1Score->getScoreBoard()->clearScreen();
             mode1Score->updateScore( player1 );
             sleep( SCORE_DELAY );          
         }

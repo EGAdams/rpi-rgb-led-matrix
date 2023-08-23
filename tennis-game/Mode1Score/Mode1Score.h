@@ -33,8 +33,9 @@ class Mode1Score {
     void mode1P2Games();
     void mode1TBP2Games();
     void mode1SetTBP2Games();
-    void setScoreBoard( ScoreBoard* scoreBoard );
     void updateScore(   IPlayer* currentPlayer  );
+    void setScoreBoard( ScoreBoard* scoreBoard );
+    ScoreBoard* getScoreBoard();
 
  private:
     void _resetGame();
