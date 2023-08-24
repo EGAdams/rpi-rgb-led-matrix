@@ -64,11 +64,12 @@ int main() {
     std::string line;
     int test_count = 0;
     while ( std::getline( configFile, line )) {
-        test_count++;
+        
         // Check if the line starts a new test
         if ( line.find( "## Test " ) != std::string::npos ) {
             std::cout << "Test " << test_count << std::endl;
-
+            test_count++;
+            scoreBoard->clearScreen();
             scoreBoard->writeMessage( "t " + std::to_string( test_count ));
             // print the line
             // replace "## Test " with "Test "
