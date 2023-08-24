@@ -68,6 +68,7 @@ int main() {
         // Check if the line starts a new test
         if ( line.find( "## Test " ) != std::string::npos ) {
             std::cout << "Test " << test_count << std::endl;
+            
             scoreBoard->writeMessage( "Test " + std::to_string( test_count ));
             // print the line
             // replace "## Test " with "Test "
