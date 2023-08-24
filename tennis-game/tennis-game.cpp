@@ -62,9 +62,12 @@ int main() {
     gameState->setCurrentAction( "testing" );
 
     std::string line;
+    int test_count = 0;
     while ( std::getline( configFile, line )) {
+        test_count++;
         // Check if the line starts a new test
         if ( line.find( "## Test " ) != std::string::npos ) {
+            scoreBoard->writeMessage( "Test " + std::to_string( test_count ));
             // print the line
             // replace "## Test " with "Test "
             line = line.replace( 0, 8, "" );
