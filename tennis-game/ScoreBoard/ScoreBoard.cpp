@@ -57,9 +57,9 @@ ScoreBoard::ScoreBoard( IPlayer* player1, IPlayer* player2, GameState* gameState
         _playerTwoScoreDrawer   = std::make_unique<NumberDrawer>(
             _canvas.get(), &_big_number_font, NumberDrawer::BIG, player_two_score_color, bg_color );
 
-        _smallNumberDrawer = std::make_unique<NumberDrawer>( _canvas.get(), &_big_number_font, NumberDrawer::BIG, color, bg_color );
-        _pipeDrawer        = std::make_unique<NumberDrawer>( _canvas.get(), &_big_number_font, NumberDrawer::BIG, color, bg_color );
-        _setDrawer         = std::make_unique<SetDrawer>(    _canvas.get(), _gameState                                            );
+        _smallNumberDrawer = std::make_unique<NumberDrawer>( _canvas.get(), &_big_number_font, NumberDrawer::SMALL, color, bg_color );
+        _pipeDrawer        = std::make_unique<NumberDrawer>( _canvas.get(), &_big_number_font, NumberDrawer::BIG, color, bg_color   );
+        _setDrawer         = std::make_unique<SetDrawer>(    _canvas.get(), _gameState                                              );
         } // fi
     update();
 }
@@ -83,7 +83,7 @@ void ScoreBoard::writeMessage( std::string message ) {
         int first_offset  = 8;
         _smallNumberDrawer->DrawNumber( message, first_offset, baseline + _big_number_font.height());
         std::cout << "sleeping for 2 seconds..." << std::endl;
-        GameTimer::gameDelay( 2000 );
+        GameTimer::gameDelay( 4000 );
         std::cout << "done sleeping." << std::endl; }}
 
 void ScoreBoard::drawGames() {  std::cout << "inside ScoreBoard::drawGames()" << std::endl; }
