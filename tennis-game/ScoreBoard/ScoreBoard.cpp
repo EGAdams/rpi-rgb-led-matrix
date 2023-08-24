@@ -79,10 +79,12 @@ void ScoreBoard::writeMessage( std::string message ) {
         std::cout << "MATRIX_DISABLED == 1 is false.  writing message..." << std::endl;
         Color color( 255, 255, 0 );
         Color bg_color( 0, 0, 0 );
-        _smallNumberDrawer->DrawNumber( message, 1, 1 ); }
-        // sleep for a couple seconds
+        int baseline = _big_number_font.baseline();                     // set the coordinates for the text
+        int first_offset  = 1;
+        _smallNumberDrawer->DrawNumber( message, first_offset  + 16, baseline + _big_number_font.height());
+        std::cout << "sleeping for 2 seconds..." << std::endl;
         GameTimer::gameDelay( 2000 );
-}
+        std::cout << "done sleeping." << std::endl; }}
 
 void ScoreBoard::drawGames() {  std::cout << "inside ScoreBoard::drawGames()" << std::endl; }
 
