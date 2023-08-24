@@ -80,8 +80,8 @@ void ScoreBoard::writeMessage( std::string message ) {
         Color color( 255, 255, 0 );
         Color bg_color( 0, 0, 0 );
         int baseline = _big_number_font.baseline();                     // set the coordinates for the text
-        int first_offset  = 1;
-        _smallNumberDrawer->DrawNumber( message, first_offset  + 16, baseline + _big_number_font.height());
+        int first_offset  = 8;
+        _smallNumberDrawer->DrawNumber( message, first_offset, baseline + _big_number_font.height());
         std::cout << "sleeping for 2 seconds..." << std::endl;
         GameTimer::gameDelay( 2000 );
         std::cout << "done sleeping." << std::endl; }}
