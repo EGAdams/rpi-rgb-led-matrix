@@ -79,7 +79,10 @@ void ScoreBoard::writeMessage( std::string message ) {
         std::cout << "MATRIX_DISABLED == 1 is false.  writing message..." << std::endl;
         Color color( 255, 255, 0 );
         Color bg_color( 0, 0, 0 );
-        _smallNumberDrawer->DrawNumber( message, 1, 1 ); }}
+        _smallNumberDrawer->DrawNumber( message, 1, 1 ); }
+        // sleep for a couple seconds
+        GameTimer::gameDelay( 2000 );
+}
 
 void ScoreBoard::drawGames() {  std::cout << "inside ScoreBoard::drawGames()" << std::endl; }
 

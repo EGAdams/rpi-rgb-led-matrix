@@ -3,7 +3,8 @@
 GameTimer::GameTimer() {}
 GameTimer::~GameTimer(){}
 
-void GameTimer::gameDelay( int milliseconds ) { std::this_thread::sleep_for( std::chrono::milliseconds( milliseconds )); }
+void GameTimer::gameDelay( int milliseconds ) { 
+    std::this_thread::sleep_for( std::chrono::milliseconds( milliseconds )); }
 
 void GameTimer::sleep_until( int milliseconds ) {}
 
