@@ -19,13 +19,14 @@
 
 class ScoreBoard {
 public:
-    ScoreBoard( IPlayer* player1, IPlayer* player2, GameState* gameState );       
+    ScoreBoard( IPlayer* player1, IPlayer* player2, GameState* gameState );
     ~ScoreBoard();
     void update();
     bool hasCanvas();
     void clearScreen();
     void drawGames();
-    
+    void writeMessage( std::string message )
+
 private:
     IPlayer*                        _player1;
     IPlayer*                        _player2;
@@ -38,7 +39,7 @@ private:
     std::unique_ptr<SetDrawer>     _setDrawer;
     std::unique_ptr<RGBMatrix>     _canvas;
 
-    void _drawPlayerScore(  IPlayer* player        );
+    void _drawPlayerScore(  IPlayer* player       );
     int  _characterOffset(  std::string character );
     std::string _translate( int raw_score         ); };
 #endif

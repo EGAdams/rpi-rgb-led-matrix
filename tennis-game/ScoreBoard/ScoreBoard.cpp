@@ -1,9 +1,9 @@
 #include "ScoreBoard.h"
 
-ScoreBoard::ScoreBoard( IPlayer* player1, IPlayer* player2, GameState* gameState ): 
+ScoreBoard::ScoreBoard( IPlayer* player1, IPlayer* player2, GameState* gameState ):
     _player1( player1 ), _player2( player2 ), _gameState( gameState ) {
     printf( "Constructing ScoreBoard...\n" );
-    if ( MATRIX_DISABLED == 1 ) { 
+    if ( MATRIX_DISABLED == 1 ) {
         printf( "MATRIX_DISABLED == 1 is true.  Skipping matrix setup...\n" );
     } else {
         printf( "MATRIX_DISABLED == 1 is false.  Setting up matrix...\n" );
@@ -48,20 +48,20 @@ ScoreBoard::ScoreBoard( IPlayer* player1, IPlayer* player2, GameState* gameState
         FontLoader bigNumberFontLoader( "fonts/fgm_27_ee.bdf" );
         rgb_matrix::Font bigNumberFont;
         bigNumberFontLoader.LoadFont( bigNumberFont );
-        if (!_big_number_font.LoadFont( BIG_NUMBER_FONT )) { 
+        if (!_big_number_font.LoadFont( BIG_NUMBER_FONT )) {
             fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT ); exit( 1 );}
         Color color( 255, 255, 0 );
         Color bg_color( 0, 0, 0 );
-        _playerOneScoreDrawer   = std::make_unique<NumberDrawer>( 
+        _playerOneScoreDrawer   = std::make_unique<NumberDrawer>(
             _canvas.get(), &_big_number_font, NumberDrawer::BIG, player_one_score_color, bg_color );
-        _playerTwoScoreDrawer   = std::make_unique<NumberDrawer>( 
+        _playerTwoScoreDrawer   = std::make_unique<NumberDrawer>(
             _canvas.get(), &_big_number_font, NumberDrawer::BIG, player_two_score_color, bg_color );
-        
+
         _smallNumberDrawer = std::make_unique<NumberDrawer>( _canvas.get(), &_big_number_font, NumberDrawer::BIG, color, bg_color );
-        _pipeDrawer        = std::make_unique<NumberDrawer>( _canvas.get(), &_big_number_font, NumberDrawer::BIG, color, bg_color ); 
-        _setDrawer         = std::make_unique<SetDrawer>(    _canvas.get(), _gameState                                            ); 
+        _pipeDrawer        = std::make_unique<NumberDrawer>( _canvas.get(), &_big_number_font, NumberDrawer::BIG, color, bg_color );
+        _setDrawer         = std::make_unique<SetDrawer>(    _canvas.get(), _gameState                                            );
         } // fi
-    update(); 
+    update();
 }
 
 ScoreBoard::~ScoreBoard() {
@@ -71,9 +71,19 @@ ScoreBoard::~ScoreBoard() {
         // delete _canvas.get(); // this causes some error.  only one scoreBoard is created anyway.
     } else { std::cout << "*** WARNING: _canvas == NULL, not deleting. ***" << std::endl; }}
 
+void ScoreBoard::writeMessage( std::string message ) {
+    std::cout << "inside ScoreBoard::_writeMessage()..." << std::endl;
+    if ( MATRIX_DISABLED == 1 ) {
+        std::cout << "MATRIX_DISABLED == 1 is true.  skipping message..." << std::endl;
+    } else {
+        std::cout << "MATRIX_DISABLED == 1 is false.  writing message..." << std::endl;
+        Color color( 255, 255, 0 );
+        Color bg_color( 0, 0, 0 );
+        _smallNumberDrawer->DrawNumber( message, 1, 1 ); }}
+
 void ScoreBoard::drawGames() {  std::cout << "inside ScoreBoard::drawGames()" << std::endl; }
 
-bool ScoreBoard::hasCanvas() { 
+bool ScoreBoard::hasCanvas() {
     if ( _canvas != NULL ) { return true;
     } else { std::cout << "*** WARNING: canvas is NULL ***" << std::endl; return false; }}
 
@@ -85,7 +95,7 @@ void ScoreBoard::update() {
     std::cout << "inside ScoreBoard::update()  player2 points: " << _player2->getPoints() << std::endl;
     _drawPlayerScore( _player1 ); _drawPlayerScore( _player2 );
     // _setDrawer->drawSets();
-    
+
     if ( MATRIX_DISABLED == 1 ) {
         std::cout << "MATRIX_DISABLED == 1 is true.  skipping blink..." << std::endl;
     } else {
@@ -93,12 +103,12 @@ void ScoreBoard::update() {
         bool blink = _gameState->getCurrentAction().find( "blink" ) != std::string::npos;
         if ( blink ) {
             std::cout << "blink is true, calling _setDrawer->drawBlinkSets()..." << std::endl;
-            int playerToBlink = _gameState->getCurrentAction().find( "player1" ) == std::string::npos ? 
+            int playerToBlink = _gameState->getCurrentAction().find( "player1" ) == std::string::npos ?
                 PLAYER_1_INITIALIZED : PLAYER_2_INITIALIZED;
             _setDrawer->drawBlinkSets( playerToBlink );
         } else { _setDrawer->drawSets(); }}}
 
-void ScoreBoard::clearScreen() { 
+void ScoreBoard::clearScreen() {
     if ( MATRIX_DISABLED == 1 ) {
         std::cout << "clearScreen called, no matrix." << std::endl;
     } else {
