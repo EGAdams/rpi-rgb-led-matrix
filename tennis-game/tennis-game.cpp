@@ -31,7 +31,7 @@ int main() {
     #define A_SPACE        13
     #define FOUR_SPACE     14
     #define THREE_SPACE    15
-    #define SCORE_DELAY    3
+    #define SCORE_DELAY    1
 
     std::ifstream configFile("config.md" );
     if (!configFile.is_open()) {
@@ -124,7 +124,7 @@ int main() {
             std::cout << "updating score for player 1.  player 1 score is: " << player1->getPoints() << std::endl;
             player1->setPoints( player1->getPoints() + 1 ); // simulate player 1 scoring!!
             mode1Score->updateScore( player1 );
-            sleep( SCORE_DELAY );
+            sleep( SCORE_DELAY);
             player1->setSets( gameState, 0 );
             player2->setSets( gameState, 0 );
             player1->setGames( 0 );
