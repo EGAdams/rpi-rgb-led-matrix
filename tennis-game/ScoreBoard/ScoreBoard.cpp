@@ -71,7 +71,7 @@ ScoreBoard::~ScoreBoard() {
         // delete _canvas.get(); // this causes some error.  only one scoreBoard is created anyway.
     } else { std::cout << "*** WARNING: _canvas == NULL, not deleting. ***" << std::endl; }}
 
-void ScoreBoard::writeMessage( std::string message, int message_delay ) {
+void ScoreBoard::writeMessage( std::string message ) {
     std::cout << "inside ScoreBoard::_writeMessage()..." << std::endl;
     if ( MATRIX_DISABLED == 1 ) {
         std::cout << "MATRIX_DISABLED == 1 is true.  skipping message..." << std::endl;
@@ -83,7 +83,7 @@ void ScoreBoard::writeMessage( std::string message, int message_delay ) {
         int first_offset  = 8;
         _smallNumberDrawer->DrawNumber( message, first_offset, baseline + _big_number_font.height());
         std::cout << "sleeping for 2 seconds..." << std::endl;
-        GameTimer::gameDelay( message_delay );
+        GameTimer::gameDelay( 1000 );
         std::cout << "done sleeping." << std::endl; }}
 
 void ScoreBoard::drawGames() {  std::cout << "inside ScoreBoard::drawGames()" << std::endl; }

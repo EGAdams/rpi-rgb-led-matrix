@@ -25,7 +25,7 @@ public:
     bool hasCanvas();
     void clearScreen();
     void drawGames();
-    void writeMessage( std::string message, int message_delay = 2 );
+    void writeMessage( std::string message );
 
 private:
     IPlayer*                        _player1;
