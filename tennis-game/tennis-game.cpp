@@ -100,17 +100,19 @@ int main() {
             // simulate each player scoring until we reach player1_score or player2_score
             #define MAX_LOOP_COUNT 100 // no endless loops man.
             int count = 0; while ( count++ < MAX_LOOP_COUNT ) { // for (int count=0;count<MAX_LOOP_COUNT;count++) {
-                gameObject->playerScore( PLAYER_1_INITIALIZED );
+                // gameObject->playerScore( PLAYER_1_INITIALIZED );
                 if ( player1->getPoints() < player1_score ) { 
                     std::cout << "player score is not yet " << player1_score << ".  updating score..." << std::endl;
-                    player1->setPoints( player1->getPoints() + 1 );
+                    gameObject->playerScore( PLAYER_1_INITIALIZED );
+                    // player1->setPoints( player1->getPoints() + 1 );
                     std::cout << "player score is now " << player1->getPoints() << " updating scoreboard..." << std::endl; 
                     mode1Score->updateScore( player1 ); }
                 if ( player2->getPoints() < player2_score ) {
                     std::cout << "player score is not yet " << player2_score << ".  updating score..." << std::endl;
-                    player2->setPoints( player2->getPoints() + 1 );
+                    // player2->setPoints( player2->getPoints() + 1 );
+                    gameObject->playerScore( PLAYER_2_INITIALIZED );
                     std::cout << "player score is now " << player2->getPoints() << " updating scoreboard..." << std::endl; 
-                    mode1Score->updateScore( player2 ); }
+                    //mode1Score->updateScore( player2 ); }
                 // break if we've reached the score we're testing
                 if ( player1->getPoints() == player1_score && player2->getPoints() == player2_score ) { 
                     std::cout << "player1 score is now " << player1->getPoints() << ", player2 score is now " << player2->getPoints() << "  breaking out of for loop. " << std::endl;
@@ -142,7 +144,7 @@ int main() {
             mode1Score->getScoreBoard()->clearScreen();
             std::cout << "updating score for player 1.  player 1 score is: " << 
                           player1->getPoints() << std::endl;
-                          
+
             player1->setPoints( player1->getPoints() + 1 ); // simulate player 1 scoring!!
             mode1Score->updateScore( player1 );
             sleep( SCORE_DELAY );

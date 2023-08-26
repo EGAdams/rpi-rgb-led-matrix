@@ -114,7 +114,7 @@ void Mode1Score::mode1P1Games() {
             } else {    // no set win, no match win, no tie break. just a regular game win.
                 std::cout << "*** calling p1GameWinSequence() ***" << std::endl;
                 _gameLeds.updateGames();
-                _gameState->setPlayer1SetHistory( _player1->getSetHistory());
+                _gameState->setPlayer1SetHistory( _player1->getSetHistory());  // gamestate needs update here
                 _gameState->setPlayer2SetHistory( _player2->getSetHistory());
                 _mode1WinSequences.p1GameWinSequence();  // sets player points to zero
                 _resetGame();
