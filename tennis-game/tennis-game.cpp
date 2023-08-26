@@ -139,6 +139,7 @@ int main() {
             player2->setGames( 0 );
             scoreBoard->update();
         }
+        sleep( 3 ); // TODO: make this a constant or remove it.  need to see end of tests.
     }
 
     delete gameState;  // delete all of the "newed" objects
