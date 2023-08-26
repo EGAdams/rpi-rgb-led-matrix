@@ -100,6 +100,8 @@ int main() {
             // Now, set up the game state and run the test
             player1->setGames( player1_games );
             player2->setGames( player2_games );
+            std::cout << "player 1 games: " << player1->getGames() << std::endl;
+            std::cout << "player 2 games: " << player2->getGames() << std::endl;
             player1->setSets( gameState, player1_sets );
             player2->setSets( gameState, player2_sets );
             std::cout << "setting points in gameState..." << std::endl;
@@ -115,7 +117,7 @@ int main() {
             scoreBoard->update();
             std::cout << "sleeping for 2 seconds..." << std::endl;
             sleep( SCORE_DELAY );
-            
+
             std::cout << "setting player points; player1: " << player1_score << ", player2: " << player2_score << std::endl;
             player1->setPoints( player1_score );
             player2->setPoints( player2_score );
