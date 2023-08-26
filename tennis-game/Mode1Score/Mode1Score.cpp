@@ -45,7 +45,7 @@ void Mode1Score::updateScore( IPlayer* currentPlayer ) {
         } else if ( currentPlayer->getPoints() > 3 && ( currentPlayer->getPoints() - otherPlayer->getPoints()) > 1 ) {
             currentPlayer->setGames( currentPlayer->getGames() + 1);
             _undo.memory();
-            currentPlayer->number() == 1 ? mode1P1Games() : mode1P2Games(); } // right here is the bug!
+            currentPlayer->number() == 0 ? mode1P1Games() : mode1P2Games(); } // right here is the bug!
                                                                               // this has stumped me for
                                                                               // a few days now.  Put these
                                                                               // notes somewhere and refactor
