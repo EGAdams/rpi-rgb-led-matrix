@@ -109,7 +109,7 @@ void ScoreBoard::update() {
         if ( blink ) {
             std::cout << "blink is true, calling _setDrawer->drawBlinkSets()..." << std::endl;
             std::cout << "gamestate current action: " << _gameState->getCurrentAction() << std::endl;
-            int playerToBlink = _gameState->getCurrentAction().find( "player1" ) == std::string::npos ?
+            int playerToBlink = _gameState->getCurrentAction().find( "player1" ) != std::string::npos ?
                 PLAYER_1_INITIALIZED : PLAYER_2_INITIALIZED;
             _setDrawer->drawBlinkSets( playerToBlink );
         } else { _setDrawer->drawSets(); }}}
