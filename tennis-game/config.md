@@ -4,8 +4,8 @@
 
 ## Test 2: Normal Set Win ( First to 6 games with 2 game lead )
 ```
---player1_score 4
---player2_score 3
+--player1_score 3
+--player2_score 2
 --player1_sets 0
 --player2_sets 0
 --player1_games 5
