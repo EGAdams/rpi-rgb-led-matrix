@@ -34,69 +34,72 @@ void Mode1ScoreTest::TearDown() {
     delete _player1;
 }
 
-// Test case: TestMode1P1Score_LessThan3Points
-TEST_F(Mode1ScoreTest, TestMode1P1Score_LessThan3Points) {
-    _player1->setPoints(2);
-    _player2->setPoints(1);
-    _mode1Score->updateScore(_player1);
-    EXPECT_EQ(_player1->getPoints(), 2);
-    EXPECT_EQ(_player2->getPoints(), 1);
+
+///////////////// Test case: Test Mode 1 P1 Score Less Than 3 Points //////////
+TEST_F( Mode1ScoreTest, TestMode1P1Score_LessThan3Points ) {
+    _player1->setPoints( 2 );
+    _player2->setPoints( 1 );
+    _mode1Score->updateScore( _player1 );
+    EXPECT_EQ( _player1->getPoints(), 2);
+    EXPECT_EQ( _player2->getPoints(), 1 );
     // Check other changes made by the method
 }
+///////////////////////////////////////////////////////////////////////////////
+
 
 // Test case: Mode1P1ScoreTest
-TEST_F(Mode1ScoreTest, Mode1P1ScoreTest) {
+TEST_F( Mode1ScoreTest, Mode1P1ScoreTest) {
     // Test implementation here
 }
 
 // Test case: TestMode1P1Score_LessThan3Points
-TEST_F(Mode1ScoreTest, TestMode1P1Score_LessThan3Points) {
-    _player1->setPoints(2);
-    _player2->setPoints(1);
-    _mode1Score->updateScore(_player1);
-    EXPECT_EQ(_player1->getPoints(), 2);
-    EXPECT_EQ(_player2->getPoints(), 1);
+TEST_F( Mode1ScoreTest, TestMode1P1Score_LessThan3Points ) {
+    _player1->setPoints( 2 );
+    _player2->setPoints( 1 );
+    _mode1Score->updateScore( _player1 );
+    EXPECT_EQ( _player1->getPoints(), 2);
+    EXPECT_EQ( _player2->getPoints(), 1 );
     // Check other changes made by the method
 }
 
 // Test case: TestMode1P1Score_3Points_LessThan3PointsP2
-TEST_F(Mode1ScoreTest, TestMode1P1Score_3Points_LessThan3PointsP2) {
+TEST_F( Mode1ScoreTest, TestMode1P1Score_3Points_LessThan3PointsP2) {
     _player1->setPoints(3);
-    _player2->setPoints(2);
-    _mode1Score->updateScore(_player1);
-    EXPECT_EQ(_player1->getPoints(), 3);
-    EXPECT_EQ(_player2->getPoints(), 2);
+    _player2->setPoints( 2 );
+    _mode1Score->updateScore( _player1 );
+    EXPECT_EQ( _player1->getPoints(), 3);
+    EXPECT_EQ( _player2->getPoints(), 2);
     // Check other changes made by the method
 }
 
 // Test case: TestMode1P1Score_3Points_EqualPoints
-TEST_F(Mode1ScoreTest, TestMode1P1Score_3Points_EqualPoints) {
+TEST_F( Mode1ScoreTest, TestMode1P1Score_3Points_EqualPoints ) {
     _player1->setPoints(3);
     _player2->setPoints(3);
-    _mode1Score->updateScore(_player1);
-    EXPECT_EQ(_player1->getPoints(), 3);
-    EXPECT_EQ(_player2->getPoints(), 3);
+    _mode1Score->updateScore( _player1 );
+    EXPECT_EQ( _player1->getPoints(), 3);
+    EXPECT_EQ( _player2->getPoints(), 3);
     // Check other changes made by the method
 }
 
 // Test case: TestMode1P1Score_MoreThan3Points_DifferenceMoreThan1
-TEST_F(Mode1ScoreTest, TestMode1P1Score_MoreThan3Points_DifferenceMoreThan1) {
+TEST_F( Mode1ScoreTest, TestMode1P1Score_MoreThan3Points_DifferenceMoreThan1) {
     _player1->setPoints(5);
     _player2->setPoints(3);
-    _mode1Score->updateScore(_player1);
-    EXPECT_EQ(_player1->getPoints(), 5);
-    EXPECT_EQ(_player2->getPoints(), 3);
-    EXPECT_EQ(_player1->getGames(), 1); // Assuming getGames starts from 0
+    _mode1Score->updateScore( _player1 );
+    EXPECT_EQ( _player1->getPoints(), 5);
+    EXPECT_EQ( _player2->getPoints(), 3);
+    EXPECT_EQ( _player1->getGames(), 1 ); // Assuming getGames starts from 0
     // Check other changes made by the method
 }
 
 // Test case: TestMode1P1Score_4Points
-TEST_F(Mode1ScoreTest, TestMode1P1Score_4Points) {
+TEST_F( Mode1ScoreTest, TestMode1P1Score_4Points ) {
     _player1->setPoints(4);
-    _player2->setPoints(2);
-    _mode1Score->updateScore(_player1);
-    EXPECT_EQ(_player1->getPoints(), 4);
-    EXPECT_EQ(_player2->getPoints(), 2);
-    EXPECT_EQ(_gameState->getPointFlash(), 1); // Assuming getPointFlash returns the current pointFlash
+    _player2->setPoints( 2 );
+    _mode1Score->updateScore( _player1 );
+    EXPECT_EQ( _player1->getPoints(), 4);
+    EXPECT_EQ( _player2->getPoints(), 2);
+    EXPECT_EQ( _gameState->getPointFlash(), 1 ); // Assuming getPointFlash returns the current pointFlash
     // Check other changes made by the method
 }

@@ -104,13 +104,14 @@ int main() {
             std::cout << "setting sets in gamestate..." << std::endl;
             gameState->setPlayer1Sets( player1_sets );
             gameState->setPlayer2Sets( player2_sets );
-            std::cout << "setting games in gamestate..." << std::endl;
-            gameState->setPlayer1Games( player1_games );
-            gameState->setPlayer2Games( player2_games );
+            // std::cout << "setting games in gamestate..." << std::endl;
+            // gameState->setPlayer1Games( player1_games );
+            // gameState->setPlayer2Games( player2_games );
             std::cout << "setting player points; player1: " << player1_score << ", player2: " << player2_score << std::endl;
             player1->setPoints( player1_score );
             player2->setPoints( player2_score );
-            std::cout << "player points now set to: player1: " << player1->getPoints() << ", player2: " << player2->getPoints() << std::endl;
+            std::cout << "player points now set to: player1: " << player1->getPoints() << 
+                         ", player2: " << player2->getPoints() << std::endl;
             player1->setGames( player1_games );
             player2->setGames( player2_games );
             player1->setSets( gameState, player1_sets );
@@ -124,7 +125,7 @@ int main() {
             std::cout << "updating score for player 1.  player 1 score is: " << player1->getPoints() << std::endl;
             player1->setPoints( player1->getPoints() + 1 ); // simulate player 1 scoring!!
             mode1Score->updateScore( player1 );
-            sleep( SCORE_DELAY);
+            sleep( SCORE_DELAY );
             player1->setSets( gameState, 0 );
             player2->setSets( gameState, 0 );
             player1->setGames( 0 );

@@ -45,7 +45,23 @@ void Mode1Score::updateScore( IPlayer* currentPlayer ) {
         } else if ( currentPlayer->getPoints() > 3 && ( currentPlayer->getPoints() - otherPlayer->getPoints()) > 1 ) {
             currentPlayer->setGames( currentPlayer->getGames() + 1);
             _undo.memory();
-            currentPlayer->number() == 1 ? mode1P1Games() : mode1P2Games(); }
+            currentPlayer->number() == 0 ? mode1P1Games() : mode1P2Games(); } // right here is the bug!
+                                                                              // this has stumped me for
+                                                                              // a few days now.  Put these
+                                                                              // notes somewhere and refactor
+                                                                              // this code.  writing a 
+                                                                              // unit test for this right
+                                                                              // now...
+                                                                              // change of plan.  the ==
+                                                                              // 1 ?... should say  ==  
+                                                                              // 0 ? ... change this back
+                                                                              // make a unit test that fails
+                                                                              // it is saturday and I
+                                                                              // desperately need to get the
+                                                                              // swift_metagpt project 
+                                                                              // working for the airport
+                                                                              // project.  I will come back
+                                                                              // to this later.
         if ( currentPlayer->getPoints() == 4 ) {
             // std::cout << "inside updateScore().  points == 4.  setting point flash to 1..." << std::endl;
             _gameState->setPointFlash( 1 );
