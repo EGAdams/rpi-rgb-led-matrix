@@ -34,7 +34,7 @@
 #define SCORE_CASE_4             4
 #define SCORE_CASE_5             5
 #define UNDEFINED_SCORE          99
-#define MATRIX_DISABLED          1
+#define MATRIX_DISABLED          0
 
 // #define INPUT 0 // not in windows.. ouch!!
 // #define OUTPUT 0
