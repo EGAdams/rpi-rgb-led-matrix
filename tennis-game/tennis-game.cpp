@@ -98,24 +98,30 @@ int main() {
                     player2_games = std::stoi( val ); }}
 
             // Now, set up the game state and run the test
+            player1->setGames( player1_games );
+            player2->setGames( player2_games );
+            player1->setSets( gameState, player1_sets );
+            player2->setSets( gameState, player2_sets );
             std::cout << "setting points in gameState..." << std::endl;
             gameState->setPlayer1Points( player1_score );
             gameState->setPlayer2Points( player2_score );
             std::cout << "setting sets in gameState..." << std::endl;
             gameState->setPlayer1Sets( player1_sets );
             gameState->setPlayer2Sets( player2_sets );
-            // std::cout << "setting games in gamestate..." << std::endl;
-            // gameState->setPlayer1Games( player1_games );
-            // gameState->setPlayer2Games( player2_games );
+            std::cout << "setting games in gamestate..." << std::endl;
+            gameState->setPlayer1Games( player1_games );
+            gameState->setPlayer2Games( player2_games );
+            std::cout << "updating scoreboard..." << std::endl;
+            scoreBoard->update();
+            std::cout << "sleeping for 2 seconds..." << std::endl;
+            sleep( SCORE_DELAY );
+            
             std::cout << "setting player points; player1: " << player1_score << ", player2: " << player2_score << std::endl;
             player1->setPoints( player1_score );
             player2->setPoints( player2_score );
             std::cout << "player points now set to: player1: " << player1->getPoints() << 
                          ", player2: " << player2->getPoints() << std::endl;
-            player1->setGames( player1_games );
-            player2->setGames( player2_games );
-            player1->setSets( gameState, player1_sets );
-            player2->setSets( gameState, player2_sets );
+            
             scoreBoard->update();
             sleep( SCORE_DELAY );
             std::cout << "simulating player 1 score..." << std::endl;
