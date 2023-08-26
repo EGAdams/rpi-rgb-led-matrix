@@ -1,53 +1,53 @@
 #ifndef Player_h
 #define Player_h
 
-#include "IPlayer.h"
+#include "Player.h"
 #include "../GameState/IGameState.h"
 #include "../TennisConstants/TennisConstants.h"
 
-class Player : public IPlayer {
+class Player {
 public:
     Player( IGameState* gameState, int player_number );
-    ~Player() override;
+    ~Player();
 
-    void setOpponent(    IPlayer* opponent                 ) override;
-    IPlayer* getOpponent() override;
+    void setOpponent(    Player* opponent                 );
+    Player* getOpponent();
 
-    void setSets( IGameState * gameState, int sets ) override;
-    int getSets() override;
+    void setSets( IGameState * gameState, int sets );
+    int getSets();
 
-    void setPoints(      int points                       ) override;
-    int getPoints() override;
+    void setPoints(      int points                       );
+    int getPoints();
 
-    void setGames( int game_value  ) override; // it knows the current set
-    int getGames() override;
+    void setGames( int game_value  ); // it knows the current set
+    int getGames();
 
-    void setServeSwitch( int serve_switch                 ) override;
-    int getServeSwitch() override;
+    void setServeSwitch( int serve_switch                 );
+    int getServeSwitch();
 
-    void setMatches(     int matches                      ) override;
-    int getMatches() override;
+    void setMatches(     int matches                      );
+    int getMatches();
 
-    void setMode(        int mode                         ) override;
-    int getMode() override;
+    void setMode(        int mode                         );
+    int getMode();
 
-    void setSetting(     int setting                      ) override;
-    int getSetting() override;
+    void setSetting(     int setting                      );
+    int getSetting();
 
-    void setSetHistory(  int set, int score               ) override;
-    std::map<int, int> getSetHistory() override;
+    void setSetHistory(  int set, int score               );
+    std::map<int, int> getSetHistory();
 
-    void setGameHistory( int game, int score              ) override;
-    std::map<int, int> getGameHistory() override;
+    void setGameHistory( int game, int score              );
+    std::map<int, int> getGameHistory();
 
-    int incrementSetting() override;
+    int incrementSetting();
 
-    int number() override; // only set during construction
+    int number(); // only set during construction
 
 private:
     IGameState* _gameState;
     int _playerNumber;
-    IPlayer* _opponent;
+    Player* _opponent;
     int _points;
     int _games;
     int _sets;

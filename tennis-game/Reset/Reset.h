@@ -11,8 +11,8 @@
 
 class Reset {
  public:
-  Reset( IPlayer* player1,
-         IPlayer* player2,
+  Reset( Player* player1,
+         Player* player2,
          PinInterface* pinInterface,
          GameState* gameState);
   ~Reset();
@@ -23,8 +23,8 @@ class Reset {
   void tieLEDsOff();
 
  private:
-  IPlayer* _player1;
-  IPlayer* _player2;
+  Player* _player1;
+  Player* _player2;
   PinInterface* _pinInterface;
   GameState* _gameState;
   Logger* _logger;

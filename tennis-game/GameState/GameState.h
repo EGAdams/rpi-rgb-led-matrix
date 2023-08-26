@@ -2,7 +2,7 @@
 #define GameState_h
 
 #include "IGameState.h"
-#include "../Player/IPlayer.h"
+#include "../Player/Player.h"
 #include <map>
 #include <string>
 

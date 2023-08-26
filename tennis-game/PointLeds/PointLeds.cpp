@@ -1,12 +1,12 @@
 #include "PointLeds.h"
 
-PointLeds::PointLeds( IPlayer* player1,
-    IPlayer* player2,
+PointLeds::PointLeds( Player* player1,
+    Player* player2,
     PinInterface* pinInterface )
     : _player1( player1 ), _player2( player2 ), _pinInterface( pinInterface ) {}
 
-PointLeds::PointLeds( IPlayer* player1,
-    IPlayer* player2,
+PointLeds::PointLeds( Player* player1,
+    Player* player2,
     ScoreBoard* scoreBoard )
     : _player1( player1 ), _player2( player2 ), _scoreBoard(   scoreBoard   ) {}
 

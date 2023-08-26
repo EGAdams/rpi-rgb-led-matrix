@@ -1,6 +1,6 @@
 #include "BatteryTest.h"
 
-BatteryTest::BatteryTest( IPlayer* player1, IPlayer* player2, PinInterface* pinInterface,  PointLeds* pointLeds, Inputs* inputs ):
+BatteryTest::BatteryTest( Player* player1, Player* player2, PinInterface* pinInterface,  PointLeds* pointLeds, Inputs* inputs ):
     _player1( player1 ),
     _player2( player2 ),
     _pinInterface( pinInterface ),

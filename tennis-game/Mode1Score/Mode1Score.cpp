@@ -1,7 +1,8 @@
 #include "Mode1Score.h"
 
-Mode1Score::Mode1Score( IPlayer* player1,
-    IPlayer* player2,
+Mode1Score::Mode1Score( 
+    Player* player1,
+    Player* player2,
     PinInterface* pinInterface,
     GameState* gameState,
     History* history )
@@ -34,10 +35,10 @@ void Mode1Score::_resetGame() {
     _gameState->setServe( 0 );
     _pointLeds.updatePoints(); }
 
-void Mode1Score::updateScore( IPlayer* currentPlayer ) {
+void Mode1Score::updateScore( Player* currentPlayer ) {
     if ( _gameState->getTieBreak()    == 1 ) { _mode1TieBreaker.tieBreaker();    } // TieBreaker();
     if ( _gameState->getSetTieBreak() == 1 ) { _mode1TieBreaker.setTieBreaker(); } // SetTieBreaker();
-    IPlayer* otherPlayer = currentPlayer->getOpponent();
+    Player* otherPlayer = currentPlayer->getOpponent();
     if ( currentPlayer->getPoints() >= 3 ) {
         if ( currentPlayer->getPoints() == otherPlayer->getPoints()) {
             currentPlayer->setPoints( 3 );

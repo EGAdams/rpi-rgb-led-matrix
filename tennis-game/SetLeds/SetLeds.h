@@ -8,14 +8,14 @@
 
 class SetLeds {
  public:
-  SetLeds( IPlayer* player1, IPlayer* player2, PinInterface* pinInterface );
+  SetLeds( Player* player1, Player* player2, PinInterface* pinInterface );
   ~SetLeds();
   void updateSets();
   void setScoreBoard( ScoreBoard* scoreBoard );
 
  private:
-  IPlayer*       _player1;
-  IPlayer*       _player2;
+  Player*       _player1;
+  Player*       _player2;
   PinInterface* _pinInterface;
   ScoreBoard*   _scoreBoard; };
 #endif

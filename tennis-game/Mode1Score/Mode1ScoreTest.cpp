@@ -1,8 +1,8 @@
 #include "Mode1Score.h"
 class Mode1ScoreTest : public ::testing::Test {
 protected:
-    IPlayer* _player1;
-    IPlayer* _player2;
+    Player* _player1;
+    Player* _player2;
     PinInterface* _pinInterface;
     GameState* _gameState;
     History* _history;

@@ -1,7 +1,7 @@
 #include "Mode2Functions.h"
 
-Mode2Functions::Mode2Functions(IPlayer*      player1,
-                               IPlayer*      player2,
+Mode2Functions::Mode2Functions(Player*      player1,
+                               Player*      player2,
                                PinInterface* pinInterface,
                                GameState*    gameState)
     : _player1(player1),

@@ -43,8 +43,8 @@ int main() {
     GameState*  gameState  = new GameState();
     std::cout << "creating GameObject..." << std::endl;
     std::cout << "creating players..." << std::endl;
-    IPlayer* player1 = new Player( gameState, PLAYER_1_INITIALIZED );
-    IPlayer* player2 = new Player( gameState, PLAYER_2_INITIALIZED );
+    Player* player1 = new Player( gameState, PLAYER_1_INITIALIZED );
+    Player* player2 = new Player( gameState, PLAYER_2_INITIALIZED );
     std::cout << "setting opponents..." << std::endl;
     player1->setOpponent( player2 ); player2->setOpponent( player1 );
     std::map<std::string, int> pin_map;
@@ -121,16 +121,15 @@ int main() {
             std::cout << "setting player points; player1: " << player1_score << ", player2: " << player2_score << std::endl;
             player1->setPoints( player1_score );
             player2->setPoints( player2_score );
-            std::cout << "player points now set to: player1: " << player1->getPoints() << 
-                         ", player2: " << player2->getPoints() << std::endl;
+            
             
             scoreBoard->update();
             sleep( SCORE_DELAY );
-            std::cout << "simulating player 1 score..." << std::endl;
-            gameObject->playerScore( PLAYER_1_INITIALIZED );
+            // gameObject->playerScore( PLAYER_1_INITIALIZED );
             std::cout << "clearing scoreboard before updating..." << std::endl;
             mode1Score->getScoreBoard()->clearScreen();
             std::cout << "updating score for player 1.  player 1 score is: " << player1->getPoints() << std::endl;
+            std::cout << "simulating player 1 score..." << std::endl;
             player1->setPoints( player1->getPoints() + 1 ); // simulate player 1 scoring!!
             mode1Score->updateScore( player1 );
             sleep( SCORE_DELAY );

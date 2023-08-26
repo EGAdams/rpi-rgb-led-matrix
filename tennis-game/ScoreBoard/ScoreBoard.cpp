@@ -1,6 +1,6 @@
 #include "ScoreBoard.h"
 
-ScoreBoard::ScoreBoard( IPlayer* player1, IPlayer* player2, GameState* gameState ):
+ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState ):
     _player1( player1 ), _player2( player2 ), _gameState( gameState ) {
     printf( "Constructing ScoreBoard...\n" );
     if ( MATRIX_DISABLED == 1 ) {
@@ -121,7 +121,7 @@ void ScoreBoard::clearScreen() {
         std::cout << "clearScreen called, hasCanvas() is good.  clearing matrix...." << std::endl;
         Color flood_color( 0, 0, 0 ); _canvas->Fill( flood_color.r, flood_color.g, flood_color.b ); }}
 
-void ScoreBoard::_drawPlayerScore( IPlayer* player ) {
+void ScoreBoard::_drawPlayerScore( Player* player ) {
     std::string serve_bar = _gameState->getServe() == player->number() ? "I" : " "; // or p1 serve and swap
     std::string score = _translate( player->getPoints());
     if( MATRIX_DISABLED == 1 ) {

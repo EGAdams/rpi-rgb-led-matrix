@@ -3,7 +3,7 @@
 GameWinSequence::GameWinSequence()  {}
 GameWinSequence::~GameWinSequence() {}
 
-void GameWinSequence::run( IPlayer* player, GameState* gameState, 
+void GameWinSequence::run( Player* player, GameState* gameState, 
                            GameLeds* gameLeds, ScoreBoard* scoreBoard, int games_in_memory ) {
     
     if ( MATRIX_DISABLED == 1 ) { 

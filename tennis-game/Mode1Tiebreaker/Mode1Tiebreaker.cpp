@@ -1,7 +1,7 @@
 #include "Mode1Tiebreaker.h"
 
-Mode1TieBreaker::Mode1TieBreaker( IPlayer* player1,
-    IPlayer* player2,
+Mode1TieBreaker::Mode1TieBreaker( Player* player1,
+    Player* player2,
     PinInterface* pinInterface,
     GameState* gameState,
     History* history )

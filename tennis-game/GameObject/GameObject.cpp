@@ -4,8 +4,8 @@
 #include <thread>
 #include <iostream>
 
-GameObject::GameObject( IPlayer* player1,
-    IPlayer* player2,
+GameObject::GameObject( Player* player1,
+    Player* player2,
     PinState* pinState,
     PinInterface* pinInterface,
     GameState* gameState,

@@ -4,7 +4,7 @@
 MatchWinSequence::MatchWinSequence()  {}
 MatchWinSequence::~MatchWinSequence() {}
 
-void MatchWinSequence::run( IPlayer* player, GameState* gameState, GameLeds* gameLeds, SetLeds* setLeds ) {
+void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* gameLeds, SetLeds* setLeds ) {
     std::cout << "//////////////////////// MatchWinSequence::run() ////////////////////////" << std::endl;
     GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
     for ( int blink_sequence_count = 0; blink_sequence_count < LOOP_MATCH_LAMP_WIN; blink_sequence_count++ ) {

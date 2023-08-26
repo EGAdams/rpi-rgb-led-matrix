@@ -1,6 +1,6 @@
 #include "Undo.h"
 
-Undo::Undo( IPlayer* player1, IPlayer* player2, PinInterface* pinInterface, GameState* gameState ): 
+Undo::Undo( Player* player1, Player* player2, PinInterface* pinInterface, GameState* gameState ): 
     _player1( player1 ), _player2( player2 ),
     _gameState( gameState ),
     _pointLeds( player1, player2, pinInterface ),
