@@ -117,7 +117,7 @@ int main() {
                 if ( player1->getPoints() == player1_score && player2->getPoints() == player2_score ) { 
                     std::cout << "player1 score is now " << player1->getPoints() << ", player2 score is now " << player2->getPoints() << "  breaking out of for loop. " << std::endl;
                     break; }
-                sleep( SCORE_DELAY ); }
+                sleep( SCORE_DELAY ); }}
 
             // Now, set up the game state and run the test
             std::cout << "setting points in gameState..." << std::endl;
