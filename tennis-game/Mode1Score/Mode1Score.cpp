@@ -100,7 +100,9 @@ void Mode1Score::mode1P1Games() {
                     std::cout << "*** calling p1MatchWinSequence() ***" << std::endl;
                     _mode1WinSequences.p1MatchWinSequence();             // <-------------<< Match Win
                     _gameState->stopGameRunning();
-                } else {                                                 // <-------------<< Set Win
+                } else {     
+                    std::cout << "calling game win sequence 1st..." << std::endl; // <-------------<< Set Win
+                    _mode1WinSequences.p1GameWinSequence();  // sets player points to zero
                     std::cout << "*** /// calling p1SetWinSequence() point gap is 2 /// ***" << std::endl;
                     _gameState->setPlayer1SetHistory( _player1->getSetHistory());
                     _gameState->setPlayer2SetHistory( _player2->getSetHistory());
@@ -153,6 +155,8 @@ void Mode1Score::mode1P2Games() {
                     _mode1WinSequences.p2MatchWinSequence();
                     _gameState->stopGameRunning();
                 }  else {
+                    std::cout << "calling game win sequence 1st..." << std::endl; // <-------------<< Set Win
+                    _mode1WinSequences.p2GameWinSequence();  // sets player points to zero
                     std::cout << "** inside mode1P2Games().  calling p2SetWinSequence()... ***" << std::endl;
                     _player2->setGames( _player2->getGames() );
                     _gameState->setPlayer1SetHistory( _player1->getSetHistory());
