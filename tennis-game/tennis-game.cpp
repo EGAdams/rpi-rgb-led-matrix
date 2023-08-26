@@ -97,28 +97,6 @@ int main() {
                 } else if ( arg == "--player2_games" ) {
                     player2_games = std::stoi( val ); }}
 
-            // simulate each player scoring until we reach player1_score or player2_score
-            #define MAX_LOOP_COUNT 100 // no endless loops man.
-            int count = 0; while ( count++ < MAX_LOOP_COUNT ) { // for (int count=0;count<MAX_LOOP_COUNT;count++) {
-                // gameObject->playerScore( PLAYER_1_INITIALIZED );
-                if ( player1->getPoints() < player1_score ) { 
-                    std::cout << "player score is not yet " << player1_score << ".  updating score..." << std::endl;
-                    gameObject->playerScore( PLAYER_1_INITIALIZED );
-                    // player1->setPoints( player1->getPoints() + 1 );
-                    std::cout << "player score is now " << player1->getPoints() << " updating scoreboard..." << std::endl; 
-                    mode1Score->updateScore( player1 ); }
-                if ( player2->getPoints() < player2_score ) {
-                    std::cout << "player score is not yet " << player2_score << ".  updating score..." << std::endl;
-                    // player2->setPoints( player2->getPoints() + 1 );
-                    gameObject->playerScore( PLAYER_2_INITIALIZED );
-                    std::cout << "player score is now " << player2->getPoints() << " updating scoreboard..." << std::endl; 
-                    //mode1Score->updateScore( player2 ); }
-                // break if we've reached the score we're testing
-                if ( player1->getPoints() == player1_score && player2->getPoints() == player2_score ) { 
-                    std::cout << "player1 score is now " << player1->getPoints() << ", player2 score is now " << player2->getPoints() << "  breaking out of for loop. " << std::endl;
-                    break; }
-                sleep( SCORE_DELAY ); }}
-
             // Now, set up the game state and run the test
             std::cout << "setting points in gameState..." << std::endl;
             gameState->setPlayer1Points( player1_score );
@@ -126,8 +104,10 @@ int main() {
             std::cout << "setting sets in gameState..." << std::endl;
             gameState->setPlayer1Sets( player1_sets );
             gameState->setPlayer2Sets( player2_sets );
-            std::cout << "setting player points; player1: " << player1_score << ", player2: " << 
-                         player2_score << std::endl;
+            // std::cout << "setting games in gamestate..." << std::endl;
+            // gameState->setPlayer1Games( player1_games );
+            // gameState->setPlayer2Games( player2_games );
+            std::cout << "setting player points; player1: " << player1_score << ", player2: " << player2_score << std::endl;
             player1->setPoints( player1_score );
             player2->setPoints( player2_score );
             std::cout << "player points now set to: player1: " << player1->getPoints() << 
@@ -142,9 +122,7 @@ int main() {
             gameObject->playerScore( PLAYER_1_INITIALIZED );
             std::cout << "clearing scoreboard before updating..." << std::endl;
             mode1Score->getScoreBoard()->clearScreen();
-            std::cout << "updating score for player 1.  player 1 score is: " << 
-                          player1->getPoints() << std::endl;
-
+            std::cout << "updating score for player 1.  player 1 score is: " << player1->getPoints() << std::endl;
             player1->setPoints( player1->getPoints() + 1 ); // simulate player 1 scoring!!
             mode1Score->updateScore( player1 );
             sleep( SCORE_DELAY );
@@ -153,15 +131,13 @@ int main() {
             player1->setGames( 0 );
             player2->setGames( 0 );
             scoreBoard->update();
-        }}
+        }
+    }
+
     delete gameState;  // delete all of the "newed" objects
     delete gameObject;
     delete player1;
     delete player2;
     configFile.close();
-    return 0;}
-
-
-// std::cout << "setting games in gamestate..." << std::endl;
-// gameState->setPlayer1Games( player1_games );
-// gameState->setPlayer2Games( player2_games );
+    return 0;
+}
