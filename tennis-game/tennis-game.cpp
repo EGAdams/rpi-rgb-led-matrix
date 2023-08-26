@@ -40,7 +40,7 @@ int main() {
     }
 
     std::cout << "creating GameState..." << std::endl;
-    GameState*  gameState  = new GameState();  
+    GameState*  gameState  = new GameState();
     std::cout << "creating GameObject..." << std::endl;
     std::cout << "creating players..." << std::endl;
     IPlayer* player1 = new Player( gameState, PLAYER_1_INITIALIZED );
@@ -69,7 +69,7 @@ int main() {
             std::cout << "Test " << test_count << std::endl;
             test_count++;
             scoreBoard->clearScreen();
-            scoreBoard->writeMessage( "t " + std::to_string( test_count ));
+            scoreBoard->writeMessage( "t 01" ); //std::to_string( test_count ));
             // print the line
             // replace "## Test " with "Test "
             line = line.replace( 0, 8, "" );
@@ -98,10 +98,10 @@ int main() {
                     player2_games = std::stoi( val ); }}
 
             // Now, set up the game state and run the test
-            std::cout << "setting points in gamestate..." << std::endl;
+            std::cout << "setting points in gameState..." << std::endl;
             gameState->setPlayer1Points( player1_score );
             gameState->setPlayer2Points( player2_score );
-            std::cout << "setting sets in gamestate..." << std::endl;
+            std::cout << "setting sets in gameState..." << std::endl;
             gameState->setPlayer1Sets( player1_sets );
             gameState->setPlayer2Sets( player2_sets );
             // std::cout << "setting games in gamestate..." << std::endl;
@@ -117,7 +117,7 @@ int main() {
             player1->setSets( gameState, player1_sets );
             player2->setSets( gameState, player2_sets );
             scoreBoard->update();
-            sleep( SCORE_DELAY );          
+            sleep( SCORE_DELAY );
             std::cout << "simulating player 1 score..." << std::endl;
             gameObject->playerScore( PLAYER_1_INITIALIZED );
             std::cout << "clearing scoreboard before updating..." << std::endl;
@@ -130,7 +130,7 @@ int main() {
             player2->setSets( gameState, 0 );
             player1->setGames( 0 );
             player2->setGames( 0 );
-            scoreBoard->update();      
+            scoreBoard->update();
         }
     }
 
@@ -139,5 +139,5 @@ int main() {
     delete player1;
     delete player2;
     configFile.close();
-    return 0; 
+    return 0;
 }
