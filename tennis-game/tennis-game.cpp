@@ -69,7 +69,7 @@ int main() {
             std::cout << "Test " << test_count << std::endl;
             test_count++;
             scoreBoard->clearScreen();
-            scoreBoard->writeMessage( "t " +  "01" ) //std::to_string( test_count ));
+            scoreBoard->writeMessage( "t 01" ) //std::to_string( test_count ));
             // print the line
             // replace "## Test " with "Test "
             line = line.replace( 0, 8, "" );
