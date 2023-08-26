@@ -1,6 +1,5 @@
 ## Visible Tests presumably run by a Python script
-## 
-
+inside the `tennis-game` directory
 
 ## Test 2: Normal Set Win ( First to 6 games with 2 game lead )
 ```
