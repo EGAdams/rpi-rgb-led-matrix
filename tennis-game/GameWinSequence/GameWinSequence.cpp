@@ -12,8 +12,10 @@ void GameWinSequence::run( Player* player, GameState* gameState,
         std::cout << "GameWinSequence::run() hasCanvas() == true" << std::endl;
         for ( int blink_sequence_count = 0; blink_sequence_count < LOOP_GAME_LAMP_WIN; blink_sequence_count++ ) {
             std::cout << "cloaking ... " << std::endl;
+            std::cout << "setting blink for player number: " << player->number() << std::endl;
             player->number() == PLAYER_1_INITIALIZED ? gameState->setCurrentAction( "player1 blink" ) 
                                 : gameState->setCurrentAction( "player2 blink" );
+            std::cout << "gamestate current action: " << gameState->getCurrentAction() << std::endl;
             scoreBoard->update();
             std::cout << "uncloaking ... " << std::endl;
             GameTimer::gameDelay( gameState->getGameFlashDelay());  /*** wait ***/
