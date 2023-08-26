@@ -138,8 +138,10 @@ int main() {
             player1->setGames( 0 );
             player2->setGames( 0 );
             scoreBoard->update();
+            sleep( SCORE_DELAY );
+            sleep( SCORE_DELAY );
+            sleep( SCORE_DELAY );
         }
-        sleep( 3 ); // TODO: make this a constant or remove it.  need to see end of tests.
     }
 
     delete gameState;  // delete all of the "newed" objects
