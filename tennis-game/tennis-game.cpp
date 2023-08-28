@@ -24,7 +24,6 @@ using namespace rgb_matrix;
 void score( GameObject* gameObject, GameState* gameState, int player, int* loop_count ) {
     std::cout << "\n\n\n\n\n\n\n*** Player " << player << " scored ***\n" << std::endl;
     gameObject->playerScore( player );  // flip the player score flag
-    sleep( SCORE_DELAY );
     gameObject->loopGame();  // handle the player score flag
     loop_count++;
     std::cout << "player 1 points: " << gameState->getPlayer1Points();
@@ -67,7 +66,6 @@ int main( int argc, char *argv[]) {
     std::signal( SIGINT, GameObject::_signalHandler );
     /*/// Begin Game Loop ///*/ while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { 
         if ( loop_count >  MAX_LOOP_COUNT ) { gameState->stopGameRunning(); }
-        sleep( SCORE_DELAY );
         gameObject->getScoreBoard()->clearScreen();
         gameObject->getScoreBoard()->writeMessage( "t " + std::to_string( ++test_count ));
         // loop 6 times
@@ -82,7 +80,6 @@ int main( int argc, char *argv[]) {
         score( gameObject, gameState, 1, &loop_count );
         std::cout << "player 1 won!" << std::endl;
         std::cout << "presumably done with test 1." << std::endl;
-        sleep( 4 );
         // exit( 0 );
     } ///////// End Game Loop /////////
     sleep( 3 );
