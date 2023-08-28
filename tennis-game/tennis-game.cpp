@@ -85,10 +85,10 @@ int main( int argc, char *argv[]) {
             score( gameObject, gameState, 1, &loop_count );
             sleep( SCORE_DELAY );
         }
-        sleep( 1 );
+        sleep( 3 );
+        exit( 0 );
     } ///////// End Game Loop /////////
     sleep( 3 );
-    exit( 0 );
     std::cout << "game loop exited.  loop_count: " << loop_count << std::endl;
     if ( loop_count > MAX_LOOP_COUNT ) {
         // sleep for 5 seconds
