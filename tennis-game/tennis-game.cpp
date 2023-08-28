@@ -79,6 +79,7 @@ int main( int argc, char *argv[]) {
         }
         std::cout << "next player 1 score wins!" << std::endl;
         score( gameObject, gameState, 1, &loop_count );
+        score( gameObject, gameState, 1, &loop_count );
         std::cout << "player 1 won!" << std::endl;
         std::cout << "presumably done with test 1." << std::endl;
         sleep( 4 );
