@@ -63,11 +63,13 @@ int main( int argc, char *argv[]) {
     std::cout << "done calling loopGame().  sleeping...\n\n\n\n\n" << std::endl;
     sleep( 1 );
 
+    int test_count = 0;
     std::signal( SIGINT, GameObject::_signalHandler );
     /*/// Begin Game Loop ///*/ while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { 
         if ( loop_count >  MAX_LOOP_COUNT ) { gameState->stopGameRunning(); }
         sleep( SCORE_DELAY );
-        
+        gameObject->getScoreBoard()->clearScreen();
+        gameObject->getScoreBoard()->writeMessage( "t " + std::to_string( test_count++ ));
         // loop 6 times
         for ( int for_loop_count = 0; for_loop_count < 3; for_loop_count++ ) {
             score( gameObject, gameState, 1, &loop_count );
