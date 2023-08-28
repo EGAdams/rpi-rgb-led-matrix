@@ -83,7 +83,7 @@ int main( int argc, char *argv[]) {
         std::cout << "player 1 won!" << std::endl;
         std::cout << "presumably done with test 1." << std::endl;
         sleep( 4 );
-        exit( 0 );
+        // exit( 0 );
     } ///////// End Game Loop /////////
     sleep( 3 );
     std::cout << "game loop exited.  loop_count: " << loop_count << std::endl;
