@@ -71,17 +71,13 @@ int main( int argc, char *argv[]) {
         gameObject->getScoreBoard()->clearScreen();
         gameObject->getScoreBoard()->writeMessage( "t " + std::to_string( test_count++ ));
         // loop 6 times
-        for ( int for_loop_count = 0; for_loop_count < 3; for_loop_count++ ) {
+        for ( int for_loop_count = 0; for_loop_count < 6; for_loop_count++ ) {
             score( gameObject, gameState, 1, &loop_count );
             score( gameObject, gameState, 2, &loop_count );
             score( gameObject, gameState, 2, &loop_count );
-            score( gameObject, gameState, 1, &loop_count );
-            score( gameObject, gameState, 1, &loop_count );
-            score( gameObject, gameState, 2, &loop_count );
-            score( gameObject, gameState, 2, &loop_count );
-            score( gameObject, gameState, 1, &loop_count );
             score( gameObject, gameState, 1, &loop_count );
         }
+        std::cout << "presumably done with test 1." << std::endl;
         sleep( 1 );
         exit( 0 );
     } ///////// End Game Loop /////////
