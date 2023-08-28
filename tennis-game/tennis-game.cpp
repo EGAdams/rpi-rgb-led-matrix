@@ -63,8 +63,6 @@ int main( int argc, char *argv[]) {
     std::cout << "done calling loopGame().  sleeping...\n\n\n\n\n" << std::endl;
     sleep( 1 );
 
-
-
     std::signal( SIGINT, GameObject::_signalHandler );
     /*/// Begin Game Loop ///*/ while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { 
         if ( loop_count >  MAX_LOOP_COUNT ) { gameState->stopGameRunning(); }
@@ -73,7 +71,6 @@ int main( int argc, char *argv[]) {
         // loop 6 times
         for ( int for_loop_count = 0; for_loop_count < 3; for_loop_count++ ) {
             score( gameObject, gameState, 1, &loop_count );
-            score( gameObject, gameState, 1, &loop_count );
             sleep( SCORE_DELAY );
             score( gameObject, gameState, 2, &loop_count );
             score( gameObject, gameState, 2, &loop_count );
@@ -87,25 +84,11 @@ int main( int argc, char *argv[]) {
             score( gameObject, gameState, 1, &loop_count );
             score( gameObject, gameState, 1, &loop_count );
             sleep( SCORE_DELAY );
-            // player = 2;
-            // std::cout << "\n\n\n\n\n\n\n*** Player " << player << " scored ***\n" << std::endl;
-            // gameObject->playerScore( player );  // flip the player score flag
-            // sleep( SCORE_DELAY );
-            // gameObject->loopGame();  // handle the player score flag
-            // loop_count++;
-            // std::cout << "player 1 points: " << gameState->getPlayer1Points();
-            // std::cout << "  player 2 points: " << gameState->getPlayer2Points() << std::endl;
-            // std::cout << "player 1 games:  "  << gameState->getPlayer1Games();
-            // std::cout << "  player 2 games:  "  << gameState->getPlayer2Games()  << std::endl;
-            // std::cout << "player 1 sets:   "   << gameState->getPlayer1Sets();
-            // std::cout << "  player 2 sets:   "   << gameState->getPlayer2Sets();
-            // std::cout << "     current set: "     << gameState->getCurrentSet()      << std::endl;
-            // _player1_set_history = gameState->getPlayer1SetHistory();
-            // _player2_set_history = gameState->getPlayer2SetHistory();
-            //std::cout << "end of game loop.  loop_count: " << loop_count << std::endl;
         }
-        sleep( 3 );
+        sleep( 1 );
     } ///////// End Game Loop /////////
+    sleep( 3 );
+    exit( 0 );
     std::cout << "game loop exited.  loop_count: " << loop_count << std::endl;
     if ( loop_count > MAX_LOOP_COUNT ) {
         // sleep for 5 seconds
