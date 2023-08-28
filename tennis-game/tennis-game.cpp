@@ -71,21 +71,16 @@ int main( int argc, char *argv[]) {
         // loop 6 times
         for ( int for_loop_count = 0; for_loop_count < 3; for_loop_count++ ) {
             score( gameObject, gameState, 1, &loop_count );
-            sleep( SCORE_DELAY );
             score( gameObject, gameState, 2, &loop_count );
             score( gameObject, gameState, 2, &loop_count );
-            sleep( SCORE_DELAY );
             score( gameObject, gameState, 1, &loop_count );
             score( gameObject, gameState, 1, &loop_count );
-            sleep( SCORE_DELAY );
             score( gameObject, gameState, 2, &loop_count );
             score( gameObject, gameState, 2, &loop_count );
-            sleep( SCORE_DELAY );
             score( gameObject, gameState, 1, &loop_count );
             score( gameObject, gameState, 1, &loop_count );
-            sleep( SCORE_DELAY );
         }
-        sleep( 3 );
+        sleep( 1 );
         exit( 0 );
     } ///////// End Game Loop /////////
     sleep( 3 );
