@@ -81,7 +81,7 @@ int main( int argc, char *argv[]) {
         score( gameObject, gameState, 1, &loop_count );
         std::cout << "player 1 won!" << std::endl;
         std::cout << "presumably done with test 1." << std::endl;
-        sleep( 1 );
+        sleep( 4 );
         exit( 0 );
     } ///////// End Game Loop /////////
     sleep( 3 );
