@@ -45,7 +45,7 @@ int main( int argc, char *argv[]) {
     #define FOUR_SPACE     14
     #define THREE_SPACE    15
     #define SCORE_DELAY    .15
-    
+
     // set games to --games argument
     // set sets to --sets argument
     // set player1 score to --player1 argument
@@ -64,7 +64,9 @@ int main( int argc, char *argv[]) {
 
     int test_count = 0;
     std::signal( SIGINT, GameObject::_signalHandler );
-    /*/// Begin Game Loop ///*/ while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { 
+
+    /*/// Begin Game Loop ///*/
+    while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) {
         if ( loop_count >  MAX_LOOP_COUNT ) { gameState->stopGameRunning(); }
         gameObject->getScoreBoard()->clearScreen();
         gameObject->getScoreBoard()->writeMessage( "t " + std::to_string( ++test_count ));
@@ -80,8 +82,11 @@ int main( int argc, char *argv[]) {
         score( gameObject, gameState, 1, &loop_count );
         std::cout << "player 1 won!" << std::endl;
         std::cout << "presumably done with test 1." << std::endl;
+        gameState->stopGameRunning();
         // exit( 0 );
-    } ///////// End Game Loop /////////
+    }
+    ///////// End Game Loop /////////
+
     sleep( 3 );
     std::cout << "game loop exited.  loop_count: " << loop_count << std::endl;
     if ( loop_count > MAX_LOOP_COUNT ) {
@@ -89,6 +94,5 @@ int main( int argc, char *argv[]) {
         std::cout << "sleeping for 5 seconds..." << std::endl;
         sleep( 120 );
         std::cout << "MAX_LOOP_COUNT reached.  Exiting...\n\n\n\n\n" << std::endl; }
-    return 0; 
+    return 0;
 }
-    
