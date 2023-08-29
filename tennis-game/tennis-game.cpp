@@ -64,35 +64,31 @@ int main( int argc, char *argv[]) {
 
     int test_count = 0;
     std::signal( SIGINT, GameObject::_signalHandler );
+    gameObject->getScoreBoard()->clearScreen();
     gameObject->getScoreBoard()->writeMessage( "t " + std::to_string( ++test_count ));
-    /*/// Begin Game Loop ///*/
-    while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) {
-        if ( loop_count >  MAX_LOOP_COUNT ) { gameState->stopGameRunning(); }
-        gameObject->getScoreBoard()->clearScreen();
-        sleep( 3 );
-        // loop 6 times
-        for ( int for_loop_count = 0; for_loop_count < 4; for_loop_count++ ) {
-            score( gameObject, gameState, 1, &loop_count );
-            score( gameObject, gameState, 2, &loop_count );
-            score( gameObject, gameState, 2, &loop_count );
-            score( gameObject, gameState, 1, &loop_count );
-        }
-        std::cout << "next player 1 score wins!" << std::endl;
-        score( gameObject, gameState, 1, &loop_count );
-        score( gameObject, gameState, 1, &loop_count );
-        std::cout << "player 1 won!" << std::endl;
-        std::cout << "presumably done with test 1." << std::endl;
-        gameState->stopGameRunning();
-        // exit( 0 );
-    }
-    ///////// End Game Loop /////////
-
+    gameObject->getScoreBoard()->clearScreen();
+    std::cout << "done sleeping.  calling gameObject->getScoreBoard()->writeMessage(). calling loopGame()..." << std::endl;
+    gameObject->loopGame();
+    std::cout << "done calling loopGame().  sleeping...\n\n\n\n\n" << std::endl;
+    sleep( 1 );
+    gameObject->getScoreBoard()->clearScreen();
+    sleep( 1 );
+    score( gameObject, gameState, 1, &loop_count );
+    score( gameObject, gameState, 2, &loop_count );
+    score( gameObject, gameState, 2, &loop_count );
+    score( gameObject, gameState, 1, &loop_count );
+    score( gameObject, gameState, 1, &loop_count );
+    score( gameObject, gameState, 2, &loop_count );
+    score( gameObject, gameState, 2, &loop_count );
+    score( gameObject, gameState, 1, &loop_count );
+    score( gameObject, gameState, 1, &loop_count );
+    sleep( 1 );
+    std::cout << "next player 1 score wins..." << std::endl;
+    score( gameObject, gameState, 1, &loop_count );
+    score( gameObject, gameState, 1, &loop_count );
+    std::cout << "player 1 won!" << std::endl;
+    std::cout << "presumably done with test 1." << std::endl;
     sleep( 3 );
-    std::cout << "game loop exited.  loop_count: " << loop_count << std::endl;
-    if ( loop_count > MAX_LOOP_COUNT ) {
-        // sleep for 5 seconds
-        std::cout << "sleeping for 5 seconds..." << std::endl;
-        sleep( 120 );
-        std::cout << "MAX_LOOP_COUNT reached.  Exiting...\n\n\n\n\n" << std::endl; }
+    // exit( 0 );
     return 0;
 }
