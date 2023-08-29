@@ -71,7 +71,7 @@ int main( int argc, char *argv[]) {
     gameObject->loopGame();
     std::cout << "done calling loopGame().  sleeping...\n\n\n\n\n" << std::endl;
     sleep( 1 );
-    gameObject->getScoreBoard()->clearScreen();
+    gameObject->loopGame();
     sleep( 1 );
     score( gameObject, gameState, 1, &loop_count );
     score( gameObject, gameState, 2, &loop_count );
