@@ -58,21 +58,20 @@ int main( int argc, char *argv[]) {
     sleep( 1 );
     std::cout << "done sleeping.  calling gameObject->loopGame()..." << std::endl;
     gameObject->loopGame();
-
     std::cout << "done calling loopGame().  sleeping...\n\n\n\n\n" << std::endl;
     sleep( 1 );
-
     int test_count = 0;
     std::signal( SIGINT, GameObject::_signalHandler );
     gameObject->getScoreBoard()->clearScreen();
+    std::cout << "done sleeping.  calling gameObject->getScoreBoard()->writeMessage(). calling loopGame()..." << std::endl;
     gameObject->getScoreBoard()->writeMessage( "t " + std::to_string( ++test_count ));
     gameObject->getScoreBoard()->clearScreen();
-    std::cout << "done sleeping.  calling gameObject->getScoreBoard()->writeMessage(). calling loopGame()..." << std::endl;
+    std::cout << "calling game object start()... " << std::endl;
+    gameObject->start();
+    std::cout << "done calling start(). \n\n\n\n\n" << std::endl;
     gameObject->loopGame();
     std::cout << "done calling loopGame().  sleeping...\n\n\n\n\n" << std::endl;
     sleep( 1 );
-    gameObject->loopGame();
-    sleep( 1 );
     score( gameObject, gameState, 1, &loop_count );
     score( gameObject, gameState, 2, &loop_count );
     score( gameObject, gameState, 2, &loop_count );
@@ -83,8 +82,8 @@ int main( int argc, char *argv[]) {
     score( gameObject, gameState, 1, &loop_count );
     score( gameObject, gameState, 1, &loop_count );
     sleep( 1 );
-    score( gameObject, gameState, 1, &loop_count );
     std::cout << "next player 1 score wins..." << std::endl;
+    score( gameObject, gameState, 1, &loop_count );
     std::cout << "player 1 won!" << std::endl;
     std::cout << "presumably done with test 1." << std::endl;
     sleep( 3 );

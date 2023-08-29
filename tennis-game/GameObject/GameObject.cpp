@@ -29,7 +29,7 @@ GameObject::GameObject( Player* player1,
 GameObject::GameObject( GameState* gameState ) : _gameState( gameState ) {
     _webLiquidCrystal = new WebLiquidCrystal();
     _gameTimer = new GameTimer();
-    _player1 = new Player( _gameState, PLAYER_1_INITIALIZED ); 
+    _player1 = new Player( _gameState, PLAYER_1_INITIALIZED );
     _player2 = new Player( _gameState, PLAYER_2_INITIALIZED ); // got players defined, now set echother as opponents...
     _player2->setOpponent( _player1 ); _player1->setOpponent( _player2 );
     _pinState = new PinState( _pin_map );
@@ -69,7 +69,7 @@ void GameObject::playerScore( int playerNumber ) {  // sets the gamestate player
     // std::cout << "updating game state...  setting player button to " << playerNumber << " ..." << std::endl;
     // int current_player_button = _gameState->getPlayerButton();
     // std::cout << "current_player_button: " << current_player_button << std::endl;
-    _gameState->setPlayerButton( playerNumber ); 
+    _gameState->setPlayerButton( playerNumber );
     // current_player_button = _gameState->getPlayerButton();
     // std::cout << "current_player_button: " << current_player_button << std::endl;
 }
@@ -78,4 +78,18 @@ PinInterface* GameObject::getPinInterface() { return _pinInterface; }
 
 ScoreBoard* GameObject::getScoreBoard() { return _scoreBoard; }
 
-void GameObject::start() {}
+void GameObject::start() {
+    _player1->setPoints( 0 );             // p1Points = 0;
+    _player2->setPoints( 0 );             // p2Points = 0;
+    std::cout << "setting player games... " << std::endl;
+    _player1->setGames( 0 );              // p1Games = 0;
+    _player2->setGames( 0 );              // p2Games = 0;
+    std::cout << "setting player sets... " << std::endl;
+    _player1->setSets( _gameState, 0 );               // p1Sets = 0;
+    _player2->setSets( _gameState, 0 );               // p2Sets = 0;
+    std::cout << "updating scoreboard in game object start()... " << std::endl;
+    _scoreBoard->update();
+    _gameState->setTieBreakOnly( 0 );     // tieBreakOnly = false;
+    std::cout << "setting started to 1... " << std::endl;
+    _gameState->setStarted( 1 );
+}
