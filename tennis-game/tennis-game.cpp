@@ -70,7 +70,9 @@ int main( int argc, char *argv[]) {
         if ( loop_count >  MAX_LOOP_COUNT ) { gameState->stopGameRunning(); }
         gameObject->getScoreBoard()->clearScreen();
         gameObject->getScoreBoard()->writeMessage( "t " + std::to_string( ++test_count ));
+        score( gameObject, gameState, 2, &loop_count );
         sleep( 3 );
+        score( gameObject, gameState, 1, &loop_count );
         // loop 6 times
         for ( int for_loop_count = 0; for_loop_count < 4; for_loop_count++ ) {
             score( gameObject, gameState, 1, &loop_count );
