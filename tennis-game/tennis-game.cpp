@@ -60,6 +60,7 @@ int main( int argc, char *argv[]) {
     // set sets to --sets argument
     // set player1 score to --player1 argument
     // set player2 score to --player2 argument
+    std::cout << "manual set to: " << manual << std::endl;
     if ( manual == 1 ) {
         std::cout << "creating GameObject..." << std::endl;
         GameState*  gameState  = new GameState();  // make this 1st!!! cost me 3 days of debugging
