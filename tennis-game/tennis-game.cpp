@@ -46,7 +46,6 @@ int main( int argc, char *argv[]) {
         if( arg1 == "--manual" ) {
             std::cout << "running manual tests..." << std::endl;
             manual = 1;
-            return 0;
         }
     }
     int loop_count = 0;
