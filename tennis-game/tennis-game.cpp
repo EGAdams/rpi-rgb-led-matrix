@@ -110,6 +110,8 @@ int main( int argc, char *argv[]) {
     score( gameObject, gameState, 2, &loop_count );
     score( gameObject, gameState, 2, &loop_count );
     score( gameObject, gameState, 2, &loop_count );
+    score( gameObject, gameState, 1, &loop_count );
+    score( gameObject, gameState, 1, &loop_count );
 
 
     sleep( 1 );
