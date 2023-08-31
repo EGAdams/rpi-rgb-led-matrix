@@ -109,6 +109,9 @@ int main( int argc, char *argv[]) {
     score( gameObject, gameState, 1, &loop_count );
     score( gameObject, gameState, 2, &loop_count );
     score( gameObject, gameState, 2, &loop_count );
+    score( gameObject, gameState, 2, &loop_count );
+
+    
     sleep( 1 );
     std::cout << "next player 1 score wins..." << std::endl;
     score( gameObject, gameState, 1, &loop_count );
