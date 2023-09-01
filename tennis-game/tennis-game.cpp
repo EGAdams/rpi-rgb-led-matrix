@@ -21,6 +21,24 @@
 using namespace rgb_matrix;
 #define SCORE_DELAY    .15
 
+void score( GameObject* gameObject, GameState* gameState, int player, int* loop_count ) {
+    std::cout << "\n\n\n\n\n\n\n*** Player " << player << " scored ***\n" << std::endl;
+    gameObject->playerScore( player );  // flip the player score flag
+    gameObject->loopGame();  // handle the player score flag
+    loop_count++;
+    std::cout << "player 1 points: " << gameState->getPlayer1Points();
+    std::cout << "player 2 points: " << gameState->getPlayer2Points() << std::endl;
+    std::cout << "player 1 games:  " << gameState->getPlayer1Games();
+    std::cout << "player 2 games:  " << gameState->getPlayer2Games() << std::endl;
+    std::cout << "player 1 sets:   " << gameState->getPlayer1Sets();
+    std::cout << "player 2 sets:   " << gameState->getPlayer2Sets();
+    std::cout << "current set:     " << gameState->getCurrentSet() << std::endl;
+    std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
+    std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
+    std::cout << "end of game loop.  loop_count: " << loop_count << std::endl;
+}
+
+
 void test_01( GameObject* gameObject, GameState* gameState, int player, int* loop_count ) {
     // std::signal( SIGINT, GameObject::_signalHandler );
     // gameObject->getScoreBoard()->clearScreen();
@@ -78,23 +96,6 @@ void test_01( GameObject* gameObject, GameState* gameState, int player, int* loo
     std::cout << "player 1 won!" << std::endl;
     std::cout << "presumably done with test 1." << std::endl;
     sleep( 3 );
-}
-
-void score( GameObject* gameObject, GameState* gameState, int player, int* loop_count ) {
-    std::cout << "\n\n\n\n\n\n\n*** Player " << player << " scored ***\n" << std::endl;
-    gameObject->playerScore( player );  // flip the player score flag
-    gameObject->loopGame();  // handle the player score flag
-    loop_count++;
-    std::cout << "player 1 points: " << gameState->getPlayer1Points();
-    std::cout << "player 2 points: " << gameState->getPlayer2Points() << std::endl;
-    std::cout << "player 1 games:  " << gameState->getPlayer1Games();
-    std::cout << "player 2 games:  " << gameState->getPlayer2Games() << std::endl;
-    std::cout << "player 1 sets:   " << gameState->getPlayer1Sets();
-    std::cout << "player 2 sets:   " << gameState->getPlayer2Sets();
-    std::cout << "current set:     " << gameState->getCurrentSet() << std::endl;
-    std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
-    std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
-    std::cout << "end of game loop.  loop_count: " << loop_count << std::endl;
 }
 
 int main( int argc, char *argv[]) {
