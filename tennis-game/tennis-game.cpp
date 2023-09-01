@@ -117,6 +117,8 @@ void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     sleep( 2 );
     std::cout << " ready for player 1 set win..." << std::endl;
     playerWin( gameObject, gameState, 1 );
+    std::cout << "player 1 won the set!" << std::endl;
+    sleep( 2 );
 }
 
 void run_manual_game( GameObject* gameObject, GameState* gameState, int player ) {
