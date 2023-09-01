@@ -33,11 +33,17 @@ void writeMessage( GameObject* gameObject, std::string message ) {
     std::cout << "done writing message." << std::endl;
 }
 
-void score( GameObject* gameObject, GameState* gameState, int player, int* loop_count ) {
+void playerWin( GameObject* gameObject, GameState* gameState, int player ) {
+    score( gameObject, gameState, player );
+    score( gameObject, gameState, player );
+    score( gameObject, gameState, player );
+}
+
+
+void score( GameObject* gameObject, GameState* gameState, int player ) {
     std::cout << "\n\n\n\n\n\n\n*** Player " << player << " scored ***\n" << std::endl;
     gameObject->playerScore( player );  // flip the player score flag
     gameObject->loopGame();  // handle the player score flag
-    loop_count++;
     std::cout << "player 1 points: " << gameState->getPlayer1Points();
     std::cout << "player 2 points: " << gameState->getPlayer2Points() << std::endl;
     std::cout << "player 1 games:  " << gameState->getPlayer1Games();
@@ -47,7 +53,6 @@ void score( GameObject* gameObject, GameState* gameState, int player, int* loop_
     std::cout << "current set:     " << gameState->getCurrentSet() << std::endl;
     std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
     std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
-    std::cout << "end of game loop.  loop_count: " << loop_count << std::endl;
 }
 
 void test_01( GameObject* gameObject, GameState* gameState, int* loop_count ) {
@@ -60,18 +65,18 @@ void test_01( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->loopGame();
     std::cout << "done calling loopGame().  sleeping...\n\n\n\n\n" << std::endl;
     sleep( 1 );
-    score( gameObject, gameState, 1, loop_count );
-    score( gameObject, gameState, 2, loop_count );
-    score( gameObject, gameState, 2, loop_count );
-    score( gameObject, gameState, 1, loop_count );
-    score( gameObject, gameState, 1, loop_count );
-    score( gameObject, gameState, 2, loop_count );
-    score( gameObject, gameState, 2, loop_count );
-    score( gameObject, gameState, 1, loop_count );
-    score( gameObject, gameState, 1, loop_count );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
     sleep( 1 );
     std::cout << "next player 1 score wins..." << std::endl;
-    score( gameObject, gameState, 1, loop_count );
+    score( gameObject, gameState, 1 );
     std::cout << "player 1 won!" << std::endl;
     std::cout << "presumably done with test 1." << std::endl;
     sleep( 3 );
@@ -84,21 +89,27 @@ void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     // std::cout << "done calling start(). \n\n\n\n\n" << std::endl;
     // gameObject->loopGame();
     // std::cout << "done calling loopGame().  sleeping...\n\n\n\n\n" << std::endl;
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 2 );
     sleep( 1 );
-    score( gameObject, gameState, 1, loop_count );
-    score( gameObject, gameState, 2, loop_count );
-    score( gameObject, gameState, 2, loop_count );
-    score( gameObject, gameState, 1, loop_count );
-    score( gameObject, gameState, 1, loop_count );
-    score( gameObject, gameState, 2, loop_count );
-    score( gameObject, gameState, 2, loop_count );
-    score( gameObject, gameState, 1, loop_count );
-    score( gameObject, gameState, 1, loop_count );    
-    score( gameObject, gameState, 1, loop_count );
-    score( gameObject, gameState, 1, loop_count );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );    
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
     sleep( 1 );
+    // player 2 win
+
     std::cout << "next player 1 score wins..." << std::endl;
-    score( gameObject, gameState, 1, loop_count );
+    score( gameObject, gameState, 1 );
     std::cout << "player 1 won!" << std::endl;
     std::cout << "presumably done with test 1." << std::endl;
     sleep( 3 );
