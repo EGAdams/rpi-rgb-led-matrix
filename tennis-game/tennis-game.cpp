@@ -33,12 +33,6 @@ void writeMessage( GameObject* gameObject, std::string message ) {
     std::cout << "done writing message." << std::endl;
 }
 
-void playerWin( GameObject* gameObject, GameState* gameState, int player ) {
-    score( gameObject, gameState, player );
-    score( gameObject, gameState, player );
-    score( gameObject, gameState, player );
-}
-
 
 void score( GameObject* gameObject, GameState* gameState, int player ) {
     std::cout << "\n\n\n\n\n\n\n*** Player " << player << " scored ***\n" << std::endl;
@@ -53,6 +47,12 @@ void score( GameObject* gameObject, GameState* gameState, int player ) {
     std::cout << "current set:     " << gameState->getCurrentSet() << std::endl;
     std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
     std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
+}
+
+void playerWin( GameObject* gameObject, GameState* gameState, int player ) {
+    score( gameObject, gameState, player );
+    score( gameObject, gameState, player );
+    score( gameObject, gameState, player );
 }
 
 void test_01( GameObject* gameObject, GameState* gameState, int* loop_count ) {
