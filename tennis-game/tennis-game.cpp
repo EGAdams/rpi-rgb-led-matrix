@@ -131,7 +131,7 @@ int main( int argc, char *argv[]) {
         sleep( 1 );
         int player = 1;
         std::signal( SIGINT, GameObject::_signalHandler );
-        /*/// Begin Game Loop ///*/ while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { 
+        /*/// Begin Game Loop ///*/ while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) {
             if ( loop_count >  MAX_LOOP_COUNT ) { gameState->stopGameRunning(); }
             sleep( SCORE_DELAY );
             std::cout << "\n\nenter 1 or 2 to score for player 1 or 2: ";
