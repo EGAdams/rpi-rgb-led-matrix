@@ -104,7 +104,7 @@ void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     sleep( 1 );
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 1 );
-    sleep( 2 );
+    score( gameObject, gameState, 1 );
     score( gameObject, gameState, 1 );
     sleep( 3 );
 }
