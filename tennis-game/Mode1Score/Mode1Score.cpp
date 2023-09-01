@@ -107,6 +107,7 @@ void Mode1Score::mode1P1Games() {
                     _gameState->setPlayer1SetHistory( _player1->getSetHistory());
                     _gameState->setPlayer2SetHistory( _player2->getSetHistory());
                     _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
+                    GameTimer::gameDelay( SET_WIN_DELAY );
                     _mode1WinSequences.p1SetWinSequence();
                     _setLeds.updateSets();
                     GameTimer::gameDelay( _gameState->getWinDelay());
@@ -162,6 +163,7 @@ void Mode1Score::mode1P2Games() {
                     _gameState->setPlayer1SetHistory( _player1->getSetHistory());
                     _gameState->setPlayer2SetHistory( _player2->getSetHistory());
                     _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
+                    GameTimer::gameDelay( SET_WIN_DELAY );
                     _mode1WinSequences.p2SetWinSequence();
                     _setLeds.updateSets();
                     GameTimer::gameDelay( _gameState->getWinDelay());

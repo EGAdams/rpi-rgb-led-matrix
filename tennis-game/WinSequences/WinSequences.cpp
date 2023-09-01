@@ -113,6 +113,7 @@ void Mode1WinSequences::p2TBGameWinSequence() {
     _player2->setGames( 0 );
     _gameLeds.updateGames(); }    
 
+
 ////////////////////////////////// SET WIN SEQUENCES //////////////////////////////////////////////
 void Mode1WinSequences::p1TBSetWinSequence() {  // for entering set t/b
     _undo.memory();                               
