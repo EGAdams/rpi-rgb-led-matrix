@@ -106,7 +106,8 @@ void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 1 );
-    sleep( 3 );
+    sleep( 2 );
+    playerWin( gameObject, gameState, 1 );
 }
 
 void run_manual_game( GameObject* gameObject, GameState* gameState, int player ) {
