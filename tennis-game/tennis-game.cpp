@@ -85,11 +85,6 @@ void test_01( GameObject* gameObject, GameState* gameState, int* loop_count ) {
 
 void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen();
-    // std::cout << "calling game object start()... " << std::endl;
-    // gameObject->start();
-    // std::cout << "done calling start(). \n\n\n\n\n" << std::endl;
-    // gameObject->loopGame();
-    // std::cout << "done calling loopGame().  sleeping...\n\n\n\n\n" << std::endl;
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 1 );
@@ -107,12 +102,10 @@ void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 1 );
     sleep( 1 );
-    // player 2 win
-
-    std::cout << "next player 1 score wins..." << std::endl;
     score( gameObject, gameState, 1 );
-    std::cout << "player 1 won!" << std::endl;
-    std::cout << "presumably done with test 1." << std::endl;
+    score( gameObject, gameState, 1 );
+    sleep( 2 );
+    score( gameObject, gameState, 1 );
     sleep( 3 );
 }
 
