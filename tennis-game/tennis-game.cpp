@@ -53,6 +53,7 @@ void playerWin( GameObject* gameObject, GameState* gameState, int player ) {
     score( gameObject, gameState, player );
     score( gameObject, gameState, player );
     score( gameObject, gameState, player );
+    score( gameObject, gameState, player );
 }
 
 void test_01( GameObject* gameObject, GameState* gameState, int* loop_count ) {
