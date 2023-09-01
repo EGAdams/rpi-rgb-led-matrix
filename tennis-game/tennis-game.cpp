@@ -25,6 +25,14 @@ using namespace rgb_matrix;
 #define FOUR_SPACE     14
 #define THREE_SPACE    15
 
+void writeMessage( GameObject* gameObject, std::string message ) {
+    std::cout << "writing message: " << message << std::endl;
+    gameObject->getScoreBoard()->clearScreen();
+    gameObject->getScoreBoard()->writeMessage( message );
+    gameObject->getScoreBoard()->clearScreen();
+    std::cout << "done writing message." << std::endl;
+}
+
 void score( GameObject* gameObject, GameState* gameState, int player, int* loop_count ) {
     std::cout << "\n\n\n\n\n\n\n*** Player " << player << " scored ***\n" << std::endl;
     gameObject->playerScore( player );  // flip the player score flag
@@ -159,8 +167,7 @@ int main( int argc, char *argv[]) {
 
     ///// run tests /////
     int test_count = 0;
-    gameObject->getScoreBoard()->writeMessage( "t " + std::to_string( ++test_count ));
-    gameObject->getScoreBoard()->clearScreen();
+    writeMessage( gameObject, "t " + std::to_string( ++test_count ));
     std::cout << "calling test_01()..." << std::endl;
     test_01( gameObject, gameState, 1, &loop_count );
 }
