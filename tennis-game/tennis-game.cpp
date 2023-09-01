@@ -100,7 +100,7 @@ void test_01( GameObject* gameObject, GameState* gameState, int player, int* loo
 }
 
 void run_manual_game( GameObject* gameObject, GameState* gameState, int player ) {
-    int player = 1; int loop_count = 0;
+    int loop_count = 0;
     std::signal( SIGINT, GameObject::_signalHandler );
     while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) {
         if ( loop_count >  MAX_LOOP_COUNT ) { gameState->stopGameRunning(); }
@@ -155,7 +155,7 @@ int main( int argc, char *argv[]) {
     std::cout << "done calling loopGame().  sleeping...\n\n\n\n\n" << std::endl;
     sleep( .5 );
     std::cout << "manual set to: " << manual << std::endl;
-    if ( manual == 1 ) { run_manual_game( gameObject, gameState, 1 ); return; } 
+    if ( manual == 1 ) { run_manual_game( gameObject, gameState, 1 ); return 0; } 
 
     ///// run tests /////
     int test_count = 0;
