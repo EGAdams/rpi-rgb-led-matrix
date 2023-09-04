@@ -121,6 +121,23 @@ void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     sleep( 4 );
 }
 
+void test_03( GameObject* gameObject, GameState* gameState, int* loop_count ) {
+    gameObject->getScoreBoard()->clearScreen();
+    //undo
+    Undo* undo = gameObject->createUndo();
+    sleep( 1 );
+    undo->mode1Undo( gameObject->getHistory());
+    sleep( 1 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 2 );
+    sleep( 2 );
+    std::cout << " ready for player 1 set win..." << std::endl;
+    playerWin( gameObject, gameState, 1 );
+    std::cout << "player 1 won the set!" << std::endl;
+    sleep( 4 ); }
+
 void run_manual_game( GameObject* gameObject, GameState* gameState, int player ) {
     int loop_count = 0;
     std::signal( SIGINT, GameObject::_signalHandler );
@@ -188,5 +205,9 @@ int main( int argc, char *argv[]) {
     writeMessage( gameObject, "t " + std::to_string( ++test_count ));
     std::cout << "calling test_02()..." << std::endl;
     test_02( gameObject, gameState, &loop_count );
+
+    writeMessage( gameObject, "t " + std::to_string( ++test_count ));
+    std::cout << "calling test_03()..." << std::endl;
+    test_03( gameObject, gameState, &loop_count );
 
 }

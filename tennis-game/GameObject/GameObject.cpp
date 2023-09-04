@@ -30,7 +30,7 @@ GameObject::GameObject( GameState* gameState ) : _gameState( gameState ) {
     _webLiquidCrystal = new WebLiquidCrystal();
     _gameTimer = new GameTimer();
     _player1 = new Player( _gameState, PLAYER_1_INITIALIZED );
-    _player2 = new Player( _gameState, PLAYER_2_INITIALIZED ); // got players defined, now set echother as opponents...
+    _player2 = new Player( _gameState, PLAYER_2_INITIALIZED ); // now set echother as opponents...
     _player2->setOpponent( _player1 ); _player1->setOpponent( _player2 );
     _pinState = new PinState( _pin_map );
     _pinInterface = new PinInterface( _pinState );
@@ -77,6 +77,10 @@ void GameObject::playerScore( int playerNumber ) {  // sets the gamestate player
 PinInterface* GameObject::getPinInterface() { return _pinInterface; }
 
 ScoreBoard* GameObject::getScoreBoard() { return _scoreBoard; }
+
+History* GameObject::getHistory() { return _history; }
+
+Undo* GameObject::createUndo() { return new Undo( _player1, _player2, _pinInterface, _gameState ); }
 
 void GameObject::start() {
     _player1->setPoints( 0 );             // p1Points = 0;
