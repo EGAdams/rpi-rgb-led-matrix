@@ -278,5 +278,8 @@ void Mode1Score::mode1SetTBP2Games() {
         _mode1WinSequences.p2SetTBWinSequence();
         _mode1TieBreaker.tieLEDsOff();
         _mode1WinSequences.p2MatchWinSequence(); 
-        _gameState->stopGameRunning(); }
-    _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 ); }
+        _gameState->stopGameRunning(); 
+    }
+    std::cout << "setting serve switch to: " << _gameState->getServeSwitch() + 1 << std::endl;
+    _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 ); 
+}

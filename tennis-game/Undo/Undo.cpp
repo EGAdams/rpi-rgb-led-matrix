@@ -13,6 +13,14 @@ Undo::~Undo(){
     std::cout << "*** Undo destructor called. ***" << std::endl;
     delete _logger; };
 
+void Undo::setScoreBoard( ScoreBoard* scoreBoard ) {
+    // _scoreBoard = scoreBoard;
+    _pointLeds.setScoreBoard(          scoreBoard ); 
+    _gameLeds.setScoreBoard(           scoreBoard ); 
+    // _mode1WinSequences.setScoreBoards( scoreBoard ); 
+    _setLeds.setScoreBoard(            scoreBoard );
+}
+
 void Undo::memory() {
     _gameState->setP1PointsMem(       _player1->getPoints()); _gameState->setP2PointsMem( _player2->getPoints());
     _gameState->setP1GamesMem(        _player1->getGames());  _gameState->setP2GamesMem(  _player2->getGames());
@@ -104,4 +112,8 @@ void Undo::mode1Undo( History* history ) {
     if ( _gameState->getTieLEDsOn() == 1 ) { _gameState->setTieLEDsOn( 1 );  _tieLeds.turnOn(); }
     if ( _gameState->getTieLEDsOn() == 0 ) {  _tieLeds.turnOff(); _gameState->setTieLEDsOn( 0 );  } 
     _logger->logUpdate( "updating leds...", __FUNCTION__ );
-    _pointLeds.updatePoints(); _gameLeds.updateGames(); _setLeds.updateSets(); _serveLeds.updateServeLED(); }
+    _pointLeds.updatePoints();
+    _gameLeds.updateGames();
+    _setLeds.updateSets();
+    _serveLeds.updateServeLED();
+}

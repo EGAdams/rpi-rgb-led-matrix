@@ -10,3 +10,16 @@
 {"timestamp":1689464488000,"id":"Reset_821287910_1689464488000","message":"resetting scoreboard...","method":"resetScoreboard"}
 {"timestamp":1689464488000,"id":"Reset_821287911_1689464488000","message":"turning tie leds off... ","method":"resetScoreboard"}
 {"timestamp":1689464488000,"id":"Reset_821287912_1689464488000","message":"done resetting game.","method":"resetScoreboard"}
+{"timestamp":1693854225000,"id":"Undo_1205858988_1693854225000","message":"updating leds...","method":"mode1Undo"}
+{"timestamp":1693854302000,"id":"Undo_1415334463_1693854302000","message":"updating leds...","method":"mode1Undo"}
+{"timestamp":1693854401000,"id":"Undo_294515808_1693854401000","message":"updating leds...","method":"mode1Undo"}
+{"timestamp":1693854665000,"id":"Undo_1914836621_1693854665000","message":"updating leds...","method":"mode1Undo"}
+{"timestamp":1693854998000,"id":"Undo_192742857_1693854998000","message":"updating leds...","method":"mode1Undo"}
+{"timestamp":1693855150000,"id":"Undo_130992386_1693855150000","message":"updating leds...","method":"mode1Undo"}
+{"timestamp":1693855543000,"id":"Undo_870863462_1693855543000","message":"updating leds...","method":"mode1Undo"}
+{"timestamp":1693855672000,"id":"Undo_1362944163_1693855672000","message":"updating leds...","method":"mode1Undo"}
+{"timestamp":1693855795000,"id":"Undo_462323520_1693855795000","message":"updating leds...","method":"mode1Undo"}
+{"timestamp":1693855898000,"id":"Undo_578696803_1693855898000","message":"updating leds...","method":"mode1Undo"}
+{"timestamp":1693856102000,"id":"Undo_524717565_1693856102000","message":"updating leds...","method":"mode1Undo"}
+{"timestamp":1693856856000,"id":"Undo_2059537596_1693856856000","message":"updating leds...","method":"mode1Undo"}
+{"timestamp":1693857419000,"id":"Undo_489522508_1693857419000","message":"updating leds...","method":"mode1Undo"}

@@ -20,6 +20,7 @@ class Undo {
     void setMode1Undo( History* history );
     void memory();
     void mode1Undo( History* history );
+    void setScoreBoard( ScoreBoard* scoreBoard );
 
  private:
     Player*       _player1; std::map< std::string, int > _player1_set_history;
