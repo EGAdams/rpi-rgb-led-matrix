@@ -19,7 +19,7 @@ void GameWinSequence::run( Player* player, GameState* gameState,
             scoreBoard->update();
             std::cout << "uncloaking ... " << std::endl;
             GameTimer::gameDelay( gameState->getGameFlashDelay());  /*** wait ***/
-            gameState->setCurrentAction( "normal operation" );
+            gameState->setCurrentAction( NORMAL_GAME_STATE );
             scoreBoard->update(); 
             GameTimer::gameDelay( gameState->getGameFlashDelay());  /*** wait ***/ }
     } else {

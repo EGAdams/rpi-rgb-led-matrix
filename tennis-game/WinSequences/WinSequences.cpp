@@ -36,7 +36,7 @@ void Mode1WinSequences::p1GameWinSequence() {
 
 void Mode1WinSequences::p1SetWinSequence() { 
     std::cout << "*** executing _setWin->execute for player one... ***" << std::endl;
-    _setWin->execute( _player1 ); }
+    _setWin->execute( _player1, _scoreBoard ); }
 
 void Mode1WinSequences::p1MatchWinSequence() {
     std::cout << "//////////////////////// p1MatchWinSequence() ////////////////////////" << std::endl;
@@ -60,8 +60,7 @@ void Mode1WinSequences::p2GameWinSequence() {
 
 void Mode1WinSequences::p2SetWinSequence() { 
      std::cout << "*** executing _setWin->execute... ***" << std::endl;
-    _setWin->execute( _player2 ); }   
-    // _undo.memory();  does this go here?
+    _setWin->execute( _player2, _scoreBoard ); }   
 
 void Mode1WinSequences::p2MatchWinSequence() {
     std::cout << "//////////////////////// p2MatchWinSequence() ////////////////////////" << std::endl;

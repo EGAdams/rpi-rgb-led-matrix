@@ -14,7 +14,7 @@ class SetWin {
  public:
   SetWin( Undo* undo, GameState* gameState, SetLeds* setLeds );
   ~SetWin();
-  void execute( Player* player );
+  void execute( Player* player, ScoreBoard* scoreBoard );
 
  private:
      Undo*      _undo; 

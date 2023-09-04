@@ -93,7 +93,7 @@ void Mode1Score::mode1P1Games() {
                     _gameState->stopGameRunning();
                 } else {     
                     std::cout << "calling game win sequence 1st..." << std::endl; // <-------------<< Set Win
-                    _mode1WinSequences.p1GameWinSequence();  // sets player points to zero
+                    // _mode1WinSequences.p1GameWinSequence();  // sets player points to zero
                     std::cout << "*** /// calling p1SetWinSequence() point gap is 2 /// ***" << std::endl;
                     _gameState->setPlayer1SetHistory( _player1->getSetHistory());
                     _gameState->setPlayer2SetHistory( _player2->getSetHistory());
