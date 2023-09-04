@@ -43,13 +43,9 @@ void SetDrawer::drawBlinkSets( int playerToBlink ) {
         std::cout << "blinking player 1..." << std::endl;
         playerOneSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX ), set );
         playerTwoSetString = _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX );
-    } else if ( playerToBlink == PLAYER_2_INITIALIZED ) { // Blink player 2  
-        std::cout << "blinking player 2..." << std::endl;
-        playerTwoSetString = _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX );
-        playerOneSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX ), set );
     } else {                                       // Blink player 2
-        std::cout << "blinking both players..." << std::endl;
-        playerOneSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX ), set );
+        std::cout << "blinking player 2..." << std::endl;
+        playerOneSetString = _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX );
         playerTwoSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX ), set ); }
     Color thirdRowColor( 0, 255, 0 );
      drawTextOnCanvas( x + SMALL_BEFORE, y, thirdRowColor, playerOneSetString );
