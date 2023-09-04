@@ -39,11 +39,11 @@ void score( GameObject* gameObject, GameState* gameState, int player ) {
     gameObject->playerScore( player );  // flip the player score flag
     gameObject->loopGame();  // handle the player score flag
     std::cout << "player 1 points: " << gameState->getPlayer1Points();
-    std::cout << "player 2 points: " << gameState->getPlayer2Points() << std::endl;
+    std::cout << " player 2 points: " << gameState->getPlayer2Points() << std::endl;
     std::cout << "player 1 games:  " << gameState->getPlayer1Games();
-    std::cout << "player 2 games:  " << gameState->getPlayer2Games() << std::endl;
+    std::cout << " player 2 games:  " << gameState->getPlayer2Games() << std::endl;
     std::cout << "player 1 sets:   " << gameState->getPlayer1Sets();
-    std::cout << "player 2 sets:   " << gameState->getPlayer2Sets();
+    std::cout << " player 2 sets:   " << gameState->getPlayer2Sets();
     std::cout << "current set:     " << gameState->getCurrentSet() << std::endl;
     std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
     std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
