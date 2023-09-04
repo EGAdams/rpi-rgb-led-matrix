@@ -46,23 +46,14 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
         } else if ( currentPlayer->getPoints() > 3 && ( currentPlayer->getPoints() - otherPlayer->getPoints()) > 1 ) {
             currentPlayer->setGames( currentPlayer->getGames() + 1);
             _undo.memory();
-            currentPlayer->number() == 0 ? mode1P1Games() : mode1P2Games(); } // right here is the bug!
-                                                                              // this has stumped me for
-                                                                              // a few days now.  Put these
-                                                                              // notes somewhere and refactor
-                                                                              // this code.  writing a 
-                                                                              // unit test for this right
-                                                                              // now...
-                                                                              // change of plan.  the ==
-                                                                              // 1 ?... should say  ==  
-                                                                              // 0 ? ... change this back
-                                                                              // make a unit test that fails
-                                                                              // it is saturday and I
-                                                                              // desperately need to get the
-                                                                              // swift_metagpt project 
-                                                                              // working for the airport
-                                                                              // project.  I will come back
-                                                                              // to this later.
+            currentPlayer->number() == 0 ? mode1P1Games() : mode1P2Games(); } 
+            // right here is the bug!
+            // this has stumped me for a few days now.  Put these notes somewhere and refactor
+            // this code.  writing a unit test for this right now...
+            // change of plan.  the == 1 ?... should say  == 0 ? ... change this back
+            // make a unit test that fails it is saturday and I desperately need to get the
+            // swift_metagpt project working for the airport project.  I will come back
+            // to this later.
         if ( currentPlayer->getPoints() == 4 ) {
             // std::cout << "inside updateScore().  points == 4.  setting point flash to 1..." << std::endl;
             _gameState->setPointFlash( 1 );
@@ -102,6 +93,7 @@ void Mode1Score::mode1P1Games() {
                     _gameState->stopGameRunning();
                 } else {     
                     std::cout << "calling game win sequence 1st..." << std::endl; // <-------------<< Set Win
+                    _gameState->setCurrentAction( BOTH_PLAYER_BLINK );
                     _mode1WinSequences.p1GameWinSequence();  // sets player points to zero
                     std::cout << "*** /// calling p1SetWinSequence() point gap is 2 /// ***" << std::endl;
                     _gameState->setPlayer1SetHistory( _player1->getSetHistory());
@@ -120,6 +112,7 @@ void Mode1Score::mode1P1Games() {
                 _gameLeds.updateGames();
                 _gameState->setPlayer1SetHistory( _player1->getSetHistory());  // gamestate needs update here
                 _gameState->setPlayer2SetHistory( _player2->getSetHistory());
+                _gameState->setCurrentAction( PLAYER_1_BLINK );
                 _mode1WinSequences.p1GameWinSequence();  // sets player points to zero
                 _resetGame();
             }}
@@ -128,6 +121,7 @@ void Mode1Score::mode1P1Games() {
         _gameLeds.updateGames();
         _gameState->setPlayer1SetHistory( _player1->getSetHistory());
         _gameState->setPlayer2SetHistory( _player2->getSetHistory());
+        _gameState->setCurrentAction( PLAYER_1_BLINK );
         _mode1WinSequences.p1GameWinSequence();
         _resetGame(); }}
 
@@ -157,6 +151,7 @@ void Mode1Score::mode1P2Games() {
                     _gameState->stopGameRunning();
                 }  else {
                     std::cout << "calling game win sequence 1st..." << std::endl; // <-------------<< Set Win
+                    _gameState->setCurrentAction( BOTH_PLAYER_BLINK );
                     _mode1WinSequences.p2GameWinSequence();  // sets player points to zero
                     std::cout << "** inside mode1P2Games().  calling p2SetWinSequence()... ***" << std::endl;
                     _player2->setGames( _player2->getGames() );
@@ -181,10 +176,12 @@ void Mode1Score::mode1P2Games() {
                 _gameState->setPlayer1SetHistory( _player1->getSetHistory());
                 _gameState->setPlayer2SetHistory( _player2->getSetHistory());
                 _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
+                _gameState->setCurrentAction( PLAYER_2_BLINK );
                 _mode1WinSequences.p2GameWinSequence();
                 _resetGame(); }
     } else {
         _gameLeds.updateGames();
+        _gameState->setCurrentAction( PLAYER_2_BLINK );
         _mode1WinSequences.p2GameWinSequence();  // sets player points to zero
         _gameState->setPlayer1SetHistory( _player1->getSetHistory());
         _gameState->setPlayer2SetHistory( _player2->getSetHistory());

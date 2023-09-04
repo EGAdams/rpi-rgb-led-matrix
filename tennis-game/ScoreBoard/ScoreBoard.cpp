@@ -79,7 +79,7 @@ void ScoreBoard::writeMessage( std::string message ) {
         std::cout << "MATRIX_DISABLED == 1 is false.  writing message..." << std::endl;
         Color color( 255, 255, 0 );
         Color bg_color( 0, 0, 0 );
-        int baseline = _big_number_font.baseline();                     // set the coordinates for the text
+        int baseline = _big_number_font.baseline();            // set the coordinates for the text
         int first_offset  = 8;
         _smallNumberDrawer->DrawNumber( message, first_offset, baseline + _big_number_font.height());
         std::cout << "sleeping for 2 seconds..." << std::endl;
@@ -105,12 +105,15 @@ void ScoreBoard::update() {
         std::cout << "MATRIX_DISABLED == 1 is true.  skipping blink..." << std::endl;
     } else {
         std::cout << "MATRIX_DISABLED == 1 is false.  checking for blink in action..." << std::endl;
-        bool blink = _gameState->getCurrentAction().find( "blink" ) != std::string::npos;
+        bool blink = _gameState->getCurrentAction().find( ACTIVE_BLINK ) != std::string::npos;
         if ( blink ) {
             std::cout << "blink is true, calling _setDrawer->drawBlinkSets()..." << std::endl;
             std::cout << "gamestate current action: " << _gameState->getCurrentAction() << std::endl;
-            int playerToBlink = _gameState->getCurrentAction().find( "player1" ) != std::string::npos ?
-                PLAYER_1_INITIALIZED : PLAYER_2_INITIALIZED;
+            int playerToBlink =  3; // default to both players
+            if ( _gameState->getCurrentAction().find( PLAYER_1_BLINK ) != std::string::npos ) {
+                playerToBlink = PLAYER_1_INITIALIZED;
+            } else if( _gameState->getCurrentAction().find( PLAYER_2_BLINK ) != std::string::npos ) {
+                playerToBlink = PLAYER_2_INITIALIZED; }
             _setDrawer->drawBlinkSets( playerToBlink );
         } else { _setDrawer->drawSets(); }}}
 
@@ -132,9 +135,9 @@ void ScoreBoard::_drawPlayerScore( Player* player ) {
     } else {
         int vertical_offset = player->number() == 0 ? 0 : _big_number_font.height();
         _pipeDrawer->DrawNumber(serve_bar, 1, _big_number_font.baseline() + vertical_offset ); // draw pipe
-        int baseline = _big_number_font.baseline();                     // set the coordinates for the text
+        int baseline = _big_number_font.baseline();                  // set the coordinates for the text
         int first_offset  = _characterOffset( score.substr( 0, 1 ));
-        int second_offset = _characterOffset( score.substr( 1, 1 ));    // then draw text depending on player
+        int second_offset = _characterOffset( score.substr( 1, 1 )); // then draw text depending on player
         if( player->number() == PLAYER_1_INITIALIZED ) {
             _playerOneScoreDrawer->DrawNumber( score.substr( 0, 1 ), first_offset  + 16, baseline + vertical_offset );
             _playerOneScoreDrawer->DrawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset );

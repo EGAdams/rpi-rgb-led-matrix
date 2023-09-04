@@ -6,6 +6,11 @@
 //  Written by Chris Bean for Teensy 4.1 only
 //  re-written in C++ by EG in June 2022 
 
+#define BOTH_PLAYER_BLINK        "both player blink"
+#define PLAYER_1_BLINK           "player1 blink"
+#define PLAYER_2_BLINK           "player2 blink"
+#define ACTIVE_BLINK             "blink"
+#define NORMAL_GAME_STATE        "normal game state"
 #define TESTING                  1
 #define GAME_FLASH_DELAY         1000
 #define FLASH_DELAY              1000

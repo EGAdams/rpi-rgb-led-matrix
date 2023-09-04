@@ -12,6 +12,6 @@ std::string SetHistoryText::_buildString( int player ) {
         _gameState->getPlayer1SetHistory() : _gameState->getPlayer2SetHistory();
     std::string setHistoryText = ""; 
     for ( int i = 1; i < _gameState->getCurrentSet() + 1; i++ ) {
-        setHistoryText += std::to_string( setHistory[ i ] );
+        setHistoryText += std::to_string( setHistory[ i ]);
         setHistoryText += " "; }
     return setHistoryText; }
