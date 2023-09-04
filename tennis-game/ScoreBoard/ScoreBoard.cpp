@@ -105,15 +105,12 @@ void ScoreBoard::update() {
         std::cout << "MATRIX_DISABLED == 1 is true.  skipping blink..." << std::endl;
     } else {
         std::cout << "MATRIX_DISABLED == 1 is false.  checking for blink in action..." << std::endl;
-        bool blink = _gameState->getCurrentAction().find( ACTIVE_BLINK ) != std::string::npos;
+        bool blink = _gameState->getCurrentAction().find( "blink" ) != std::string::npos;
         if ( blink ) {
             std::cout << "blink is true, calling _setDrawer->drawBlinkSets()..." << std::endl;
             std::cout << "gamestate current action: " << _gameState->getCurrentAction() << std::endl;
-            int playerToBlink =  3; // default to both players
-            if ( _gameState->getCurrentAction().find( PLAYER_1_BLINK ) != std::string::npos ) {
-                playerToBlink = PLAYER_1_INITIALIZED;
-            } else if( _gameState->getCurrentAction().find( PLAYER_2_BLINK ) != std::string::npos ) {
-                playerToBlink = PLAYER_2_INITIALIZED; }
+            int playerToBlink = _gameState->getCurrentAction().find( "player1" ) != std::string::npos ?
+                PLAYER_1_INITIALIZED : PLAYER_2_INITIALIZED;
             _setDrawer->drawBlinkSets( playerToBlink );
         } else { _setDrawer->drawSets(); }}}
 
