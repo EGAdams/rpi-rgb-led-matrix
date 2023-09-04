@@ -97,9 +97,9 @@ void Mode1Score::mode1P1Games() {
                     std::cout << "*** /// calling p1SetWinSequence() point gap is 2 /// ***" << std::endl;
                     _gameState->setPlayer1SetHistory( _player1->getSetHistory());
                     _gameState->setPlayer2SetHistory( _player2->getSetHistory());
-                    _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
                     GameTimer::gameDelay( SET_WIN_DELAY );
-                    _mode1WinSequences.p1SetWinSequence();
+                    _mode1WinSequences.p1SetWinSequence();  // call set win before incrementing set
+                    _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 ); // moved here sep4
                     _setLeds.updateSets();
                     GameTimer::gameDelay( _gameState->getWinDelay());
                     _resetGame(); }

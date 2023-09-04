@@ -111,7 +111,7 @@ void ScoreBoard::update() {
             std::cout << "gamestate current action: " << _gameState->getCurrentAction() << std::endl;
             int playerToBlink = _gameState->getCurrentAction().find( "player1" ) != std::string::npos ?
                 PLAYER_1_INITIALIZED : PLAYER_2_INITIALIZED;
-            _setDrawer->drawBlinkSets( playerToBlink );
+            _setDrawer->drawBlinkSets( playerToBlink ); // checks current action ignoring playerToBlink
         } else { _setDrawer->drawSets(); }}}
 
 void ScoreBoard::clearScreen() {
