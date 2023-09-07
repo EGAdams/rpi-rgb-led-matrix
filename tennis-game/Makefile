@@ -39,8 +39,12 @@ $(RGB_LIBRARY): FORCE
 tennis-game: $(MAIN_OBJECTS)
 	$(CXX) $^ -o $@ $(LDFLAGS)
 
-tennis-game-manual: $( MAIN_OBJECTS_MANUAL )
+tennis-game-manual: GameWinSequence.o SetWin.o SetHistoryText.o SetDrawer.o GameLedTranslator.o SubjectManager.o WebLiquidCrystal.o WatchTimer.o Inputs.o Mode1Tiebreaker.o Mode1Score.o Mode1Functions.o ServeLeds.o Undo.o BatteryTest.o Reset.o SetLeds.o TieLeds.o Mode1WinSequences.o Mode2Functions.o MatchWinSequence.o TennisConstants.o GameLeds.o GameModes.o GameObject.o PinState.o PinInterface.o TranslateConstant.o PointLeds.o Arduino.o CanvasCreator.o FontLoader.o NumberDrawer.o TextDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game-manual.o
 	$(CXX) $^ -o $@ $(LDFLAGS)
+
+
+test-manual: GameWinSequence.o SetWin.o
+	@echo "Temporary rule worked."
 
 Mode1ScoreTest: $( SCORE_TEST_OBJECTS )
 	$(CXX) $^ -o $@ $(LDFLAGS)
@@ -171,8 +175,16 @@ SetHistoryText.o : SetHistoryText/SetHistoryText.cpp
 tennis-game.o : tennis-game.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
+tennis-game-manual.o : tennis-game-manual.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+
+
 clean:
 	rm -f $(MAIN_OBJECTS) $(TEST_OBJECTS) $(BINARIES)
 
 FORCE:
 .PHONY: FORCE
+
+print-%:
+	@echo $* = $($*)

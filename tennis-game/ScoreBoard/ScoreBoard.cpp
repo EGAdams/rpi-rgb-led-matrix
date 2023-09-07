@@ -94,6 +94,13 @@ bool ScoreBoard::hasCanvas() {
 
 void ScoreBoard::update() {
     std::cout << "inside ScoreBoard::update() ... " << std::endl;
+    std::cout << "checking for _player1 or _player2 null values..." << std::endl;
+    if ( _player1 == nullptr ) {
+        std::cout << "*** ERROR: _player1 == NULL ***" << std::endl; 
+        exit( 1 ); }
+    if ( _player2 == nullptr ) { 
+        std::cout << "*** ERROR: _player2 == NULL ***" << std::endl; 
+        exit( 1 ); }
     // std::cout << "gamestate current action: " << _gameState->getCurrentAction() << std::endl;
     clearScreen();
     std::cout << "inside ScoreBoard::update()  player1 points: " << _player1->getPoints() << std::endl;
