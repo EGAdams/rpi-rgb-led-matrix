@@ -41,7 +41,7 @@ int main( int argc, char *argv[]) {
     std::cout << "done sleeping.  calling gameObject->loopGame()..." << std::endl;
     gameObject->loopGame();
 
-    std::cout << "done calling loopGame().  sleeping...\n\n\n\n\n" << std::endl;
+    std::cout << "done calling loopGame().  sleeping...\n" << std::endl;
     sleep( 1 );
 
     int menu_selection = 1;
@@ -49,14 +49,18 @@ int main( int argc, char *argv[]) {
     /*/// Begin Game Loop ///*/ while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { 
         if ( loop_count >  MAX_LOOP_COUNT ) { gameState->stopGameRunning(); }
         sleep( SCORE_DELAY );
-        std::cout << "\n\n1.) Player 1 score" << std::endl;
-        std::cout << "\n2.) Player 2 score" << std::endl;
-        std::cout << "\n3.) Undo" << std::endl;
+        std::cout << "\n  1.) Player 1 score" << std::endl;
+        std::cout << "  2.) Player 2 score" << std::endl;
+        std::cout << "  3.) Undo" << std::endl;
+        std::cout << "  4.) Exit" << std::endl;
         std::cin >> menu_selection;
         if ( menu_selection == 1  ||  menu_selection == 2 ) {
             std::cout << "\n\n\n\n\n\n\n*** Player " << menu_selection << " scored ***\n" << std::endl;
             gameObject->playerScore( menu_selection );  // flip the player score flag
             sleep( SCORE_DELAY );
+        } else if ( menu_selection == 4 ) {
+            std::cout << "*** Exiting... ***\n" << std::endl;
+            exit( 0 );
         } else if ( menu_selection == 3 ) { 
             std::cout << "\n\n\n\n\n\n\n*** Undo ***\n" << std::endl;
             gameObject->undo(); 
@@ -68,8 +72,8 @@ int main( int argc, char *argv[]) {
         
         gameObject->loopGame();  // handle the player score flag
         loop_count++;
-        std::cout << "player 1 points: " << gameState->getPlayer1Points();
-        std::cout << "  player 2 points: " << gameState->getPlayer2Points() << std::endl;
+        std::cout << "player 1 points: " << "\033[32m" << gameState->getPlayer1Points() << "\033[0m";
+        std::cout << "  player 2 points: " << "\033[31m" << gameState->getPlayer1Points() << "\033[0m" << std::endl;
         std::cout << "player 1 games:  "  << gameState->getPlayer1Games();
         std::cout << "  player 2 games:  "  << gameState->getPlayer2Games()  << std::endl;
         std::cout << "player 1 sets:   "   << gameState->getPlayer1Sets();
@@ -77,7 +81,7 @@ int main( int argc, char *argv[]) {
         std::cout << "     current set: "     << gameState->getCurrentSet()      << std::endl;
         std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
         std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
-        std::cout << "end of game loop.  loop_count: " << loop_count << std::endl;
+        // std::cout << "end of game loop.  loop_count: " << loop_count << std::endl;
     } ///////// End Game Loop /////////
     std::cout << "game loop exited.  loop_count: " << loop_count << std::endl;
     if ( loop_count > MAX_LOOP_COUNT ) {

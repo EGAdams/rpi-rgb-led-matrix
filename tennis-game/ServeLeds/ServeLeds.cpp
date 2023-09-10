@@ -15,7 +15,7 @@ void ServeLeds::updateServeLED() {
   } else {
     if( _gameState->getCurrentAction().find( "1 scored" ) != std::string::npos ) { // ERROR trap.
       std::cout << "*** ERROR: Player 1 to scored yet we are turning player 2 serve bar on.  exiting program... ***" << std::endl;
-      exit( 1 ); } 
+      /* exit( 1 );*/ } 
 
     std::cout << "updateServeLED() setting P2_SERVE to HIGH" << std::endl;
     _pinInterface->pinDigitalWrite(P1_SERVE, LOW);

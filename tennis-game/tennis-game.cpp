@@ -161,7 +161,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, int player )
         std::cout << "     current set: "     << gameState->getCurrentSet()      << std::endl;
         std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
         std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
-        std::cout << "end of game loop.  loop_count: " << loop_count << std::endl;
+        // std::cout << "end of game loop.  loop_count: " << loop_count << std::endl;
     } ///////// End Game Loop /////////
     std::cout << "game loop exited.  loop_count: " << loop_count << std::endl;
     if ( loop_count > MAX_LOOP_COUNT ) {

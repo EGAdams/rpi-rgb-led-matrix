@@ -5,7 +5,7 @@
 #include "../GameLeds/GameLeds.h"
 #include "../GameState/GameState.h"
 #include "../GameTimer/GameTimer.h"
-#include "../Mode1Tiebreaker/Mode1Tiebreaker.h"
+#include "../Mode1TieBreaker/Mode1TieBreaker.h"
 #include "../WinSequences/WinSequences.h"
 #include "../PointLeds/PointLeds.h"
 #include "../PinState/PinState.h"

@@ -109,7 +109,7 @@ void ScoreBoard::update() {
     // _setDrawer->drawSets();
 
     if ( MATRIX_DISABLED == 1 ) {
-        std::cout << "MATRIX_DISABLED == 1 is true.  skipping blink..." << std::endl;
+        // std::cout << "MATRIX_DISABLED == 1 is true.  skipping blink..." << std::endl;
     } else {
         std::cout << "MATRIX_DISABLED == 1 is false.  checking for blink in action..." << std::endl;
         bool blink = _gameState->getCurrentAction().find( "blink" ) != std::string::npos;
@@ -130,12 +130,12 @@ void ScoreBoard::clearScreen() {
         Color flood_color( 0, 0, 0 ); _canvas->Fill( flood_color.r, flood_color.g, flood_color.b ); }}
 
 void ScoreBoard::_drawPlayerScore( Player* player ) {
-    std::string serve_bar = _gameState->getServe() == player->number() ? "I" : " "; // or p1 serve and swap
+    std::string serve_bar = _gameState->getServe() == player->number() ? "\033[33mI\033[0m" : " "; // or p1 serve and swap
     std::string score = _translate( player->getPoints());
     if( MATRIX_DISABLED == 1 ) {
         player->number() == PLAYER_1_INITIALIZED ?  // type player 1 score, else type player 2 score
-        std::cout << "PLAYER 1: ////// " << serve_bar << " " << score << " ////// " << std::endl :
-        std::cout << "PLAYER 2: ////// " << serve_bar << " " << score << " ////// " << std::endl;
+        std::cout << "PLAYER 1: ////// " << serve_bar << " " << "\033[32m" << score << "\033[0m" << " ////// " << std::endl :
+        std::cout << "PLAYER 2: ////// " << serve_bar << " " << "\033[31m" << score << "\033[0m" << " ////// " << std::endl;
     } else {
         int vertical_offset = player->number() == 0 ? 0 : _big_number_font.height();
         _pipeDrawer->DrawNumber(serve_bar, 1, _big_number_font.baseline() + vertical_offset ); // draw pipe

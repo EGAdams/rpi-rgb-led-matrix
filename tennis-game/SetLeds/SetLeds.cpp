@@ -43,7 +43,7 @@ void SetLeds::updateSets() {
             _pinInterface->pinDigitalWrite( P1_SETS_LED2, LOW ); } break;
 
     case PLAYER_1_TWO_SETS:
-        std::cout << "player1 has two sets" << std::endl;
+        // std::cout << "player1 has two sets" << std::endl;
         if ( _scoreBoard->hasCanvas() ) {
             std::cout << "scoreboard has canvas.  updating..." << std::endl;
             _scoreBoard->update();
@@ -62,7 +62,7 @@ void SetLeds::updateSets() {
 
   switch (_player2->getSets()) {
     case PLAYER_2_ZERO_SETS:
-        std::cout << "player2 has zero sets" << std::endl;
+        // std::cout << "player2 has zero sets" << std::endl;
         if ( _scoreBoard->hasCanvas() ) {
             std::cout << "scoreboard has canvas.  updating..." << std::endl;
             _scoreBoard->update();
