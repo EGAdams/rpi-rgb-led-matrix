@@ -90,7 +90,7 @@ void ScoreBoard::drawGames() {  std::cout << "inside ScoreBoard::drawGames()" <<
 
 bool ScoreBoard::hasCanvas() {
     if ( _canvas != NULL ) { return true;
-    } else { std::cout << "*** WARNING: canvas is NULL ***" << std::endl; return false; }}
+    } else { /* std::cout << "*** WARNING: canvas is NULL ***" << std::endl; */ return false; }}
 
 void ScoreBoard::update() {
     std::cout << "inside ScoreBoard::update() ... " << std::endl;

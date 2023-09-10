@@ -73,7 +73,7 @@ int main( int argc, char *argv[]) {
         gameObject->loopGame();  // handle the player score flag
         loop_count++;
         std::cout << "player 1 points: " << "\033[32m" << gameState->getPlayer1Points() << "\033[0m";
-        std::cout << "  player 2 points: " << "\033[31m" << gameState->getPlayer1Points() << "\033[0m" << std::endl;
+        std::cout << "  player 2 points: " << "\033[31m" << gameState->getPlayer2Points() << "\033[0m" << std::endl;
         std::cout << "player 1 games:  "  << gameState->getPlayer1Games();
         std::cout << "  player 2 games:  "  << gameState->getPlayer2Games()  << std::endl;
         std::cout << "player 1 sets:   "   << gameState->getPlayer1Sets();

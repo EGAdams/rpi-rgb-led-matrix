@@ -76,6 +76,7 @@ void GameObject::playerScore( int playerNumber ) {  // sets the gamestate player
     _gameState->setPlayerButton( playerNumber );
     // current_player_button = _gameState->getPlayerButton();
     // std::cout << "current_player_button: " << current_player_button << std::endl;
+    _gameState->setCurrentAction( "after player score in GameObject" );
 }
 
 PinInterface* GameObject::getPinInterface() { return _pinInterface; }
