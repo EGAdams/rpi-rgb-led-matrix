@@ -28,8 +28,6 @@ void SetWin::execute( Player* player, ScoreBoard* scoreBoard ) {
     std::cout << "*** SetWin::execute() ***" << std::endl;
     _undo->memory();
     _setLeds->updateSets();
-    std::cout << "setting player games to 0" << std::endl;
-    player->setGames( 0 ); player->getOpponent()->setGames( 0 ); // set both player games to zero.
     std::cout << "updating set leds" << std::endl;
     _setLeds->updateSets(); 
     std::cout << "*** end of SetWin::execute() ***" << std::endl; }

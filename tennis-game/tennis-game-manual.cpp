@@ -46,7 +46,8 @@ int main( int argc, char *argv[]) {
 
     int menu_selection = 1;
     std::signal( SIGINT, GameObject::_signalHandler );
-    /*/// Begin Game Loop ///*/ while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { 
+    
+    while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { /*/// Begin Game Loop ///*/  
         if ( loop_count >  MAX_LOOP_COUNT ) { gameState->stopGameRunning(); }
         sleep( SCORE_DELAY );
         std::cout << "\n  1.) Player 1 score" << std::endl;

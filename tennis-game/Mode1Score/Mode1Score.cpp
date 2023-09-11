@@ -103,7 +103,7 @@ void Mode1Score::mode1P1Games() {
                     _setLeds.updateSets();
                     GameTimer::gameDelay( _gameState->getWinDelay());
                     _resetGame(); }
-                    std::cout << "*** setting games to 0 ***" << std::endl;
+                    std::cout << "*** setting games to 0 ***" << std::endl; // after incrementing set! -sep11
                     _player1->setGames( 0 );
                     _player2->setGames( 0 );
             } else {    // no set win, no match win, no tie break. just a regular game win.
