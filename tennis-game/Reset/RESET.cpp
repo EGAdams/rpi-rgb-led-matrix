@@ -95,6 +95,8 @@ void Reset::tieLEDsOff() {
 void Reset::zeroPlayerValues() {
     _player1->setPoints( 0 );
     _player2->setPoints( 0 );
+    _gameState->setPlayer1Points( _player1->getPoints());
+    _gameState->setPlayer2Points( _player2->getPoints());
     _player1->setGames( 0 );
     _player2->setGames( 0 );
     _player1->setSets( _gameState, 0 );

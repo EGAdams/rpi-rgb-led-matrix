@@ -31,6 +31,8 @@ void Mode1Score::_resetGame() {
      GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
     _player1->setPoints( 0 );
     _player2->setPoints( 0 );
+    _gameState->setPlayer1Points( 0 );
+    _gameState->setPlayer2Points( 0 );
     _gameState->setServeSwitch( 1 );
     _gameState->setServe( 0 );
     _pointLeds.updatePoints(); }
@@ -69,8 +71,10 @@ void Mode1Score::mode1P2Score() { updateScore( _player2 );}
 /////////////////////////////////////// MODE 1 GAMES //////////////////////////////////////////////
 void Mode1Score::mode1P1Games() {
     // _gameLeds.updateGames();
+    // print player1 games
+    std::cout << "player 1 games: " << _player1->getGames() << std::endl;
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
-    if ( _player1->getGames() == GAMES_TO_WIN_SET ) {
+    if ( _player1->getGames() >= GAMES_TO_WIN_SET ) {
         if ( _player1->getGames() == GAMES_TO_WIN_SET && _player2->getGames() == GAMES_TO_WIN_SET ) {
             _gameState->setTieBreak( 1 );
             _mode1TieBreaker.tieBreakEnable(); }

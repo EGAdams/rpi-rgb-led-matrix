@@ -37,7 +37,7 @@ void writeMessage( GameObject* gameObject, std::string message ) {
 void score( GameObject* gameObject, GameState* gameState, int player ) {
     std::cout << "\n\n\n\n\n\n\n*** Player " << player << " scored ***\n" << std::endl;
     gameObject->playerScore( player );  // flip the player score flag
-    gameObject->loopGame();  // handle the player score flag
+    gameObject->loopGame();             // handle the player score flag
     std::cout << "player 1 points: " << gameState->getPlayer1Points();
     std::cout << "player 2 points: " << gameState->getPlayer2Points() << std::endl;
     std::cout << "player 1 games:  " << gameState->getPlayer1Games();

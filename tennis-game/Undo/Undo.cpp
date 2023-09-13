@@ -67,6 +67,7 @@ void Undo::setMode1Undo( History* history ) {
 
     _gameState->setPlayer1SetHistory( _player1->getSetHistory());
     _gameState->setPlayer2SetHistory( _player2->getSetHistory());
+    gameState.setCurrentSet( _gameState->getCurrentSet());
     // std::cout << "done setting set histories.  pushing gamestate to history..." << std::endl;
     history->push( gameState ); 
     
@@ -80,8 +81,9 @@ void Undo::mode1Undo( History* history ) {
     GameTimer::gameDelay( 100 );
     if ( history->size() == 0 ) { return; }
     // std::cout << "inside mode1Undo.  history->size()==" << history->size() << std::endl;
-    if ( _scoreBoardSet == false ) { std::cout << "*** ERROR: trying to call undo when _scoreBoardSet == false exiting process... *** \nMake sure to call undo->setScoreBoard before trying to use the Undo object." << std::endl; exit( 1 ); }
+    if ( _scoreBoardSet == false ) { std::cout << "*** ERROR: trying to call undo when _scoreBoardSet == false exiting process... *** \nMake sure to call undo->setScoreBoard before trying to use the Undo object." << std::endl; exit( 1 ); } // TODO: Update Current Set 1st!
     GameState gameState = ( history->pop());
+    _gameState->setCurrentSet( gameState.getCurrentSet());
     _player1->setPoints( gameState.getPlayer1Points());
     _gameState->setP1PointsMem( gameState.getP1PointsMem());
     _player2->setPoints( gameState.getPlayer2Points());

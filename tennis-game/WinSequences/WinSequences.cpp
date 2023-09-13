@@ -32,7 +32,9 @@ void Mode1WinSequences::p1GameWinSequence() {
     GameTimer::gameDelay( 2000 );
     std::cout << "*** done delaying game after p1GameWinSequence()  setting points to zero... ***" << std::endl;
     _player1->setPoints( 0 );
-    _player2->setPoints( 0 );}
+    _player2->setPoints( 0 );
+    _gameState->setPlayer1Points( 0 );
+    _gameState->setPlayer2Points( 0 );  }
 
 void Mode1WinSequences::p1SetWinSequence() { 
     std::cout << "*** executing _setWin->execute for player one... ***" << std::endl;
@@ -56,7 +58,9 @@ void Mode1WinSequences::p2GameWinSequence() {
     GameTimer::gameDelay( 1000 );
     std::cout << "*** done delaying game after p2GameWinSequence()  setting points to zero... ***" << std::endl;
     _player1->setPoints( 0 );
-    _player2->setPoints( 0 );}
+    _player2->setPoints( 0 );
+    _gameState->setPlayer1Points( 0 );
+    _gameState->setPlayer2Points( 0 ); }
 
 void Mode1WinSequences::p2SetWinSequence() { 
      std::cout << "*** executing _setWin->execute... ***" << std::endl;

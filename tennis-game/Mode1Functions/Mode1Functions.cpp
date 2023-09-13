@@ -32,6 +32,8 @@ void Mode1Functions::mode1ButtonFunction() {
             _gameState->setPointFlash( 0 );
             _player1->setPoints( _gameState->getP1PointsMem());
             _player2->setPoints( _gameState->getP2PointsMem());
+            _gameState->setPlayer1Points( _player1->getPoints());
+            _gameState->setPlayer2Points( _player2->getPoints());
             // _pointLeds.updatePoints(); jul20
         }
         GameTimer::gameDelay( _gameState->getButtonDelay());
@@ -56,6 +58,8 @@ void Mode1Functions::mode1ButtonFunction() {
             _gameState->setPointFlash( 0 );
             _player1->setPoints( _gameState->getP1PointsMem());
             _player2->setPoints( _gameState->getP2PointsMem());
+            _gameState->setPlayer1Points( _player1->getPoints());
+            _gameState->setPlayer2Points( _player2->getPoints());
             /*_pointLeds.updatePoints(); jul20 */ }
 
         GameTimer::gameDelay( _gameState->getButtonDelay());
