@@ -89,7 +89,6 @@ void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 2 );
-    // sleep( 1 );
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 2 );
     score( gameObject, gameState, 2 );
@@ -101,12 +100,10 @@ void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 1 );    
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 1 );
-    // sleep( 1 );
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 1 );
-    // sleep( 2 );
     playerWin( gameObject, gameState, 1 );
     score(     gameObject, gameState, 2 ); // player 2 needs to bump the serve 1st
     playerWin( gameObject, gameState, 2 );
@@ -114,7 +111,6 @@ void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     playerWin( gameObject, gameState, 2 );
     score(     gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 2 );
-    // sleep( 2 );
     std::cout << " ready for player 1 set win..." << std::endl;
     playerWin( gameObject, gameState, 1 );
     std::cout << "player 1 won the set!" << std::endl;
@@ -123,17 +119,10 @@ void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
 
 void test_03( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen();
-    //undo
-    Undo* undo = gameObject->createUndo();
-    undo->setScoreBoard( gameObject->getScoreBoard());
-    sleep( 1 );
-    undo->mode1Undo( gameObject->getHistory());
-    sleep( 1 );
     playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 2 );
-    sleep( 2 );
     std::cout << " ready for player 1 set win..." << std::endl;
     playerWin( gameObject, gameState, 1 );
     std::cout << "player 1 won the set!" << std::endl;
@@ -198,17 +187,20 @@ int main( int argc, char *argv[]) {
     if ( manual == 1 ) { run_manual_game( gameObject, gameState, 1 ); return 0; } 
 
     ///// run tests /////
-    int test_count = 0;
-    writeMessage( gameObject, "t " + std::to_string( ++test_count ));
-    std::cout << "calling test_01()..." << std::endl;
-    test_01( gameObject, gameState, &loop_count );
+    int test_count = 1;
+    // writeMessage( gameObject, "t " + std::to_string( test_count ));
+    // std::cout << "calling test_01()..." << std::endl;
+    // test_01( gameObject, gameState, &loop_count );
+    test_count++;
 
-    writeMessage( gameObject, "t " + std::to_string( ++test_count ));
-    std::cout << "calling test_02()..." << std::endl;
-    test_02( gameObject, gameState, &loop_count );
+    // writeMessage( gameObject, "t " + std::to_string( test_count ));
+    // std::cout << "calling test_02()..." << std::endl;
+    // test_02( gameObject, gameState, &loop_count );
+    test_count++;
 
-    writeMessage( gameObject, "t " + std::to_string( ++test_count ));
+    writeMessage( gameObject, "t " + std::to_string( test_count ));
     std::cout << "calling test_03()..." << std::endl;
     test_03( gameObject, gameState, &loop_count );
+    test_count++;
 
 }
