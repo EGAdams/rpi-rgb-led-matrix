@@ -78,8 +78,6 @@ public:
     int getTieBreakMem() override;
     void setSetTieBreakMem(int setTieBreakMem) override;
     int getSetTieBreakMem() override;
-    void setGameFlashDelay(int gameFlashDelay) override;
-    int getGameFlashDelay() override;
     void setPlayer1Points(int player1Points) override;
     int getPlayer1Points() override;
     void setPlayer2Points(int player2Points) override;
@@ -137,7 +135,6 @@ private:
     int _winDelay;
     int _buttonDelay;
     unsigned long _flashDelay;
-    int _gameFlashDelay;
     int _gameWinPulseCount;
     int _setTieBreakMem;
     int _tieBreakMem;

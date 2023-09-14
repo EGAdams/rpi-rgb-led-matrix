@@ -29,7 +29,7 @@ void Mode1WinSequences::p1GameWinSequence() {
     std::cout << "*** inside WinSequences class.  p1GameWinSequence() ***" << std::endl;
     _undo.memory();
     std::cout << "*** delaying game after p1GameWinSequence()... ***" << std::endl;
-    GameTimer::gameDelay( 2000 );
+    GameTimer::gameDelay( GAME_FLASH_DELAY );
     std::cout << "*** done delaying game after p1GameWinSequence()  setting points to zero... ***" << std::endl;
     _player1->setPoints( 0 );
     _player2->setPoints( 0 );
@@ -55,7 +55,7 @@ void Mode1WinSequences::p2GameWinSequence() {
     std::cout << "*** inside WinSequences class.  executing p2GameWinSequence()... ***" << std::endl;
     _undo.memory();  
     std::cout << "*** delaying game after p2GameWinSequence()... ***" << std::endl;
-    GameTimer::gameDelay( 1000 );
+    GameTimer::gameDelay( GAME_FLASH_DELAY );
     std::cout << "*** done delaying game after p2GameWinSequence()  setting points to zero... ***" << std::endl;
     _player1->setPoints( 0 );
     _player2->setPoints( 0 );

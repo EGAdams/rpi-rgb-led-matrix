@@ -19,10 +19,10 @@ void WinSequence::run( Player* player, GameState* gameState, GameLeds* gameLeds,
             #endif
             player->setGames( 99 );
             gameLeds->updateGames();  // UpdateGames();
-            GameTimer::gameDelay( gameState->getGameFlashDelay() /* flashDelay */ );
+            GameTimer::gameDelay( GAME_FLASH_DELAY );
             player->setGames( current_lamp );
             gameLeds->updateGames();  // UpdateGames();
-            GameTimer::gameDelay( gameState->getGameFlashDelay() /* flashDelay */ );
+            GameTimer::gameDelay( GAME_FLASH_DELAY );
         }
         player->setGames( games_in_memory );
         gameLeds->updateGames();

@@ -74,8 +74,6 @@ public:
     virtual int getTieBreakMem() = 0;
     virtual void setSetTieBreakMem(int setTieBreakMem) = 0;
     virtual int getSetTieBreakMem() = 0;
-    virtual void setGameFlashDelay(int gameFlashDelay) = 0;
-    virtual int getGameFlashDelay() = 0;
     virtual void setPlayer1Points(int player1Points) = 0;
     virtual int getPlayer1Points() = 0;
     virtual void setPlayer2Points(int player2Points) = 0;

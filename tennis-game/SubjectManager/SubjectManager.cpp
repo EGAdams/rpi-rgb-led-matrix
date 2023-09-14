@@ -32,7 +32,6 @@ void SubjectManager::gameStateUpdate( GameState* gameState, Player* player1, Pla
     stringifiedGameState += "\"tieLEDsOn\": \"" + std::to_string( gameState->getTieLEDsOn() ) + "\",\n";
     stringifiedGameState += "\"buttonDelay\": \"" + std::to_string( gameState->getButtonDelay() ) + "\",\n";
     stringifiedGameState += "\"flashDelay\": \"" + std::to_string( gameState->getFlashDelay() ) + "\",\n";
-    stringifiedGameState += "\"gameFlashDelay\": \"" + std::to_string( gameState->getGameFlashDelay() ) + "\",\n";
     stringifiedGameState += "\"gameWinPulseCount\": \" " + std::to_string( gameState->getGameWinPulseCount() ) + "\",\n";
     stringifiedGameState += "\"setTieBreak\": \" " + std::to_string( gameState->getSetTieBreak() ) + "\",\n";
     stringifiedGameState += "\"serveSwitch\": \" " + std::to_string( gameState->getServeSwitch() ) + "\",\n";
