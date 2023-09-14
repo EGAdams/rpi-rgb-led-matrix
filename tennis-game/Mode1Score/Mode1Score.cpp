@@ -132,8 +132,8 @@ void Mode1Score::mode1P2Games() {
     // std::cout << "inside mode1P2Games().  setting serve switch..." << std::endl;
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
     // std::cout << "serve switch set to: " << _gameState->getServeSwitch() << std::endl;
-    if ( _player2->getGames()  == GAMES_TO_WIN_SET ) {
-        if ( _player2->getGames()  == GAMES_TO_WIN_SET && _player1->getGames() == GAMES_TO_WIN_SET ) {
+    if ( _player2->getGames() >= GAMES_TO_WIN_SET ) {
+        if ( _player2->getGames() == GAMES_TO_WIN_SET && _player1->getGames() == GAMES_TO_WIN_SET ) {
             _gameState->setTieBreak( 1 );
             std::cout << "*** calling tieBreakEnable() from inside Mode1Score::mode1P2Games()... ***" << std::endl;
             _mode1TieBreaker.tieBreakEnable();
@@ -151,23 +151,15 @@ void Mode1Score::mode1P2Games() {
                     _mode1WinSequences.p2MatchWinSequence();
                     _gameState->stopGameRunning();
                 }  else {
-                    std::cout << "calling game win sequence 1st..." << std::endl; // <-------------<< Set Win
-                    _mode1WinSequences.p2GameWinSequence();  // sets player points to zero
-                    std::cout << "** inside mode1P2Games().  calling p2SetWinSequence()... ***" << std::endl;
-                    _player2->setGames( _player2->getGames() );
                     _gameState->setPlayer1SetHistory( _player1->getSetHistory());
                     _gameState->setPlayer2SetHistory( _player2->getSetHistory());
-                    _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
-                    GameTimer::gameDelay( SET_WIN_DELAY );
                     _mode1WinSequences.p2SetWinSequence();
+                    _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
                     _setLeds.updateSets();
                     GameTimer::gameDelay( _gameState->getWinDelay());
                     _resetGame();
-                    std::cout << "*** setting games to 0 ***" << std::endl;
                     _player1->setGames( 0 );
                     _player2->setGames( 0 ); }}
-
-                std::cout << "inside mode1P2Games().  setting games to 0..." << std::endl;
                 _player1->setGames( 0 );
                 _player2->setGames( 0 );
             } else {
