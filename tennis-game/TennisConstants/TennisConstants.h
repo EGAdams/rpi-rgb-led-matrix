@@ -12,7 +12,7 @@
 #define ACTIVE_BLINK             "blink"
 #define NORMAL_GAME_STATE        "normal game state"
 #define TESTING                  1
-#define GAME_FLASH_DELAY         1000
+#define GAME_FLASH_DELAY         200
 #define SET_WIN_FLASH_DELAY      200
 #define FLASH_DELAY              1000
 #define BUTTON_DELAY             300
