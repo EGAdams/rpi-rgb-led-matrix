@@ -17,7 +17,6 @@ GameState::GameState() {
     _winDelay           = 500;
     _buttonDelay        = 150;
     _flashDelay         = 250;
-    _gameFlashDelay     = 250;
     _gameWinPulseCount = 4;
     _tieBreakMem     = 0;
     _setTieBreakMem  = 0;
@@ -96,8 +95,6 @@ void GameState::setTieBreakMem( int tieBreakMem ) { _tieBreakMem = tieBreakMem; 
 int GameState::getTieBreakMem() { return _tieBreakMem; }
 void GameState::setSetTieBreakMem( int setTieBreakMem ) { _setTieBreakMem = setTieBreakMem; }
 int GameState::getSetTieBreakMem() { return _setTieBreakMem; }
-void GameState::setGameFlashDelay( int gameFlashDelay ) { _gameFlashDelay = gameFlashDelay; }
-int GameState::getGameFlashDelay() { return _gameFlashDelay; }
 int GameState::getPlayer1Points() { return _player1_points; }
 void GameState::setPlayer1Points( int player1Points ) { _player1_points = player1Points; }
 int GameState::getPlayer2Points() { return _player2_points; }
