@@ -127,7 +127,8 @@ void test_03( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
-    
+    score(     gameObject, gameState, 1 );
+
     std::cout << " ready for player 1 set win..." << std::endl;
     // playerWin( gameObject, gameState, 1 );
     std::cout << "player 1 won the set!" << std::endl;
