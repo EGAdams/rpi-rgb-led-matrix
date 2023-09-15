@@ -133,10 +133,24 @@ void test_03( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
+    sleep( 4 ); }
 
-    std::cout << " ready for player 1 set win..." << std::endl;
-    // playerWin( gameObject, gameState, 1 );
-    std::cout << "player 1 won the set!" << std::endl;
+void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
+    gameObject->getScoreBoard()->clearScreen();
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 2 );
+    score(     gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 2 );
     sleep( 4 ); }
 
 void run_manual_game( GameObject* gameObject, GameState* gameState, int player ) {
@@ -209,9 +223,14 @@ int main( int argc, char *argv[]) {
     // test_02( gameObject, gameState, &loop_count );
     test_count++;
 
+    // writeMessage( gameObject, "t " + std::to_string( test_count ));
+    // std::cout << "calling test_03()..." << std::endl;
+    // test_03( gameObject, gameState, &loop_count );
+    test_count++;
+
     writeMessage( gameObject, "t " + std::to_string( test_count ));
-    std::cout << "calling test_03()..." << std::endl;
-    test_03( gameObject, gameState, &loop_count );
+    std::cout << "calling test_04()..." << std::endl;
+    test_04( gameObject, gameState, &loop_count );
     test_count++;
 
 }
