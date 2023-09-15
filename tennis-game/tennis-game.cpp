@@ -153,6 +153,7 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     playerWin( gameObject, gameState, 2 );
     // now to trigger the tie break...
     score(     gameObject, gameState, 2 );
+    score(     gameObject, gameState, 2 );
     sleep( 4 ); }
 
 void run_manual_game( GameObject* gameObject, GameState* gameState, int player ) {
@@ -232,6 +233,7 @@ int main( int argc, char *argv[]) {
 
     writeMessage( gameObject, "t " + std::to_string( test_count ));
     std::cout << "calling test_04()..." << std::endl;
+    sleep( 1 );
     test_04( gameObject, gameState, &loop_count );
     test_count++;
 
