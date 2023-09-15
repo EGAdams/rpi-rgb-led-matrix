@@ -151,6 +151,8 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 2 );
+    // now to trigger the tie break...
+    score(     gameObject, gameState, 2 );
     sleep( 4 ); }
 
 void run_manual_game( GameObject* gameObject, GameState* gameState, int player ) {
