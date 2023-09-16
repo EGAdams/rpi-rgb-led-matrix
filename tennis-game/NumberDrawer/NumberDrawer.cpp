@@ -4,4 +4,5 @@ NumberDrawer::NumberDrawer(RGBMatrix* canvas, const rgb_matrix::Font* font, Size
     : _canvas( canvas ), _font( font ), _size( size ), _color( color ), _bg_color( bg_color ) {}
 
 void NumberDrawer::DrawNumber( const std::string& number, int x, int y ) {
+    // return value of DrawText() goes to the bit bucket
     rgb_matrix::DrawText( _canvas, *_font, x, y, _color, &_bg_color, number.c_str(), 0);}

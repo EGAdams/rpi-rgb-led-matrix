@@ -35,7 +35,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         printf( "  parallel: %d\n", matrix_options.parallel );
         printf( "  pwm_bits: %d\n", matrix_options.pwm_bits );
         printf( "  pwm_lsb_nanoseconds: %d\n", matrix_options.pwm_lsb_nanoseconds );
-        printf( "Runtime options:\n" );
+        printf( "  Runtime options:\n" );
         printf( "  daemon: %d\n", runtime_opt.daemon );
         printf( "  do_gpio_init: %d\n", runtime_opt.do_gpio_init );
         printf( "  drop_privileges: %d\n", runtime_opt.drop_privileges );
@@ -52,6 +52,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
             fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT ); exit( 1 );}
         Color color( 255, 255, 0 );
         Color bg_color( 0, 0, 0 );
+        Color blue_color( 0, 0, 255 );
         _playerOneScoreDrawer   = std::make_unique<NumberDrawer>(
             _canvas.get(), &_big_number_font, NumberDrawer::BIG, player_one_score_color, bg_color );
         _playerTwoScoreDrawer   = std::make_unique<NumberDrawer>(
@@ -59,6 +60,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
 
         _smallNumberDrawer = std::make_unique<NumberDrawer>( _canvas.get(), &_big_number_font, NumberDrawer::SMALL, color, bg_color );
         _pipeDrawer        = std::make_unique<NumberDrawer>( _canvas.get(), &_big_number_font, NumberDrawer::BIG, color, bg_color   );
+        _bluePipeDrawer   = std::make_unique<NumberDrawer>( _canvas.get(), &_big_number_font, NumberDrawer::BIG, blue_color, bg_color );
         _setDrawer         = std::make_unique<SetDrawer>(    _canvas.get(), _gameState                                              );
         } // fi
     update();
@@ -119,7 +121,15 @@ void ScoreBoard::update() {
             int playerToBlink = _gameState->getCurrentAction().find( "player1" ) != std::string::npos ?
                 PLAYER_1_INITIALIZED : PLAYER_2_INITIALIZED;
             _setDrawer->drawBlinkSets( playerToBlink ); // checks current action ignoring playerToBlink
-        } else { _setDrawer->drawSets(); }}}
+        } else { _setDrawer->drawSets(); }
+
+        _drawTieBreakerBar(); // draw tie breaker bar if needed
+    }
+}
+
+void ScoreBoard::_drawTieBreakerBar() {
+    _pipeDrawer->DrawNumber( "I", 1, TIE_BREAK_BAR_OFFSET ); // draw pipe
+}
 
 void ScoreBoard::clearScreen() {
     if ( MATRIX_DISABLED == 1 ) {
@@ -138,7 +148,7 @@ void ScoreBoard::_drawPlayerScore( Player* player ) {
         std::cout << "PLAYER 2: ////// " << serve_bar << " " << score << " ////// " << std::endl;
     } else {
         int vertical_offset = player->number() == 0 ? 0 : _big_number_font.height();
-        _pipeDrawer->DrawNumber(serve_bar, 1, _big_number_font.baseline() + vertical_offset ); // draw pipe
+        _pipeDrawer->DrawNumber( serve_bar, 1, _big_number_font.baseline() + vertical_offset ); // draw pipe
         int baseline = _big_number_font.baseline();                  // set the coordinates for the text
         int first_offset  = _characterOffset( score.substr( 0, 1 ));
         int second_offset = _characterOffset( score.substr( 1, 1 )); // then draw text depending on player

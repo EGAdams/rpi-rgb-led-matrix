@@ -151,8 +151,8 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 2 );
-    // now to trigger the tie break...
-    score(     gameObject, gameState, 2 );
+   
+    score(     gameObject, gameState, 2 ); // now to trigger the tie break...
     score(     gameObject, gameState, 2 );
     sleep( 4 ); }
 
@@ -236,5 +236,4 @@ int main( int argc, char *argv[]) {
     sleep( 1 );
     test_04( gameObject, gameState, &loop_count );
     test_count++;
-
 }
