@@ -6,43 +6,44 @@
 //  Written by Chris Bean for Teensy 4.1 only
 //  re-written in C++ by EG in June 2022 
 
-#define BOTH_PLAYER_BLINK        "blink both players"
-#define PLAYER_1_BLINK           "player1 blink"
-#define PLAYER_2_BLINK           "player2 blink"
-#define ACTIVE_BLINK             "blink"
-#define NORMAL_GAME_STATE        "normal game state"
-#define TESTING                  1
-#define GAME_FLASH_DELAY         200
-#define SET_WIN_FLASH_DELAY      200
-#define FLASH_DELAY              1000
-#define BUTTON_DELAY             300
-#define WIN_DELAY                1000
-#define WATCH_INTERVAL           250
-#define UPDATE_DISPLAY_DELAY     50
-#define LOOP_MATCH_LAMP_WIN      5
-#define NUMBER_OF_GAME_LAMPS     7
-#define LOOP_GAME_LAMP_WIN       5
-#define TIE_PULSE_COUNT          5
-#define SET_WIN_PULSE_COUNT      5
-#define TIE_BREAK_BLINK_DELAY    750
-#define TIE_BREAK_WATCH_INTERVAL 50
-#define BATTERY_TEST_BLINK_DELAY 1000
-#define GAMES_TO_WIN_SET         6
-#define SET_WIN_DELAY            3000
-#define PLAYER_1_INITIALIZED     0
-#define PLAYER_2_INITIALIZED     1
-#define SET_HISTORY_COLUMN_1     1
-#define SET_HISTORY_COLUMN_2     2
-#define SET_HISTORY_COLUMN_3     3
-#define TOTAL_SETS               3
-#define PLAYER_ONE_SET_INDEX     0
-#define PLAYER_TWO_SET_INDEX     1
-#define SETS_TO_WIN_MATCH        3
-#define SCORE_CASE_4             4
-#define SCORE_CASE_5             5
-#define UNDEFINED_SCORE          99
-#define TIE_BREAK_BAR_OFFSET     25
-#define MATRIX_DISABLED          0
+#define BOTH_PLAYER_BLINK           "blink both players"
+#define PLAYER_1_BLINK              "player1 blink"
+#define PLAYER_2_BLINK              "player2 blink"
+#define ACTIVE_BLINK                "blink"
+#define NORMAL_GAME_STATE           "normal game state"
+#define TESTING                     1
+#define GAME_FLASH_DELAY            200
+#define SET_WIN_FLASH_DELAY         200
+#define FLASH_DELAY                 1000
+#define BUTTON_DELAY                300
+#define WIN_DELAY                   1000
+#define WATCH_INTERVAL              250
+#define UPDATE_DISPLAY_DELAY        50
+#define LOOP_MATCH_LAMP_WIN         5
+#define NUMBER_OF_GAME_LAMPS        7
+#define LOOP_GAME_LAMP_WIN          5
+#define TIE_PULSE_COUNT             5
+#define SET_WIN_PULSE_COUNT         5
+#define TIE_BREAK_BLINK_DELAY       750
+#define TIE_BREAK_WATCH_INTERVAL    50
+#define BATTERY_TEST_BLINK_DELAY    1000
+#define GAMES_TO_WIN_SET            6
+#define SET_WIN_DELAY               3000
+#define PLAYER_1_INITIALIZED        0
+#define PLAYER_2_INITIALIZED        1
+#define SET_HISTORY_COLUMN_1        1
+#define SET_HISTORY_COLUMN_2        2
+#define SET_HISTORY_COLUMN_3        3
+#define TOTAL_SETS                  3
+#define PLAYER_ONE_SET_INDEX        0
+#define PLAYER_TWO_SET_INDEX        1
+#define SETS_TO_WIN_MATCH           3
+#define SCORE_CASE_4                4
+#define SCORE_CASE_5                5
+#define UNDEFINED_SCORE             99
+#define BLUE_BAR_VERTICAL_OFFSET    121
+#define BLUE_BAR_HORIZONTAL_OFFSET  54
+#define MATRIX_DISABLED             0
 
 // #define INPUT 0 // not in windows.. ouch!!
 // #define OUTPUT 0
