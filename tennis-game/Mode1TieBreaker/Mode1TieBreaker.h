@@ -23,6 +23,7 @@ class Mode1TieBreaker {
                    GameState* gameState,
                    History* history );
   ~Mode1TieBreaker();
+  void setScoreBoards( ScoreBoard* scoreBoard );
   void tieBreaker();
   void setTieBreaker();
   void mode1TBButtonFunction();

@@ -21,6 +21,7 @@ class PointLeds {
   Player* _player2;
   PinInterface* _pinInterface;
   ScoreBoard* _scoreBoard;
+  bool _scoreBoardSet;
 };
 
 #endif

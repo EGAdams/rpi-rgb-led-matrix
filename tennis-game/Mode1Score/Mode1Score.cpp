@@ -23,7 +23,8 @@ void Mode1Score::setScoreBoard( ScoreBoard* scoreBoard ) {
     _pointLeds.setScoreBoard(          scoreBoard ); 
     _gameLeds.setScoreBoard(           scoreBoard ); 
     _mode1WinSequences.setScoreBoards( scoreBoard ); 
-    _setLeds.setScoreBoard(            scoreBoard ); }
+    _setLeds.setScoreBoard(            scoreBoard ); 
+    _mode1TieBreaker.setScoreBoards(   scoreBoard );}  // all day debug.  need to find a way to avoid this in the future.
 
 ScoreBoard* Mode1Score::getScoreBoard() { return _scoreBoard; }
 

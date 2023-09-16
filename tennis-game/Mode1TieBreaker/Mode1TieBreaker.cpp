@@ -19,6 +19,10 @@ Mode1TieBreaker::Mode1TieBreaker( Player* player1,
 
 Mode1TieBreaker::~Mode1TieBreaker() {}
 
+void Mode1TieBreaker::setScoreBoards( ScoreBoard* scoreBoard ) {
+    _pointLeds.setScoreBoard( scoreBoard );
+    _setLeds.setScoreBoard( scoreBoard ); }
+
 void Mode1TieBreaker::tieLEDsOn() {
     _gameState->setTieLEDsOn( 1 );
     _pinInterface->pinDigitalWrite( P1_TIEBREAKER, HIGH );

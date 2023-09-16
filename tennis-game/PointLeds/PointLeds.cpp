@@ -3,22 +3,29 @@
 PointLeds::PointLeds( Player* player1,
     Player* player2,
     PinInterface* pinInterface )
-    : _player1( player1 ), _player2( player2 ), _pinInterface( pinInterface ) {}
+    : _player1( player1 ), _player2( player2 ), _pinInterface( pinInterface ) {
+    _scoreBoardSet = false;
+    }
 
 PointLeds::PointLeds( Player* player1,
     Player* player2,
     ScoreBoard* scoreBoard )
-    : _player1( player1 ), _player2( player2 ), _scoreBoard(   scoreBoard   ) {}
+    : _player1( player1 ), _player2( player2 ), _scoreBoard(   scoreBoard   ) {
+    _scoreBoardSet = true;
+    }
 
 
 PointLeds::~PointLeds() {}
 
 void PointLeds::setScoreBoard( ScoreBoard* scoreBoard ) { 
     std::cout << "*** setting _scoreBoard in PointLeds object ... ***" << std::endl;
-    _scoreBoard = scoreBoard; }
+    _scoreBoard = scoreBoard; 
+    _scoreBoardSet = true; }
 
 void PointLeds::updatePoints() {
-    // std::cout << "calling _scoreBoard->update() from inside PointLeds... " << std::endl;
+    std::cout << "calling _scoreBoard->update() from inside PointLeds.  checking scoreboard bool.. " << std::endl;
+    if ( _scoreBoardSet == true ) { std::cout << "scoreboard bool is true" << std::endl; }
+    else { std::cout << "scoreboard bool is false" << std::endl; exit( 1 ); }
     _scoreBoard->update();
     // std::cout << "done calling _scoreBoard->update()... \n\n" << std::endl;
     return;
