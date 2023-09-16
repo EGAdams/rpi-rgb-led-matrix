@@ -128,7 +128,7 @@ void ScoreBoard::update() {
 }
 
 void ScoreBoard::_drawTieBreakerBar() {
-    _bluePipeDrawer->DrawNumber( "I", 1, TIE_BREAK_BAR_OFFSET + 25 ); // draw pipe
+    _bluePipeDrawer->DrawNumber( "I", 10, TIE_BREAK_BAR_OFFSET + 200 ); // draw pipe
 }
 
 void ScoreBoard::clearScreen() {
