@@ -39,6 +39,8 @@ void TieBreaker::tieLEDsOff() {
 
 void TieBreaker::celebrate() {
     std::cout << "*** celebrateWin() called. ***" << std::endl;
+    GameTimer::gameDelay( _gameState->getWinDelay() );
+    std::cout << "*** done celebrating. *** " << std::endl;
 }
 
 void TieBreaker::run( Player* currentPlayer ) { 
