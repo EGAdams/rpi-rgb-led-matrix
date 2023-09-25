@@ -154,7 +154,24 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
    
     score(     gameObject, gameState, 2 ); // now to trigger the tie break...
     score(     gameObject, gameState, 2 );
-    sleep( 4 ); }
+    score(     gameObject, gameState, 2 );
+    score(     gameObject, gameState, 2 );
+    score(     gameObject, gameState, 2 );
+    score(     gameObject, gameState, 2 );
+    score(     gameObject, gameState, 2 );
+    score(     gameObject, gameState, 2 );
+    score(     gameObject, gameState, 2 );
+    score(     gameObject, gameState, 2 );
+    score(     gameObject, gameState, 1 );
+    score(     gameObject, gameState, 1 );
+    score(     gameObject, gameState, 1 );
+    score(     gameObject, gameState, 1 );
+    score(     gameObject, gameState, 1 );
+    score(     gameObject, gameState, 1 );
+    score(     gameObject, gameState, 1 );
+    score(     gameObject, gameState, 1 );
+
+    sleep( 10 ); }
 
 void run_manual_game( GameObject* gameObject, GameState* gameState, int player ) {
     int loop_count = 0;

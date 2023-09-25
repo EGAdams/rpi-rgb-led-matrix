@@ -59,7 +59,7 @@ void GameObject::loopGame() {
         std::cout << "*** //////////// starting another loop.  current set is: " << _gameState->getCurrentSet() << " ////////////////// ***" << std::endl;
         int rotaryValue = 1; // int rotaryValue = _gameInputs->readRotary(); TODO: actually read rotary
         // std::cout << "rotaryValue: " << rotaryValue << ".  setting game mode to " << rotaryValue << "." << std::endl;
-        _gameModes->setGameMode( rotaryValue );  // mode1() called here <--- entry point !! --------------<<
+        /* ENTRY POINT! don't step over, step into !! */_gameModes->setGameMode( rotaryValue );  // mode1() called here <--- entry point !! --------------<<
         // std::cout << "delaying for " << GAME_LOOP_DELAY << " milliseconds..." << std::endl;
         GameTimer::gameDelay( GAME_LOOP_DELAY );
         // std::cout << "updating game state..." << std::endl;

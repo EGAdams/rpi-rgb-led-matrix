@@ -79,7 +79,8 @@ void GameModes::mode1() {
     if ( _gameState->getSetTieBreak() == 1 ) { 
         _tieBreaker.setTieBreaker();
     } else { 
-        _mode1Functions.mode1ButtonFunction(); _mode1Functions.pointFlash(); }}
+        _mode1Functions.mode1ButtonFunction(); // <--------- ENTRY POINT --------------<<
+        _mode1Functions.pointFlash(); }}
 
 void GameModes::mode2() {
     _gameState->setNow( GameTimer::gameMillis() );
@@ -285,7 +286,7 @@ void GameModes::setGameMode( int rotaryPosition ) {
         gameStart();
         _player1->setPoints( 5 );
         _pointLeds.updatePoints();
-        mode1();
+        mode1(); // <----------------- ENTRY POINT -------------------<<
         break;
     }
 }
