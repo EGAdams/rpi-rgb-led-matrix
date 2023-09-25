@@ -65,7 +65,8 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
     // std::cout << "inside updateScore().  updating points..." << std::endl;
     _pointLeds.updatePoints(); }
 
-void Mode1Score::mode1P1Score() { updateScore( _player1 );}
+void Mode1Score::mode1P1Score() { 
+    updateScore( _player1 );}
 void Mode1Score::mode1P2Score() { updateScore( _player2 );}
 
 

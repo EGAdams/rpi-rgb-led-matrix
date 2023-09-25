@@ -19,4 +19,5 @@ examples-api-use/c-example
 tennis-game/googletest
 examples-api-use/ledcat
 tennis-game/googletest
-tennis-game/googletest
+tennis-game/TennisConstants/TennisConstants.h
+tennis-game/tennis-game-manual
