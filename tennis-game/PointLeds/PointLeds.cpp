@@ -24,7 +24,7 @@ void PointLeds::setScoreBoard( ScoreBoard* scoreBoard ) {
 
 void PointLeds::updatePoints() {
     std::cout << "calling _scoreBoard->update() from inside PointLeds.  checking scoreboard bool.. " << std::endl;
-    if ( _scoreBoardSet == true ) { std::cout << "scoreboard bool is true" << std::endl; }
+    if ( _scoreBoardSet == true ) { /* std::cout << "scoreboard bool is true" << std::endl; */ }
     else { std::cout << "scoreboard bool is false" << std::endl; exit( 1 ); }
     _scoreBoard->update();
     // std::cout << "done calling _scoreBoard->update()... \n\n" << std::endl;

@@ -10,10 +10,7 @@ Reset::Reset( Player* player1,
     _gameState( gameState ) {
     _logger = new Logger( "Reset" );
 }
-Reset::~Reset() {
-    std::cout << "*** Reset destructor called. ***" << std::endl;
-    delete _logger;
-}
+Reset::~Reset() { delete _logger; }
 
 void Reset::resetScoreboard() {
     _logger->logUpdate( "resetting scoreboard...", __FUNCTION__ );

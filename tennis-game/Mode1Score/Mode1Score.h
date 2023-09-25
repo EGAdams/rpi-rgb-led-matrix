@@ -5,7 +5,7 @@
 #include "../GameLeds/GameLeds.h"
 #include "../GameState/GameState.h"
 #include "../GameTimer/GameTimer.h"
-#include "../Mode1TieBreaker/Mode1TieBreaker.h"
+#include "../TieBreaker/TieBreaker.h"
 #include "../WinSequences/WinSequences.h"
 #include "../PointLeds/PointLeds.h"
 #include "../PinState/PinState.h"
@@ -43,7 +43,7 @@ class Mode1Score {
     Player* _player2;
     GameState* _gameState;
     History* _history;
-    Mode1TieBreaker _mode1TieBreaker;
+    TieBreaker _tieBreaker;
     PointLeds _pointLeds;
     GameLeds _gameLeds;
     SetLeds _setLeds;

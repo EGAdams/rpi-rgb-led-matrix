@@ -95,8 +95,8 @@ bool ScoreBoard::hasCanvas() {
     } else { /* std::cout << "*** WARNING: canvas is NULL ***" << std::endl; */ return false; }}
 
 void ScoreBoard::update() {
-    std::cout << "inside ScoreBoard::update() ... " << std::endl;
-    std::cout << "checking for _player1 or _player2 null values..." << std::endl;
+    // std::cout << "inside ScoreBoard::update() ... " << std::endl;
+    // std::cout << "checking for _player1 or _player2 null values..." << std::endl;
     if ( _player1 == nullptr ) {
         std::cout << "*** ERROR: _player1 == NULL ***" << std::endl; 
         exit( 1 ); }
@@ -107,7 +107,8 @@ void ScoreBoard::update() {
     clearScreen();
     std::cout << "inside ScoreBoard::update()  player1 points: " << _player1->getPoints() << std::endl;
     std::cout << "inside ScoreBoard::update()  player2 points: " << _player2->getPoints() << std::endl;
-    _drawPlayerScore( _player1 ); _drawPlayerScore( _player2 );
+    drawPlayerScore( _player1 ); 
+    drawPlayerScore( _player2 );
     // _setDrawer->drawSets();
 
     if ( MATRIX_DISABLED == 1 ) {
@@ -123,7 +124,10 @@ void ScoreBoard::update() {
             _setDrawer->drawBlinkSets( playerToBlink ); // checks current action ignoring playerToBlink
         } else { _setDrawer->drawSets(); }
 
-        _drawTieBreakerBar(); // draw tie breaker bar if needed
+        if ( _gameState->getTieBreak() == true ) {
+            std::cout << "tie break is true, calling _drawTieBreakerBar()..." << std::endl;
+            _drawTieBreakerBar();
+        } else { std::cout << "tie break is false, not calling _drawTieBreakerBar()..." << std::endl; }
     }
 }
 
@@ -133,13 +137,13 @@ void ScoreBoard::_drawTieBreakerBar() {
 
 void ScoreBoard::clearScreen() {
     if ( MATRIX_DISABLED == 1 ) {
-        std::cout << "clearScreen called, no matrix." << std::endl;
+        // std::cout << "clearScreen called, no matrix." << std::endl;
     } else {
         if ( !hasCanvas()) { std::cout << "*** ERROR: canvas == NULL.  exiting... ***" << std::endl; exit( 1 ); }
         std::cout << "clearScreen called, hasCanvas() is good.  clearing matrix...." << std::endl;
         Color flood_color( 0, 0, 0 ); _canvas->Fill( flood_color.r, flood_color.g, flood_color.b ); }}
 
-void ScoreBoard::_drawPlayerScore( Player* player ) {
+std::string ScoreBoard::drawPlayerScore( Player* player ) {
     std::string serve_bar = _gameState->getServe() == player->number() ? "I" : " "; // or p1 serve and swap
     std::string score = _translate( player->getPoints());
     if( MATRIX_DISABLED == 1 ) {
@@ -157,8 +161,18 @@ void ScoreBoard::_drawPlayerScore( Player* player ) {
             _playerOneScoreDrawer->DrawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset );
         } else {
             _playerTwoScoreDrawer->DrawNumber( score.substr( 0, 1 ), first_offset  + 16, baseline + vertical_offset );
-            _playerTwoScoreDrawer->DrawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset ); }}}
-
+                        _playerTwoScoreDrawer->DrawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset ); 
+        } // return player 1 score, else type player 2 score
+    }
+    // created a concatenated string with "PLAYER 1: ////// " + serve_bar
+    std::string returnString = "*** WARNING: return string is not set. this is not normal ***";
+    std::string player1ScoreString = "PLAYER 1: ////// " + serve_bar + " " + score + " //////";
+    std::string player2ScoreString = "PLAYER 2: ////// " + serve_bar + " " + score + " //////";
+    player->number() == PLAYER_1_INITIALIZED ? 
+    returnString = player1ScoreString : returnString = player2ScoreString;
+    return returnString;
+}
+ 
 int ScoreBoard::_characterOffset( std::string character ) {
     int char_offset = 0;
     if ( character == "A" ) {
@@ -174,19 +188,38 @@ int ScoreBoard::_characterOffset( std::string character ) {
     default: return 0; }}
 
 std::string ScoreBoard::_translate( int raw_score ) {
-    switch ( raw_score ) {
-    case 0:               return "00";
-    case 1:               return "15";
-    case 2:               return "30";
-    case 3:               return "40";
-    
-    case SCORE_CASE_4:    
-        if ( _gameState->getPointFlash()) {
-            return "Ad";
-        } else {
-            return "40";
-        }
-    
-    case SCORE_CASE_5:    return "Ad";
-    case UNDEFINED_SCORE: return "99";
-    default:              return "00"; }}
+    if( _gameState->getTieBreak() == false ) {
+        switch ( raw_score ) {
+        case 0:               return "00";
+        case 1:               return "15";
+        case 2:               return "30";
+        case 3:               return "40";
+        
+        case SCORE_CASE_4:    
+            if ( _gameState->getPointFlash()) {
+                return "Ad";
+            } else {
+                return "40";
+            }
+        
+        case SCORE_CASE_5:    return "Ad";
+        case UNDEFINED_SCORE: return "99";
+        default:              return "00"; }
+    } else {
+        switch ( raw_score ) {
+            case 0:               return "00";
+            case 1:               return "01";
+            case 2:               return "02";
+            case 3:               return "03";
+            case 4:               return "04";
+            case 5:               return "05";
+            case 6:               return "06";
+            case 7:               return "07";
+            case 8:               return "08";
+            case 9:               return "09";
+            case 10:              return "10";
+            case 11:              return "11";
+            case 12:              return "12";
+            case 13:              return "13";
+            case 14:              return "14";
+            case 15:              return "15"; }}}

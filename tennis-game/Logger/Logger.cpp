@@ -12,7 +12,7 @@ Logger::Logger( std::string constructor_name ) : _constructor_name( constructor_
 }
 
 Logger::~Logger() {
-    std::cout << "Destructing Logger..." << std::endl;
+    // std::cout << "Destructing Logger..." << std::endl;
     _log_file.close();
 }
 

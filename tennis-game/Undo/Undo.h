@@ -23,7 +23,7 @@ class Undo {
         GameState*      gameState );
 
     ~Undo();
-    void setMode1Undo( History* history );
+    void snapshot( History* history );
     void memory();
     void mode1Undo( History* history );
     void setScoreBoard( ScoreBoard* scoreBoard );

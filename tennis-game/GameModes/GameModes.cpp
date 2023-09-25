@@ -1,7 +1,7 @@
 #include "GameModes.h"
 
 GameModes::~GameModes() {
-    std::cout << "*** GameModes destructor called. ***" << std::endl;
+    // std::cout << "*** GameModes destructor called. ***" << std::endl;
     delete _logger; }
     
 GameModes::GameModes( 
@@ -76,9 +76,10 @@ void GameModes::mode1() {
     // std::cout << "calling serveLeds serveSwitch()... " << std::endl;
     _serveLeds.serveSwitch(); // if serveSwitch >= 2, serveSwitch = 0; and toggle serve variable
     // std::cout << "after serveLeds serveSwitch().  serveSwitch: " << _gameState->getServeSwitch() << std::endl;
-    if ( _gameState->getTieBreak()    == 1 ) { _mode1TieBreaker.tieBreaker(); }   // TieBreaker();
-    if ( _gameState->getSetTieBreak() == 1 ) { _mode1TieBreaker.setTieBreaker();  // SetTieBreaker();
-    } else { _mode1Functions.mode1ButtonFunction(); _mode1Functions.pointFlash(); }}
+    if ( _gameState->getSetTieBreak() == 1 ) { 
+        _mode1TieBreaker.setTieBreaker();
+    } else { 
+        _mode1Functions.mode1ButtonFunction(); _mode1Functions.pointFlash(); }}
 
 void GameModes::mode2() {
     _gameState->setNow( GameTimer::gameMillis() );

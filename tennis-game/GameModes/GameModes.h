@@ -8,7 +8,7 @@
 // #include "IniReader.h"
 #include "../Logger/Logger.h"
 #include "../Mode1Functions/Mode1Functions.h"
-#include "../Mode1TieBreaker/Mode1TieBreaker.h"
+#include "../TieBreaker/TieBreaker.h"
 #include "../Mode2Functions/Mode2Functions.h"
 #include "../PointLeds/PointLeds.h"
 #include "../PinInterface/PinInterface.h"
@@ -54,7 +54,7 @@ class GameModes {
   Inputs _inputs;
   Undo _undo;
   ServeLeds _serveLeds;
-  Mode1TieBreaker _mode1TieBreaker;
+  TieBreaker _mode1TieBreaker;
   Mode1Functions _mode1Functions;
   Mode2Functions _mode2Functions;
   //   IniReader _iniReader;
