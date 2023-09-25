@@ -1,22 +1,23 @@
 #ifndef Player_h
 #define Player_h
 
-#include "Player.h"
-#include "../GameState/IGameState.h"
+#include "../GameState/GameState.h"
 #include "../TennisConstants/TennisConstants.h"
+#include <map>
 
+class GameState;
 class Player {
 public:
-    Player( IGameState* gameState, int player_number );
+    Player( GameState* gameState, int player_number );
     ~Player();
-
+    
     void setOpponent(    Player* opponent                 );
     Player* getOpponent();
 
-    void setSets( IGameState * gameState, int sets );
+    void setSets( GameState* gameState, int sets );
     int getSets();
 
-    void setPoints(      int points                       );
+    void setPoints( int points                       );
     int getPoints();
 
     void setGames( int game_value  ); // it knows the current set
@@ -45,7 +46,7 @@ public:
     int number(); // only set during construction
 
 private:
-    IGameState* _gameState;
+    GameState* _gameState;
     int _playerNumber;
     Player* _opponent;
     int _points;

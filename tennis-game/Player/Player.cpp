@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player( IGameState* gamestate, int playerNumber ) : _gameState( gamestate ), _playerNumber( playerNumber ) {
+Player::Player( GameState* gamestate, int playerNumber ) : _gameState( gamestate ), _playerNumber( playerNumber ) {
         _points = 0; _games = 0; _sets = 0; _matches = 0; _mode = 0; _setting = 0; 
         _game_history[ 1 ] = 0; _game_history[ 2 ] = 0; _game_history[ 3 ] = 0;     // initialize game history
         _set_history[  1 ] = 0;  _set_history[ 2 ] = 0; _set_history[  3 ] = 0; }   // initialize set history
@@ -10,7 +10,7 @@ void Player::setServeSwitch( int serve_switch ) { _serve_switch = serve_switch; 
 int Player::getServeSwitch() { return _serve_switch; }
 void Player::setOpponent( Player* opponent ) { _opponent = opponent; }                                  
 Player* Player::getOpponent() { return _opponent; }
-void Player::setSets( IGameState* gameState, int sets ) {                         // sets this player's sets
+void Player::setSets( GameState* gameState, int sets ) {                         // sets this player's sets
     this->setSetHistory(      gameState->getCurrentSet(), _games               ); // and set history for both
     _opponent->setSetHistory( gameState->getCurrentSet(), _opponent->getGames()); // players
     if( _playerNumber == PLAYER_1_INITIALIZED ) { 
@@ -37,7 +37,9 @@ void Player::setMatches(int matches) { _matches = matches; } int Player::getMatc
 void Player::setMode(int mode) { _mode = mode; }             int Player::getMode() {    return _mode;    }
 void Player::setSetting(int setting) { _setting = setting; } int Player::getSetting() { return _setting; }
 int Player::incrementSetting() { return ++_setting; }
-int Player::number() { return _playerNumber; }
+int Player::number() { 
+    std::cout << "Player::number() returning " << _playerNumber << std::endl;
+    return _playerNumber; }
 
 void Player::setSetHistory( int set, int games ) {
     std::cout << "setting set history for player " << number() << " set " << set << " to " << games << std::endl;
