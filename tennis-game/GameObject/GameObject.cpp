@@ -44,6 +44,9 @@ GameObject::GameObject( GameState* gameState ) : _gameState( gameState ) {
     std::cout << "GameObject constructed." << std::endl;
 }
 
+Player* GameObject::getPlayer1() { return _player1; }
+Player* GameObject::getPlayer2() { return _player2; }
+
 GameObject::~GameObject() {};
 void GameObject::_signalHandler( int signal ) { GameObject::gSignalStatus = signal; }
 volatile int GameObject::gSignalStatus = 0;

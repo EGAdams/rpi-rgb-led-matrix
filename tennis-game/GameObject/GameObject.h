@@ -42,6 +42,8 @@ class GameObject {
   static volatile int gSignalStatus;
   ScoreBoard* getScoreBoard();
   void setScoreBoard( ScoreBoard* scoreBoard );
+  Player* getPlayer1();
+  Player* getPlayer2();
   GameState* getGameState();
   Undo* createUndo();
   History* getHistory();
