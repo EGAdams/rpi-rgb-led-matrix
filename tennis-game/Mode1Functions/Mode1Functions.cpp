@@ -27,7 +27,7 @@ void Mode1Functions::mode1ButtonFunction() {
         break;
 
     case 1: // Player 1 Score
-        _undo.setMode1Undo( _history );
+        _undo.snapshot( _history );
         if ( _gameState->getPointFlash() == 1 ) {
             _gameState->setPointFlash( 0 );
             _player1->setPoints( _gameState->getP1PointsMem());
@@ -53,7 +53,7 @@ void Mode1Functions::mode1ButtonFunction() {
         break;
 
     case 2: // Player 2 Score
-        _undo.setMode1Undo( _history );
+        _undo.snapshot( _history );
         if ( _gameState->getPointFlash() == 1 ) {
             _gameState->setPointFlash( 0 );
             _player1->setPoints( _gameState->getP1PointsMem());
@@ -79,7 +79,7 @@ void Mode1Functions::mode1ButtonFunction() {
     _gameState->setPlayerButton( 0 ); } // reset player button here!
 
 void Mode1Functions::mode1ServeFunction() {
-    _undo.setMode1Undo( _history );
+    _undo.snapshot( _history );
     _serveLeds.serveSwitch(); }
 
 void Mode1Functions::pointFlash() {

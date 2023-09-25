@@ -54,7 +54,7 @@ class GameModes {
   Inputs _inputs;
   Undo _undo;
   ServeLeds _serveLeds;
-  TieBreaker _mode1TieBreaker;
+  TieBreaker _tieBreaker;
   Mode1Functions _mode1Functions;
   Mode2Functions _mode2Functions;
   //   IniReader _iniReader;

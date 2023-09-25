@@ -9,7 +9,7 @@ TARGET = run_tests
 
 # Define our source and object files
 SOURCES =   ../Mode1Score/Mode1Score.cpp \
-            ../Mode1TieBreaker/Mode1TieBreaker.cpp \
+            ../TieBreaker/TieBreaker.cpp \
             ../GameLeds/GameLeds.cpp \
             ../GameTimer/GameTimer.cpp \
             ../GameState/GameState.cpp \

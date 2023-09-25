@@ -3,6 +3,8 @@ import os
 from time import sleep
 # from constants import DEFAULT_DIR, DEFAULT_MODEL, DEFAULT_MAX_TOKENS, EXTENSION_TO_SKIP
 import argparse
+
+
 def read_file(filename):
     with open(filename, "r") as file:
         return file.read()
@@ -52,7 +54,7 @@ def main(args):
     CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter
     # CXXFLAGS=$(CFLAGS)
     CXXFLAGS=$(CFLAGS) -I$(GTEST_INCDIR)
-    # OBJECTS=SetHistoryTextTest.o SetHistoryText.o SetDrawer.o GameLedTranslator.o SubjectManager.o WebLiquidCrystal.o WatchTimer.o Inputs.o Mode1TieBreaker.o Mode1Score.o Mode1Functions.o ServeLeds.o Undo.o BatteryTest.o Reset.o SetLeds.o TieLeds.o Mode1WinSequences.o Mode2Functions.o MatchWinSequence.o TennisConstants.o GameLeds.o GameModes.o GameObject.o PinState.o PinInterface.o TranslateConstant.o PointLeds.o Arduino.o CanvasCreator.o FontLoader.o NumberDrawer.o TextDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game.o
+    # OBJECTS=SetHistoryTextTest.o SetHistoryText.o SetDrawer.o GameLedTranslator.o SubjectManager.o WebLiquidCrystal.o WatchTimer.o Inputs.o TieBreaker.o Mode1Score.o Mode1Functions.o ServeLeds.o Undo.o BatteryTest.o Reset.o SetLeds.o TieLeds.o Mode1WinSequences.o Mode2Functions.o MatchWinSequence.o TennisConstants.o GameLeds.o GameModes.o GameObject.o PinState.o PinInterface.o TranslateConstant.o PointLeds.o Arduino.o CanvasCreator.o FontLoader.o NumberDrawer.o TextDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game.o
     BINARIES=tennis-game
 
     # Where our library resides. It is assumed here that $(RGB_LIB_DISTRIBUTION) has a
@@ -69,7 +71,7 @@ def main(args):
     MAGICK_CXXFLAGS?=$(shell GraphicsMagick++-config --cppflags --cxxflags)
     MAGICK_LDFLAGS?=$(shell GraphicsMagick++-config --ldflags --libs)
 
-    MAIN_OBJECTS=GameWinSequence.o SetWin.o SetHistoryText.o SetDrawer.o GameLedTranslator.o SubjectManager.o WebLiquidCrystal.o WatchTimer.o Inputs.o Mode1TieBreaker.o Mode1Score.o Mode1Functions.o ServeLeds.o Undo.o BatteryTest.o Reset.o SetLeds.o TieLeds.o Mode1WinSequences.o Mode2Functions.o MatchWinSequence.o TennisConstants.o GameLeds.o GameModes.o GameObject.o PinState.o PinInterface.o TranslateConstant.o PointLeds.o Arduino.o CanvasCreator.o FontLoader.o NumberDrawer.o TextDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game.o
+    MAIN_OBJECTS=GameWinSequence.o SetWin.o SetHistoryText.o SetDrawer.o GameLedTranslator.o SubjectManager.o WebLiquidCrystal.o WatchTimer.o Inputs.o TieBreaker.o Mode1Score.o Mode1Functions.o ServeLeds.o Undo.o BatteryTest.o Reset.o SetLeds.o TieLeds.o Mode1WinSequences.o Mode2Functions.o MatchWinSequence.o TennisConstants.o GameLeds.o GameModes.o GameObject.o PinState.o PinInterface.o TranslateConstant.o PointLeds.o Arduino.o CanvasCreator.o FontLoader.o NumberDrawer.o TextDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game.o
     TEST_OBJECTS=GameState.o Player.o GameState.o GameTimer.o ScoreBoard.o SetDrawer.o NumberDrawer.o CanvasCreator.o FontLoader.o GameTimer.o
 
     all : $(BINARIES)
@@ -185,7 +187,7 @@ def main(args):
     Mode1Score.o : Mode1Score/Mode1Score.cpp
         $(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
-    Mode1TieBreaker.o : Mode1TieBreaker/Mode1TieBreaker.cpp
+    TieBreaker.o : TieBreaker/TieBreaker.cpp
         $(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
     Inputs.o : Inputs/Inputs.cpp
@@ -210,12 +212,13 @@ def main(args):
     .PHONY: FORCE
     """
     # prompt=args.prompt
-    prompt= """ make error ``` I need to run the Mode1ScoreTest in this directory.  Please modify the Makefile provided to account for this and let me know how to run the test. ``` """
+    prompt = """ make error ``` I need to run the Mode1ScoreTest in this directory.  Please modify the Makefile provided to account for this and let me know how to run the test. ``` """
 
-    directory= args.directory
-    model=args.model
+    directory = args.directory
+    model = args.model
     # code_contents = walk_directory(directory)
-    code_contents = walk_directory( "/home/adamsl/rpi-rgb-led-matrix/tennis-game/GameState" )
+    code_contents = walk_directory(
+        "/home/adamsl/rpi-rgb-led-matrix/tennis-game/GameState")
     # code_contents = walk_directory( "GameState" )
 
     # Now, `code_contents` is a dictionary that contains the content of all your non-image files
@@ -289,7 +292,7 @@ if __name__ == "__main__":
     # parser.add_argument(
     #     "prompt",
     #     help="The prompt to use for the AI. This should be the error message or issue you are facing.",
-        
+
     # )
     parser.add_argument(
         "--directory",
