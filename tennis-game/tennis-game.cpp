@@ -160,7 +160,7 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 2 );
     score( gameObject, gameState, 2 );
 
-    GameTimer::gameDelay( 2000 );
+    GameTimer::gameDelay( 4000 );
 
     score(     gameObject, gameState, 2 );    // now to trigger the tie break...
     score(     gameObject, gameState, 2 );

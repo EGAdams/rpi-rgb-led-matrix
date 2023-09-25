@@ -53,6 +53,7 @@ void TieBreaker::run( Player* currentPlayer ) {
         currentPlayer->setGames( currentPlayer->getGames() + 1 );
         celebrate();    // this is a win no matter what.
         _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 ); // increment set
+        GameTimer::gameDelay( 3000 );
         endTieBreak(); }
 
     Player* opponent = currentPlayer->getOpponent();
@@ -62,6 +63,7 @@ void TieBreaker::run( Player* currentPlayer ) {
         currentPlayer->setGames( currentPlayer->getGames() + 1 );
         celebrate();
         _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 ); // increment set
+        GameTimer::gameDelay( 3000 );
         endTieBreak(); }
 }
 
@@ -163,7 +165,8 @@ void TieBreaker::endTieBreak() {
     _pointLeds.updatePoints();
     _gameLeds.updateGames();
     _gameState->setTieBreak( 0 );
-    _gameState->setSetTieBreak( 0 ); }
+    _gameState->setSetTieBreak( 0 );
+    _scoreBoard->update(); }
 
 void TieBreaker::mode1TBP1Games() {
     _gameLeds.updateGames();  // UpdateGames();
