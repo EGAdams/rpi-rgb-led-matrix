@@ -50,7 +50,8 @@ void TieBreaker::run( Player* currentPlayer ) {
 
     if ( currentPlayer->getPoints() == 15 ) {
         _undo.snapshot( _history );                                   
-        currentPlayer->setGames( currentPlayer->getGames() + 1 );
+        currentPlayer->setGames( currentPlayer->getGames() + 1 );     // increment games
+        _scoreBoard->update();
         celebrate();    // this is a win no matter what.
         _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 ); // increment set
         GameTimer::gameDelay( 3000 );
@@ -60,7 +61,8 @@ void TieBreaker::run( Player* currentPlayer ) {
     if ( currentPlayer->getPoints() >= 10 && 
         ( currentPlayer->getPoints() - opponent->getPoints() >= 2)) {
         _undo.snapshot( _history );                                   
-        currentPlayer->setGames( currentPlayer->getGames() + 1 );
+        currentPlayer->setGames( currentPlayer->getGames() + 1 );     // increment games
+        _scoreBoard->update();
         celebrate();
         _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 ); // increment set
         GameTimer::gameDelay( 3000 );
