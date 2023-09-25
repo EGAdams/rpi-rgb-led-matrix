@@ -141,6 +141,8 @@ void Mode1Score::mode1P2Games() {
             _gameState->setTieBreak( 1 );
             std::cout << "*** calling tieBreakEnable() from inside Mode1Score::mode1P2Games()... ***" << std::endl;
             _tieBreaker.tieBreakEnable();
+            _scoreBoard->update();
+            return; // we no longer have business in this function.  we're in tie break now.
         }
         if ( _gameState->getTieBreak() == 0 ) {
             if (( _player2->getGames() - _player1->getGames()) > 1 ) {

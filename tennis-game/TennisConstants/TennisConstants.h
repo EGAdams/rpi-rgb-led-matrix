@@ -43,7 +43,7 @@
 #define UNDEFINED_SCORE             99
 #define BLUE_BAR_VERTICAL_OFFSET    121
 #define BLUE_BAR_HORIZONTAL_OFFSET  54
-#define MATRIX_DISABLED             1
+#define MATRIX_DISABLED             0
 
 // #define INPUT 0 // not in windows.. ouch!!
 // #define OUTPUT 0
