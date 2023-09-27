@@ -51,7 +51,6 @@ void TieBreaker::run( Player* currentPlayer ) {
     _undo.memory(); 
     _scoreBoard->update();
     _gameState->setServeSwitch( 1 ); // not sure about this one...
-
     if ( currentPlayer->getPoints() == 15 ) {
         _undo.snapshot( _history );                                   
         currentPlayer->setGames( currentPlayer->getGames() + 1 );     // increment games
@@ -177,11 +176,11 @@ void TieBreaker::endTieBreak() {
     _gameLeds.updateGames();
     _gameState->setTieBreak( 0 );
     _gameState->setSetTieBreak( 0 );
-    _scoreBoard->update(); 
-    _gameState->setServe( 1 ); } // TODO: set to 1 or 2 depending on who won the tie break
-                                 // copilot says... but I say, just check this because I am
-                                 // not sure if we are always going to start player 1 serve.
-
+    _gameState->setServe( 1 ); // TODO: set to 1 or 2 depending on who won the tie break
+                               // copilot says... but I say, just check this because I am
+                               // not sure if we are always going to start player 1 serve.
+    _scoreBoard->update(); }
+    
 void TieBreaker::mode1TBP1Games() {
     _gameLeds.updateGames();  // UpdateGames();
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
