@@ -17,7 +17,7 @@ public:
     void setSets( GameState* gameState, int sets );
     int getSets();
 
-    void setPoints( int points                       );
+    void setPoints( int points  );
     int getPoints();
 
     void setGames( int game_value  ); // it knows the current set
@@ -26,13 +26,13 @@ public:
     void setServeSwitch( int serve_switch                 );
     int getServeSwitch();
 
-    void setMatches(     int matches                      );
+    void setMatches(     int matches );
     int getMatches();
 
-    void setMode(        int mode                         );
+    void setMode(        int mode    );
     int getMode();
 
-    void setSetting(     int setting                      );
+    void setSetting(     int setting );
     int getSetting();
 
     void setSetHistory(  int set, int score               );

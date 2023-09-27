@@ -222,4 +222,7 @@ std::string ScoreBoard::_translate( int raw_score ) {
             case 12:              return "12";
             case 13:              return "13";
             case 14:              return "14";
-            case 15:              return "15"; }}}
+            case 15:              return "15"; 
+        }
+    }
+    return "*** ERROR: can not translate. ***"; }

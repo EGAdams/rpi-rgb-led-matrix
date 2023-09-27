@@ -38,7 +38,7 @@ void Player::setMode(int mode) { _mode = mode; }             int Player::getMode
 void Player::setSetting(int setting) { _setting = setting; } int Player::getSetting() { return _setting; }
 int Player::incrementSetting() { return ++_setting; }
 int Player::number() { 
-    std::cout << "Player::number() returning " << _playerNumber << std::endl;
+    // std::cout << "Player::number() returning " << _playerNumber << std::endl;
     return _playerNumber; }
 
 void Player::setSetHistory( int set, int games ) {

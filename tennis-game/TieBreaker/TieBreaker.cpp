@@ -43,6 +43,10 @@ void TieBreaker::celebrate() {
     std::cout << "*** done celebrating. *** " << std::endl;
 }
 
+void TieBreaker::incrementSet() {
+    _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 ); // increment set
+}
+
 void TieBreaker::run( Player* currentPlayer ) { 
     _undo.memory(); 
     _scoreBoard->update();
@@ -53,9 +57,9 @@ void TieBreaker::run( Player* currentPlayer ) {
         currentPlayer->setGames( currentPlayer->getGames() + 1 );     // increment games
         _scoreBoard->update();
         celebrate();    // this is a win no matter what.
-        _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 ); // increment set
         GameTimer::gameDelay( 3000 );
-        endTieBreak(); }
+        endTieBreak(); 
+        incrementSet(); }
 
     Player* opponent = currentPlayer->getOpponent();
     if ( currentPlayer->getPoints() >= 10 && 
@@ -63,10 +67,15 @@ void TieBreaker::run( Player* currentPlayer ) {
         _undo.snapshot( _history );                                   
         currentPlayer->setGames( currentPlayer->getGames() + 1 );     // increment games
         _scoreBoard->update();
-        celebrate();
-        _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 ); // increment set
-        GameTimer::gameDelay( 3000 );
-        endTieBreak(); }
+        SetWin setWin = SetWin( &_undo, _gameState, &_setLeds );        
+        setWin.execute( currentPlayer, _scoreBoard );
+        std::cout << "*** /// calling p1SetWinSequence() point gap is 2 /// ***" << std::endl;
+        _gameState->setPlayer1SetHistory( _player1->getSetHistory());
+        _gameState->setPlayer2SetHistory( _player2->getSetHistory());
+        GameTimer::gameDelay( SET_WIN_DELAY );
+        incrementSet(); 
+        endTieBreak(); 
+    }
 }
 
 void TieBreaker::mode1SetTBButtonFunction() {
