@@ -23,7 +23,7 @@ void ServeLeds::updateServeLED() {
   }
 }
 
-void ServeLeds::serveSwitch() {
+void ServeLeds::serveSwitch() {   // TODO: name this method toggleServe() instead!
 //   std::cout << "inside serveSwitch()..." << std::endl;
   if (_gameState->getServeSwitch() /* serveSwitch */ >= 2) {
     if (_gameState->getServe() /* serve */ == 0) {
