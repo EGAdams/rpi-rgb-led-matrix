@@ -137,6 +137,19 @@ void test_03( GameObject* gameObject, GameState* gameState, int* loop_count ) {
 
 void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen();
+    // playerWin( gameObject, gameState, 2 );
+    // playerWin( gameObject, gameState, 2 );
+    // playerWin( gameObject, gameState, 2 );
+    // playerWin( gameObject, gameState, 2 );
+    // playerWin( gameObject, gameState, 2 );
+    // playerWin( gameObject, gameState, 2 );
+    // score(     gameObject, gameState, 2 );
+    // playerWin( gameObject, gameState, 1 );
+    // playerWin( gameObject, gameState, 1 );
+    // playerWin( gameObject, gameState, 1 );
+    // playerWin( gameObject, gameState, 1 );
+    // playerWin( gameObject, gameState, 1 );
+    // playerWin( gameObject, gameState, 1 );
     gameObject->getPlayer1()->setPoints( 0 );
     gameState->setPlayer1Points(         0 );
     gameObject->getPlayer2()->setPoints( 2 );
@@ -171,6 +184,7 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score(     gameObject, gameState, 2 );
     score(     gameObject, gameState, 2 );
     score(     gameObject, gameState, 2 );
+
     sleep( 6 ); }
 
 void run_manual_game( GameObject* gameObject, GameState* gameState, int player ) {

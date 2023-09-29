@@ -86,7 +86,7 @@ void GameModes::mode2() {
     _gameState->setNow( GameTimer::gameMillis() );
     if ( _gameState->getTieBreakOnly() == 0 ) {
         _gameState->setTieBreak( 1 );  
-        _tieBreaker.tieBreakEnable();
+        _tieBreaker.initializeTieBreakMode();
         _gameState->setTieBreakOnly( 1 );
     }
     mode1(); }
@@ -95,7 +95,7 @@ void GameModes::mode4() {
     _gameState->setNow( GameTimer::gameMillis() );  
     if ( _gameState->getTieBreakOnly() == 0 ) {
         _gameState->setTieBreak( 1 );  
-        _tieBreaker.tieBreakEnable();
+        _tieBreaker.initializeTieBreakMode();
         _gameState->setTieBreakOnly( 1 );  
     }
     mode1(); }
@@ -272,7 +272,7 @@ void GameModes::setGameMode( int rotaryPosition ) {
         _gameState->setNow( GameTimer::gameMillis() );  
         if ( _gameState->getTieBreakOnly() == 0 ) {
             _gameState->setTieBreak( 1 );  
-            _tieBreaker.tieBreakEnable();
+            _tieBreaker.initializeTieBreakMode();
             _gameState->setTieBreakOnly( 1 );  
         }
         mode1();

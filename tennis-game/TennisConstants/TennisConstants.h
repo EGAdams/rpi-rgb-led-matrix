@@ -9,6 +9,8 @@
 #define BOTH_PLAYER_BLINK           "blink both players"
 #define PLAYER_1_BLINK              "player1 blink"
 #define PLAYER_2_BLINK              "player2 blink"
+#define PLAYER_ONE_BUTTON           1
+#define PLAYER_TWO_BUTTON           2
 #define ACTIVE_BLINK                "blink"
 #define NORMAL_GAME_STATE           "normal game state"
 #define TESTING                     1
@@ -43,7 +45,7 @@
 #define UNDEFINED_SCORE             99
 #define BLUE_BAR_VERTICAL_OFFSET    121
 #define BLUE_BAR_HORIZONTAL_OFFSET  54
-#define MATRIX_DISABLED             0
+#define MATRIX_DISABLED             1
 
 // #define INPUT 0 // not in windows.. ouch!!
 // #define OUTPUT 0

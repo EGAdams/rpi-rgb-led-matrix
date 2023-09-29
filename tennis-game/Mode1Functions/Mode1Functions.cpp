@@ -44,7 +44,7 @@ void Mode1Functions::mode1ButtonFunction() {
         } else {
             _gameState->setServe( PLAYER_ONE_SERVE ); }
         _undo.memory();
-        _mode1Score.mode1P1Score();
+        _mode1Score.playerOneScore();
         break;
 
     case 3: // UNDO button pressed
@@ -69,7 +69,7 @@ void Mode1Functions::mode1ButtonFunction() {
         } else {
             _gameState->setServe( PLAYER_TWO_SERVE ); }
         _undo.memory();
-        _mode1Score.mode1P2Score();
+        _mode1Score.playerTwoScore();
         break;
 
     case 4:

@@ -25,17 +25,18 @@ class Mode1Score {
                 GameState* gameState,
                 History* history );
     ~Mode1Score();
-    void mode1P1Score();
+    void playerOneScore();
     void mode1P1Games();
     void mode1TBP1Games();
     void mode1SetTBP1Games();
-    void mode1P2Score();
+    void playerTwoScore();
     void mode1P2Games();
     void mode1TBP2Games();
     void mode1SetTBP2Games();
     void updateScore(  Player* currentPlayer  );
     void setScoreBoard( ScoreBoard* scoreBoard );
     ScoreBoard* getScoreBoard();
+    TieBreaker* getTieBreaker();
 
  private:
     void _resetGame();

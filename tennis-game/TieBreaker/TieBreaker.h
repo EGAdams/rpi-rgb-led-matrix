@@ -27,7 +27,7 @@ class TieBreaker {
   void setTieBreaker();
   void buttonAction();
   void mode1SetTBButtonFunction();
-  void tieBreakEnable();
+  void initializeTieBreakMode();
   void setTieBreakEnable();
   void tieLEDsOn();
   void tieLEDsOff();
@@ -38,8 +38,12 @@ class TieBreaker {
   void mode1SetTBP1Games();
   void celebrate();
   void incrementSet();
+  void setIteration( int iteration );
+  int  getIteration();
+  void incrementIteration();
 
  private:
+  int  _getServe();    // determine serve based on iteration
   Player* _player1;
   Player* _player2;
   PinInterface* _pinInterface;
@@ -52,6 +56,7 @@ class TieBreaker {
   Mode1WinSequences _mode1WinSequences;
   Undo _undo;
   ScoreBoard* _scoreBoard;
+  int _iteration;
 };
 
 #endif
