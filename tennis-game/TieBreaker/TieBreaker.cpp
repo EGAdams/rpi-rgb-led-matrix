@@ -259,13 +259,15 @@ void TieBreaker::endTieBreak() {
     _iteration = 0;
     _player1->setPoints( 0 );
     _player2->setPoints( 0 );
-    _player1->setGames(  0 );  // TODO: set to 7 6 and increment the current serve and 
+    _player1->setGames(  0 );
     _player2->setGames(  0 );
     std::cout << "*** calling _pointLeds.updatePoints() from inside endTieBreak()... ***" << std::endl;
     _pointLeds.updatePoints();
     _gameLeds.updateGames();
     _gameState->setTieBreak(    0 );
     _gameState->setSetTieBreak( 0 );
+    _gameState->setServeSwitch( 1 );
+    _gameState->setServe( 0 );
     _scoreBoard->update(); }
 
 void TieBreaker::mode1TBP1Games() {
