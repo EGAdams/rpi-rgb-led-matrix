@@ -122,9 +122,11 @@ void TieBreaker::tieLEDsOff() {
     _pinInterface->pinDigitalWrite( P1_TIEBREAKER, LOW );
     _pinInterface->pinDigitalWrite( P2_TIEBREAKER, LOW ); }
 
-void TieBreaker::celebrate() {
+void TieBreaker::celebrate( Player* currentPlayer) {
     std::cout << "*** celebrateWin() called. ***" << std::endl;
     GameTimer::gameDelay( _gameState->getWinDelay() );
+    SetWin setWin( &_undo, _gameState, &_setLeds );
+    setWin.execute( currentPlayer, _scoreBoard );
     std::cout << "*** done celebrating. *** " << std::endl;
 }
 
@@ -142,7 +144,7 @@ void TieBreaker::run( Player* currentPlayer ) {
         _undo.snapshot( _history );                                   
         currentPlayer->setGames( currentPlayer->getGames() + 1 );     // increment games
         _scoreBoard->update();
-        celebrate();    // this is a win no matter what.
+        celebrate( currentPlayer );    // this is a win no matter what.
         GameTimer::gameDelay( 3000 );
         endTieBreak(); 
         incrementSet();
@@ -151,7 +153,7 @@ void TieBreaker::run( Player* currentPlayer ) {
         _undo.snapshot( _history );                                   
         currentPlayer->setGames( currentPlayer->getGames() + 1 );     // increment games
         _scoreBoard->update();
-        celebrate();
+        celebrate( currentPlayer );
         GameTimer::gameDelay( 3000 );
         incrementSet(); 
         endTieBreak(); 

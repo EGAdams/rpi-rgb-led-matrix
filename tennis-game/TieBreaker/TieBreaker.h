@@ -36,7 +36,7 @@ class TieBreaker {
   void mode1TBP2Games();
   void mode1SetTBP2Games();
   void mode1SetTBP1Games();
-  void celebrate();
+  void celebrate( Player* currentPlayer );
   void incrementSet();
   void setIteration( int iteration );
   int  getIteration();
