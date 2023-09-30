@@ -38,7 +38,8 @@ void Mode1Functions::mode1ButtonFunction() {
         }
         GameTimer::gameDelay( _gameState->getButtonDelay());
         // if serving, increment score.  if not serving, set serve to 1 and don't increment score.
-        if ( _gameState->getServe() == PLAYER_ONE_SERVE ) {
+        if ( _gameState->getServe() == PLAYER_ONE_SERVE || 
+            /*aways increment when tie break is enabled*/ _gameState->getTieBreak() == 1 )  {
             _player1->setPoints( _player1->getPoints() + 1 );
             _gameState->setPlayer1Points( _player1->getPoints());
         } else {
