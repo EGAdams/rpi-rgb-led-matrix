@@ -63,7 +63,8 @@ void Mode1Functions::mode1ButtonFunction() {
             /*_pointLeds.updatePoints(); jul20 */ }
 
         GameTimer::gameDelay( _gameState->getButtonDelay());
-        if ( _gameState->getServe() == PLAYER_TWO_SERVE ) {
+        if ( _gameState->getServe() == PLAYER_TWO_SERVE || 
+            /*aways increment when tie break is enabled*/ _gameState->getTieBreak() == 1 )  {
             _player2->setPoints( _player2->getPoints() + 1 );
             _gameState->setPlayer2Points( _player2->getPoints());
         } else {

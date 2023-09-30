@@ -105,11 +105,11 @@ void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
-    score(     gameObject, gameState, 2 ); // player 2 needs to bump the serve 1st
+    score( gameObject, gameState, 2 ); // player 2 needs to bump the serve 1st 
     playerWin( gameObject, gameState, 2 );
-    score(     gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 2 );
-    score(     gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 2 );
     std::cout << " ready for player 1 set win..." << std::endl;
     playerWin( gameObject, gameState, 1 );
@@ -125,7 +125,7 @@ void test_03( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 2 );
-    score(     gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
@@ -143,7 +143,7 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     // playerWin( gameObject, gameState, 2 );
     // playerWin( gameObject, gameState, 2 );
     // playerWin( gameObject, gameState, 2 );
-    // score(     gameObject, gameState, 2 );
+    // score( gameObject, gameState, 2 );
     // playerWin( gameObject, gameState, 1 );
     // playerWin( gameObject, gameState, 1 );
     // playerWin( gameObject, gameState, 1 );
@@ -162,28 +162,28 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
 
     GameTimer::gameDelay( 4000 );
 
-    score(     gameObject, gameState, 2 );    // now to trigger the tie break...
-    score(     gameObject, gameState, 2 );
-    score(     gameObject, gameState, 2 );
-    score(     gameObject, gameState, 2 );
-    score(     gameObject, gameState, 2 );
-    score(     gameObject, gameState, 2 );
-    score(     gameObject, gameState, 2 );
-    score(     gameObject, gameState, 2 );
-    score(     gameObject, gameState, 2 );
-    score(     gameObject, gameState, 2 );
-    score(     gameObject, gameState, 1 );
-    score(     gameObject, gameState, 1 );
-    score(     gameObject, gameState, 1 );
-    score(     gameObject, gameState, 1 );
-    score(     gameObject, gameState, 1 );
-    score(     gameObject, gameState, 1 );
-    score(     gameObject, gameState, 1 );
-    score(     gameObject, gameState, 1 );
-    score(     gameObject, gameState, 1 );
-    score(     gameObject, gameState, 2 );
-    score(     gameObject, gameState, 2 );
-    score(     gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );    // now to trigger the tie break...
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
 
     sleep( 6 ); }
 
