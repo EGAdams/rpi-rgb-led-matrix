@@ -112,6 +112,7 @@ void ScoreBoard::clearScreen() {
 std::string ScoreBoard::drawPlayerScore( Player* player ) {
     std::string serve_bar = _gameState->getServe() == player->number() ? "I" : " "; // or p1 serve and swap
     std::string score = _translate( player->getPoints());
+    std::cout << "translated score: " << score << std::endl;
     if( MATRIX_DISABLED == 1 ) {
         player->number() == PLAYER_1_INITIALIZED ?  // type player 1 score, else type player 2 score
         std::cout << "PLAYER 1: ////// " << serve_bar << " " << score << " ////// " << std::endl :

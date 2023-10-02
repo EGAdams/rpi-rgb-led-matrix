@@ -16,7 +16,6 @@ TieBreaker::TieBreaker( Player* player1,
     _setLeds( player1, player2, pinInterface ),
     _mode1WinSequences( player1, player2, pinInterface, gameState ),
     _undo( player1, player2, pinInterface, gameState ) {}
-
 TieBreaker::~TieBreaker() {}
 
 int TieBreaker::_getServe() {
@@ -127,12 +126,9 @@ void TieBreaker::celebrate( Player* currentPlayer) {
     GameTimer::gameDelay( _gameState->getWinDelay() );
     SetWin setWin( &_undo, _gameState, &_setLeds );
     setWin.execute( currentPlayer, _scoreBoard );
-    std::cout << "*** done celebrating. *** " << std::endl;
-}
+    std::cout << "*** done celebrating. *** " << std::endl; }
 
-void TieBreaker::incrementSet() {
-    _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 ); // increment set
-}
+void TieBreaker::incrementSet() { _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 ); }
 
 void TieBreaker::run( Player* currentPlayer ) { 
     _undo.memory(); 
@@ -141,7 +137,6 @@ void TieBreaker::run( Player* currentPlayer ) {
     GameTimer::gameDelay( TIE_BREAK_DELAY );
     _scoreBoard->update();
     Player* opponent = currentPlayer->getOpponent();
-
     if ( currentPlayer->getPoints() == 15 ) {
         _undo.snapshot( _history );                                   
         currentPlayer->setGames( currentPlayer->getGames() + 1 ); // increment games
@@ -153,19 +148,14 @@ void TieBreaker::run( Player* currentPlayer ) {
     } else if ( currentPlayer->getPoints() >= 10 && 
         ( currentPlayer->getPoints() - opponent->getPoints() >= 2)) {
         _undo.snapshot( _history );                                   
-        currentPlayer->setGames( currentPlayer->getGames() + 1 );     // increment games
+        currentPlayer->setGames( currentPlayer->getGames() + 1 ); // increment games
         _scoreBoard->update();
         celebrate( currentPlayer );
         GameTimer::gameDelay( 3000 );
         incrementSet(); 
         endTieBreak(); 
-    } else {
-                               // needed to put this here otherwise tie break would
-                               // be incremented even after a win.
-        incrementIteration();  // need this to determine serve bar location
-    }
-}
-
+    } else { incrementIteration(); }} // for determining next bar location
+    
 void TieBreaker::mode1SetTBButtonFunction() {
     switch ( _gameState->getPlayerButton()) {
     case 0:
