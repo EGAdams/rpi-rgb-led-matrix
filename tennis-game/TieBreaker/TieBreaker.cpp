@@ -137,8 +137,8 @@ void TieBreaker::incrementSet() {
 void TieBreaker::run( Player* currentPlayer ) { 
     _undo.memory(); 
     _gameState->setServe( _getServe()); // set the serve bar depending tie-break iteration
-    // Roy says the game is going to fast.  Here we fire a generic win delay:
-    GameTimer::gameDelay( WIN_DELAY );
+    // Roy says the game is going to fast.  Here we fire a tie-break delay
+    GameTimer::gameDelay( TIE_BREAK_DELAY );
     _scoreBoard->update();
     Player* opponent = currentPlayer->getOpponent();
 
