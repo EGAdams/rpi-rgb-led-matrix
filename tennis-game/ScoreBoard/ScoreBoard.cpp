@@ -4,6 +4,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
     _player1( player1 ), _player2( player2 ), _gameState( gameState ) {
     printf( "Constructing ScoreBoard...\n" );
     if ( MATRIX_DISABLED == 0 ) {
+        printf( "MATRIX_DISABLED == 0, creating canvas...\n" );
         Color pipe_color( 255, 255, 0 ); // yellow
         Color background_color( 0, 0, 0 );
         Color player_one_score_color( 0, 255, 0 ); // green
@@ -58,7 +59,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         _smallNumberDrawer = std::make_unique<NumberDrawer>( _canvas.get(), &_big_number_font, NumberDrawer::SMALL, color, bg_color );
         _pipeDrawer        = std::make_unique<NumberDrawer>( _canvas.get(), &_big_number_font, NumberDrawer::BIG, color, bg_color   );
         _bluePipeDrawer   = std::make_unique<NumberDrawer>( _canvas.get(), &_big_number_font, NumberDrawer::BIG, blue_color, bg_color );
-        _setDrawer         = std::make_unique<SetDrawer>(    _canvas.get(), _gameState                                              ); } // fi
+        _setDrawer         = std::make_unique<SetDrawer>(    _canvas.get(), _gameState                                              ); } // fi ( MATRIX_DISABLED == 0 )
     update(); }
 
 ScoreBoard::~ScoreBoard() {
