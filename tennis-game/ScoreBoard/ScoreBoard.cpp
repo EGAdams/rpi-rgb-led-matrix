@@ -155,13 +155,15 @@ std::string ScoreBoard::drawPlayerScore( Player* player ) {
         _pipeDrawer->DrawNumber( serve_bar, 1, _big_number_font.baseline() + vertical_offset ); // draw pipe
         int baseline = _big_number_font.baseline();                  // set the coordinates for the text
         int first_offset  = _characterOffset( score.substr( 0, 1 ));
-        int second_offset = _characterOffset( score.substr( 1, 1 )); // then draw text depending on player
-        if( player->number() == PLAYER_1_INITIALIZED ) {
+        int second_offset = _characterOffset( score.substr( 1, 1 ));
+        if( player->number() == PLAYER_1_INITIALIZED ) { // then draw text depending on player
             _playerOneScoreDrawer->DrawNumber( score.substr( 0, 1 ), first_offset  + 16, baseline + vertical_offset );
-            _playerOneScoreDrawer->DrawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset );
+            if ( score.length() > 1 ) {
+                _playerOneScoreDrawer->DrawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset ); }
         } else {
             _playerTwoScoreDrawer->DrawNumber( score.substr( 0, 1 ), first_offset  + 16, baseline + vertical_offset );
-                        _playerTwoScoreDrawer->DrawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset ); 
+            if ( score.length() > 1 ) {
+                _playerTwoScoreDrawer->DrawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset ); }
         } // return player 1 score, else type player 2 score
     }
     // created a concatenated string with "PLAYER 1: ////// " + serve_bar
@@ -207,16 +209,16 @@ std::string ScoreBoard::_translate( int raw_score ) {
         default:              return "00"; }
     } else {
         switch ( raw_score ) {
-            case 0:               return "00";
-            case 1:               return "01";
-            case 2:               return "02";
-            case 3:               return "03";
-            case 4:               return "04";
-            case 5:               return "05";
-            case 6:               return "06";
-            case 7:               return "07";
-            case 8:               return "08";
-            case 9:               return "09";
+            case 0:               return "0";
+            case 1:               return "1";
+            case 2:               return "2";
+            case 3:               return "3";
+            case 4:               return "4";
+            case 5:               return "5";
+            case 6:               return "6";
+            case 7:               return "7";
+            case 8:               return "8";
+            case 9:               return "9";
             case 10:              return "10";
             case 11:              return "11";
             case 12:              return "12";
