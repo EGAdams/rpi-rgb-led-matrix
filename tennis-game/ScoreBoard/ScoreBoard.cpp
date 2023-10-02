@@ -3,10 +3,7 @@
 ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState ):
     _player1( player1 ), _player2( player2 ), _gameState( gameState ) {
     printf( "Constructing ScoreBoard...\n" );
-    if ( MATRIX_DISABLED == 1 ) {
-        printf( "MATRIX_DISABLED == 1 is true.  Skipping matrix setup...\n" );
-    } else {
-        printf( "MATRIX_DISABLED == 1 is false.  Setting up matrix...\n" );
+    if ( MATRIX_DISABLED == 0 ) {
         Color pipe_color( 255, 255, 0 ); // yellow
         Color background_color( 0, 0, 0 );
         Color player_one_score_color( 0, 255, 0 ); // green

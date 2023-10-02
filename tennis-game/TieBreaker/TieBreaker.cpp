@@ -263,7 +263,6 @@ void TieBreaker::endTieBreak() {
     _player2->setPoints( 0 );
     _player1->setGames(  0 );
     _player2->setGames(  0 );
-    // _gameLeds.updateGames();
     _gameState->setTieBreak(    0 );
     _gameState->setSetTieBreak( 0 );
     _gameState->setServeSwitch( 1 );

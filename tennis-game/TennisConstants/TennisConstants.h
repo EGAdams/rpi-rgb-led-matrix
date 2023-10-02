@@ -19,7 +19,7 @@
 #define FLASH_DELAY                 1000
 #define BUTTON_DELAY                300
 #define WIN_DELAY                   1000
-#define TIE_BREAK_DELAY             500
+#define TIE_BREAK_DELAY             250
 #define WATCH_INTERVAL              250
 #define UPDATE_DISPLAY_DELAY        50
 #define LOOP_MATCH_LAMP_WIN         5
