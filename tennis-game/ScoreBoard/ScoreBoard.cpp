@@ -61,16 +61,13 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         _smallNumberDrawer = std::make_unique<NumberDrawer>( _canvas.get(), &_big_number_font, NumberDrawer::SMALL, color, bg_color );
         _pipeDrawer        = std::make_unique<NumberDrawer>( _canvas.get(), &_big_number_font, NumberDrawer::BIG, color, bg_color   );
         _bluePipeDrawer   = std::make_unique<NumberDrawer>( _canvas.get(), &_big_number_font, NumberDrawer::BIG, blue_color, bg_color );
-        _setDrawer         = std::make_unique<SetDrawer>(    _canvas.get(), _gameState                                              );
-        } // fi
-    update();
-}
+        _setDrawer         = std::make_unique<SetDrawer>(    _canvas.get(), _gameState                                              ); } // fi
+    update(); }
 
 ScoreBoard::~ScoreBoard() {
     std::cout << "destroying ScoreBoard..." << std::endl;
     if ( _canvas != NULL ) {
         std::cout << "NOT deleting _canvas..." << std::endl;
-        // delete _canvas.get(); // this causes some error.  only one scoreBoard is created anyway.
     } else { std::cout << "*** WARNING: _canvas == NULL, not deleting. ***" << std::endl; }}
 
 void ScoreBoard::writeMessage( std::string message ) {
@@ -88,33 +85,14 @@ void ScoreBoard::writeMessage( std::string message ) {
         GameTimer::gameDelay( 1000 );
         std::cout << "done sleeping." << std::endl; }}
 
-void ScoreBoard::drawGames() {  std::cout << "inside ScoreBoard::drawGames()" << std::endl; }
-
-bool ScoreBoard::hasCanvas() {
-    if ( _canvas != NULL ) { return true;
-    } else { /* std::cout << "*** WARNING: canvas is NULL ***" << std::endl; */ return false; }}
+void ScoreBoard::drawGames() {  std::cout << "inside ScoreBoard::drawGames()" << std::endl;  }
+bool ScoreBoard::hasCanvas() { if ( _canvas != NULL ) { return true; } else { return false; }}
 
 void ScoreBoard::update() {
-    // std::cout << "inside ScoreBoard::update() ... " << std::endl;
-    // std::cout << "checking for _player1 or _player2 null values..." << std::endl;
-    if ( _player1 == nullptr ) {
-        std::cout << "*** ERROR: _player1 == NULL ***" << std::endl; 
-        exit( 1 ); }
-    if ( _player2 == nullptr ) { 
-        std::cout << "*** ERROR: _player2 == NULL ***" << std::endl; 
-        exit( 1 ); }
-    // std::cout << "gamestate current action: " << _gameState->getCurrentAction() << std::endl;
-    clearScreen();
-    std::cout << "inside ScoreBoard::update()  player1 points: " << _player1->getPoints() << std::endl;
-    std::cout << "inside ScoreBoard::update()  player2 points: " << _player2->getPoints() << std::endl;
-    drawPlayerScore( _player1 ); 
-    drawPlayerScore( _player2 );
-    // _setDrawer->drawSets();
-
-    if ( MATRIX_DISABLED == 1 ) {
-        // std::cout << "MATRIX_DISABLED == 1 is true.  skipping blink..." << std::endl;
-    } else {
-        std::cout << "MATRIX_DISABLED == 1 is false.  checking for blink in action..." << std::endl;
+    if ( _player1 == nullptr ) { std::cout << "*** ERROR: _player1 == NULL ***" << std::endl; exit( 1 ); }
+    if ( _player2 == nullptr ) { std::cout << "*** ERROR: _player2 == NULL ***" << std::endl; exit( 1 ); }
+    clearScreen(); drawPlayerScore( _player1 ); drawPlayerScore( _player2 );
+    if ( MATRIX_DISABLED == 0 ) {
         bool blink = _gameState->getCurrentAction().find( "blink" ) != std::string::npos;
         if ( blink ) {
             std::cout << "blink is true, calling _setDrawer->drawBlinkSets()..." << std::endl;
@@ -123,22 +101,13 @@ void ScoreBoard::update() {
                 PLAYER_1_INITIALIZED : PLAYER_2_INITIALIZED;
             _setDrawer->drawBlinkSets( playerToBlink ); // checks current action ignoring playerToBlink
         } else { _setDrawer->drawSets(); }
-
-        if ( _gameState->getTieBreak() == true ) {
-            std::cout << "tie break is true, calling _drawTieBreakerBar()..." << std::endl;
-            _drawTieBreakerBar();
-        } else { std::cout << "tie break is false, not calling _drawTieBreakerBar()..." << std::endl; }
-    }
-}
+        if ( _gameState->getTieBreak() == true ) { _drawTieBreakerBar(); }}}
 
 void ScoreBoard::_drawTieBreakerBar() {
-    _bluePipeDrawer->DrawNumber( "I", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
-}
+    _bluePipeDrawer->DrawNumber( "I", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET );}
 
 void ScoreBoard::clearScreen() {
-    if ( MATRIX_DISABLED == 1 ) {
-        // std::cout << "clearScreen called, no matrix." << std::endl;
-    } else {
+    if ( MATRIX_DISABLED == 0 ) {
         if ( !hasCanvas()) { std::cout << "*** ERROR: canvas == NULL.  exiting... ***" << std::endl; exit( 1 ); }
         std::cout << "clearScreen called, hasCanvas() is good.  clearing matrix...." << std::endl;
         Color flood_color( 0, 0, 0 ); _canvas->Fill( flood_color.r, flood_color.g, flood_color.b ); }}
@@ -152,8 +121,8 @@ std::string ScoreBoard::drawPlayerScore( Player* player ) {
         std::cout << "PLAYER 2: ////// " << serve_bar << " " << score << " ////// " << std::endl;
     } else {
         int vertical_offset = player->number() == 0 ? 0 : _big_number_font.height();
-        _pipeDrawer->DrawNumber( serve_bar, 1, _big_number_font.baseline() + vertical_offset ); // draw pipe
-        int baseline = _big_number_font.baseline();                  // set the coordinates for the text
+        _pipeDrawer->DrawNumber( serve_bar, 1, _big_number_font.baseline() + vertical_offset );
+        int baseline = _big_number_font.baseline(); // we set the coordinates for the text next
         int first_offset  = _characterOffset( score.substr( 0, 1 ));
         int second_offset = ( score.length() > 1 ) ? _characterOffset( score.substr( 1, 1 )) : 0;
         if( player->number() == PLAYER_1_INITIALIZED ) { // then draw text depending on player
@@ -163,17 +132,13 @@ std::string ScoreBoard::drawPlayerScore( Player* player ) {
         } else {
             _playerTwoScoreDrawer->DrawNumber( score.substr( 0, 1 ), first_offset  + 16, baseline + vertical_offset );
             if ( score.length() > 1 ) {
-                _playerTwoScoreDrawer->DrawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset ); }
-        } // return player 1 score, else type player 2 score
-    }
-    // created a concatenated string with "PLAYER 1: ////// " + serve_bar
+                _playerTwoScoreDrawer->DrawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset ); }}} // return player 1 score, else type player 2 score
     std::string returnString = "*** WARNING: return string is not set. this is not normal ***";
     std::string player1ScoreString = "PLAYER 1: ////// " + serve_bar + " " + score + " //////";
     std::string player2ScoreString = "PLAYER 2: ////// " + serve_bar + " " + score + " //////";
     player->number() == PLAYER_1_INITIALIZED ? 
     returnString = player1ScoreString : returnString = player2ScoreString;
-    return returnString;
-}
+    return returnString; }
  
 int ScoreBoard::_characterOffset( std::string character ) {
     int char_offset = 0;

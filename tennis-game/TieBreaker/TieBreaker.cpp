@@ -137,12 +137,14 @@ void TieBreaker::incrementSet() {
 void TieBreaker::run( Player* currentPlayer ) { 
     _undo.memory(); 
     _gameState->setServe( _getServe()); // set the serve bar depending tie-break iteration
+    // Roy says the game is going to fast.  Here we fire a generic win delay:
+    GameTimer::gameDelay( WIN_DELAY );
     _scoreBoard->update();
     Player* opponent = currentPlayer->getOpponent();
 
     if ( currentPlayer->getPoints() == 15 ) {
         _undo.snapshot( _history );                                   
-        currentPlayer->setGames( currentPlayer->getGames() + 1 );     // increment games
+        currentPlayer->setGames( currentPlayer->getGames() + 1 ); // increment games
         _scoreBoard->update();
         celebrate( currentPlayer );    // this is a win no matter what.
         GameTimer::gameDelay( 3000 );
@@ -268,7 +270,8 @@ void TieBreaker::endTieBreak() {
     _gameState->setSetTieBreak( 0 );
     _gameState->setServeSwitch( 1 );
     _gameState->setServe( 0 );
-    _scoreBoard->update(); }
+    // _scoreBoard->update(); // otherwise shows "0", "0" not "00", "00"
+}
 
 void TieBreaker::mode1TBP1Games() {
     _gameLeds.updateGames();  // UpdateGames();

@@ -137,32 +137,16 @@ void test_03( GameObject* gameObject, GameState* gameState, int* loop_count ) {
 
 void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen();
-    // playerWin( gameObject, gameState, 2 );
-    // playerWin( gameObject, gameState, 2 );
-    // playerWin( gameObject, gameState, 2 );
-    // playerWin( gameObject, gameState, 2 );
-    // playerWin( gameObject, gameState, 2 );
-    // playerWin( gameObject, gameState, 2 );
-    // score( gameObject, gameState, 2 );
-    // playerWin( gameObject, gameState, 1 );
-    // playerWin( gameObject, gameState, 1 );
-    // playerWin( gameObject, gameState, 1 );
-    // playerWin( gameObject, gameState, 1 );
-    // playerWin( gameObject, gameState, 1 );
-    // playerWin( gameObject, gameState, 1 );
     gameObject->getPlayer1()->setPoints( 0 );
     gameState->setPlayer1Points(         0 );
     gameObject->getPlayer2()->setPoints( 2 );
     gameState->setPlayer2Points(         2 );
     gameObject->getPlayer1()->setGames(  6 );
     gameObject->getPlayer2()->setGames(  5 );
-
     score( gameObject, gameState, 2 );
     score( gameObject, gameState, 2 );
-
     GameTimer::gameDelay( 4000 );
-
-    score( gameObject, gameState, 2 );    // now to trigger the tie break...
+    score( gameObject, gameState, 2 ); // now to trigger the tie break...
     score( gameObject, gameState, 2 );
     score( gameObject, gameState, 2 );
     score( gameObject, gameState, 2 );
@@ -181,10 +165,6 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 2 );
-    // score( gameObject, gameState, 2 );
-    // score( gameObject, gameState, 2 );
-    // score( gameObject, gameState, 2 );
-
     sleep( 6 ); }
 
 void run_manual_game( GameObject* gameObject, GameState* gameState, int player ) {
