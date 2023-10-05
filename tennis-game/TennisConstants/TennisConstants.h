@@ -4,7 +4,7 @@
 #include "../Arduino/Arduino.h"
 
 //  Written by Chris Bean for Teensy 4.1 only
-//  re-written in C++ by EG in June 2022 
+//  re-written in C++ by EG in June 2022
 
 #define BOTH_PLAYER_BLINK           "blink both players"
 #define PLAYER_1_BLINK              "player1 blink"
@@ -19,7 +19,6 @@
 #define FLASH_DELAY                 1000
 #define BUTTON_DELAY                300
 #define WIN_DELAY                   1000
-#define TIE_BREAK_DELAY             500
 #define WATCH_INTERVAL              250
 #define UPDATE_DISPLAY_DELAY        50
 #define LOOP_MATCH_LAMP_WIN         5
@@ -27,6 +26,8 @@
 #define LOOP_GAME_LAMP_WIN          5
 #define TIE_PULSE_COUNT             5
 #define SET_WIN_PULSE_COUNT         5
+#define TIE_BREAK_WIN_BY_TWO        10
+#define TIE_BREAK_MAX_POINTS        13
 #define TIE_BREAK_BLINK_DELAY       100 // 750
 #define TIE_BREAK_WATCH_INTERVAL    50
 #define BATTERY_TEST_BLINK_DELAY    1000

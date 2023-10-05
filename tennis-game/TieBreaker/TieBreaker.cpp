@@ -16,11 +16,11 @@ TieBreaker::TieBreaker( Player* player1,
     _setLeds( player1, player2, pinInterface ),
     _mode1WinSequences( player1, player2, pinInterface, gameState ),
     _undo( player1, player2, pinInterface, gameState ) {}
+
 TieBreaker::~TieBreaker() {}
 
 int TieBreaker::_getServe() {
-    switch ( _iteration )
-    {
+    switch ( _iteration ) {
     case 1:
         return PLAYER_2_SERVE; // doesn't matter who scores here.  doesn't concern me.
         break;
@@ -92,8 +92,39 @@ int TieBreaker::_getServe() {
     case 18:
         return PLAYER_2_SERVE;
         break;
+
+    case 19:
+        return PLAYER_1_SERVE;
+        break;
+
+    case 20:
+        return PLAYER_1_SERVE;
+        break;
+
+    case 21:
+        return PLAYER_2_SERVE;
+        break;
+
+    case 22:
+        return PLAYER_2_SERVE;
+        break;
+
+    case 23:
+        return PLAYER_1_SERVE;
+        break;
+
+    case 24:
+        return PLAYER_1_SERVE;
+        break;
+
+    case 25:
+        return PLAYER_2_SERVE;
+        break;
     
     default:
+        std::cout << "*** WARNING: _getServe() in TieBreaker.cpp is returning default value. ***"
+                  << std::endl;
+        std::cout << "The iteration is: " << _iteration << std::endl;
         return PLAYER_1_SERVE;
         break;
     }
@@ -101,7 +132,9 @@ int TieBreaker::_getServe() {
 
 void TieBreaker::setIteration( int iteration ) { _iteration = iteration; }
 int  TieBreaker::getIteration() { return _iteration; }
-void TieBreaker::incrementIteration() { _iteration++; }
+void TieBreaker::incrementIteration() { 
+    // std::cout << "Incrementing iteration in TieBreaker::incrementIteration()... " << std::endl;
+    _iteration++; }
 
 void TieBreaker::setScoreBoards( ScoreBoard* scoreBoard ) {
     _pointLeds.setScoreBoard( scoreBoard );
@@ -126,36 +159,43 @@ void TieBreaker::celebrate( Player* currentPlayer) {
     GameTimer::gameDelay( _gameState->getWinDelay() );
     SetWin setWin( &_undo, _gameState, &_setLeds );
     setWin.execute( currentPlayer, _scoreBoard );
-    std::cout << "*** done celebrating. *** " << std::endl; }
+    std::cout << "*** done celebrating. *** " << std::endl;
+}
 
-void TieBreaker::incrementSet() { _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 ); }
+void TieBreaker::incrementSet() {
+    _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 ); // increment set
+}
 
 void TieBreaker::run( Player* currentPlayer ) { 
     _undo.memory(); 
     _gameState->setServe( _getServe()); // set the serve bar depending tie-break iteration
-    // Roy says the game is going to fast.  Here we fire a tie-break delay
-    GameTimer::gameDelay( TIE_BREAK_DELAY );
     _scoreBoard->update();
     Player* opponent = currentPlayer->getOpponent();
-    if ( currentPlayer->getPoints() == 15 ) {
+
+    if ( currentPlayer->getPoints() == TIE_BREAK_MAX_POINTS ) {
         _undo.snapshot( _history );                                   
-        currentPlayer->setGames( currentPlayer->getGames() + 1 ); // increment games
+        currentPlayer->setGames( currentPlayer->getGames() + 1 );     // increment games
         _scoreBoard->update();
         celebrate( currentPlayer );    // this is a win no matter what.
         GameTimer::gameDelay( 3000 );
-        endTieBreak(); 
         incrementSet();
-    } else if ( currentPlayer->getPoints() >= 10 && 
+        endTieBreak(); 
+    } else if ( currentPlayer->getPoints() >= TIE_BREAK_WIN_BY_TWO  && 
         ( currentPlayer->getPoints() - opponent->getPoints() >= 2)) {
         _undo.snapshot( _history );                                   
-        currentPlayer->setGames( currentPlayer->getGames() + 1 ); // increment games
+        currentPlayer->setGames( currentPlayer->getGames() + 1 );     // increment games
         _scoreBoard->update();
         celebrate( currentPlayer );
         GameTimer::gameDelay( 3000 );
         incrementSet(); 
         endTieBreak(); 
-    } else { incrementIteration(); }} // for determining next bar location
-    
+    } else {
+                               // needed to put this here otherwise tie break would
+                               // be incremented even after a win.
+        incrementIteration();  // need this to determine serve bar location
+    }
+}
+
 void TieBreaker::mode1SetTBButtonFunction() {
     switch ( _gameState->getPlayerButton()) {
     case 0:
@@ -253,12 +293,14 @@ void TieBreaker::endTieBreak() {
     _player2->setPoints( 0 );
     _player1->setGames(  0 );
     _player2->setGames(  0 );
+    std::cout << "*** calling _pointLeds.updatePoints() from inside endTieBreak()... ***" << std::endl;
+    _pointLeds.updatePoints();
+    _gameLeds.updateGames();
     _gameState->setTieBreak(    0 );
     _gameState->setSetTieBreak( 0 );
     _gameState->setServeSwitch( 1 );
     _gameState->setServe( 0 );
-    _scoreBoard->update();
-}
+    _scoreBoard->update(); }
 
 void TieBreaker::mode1TBP1Games() {
     _gameLeds.updateGames();  // UpdateGames();
