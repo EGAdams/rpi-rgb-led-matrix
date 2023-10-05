@@ -21,3 +21,5 @@ examples-api-use/ledcat
 tennis-game/googletest
 tennis-game/TennisConstants/TennisConstants.h
 tennis-game/tennis-game-manual
+examples-api-use/text-example
+examples-api-use/clock
