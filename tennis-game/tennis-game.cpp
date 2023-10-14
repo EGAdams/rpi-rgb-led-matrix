@@ -1,7 +1,7 @@
 // -*- mode: c++; c-basic-offset: 2; indent-tabs-mode: nil; -*-
 // The main tennis game entry point.
 // This code is public domain
-// (but note, that the led-matrix library this depends on is GPL v2) 
+// (but note, that the led-matrix library this depends on is GPL v2)
 
 #include "../include/led-matrix.h"
 #include "../include/graphics.h"
@@ -168,8 +168,6 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 2 );
-    sleep( 6 ); }
-
     sleep( 6 ); }
 
 void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
