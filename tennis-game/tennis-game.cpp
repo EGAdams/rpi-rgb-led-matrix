@@ -97,7 +97,7 @@ void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 2 );
     score( gameObject, gameState, 2 );
     score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );    
+    score( gameObject, gameState, 1 );
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 1 );
@@ -105,7 +105,7 @@ void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
-    score( gameObject, gameState, 2 ); // player 2 needs to bump the serve 1st 
+    score( gameObject, gameState, 2 ); // player 2 needs to bump the serve 1st
     playerWin( gameObject, gameState, 2 );
     score( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 2 );
@@ -137,19 +137,6 @@ void test_03( GameObject* gameObject, GameState* gameState, int* loop_count ) {
 
 void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen();
-    // playerWin( gameObject, gameState, 2 );
-    // playerWin( gameObject, gameState, 2 );
-    // playerWin( gameObject, gameState, 2 );
-    // playerWin( gameObject, gameState, 2 );
-    // playerWin( gameObject, gameState, 2 );
-    // playerWin( gameObject, gameState, 2 );
-    // score( gameObject, gameState, 2 );
-    // playerWin( gameObject, gameState, 1 );
-    // playerWin( gameObject, gameState, 1 );
-    // playerWin( gameObject, gameState, 1 );
-    // playerWin( gameObject, gameState, 1 );
-    // playerWin( gameObject, gameState, 1 );
-    // playerWin( gameObject, gameState, 1 );
     gameObject->getPlayer1()->setPoints( 0 );
     gameState->setPlayer1Points(         0 );
     gameObject->getPlayer2()->setPoints( 2 );
@@ -181,10 +168,6 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 2 );
-    // score( gameObject, gameState, 2 );
-    // score( gameObject, gameState, 2 );
-    // score( gameObject, gameState, 2 );
-
     sleep( 6 ); }
 
 void run_manual_game( GameObject* gameObject, GameState* gameState, int player ) {
@@ -243,7 +226,7 @@ int main( int argc, char *argv[]) {
     std::cout << "done calling loopGame().  sleeping...\n\n\n\n\n" << std::endl;
     sleep( .5 );
     std::cout << "manual set to: " << manual << std::endl;
-    if ( manual == 1 ) { run_manual_game( gameObject, gameState, 1 ); return 0; } 
+    if ( manual == 1 ) { run_manual_game( gameObject, gameState, 1 ); return 0; }
 
     ///// run tests /////
     int test_count = 1;
@@ -251,16 +234,19 @@ int main( int argc, char *argv[]) {
     // std::cout << "calling test_01()..." << std::endl;
     // test_01( gameObject, gameState, &loop_count );
     test_count++;
+    // end test_01
 
     // writeMessage( gameObject, "t " + std::to_string( test_count ));
     // std::cout << "calling test_02()..." << std::endl;
     // test_02( gameObject, gameState, &loop_count );
     test_count++;
+    // end test_02
 
     // writeMessage( gameObject, "t " + std::to_string( test_count ));
     // std::cout << "calling test_03()..." << std::endl;
     // test_03( gameObject, gameState, &loop_count );
     test_count++;
+    // end test_03
 
     writeMessage( gameObject, "t " + std::to_string( test_count ));
     std::cout << "calling test_04()..." << std::endl;
