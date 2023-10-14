@@ -1,7 +1,7 @@
 // -*- mode: c++; c-basic-offset: 2; indent-tabs-mode: nil; -*-
 // The main tennis game entry point.
 // This code is public domain
-// (but note, that the led-matrix library this depends on is GPL v2)
+// (but note, that the led-matrix library this depends on is GPL v2) 
 
 #include "../include/led-matrix.h"
 #include "../include/graphics.h"
@@ -170,6 +170,51 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 2 );
     sleep( 6 ); }
 
+    sleep( 6 ); }
+
+void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
+    gameObject->getScoreBoard()->clearScreen();
+    gameObject->getPlayer1()->setPoints( 0 );
+    gameState->setPlayer1Points(         0 );
+    gameObject->getPlayer2()->setPoints( 2 );
+    gameState->setPlayer2Points(         2 );
+    gameObject->getPlayer1()->setGames(  6 );
+    gameObject->getPlayer2()->setGames(  5 );
+
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+
+    GameTimer::gameDelay( 4000 );
+
+    score( gameObject, gameState, 2 );    // now to trigger the tie break...
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    sleep( 6 ); }
+
+
 void run_manual_game( GameObject* gameObject, GameState* gameState, int player ) {
     int loop_count = 0;
     std::signal( SIGINT, GameObject::_signalHandler );
@@ -248,9 +293,13 @@ int main( int argc, char *argv[]) {
     test_count++;
     // end test_03
 
+    // test_04( gameObject, gameState, &loop_count );
+    // end test_04
+    test_count++;
+
     writeMessage( gameObject, "t " + std::to_string( test_count ));
-    std::cout << "calling test_04()..." << std::endl;
+    std::cout << "calling test_05()..." << std::endl;
     sleep( 1 );
-    test_04( gameObject, gameState, &loop_count );
+    test_05( gameObject, gameState, &loop_count );
     test_count++;
 }
