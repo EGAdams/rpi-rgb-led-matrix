@@ -143,9 +143,12 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameState->setPlayer2Points(         2 );
     gameObject->getPlayer1()->setGames(  6 );
     gameObject->getPlayer2()->setGames(  5 );
+
     score( gameObject, gameState, 2 );
     score( gameObject, gameState, 2 );
+
     GameTimer::gameDelay( 4000 );
+
     score( gameObject, gameState, 2 );    // now to trigger the tie break...
     score( gameObject, gameState, 2 );
     score( gameObject, gameState, 2 );
@@ -206,35 +209,6 @@ void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 2 );
     sleep( 6 ); }
 
-void test_06(GameObject* gameObject, GameState* gameState, int* loop_count ) {
-    // Initialize the game state
-    gameObject->getScoreBoard()->clearScreen();
-    gameObject->getPlayer1()->setPoints(0);
-    gameState->setPlayer1Points(0);
-    gameObject->getPlayer2()->setPoints(0);
-    gameState->setPlayer2Points(0);
-    gameObject->getPlayer1()->setGames(5);
-    gameObject->getPlayer2()->setGames(4);
-    
-    // Player 1 wins the first set
-    playerWin(gameObject, gameState, 1);
-    
-    // Reset points for the next set
-    gameObject->getPlayer1()->setPoints(0);
-    gameState->setPlayer1Points(0);
-    gameObject->getPlayer2()->setPoints(0);
-    gameState->setPlayer2Points(0);
-    gameObject->getPlayer1()->setGames(5);
-    gameObject->getPlayer2()->setGames(4);
-    
-    // Player 1 wins the second set and the match
-    playerWin(gameObject, gameState, 1);
-    
-    // Check match win condition and display the result
-    if (!gameState->gameRunning()) {
-        std::cout << "match win" << std::endl;
-    }
-}
 
 void run_manual_game( GameObject* gameObject, GameState* gameState, int player ) {
     int loop_count = 0;
@@ -266,7 +240,8 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, int player )
         std::cout << "sleeping for 5 seconds..." << std::endl;
         sleep( 120 );
         std::cout << "MAX_LOOP_COUNT reached.  Exiting...\n\n\n\n\n" << std::endl; }
-    return; }
+    return;
+}
 
 int main( int argc, char *argv[]) {
     // if --argument is manual then run manual tests
@@ -317,12 +292,9 @@ int main( int argc, char *argv[]) {
     // end test_04
     test_count++;
 
-    // test 05
-    test_count++;
-
     writeMessage( gameObject, "t " + std::to_string( test_count ));
     std::cout << "calling test_05()..." << std::endl;
     sleep( 1 );
-    test_06( gameObject, gameState, &loop_count );
+    test_05( gameObject, gameState, &loop_count );
     test_count++;
 }
