@@ -29,7 +29,7 @@ void writeMessage( GameObject* gameObject, std::string message ) {
     std::cout << "writing message: " << message << std::endl;
     gameObject->getScoreBoard()->clearScreen();
     gameObject->getScoreBoard()->writeMessage( message );
-    sleep( 10 )
+    sleep( 3 )
     gameObject->getScoreBoard()->clearScreen();
     std::cout << "done writing message." << std::endl;
 }

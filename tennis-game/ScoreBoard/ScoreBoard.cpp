@@ -82,10 +82,10 @@ void ScoreBoard::writeMessage( std::string message ) {
         Color color( 255, 255, 0 );
         Color bg_color( 0, 0, 0 );
         int baseline = _big_number_font.baseline();            // set the coordinates for the text
-        int first_offset  = 8;
+        int first_offset  = 0;
         _smallNumberDrawer->DrawNumber( message, first_offset, baseline + _big_number_font.height());
         std::cout << "sleeping for 2 seconds..." << std::endl;
-        GameTimer::gameDelay( 1000 );
+        GameTimer::gameDelay( 3000 );
         std::cout << "done sleeping." << std::endl; }}
 
 void ScoreBoard::drawGames() {  std::cout << "inside ScoreBoard::drawGames()" << std::endl; }
@@ -98,16 +98,16 @@ void ScoreBoard::update() {
     // std::cout << "inside ScoreBoard::update() ... " << std::endl;
     // std::cout << "checking for _player1 or _player2 null values..." << std::endl;
     if ( _player1 == nullptr ) {
-        std::cout << "*** ERROR: _player1 == NULL ***" << std::endl; 
+        std::cout << "*** ERROR: _player1 == NULL ***" << std::endl;
         exit( 1 ); }
-    if ( _player2 == nullptr ) { 
-        std::cout << "*** ERROR: _player2 == NULL ***" << std::endl; 
+    if ( _player2 == nullptr ) {
+        std::cout << "*** ERROR: _player2 == NULL ***" << std::endl;
         exit( 1 ); }
     // std::cout << "gamestate current action: " << _gameState->getCurrentAction() << std::endl;
     clearScreen();
     std::cout << "inside ScoreBoard::update()  player1 points: " << _player1->getPoints() << std::endl;
     std::cout << "inside ScoreBoard::update()  player2 points: " << _player2->getPoints() << std::endl;
-    drawPlayerScore( _player1 ); 
+    drawPlayerScore( _player1 );
     drawPlayerScore( _player2 );
     // _setDrawer->drawSets();
 
@@ -170,11 +170,11 @@ std::string ScoreBoard::drawPlayerScore( Player* player ) {
     std::string returnString = "*** WARNING: return string is not set. this is not normal ***";
     std::string player1ScoreString = "PLAYER 1: ////// " + serve_bar + " " + score + " //////";
     std::string player2ScoreString = "PLAYER 2: ////// " + serve_bar + " " + score + " //////";
-    player->number() == PLAYER_1_INITIALIZED ? 
+    player->number() == PLAYER_1_INITIALIZED ?
     returnString = player1ScoreString : returnString = player2ScoreString;
     return returnString;
 }
- 
+
 int ScoreBoard::_characterOffset( std::string character ) {
     int char_offset = 0;
     if ( character == "A" ) {
@@ -196,14 +196,14 @@ std::string ScoreBoard::_translate( int raw_score ) {
         case 1:               return "15";
         case 2:               return "30";
         case 3:               return "40";
-        
-        case SCORE_CASE_4:    
+
+        case SCORE_CASE_4:
             if ( _gameState->getPointFlash()) {
                 return "Ad";
             } else {
                 return "40";
             }
-        
+
         case SCORE_CASE_5:    return "Ad";
         case UNDEFINED_SCORE: return "99";
         default:              return "00"; }
@@ -224,7 +224,7 @@ std::string ScoreBoard::_translate( int raw_score ) {
             case 12:              return "12";
             case 13:              return "13";
             case 14:              return "14";
-            case 15:              return "15"; 
+            case 15:              return "15";
         }
     }
     return "*** ERROR: can not translate. ***"; }
