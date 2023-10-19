@@ -29,6 +29,7 @@ void writeMessage( GameObject* gameObject, std::string message ) {
     std::cout << "writing message: " << message << std::endl;
     gameObject->getScoreBoard()->clearScreen();
     gameObject->getScoreBoard()->writeMessage( message );
+    sleep( 10 )
     gameObject->getScoreBoard()->clearScreen();
     std::cout << "done writing message." << std::endl;
 }
@@ -313,7 +314,7 @@ int main( int argc, char *argv[]) {
     // writeMessage( gameObject, "t " + std::to_string( test_count ));
     writeMessage( gameObject, "Match" );
     // std::cout << "calling test_05()..." << std::endl;
-    sleep( 6 );
-    // test_06( gameObject, gameState, &loop_count ); 
+    // sleep( 6 );
+    // test_06( gameObject, gameState, &loop_count );
     test_count++;
 }
