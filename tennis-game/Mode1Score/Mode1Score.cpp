@@ -26,9 +26,9 @@ void Mode1Score::setScoreBoard( ScoreBoard* scoreBoard ) {
     _gameLeds.setScoreBoard(           scoreBoard ); 
     _mode1WinSequences.setScoreBoards( scoreBoard ); 
     _setLeds.setScoreBoard(            scoreBoard ); 
-    _tieBreaker.setScoreBoards(   scoreBoard );  // all day debug. in the future.
-    _undo.setScoreBoard(               scoreBoard );  // need to find a way to avoid this
-}                                                     // in the future.
+    _tieBreaker.setScoreBoards(   scoreBoard );         // all day debug. in the future.
+    _undo.setScoreBoard(               scoreBoard ); }    // need to find a way to avoid this
+
 ScoreBoard* Mode1Score::getScoreBoard() { return _scoreBoard; }
 
 void Mode1Score::_resetGame() {

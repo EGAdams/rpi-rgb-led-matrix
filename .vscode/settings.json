@@ -70,10 +70,12 @@
     "cSpell.words": [
         "Adafruit",
         "commandline",
+        "echother",
         "errpos",
         "fprintf",
         "Freqs",
         "GAMEOBJECT",
+        "gamestate",
         "GPIO",
         "Hblock",
         "ialized",

@@ -14,6 +14,7 @@ class GameLeds {
   ~GameLeds();
   void updateGames();
   void setScoreBoard( ScoreBoard* scoreBoard );
+  ScoreBoard* getScoreBoard();
 
  private:
   Player*            _player1;

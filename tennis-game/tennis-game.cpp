@@ -206,34 +206,24 @@ void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 2 );
     sleep( 6 ); }
 
-void test_06(GameObject* gameObject, GameState* gameState, int* loop_count ) {
-    // Initialize the game state
-    gameObject->getScoreBoard()->clearScreen();
-    gameObject->getPlayer1()->setPoints(0);
-    gameState->setPlayer1Points(0);
-    gameObject->getPlayer2()->setPoints(0);
-    gameState->setPlayer2Points(0);
-    gameObject->getPlayer1()->setGames(5);
-    gameObject->getPlayer2()->setGames(4);
-    
-    // Player 1 wins the first set
-    playerWin(gameObject, gameState, 1);
-    
-    // Reset points for the next set
-    gameObject->getPlayer1()->setPoints(0);
-    gameState->setPlayer1Points(0);
-    gameObject->getPlayer2()->setPoints(0);
-    gameState->setPlayer2Points(0);
-    gameObject->getPlayer1()->setGames(5);
-    gameObject->getPlayer2()->setGames(4);
-    
-    // Player 1 wins the second set and the match
-    playerWin(gameObject, gameState, 1);
-    
-    // Check match win condition and display the result
-    if (!gameState->gameRunning()) {
-        std::cout << "match win" << std::endl;
-    }
+void test_06( GameObject* gameObject, GameState* gameState, int* loop_count ) {
+    gameObject->getScoreBoard()->clearScreen(); // Initialize the game state
+    gameObject->getPlayer1()->setPoints( 0 );
+    gameState->setPlayer1Points( 0 );
+    gameObject->getPlayer2()->setPoints( 0 );
+    gameState->setPlayer2Points( 0 );
+    gameObject->getPlayer1()->setGames( 5 );
+    gameObject->getPlayer2()->setGames( 4 );
+    playerWin(gameObject, gameState, 1); // Player 1 wins the first set
+    gameObject->getPlayer1()->setPoints( 0 ); // Reset points for the next set
+    gameState->setPlayer1Points( 0 );
+    gameObject->getPlayer2()->setPoints( 0 );
+    gameState->setPlayer2Points( 0 );
+    gameObject->getPlayer1()->setGames( 5 );
+    gameObject->getPlayer2()->setGames( 4 );
+    playerWin( gameObject, gameState, 1 ); // Player 1 wins the second set and the match
+    if ( !gameState->gameRunning()) { // Check match win condition and display the result
+        std::cout << "match win" << std::endl; }
 }
 
 void run_manual_game( GameObject* gameObject, GameState* gameState, int player ) {
@@ -320,9 +310,10 @@ int main( int argc, char *argv[]) {
     // test 05
     test_count++;
 
-    writeMessage( gameObject, "t " + std::to_string( test_count ));
-    std::cout << "calling test_05()..." << std::endl;
-    sleep( 1 );
-    test_06( gameObject, gameState, &loop_count );
+    // writeMessage( gameObject, "t " + std::to_string( test_count ));
+    writeMessage( "Match" );
+    // std::cout << "calling test_05()..." << std::endl;
+    sleep( 6 );
+    // test_06( gameObject, gameState, &loop_count );
     test_count++;
 }
