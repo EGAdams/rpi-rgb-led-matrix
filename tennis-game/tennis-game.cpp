@@ -30,7 +30,7 @@ void writeMessage( GameObject* gameObject, std::string message ) {
     gameObject->getScoreBoard()->clearScreen();
     gameObject->getScoreBoard()->writeMessage( message );
     std::cout << "done writing message.  sleeping..." << std::endl;
-    sleep( 3 )
+    sleep( 3 );
     std::cout << "done sleeping.  clearing screen..." << std::endl;
     gameObject->getScoreBoard()->clearScreen();
     std::cout << "done clearing screen.  done writeMessage()." << std::endl;
