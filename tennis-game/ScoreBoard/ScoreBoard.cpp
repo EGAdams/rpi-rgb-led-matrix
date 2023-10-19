@@ -84,7 +84,7 @@ void ScoreBoard::writeMessage( std::string message ) {
         int baseline = _big_number_font.baseline();            // set the coordinates for the text
         int first_offset  = 0;
         _smallNumberDrawer->DrawNumber( message, first_offset, baseline + _big_number_font.height());
-        std::cout << "sleeping for 2 seconds..." << std::endl;
+        std::cout << "inside ScoreBoard::writeMessage(), sleeping for 3 seconds..." << std::endl;
         GameTimer::gameDelay( 3000 );
         std::cout << "done sleeping." << std::endl; }}
 
