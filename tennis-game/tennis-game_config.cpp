@@ -17,7 +17,7 @@
 #include <map>
 #include "FontLoader/FontLoader.h"
 #include "TextDrawer/TextDrawer.h"
-#include "NumberDrawer/NumberDrawer.h"
+#include "Drawer/Drawer.h"
 #include "ScoreBoard/ScoreBoard.h"
 #include "GameObject/GameObject.h"
 #include "Inputs/Inputs.h"

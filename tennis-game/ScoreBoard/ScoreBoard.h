@@ -4,7 +4,7 @@
 #include "../GameTimer/GameTimer.h"
 #include "../Player/Player.h"
 #include "../GameState/GameState.h"
-#include "../NumberDrawer/NumberDrawer.h"
+#include "../Drawer/Drawer.h"
 #include "../CanvasCreator/CanvasCreator.h"
 #include "../FontLoader/FontLoader.h"
 #include "../SetDrawer/SetDrawer.h"
@@ -26,18 +26,21 @@ public:
     void clearScreen();
     void drawGames();
     void writeMessage( std::string message );
+    void showMatchWinner( std::string message );
     std::string drawPlayerScore(   Player* player );
+    RGBMatrix* getCanvas();
 
 private:
     Player*                        _player1;
     Player*                        _player2;
     GameState*                     _gameState;
     rgb_matrix::Font               _big_number_font;
-    std::unique_ptr<NumberDrawer>  _smallNumberDrawer;
-    std::unique_ptr<NumberDrawer>  _playerOneScoreDrawer;
-    std::unique_ptr<NumberDrawer>  _playerTwoScoreDrawer;
-    std::unique_ptr<NumberDrawer>  _pipeDrawer;
-    std::unique_ptr<NumberDrawer>  _bluePipeDrawer;
+    std::unique_ptr<Drawer>  _drawer;
+    std::unique_ptr<Drawer>  _smallDrawer;
+    std::unique_ptr<Drawer>  _playerOneScoreDrawer;
+    std::unique_ptr<Drawer>  _playerTwoScoreDrawer;
+    std::unique_ptr<Drawer>  _pipeDrawer;
+    std::unique_ptr<Drawer>  _bluePipeDrawer;
     std::unique_ptr<SetDrawer>     _setDrawer;
     std::unique_ptr<RGBMatrix>     _canvas;
 

@@ -9,7 +9,7 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
     GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
     if ( gameLeds->getScoreBoard()->hasCanvas()) {
         std::cout << "scoreboard has canvas.  updating..." << std::endl;
-        
+        _drawText( gameLeds->getScoreBoard(), "MATCH", 2, 20 );
     } else {
         for ( int blink_sequence_count = 0; blink_sequence_count < LOOP_MATCH_LAMP_WIN; blink_sequence_count++ ) {
             for ( int current_lamp = 0; current_lamp < NUMBER_OF_GAME_LAMPS; current_lamp++ ) {
@@ -20,4 +20,11 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
                 gameLeds->updateGames();
                 GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY ); }
             GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY ); }} // end LOOP_MATCH_LAMP_WIN loop  // end run().
+}
+
+void _showText( Scoreboard* scoreboard, std::string message, int first_offset, int baseline ) {
+    Color color( 255, 255, 0 );
+    Color bg_color( 0, 0, 0 );
+    Drawer drawer ( scoreboard->getCanvas(), &_big_number_font, Drawer::SMALL, color, bg_color );
+    drawer.drawText( message, first_offset, baseline + _big_number_font.height()); // draw the text
 }

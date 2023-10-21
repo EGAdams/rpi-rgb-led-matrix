@@ -5,7 +5,7 @@
 #include <string>
 #include "../GameState/GameState.h"
 #include "../Player/Player.h"
-#include "../NumberDrawer/NumberDrawer.h"
+#include "../Drawer/Drawer.h"
 #include "../FontLoader/FontLoader.h"
 #include "../SetHistoryText/SetHistoryText.h"
 #include "../TennisConstants/TennisConstants.h"
