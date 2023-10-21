@@ -42,13 +42,10 @@ void Mode1WinSequences::p1SetWinSequence() {
 
 void Mode1WinSequences::p1MatchWinSequence() {
     std::cout << "//////////////////////// p1MatchWinSequence() ////////////////////////" << std::endl;
-    if ( _scoreBoard->hasCanvas()) {
-        std::cout << "scoreboard has canvas.  updating..." << std::endl;
-    } else {
-        _undo.memory();
-        _pointLeds.updateTBPoints();
-        MatchWinSequence matchWinSequence; matchWinSequence.run( _player1, _gameState, &_gameLeds, &_setLeds );
-        _reset.resetScoreboard(); }}
+    _undo.memory();
+    _pointLeds.updateTBPoints();
+    MatchWinSequence matchWinSequence; matchWinSequence.run( _player1, _gameState, &_gameLeds, &_setLeds );
+    _reset.resetScoreboard(); }
 
 void Mode1WinSequences::p2MatchWinSequence() {
     std::cout << "//////////////////////// p2MatchWinSequence() ////////////////////////" << std::endl;
