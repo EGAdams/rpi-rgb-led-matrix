@@ -310,13 +310,13 @@ int main( int argc, char *argv[]) {
     // end test_04
     test_count++;
 
-    // test 05
+    // test 05 
     test_count++;
 
     writeMessage( gameObject, "t " + std::to_string( test_count ));
     // writeMessage( gameObject, "Match" );
     // std::cout << "calling test_05()..." << std::endl;
     // sleep( 6 );
-    // test_06( gameObject, gameState, &loop_count );
+    test_06( gameObject, gameState, &loop_count );
     test_count++;
 }
