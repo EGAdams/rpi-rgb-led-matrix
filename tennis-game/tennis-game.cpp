@@ -317,6 +317,6 @@ int main( int argc, char *argv[]) {
     // writeMessage( gameObject, "Match" );
     // std::cout << "calling test_05()..." << std::endl;
     // sleep( 6 );
-    test_06( gameObject, gameState, &loop_count );
+    // test_06( gameObject, gameState, &loop_count );
     test_count++;
 }
