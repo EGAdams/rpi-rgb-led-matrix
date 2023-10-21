@@ -24,7 +24,7 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
         gameLeds->getScoreBoard()->clearScreen();
         _showText( gameLeds->getScoreBoard(), "MATCH", 2, 20 );
         GameTimer::gameDelay( 5 );
-        std::cout << "game delay "
+        std::cout << "game delay " << std::endl;
     } else {
         std::cout << "scoreboard does not have canvas.  not updating..." << std::endl;
         for ( int blink_sequence_count = 0; blink_sequence_count < LOOP_MATCH_LAMP_WIN; blink_sequence_count++ ) {
