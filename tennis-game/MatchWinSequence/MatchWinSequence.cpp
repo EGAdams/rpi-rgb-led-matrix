@@ -23,7 +23,7 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
         std::cout << "scoreboard has canvas.  updating..." << std::endl;
         gameLeds->getScoreBoard()->clearCanvas();
         _showText( gameLeds->getScoreBoard(), "MATCH", 2, 20 );
-        _sleep( 5 );
+        GameTimer::gameDelay( 5 );
     } else {
         for ( int blink_sequence_count = 0; blink_sequence_count < LOOP_MATCH_LAMP_WIN; blink_sequence_count++ ) {
             for ( int current_lamp = 0; current_lamp < NUMBER_OF_GAME_LAMPS; current_lamp++ ) {
