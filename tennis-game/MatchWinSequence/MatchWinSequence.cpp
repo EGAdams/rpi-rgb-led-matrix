@@ -21,7 +21,7 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
     GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
     if ( gameLeds->getScoreBoard()->hasCanvas()) {
         std::cout << "scoreboard has canvas.  updating..." << std::endl;
-        gameLeds->getScoreBoard()->clearCanvas();
+        gameLeds->getScoreBoard()->clearScreen();
         _showText( gameLeds->getScoreBoard(), "MATCH", 2, 20 );
         GameTimer::gameDelay( 5 );
     } else {
