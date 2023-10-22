@@ -85,7 +85,7 @@ void ScoreBoard::drawText( std::string message, int color, int x, int y ) {
     Color fg_color = _getColor(color);
     Color bg_color( 0, 0, 0 );
     Drawer drawer( _canvas.get(), &big_number_font, Drawer::SMALL, fg_color, bg_color );
-    drawer.drawText( message, 2, 20 );
+    drawer.drawText( message, x, y );
 }
 
 
