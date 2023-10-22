@@ -15,7 +15,8 @@
 
 #define PLAYER_1_SERVE  0
 #define PLAYER_2_SERVE  1
-#define BIG_NUMBER_FONT "fonts/fgm_27_ee.bdf"
+#define BIG_NUMBER_FONT    "fonts/fgm_27_ee.bdf"
+#define LITTLE_NUMBER_FONT "fonts/little_numbers.bdf"
 #define RED    2
 #define GREEN  5
 #define BLUE   6
