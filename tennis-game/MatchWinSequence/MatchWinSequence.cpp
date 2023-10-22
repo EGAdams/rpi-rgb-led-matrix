@@ -4,17 +4,15 @@
 MatchWinSequence::MatchWinSequence()  {}
 MatchWinSequence::~MatchWinSequence() {}
 
-void MatchWinSequence::_showText( ScoreBoard* scoreboard, std::string message, int first_offset, int baseline ) {
-    
-}
-
 void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* gameLeds, SetLeds* setLeds ) {
     std::cout << "//////////////////////// MatchWinSequence::run() ////////////////////////" << std::endl;
     GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
     if ( gameLeds->getScoreBoard()->hasCanvas()) {
         std::cout << "scoreboard has canvas.  updating..." << std::endl;
-        gameLeds->getScoreBoard()->drawText( "MATCH", YELLOW, 10, 20 );
-        gameLeds->getScoreBoard()->drawText( "WIN",   YELLOW, 30, 40 );
+        gameLeds->getScoreBoard()->drawText( "10,20",  YELLOW, 10, 20  );
+        gameLeds->getScoreBoard()->drawText( "10,80",  YELLOW, 10, 80  );
+        gameLeds->getScoreBoard()->drawText( "30,180", GREEN,  30, 180 );
+        gameLeds->getScoreBoard()->drawText( "50,220", PURPLE, 50, 220 );
         GameTimer::gameDelay( 5000 );
         std::cout << "game delay done." << std::endl;
     } else {
@@ -27,5 +25,5 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
                 player->setGames( current_lamp );
                 gameLeds->updateGames();
                 GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY ); }
-            GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY ); }} // end LOOP_MATCH_LAMP_WIN loop  // end run().
+            GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY ); }} // end run().
 }
