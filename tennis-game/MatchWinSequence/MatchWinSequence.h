@@ -17,8 +17,5 @@ class MatchWinSequence {
   MatchWinSequence();
   ~MatchWinSequence();
   void run( Player* player, GameState* gameState, GameLeds* gameLeds, SetLeds* setLeds );
-
- private:
- void _showText( ScoreBoard* scoreboard, std::string message, int first_offset, int baseline );
 };
 #endif

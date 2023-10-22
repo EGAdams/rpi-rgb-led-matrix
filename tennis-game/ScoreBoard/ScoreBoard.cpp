@@ -90,8 +90,8 @@ void ScoreBoard::drawText( std::string message, int color, int x, int y ) {
 
 
 
-Color ScoreBoard::_getColor( int color_string ) {
-    switch ( color_string ) {
+Color ScoreBoard::_getColor( int color_constant ) {
+    switch ( color_constant ) {
         case RED:    return Color( 255, 0, 0 );
         case GREEN:  return Color( 0, 255, 0 );
         case BLUE:   return Color( 0, 0, 255 );
