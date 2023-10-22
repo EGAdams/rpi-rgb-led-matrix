@@ -76,8 +76,31 @@ ScoreBoard::~ScoreBoard() {
         // delete _canvas.get(); // this causes some error.  only one scoreBoard is created anyway.
     } else { /* std::cout << "*** WARNING: _canvas == NULL, not deleting. ***" << std::endl; */ }}
 
-void ScoreBoard::showMatchWinner( std::string message ) {
-    
+void ScoreBoard::drawText( std::string message, int color, int x, int y ) {
+    FontLoader bigNumberFontLoader( BIG_NUMBER_FONT );
+    rgb_matrix::Font big_number_font;
+    bigNumberFontLoader.LoadFont( big_number_font );
+    if (!big_number_font.LoadFont( BIG_NUMBER_FONT )) {
+        fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT ); exit( 1 );}
+    Color fg_color = _getColor(color);
+    Color bg_color( 0, 0, 0 );
+    Drawer drawer( _canvas.get(), &big_number_font, Drawer::SMALL, fg_color, bg_color );
+    drawer.drawText( message, 2, 20 );
+}
+
+
+
+Color ScoreBoard::_getColor( int color_string ) {
+    switch ( color_string ) {
+        case RED:    return Color( 255, 0, 0 );
+        case GREEN:  return Color( 0, 255, 0 );
+        case BLUE:   return Color( 0, 0, 255 );
+        case YELLOW: return Color( 255, 255, 0 );
+        case ORANGE: return Color( 255, 165, 0 );
+        case PURPLE: return Color( 128, 0, 128 );
+        case WHITE:  return Color( 255, 255, 255 );
+        case BLACK:  return Color( 0, 0, 0 );
+        default:       return Color( 0, 0, 0 ); }
 }
 
 void ScoreBoard::writeMessage( std::string message ) {

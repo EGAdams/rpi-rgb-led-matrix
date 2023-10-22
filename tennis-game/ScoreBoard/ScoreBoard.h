@@ -16,6 +16,14 @@
 #define PLAYER_1_SERVE  0
 #define PLAYER_2_SERVE  1
 #define BIG_NUMBER_FONT "fonts/fgm_27_ee.bdf"
+#define RED    2
+#define GREEN  5
+#define BLUE   6
+#define YELLOW 4
+#define ORANGE 3
+#define PURPLE 7
+#define WHITE  9
+#define BLACK  0
 
 class ScoreBoard {
 public:
@@ -26,9 +34,10 @@ public:
     void clearScreen();
     void drawGames();
     void writeMessage( std::string message );
-    void showMatchWinner( std::string message );
+    void drawText( std::string message, int color, int x, int y );
     std::string drawPlayerScore(   Player* player );
     RGBMatrix* getCanvas();
+    Color _getColor( int color );
 
 private:
     Player*                        _player1;

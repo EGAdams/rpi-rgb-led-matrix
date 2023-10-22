@@ -5,15 +5,7 @@ MatchWinSequence::MatchWinSequence()  {}
 MatchWinSequence::~MatchWinSequence() {}
 
 void MatchWinSequence::_showText( ScoreBoard* scoreboard, std::string message, int first_offset, int baseline ) {
-    FontLoader bigNumberFontLoader( BIG_NUMBER_FONT );
-    rgb_matrix::Font big_number_font;
-    bigNumberFontLoader.LoadFont( big_number_font );
-    if (!big_number_font.LoadFont( BIG_NUMBER_FONT )) {
-        fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT ); exit( 1 );}
-    Color color( 255, 255, 0 );
-    Color bg_color( 0, 0, 0 );
-    Drawer drawer ( scoreboard->getCanvas(), &big_number_font, Drawer::SMALL, color, bg_color );
-    drawer.drawText( message, first_offset, baseline + big_number_font.height()); // draw the text
+    
 }
 
 void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* gameLeds, SetLeds* setLeds ) {
@@ -21,10 +13,10 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
     GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
     if ( gameLeds->getScoreBoard()->hasCanvas()) {
         std::cout << "scoreboard has canvas.  updating..." << std::endl;
-        gameLeds->getScoreBoard()->clearScreen();
-        _showText( gameLeds->getScoreBoard(), "MATCH", 2, 20 );
+        gameLeds->getScoreBoard()->drawText( "MATCH", YELLOW, 10, 20 );
+        gameLeds->getScoreBoard()->drawText( "WIN", YELLOW, 10, 40 );
         GameTimer::gameDelay( 5 );
-        std::cout << "game delay " << std::endl;
+        std::cout << "game delay done." << std::endl;
     } else {
         std::cout << "scoreboard does not have canvas.  not updating..." << std::endl;
         for ( int blink_sequence_count = 0; blink_sequence_count < LOOP_MATCH_LAMP_WIN; blink_sequence_count++ ) {
