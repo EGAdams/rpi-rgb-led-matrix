@@ -318,11 +318,10 @@ int main( int argc, char *argv[]) {
     // std::cout << "calling test_05()..." << std::endl;
     // sleep( 6 );
     // test_06( gameObject, gameState, &loop_count );
-    gameObject->getScoreBoard()->clearScreen();
-    gameObject->getScoreBoard()->drawText( "10,20",  YELLOW, 10, 20  );
-    gameObject->getScoreBoard()->drawText( "10,80",  YELLOW, 10, 80  );
-    gameObject->getScoreBoard()->drawText( "30,180", GREEN,  30, 180 );
-    gameObject->getScoreBoard()->drawText( "50,220", PURPLE, 50, 220 );
+    // gameObject->getScoreBoard()->clearScreen();
+    // gameObject->getScoreBoard()->drawText( "10,20",  YELLOW, 10, 20  );
+    // gameObject->getScoreBoard()->drawText( "10,80",  YELLOW, 10, 80  );
+    
     GameTimer::gameDelay( 5000 );
     test_count++;
 }
