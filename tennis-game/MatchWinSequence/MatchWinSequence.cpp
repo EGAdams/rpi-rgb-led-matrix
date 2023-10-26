@@ -9,10 +9,9 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
     GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
     if ( gameLeds->getScoreBoard()->hasCanvas()) {
         std::cout << "scoreboard has canvas.  updating..." << std::endl;
-        gameLeds->getScoreBoard()->drawText( "10,20",  YELLOW, 10, 20  );
-        gameLeds->getScoreBoard()->drawText( "10,80",  YELLOW, 10, 80  );
-        gameLeds->getScoreBoard()->drawText( "30,180", GREEN,  30, 180 );
-        gameLeds->getScoreBoard()->drawText( "50,220", PURPLE, 50, 220 );
+        gameLeds->getScoreBoard()->clearScreen();
+        gameLeds->getScoreBoard()->drawText( "Match",  YELLOW, 10, 40  );
+        gameLeds->getScoreBoard()->drawText( "Win",  YELLOW, 10, 80  );
         GameTimer::gameDelay( 5000 );
         std::cout << "game delay done." << std::endl;
     } else {

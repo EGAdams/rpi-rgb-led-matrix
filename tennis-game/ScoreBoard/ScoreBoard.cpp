@@ -88,8 +88,6 @@ void ScoreBoard::drawText( std::string message, int color, int x, int y ) {
     drawer.drawText( message, x, y );
 }
 
-
-
 Color ScoreBoard::_getColor( int color_constant ) {
     switch ( color_constant ) {
         case RED:    return Color( 255, 0, 0 );
