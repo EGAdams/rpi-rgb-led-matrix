@@ -11,7 +11,7 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
         std::cout << "scoreboard has canvas.  updating..." << std::endl;
         gameLeds->getScoreBoard()->clearScreen();
         gameLeds->getScoreBoard()->drawText( "Match",  YELLOW, 10, 60  );
-        gameLeds->getScoreBoard()->drawText( "Win",  YELLOW, 16, 80  );
+        gameLeds->getScoreBoard()->drawText( "Win",  YELLOW, 18, 80  );
         GameTimer::gameDelay( 7000 );
         std::cout << "game delay done." << std::endl;
     } else {
