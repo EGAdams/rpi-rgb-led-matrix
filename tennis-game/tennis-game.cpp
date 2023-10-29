@@ -311,13 +311,14 @@ int main( int argc, char *argv[]) {
     test_count++;
 
     // test 05
+    test_05( gameObject, gameState, &loop_count );
     test_count++;
 
    //  writeMessage( gameObject, "t " + std::to_string( test_count ));
     // writeMessage( gameObject, "Match" );
     // std::cout << "calling test_05()..." << std::endl;
     // sleep( 6 );
-    test_06( gameObject, gameState, &loop_count );
+    // test_06( gameObject, gameState, &loop_count );
     // gameObject->getScoreBoard()->clearScreen();
     // gameObject->getScoreBoard()->drawText( "10,20",  YELLOW, 10, 20  );
     // gameObject->getScoreBoard()->drawText( "10,80",  YELLOW, 10, 80  );
