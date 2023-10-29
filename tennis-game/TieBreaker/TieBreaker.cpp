@@ -184,10 +184,10 @@ void TieBreaker::run( Player* currentPlayer ) {
         ( currentPlayer->getPoints() - opponent->getPoints() >= 2)) {
         _undo.snapshot( _history );                                   
         currentPlayer->setGames( currentPlayer->getGames() + 1 );     // increment games
+        incrementSet(); 
         _scoreBoard->update();
         celebrate( currentPlayer );
         GameTimer::gameDelay( 3000 );
-        incrementSet(); 
         endTieBreak(); 
     } else {
                                // needed to put this here otherwise tie break would
@@ -259,8 +259,6 @@ void TieBreaker::initializeTieBreakMode() {
         if ( _watchTimer.watchInputDelay( TIE_BREAK_BLINK_DELAY, &_inputs, TIE_BREAK_WATCH_INTERVAL ) > 0 ) { return; }
         tieLEDsOn();
         if ( _watchTimer.watchInputDelay( TIE_BREAK_BLINK_DELAY, &_inputs, TIE_BREAK_WATCH_INTERVAL ) > 0 ) { return; }}
-    // _player1->setGames( 0 );  commented out for matrix code
-    // _player2->setGames( 0 );
     _gameLeds.updateGames();
     GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
     tieLEDsOn(); } // not coming on?
