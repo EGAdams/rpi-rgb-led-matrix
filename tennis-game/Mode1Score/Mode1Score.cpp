@@ -94,7 +94,7 @@ void Mode1Score::playerGameWin( Player* player ) {
                     _gameState->setSetTieBreak(1);
                     _tieBreaker.setTieBreakEnable();
                 } else if (player->getSets() == SETS_TO_WIN_MATCH) {
-                    player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1MatchWinSequence() : _mode1WinSequences.p2MatchWinSequence();
+                    player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.playerOneMatchWin() : _mode1WinSequences.playerTwoMatchWin();
                     _gameState->stopGameRunning();
                 } else {
                     _gameState->setPlayer1SetHistory(player->getSetHistory());
@@ -175,7 +175,7 @@ void Mode1Score::mode1SetTBP1Games() {
         GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
         _mode1WinSequences.p1SetTBWinSequence();
         _tieBreaker.tieLEDsOff();
-        _mode1WinSequences.p1MatchWinSequence();
+        _mode1WinSequences.playerOneMatchWin();
         _gameState->stopGameRunning(); }
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 ); }
 
@@ -222,7 +222,7 @@ void Mode1Score::mode1SetTBP2Games() {
         GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
         _mode1WinSequences.p2SetTBWinSequence();
         _tieBreaker.tieLEDsOff();
-        _mode1WinSequences.p2MatchWinSequence(); 
+        _mode1WinSequences.playerTwoMatchWin(); 
         _gameState->stopGameRunning(); 
     }
     std::cout << "setting serve switch to: " << _gameState->getServeSwitch() + 1 << std::endl;

@@ -40,15 +40,15 @@ void Mode1WinSequences::p1SetWinSequence() {
     std::cout << "*** executing _setWin->execute for player one... ***" << std::endl;
     _setWin->execute( _player1, _scoreBoard ); }
 
-void Mode1WinSequences::p1MatchWinSequence() {
-    std::cout << "//////////////////////// p1MatchWinSequence() ////////////////////////" << std::endl;
+void Mode1WinSequences::playerOneMatchWin() {
+    std::cout << "//////////////////////// playerOneMatchWin() ////////////////////////" << std::endl;
     _undo.memory();
     _pointLeds.updateTBPoints();
     MatchWinSequence matchWinSequence; matchWinSequence.run( _player1, _gameState, &_gameLeds, &_setLeds );
     _reset.resetScoreboard(); }
 
-void Mode1WinSequences::p2MatchWinSequence() {
-    std::cout << "//////////////////////// p2MatchWinSequence() ////////////////////////" << std::endl;
+void Mode1WinSequences::playerTwoMatchWin() {
+    std::cout << "//////////////////////// playerTwoMatchWin() ////////////////////////" << std::endl;
     _undo.memory();
     _pointLeds.updateTBPoints();
     MatchWinSequence matchWinSequence; matchWinSequence.run( _player2, _gameState, &_gameLeds, &_setLeds );

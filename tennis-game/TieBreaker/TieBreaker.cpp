@@ -374,7 +374,7 @@ void TieBreaker::mode1SetTBP2Games() {
         // GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
         _mode1WinSequences.p2SetTBWinSequence();
         tieLEDsOff();
-        _mode1WinSequences.p2MatchWinSequence(); 
+        _mode1WinSequences.playerTwoMatchWin(); 
         _gameState->stopGameRunning(); }
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 ); }
 
@@ -386,10 +386,9 @@ void TieBreaker::mode1SetTBP1Games() {
         _player2->setSetHistory( _gameState->getCurrentSet(), _player2->getGames());
         _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
         _player1->setSets( _gameState, _player1->getSets() + 1 );
-        // _setLeds.updateSets();                // blinking one to many
-        // GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
+        _scoreBoard->update();
         _mode1WinSequences.p1SetTBWinSequence();
         tieLEDsOff();
-        _mode1WinSequences.p1MatchWinSequence(); 
+        _mode1WinSequences.playerOneMatchWin(); 
         _gameState->stopGameRunning(); }
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 ); }
