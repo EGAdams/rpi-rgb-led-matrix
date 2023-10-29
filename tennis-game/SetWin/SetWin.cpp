@@ -19,7 +19,6 @@ void SetWin::execute( Player* player, ScoreBoard* scoreBoard ) {
             GameTimer::gameDelay( SET_WIN_FLASH_DELAY );  /*** wait ***/ }
     std::cout << "*** inside WinSequences class.  p1GameWinSequence() ***" << std::endl;
     _undo->memory();
-
     player->setPoints( 0 ); player->getOpponent()->setPoints( 0 );
     std::cout << "*** SetWin::execute() ***" << std::endl;
     _undo->memory();
