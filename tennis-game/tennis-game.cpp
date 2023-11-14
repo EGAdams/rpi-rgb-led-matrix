@@ -308,7 +308,7 @@ int main( int argc, char *argv[]) {
     gameObject->getScoreBoard()->clearScreen();
     gameObject->getScoreBoard()->drawText( "Test",  
     YELLOW, TEST_TEXT__X__POSITION, TEST_TEXT__Y__POSITION );
-    gameObject->getScoreBoard()->drawText( " 01 ",  
+    gameObject->getScoreBoard()->drawText( " 02 ",  
     YELLOW, TEST_NUMBER__X__POSITION, TEST_NUMBER__Y__POSITION );
     GameTimer::gameDelay( 4000 );
     std::cout << "calling test_02()..." << std::endl;
