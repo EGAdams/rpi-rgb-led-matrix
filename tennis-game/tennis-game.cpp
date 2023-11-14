@@ -299,8 +299,8 @@ int main( int argc, char *argv[]) {
     // end test_01
 
     gameObject->getScoreBoard()->clearScreen();
-    gameObject->getScoreBoard()->drawText( "Test",  YELLOW, 10, 20  );
-    gameObject->getScoreBoard()->drawText( " 02 ",  YELLOW, 18, 80  );
+    gameObject->getScoreBoard()->drawText( "Test",  YELLOW, 10, 50  );
+    gameObject->getScoreBoard()->drawText( " 02 ",  YELLOW, 10, 80  );
     GameTimer::gameDelay( 4000 );
     std::cout << "calling test_02()..." << std::endl;
     test_02( gameObject, gameState, &loop_count );
