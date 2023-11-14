@@ -292,14 +292,18 @@ int main( int argc, char *argv[]) {
     gameObject->getScoreBoard()->clearScreen();
     gameObject->getScoreBoard()->drawText( "Test",  YELLOW, 10, 20  );
     gameObject->getScoreBoard()->drawText( " 01 ",  YELLOW, 18, 80  );
+    GameTimer::gameDelay( 4000 );
     std::cout << "calling test_01()..." << std::endl;
     test_01( gameObject, gameState, &loop_count );
     test_count++;
     // end test_01
 
-    // writeMessage( gameObject, "t " + std::to_string( test_count ));
-    // std::cout << "calling test_02()..." << std::endl;
-    // test_02( gameObject, gameState, &loop_count );
+    gameObject->getScoreBoard()->clearScreen();
+    gameObject->getScoreBoard()->drawText( "Test",  YELLOW, 10, 20  );
+    gameObject->getScoreBoard()->drawText( " 02 ",  YELLOW, 18, 80  );
+    GameTimer::gameDelay( 4000 );
+    std::cout << "calling test_02()..." << std::endl;
+    test_02( gameObject, gameState, &loop_count );
     test_count++;
     // end test_02
 

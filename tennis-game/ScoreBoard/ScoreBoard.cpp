@@ -77,16 +77,11 @@ ScoreBoard::~ScoreBoard() {
     } else { /* std::cout << "*** WARNING: _canvas == NULL, not deleting. ***" << std::endl; */ }}
 
 void ScoreBoard::drawText( std::string message, int color, int x, int y ) {
-    std::cout << "/// " << message << " ///" << std::endl;
-    FontLoader bigNumberFontLoader( LITTLE_NUMBER_FONT );
-    rgb_matrix::Font big_number_font;
-    bigNumberFontLoader.LoadFont( big_number_font );
-    if (!big_number_font.LoadFont( LITTLE_NUMBER_FONT )) {
-        fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_NUMBER_FONT ); exit( 1 );}
-    Color fg_color = _getColor(color);
-    Color bg_color( 0, 0, 0 );
-    Drawer drawer( _canvas.get(), &big_number_font, Drawer::SMALL, fg_color, bg_color );
-    drawer.drawText( message, x, y );
+    if ( MATRIX_DISABLED == 1 ) {
+        std::cout << "/// " << message << " ///" << std::endl;
+    } else {
+        _drawer->drawText( message, x, y );
+    }
 }
 
 Color ScoreBoard::_getColor( int color_constant ) {
