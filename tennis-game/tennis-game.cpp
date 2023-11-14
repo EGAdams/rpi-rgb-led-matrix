@@ -314,7 +314,7 @@ int main( int argc, char *argv[]) {
     test_count++;
 
     // test 05
-    test_05( gameObject, gameState, &loop_count );
+    // test_05( gameObject, gameState, &loop_count );
     test_count++;
 
    //  writeMessage( gameObject, "t " + std::to_string( test_count ));

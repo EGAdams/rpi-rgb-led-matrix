@@ -77,6 +77,7 @@ ScoreBoard::~ScoreBoard() {
     } else { /* std::cout << "*** WARNING: _canvas == NULL, not deleting. ***" << std::endl; */ }}
 
 void ScoreBoard::drawText( std::string message, int color, int x, int y ) {
+    std::cout << "/// " << message << " ///" << std::endl;
     FontLoader bigNumberFontLoader( LITTLE_NUMBER_FONT );
     rgb_matrix::Font big_number_font;
     bigNumberFontLoader.LoadFont( big_number_font );
@@ -102,9 +103,8 @@ Color ScoreBoard::_getColor( int color_constant ) {
 }
 
 void ScoreBoard::writeMessage( std::string message ) {
-    std::cout << "inside ScoreBoard::_writeMessage()..." << std::endl;
     if ( MATRIX_DISABLED == 1 ) {
-        std::cout << "MATRIX_DISABLED == 1 is true.  skipping message..." << std::endl;
+        std::cout << "/// " << message << " ///" << std::endl;
     } else {
         std::cout << "MATRIX_DISABLED == 1 is false.  writing message..." << std::endl;
         Color color( 255, 255, 0 );
@@ -162,12 +162,16 @@ void ScoreBoard::update() {
 }
 
 void ScoreBoard::_drawTieBreakerBar() {
-    _bluePipeDrawer->drawNumber( "I", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
+    if( MATRIX_DISABLED == 1 ) {
+        std::cout << "/// TIE BREAK ENABLED | ///" << std::endl;
+    } else {
+        _bluePipeDrawer->drawNumber( "I", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
+    }
 }
 
 void ScoreBoard::clearScreen() {
     if ( MATRIX_DISABLED == 1 ) {
-        // std::cout << "clearScreen called, no matrix." << std::endl;
+        std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" << std::endl;
     } else {
         if ( !hasCanvas()) { std::cout << "*** ERROR: canvas == NULL.  exiting... ***" << std::endl; exit( 1 ); }
         std::cout << "clearScreen called, hasCanvas() is good.  clearing matrix...." << std::endl;
