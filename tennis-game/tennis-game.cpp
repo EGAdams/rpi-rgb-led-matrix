@@ -288,9 +288,12 @@ int main( int argc, char *argv[]) {
 
     ///// run tests /////
     int test_count = 1;
-    // writeMessage( gameObject, "t " + std::to_string( test_count ));
-    // std::cout << "calling test_01()..." << std::endl;
-    // test_01( gameObject, gameState, &loop_count );
+    // gameLeds->getScoreBoard()->drawText( "Win",  YELLOW, 18, 80  );
+    gameObject->getScoreBoard()->clearScreen();
+    gameObject->getScoreBoard()->drawText( "Test",  YELLOW, 10, 20  );
+    gameObject->getScoreBoard()->drawText( " 01 ",  YELLOW, 18, 80  );
+    std::cout << "calling test_01()..." << std::endl;
+    test_01( gameObject, gameState, &loop_count );
     test_count++;
     // end test_01
 
