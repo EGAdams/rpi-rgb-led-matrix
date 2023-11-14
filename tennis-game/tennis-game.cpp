@@ -271,7 +271,7 @@ int main( int argc, char *argv[]) {
             manual = 1;
         }
     }
-    # define TEST_TEXT__X__POSITION   10
+    # define TEST_TEXT__X__POSITION   8
     # define TEST_TEXT__Y__POSITION   40
     # define TEST_NUMBER__X__POSITION 5
     # define TEST_NUMBER__Y__POSITION 80
