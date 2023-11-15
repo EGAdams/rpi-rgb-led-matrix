@@ -77,11 +77,15 @@ ScoreBoard::~ScoreBoard() {
     } else { /* std::cout << "*** WARNING: _canvas == NULL, not deleting. ***" << std::endl; */ }}
 
 void ScoreBoard::drawText( std::string message, int color, int x, int y ) {
-    if ( MATRIX_DISABLED == 1 ) {
-        std::cout << "/// " << message << " ///" << std::endl;
-    } else {
-        _drawer->drawText( message, x, y );
-    }
+    FontLoader bigNumberFontLoader( LITTLE_NUMBER_FONT );
+    rgb_matrix::Font big_number_font;
+    bigNumberFontLoader.LoadFont( big_number_font );
+    if (!big_number_font.LoadFont( LITTLE_NUMBER_FONT )) {
+        fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_NUMBER_FONT ); exit( 1 );}
+    Color fg_color = _getColor(color);
+    Color bg_color( 0, 0, 0 );
+    Drawer drawer( _canvas.get(), &big_number_font, Drawer::SMALL, fg_color, bg_color );
+    drawer.drawText( message, x, y );
 }
 
 Color ScoreBoard::_getColor( int color_constant ) {
@@ -98,8 +102,9 @@ Color ScoreBoard::_getColor( int color_constant ) {
 }
 
 void ScoreBoard::writeMessage( std::string message ) {
+    std::cout << "inside ScoreBoard::_writeMessage()..." << std::endl;
     if ( MATRIX_DISABLED == 1 ) {
-        std::cout << "/// " << message << " ///" << std::endl;
+        std::cout << "MATRIX_DISABLED == 1 is true.  skipping message..." << std::endl;
     } else {
         std::cout << "MATRIX_DISABLED == 1 is false.  writing message..." << std::endl;
         Color color( 255, 255, 0 );
@@ -157,16 +162,12 @@ void ScoreBoard::update() {
 }
 
 void ScoreBoard::_drawTieBreakerBar() {
-    if( MATRIX_DISABLED == 1 ) {
-        std::cout << "/// TIE BREAK ENABLED | ///" << std::endl;
-    } else {
-        _bluePipeDrawer->drawNumber( "I", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
-    }
+    _bluePipeDrawer->drawNumber( "I", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
 }
 
 void ScoreBoard::clearScreen() {
     if ( MATRIX_DISABLED == 1 ) {
-        std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" << std::endl;
+        // std::cout << "clearScreen called, no matrix." << std::endl;
     } else {
         if ( !hasCanvas()) { std::cout << "*** ERROR: canvas == NULL.  exiting... ***" << std::endl; exit( 1 ); }
         std::cout << "clearScreen called, hasCanvas() is good.  clearing matrix...." << std::endl;
