@@ -77,6 +77,7 @@ ScoreBoard::~ScoreBoard() {
     } else { /* std::cout << "*** WARNING: _canvas == NULL, not deleting. ***" << std::endl; */ }}
 
 void ScoreBoard::drawText( std::string message, int color, int x, int y ) {
+    if ( MATRIX_DISABLED == 1 ) { std::cout << "/// " << message << " ///" << std::endl; return; }
     FontLoader bigNumberFontLoader( LITTLE_NUMBER_FONT );
     rgb_matrix::Font big_number_font;
     bigNumberFontLoader.LoadFont( big_number_font );
