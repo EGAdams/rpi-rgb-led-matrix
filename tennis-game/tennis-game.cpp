@@ -295,13 +295,13 @@ int main( int argc, char *argv[]) {
     int test_count = 1;
     // gameLeds->getScoreBoard()->drawText( "Win",  YELLOW, 18, 80  );
     gameObject->getScoreBoard()->clearScreen();
-    gameObject->getScoreBoard()->drawText( "Test",  
-    YELLOW, TEST_TEXT__X__POSITION, TEST_TEXT__Y__POSITION );
-    gameObject->getScoreBoard()->drawText( " 01 ",  
-    YELLOW, TEST_NUMBER__X__POSITION, TEST_NUMBER__Y__POSITION );
-    GameTimer::gameDelay( 4000 );
-    std::cout << "calling test_01()..." << std::endl;
-    test_01( gameObject, gameState, &loop_count );
+    // gameObject->getScoreBoard()->drawText( "Test",  
+    // YELLOW, TEST_TEXT__X__POSITION, TEST_TEXT__Y__POSITION );
+    // gameObject->getScoreBoard()->drawText( " 01 ",  
+    // YELLOW, TEST_NUMBER__X__POSITION, TEST_NUMBER__Y__POSITION );
+    // GameTimer::gameDelay( 4000 );
+    // std::cout << "calling test_01()..." << std::endl;
+    // test_01( gameObject, gameState, &loop_count );
     test_count++;
     // end test_01
 

@@ -1,10 +1,9 @@
 #include "ScoreBoard.h"
 
 ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState ):
-    _player1( player1 ), _player2( player2 ), _gameState( gameState ) {
-    
+    _player1( player1 ), _player2( player2 ), _gameState( gameState ) { 
     if ( onRaspberryPi() == false ) {
-        std::cout << "/// constructing scoreboard without matrix... ///" << std::endl;
+        std::cout << "constructing scoreboard without matrix..." << std::endl;
     } else {
         printf( "setting up matrix...\n" );
         Color pipe_color( 255, 255, 0 ); // yellow
@@ -54,7 +53,6 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         Color color( 255, 255, 0 );
         Color bg_color( 0, 0, 0 );
         Color blue_color( 0, 0, 255 );
-
 
         _playerOneScoreDrawer   = std::make_unique<Drawer>(
             _canvas.get(), &_big_number_font, Drawer::BIG, player_one_score_color, bg_color );
@@ -142,24 +140,20 @@ void ScoreBoard::update() {
     drawPlayerScore( _player2 );
     // _setDrawer->drawSets();
 
-    if ( hasCanvas() == false ) {
-        std::cout << "scoreboard has no canvas.  skipping blink..." << std::endl;
-    } else {
-        std::cout << "scoreboard has a canvas.  checking for blink in action..." << std::endl;
-        bool blink = _gameState->getCurrentAction().find( "blink" ) != std::string::npos;
-        if ( blink ) {
-            std::cout << "blink is true, calling _setDrawer->drawBlinkSets()..." << std::endl;
-            std::cout << "gamestate current action: " << _gameState->getCurrentAction() << std::endl;
-            int playerToBlink = _gameState->getCurrentAction().find( "player1" ) != std::string::npos ?
-                PLAYER_1_INITIALIZED : PLAYER_2_INITIALIZED;
-            _setDrawer->drawBlinkSets( playerToBlink ); // checks current action ignoring playerToBlink
-        } else { _setDrawer->drawSets(); }
+    std::cout << "scoreboard has a canvas.  checking for blink in action..." << std::endl;
+    bool blink = _gameState->getCurrentAction().find( "blink" ) != std::string::npos;
+    if ( blink ) {
+        std::cout << "blink is true, calling _setDrawer->drawBlinkSets()..." << std::endl;
+        std::cout << "gamestate current action: " << _gameState->getCurrentAction() << std::endl;
+        int playerToBlink = _gameState->getCurrentAction().find( "player1" ) != std::string::npos ?
+            PLAYER_1_INITIALIZED : PLAYER_2_INITIALIZED;
+        _setDrawer->drawBlinkSets( playerToBlink ); // checks current action ignoring playerToBlink
+    } else { _setDrawer->drawSets(); }
 
-        if ( _gameState->getTieBreak() == true ) {
-            std::cout << "tie break is true, calling _drawTieBreakerBar()..." << std::endl;
-            _drawTieBreakerBar();
-        } else { std::cout << "tie break is false, not calling _drawTieBreakerBar()..." << std::endl; }
-    }
+    if ( _gameState->getTieBreak() == true ) {
+        std::cout << "tie break is true, calling _drawTieBreakerBar()..." << std::endl;
+        _drawTieBreakerBar();
+    } else { std::cout << "tie break is false, not calling _drawTieBreakerBar()..." << std::endl; }
 }
 
 void ScoreBoard::_drawTieBreakerBar() {
@@ -266,9 +260,6 @@ bool ScoreBoard::onRaspberryPi() {
     if (file.is_open()) {
         std::getline(file, line);
         file.close();
-        if (line.find("Raspberry Pi") != std::string::npos) {
-            return true;
-        }
+        if (line.find("Raspberry Pi") != std::string::npos) { return true; }
     }
-    return false;
-}
+    return false; }
