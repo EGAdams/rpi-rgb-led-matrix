@@ -11,6 +11,8 @@
 #include <string.h>
 #include <stdio.h>
 #include <iostream>
+#include <string>
+#include <fstream>
 #include <memory>
 
 #define PLAYER_1_SERVE  0
@@ -39,6 +41,7 @@ public:
     std::string drawPlayerScore(   Player* player );
     RGBMatrix* getCanvas();
     Color _getColor( int color );
+    bool onRaspberryPi();
 
 private:
     Player*                        _player1;

@@ -24,7 +24,7 @@ void SetDrawer::drawSets() {
     std::string playerOneSetString = _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX );
     std::string playerTwoSetString = _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX );
     Color thirdRowColor( 0, 255, 0 );
-    if ( MATRIX_DISABLED ) {
+    if ( _canvas == NULL ) {
         std::cout << playerOneSetString << std::endl;
         std::cout << playerTwoSetString << std::endl;
     } else {
