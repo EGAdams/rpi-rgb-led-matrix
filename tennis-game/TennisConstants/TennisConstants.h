@@ -47,7 +47,12 @@
 #define UNDEFINED_SCORE             99
 #define BLUE_BAR_VERTICAL_OFFSET    121
 #define BLUE_BAR_HORIZONTAL_OFFSET  54
-#define MATRIX_DISABLED             1
+
+#if ( WIN32 || _WIN32 || __WIN32__ || __NT__ )
+    #define MATRIX_DISABLED 1  // there is no matrix in windows
+#else
+    #define MATRIX_DISABLED 0
+#endif
 
 // #define INPUT 0 // not in windows.. ouch!!
 // #define OUTPUT 0
