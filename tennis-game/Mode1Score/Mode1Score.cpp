@@ -116,10 +116,16 @@ void Mode1Score::playerGameWin( Player* player ) {
             }
         }
     } else {
-        player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1GameWinSequence() : _mode1WinSequences.p2GameWinSequence();
+        if ( player->number() == PLAYER_1_INITIALIZED ) {
+            _mode1WinSequences.p1GameWinSequence();
+            _gameState->setPlayer1SetHistory(player->getSetHistory());
+            _gameState->setPlayer2SetHistory(opponent->getSetHistory());
+        } else {
+            _mode1WinSequences.p2GameWinSequence();
+            _gameState->setPlayer2SetHistory(player->getSetHistory());
+            _gameState->setPlayer1SetHistory(opponent->getSetHistory());
+        } 
         _gameLeds.updateGames();
-        _gameState->setPlayer1SetHistory(player->getSetHistory());
-        _gameState->setPlayer2SetHistory(opponent->getSetHistory());
         _resetGame();
     }
 }
