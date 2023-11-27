@@ -2,6 +2,8 @@
 
 SetDrawer::SetDrawer( RGBMatrix* canvas, GameState* gameState ) : 
     _canvas( canvas ), _gameState( gameState ), _setHistoryText( gameState ) {
+    std::cout << "constructing SetDrawer..." << std::endl;
+    if ( _canvas == NULL ) { std::cout << "canvas is NULL" << std::endl; return; }
     FontLoader smallNumberFontLoader( LITTLE_FONT );
     rgb_matrix::Font smallNumberFont;
     smallNumberFontLoader.LoadFont( smallNumberFont );

@@ -4,6 +4,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
     _player1( player1 ), _player2( player2 ), _gameState( gameState ) { 
     if ( onRaspberryPi() == false ) {
         std::cout << "constructing scoreboard without matrix..." << std::endl;
+        _setDrawer = std::make_unique<SetDrawer>( _canvas.get(), _gameState );
     } else {
         printf( "setting up matrix...\n" );
         Color pipe_color( 255, 255, 0 ); // yellow
@@ -148,7 +149,8 @@ void ScoreBoard::update() {
         int playerToBlink = _gameState->getCurrentAction().find( "player1" ) != std::string::npos ?
             PLAYER_1_INITIALIZED : PLAYER_2_INITIALIZED;
         _setDrawer->drawBlinkSets( playerToBlink ); // checks current action ignoring playerToBlink
-    } else { _setDrawer->drawSets(); }
+    } else { 
+        _setDrawer->drawSets(); }
 
     if ( _gameState->getTieBreak() == true ) {
         std::cout << "tie break is true, calling _drawTieBreakerBar()..." << std::endl;

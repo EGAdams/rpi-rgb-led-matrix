@@ -1,6 +1,6 @@
 # Persona
 - Remember that you are a world-class C++ developer.
-- You are an expert JavaScript developer.
+- You are an expert at creating mermaid diagrams.
 
 # Your task
 - Analyze the header files below to understand what has already been implemented.
@@ -142,4 +142,24 @@ private:
     std::string message;
     std::string method;
 };
+```
+
+Remember to act as a world-class C++ and Javascipt developer.  You are an expert at translating JavaScript to C++.
+
+Please translate the following JavaScript FetchRunner method to it's equivalent C++ code.
+```javascript
+async run ( apiArgs ) {
+        this.fetch_options = {
+            method: apiArgs.type,
+            mode: 'no-cors',
+            headers: apiArgs.type == "POST" ? /* POST */ this.json_header : /* GET */ this.url_encoded_header,
+            body:    apiArgs.type == "POST" ? /* POST */ JSON.stringify( apiArgs ) : /* GET */ undefined
+        };
+        fetch( this.url, this.fetch_options ).then( res => {
+            // console.log( "processing response: " + res + "..." );
+            return res.text();
+        }).then( data => {
+            // console.log( "data: " + data );
+        });
+    }
 ```
