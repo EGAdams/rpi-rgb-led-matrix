@@ -22,6 +22,4 @@ private:
     void setupHeaders();
     static size_t writeCallback(void* contents, size_t size, size_t nmemb, void* userp);
 };
-
 #endif // FETCHRUNNER_H
-

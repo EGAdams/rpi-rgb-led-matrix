@@ -4,12 +4,17 @@ import sys
 import os
 import re
 
+
+# human input source directory
+source_directory = input ( "Enter the source directory: " )
+
 # list the files in the current directory and get the class name from the .h file
 class_name = ''
 # change directory to os.getcwd() + "/tennis-game/LogObjectContainer"
-os.chdir( os.getcwd() + "/tennis-game/LogObjectContainer" )
+os.chdir( "/home/adamsl/rpi-rgb-led-matrix/tennis-game/" + source_directory )
 
 # print the current directory
+print( "current directory: " )
 print( os.getcwd() )
 
 files = os.listdir(  )

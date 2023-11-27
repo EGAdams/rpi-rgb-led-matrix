@@ -27,5 +27,4 @@ private:
     std::string message;
     std::string method;
 };
-
 #endif // LOGOBJECT_H

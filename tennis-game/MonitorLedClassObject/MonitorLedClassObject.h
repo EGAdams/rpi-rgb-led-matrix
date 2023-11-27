@@ -22,5 +22,4 @@ private:
     std::string margin_top;
     std::string color;
 };
-
 #endif // MONITOR_LED_CLASS_OBJECT_H

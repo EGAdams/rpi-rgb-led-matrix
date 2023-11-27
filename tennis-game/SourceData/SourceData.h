@@ -3,6 +3,8 @@
 
 #include <string>
 #include <functional>
+#include "../FetchRunner/FetchRunner.h"
+#include "../MonitoredObjectStructures.h"
 
 class SourceData {
 public:

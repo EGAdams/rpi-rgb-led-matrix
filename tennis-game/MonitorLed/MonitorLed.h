@@ -21,5 +21,4 @@ private:
     static const std::string PASS_COLOR;
     static const std::string FAIL_COLOR;
 };
-
 #endif // MONITOR_LED_H

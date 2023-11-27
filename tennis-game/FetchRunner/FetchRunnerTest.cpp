@@ -18,6 +18,7 @@ void testFetchRunner() {
     // Run the fetcher
     fetchRunner.run( "GET", "{\"runner\":\"FetchRunner\",\"url\":\"https://americansjewelry.com/libraries/local-php-api/index.php/\",\"new_id\":\"InitSupervisor_2021\"}" );
 
+    
 
     // Restore original buffer before reading
     std::cout.rdbuf( prevcoutbuf );

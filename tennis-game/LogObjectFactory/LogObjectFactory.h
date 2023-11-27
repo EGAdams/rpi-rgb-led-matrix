@@ -16,5 +16,4 @@ private:
     std::string generateUniqueId();
     uint64_t getCurrentTimestamp();
 };
-
 #endif // LOG_OBJECT_FACTORY_H

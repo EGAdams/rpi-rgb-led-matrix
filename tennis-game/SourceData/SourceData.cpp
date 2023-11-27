@@ -1,6 +1,4 @@
 #include "SourceData.h"
-#include "../FetchRunner/FetchRunner.h"
-#include "../MonitoredObjectStructures.h"
 #include <iostream> // For demonstration purposes
 
 SourceData::SourceData(const std::string& url) : url(url) {}

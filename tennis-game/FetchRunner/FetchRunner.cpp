@@ -4,7 +4,6 @@
 
 FetchRunner::FetchRunner( const std::string& config ) {
 
-    // print the config
     std::cout << "Config: " << config << std::endl;
     
     initializeCurl();
