@@ -2,6 +2,7 @@
 #define FETCHRUNNER_H
 
 #include <string>
+#include <functional>
 #include <curl/curl.h>
 
 class FetchRunner {
@@ -9,7 +10,7 @@ public:
     FetchRunner(const std::string& config);
     ~FetchRunner();
 
-    void run(const std::string& apiArgsType, const std::string& apiArgs);
+    void run(const std::string& apiArgsType, const std::string& apiArgs, std::function<void(const std::string&)> callback)
 
 private:
     std::string url;

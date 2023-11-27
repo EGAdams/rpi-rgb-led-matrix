@@ -2,8 +2,8 @@
 #include <iostream>
 #include <sstream>
 
-FetchRunner::FetchRunner(const std::string& config) {
-    url = config;
+FetchRunner::FetchRunner( const std::string& config ) {
+
     // print the config
     std::cout << "Config: " << config << std::endl;
     
@@ -34,9 +34,14 @@ size_t FetchRunner::writeCallback(void* contents, size_t size, size_t nmemb, voi
     return size * nmemb;
 }
 
-void FetchRunner::run(const std::string& apiArgsType, const std::string& apiArgs) {
-    CURLcode res;
 
+
+void FetchRunner::run(const std::string& apiArgsType, const std::string& apiArgs, std::function<void(const std::string&)> callback) {
+    // parse apiArgs from a string into a json object
+    std::cout << "apiArgs: " << apiArgs << std::endl;
+    
+
+    CURLcode res;
     if (curl) {
         // Set the headers based on the method type
         if (apiArgsType == "POST") {
@@ -64,6 +69,7 @@ void FetchRunner::run(const std::string& apiArgsType, const std::string& apiArgs
         } else {
             // Process response here
             std::cout << "Response: " << response_string << std::endl;
+            callback(response_string);
         }
     }
 }

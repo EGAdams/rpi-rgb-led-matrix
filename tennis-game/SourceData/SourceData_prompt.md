@@ -3,9 +3,59 @@
 
 # Your task
 - Analyze the header files below to understand what has already been implemented.
-- Create SourceData .h and .cpp files using the JavaScript SourceData.js provided below as a guide.
-- Clone all of the variables and methods provided in the JavaScript SourceData class.
-- If you think anything should be added, include it in your answer.
+- Implement SourceData::get using the JavaScript SourceData.js provided below as a guide.
+- Use the FetchRunner class run() method to make the API call.
+
+# JSON config object that will need to be stringified to use in your solution
+```json
+{
+    "api_path": "https://americansjewelry.com/libraries/local-php-api/index.php/object/select/McbaStartupMonitor_2021",
+    "type": "GET",
+    "object_view_id": "McbaStartupMonitor_2021",
+    "object_data": {
+        "logObjects": [],
+        "object_view_id": "McbaStartupMonitor_2021",
+        "objectModel": {},
+        "logObjectFactory": {},
+        "monitorLed": {
+            "config": {
+                "new_id": "2021",
+                "table": "monitored_objects"
+            },
+            "classObject": {
+                "background_color": "lightyellow",
+                "text_align": "left",
+                "margin_top": "2px",
+                "color": "black"
+            },
+            "ledText": "ready.",
+            "RUNNING_COLOR": "lightyellow",
+            "PASS_COLOR": "lightgreen",
+            "FAIL_COLOR": "#fb6666"
+        }
+    }
+}
+```
+
+## C++ FetchRunner class to use for the SourceData::get method
+```cpp
+class FetchRunner {
+public:
+    FetchRunner(const std::string& config);
+    ~FetchRunner();
+    void run(const std::string& apiArgsType, const std::string& apiArgs);
+
+private:
+    std::string url;
+    struct curl_slist* url_encoded_header;
+    struct curl_slist* json_header;
+    CURL* curl;
+
+    void initializeCurl();
+    void setupHeaders();
+    static size_t writeCallback(void* contents, size_t size, size_t nmemb, void* userp);
+};
+```
 
 ## Javascript SourceData object to use as a guide
 ```javascript
@@ -187,3 +237,5 @@ private:
     std::string method;
 };
 ```
+`g4_answer`
+https://chat.openai.com/share/dacca2b9-a881-4da8-9308-a2fff913cd11
