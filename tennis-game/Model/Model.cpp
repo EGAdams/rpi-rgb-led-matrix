@@ -1,7 +1,5 @@
 #include "Model.h"
 
-Model::Model(SourceData* sourceData) : sourceData(sourceData) {}
-
 void Model::selectObject(const std::string& object_view_id,
                          const std::function<void(const std::string&)>& callback) {
     sourceData->selectObject(object_view_id, callback);

@@ -17,13 +17,17 @@
 
 class Model {
 public:
-    explicit Model(SourceData* sourceData);
+    explicit Model(SourceData* sourceData) : sourceData(sourceData) {}
     
     void selectObject(const std::string& object_view_id, const std::function<void(const std::string&)>& callback);
+
     void selectAllObjects(const std::function<void()>& callback);
-    void insertObject(const std::string& object_view_id, const std::string& object_data, const std::function<void()>& callback);
+    
+    void insertObject(const std::string& object_view_id, const std::string& object_data, const 
+    std::function<void()>& callback);
     // In Model.h
-  void updateObject(const std::string& object_view_id, const std::string& object_data, const std::function<void(const std::string&)>& callback);
+  
+    void updateObject(const std::string& object_view_id, const std::string& object_data, const std::function<void(const std::string&)>& callback);
 
 
 
@@ -37,8 +41,6 @@ private:
 # Cpp file for the class: 
 ```cpp
 #include "Model.h"
-
-Model::Model(SourceData* sourceData) : sourceData(sourceData) {}
 
 void Model::selectObject(const std::string& object_view_id,
                          const std::function<void(const std::string&)>& callback) {
@@ -285,17 +287,48 @@ print-%:
 # Make output
 ```
 g++ -I../include -Wall -O3 -g -Wextra -Wno-unused-parameter -I/home/adamsl/rpi-rgb-led-matrix/tennis-game/googletest/googletest/include -c -o Model.o Model/Model.cpp
-Model/Model.cpp: In member function ‘void Model::updateObject(const string&, const string&, const std::function<void(const std::__cxx11::basic_string<char>&)>&)’:
-Model/Model.cpp:20:59: error: cannot convert ‘const std::function<void(const std::__cxx11::basic_string<char>&)>’ to ‘const std::function<void()>&’
-   20 |     sourceData->updateObject(object_view_id, object_data, callback);
-      |                                                           ^~~~~~~~
-      |                                                           |
-      |                                                           const std::function<void(const std::__cxx11::basic_string<char>&)>
+Model/Model.cpp: In member function ‘void Model::selectObject(const string&, const std::function<void(const std::__cxx11::basic_string<char>&)>&)’:
+Model/Model.cpp:5:30: error: cannot convert ‘const string’ {aka ‘const std::__cxx11::basic_string<char>’} to ‘const ISourceQueryConfig&’
+    5 |     sourceData->selectObject(object_view_id, callback);
+      |                              ^~~~~~~~~~~~~~
+      |                              |
+      |                              const string {aka const std::__cxx11::basic_string<char>}
 In file included from Model/Model.h:4,
                  from Model/Model.cpp:1:
-Model/../SourceData/SourceData.h:16:119: note:   initializing argument 3 of ‘void SourceData::updateObject(const string&, const string&, const std::function<void()>&)’
-   16 |     void updateObject(const std::string& object_view_id, const std::string& object_data, const std::function<void()>& callback);
-      |                                                                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~
+Model/../SourceData/SourceData.h:14:49: note:   initializing argument 1 of ‘void SourceData::selectObject(const ISourceQueryConfig&, IQueryResultProcessor*)’
+   14 |     void selectObject(const ISourceQueryConfig& queryConfig, IQueryResultProcessor* callbackObject);
+      |                       ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~
+Model/Model.cpp: In member function ‘void Model::selectAllObjects(const std::function<void()>&)’:
+Model/Model.cpp:9:34: error: cannot convert ‘const std::function<void()>’ to ‘IQueryResultProcessor*’
+    9 |     sourceData->selectAllObjects(callback);
+      |                                  ^~~~~~~~
+      |                                  |
+      |                                  const std::function<void()>
+In file included from Model/Model.h:4,
+                 from Model/Model.cpp:1:
+Model/../SourceData/SourceData.h:13:50: note:   initializing argument 1 of ‘void SourceData::selectAllObjects(IQueryResultProcessor*)’
+   13 |     void selectAllObjects(IQueryResultProcessor* callbackObject);
+      |                           ~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+Model/Model.cpp: In member function ‘void Model::insertObject(const string&, const string&, const std::function<void()>&)’:
+Model/Model.cpp:14:67: error: no matching function for call to ‘SourceData::insertObject(const string&, const string&, const std::function<void()>&)’
+   14 |     sourceData->insertObject(object_view_id, object_data, callback);
+      |                                                                   ^
+In file included from Model/Model.h:4,
+                 from Model/Model.cpp:1:
+Model/../SourceData/SourceData.h:15:10: note: candidate: ‘void SourceData::insertObject(const ISourceQueryConfig&, IQueryResultProcessor*)’
+   15 |     void insertObject(const ISourceQueryConfig& queryConfig, IQueryResultProcessor* callbackObject);
+      |          ^~~~~~~~~~~~
+Model/../SourceData/SourceData.h:15:10: note:   candidate expects 2 arguments, 3 provided
+Model/Model.cpp: In member function ‘void Model::updateObject(const string&, const string&, const std::function<void(const std::__cxx11::basic_string<char>&)>&)’:
+Model/Model.cpp:18:67: error: no matching function for call to ‘SourceData::updateObject(const string&, const string&, const std::function<void(const std::__cxx11::basic_string<char>&)>&)’
+   18 |     sourceData->updateObject(object_view_id, object_data, callback);
+      |                                                                   ^
+In file included from Model/Model.h:4,
+                 from Model/Model.cpp:1:
+Model/../SourceData/SourceData.h:16:10: note: candidate: ‘void SourceData::updateObject(const ISourceQueryConfig&, IQueryResultProcessor*)’
+   16 |     void updateObject(const ISourceQueryConfig& queryConfig, IQueryResultProcessor* callbackObject);
+      |          ^~~~~~~~~~~~
+Model/../SourceData/SourceData.h:16:10: note:   candidate expects 2 arguments, 3 provided
 make: *** [Makefile:47: Model.o] Error 1
 
 ```
@@ -306,33 +339,28 @@ make: *** [Makefile:47: Model.o] Error 1
     
 ### Header file: ../SourceData/SourceData.h    
 ```cpp
-#ifndef SOURCEDATA_H
-#define SOURCEDATA_H
+#ifndef SOURCE_DATA_H
+#define SOURCE_DATA_H
 
-#include <string>
-#include <functional>
-#include "../FetchRunner/FetchRunner.h"
-#include "../MonitoredObjectStructures.h"
+#include "../ISourceDataConfig.h"
+#include "../ISourceQueryConfig.h"
+#include "../IQueryResultProcessor.h"
 
 class SourceData {
 public:
-    explicit SourceData(const std::string& url);
+    SourceData(const ISourceDataConfig& configuration_object)
+        : runnerObject(configuration_object.runner), url(configuration_object.url) {}
     
-    void selectAllObjects(const std::function<void()>& callback);
-    void selectObject(const std::string& object_view_id, const std::function<void(const std::string&)>& callback);
-    void insertObject(const std::string& object_view_id, const std::string& object_data, const std::function<void()>& callback);
-    void updateObject(const std::string& object_view_id, const std::string& object_data, const std::function<void()>& callback);
+    void selectAllObjects(IQueryResultProcessor* callbackObject);
+    void selectObject(const ISourceQueryConfig& queryConfig, IQueryResultProcessor* callbackObject);
+    void insertObject(const ISourceQueryConfig& queryConfig, IQueryResultProcessor* callbackObject);
+    void updateObject(const ISourceQueryConfig& queryConfig, IQueryResultProcessor* callbackObject);
 
 private:
+    FetchRunner* runnerObject;  // Replace RunnerType with the actual C++ type
     std::string url;
-    std::string api_path;
-
-    // Helper methods for making HTTP requests
-    void get(const APIConfigStruct& config, std::function<void(const std::string&)> callback);
-    void post(const std::string& api_path, const std::string& data, const std::function<void()>& callback);
 };
 
-#endif // SOURCEDATA_H
-
+#endif // SOURCE_DATA_H
 ```
 

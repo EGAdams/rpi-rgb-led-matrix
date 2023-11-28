@@ -7,7 +7,8 @@
 
 class SourceData {
 public:
-    SourceData(const ISourceDataConfig& config);
+    SourceData(const ISourceDataConfig& configuration_object)
+        : runnerObject(configuration_object.runner), url(configuration_object.url) {}
     
     void selectAllObjects(IQueryResultProcessor* callbackObject);
     void selectObject(const ISourceQueryConfig& queryConfig, IQueryResultProcessor* callbackObject);
@@ -15,7 +16,7 @@ public:
     void updateObject(const ISourceQueryConfig& queryConfig, IQueryResultProcessor* callbackObject);
 
 private:
-    std::string runnerObject;  // Replace RunnerType with the actual C++ type
+    FetchRunner* runnerObject;  // Replace RunnerType with the actual C++ type
     std::string url;
 };
 

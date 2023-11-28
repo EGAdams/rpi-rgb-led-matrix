@@ -7,13 +7,17 @@
 
 class Model {
 public:
-    explicit Model(SourceData* sourceData);
+    explicit Model(SourceData* sourceData) : sourceData(sourceData) {}
     
     void selectObject(const std::string& object_view_id, const std::function<void(const std::string&)>& callback);
+
     void selectAllObjects(const std::function<void()>& callback);
-    void insertObject(const std::string& object_view_id, const std::string& object_data, const std::function<void()>& callback);
+    
+    void insertObject(const std::string& object_view_id, const std::string& object_data, const 
+    std::function<void()>& callback);
     // In Model.h
-  void updateObject(const std::string& object_view_id, const std::string& object_data, const std::function<void(const std::string&)>& callback);
+  
+    void updateObject(const std::string& object_view_id, const std::string& object_data, const std::function<void(const std::string&)>& callback);
 
 
 
