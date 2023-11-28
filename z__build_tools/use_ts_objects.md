@@ -185,5 +185,3 @@ private:
 
 These objects are proven to work and are in production.  I am not sure if they will help in the design of this system, but I thought I would share them just in case.  Please use this design if it will help.
 Please help me make more C++ Objects if it would help in the design of this system.  The FetchRunner object is the only one I have made so far.
-
-
