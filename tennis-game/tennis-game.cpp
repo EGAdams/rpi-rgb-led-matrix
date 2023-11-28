@@ -17,6 +17,7 @@
 #include "Drawer/Drawer.h"
 #include "ScoreBoard/ScoreBoard.h"
 #include "GameObject/GameObject.h"
+#include "LoggerFactory/LoggerFactory.h"
 
 using namespace rgb_matrix;
 #define SCORE_DELAY    .15
@@ -262,6 +263,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, int player )
     return; }
 
 int main( int argc, char *argv[]) {
+    std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );
     // if --argument is manual then run manual tests
     int manual = 0;
     if( argc > 1 ) {
@@ -275,6 +277,8 @@ int main( int argc, char *argv[]) {
     # define TEST_TEXT__Y__POSITION   40
     # define TEST_NUMBER__X__POSITION 5
     # define TEST_NUMBER__Y__POSITION 80
+
+
 
     int loop_count = 0;
     std::cout << "creating GameObject..." << std::endl;

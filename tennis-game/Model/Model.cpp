@@ -16,7 +16,6 @@ void Model::insertObject(const std::string& object_view_id,
     sourceData->insertObject(object_view_id, object_data, callback);
 }
 
-void Model::updateObject(const std::string& object_view_id,
-                         const std::string& object_data, const std::function<void()>& callback) {
+void Model::updateObject(const std::string& object_view_id, const std::string& object_data, const std::function<void(const std::string&)>& callback) {
     sourceData->updateObject(object_view_id, object_data, callback);
 }
