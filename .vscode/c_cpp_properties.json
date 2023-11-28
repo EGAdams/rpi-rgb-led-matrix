@@ -5,6 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/tennis-game/Player/*",
+                "${workspaceFolder}/tennis-game/*\"",
                 "${workspaceFolder}/tennis-game/Mode1Score/**",
                 "${workspaceFolder}/tennis-game/googletest/googletest/include/**",
                 "${workspaceFolder}/tennis-game/googletest/googlemock/**",
