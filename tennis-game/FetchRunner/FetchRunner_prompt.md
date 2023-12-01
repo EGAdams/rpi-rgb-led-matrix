@@ -1,165 +1,154 @@
 # Persona
-- Remember that you are a world-class C++ developer.
-- You are an expert at creating mermaid diagrams.
+- You are a world-class C++ developer.
+- Act as an Expert at translating TypeScript to C++.
 
 # Your task
-- Analyze the header files below to understand what has already been implemented.
-- Create FetchRunner .h and .cpp files using the JavaScript FetchRunner.js provided below as a guide.
-- Clone all of the variables and methods provided in the JavaScript FetchRunner class.
-- If you think anything should be added, include it in your answer.
+- Analyze the C++ header files below to understand what has already been implemented.
+- Clone all of the variables and methods provided in the TypeScript FetchRunner class.
+- Create FetchRunner .h and .cpp files using the TypeScript FetchRunner class provided below as a guide.
+- Make sure to play close attention to the runner.run() method in the working SourceData.cpp file.  This is crucial to getting the FetchRunner class to work properly.
 
-## Javascript FetchRunner object to use as a guide
-```javascript
+## TypeScript FetchRunner class to use as a guide
+```typescript
 /** @class FetchRunner class */
-class FetchRunner {
-    url;
-    url_encoded_header;
-    json_header;
-    fetch_options;
-    constructor( config ) {
+export default class FetchRunner {
+    url                : string;
+    url_encoded_header : Record< string, string >;
+    json_header        : Record< string, string >;
+    fetch_options     !: RequestInit;
+
+    constructor( config: { api_path: string; } ) {
         this.url = config.api_path;
         this.url_encoded_header = { "Content-Type": "application/x-www-form-urlencoded" };
-        this.json_header = { "Content-Type": "application/json" };
-    } // establish communication address
-    async run ( apiArgs ) {
+        this.json_header        = { "Content-Type": "application/json"                  };
+    } // establish communication address and define header objects.
+
+    async run( apiArgs: { type: string; }, callbackObject : IQueryResultProcessor ): Promise< void > {
         this.fetch_options = {
-            method: apiArgs.type,
-            mode: 'no-cors',
-            headers: apiArgs.type == "POST" ? /* POST */ this.json_header : /* GET */ this.url_encoded_header,
-            body:    apiArgs.type == "POST" ? /* POST */ JSON.stringify( apiArgs ) : /* GET */ undefined
+            method:  apiArgs.type,
+            mode:    apiArgs.type === "POST" ? /* POST */ 'no-cors'                 : /* GET */ undefined,
+            headers: apiArgs.type === "POST" ? /* POST */ this.json_header          : /* GET */ this.url_encoded_header,
+            body:    apiArgs.type === "POST" ? /* POST */ JSON.stringify( apiArgs ) : /* GET */ undefined
         };
-        fetch( this.url, this.fetch_options ).then( res => {
-            // console.log( "processing response: " + res + "..." );
-            return res.text();
-        }).then( data => {
-            // console.log( "data: " + data );
-        });
+        try {
+            fetch( this.url, this.fetch_options ).then( res => {
+                return res.text();
+            }).then( data => {
+                callbackObject.processQueryResult( callbackObject, data );
+            });
+        } catch ( fetch_error ) {
+            console.log( fetch_error );
+        }
     }
 }
 ```
 
-## MonitorLed header file
+## SourceData.h
 ```cpp
-class MonitorLed {
+class SourceData {
 public:
-    MonitorLed();
-
-    void setFail();
-    void setPass();
-    void setLedBackgroundColor(const std::string& newColor);
-    void setLedTextColor(const std::string& newColor);
-    void setLedText(const std::string& newText);
+    SourceData(const ISourceDataConfig& configuration_object);
+    
+    void selectAllObjects(IQueryResultProcessor* callbackObject);
+    void selectObject(const ISourceQueryConfig& queryConfig, IQueryResultProcessor* callbackObject);
+    void insertObject(const ISourceQueryConfig& queryConfig, IQueryResultProcessor* callbackObject);
+    void updateObject(const ISourceQueryConfig& queryConfig, IQueryResultProcessor* callbackObject);
 
 private:
-    MonitorLedClassObject classObject;
-    std::string ledText;
-    static const std::string RUNNING_COLOR;
-    static const std::string PASS_COLOR;
-    static const std::string FAIL_COLOR;
+    FetchRunner* runnerObject;
+    std::string url;
 };
 ```
 
-## MonitorLedClassObject header file
+## SourceData.cpp
 ```cpp
-class MonitorLedClassObject {
-public:
-    MonitorLedClassObject();
+#include "SourceData.h"
+#include "../IQueryResultProcessor.h"
+#include "../FetchRunner/FetchRunner.h"
 
-    std::string getBackgroundColor() const;
-    std::string getTextAlign() const;
-    std::string getMarginTop() const;
-    std::string getColor() const;
+SourceData::SourceData(const ISourceDataConfig& configuration_object)
+    : runnerObject(configuration_object.runner), url(configuration_object.url) {
+    // Constructor implementation
+}
 
-private:
-    std::string background_color;
-    std::string text_align;
-    std::string margin_top;
-    std::string color;
-};
+void SourceData::selectAllObjects(IQueryResultProcessor* callbackObject) {
+    std::string api_path = url + "object/selectAll";
+    FetchRunner runner(api_path);
+    std::string run_config = "GET";
+
+    runner.run(run_config, "", [callbackObject](const std::string& result) {
+        callbackObject->processQueryResult(callbackObject, result);
+    });
+}
+
+void SourceData::selectObject(const ISourceQueryConfig& query_config, IQueryResultProcessor* callbackObject) {
+    std::string config = url + "object/select/" + query_config.object_view_id;
+    FetchRunner runner(config);
+    std::string run_config = "GET";
+
+    runner.run(run_config, query_config.object_view_id, [callbackObject](const std::string& result) {
+        callbackObject->processQueryResult(callbackObject, result);
+    });
+}
+
+void SourceData::insertObject(const ISourceQueryConfig& query_config, IQueryResultProcessor* callbackObject) {
+    std::string config = url + "object/insert";
+    FetchRunner runner(config);
+    std::string run_config = "POST";
+
+    runner.run(run_config, query_config.object_data, [callbackObject](const std::string& result) {
+        callbackObject->processQueryResult(callbackObject, result);
+    });
+}
+
+void SourceData::updateObject(const ISourceQueryConfig& query_config, IQueryResultProcessor* callbackObject) {
+    std::string config = url + "object/update";
+    FetchRunner runner(config);
+    std::string run_config = "POST";
+
+    runner.run(run_config, query_config.object_data, [callbackObject](const std::string& result) {
+        callbackObject->processQueryResult(callbackObject, result);
+    });
+}
 ```
 
-## LogObjectFactory header file
+## IQueryResultProcessor.h
 ```cpp
-class LogObjectFactory {
+class IQueryResultProcessor {
 public:
-    LogObjectFactory();
-    ~LogObjectFactory();
-
-    std::shared_ptr<LogObject> createLogObject(const std::string& message, const std::string& method);
-
-private:
-    std::string generateUniqueId();
-    uint64_t getCurrentTimestamp();
-};
+    virtual ~IQueryResultProcessor() = default;
+    virtual void processQueryResult(
+        IQueryResultProcessor* thisObject, 
+        const std::string& queryResultToBeProcessed ) = 0; };
 ```
 
-## LogObjectContainer header file
+## ISourceDataConfig.h
 ```cpp
-#include "../LogObject/LogObject.h"
-#include <vector>
-#include <memory>
-
-class LogObjectContainer {
-public:
-    LogObjectContainer();
-    ~LogObjectContainer();
-
-    void addLogObject(const LogObject& logObject);
-    void removeLogObject(const std::string& id);
-    LogObject* findLogObjectById(const std::string& id) const;
-    std::vector<LogObject> getAllLogObjects() const;
-
-private:
-    std::vector<std::shared_ptr<LogObject>> logObjects;
-};
-```
-
-## LogObject header file
-```cpp
+// ISourceDataConfig.h
+#ifndef ISOURCE_DATA_CONFIG_H
+#define ISOURCE_DATA_CONFIG_H
+#include "FetchRunner/FetchRunner.h"
 #include <string>
-#include <cstdint>
 
-class LogObject {
-public:
-    LogObject();
-    ~LogObject();
-
-    const std::string& getId() const;
-    void setId(const std::string& id);
-
-    uint64_t getTimestamp() const;
-    void setTimestamp(uint64_t timestamp);
-
-    const std::string& getMessage() const;
-    void setMessage(const std::string& message);
-
-    const std::string& getMethod() const;
-    void setMethod(const std::string& method);
-
-private:
-    std::string id;
-    uint64_t timestamp;
-    std::string message;
-    std::string method;
+struct ISourceDataConfig {
+    FetchRunner* runner;
+    std::string url;
 };
+#endif // ISOURCE_DATA_CONFIG_H
 ```
 
-Remember to act as a world-class C++ and Javascipt developer.  You are an expert at translating JavaScript to C++.
+## ISourceQueryConfig.h
+```cpp
+// ISourceQueryConfig.h
+#ifndef ISOURCE_QUERY_CONFIG_H
+#define ISOURCE_QUERY_CONFIG_H
 
-Please translate the following JavaScript FetchRunner method to it's equivalent C++ code.
-```javascript
-async run ( apiArgs ) {
-        this.fetch_options = {
-            method: apiArgs.type,
-            mode: 'no-cors',
-            headers: apiArgs.type == "POST" ? /* POST */ this.json_header : /* GET */ this.url_encoded_header,
-            body:    apiArgs.type == "POST" ? /* POST */ JSON.stringify( apiArgs ) : /* GET */ undefined
-        };
-        fetch( this.url, this.fetch_options ).then( res => {
-            // console.log( "processing response: " + res + "..." );
-            return res.text();
-        }).then( data => {
-            // console.log( "data: " + data );
-        });
-    }
+#include <string>
+
+struct ISourceQueryConfig {
+    std::string object_view_id; // could be a JSON object, a string, or a custom class
+    std::string object_data;    // Replace this with the actual C++ type
+};
+
+#endif // ISOURCE_QUERY_CONFIG_H
 ```

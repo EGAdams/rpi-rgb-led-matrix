@@ -8,5 +8,4 @@ struct ISourceDataConfig {
     FetchRunner* runner;
     std::string url;
 };
-
 #endif // ISOURCE_DATA_CONFIG_H

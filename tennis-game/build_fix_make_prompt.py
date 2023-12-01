@@ -3,6 +3,7 @@ import subprocess
 import sys
 import os
 import re
+import pyperclip
 
 class CommandRunner:
     def __init__(self, command, args=[]):
@@ -91,6 +92,10 @@ for line in header_file_text.split('\n'):
         print(line)
         # pull out the path to the header file
         # pull out the name of the header file
+        # if line includes "json.h", continue
+        if re.search('json.h', line):
+            print( "skipping json.h" )
+            continue
         regex = re.compile('#include "(.*)"')
         match = regex.search(line)
         # if there is a match add it to the array of header files
@@ -121,3 +126,6 @@ prompt_file = open('fix_make.md', 'w')
 
 # write the prompt to a file
 prompt_file.write( prompt )
+
+# put the prompt on the clipboard
+pyperclip.copy(prompt)

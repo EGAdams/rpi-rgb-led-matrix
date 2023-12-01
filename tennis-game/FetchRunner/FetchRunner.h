@@ -2,24 +2,22 @@
 #define FETCHRUNNER_H
 
 #include <string>
+#include <map>
 #include <functional>
-#include <curl/curl.h>
+#include "../IQueryResultProcessor.h" // Include this if necessary
 
 class FetchRunner {
 public:
-    FetchRunner(const std::string& config);
-    ~FetchRunner();
-
-    void run(const std::string& apiArgsType, const std::string& apiArgs, std::function<void(const std::string&)> callback);
+    FetchRunner(const std::string& api_path);
+    void run(const std::string& apiArgsType, const std::string& body, 
+             std::function<void(const std::string&)> callback);
 
 private:
     std::string url;
-    struct curl_slist* url_encoded_header;
-    struct curl_slist* json_header;
-    CURL* curl;
+    std::map<std::string, std::string> url_encoded_header;
+    std::map<std::string, std::string> json_header;
 
-    void initializeCurl();
-    void setupHeaders();
-    static size_t writeCallback(void* contents, size_t size, size_t nmemb, void* userp);
+    std::string prepareRequestBody(const std::string& apiArgsType, const std::string& body);
 };
+
 #endif // FETCHRUNNER_H

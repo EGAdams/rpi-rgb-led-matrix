@@ -11,12 +11,13 @@
 #include <vector>
 #include <memory>
 
-class MonitoredObject {
+class MonitoredObject : public IQueryResultProcessor {
 public:
     MonitoredObject(const std::string& new_id);
     void logUpdate(const std::string& message);
     std::string getObjectViewId() const;
-    static void processQueryResult(const std::string& results);
+    void processQueryResult( IQueryResultProcessor* processor, const std::string& results ) override;
+
 
 private:
     std::string object_view_id;
