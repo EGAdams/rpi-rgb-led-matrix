@@ -121,3 +121,6 @@
 {"timestamp":1698083381000,"id":"Reset_1655232612_1698083381000","message":"resetting scoreboard...","method":"resetScoreboard"}
 {"timestamp":1698083382000,"id":"Reset_1655232613_1698083382000","message":"turning tie leds off... ","method":"resetScoreboard"}
 {"timestamp":1698083382000,"id":"Reset_1352079972_1698083382000","message":"done resetting game.","method":"resetScoreboard"}
+{"timestamp":1701705809000,"id":"Reset_1016439214_1701705809000","message":"resetting scoreboard...","method":"resetScoreboard"}
+{"timestamp":1701705809000,"id":"Reset_1016439215_1701705809000","message":"turning tie leds off... ","method":"resetScoreboard"}
+{"timestamp":1701705810000,"id":"Reset_1783726761_1701705810000","message":"done resetting game.","method":"resetScoreboard"}

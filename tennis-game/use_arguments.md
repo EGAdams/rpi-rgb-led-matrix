@@ -68,16 +68,16 @@ int main( int argc, char *argv[]) {
         sleep( SCORE_DELAY );
         gameObject->loopGame();  // handle the player score flag
         loop_count++;
-        std::cout << "player 1 points: " << gameState->getPlayer1Points();
-        std::cout << "  player 2 points: " << gameState->getPlayer2Points() << std::endl;
-        std::cout << "player 1 games:  "  << gameState->getPlayer1Games();
-        std::cout << "  player 2 games:  "  << gameState->getPlayer2Games()  << std::endl;
-        std::cout << "player 1 sets:   "   << gameState->getPlayer1Sets();
-        std::cout << "  player 2 sets:   "   << gameState->getPlayer2Sets();
-        std::cout << "     current set: "     << gameState->getCurrentSet()      << std::endl;
-        std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
-        std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
-        std::cout << "end of game loop.  loop_count: " << loop_count << std::endl;
+        // std::cout << "player 1 points: " << gameState->getPlayer1Points();
+        // std::cout << "  player 2 points: " << gameState->getPlayer2Points() << std::endl;
+        // std::cout << "player 1 games:  "  << gameState->getPlayer1Games();
+        // std::cout << "  player 2 games:  "  << gameState->getPlayer2Games()  << std::endl;
+        // std::cout << "player 1 sets:   "   << gameState->getPlayer1Sets();
+        // std::cout << "  player 2 sets:   "   << gameState->getPlayer2Sets();
+        // std::cout << "     current set: "     << gameState->getCurrentSet()      << std::endl;
+        // std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
+        // std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
+        // std::cout << "end of game loop.  loop_count: " << loop_count << std::endl;
     } ///////// End Game Loop /////////
     std::cout << "game loop exited.  loop_count: " << loop_count << std::endl;
     if ( loop_count > MAX_LOOP_COUNT ) {

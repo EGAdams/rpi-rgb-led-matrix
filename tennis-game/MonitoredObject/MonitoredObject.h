@@ -5,8 +5,7 @@
 #include "../LogObjectFactory/LogObjectFactory.h"
 #include "../MonitorLed/MonitorLed.h"
 #include <iostream>
-// #include <json/json.h> // Include the JSON library
-#include "/usr/include/jsoncpp/json/json.h"
+#include <jsoncpp/json/json.h>
 #include <string>
 #include <vector>
 #include <memory>

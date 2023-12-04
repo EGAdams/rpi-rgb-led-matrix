@@ -41,7 +41,7 @@ int main( int argc, char *argv[]) {
     std::cout << "done sleeping.  calling gameObject->loopGame()..." << std::endl;
     gameObject->loopGame();
 
-    std::cout << "done calling loopGame().  sleeping...\n" << std::endl;
+    // std::cout << "done calling loopGame().  sleeping...\n" << std::endl;
     sleep( 1 );
 
     int menu_selection = 1;
@@ -73,13 +73,13 @@ int main( int argc, char *argv[]) {
         
         gameObject->loopGame();  // handle the player score flag
         loop_count++;
-        std::cout << "player 1 points: " << "\033[32m" << gameState->getPlayer1Points() << "\033[0m";
-        std::cout << "  player 2 points: " << "\033[31m" << gameState->getPlayer2Points() << "\033[0m" << std::endl;
-        std::cout << "player 1 games:  "  << gameState->getPlayer1Games();
-        std::cout << "  player 2 games:  "  << gameState->getPlayer2Games()  << std::endl;
-        std::cout << "player 1 sets:   "   << gameState->getPlayer1Sets();
-        std::cout << "  player 2 sets:   "   << gameState->getPlayer2Sets();
-        std::cout << "     current set: "     << gameState->getCurrentSet()      << std::endl;
+        // std::cout << "player 1 points: " << "\033[32m" << gameState->getPlayer1Points() << "\033[0m";
+        // std::cout << "  player 2 points: " << "\033[31m" << gameState->getPlayer2Points() << "\033[0m" << std::endl;
+        // std::cout << "player 1 games:  "  << gameState->getPlayer1Games();
+        // std::cout << "  player 2 games:  "  << gameState->getPlayer2Games()  << std::endl;
+        // std::cout << "player 1 sets:   "   << gameState->getPlayer1Sets();
+        // std::cout << "  player 2 sets:   "   << gameState->getPlayer2Sets();
+        // std::cout << "     current set: "     << gameState->getCurrentSet()      << std::endl;
         std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
         std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
         // std::cout << "end of game loop.  loop_count: " << loop_count << std::endl;
