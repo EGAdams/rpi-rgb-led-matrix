@@ -14,7 +14,6 @@ PointLeds::PointLeds( Player* player1,
     _scoreBoardSet = true;
     }
 
-
 PointLeds::~PointLeds() {}
 
 void PointLeds::setScoreBoard( ScoreBoard* scoreBoard ) { 
