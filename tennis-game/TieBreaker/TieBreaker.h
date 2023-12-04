@@ -2,7 +2,6 @@
 #define TieBreaker_h
 #include "../Arduino/Arduino.h"
 #include "../GameLeds/GameLeds.h"
-#include "../GameLeds/GameLeds.h"
 #include "../GameTimer/GameTimer.h"
 #include "../PointLeds/PointLeds.h"
 #include "../PinInterface/PinInterface.h"

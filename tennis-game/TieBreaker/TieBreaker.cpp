@@ -175,19 +175,19 @@ void TieBreaker::run( Player* currentPlayer ) {
     if ( currentPlayer->getPoints() == TIE_BREAK_MAX_POINTS ) {
         _undo.snapshot( _history );                                   
         currentPlayer->setGames( currentPlayer->getGames() + 1 );     // increment games
+        incrementSet();
         _scoreBoard->update();
         celebrate( currentPlayer );    // this is a win no matter what.
         GameTimer::gameDelay( 3000 );
-        incrementSet();
         endTieBreak(); 
     } else if ( currentPlayer->getPoints() >= TIE_BREAK_WIN_BY_TWO  && 
         ( currentPlayer->getPoints() - opponent->getPoints() >= 2)) {
         _undo.snapshot( _history );                                   
         currentPlayer->setGames( currentPlayer->getGames() + 1 );     // increment games
+        incrementSet();
         _scoreBoard->update();
         celebrate( currentPlayer );
         GameTimer::gameDelay( 3000 );
-        incrementSet(); 
         endTieBreak(); 
     } else {
                                // needed to put this here otherwise tie break would
@@ -259,8 +259,6 @@ void TieBreaker::initializeTieBreakMode() {
         if ( _watchTimer.watchInputDelay( TIE_BREAK_BLINK_DELAY, &_inputs, TIE_BREAK_WATCH_INTERVAL ) > 0 ) { return; }
         tieLEDsOn();
         if ( _watchTimer.watchInputDelay( TIE_BREAK_BLINK_DELAY, &_inputs, TIE_BREAK_WATCH_INTERVAL ) > 0 ) { return; }}
-    // _player1->setGames( 0 );  commented out for matrix code
-    // _player2->setGames( 0 );
     _gameLeds.updateGames();
     GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
     tieLEDsOn(); } // not coming on?
@@ -366,15 +364,15 @@ void TieBreaker::mode1SetTBP2Games() {
     _gameLeds.updateGames();
     GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
     if ( _player2->getGames() == 7 ) {
+        std::cout << "inside mode1SetTBP2Games()...  player 2 games  is player 2... 7" << std::endl;
         _player1->setSetHistory( _gameState->getCurrentSet(), _player1->getGames());
         _player2->setSetHistory( _gameState->getCurrentSet(), _player2->getGames());
         _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
         _player2->setSets( _gameState, _player2->getSets() + 1 );
-        // _setLeds.updateSets();
-        // GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
+        _scoreBoard->update();
         _mode1WinSequences.p2SetTBWinSequence();
         tieLEDsOff();
-        _mode1WinSequences.p2MatchWinSequence(); 
+        _mode1WinSequences.playerTwoMatchWin(); 
         _gameState->stopGameRunning(); }
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 ); }
 
@@ -382,14 +380,14 @@ void TieBreaker::mode1SetTBP1Games() {
     _gameLeds.updateGames();
     GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
     if ( _player1->getGames() == 7 ) {
+        std::cout << "inside mode1SetTBP1Games()...  player 1 games  is player 1... 7" << std::endl;
         _player1->setSetHistory( _gameState->getCurrentSet(), _player1->getGames());
         _player2->setSetHistory( _gameState->getCurrentSet(), _player2->getGames());
         _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
         _player1->setSets( _gameState, _player1->getSets() + 1 );
-        // _setLeds.updateSets();                // blinking one to many
-        // GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
+        _scoreBoard->update();
         _mode1WinSequences.p1SetTBWinSequence();
         tieLEDsOff();
-        _mode1WinSequences.p1MatchWinSequence(); 
+        _mode1WinSequences.playerOneMatchWin(); 
         _gameState->stopGameRunning(); }
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 ); }

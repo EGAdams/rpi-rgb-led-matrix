@@ -5,13 +5,20 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/tennis-game/Player/*",
+                "${workspaceFolder}/tennis-game/*\"",
                 "${workspaceFolder}/tennis-game/Mode1Score/**",
                 "${workspaceFolder}/tennis-game/googletest/googletest/include/**",
                 "${workspaceFolder}/tennis-game/googletest/googlemock/**",
-                "${workspaceFolder}/tennis-game/googletest/googletest/include/gtest/**"
+                "${workspaceFolder}/tennis-game/googletest/googletest/include/gtest/**",
+                "/usr/share/doc/libjsoncpp-dev/**",
+                "/usr/include/jsoncpp/**",
+                "/usr/share/doc/libjsoncpp-dev/**",
+                "/usr/share/doc/libjsoncpp-dev/**",
+                "/usr/include/jsoncpp/**",
+                "/usr/include/jsoncpp/**"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/clang",
+            "compilerPath": "/usr/bin/g++",
             "cStandard": "c17",
             "cppStandard": "c++14",
             "intelliSenseMode": "linux-clang-x64",

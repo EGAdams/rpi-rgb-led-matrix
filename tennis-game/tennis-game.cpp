@@ -14,9 +14,10 @@
 #include <map>
 #include "FontLoader/FontLoader.h"
 #include "TextDrawer/TextDrawer.h"
-#include "NumberDrawer/NumberDrawer.h"
+#include "Drawer/Drawer.h"
 #include "ScoreBoard/ScoreBoard.h"
 #include "GameObject/GameObject.h"
+#include "LoggerFactory/LoggerFactory.h"
 
 using namespace rgb_matrix;
 #define SCORE_DELAY    .15
@@ -29,8 +30,11 @@ void writeMessage( GameObject* gameObject, std::string message ) {
     std::cout << "writing message: " << message << std::endl;
     gameObject->getScoreBoard()->clearScreen();
     gameObject->getScoreBoard()->writeMessage( message );
+    std::cout << "done writing message.  sleeping..." << std::endl;
+    sleep( 3 );
+    std::cout << "done sleeping.  clearing screen..." << std::endl;
     gameObject->getScoreBoard()->clearScreen();
-    std::cout << "done writing message." << std::endl;
+    std::cout << "done clearing screen.  done writeMessage()." << std::endl;
 }
 
 
@@ -143,12 +147,9 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameState->setPlayer2Points(         2 );
     gameObject->getPlayer1()->setGames(  6 );
     gameObject->getPlayer2()->setGames(  5 );
-
     score( gameObject, gameState, 2 );
     score( gameObject, gameState, 2 );
-
     GameTimer::gameDelay( 4000 );
-
     score( gameObject, gameState, 2 );    // now to trigger the tie break...
     score( gameObject, gameState, 2 );
     score( gameObject, gameState, 2 );
@@ -178,12 +179,9 @@ void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameState->setPlayer2Points(         2 );
     gameObject->getPlayer1()->setGames(  6 );
     gameObject->getPlayer2()->setGames(  5 );
-
     score( gameObject, gameState, 2 );
     score( gameObject, gameState, 2 );
-
     GameTimer::gameDelay( 4000 );
-
     score( gameObject, gameState, 2 );    // now to trigger the tie break...
     score( gameObject, gameState, 2 );
     score( gameObject, gameState, 2 );
@@ -212,6 +210,26 @@ void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 2 );
     sleep( 6 ); }
 
+void test_06( GameObject* gameObject, GameState* gameState, int* loop_count ) {
+    gameObject->getScoreBoard()->clearScreen(); // Initialize the game state
+    gameObject->getPlayer1()->setPoints( 0 );
+    gameState->setPlayer1Points( 0 );
+    gameObject->getPlayer2()->setPoints( 0 );
+    gameState->setPlayer2Points( 0 );
+    gameObject->getPlayer1()->setGames( 5 );
+    gameObject->getPlayer2()->setGames( 4 );
+    playerWin(gameObject, gameState, 1); // Player 1 wins the first set
+    gameObject->getPlayer1()->setPoints( 0 ); // Reset points for the next set
+    gameState->setPlayer1Points( 0 );
+    gameObject->getPlayer2()->setPoints( 0 );
+    gameState->setPlayer2Points( 0 );
+    gameObject->getPlayer1()->setGames( 5 );
+    gameObject->getPlayer2()->setGames( 4 );
+    playerWin( gameObject, gameState, 1 ); // Player 1 wins the second set and the match
+    if ( !gameState->gameRunning()) { // Check match win condition and display the result
+        std::cout << "match win" << std::endl; }
+}
+
 void run_manual_game( GameObject* gameObject, GameState* gameState, int player ) {
     int loop_count = 0;
     std::signal( SIGINT, GameObject::_signalHandler );
@@ -220,7 +238,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, int player )
         sleep( SCORE_DELAY );
         std::cout << "\n\nenter 1 or 2 to score for player 1 or 2: ";
         std::cin >> player;
-        std::cout << "\n\n\n\n\n\n\n*** Player " << player << " scored *** \n" << std::endl;
+        std::cout << "\n\n\n\n\n\n\n*** Player " << player << " scored ***\n" << std::endl;
         gameObject->playerScore( player );  // flip the player score flag
         sleep( SCORE_DELAY );
         gameObject->loopGame();  // handle the player score flag
@@ -242,10 +260,10 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, int player )
         std::cout << "sleeping for 5 seconds..." << std::endl;
         sleep( 120 );
         std::cout << "MAX_LOOP_COUNT reached.  Exiting...\n\n\n\n\n" << std::endl; }
-    return;
-}
+    return; }
 
 int main( int argc, char *argv[]) {
+    std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );
     // if --argument is manual then run manual tests
     int manual = 0;
     if( argc > 1 ) {
@@ -255,6 +273,13 @@ int main( int argc, char *argv[]) {
             manual = 1;
         }
     }
+    # define TEST_TEXT__X__POSITION   6
+    # define TEST_TEXT__Y__POSITION   40
+    # define TEST_NUMBER__X__POSITION 5
+    # define TEST_NUMBER__Y__POSITION 80
+
+
+
     int loop_count = 0;
     std::cout << "creating GameObject..." << std::endl;
     std::cout << "creating GameState..." << std::endl;
@@ -272,27 +297,52 @@ int main( int argc, char *argv[]) {
 
     ///// run tests /////
     int test_count = 1;
-    // writeMessage( gameObject, "t " + std::to_string( test_count ));
+    // gameLeds->getScoreBoard()->drawText( "Win",  YELLOW, 18, 80  );
+    gameObject->getScoreBoard()->clearScreen();
+    // gameObject->getScoreBoard()->drawText( "Test",  
+    // YELLOW, TEST_TEXT__X__POSITION, TEST_TEXT__Y__POSITION );
+    // gameObject->getScoreBoard()->drawText( " 01 ",  
+    // YELLOW, TEST_NUMBER__X__POSITION, TEST_NUMBER__Y__POSITION );
+    // GameTimer::gameDelay( 4000 );
     // std::cout << "calling test_01()..." << std::endl;
     // test_01( gameObject, gameState, &loop_count );
     test_count++;
+    // end test_01
 
-    // writeMessage( gameObject, "t " + std::to_string( test_count ));
-    // std::cout << "calling test_02()..." << std::endl;
-    // test_02( gameObject, gameState, &loop_count );
+    gameObject->getScoreBoard()->clearScreen();
+    gameObject->getScoreBoard()->drawText( "Test",  
+    YELLOW, TEST_TEXT__X__POSITION, TEST_TEXT__Y__POSITION );
+    gameObject->getScoreBoard()->drawText( " 02 ",  
+    YELLOW, TEST_NUMBER__X__POSITION, TEST_NUMBER__Y__POSITION );
+    GameTimer::gameDelay( 4000 );
+    std::cout << "calling test_02()..." << std::endl;
+    test_02( gameObject, gameState, &loop_count );
     test_count++;
+    // end test_02
 
     // writeMessage( gameObject, "t " + std::to_string( test_count ));
     // std::cout << "calling test_03()..." << std::endl;
     // test_03( gameObject, gameState, &loop_count );
     test_count++;
+    // end test_03
 
-    // test_04( ...
+    // test_04( gameObject, gameState, &loop_count );
+    // end test_04
     test_count++;
 
-    writeMessage( gameObject, "t " + std::to_string( test_count ));
-    std::cout << "calling test_0" << test_count << "()..." << std::endl;
-    sleep( 1 );
-    test_05( gameObject, gameState, &loop_count );
+    // test 05
+    // test_05( gameObject, gameState, &loop_count );
+    test_count++;
+
+   //  writeMessage( gameObject, "t " + std::to_string( test_count ));
+    // writeMessage( gameObject, "Match" );
+    // std::cout << "calling test_05()..." << std::endl;
+    // sleep( 6 );
+    // test_06( gameObject, gameState, &loop_count );
+    // gameObject->getScoreBoard()->clearScreen();
+    // gameObject->getScoreBoard()->drawText( "10,20",  YELLOW, 10, 20  );
+    // gameObject->getScoreBoard()->drawText( "10,80",  YELLOW, 10, 80  );
+
+    GameTimer::gameDelay( 2000 );
     test_count++;
 }

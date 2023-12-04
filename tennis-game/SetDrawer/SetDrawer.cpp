@@ -2,6 +2,8 @@
 
 SetDrawer::SetDrawer( RGBMatrix* canvas, GameState* gameState ) : 
     _canvas( canvas ), _gameState( gameState ), _setHistoryText( gameState ) {
+    std::cout << "constructing SetDrawer..." << std::endl;
+    if ( _canvas == NULL ) { std::cout << "canvas is NULL" << std::endl; return; }
     FontLoader smallNumberFontLoader( LITTLE_FONT );
     rgb_matrix::Font smallNumberFont;
     smallNumberFontLoader.LoadFont( smallNumberFont );
@@ -20,11 +22,10 @@ void SetDrawer::drawTextOnCanvas( int x, int y, const Color& color, const std::s
 void SetDrawer::drawSets() {
     int y = START_ROW; 
     int x = 0;
-    std::cout << "*** inside SetDrawer drawing sets..." << std::endl;
     std::string playerOneSetString = _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX );
     std::string playerTwoSetString = _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX );
     Color thirdRowColor( 0, 255, 0 );
-    if ( MATRIX_DISABLED ) {
+    if ( _canvas == NULL ) {
         std::cout << playerOneSetString << std::endl;
         std::cout << playerTwoSetString << std::endl;
     } else {
@@ -38,24 +39,25 @@ void SetDrawer::drawBlinkSets( int playerToBlink ) {
     int x = 0;
     int set = _gameState->getCurrentSet(); // init coords and set
     std::string playerOneSetString = ""; std::string playerTwoSetString = ""; // set inside if statement
-    std::cout << "*** inside SetDrawer drawing BLINK sets..." << std::endl;
     if ( _gameState->getCurrentAction() == BOTH_PLAYER_BLINK ) {
-        std::cout << "blinking both players..." << std::endl;
         playerOneSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX ), set );
         playerTwoSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX ), set );
     } else if ( playerToBlink == PLAYER_1_INITIALIZED ) { // Blink player 1
-        std::cout << "blinking player 1..." << std::endl;
         playerOneSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX ), set );
         playerTwoSetString = _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX );
     } else {                                       // Blink player 2
-        std::cout << "blinking player 2..." << std::endl;
         playerOneSetString = _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX );
         playerTwoSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX ), set ); }
-    Color thirdRowColor( 0, 255, 0 );
-     drawTextOnCanvas( x + SMALL_BEFORE, y, thirdRowColor, playerOneSetString );
-    y += _little_font.height() - 5;
-    Color fourthRowColor( 255, 0, 0 );
-    drawTextOnCanvas( x + SMALL_BEFORE, y, fourthRowColor, playerTwoSetString ); }
+    
+    if ( _canvas == NULL ) {
+        std::cout << playerOneSetString << std::endl;
+        std::cout << playerTwoSetString << std::endl;
+    } else {
+        Color thirdRowColor( 0, 255, 0 );
+        drawTextOnCanvas( x + SMALL_BEFORE, y, thirdRowColor, playerOneSetString );
+        y += _little_font.height() - 5;
+        Color fourthRowColor( 255, 0, 0 );
+        drawTextOnCanvas( x + SMALL_BEFORE, y, fourthRowColor, playerTwoSetString ); }}
 
 std::string SetDrawer::cloaker( std::string stringToCloak, int sectionToCloak ) {
     if ( sectionToCloak < 1 || sectionToCloak > 3 ) { return "Invalid section number";}

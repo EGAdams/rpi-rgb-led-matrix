@@ -113,14 +113,14 @@ static int usage(const char *progname) {
     TextDrawer textDrawer(canvas, font, 0, 0, color, bg_color, "I", 0); // Draw Text
     textDrawer.DrawText();
 
-    TextDrawer bigNumberDrawer1(canvas, bigNumberFont, 16, bigNumberFont.baseline() - 1, color, bg_color, "8", 1);
-    bigNumberDrawer1.DrawText();
+    TextDrawer bigDrawer1(canvas, bigNumberFont, 16, bigNumberFont.baseline() - 1, color, bg_color, "8", 1);
+    bigDrawer1.DrawText();
 
-    TextDrawer bigNumberDrawer2(canvas, bigNumberFont, 38, bigNumberFont.baseline() - 1, color, bg_color, "9", 1);
-    bigNumberDrawer2.DrawText();
+    TextDrawer bigDrawer2(canvas, bigNumberFont, 38, bigNumberFont.baseline() - 1, color, bg_color, "9", 1);
+    bigDrawer2.DrawText();
 
-    TextDrawer littleNumberDrawer(canvas, littleNumberFont, 7, littleNumberFont.baseline(), color, bg_color, "1 2 3", 0);
-    littleNumberDrawer.DrawText();
+    TextDrawer littleDrawer(canvas, littleNumberFont, 7, littleNumberFont.baseline(), color, bg_color, "1 2 3", 0);
+    littleDrawer.DrawText();
 
     delete canvas;
     

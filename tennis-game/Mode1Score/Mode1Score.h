@@ -26,11 +26,12 @@ class Mode1Score {
                 History* history );
     ~Mode1Score();
     void playerOneScore();
-    void mode1P1Games();
+    void playerOneGameWin();
     void mode1TBP1Games();
     void mode1SetTBP1Games();
     void playerTwoScore();
-    void mode1P2Games();
+    void playerTwoGameWin();
+    void playerGameWin( Player* currentPlayer );
     void mode1TBP2Games();
     void mode1SetTBP2Games();
     void updateScore(  Player* currentPlayer  );

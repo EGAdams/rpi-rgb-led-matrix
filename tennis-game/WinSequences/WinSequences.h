@@ -27,10 +27,10 @@ class Mode1WinSequences {
     void setScoreBoards( ScoreBoard* scoreBoard );
     void p1GameWinSequence();
     void p1SetWinSequence();
-    void p1MatchWinSequence();
+    void playerOneMatchWin();
     void p2GameWinSequence();
     void p2SetWinSequence();
-    void p2MatchWinSequence();
+    void playerTwoMatchWin();
     void p1TBGameWinSequence();
     void p2TBGameWinSequence();
     void p1TBSetWinSequence();

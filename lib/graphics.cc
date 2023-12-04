@@ -80,7 +80,7 @@ bool SetImage(Canvas *c, int canvas_offset_x, int canvas_offset_y,
 int DrawText(Canvas *c, const Font &font,
              int x, int y, const Color &color,
              const char *utf8_text) {
-  return DrawText(c, font, x, y, color, NULL, utf8_text);
+  return DrawText(c, font, x, y, color, NULL, utf8_text, 0);
 }
 
 int DrawText(Canvas *c, const Font &font,
@@ -167,6 +167,4 @@ void DrawLine(Canvas *c, int x0, int y0, int x1, int y1, const Color &color) {
   } else {
     c->SetPixel(x0, y0, color.r, color.g, color.b);
   }
-}
-
-}//namespace
+}} //namespace rgb_matrix

@@ -8,6 +8,8 @@
 #include "../GameLeds/GameLeds.h"
 #include "../GameTimer/GameTimer.h"
 #include "../SetLeds/SetLeds.h"
+#include "../ScoreBoard/ScoreBoard.h"
+#include "../../include/led-matrix.h"
 
 class MatchWinSequence {
 
@@ -15,8 +17,5 @@ class MatchWinSequence {
   MatchWinSequence();
   ~MatchWinSequence();
   void run( Player* player, GameState* gameState, GameLeds* gameLeds, SetLeds* setLeds );
-
- private:
-
 };
 #endif
