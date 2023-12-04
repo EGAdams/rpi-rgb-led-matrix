@@ -1,4 +1,4 @@
-# tool to create a prompt to fix the make output
+# tool to create a prompt for debugging
 import subprocess
 import sys
 import os
@@ -7,34 +7,41 @@ import pyperclip
 
 class CommandRunner:
     def __init__(self, command, args=[]):
-        self.command = command
-        self.args = args
+        self.command, self.args = self.parse_command(command)
+        # If additional args are provided, append them
+        self.args.extend(args)
+
+    @staticmethod # in case we want to run a command without creating an instance of the class
+    def parse_command(command_string):
+        parts = command_string.split()  # Split the command string into a list of words
+        command = parts[0]              # The first part is the command
+        args = parts[1:]                # The rest are the arguments
+        return command, args
 
     def run(self):
         try:
-            output = subprocess.check_output([self.command] + self.args, stderr=subprocess.STDOUT, text=True)
+            command_list = [self.command] + self.args  # Combine command and arguments
+            print("running command:", " ".join(command_list))
+            output = subprocess.check_output(command_list, stderr=subprocess.STDOUT, text=True)
             return output
         except subprocess.CalledProcessError as e:
             return e.output
         
 # get the source from the make file into a variable. /home/adamsl/rpi-rgb-led-matrix/tennis-game/Makefile is the location of the make file
 make_file_text = open( "/home/adamsl/rpi-rgb-led-matrix/tennis-game/Makefile", 'r').read()
-
-# human input source directory
 main_class = input ( "Enter the source directory: " )
 
-
-# list the files in the current directory and get the class name from the .h file
-class_name = ''
-# change directory to os.getcwd() + "/tennis-game/LogObjectContainer"
-os.chdir( "/home/adamsl/rpi-rgb-led-matrix/tennis-game/" )
+class_name = '' # list the files in the current directory and get the class name from the .h file
+os.chdir( "/home/adamsl/rpi-rgb-led-matrix/tennis-game/" ) # change directory
 
 # print the current directory
 print( "current directory: " )
 print( os.getcwd() )
 
-make_runner = CommandRunner( "make" )
-make_output = make_runner.run()
+command_to_run = input( "Please enter the command to run for this debug session: " )
+
+command_to_run = CommandRunner( command_to_run )
+command_output = command_to_run.run()
 
 # files = os.listdir(  )
 # for file in files:
@@ -69,9 +76,9 @@ prompt = """
 """ + make_file_text + """
 ```
 
-# Make output
+# Command output
 ```
-""" + make_output + """
+""" + command_output + """
 ```
 """
 
@@ -80,7 +87,7 @@ prompt = """
 # loop through each line of the .cpp file and pull out the #include statements
 # print the contents of the header file
 
-# open LogObjectContainer.h and read it
+# open .h and read it
 header_file = open(  main_class + "/" + main_class + '.h', 'r')
 header_file_text = header_file.read()
 print ( header_file_text )
@@ -90,24 +97,18 @@ header_files = []
 for line in header_file_text.split('\n'):
     if re.search('#include', line):
         print(line)
-        # pull out the path to the header file
-        # pull out the name of the header file
-        # if line includes "json.h", continue
         if re.search('json.h', line):
             print( "skipping json.h" )
             continue
-        regex = re.compile('#include "(.*)"')
+        regex = re.compile('#include "(.*)"') # pull the include path
         match = regex.search(line)
-        # if there is a match add it to the array of header files
-        if match:
+        if match: # if there is a match add it to the array of header files
             print( "appending: " + match.group(1))
             header_files.append(match.group(1))
             
-
-# loop through the header files and add them to the prompt
 prompt += """
 # Header files for the class: """ + class_name + """\n
-"""
+""" # loop through the header files and add them to the prompt
 print ( "entering header files loop..." )
 for header_file in header_files:
     print( header_file )
@@ -121,11 +122,6 @@ for header_file in header_files:
 ```\n
 """
 
-# open the file to write to
-prompt_file = open('fix_make.md', 'w')
-
-# write the prompt to a file
-prompt_file.write( prompt )
-
-# put the prompt on the clipboard
-pyperclip.copy(prompt)
+prompt_file = open('fix_make.md', 'w')  # open the file to write to
+prompt_file.write( prompt )             # write the prompt to a file
+pyperclip.copy(prompt)                  # put the prompt on the clipboard

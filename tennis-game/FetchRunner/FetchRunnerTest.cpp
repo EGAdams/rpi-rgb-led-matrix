@@ -19,10 +19,10 @@ void testFetchRunner() {
         std::cout << "JSON Start Position: " << jsonStart << std::endl;
 
         std::string jsonResponse = response.substr(jsonStart);
-        for (char c : jsonResponse) {
-            std::cout << std::hex << static_cast<int>(c) << " ";
-        }
-        std::cout << std::endl;
+        // for (char c : jsonResponse) {
+        //     std::cout << std::hex << static_cast<int>(c) << " ";
+        // }
+        // std::cout << std::endl;
 
         // Assert that the actual JSON matches the expected JSON
         assert(jsonResponse == expectedJSON); // Using assert for simplicity; in real use, a testing framework should be used
