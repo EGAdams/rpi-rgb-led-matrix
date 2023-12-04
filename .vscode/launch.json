@@ -26,10 +26,10 @@
             ]
         },
         {
-            "name": "select_object_test",
+            "name": "SourceDataTest",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/tennis-game/SourceData/select_object_test",
+            "program": "${workspaceFolder}/tennis-game/SourceData/SourceDataTest",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
@@ -54,6 +54,54 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/tennis-game/tennis-game-manual",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "source_data_test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/tennis-game/SourceData/source_data_test",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "insert_source_data_test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/tennis-game/SourceData/insert_source_data_test",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

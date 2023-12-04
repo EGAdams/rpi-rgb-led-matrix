@@ -8,109 +8,78 @@
 
 # Header file for the class: 
 ```cpp
-#ifndef FETCHRUNNER_H
-#define FETCHRUNNER_H
+#ifndef SOURCE_DATA_H
+#define SOURCE_DATA_H
 
-#include <string>
-#include <functional>
-#include <curl/curl.h>
+#include "../ISourceDataConfig.h"
+#include "../ISourceQueryConfig.h"
+#include "../IQueryResultProcessor.h"
 
-class FetchRunner {
+class SourceData {
 public:
-    FetchRunner(const std::string& config);
-    ~FetchRunner();
-
-    void run(const std::string& apiArgsType, const std::string& apiArgs, std::function<void(const std::string&)> callback);
+    SourceData( const ISourceDataConfig& configuration_object );
+    ~SourceData();
+    void selectAllObjects( IQueryResultProcessor* callbackObject );
+    void selectObject( const ISourceQueryConfig& queryConfig, IQueryResultProcessor* callbackObject );
+    void insertObject( const ISourceQueryConfig& queryConfig, IQueryResultProcessor* callbackObject );
+    void updateObject( const ISourceQueryConfig& queryConfig, IQueryResultProcessor* callbackObject );
 
 private:
-    std::string url;
-    struct curl_slist* url_encoded_header;
-    struct curl_slist* json_header;
-    CURL* curl;
-
-    void initializeCurl();
-    void setupHeaders();
-    static size_t writeCallback(void* contents, size_t size, size_t nmemb, void* userp);
+    FetchRunner* _runnerObject;
+    std::string  _url;
 };
-#endif // FETCHRUNNER_H
 
+#endif // SOURCE_DATA_H
 ```
 
 # Cpp file for the class: 
 ```cpp
-#include "FetchRunner.h"
-#include <iostream>
-#include <sstream>
+#include "SourceData.h"
+#include "../IQueryResultProcessor.h"
+#include "../FetchRunner/FetchRunner.h"
 
-FetchRunner::FetchRunner( const std::string& config ) {
+SourceData::SourceData( const ISourceDataConfig& configuration_object )
+    : _runnerObject( configuration_object.runner ), _url( configuration_object.url ) {}
+SourceData::~SourceData() { delete _runnerObject; }
 
-    std::cout << "Config: " << config << std::endl;
-    
-    initializeCurl();
-    setupHeaders();
+void SourceData::selectAllObjects( IQueryResultProcessor* callbackObject ) {
+    std::string api_path = _url + "object/selectAll";
+    FetchRunner runner( api_path );
+    std::string run_config = "GET";
+
+    runner.run( run_config, "", [ callbackObject ]( const std::string& result ) {
+        callbackObject->processQueryResult( callbackObject, result );
+    });
 }
 
-FetchRunner::~FetchRunner() {
-    curl_easy_cleanup(curl);
-    curl_slist_free_all(url_encoded_header);
-    curl_slist_free_all(json_header);
+void SourceData::selectObject( const ISourceQueryConfig& query_config, IQueryResultProcessor* callbackObject ) {
+    std::string config = _url + "object/select/" + query_config.object_view_id;
+    FetchRunner runner( config );  // If FetchRunner needs to be swapped out...
+    std::string run_config = "GET";
+
+    runner.run( run_config, query_config.object_view_id, [ callbackObject ]( const std::string& result ) {
+        callbackObject->processQueryResult( callbackObject, result );
+    });
 }
 
-void FetchRunner::initializeCurl() {
-    curl = curl_easy_init();
-    if (!curl) {
-        std::cerr << "Failed to initialize curl." << std::endl;
-    }
+void SourceData::insertObject(const ISourceQueryConfig& query_config, IQueryResultProcessor* callbackObject) {
+    std::string config = _url + "object/insert";
+    FetchRunner runner(config);
+    std::string run_config = "POST";
+
+    runner.run( run_config, query_config.object_data, [ callbackObject ]( const std::string& result ) {
+        callbackObject->processQueryResult( callbackObject, result );
+    });
 }
 
-void FetchRunner::setupHeaders() {
-    url_encoded_header = curl_slist_append(url_encoded_header, "Content-Type: application/x-www-form-urlencoded");
-    json_header = curl_slist_append(json_header, "Content-Type: application/json");
-}
+void SourceData::updateObject( const ISourceQueryConfig& query_config, IQueryResultProcessor* callbackObject ) {
+    std::string config = _url + "object/update";
+    FetchRunner runner( config );
+    std::string run_config = "POST";
 
-size_t FetchRunner::writeCallback(void* contents, size_t size, size_t nmemb, void* userp) {
-    ((std::string*)userp)->append((char*)contents, size * nmemb);
-    return size * nmemb;
-}
-
-
-
-void FetchRunner::run(const std::string& apiArgsType, const std::string& apiArgs, std::function<void(const std::string&)> callback) {
-    // parse apiArgs from a string into a json object
-    std::cout << "apiArgs: " << apiArgs << std::endl;
-    
-
-    CURLcode res;
-    if (curl) {
-        // Set the headers based on the method type
-        if (apiArgsType == "POST") {
-            curl_easy_setopt(curl, CURLOPT_HTTPHEADER, json_header);
-            curl_easy_setopt(curl, CURLOPT_POSTFIELDS, apiArgs.c_str()); // Assuming apiArgs is already a JSON string
-        } else {
-            curl_easy_setopt(curl, CURLOPT_HTTPHEADER, url_encoded_header);
-        }
-
-        curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, apiArgsType.c_str());
-        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-
-        std::string response_string;
-        std::string header_string;
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeCallback);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response_string);
-        curl_easy_setopt(curl, CURLOPT_HEADERDATA, &header_string);
-
-        // Perform the request
-        res = curl_easy_perform(curl);
-
-        // Check for errors
-        if (res != CURLE_OK) {
-            std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << std::endl;
-        } else {
-            // Process response here
-            std::cout << "Response: " << response_string << std::endl;
-            callback(response_string);
-        }
-    }
+    runner.run( run_config, query_config.object_data, [ callbackObject ]( const std::string& result ) {
+        callbackObject->processQueryResult( callbackObject, result );
+    });
 }
 
 ```
@@ -138,7 +107,7 @@ RGB_LIBDIR=$(RGB_LIB_DISTRIBUTION)/lib
 RGB_LIBRARY_NAME=rgbmatrix
 RGB_LIBRARY=$(RGB_LIBDIR)/lib$(RGB_LIBRARY_NAME).a
 
-LDFLAGS+=-L$(RGB_LIBDIR) -l$(RGB_LIBRARY_NAME) -lrt -lm -lpthread -L$(GTEST_LIBDIR) $(GTEST_LIBS) -ljsoncpp
+LDFLAGS+=-L$(RGB_LIBDIR) -l$(RGB_LIBRARY_NAME) -lrt -lm -lpthread -L$(GTEST_LIBDIR) $(GTEST_LIBS) -ljsoncpp -lcurl
 
 # To compile image-example
 MAGICK_CXXFLAGS?=$(shell GraphicsMagick++-config --cppflags --cxxflags)
@@ -345,37 +314,75 @@ print-%:
 
 # Make output
 ```
-g++ GameWinSequence.o SetWin.o SetHistoryText.o SetDrawer.o GameLedTranslator.o SubjectManager.o WebLiquidCrystal.o WatchTimer.o Inputs.o TieBreaker.o Mode1Score.o Mode1Functions.o ServeLeds.o Undo.o BatteryTest.o Reset.o SetLeds.o TieLeds.o Mode1WinSequences.o Mode2Functions.o MatchWinSequence.o TennisConstants.o GameLeds.o GameModes.o GameObject.o PinState.o PinInterface.o TranslateConstant.o PointLeds.o Arduino.o CanvasCreator.o FontLoader.o Drawer.o TextDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game.o LogObject.o LogObjectContainer.o LogObjectFactory.o MonitorLedClassObject.o MonitorLed.o JsonParser.o LoggerFactory.o Model.o MonitoredObject.o SourceData.o FetchRunner.o -o tennis-game -L../lib -lrgbmatrix -lrt -lm -lpthread -L/home/adamsl/rpi-rgb-led-matrix/tennis-game/googletest/build/lib -lgtest_main -lgtest -lpthread -ljsoncpp
-/usr/bin/ld: FetchRunner.o: in function `FetchRunner::initializeCurl()':
-/home/adamsl/rpi-rgb-led-matrix/tennis-game/FetchRunner/FetchRunner.cpp:20: undefined reference to `curl_easy_init'
-/usr/bin/ld: FetchRunner.o: in function `FetchRunner::setupHeaders()':
-/home/adamsl/rpi-rgb-led-matrix/tennis-game/FetchRunner/FetchRunner.cpp:27: undefined reference to `curl_slist_append'
-/usr/bin/ld: /home/adamsl/rpi-rgb-led-matrix/tennis-game/FetchRunner/FetchRunner.cpp:28: undefined reference to `curl_slist_append'
-/usr/bin/ld: FetchRunner.o: in function `FetchRunner::~FetchRunner()':
-/home/adamsl/rpi-rgb-led-matrix/tennis-game/FetchRunner/FetchRunner.cpp:14: undefined reference to `curl_easy_cleanup'
-/usr/bin/ld: /home/adamsl/rpi-rgb-led-matrix/tennis-game/FetchRunner/FetchRunner.cpp:15: undefined reference to `curl_slist_free_all'
-/usr/bin/ld: /home/adamsl/rpi-rgb-led-matrix/tennis-game/FetchRunner/FetchRunner.cpp:16: undefined reference to `curl_slist_free_all'
-/usr/bin/ld: FetchRunner.o: in function `FetchRunner::initializeCurl()':
-/home/adamsl/rpi-rgb-led-matrix/tennis-game/FetchRunner/FetchRunner.cpp:20: undefined reference to `curl_easy_init'
-/usr/bin/ld: FetchRunner.o: in function `FetchRunner::setupHeaders()':
-/home/adamsl/rpi-rgb-led-matrix/tennis-game/FetchRunner/FetchRunner.cpp:27: undefined reference to `curl_slist_append'
-/usr/bin/ld: /home/adamsl/rpi-rgb-led-matrix/tennis-game/FetchRunner/FetchRunner.cpp:28: undefined reference to `curl_slist_append'
-/usr/bin/ld: FetchRunner.o: in function `FetchRunner::run(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::function<void (std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)>)':
-/home/adamsl/rpi-rgb-led-matrix/tennis-game/FetchRunner/FetchRunner.cpp:50: undefined reference to `curl_easy_setopt'
-/usr/bin/ld: /home/adamsl/rpi-rgb-led-matrix/tennis-game/FetchRunner/FetchRunner.cpp:53: undefined reference to `curl_easy_setopt'
-/usr/bin/ld: /home/adamsl/rpi-rgb-led-matrix/tennis-game/FetchRunner/FetchRunner.cpp:54: undefined reference to `curl_easy_setopt'
-/usr/bin/ld: /home/adamsl/rpi-rgb-led-matrix/tennis-game/FetchRunner/FetchRunner.cpp:58: undefined reference to `curl_easy_setopt'
-/usr/bin/ld: /home/adamsl/rpi-rgb-led-matrix/tennis-game/FetchRunner/FetchRunner.cpp:59: undefined reference to `curl_easy_setopt'
-/usr/bin/ld: FetchRunner.o:/home/adamsl/rpi-rgb-led-matrix/tennis-game/FetchRunner/FetchRunner.cpp:60: more undefined references to `curl_easy_setopt' follow
-/usr/bin/ld: FetchRunner.o: in function `FetchRunner::run(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::function<void (std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)>)':
-/home/adamsl/rpi-rgb-led-matrix/tennis-game/FetchRunner/FetchRunner.cpp:63: undefined reference to `curl_easy_perform'
-/usr/bin/ld: /home/adamsl/rpi-rgb-led-matrix/tennis-game/FetchRunner/FetchRunner.cpp:67: undefined reference to `curl_easy_strerror'
-/usr/bin/ld: /home/adamsl/rpi-rgb-led-matrix/tennis-game/FetchRunner/FetchRunner.cpp:47: undefined reference to `curl_easy_setopt'
-/usr/bin/ld: /home/adamsl/rpi-rgb-led-matrix/tennis-game/FetchRunner/FetchRunner.cpp:48: undefined reference to `curl_easy_setopt'
-collect2: error: ld returned 1 exit status
-make: *** [Makefile:41: tennis-game] Error 1
+make: Nothing to be done for 'all'.
 
 ```
 
 # Header files for the class: 
+
+
+    
+### Header file: ../ISourceDataConfig.h    
+```cpp
+// ISourceDataConfig.h
+#ifndef ISOURCE_DATA_CONFIG_H
+#define ISOURCE_DATA_CONFIG_H
+#include "FetchRunner/FetchRunner.h"
+#include <string>
+
+struct ISourceDataConfig {
+    FetchRunner* runner;
+    std::string url;
+};
+#endif // ISOURCE_DATA_CONFIG_H
+
+```
+
+
+    
+### Header file: ../ISourceQueryConfig.h    
+```cpp
+// ISourceQueryConfig.h
+#ifndef ISOURCE_QUERY_CONFIG_H
+#define ISOURCE_QUERY_CONFIG_H
+
+#include <string>
+
+struct ISourceQueryConfig {
+    std::string object_view_id; // could be a JSON object, a string, or a custom class
+    std::string object_data;    // Replace this with the actual C++ type
+};
+
+#endif // ISOURCE_QUERY_CONFIG_H
+```
+
+
+    
+### Header file: ../IQueryResultProcessor.h    
+```cpp
+#ifndef IQUERY_RESULT_PROCESSOR_H
+#define IQUERY_RESULT_PROCESSOR_H
+#include <string>
+/** 
+ *  IQureyResultProcessor is an interface for processing query results.
+ *  It is used by SourceData to process query results.
+ *  It is implemented by the caller of SourceData.
+ * 
+ *  arguments:
+ *     thisObject: a pointer to the object implementing this interface
+ *    queryResultToBeProcessed: the query result to be processed
+ * 
+ * return value: none
+ * 
+ */
+class IQueryResultProcessor {
+public:
+    virtual ~IQueryResultProcessor() = default;
+    virtual void processQueryResult(
+        IQueryResultProcessor* thisObject, 
+        const std::string& queryResultToBeProcessed ) = 0; };
+
+#endif // IQUERY_RESULT_PROCESSOR_H 
+
+```
 

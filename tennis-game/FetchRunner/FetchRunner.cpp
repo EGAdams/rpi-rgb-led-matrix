@@ -1,11 +1,16 @@
 #include "FetchRunner.h"
-#include <curl/curl.h>
-#include "/usr/include/jsoncpp/json/json.h"
-#include <sstream>
+
+#include <iostream> // Add this line
 
 FetchRunner::FetchRunner(const std::string& api_path) : url(api_path) {
     url_encoded_header = { {"Content-Type", "application/x-www-form-urlencoded"} };
     json_header = { {"Content-Type", "application/json"} };
+    std::cout << "*** FetchRunner constructor called. ***" << std::endl;
+    std::cout << "api_path: " << api_path << std::endl;
+}
+
+FetchRunner::~FetchRunner() {
+    std::cout << "FetchRunner destructor called." << std::endl;
 }
 
 static size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* s) {
@@ -24,6 +29,12 @@ void FetchRunner::run(const std::string& apiArgsType, const std::string& body,
                       std::function<void(const std::string&)> callback) {
     CURL* curl = curl_easy_init();
     std::string response;
+    // if url is not valid
+    if ( url == "") {
+        response = "Invalid URL.  At this point it is null for some reason.";
+        callback(response);
+        return;
+    }
 
     if (curl) {
         curl_easy_setopt(curl, CURLOPT_URL, url.c_str());

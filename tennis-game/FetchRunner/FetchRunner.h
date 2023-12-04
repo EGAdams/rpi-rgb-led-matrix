@@ -4,11 +4,15 @@
 #include <string>
 #include <map>
 #include <functional>
-#include "../IQueryResultProcessor.h" // Include this if necessary
+#include "../IQueryResultProcessor.h"
+#include <curl/curl.h>
+#include "/usr/include/jsoncpp/json/json.h"
+#include <sstream>
 
 class FetchRunner {
 public:
     FetchRunner(const std::string& api_path);
+    ~FetchRunner();
     void run(const std::string& apiArgsType, const std::string& body, 
              std::function<void(const std::string&)> callback);
 
