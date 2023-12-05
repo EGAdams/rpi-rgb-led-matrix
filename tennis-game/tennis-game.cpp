@@ -97,7 +97,7 @@ void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 1 ); // this score wins player 1 set.
+    //  playerWin( gameObject, gameState, 1 ); // this score wins player 1 set.  needed if test 01 is not run.
     sleep( 2 );
 }
 
