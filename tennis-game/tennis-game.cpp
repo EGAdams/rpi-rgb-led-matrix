@@ -52,7 +52,6 @@ void test_01( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     std::signal( SIGINT, GameObject::_signalHandler );
     gameObject->getScoreBoard()->clearScreen();
     gameObject->start();
-    // gameObject->loopGame();
     sleep( 1 );
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 2 );
