@@ -12,7 +12,7 @@ void SetWin::execute( Player* player, ScoreBoard* scoreBoard ) {
             _gameState->setCurrentAction( BOTH_PLAYER_BLINK );
             std::cout << "gamestate current action: " << _gameState->getCurrentAction() << std::endl;
             scoreBoard->update();
-            std::cout << "uncloaking ... " << std::endl;
+            // std::cout << "uncloaking ... " << std::endl;
             GameTimer::gameDelay( SET_WIN_FLASH_DELAY );  /*** wait ***/
             _gameState->setCurrentAction( "normal operation" );
             scoreBoard->update(); 
