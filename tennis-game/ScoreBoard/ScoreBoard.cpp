@@ -172,15 +172,15 @@ void ScoreBoard::_drawTieBreakerBar() {
 void ScoreBoard::blink_player_score(int player) {
     if ( !onRaspberryPi()) { return; }
     if (player == PLAYER_1_SCORE) {
-        _bluePipeDrawer->drawNumber("I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
+        _greenPipeDrawer->drawNumber("I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
         std::this_thread::sleep_for(std::chrono::seconds(1)); // sleep 1 second
-        _bluePipeDrawer->drawNumber("I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
+        _greenPipeDrawer->drawNumber("I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
         std::this_thread::sleep_for(std::chrono::seconds(1)); // sleep 1 second
-        _bluePipeDrawer->drawNumber("I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
+        _greenPipeDrawer->drawNumber("I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
         std::this_thread::sleep_for(std::chrono::seconds(1)); // sleep 1 second
 
         // blank out
-        _bluePipeDrawer->drawNumber(" ", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
+        _greenPipeDrawer->drawNumber(" ", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
     }
 }
 
