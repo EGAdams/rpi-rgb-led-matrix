@@ -54,17 +54,21 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         Color color( 255, 255, 0 );
         Color bg_color( 0, 0, 0 );
         Color blue_color( 0, 0, 255 );
+        Color red_color( 255, 0, 0 );
+        Color green_color( 0, 255, 0 );
 
         _playerOneScoreDrawer   = std::make_unique<Drawer>(
             _canvas.get(), &_big_number_font, Drawer::BIG, player_one_score_color, bg_color );
         _playerTwoScoreDrawer   = std::make_unique<Drawer>(
             _canvas.get(), &_big_number_font, Drawer::BIG, player_two_score_color, bg_color );
 
-        _drawer = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::SMALL, color, bg_color );
-        _pipeDrawer        = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::BIG, color, bg_color   );
-        _bluePipeDrawer   = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::BIG, blue_color, bg_color );
-        _setDrawer         = std::make_unique<SetDrawer>(    _canvas.get(), _gameState                                              );
-        } // fi
+        _drawer          = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::SMALL, color, bg_color       );
+        _pipeDrawer      = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, color, bg_color         );
+        _bluePipeDrawer  = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, blue_color, bg_color    );
+        _redPipeDrawer   = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, blue_color, red_color   );
+        _greenPipeDrawer = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, blue_color, green_color );
+        _setDrawer       = std::make_unique<SetDrawer>( _canvas.get(), _gameState                                              );
+        } // fi onRaspberryPi
     update();
 }
 
@@ -162,6 +166,22 @@ void ScoreBoard::update() {
 
 void ScoreBoard::_drawTieBreakerBar() {
     _bluePipeDrawer->drawNumber( "I", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
+}
+
+
+void ScoreBoard::blink_player_score(int player) {
+    if ( !onRaspberryPi()) { return; }
+    if (player == PLAYER_1_SCORE) {
+        _bluePipeDrawer->drawNumber("I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
+        std::this_thread::sleep_for(std::chrono::seconds(1)); // sleep 1 second
+        _bluePipeDrawer->drawNumber("I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
+        std::this_thread::sleep_for(std::chrono::seconds(1)); // sleep 1 second
+        _bluePipeDrawer->drawNumber("I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
+        std::this_thread::sleep_for(std::chrono::seconds(1)); // sleep 1 second
+
+        // blank out
+        _bluePipeDrawer->drawNumber(" ", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
+    }
 }
 
 void ScoreBoard::clearScreen() {

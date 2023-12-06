@@ -14,9 +14,12 @@
 #include <string>
 #include <fstream>
 #include <memory>
+#include <thread> // Include the <thread> header for sleep function
 
 #define PLAYER_1_SERVE  0
 #define PLAYER_2_SERVE  1
+#define PLAYER_1_SCORE  1
+#define PLAYER_2_SCORE  2
 #define BIG_NUMBER_FONT    "fonts/fgm_27_ee.bdf"
 #define LITTLE_NUMBER_FONT "fonts/little_numbers.bdf"
 #define RED    2
@@ -42,6 +45,7 @@ public:
     RGBMatrix* getCanvas();
     Color _getColor( int color );
     bool onRaspberryPi();
+    void blink_player_score( int player );
 
 private:
     Player*                        _player1;
@@ -54,6 +58,8 @@ private:
     std::unique_ptr<Drawer>  _playerTwoScoreDrawer;
     std::unique_ptr<Drawer>  _pipeDrawer;
     std::unique_ptr<Drawer>  _bluePipeDrawer;
+    std::unique_ptr<Drawer>  _redPipeDrawer;
+    std::unique_ptr<Drawer>  _greenPipeDrawer;
     std::unique_ptr<SetDrawer>     _setDrawer;
     std::unique_ptr<RGBMatrix>     _canvas;
 

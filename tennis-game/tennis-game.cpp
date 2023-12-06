@@ -35,6 +35,7 @@ void writeMessage( GameObject* gameObject, std::string message ) {
 
 
 void score( GameObject* gameObject, GameState* gameState, int player ) {
+    gameObject->getScoreBoard()->blink_player_score( player );
     gameObject->playerScore( player );  // flip the player score flag
     gameObject->loopGame();             // handle the player score flag
     std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
@@ -53,6 +54,7 @@ void test_01( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen();
     gameObject->start();
     sleep( 1 );
+    
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 2 );
     score( gameObject, gameState, 2 );
@@ -102,20 +104,22 @@ void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
 
 void test_03( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen();
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+    // playerWin( gameObject, gameState, 1 ); 
+    // score( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 2 );
-    score( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 2 );
     sleep( 4 ); }
 
 void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
@@ -272,17 +276,25 @@ int main( int argc, char *argv[]) {
     test_count++;
     // end test_01
 
-    gameObject->getScoreBoard()->clearScreen();
-    gameObject->getScoreBoard()->drawText( "Test",  
-    YELLOW, TEST_TEXT__X__POSITION, TEST_TEXT__Y__POSITION );
-    gameObject->getScoreBoard()->drawText( " 02 ",  
-    YELLOW, TEST_NUMBER__X__POSITION, TEST_NUMBER__Y__POSITION );
-    GameTimer::gameDelay( 4000 );
-    std::cout << "calling test_02()..." << std::endl;
-    test_02( gameObject, gameState, &loop_count );
+    // gameObject->getScoreBoard()->clearScreen();
+    // gameObject->getScoreBoard()->drawText( "Test",  
+    // YELLOW, TEST_TEXT__X__POSITION, TEST_TEXT__Y__POSITION );
+    // gameObject->getScoreBoard()->drawText( " 02 ",  
+    // YELLOW, TEST_NUMBER__X__POSITION, TEST_NUMBER__Y__POSITION );
+    // GameTimer::gameDelay( 4000 );
+    // std::cout << "calling test_02()..." << std::endl;
+    // test_02( gameObject, gameState, &loop_count );
     test_count++;
     // end test_02
-    // writeMessage( gameObject, "t " + std::to_string( test_count ));
+    
+    
+    // gameObject->getScoreBoard()->clearScreen();
+    // gameObject->getScoreBoard()->drawText( "Test",  
+    // YELLOW, TEST_TEXT__X__POSITION, TEST_TEXT__Y__POSITION );
+    // gameObject->getScoreBoard()->drawText( " 03 ",  
+    // YELLOW, TEST_NUMBER__X__POSITION, TEST_NUMBER__Y__POSITION );
+    // GameTimer::gameDelay( 4000 );
+    // std::cout << "calling test_03()..." << std::endl;
     // test_03( gameObject, gameState, &loop_count );
     test_count++;
     // end test_03
