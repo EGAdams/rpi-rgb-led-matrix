@@ -176,11 +176,11 @@ void ScoreBoard::blink_player_score(int player) {
         GameTimer::gameDelay( 1000 );
         _greenPipeDrawer->drawNumber(" ", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
         GameTimer::gameDelay( 1000 );
-        _greenPipeDrawer->drawNumber("I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
+        _greenPipeDrawer->drawNumber("1", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
         GameTimer::gameDelay( 1000 );
         _greenPipeDrawer->drawNumber(" ", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
         GameTimer::gameDelay( 1000 );
-        _greenPipeDrawer->drawNumber("I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
+        _greenPipeDrawer->drawNumber("l", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
         GameTimer::gameDelay( 1000 );
         _greenPipeDrawer->drawNumber(" ", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
     }
