@@ -189,7 +189,7 @@ void ScoreBoard::_drawTieBreakerBar() {
 
 void ScoreBoard::blink_player_score(int player) {
     if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
-    #define BLINK_DELAY 300 // 75
+    #define BLINK_DELAY 75
     if ( player == PLAYER_1_SCORE ) {
         for ( int i=0; i < 5; i++ ) {
             _greenPeriodDrawer->drawNumber( ".", RED_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET - 38 );
