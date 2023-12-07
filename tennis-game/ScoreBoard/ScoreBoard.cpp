@@ -189,9 +189,10 @@ void ScoreBoard::_drawTieBreakerBar() {
 
 void ScoreBoard::blink_player_score(int player) {
     if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
-    #define BLINK_DELAY 75
+    #define BLINK_DELAY 100
+    #define BLINK_COUNT 5
     if ( player == PLAYER_1_SCORE ) {
-        for ( int i=0; i < 5; i++ ) {
+        for ( int i=0; i < BLINK_COUNT; i++ ) {
             _greenPeriodDrawer->drawNumber( ".", RED_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET - 38 );
             GameTimer::gameDelay( BLINK_DELAY );
             _blankPeriodDrawer->drawNumber( ".", RED_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET - 38 );
@@ -199,7 +200,7 @@ void ScoreBoard::blink_player_score(int player) {
         }
     } else {
         // do this 5 times
-        for ( int i = 0; i < 5; i++ ) {
+        for ( int i = 0; i < BLINK_COUNT; i++ ) {
             _redPeriodDrawer->drawNumber( ".", RED_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET -20 );
             GameTimer::gameDelay( BLINK_DELAY );
             _blankPeriodDrawer->drawNumber( ".", RED_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET -20 );
