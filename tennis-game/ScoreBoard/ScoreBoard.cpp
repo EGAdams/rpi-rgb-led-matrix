@@ -42,14 +42,25 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         printf( "  gpio_slowdown: %d\n", runtime_opt.gpio_slowdown );
         CanvasCreator canvasCreator( matrix_options, runtime_opt );
         _canvas = std::unique_ptr<rgb_matrix::RGBMatrix>( canvasCreator.createCanvas());
-        FontLoader fontLoader( "fonts/mspgothic_042623.bdf" ); // Load Fonts
-        rgb_matrix::Font font;
-        fontLoader.LoadFont( font );
-        FontLoader bigNumberFontLoader( "fonts/fgm_27_ee.bdf" );
+
+        // start loading fonts...
+        FontLoader smallNumberFontLoader( "fonts/mspgothic_042623.bdf" );       // little numbers
+        rgb_matrix::Font small_number_font;
+        smallNumberFontLoader.LoadFont( small_number_font );
+
+        FontLoader bigNumberFontLoader( "fonts/fgm_27_ee.bdf" );                // big numbers
         rgb_matrix::Font bigNumberFont;
         bigNumberFontLoader.LoadFont( bigNumberFont );
         if (!_big_number_font.LoadFont( BIG_NUMBER_FONT )) {
             fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT ); exit( 1 );}
+        
+        FontLoader periodFontLoader( "fonts/mspgothic_030623.bdf" );            // that period
+        rgb_matrix::Font _period_font;
+        periodFontLoader.LoadFont( _period_font );
+        if (!_period_font.LoadFont( "fonts/mspgothic_030623.bdf" )) { 
+            fprintf( stderr, "Couldn't load font '%s'\n", "fonts/mspgothic_030623.bdf" ); exit( 1 );}
+        
+        // end loading fonts
 
         Color color( 255, 255, 0 );
         Color bg_color( 0, 0, 0 );
@@ -63,13 +74,16 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         _playerTwoScoreDrawer   = std::make_unique<Drawer>(
             _canvas.get(), &_big_number_font, Drawer::BIG, player_two_score_color, bg_color );
 
-        _drawer          = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::SMALL, color, bg_color     );
-        _pipeDrawer      = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, color, bg_color       );
-        _bluePipeDrawer  = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, blue_color, bg_color  );
-        _redPipeDrawer   = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, red_color, bg_color   );
-        _greenPipeDrawer = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, green_color, bg_color );
-        _blankPipeDrawer = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, black_color, bg_color );
-        _setDrawer       = std::make_unique<SetDrawer>( _canvas.get(), _gameState                                            );
+        _drawer            = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::SMALL, color, bg_color     );
+        _pipeDrawer        = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, color, bg_color       );
+        _bluePipeDrawer    = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, blue_color, bg_color  );
+        _redPipeDrawer     = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, red_color, bg_color   );
+        _greenPipeDrawer   = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, green_color, bg_color );
+        _blankPipeDrawer   = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, black_color, bg_color );
+        _redPeriodDrawer   = std::make_unique<Drawer>(    _canvas.get(), &_period_font, Drawer::BIG, red_color, bg_color );
+        _greenPeriodDrawer = std::make_unique<Drawer>(    _canvas.get(), &_period_font, Drawer::BIG, green_color, bg_color );
+        _blankPeriodDrawer = std::make_unique<Drawer>(    _canvas.get(), &_period_font, Drawer::BIG, black_color, bg_color );
+        _setDrawer         = std::make_unique<SetDrawer>( _canvas.get(), _gameState                                            );
         } // fi onRaspberryPi
     update();
 }
@@ -175,17 +189,17 @@ void ScoreBoard::blink_player_score(int player) {
     if ( /* return if not on Pi */ !onRaspberryPi()) { return; }
     #define BLINK_DELAY 100
     if ( player == PLAYER_1_SCORE ) {
-        _greenPipeDrawer->drawNumber( "I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
+        _greenPeriodDrawer->drawNumber( ".", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
         GameTimer::gameDelay( BLINK_DELAY );
-        _blankPipeDrawer->drawNumber( "I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
+        _blankPeriodDrawer->drawNumber( ".", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
         GameTimer::gameDelay( BLINK_DELAY );
-        _greenPipeDrawer->drawNumber( "I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
+        _greenPeriodDrawer->drawNumber( ".", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
         GameTimer::gameDelay( BLINK_DELAY );
-        _blankPipeDrawer->drawNumber( "I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
+        _blankPeriodDrawer->drawNumber( ".", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
         GameTimer::gameDelay( BLINK_DELAY );
-        _greenPipeDrawer->drawNumber( "I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
+        _greenPeriodDrawer->drawNumber( ".", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
         GameTimer::gameDelay( BLINK_DELAY );
-        _blankPipeDrawer->drawNumber( "I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
+        _blankPeriodDrawer->drawNumber( ".", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
     }
 }
 
