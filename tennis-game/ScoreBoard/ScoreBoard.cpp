@@ -57,7 +57,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         FontLoader periodFontLoader( "fonts/mspgothic_030623.bdf" );            // that period
         rgb_matrix::Font _period_font;
         periodFontLoader.LoadFont( _period_font );
-        if (!_period_font.LoadFont( "fonts/mspgothic_030623.bdf" )) { 
+        if (!_period_font.LoadFont( "fonts/mspgothic_03063.bdf" )) { 
             fprintf( stderr, "Couldn't load font '%s'\n", "fonts/mspgothic_030623.bdf" ); exit( 1 );}
         
         // end loading fonts
@@ -186,7 +186,7 @@ void ScoreBoard::_drawTieBreakerBar() {
 
 
 void ScoreBoard::blink_player_score(int player) {
-    if ( /* return if not on Pi */ !onRaspberryPi()) { return; }
+    if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
     #define BLINK_DELAY 100
     if ( player == PLAYER_1_SCORE ) {
         _greenPeriodDrawer->drawNumber( "i", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
