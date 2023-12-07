@@ -191,7 +191,7 @@ void ScoreBoard::blink_player_score(int player) {
     if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
     #define BLINK_DELAY 100
     if ( player == PLAYER_1_SCORE ) {
-        _greenPeriodDrawer->drawNumber( ".", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET );
+        _greenPeriodDrawer->drawNumber( ".", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET -5 );
         GameTimer::gameDelay( BLINK_DELAY );
         _blankPeriodDrawer->drawNumber( ".", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET );
         GameTimer::gameDelay( BLINK_DELAY );
