@@ -73,7 +73,7 @@ void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen();
     gameObject->start();
     sleep( 1 );
-    
+
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 1 );
@@ -101,7 +101,7 @@ void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 1 );
-    //  playerWin( gameObject, gameState, 1 ); // this score wins player 1 set.  needed if test 01 is not run.
+    playerWin( gameObject, gameState, 1 );
     sleep( 2 );
 }
 
