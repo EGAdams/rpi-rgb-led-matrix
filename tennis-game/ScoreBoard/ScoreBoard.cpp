@@ -54,15 +54,13 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         if (!_big_number_font.LoadFont( BIG_NUMBER_FONT )) {
             fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT ); exit( 1 );}
         
-        FontLoader periodFontLoader( "fonts/mspgothic_030623.bdf" );            // that period
+        FontLoader periodFontLoader( "f.bdf" );            // that period
         rgb_matrix::Font _period_font;
         periodFontLoader.LoadFont( _period_font );
         if (!_period_font.LoadFont( "fonts/mspgothic_030623.bdf" )) { 
             fprintf( stderr, "Couldn't load font '%s'\n", "fonts/mspgothic_030623.bdf" ); exit( 1 );
         } else {
-            // cout period font loaded, ok?
-            // std::cout << "period font loaded, ok?" << std::endl;
-            std::cin.get();
+            std::cout << "loaded period font." << std::endl;
         }
         
         // end loading fonts
