@@ -196,10 +196,6 @@ void ScoreBoard::blink_player_score(int player) {
             GameTimer::gameDelay( BLINK_DELAY );
             _blankPeriodDrawer->drawNumber( ".", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET - 20 );
             GameTimer::gameDelay( BLINK_DELAY );
-            _greenPeriodDrawer->drawNumber( ".", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET - 20 );
-            GameTimer::gameDelay( BLINK_DELAY );
-            _blankPeriodDrawer->drawNumber( ".", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET - 20 );
-            GameTimer::gameDelay( BLINK_DELAY );
         }
     } else {
         // do this 5 times
@@ -208,13 +204,6 @@ void ScoreBoard::blink_player_score(int player) {
             GameTimer::gameDelay( BLINK_DELAY );
             _blankPeriodDrawer->drawNumber( ".", RED_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET -20 );
             GameTimer::gameDelay( BLINK_DELAY );
-            _redPeriodDrawer->drawNumber( ".", RED_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET - 20 );
-            GameTimer::gameDelay( BLINK_DELAY );
-            _blankPeriodDrawer->drawNumber( ".", RED_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET - 20 );
-            GameTimer::gameDelay( BLINK_DELAY );
-            _redPeriodDrawer->drawNumber( ".", RED_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET - 20 );
-            GameTimer::gameDelay( BLINK_DELAY );
-            _blankPeriodDrawer->drawNumber( ".", RED_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET - 20 );
         }
     }    
 }
