@@ -202,17 +202,6 @@ void ScoreBoard::blink_player_score(int player) {
         _greenPeriodDrawer->drawNumber( ".", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET - 20);
         GameTimer::gameDelay( BLINK_DELAY );
         _blankPeriodDrawer->drawNumber( ".", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
-        _greenPeriodDrawer->drawNumber( ".", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET + 20);
-        GameTimer::gameDelay( BLINK_DELAY );
-        _blankPeriodDrawer->drawNumber( ".", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
-        GameTimer::gameDelay( BLINK_DELAY );
-        _greenPeriodDrawer->drawNumber( ".", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET - 20 );
-        GameTimer::gameDelay( BLINK_DELAY );
-        _blankPeriodDrawer->drawNumber( ".", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
-        GameTimer::gameDelay( BLINK_DELAY );
-        _greenPeriodDrawer->drawNumber( ".", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET - 40);
-        GameTimer::gameDelay( BLINK_DELAY );
-        _blankPeriodDrawer->drawNumber( ".", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
     }
 }
 
