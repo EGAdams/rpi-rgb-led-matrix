@@ -71,9 +71,9 @@ void test_01( GameObject* gameObject, GameState* gameState, int* loop_count ) {
 
 void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen();
-    std::cout << "screen cleared..." << std::endl;
-    // sleep 4 seconds...
-    GameTimer::gameDelay( 4000 );
+    gameObject->start();
+    sleep( 1 );
+    
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 1 );
