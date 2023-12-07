@@ -60,6 +60,7 @@ private:
     std::unique_ptr<Drawer>  _bluePipeDrawer;
     std::unique_ptr<Drawer>  _redPipeDrawer;
     std::unique_ptr<Drawer>  _greenPipeDrawer;
+    std::unique_ptr<Drawer>  _blankPipeDrawer;
     std::unique_ptr<SetDrawer>     _setDrawer;
     std::unique_ptr<RGBMatrix>     _canvas;
 

@@ -20,6 +20,10 @@
 #include <functional>
 #include <algorithm>
 
+/**
+ * @namespace rgb_matrix
+ * @brief Namespace containing functions and classes for manipulating and drawing on RGB matrices.
+ */
 namespace rgb_matrix {
 bool SetImage(Canvas *c, int canvas_offset_x, int canvas_offset_y,
               const uint8_t *buffer, size_t size,

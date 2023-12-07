@@ -56,6 +56,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         Color blue_color( 0, 0, 255 );
         Color red_color( 255, 0, 0 );
         Color green_color( 0, 255, 0 );
+        Color black_color( 0, 0, 0 );
 
         _playerOneScoreDrawer   = std::make_unique<Drawer>(
             _canvas.get(), &_big_number_font, Drawer::BIG, player_one_score_color, bg_color );
@@ -65,8 +66,9 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         _drawer          = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::SMALL, color, bg_color     );
         _pipeDrawer      = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, color, bg_color       );
         _bluePipeDrawer  = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, blue_color, bg_color  );
-        // _redPipeDrawer   = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, red_color, bg_color   );
+        _redPipeDrawer   = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, red_color, bg_color   );
         _greenPipeDrawer = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, green_color, bg_color );
+        _blankPipeDrawer = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, black_color, bg_color );
         _setDrawer       = std::make_unique<SetDrawer>( _canvas.get(), _gameState                                            );
         } // fi onRaspberryPi
     update();
@@ -172,17 +174,17 @@ void ScoreBoard::_drawTieBreakerBar() {
 void ScoreBoard::blink_player_score(int player) {
     if ( /* return if not on Pi */ !onRaspberryPi()) { return; }
     if ( player == PLAYER_1_SCORE ) {
-        _greenPipeDrawer->drawNumber("I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
+        _greenPipeDrawer->drawNumber( "I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
         GameTimer::gameDelay( 1000 );
-        _greenPipeDrawer->drawNumber("0", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
+        _blankPipeDrawer->drawNumber( "I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
         GameTimer::gameDelay( 5000 );
-        // _greenPipeDrawer->drawNumber("1", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
-        // GameTimer::gameDelay( 1000 );
-        // _greenPipeDrawer->drawNumber(" ", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
-        // GameTimer::gameDelay( 1000 );
-        // _greenPipeDrawer->drawNumber("l", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
-        // GameTimer::gameDelay( 1000 );
-        // _greenPipeDrawer->drawNumber(" ", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
+        _greenPipeDrawer->drawNumber( "I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
+        GameTimer::gameDelay( 1000 );
+        _blankPipeDrawer->drawNumber( "I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
+        GameTimer::gameDelay( 1000 );
+        _greenPipeDrawer->drawNumber( "I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
+        GameTimer::gameDelay( 1000 );
+        _blankPipeDrawer->drawNumber( "I", GREEN_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET);
     }
 }
 
