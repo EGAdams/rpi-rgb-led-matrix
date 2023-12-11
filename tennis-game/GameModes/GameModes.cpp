@@ -70,12 +70,8 @@ void GameModes::mode1() {
         _gameState->setUndo( 0 );
         std::cout << "calling mode1Undo( _history )... " << std::endl;
         _undo.mode1Undo( _history ); }
-    // std::cout << "calling readPlayerButtons()... " << std::endl;
     _inputs.readPlayerButtons();  // digital read on player buttons.  sets playerButton if tripped.
-    // std::cout << "Player button read.  player button: " << _gameState->getPlayerButton() << std::endl;
-    // std::cout << "calling serveLeds serveSwitch()... " << std::endl;
     _serveLeds.serveSwitch(); // if serveSwitch >= 2, serveSwitch = 0; and toggle serve variable
-    // std::cout << "after serveLeds serveSwitch().  serveSwitch: " << _gameState->getServeSwitch() << std::endl;
     if ( _gameState->getSetTieBreak() == 1 ) { 
         _tieBreaker.setTieBreaker();
     } else { 
