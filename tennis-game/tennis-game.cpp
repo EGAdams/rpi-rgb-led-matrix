@@ -106,10 +106,6 @@ void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     playerWinDelay( gameObject, gameState, 2, DEMO_DELAY );
     playerWinDelay( gameObject, gameState, 2, DEMO_DELAY );
     playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
-    
-    std::cout << "time to go into high gear.  press <enter> to continue" << std::endl;
-    std::cin.ignore();
-
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
