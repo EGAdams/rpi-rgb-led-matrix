@@ -38,17 +38,18 @@ void score( GameObject* gameObject, GameState* gameState, int player ) {
 }
 
 void playerWinDelay( GameObject* gameObject, GameState* gameState, int player, int delay ) {
+    if( player == 1 ) {
+        gameState->setServe( PLAYER_ONE_SERVE );
+    } else {
+        gameState->setServe( PLAYER_TWO_SERVE ); }
+    
     scoreDelay( gameObject, gameState, player, delay );
     while( gameState->getPlayer1Points() != 0 || gameState->getPlayer2Points() != 0 ) {
         scoreDelay( gameObject, gameState, player, delay );
-    }
-    // std::cout << "playerWinDelay() player: " << player 
-    //         << " finished.  press <enter> to continue" << std::endl;
-    // std::cin.ignore();          
+    }      
 }
 
 void playerWin( GameObject* gameObject, GameState* gameState, int player ) {
-    // PLAYER_ONE_SERVE
     if( player == 1 ) {
         gameState->setServe( PLAYER_ONE_SERVE );
     } else {
