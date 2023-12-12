@@ -20,7 +20,7 @@
 #include "LoggerFactory/LoggerFactory.h"
 
 using namespace rgb_matrix;
-#define SCORE_DELAY    .15
+#define SCORE_DELAY    1
 #define MAX_LOOP_COUNT 350
 #define A_SPACE        13
 #define FOUR_SPACE     14
@@ -87,9 +87,9 @@ void test_01( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
     sleep( 1 );
     score( gameObject, gameState, 1 );
-    sleep( 3 );
 }
 
 /*
@@ -114,6 +114,8 @@ void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
 
 void test_03( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen();
+    gameObject->start();
+    sleep( 1 );
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
@@ -124,10 +126,8 @@ void test_03( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
     sleep( 4 ); }
 
 void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
@@ -221,14 +221,19 @@ void test_06( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     }
 }
 
-void run_manual_game( GameObject* gameObject, GameState* gameState, int player ) {
+void resetAll( Reset* reset ) {
+    reset->zeroPlayerValues();
+    reset->zeroSetHistory();
+    reset->resetScoreboard();
+}
+
+void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset, int player ) {
     int loop_count = 0;
     int test_count = 0;
     #define MAX_LOOP_COUNT 350
     #define A_SPACE        13
     #define FOUR_SPACE     14
     #define THREE_SPACE    15
-    #define SCORE_DELAY    .15
     
     // set games to --games argument
     // set sets to --sets argument
@@ -249,12 +254,16 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, int player )
         std::cout << "\n";
         std::cout << "  1.) Player 1 score" << std::endl;
         std::cout << "  2.) Player 2 score" << std::endl;
-        std::cout << "  3.) Player 1 win" << std::endl;
-        std::cout << "  4.) Player 2 win" << std::endl;
-        std::cout << "  5.) Test 02" << std::endl;
-        std::cout << "  5.) Test 03" << std::endl;
+        std::cout << "  11.) Player 1 win" << std::endl;
+        std::cout << "  22.) Player 2 win" << std::endl;
         std::cout << "  9.) Undo" << std::endl;
+        std::cout << "  101.) Test 01" << std::endl;
+        std::cout << "  102.) Test 02" << std::endl;
+        std::cout << "  103.) Test 03" << std::endl;
+
         std::cout << "  0.) Exit" << std::endl;
+        // cout
+        std::cout << "  Enter selection: ";
         std::cin >> menu_selection;
         
         if ( menu_selection == 1  ||  menu_selection == 2 ) {
@@ -268,22 +277,32 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, int player )
             std::cout << "\n\n\n\n\n\n\n*** Undo ***\n" << std::endl;
             gameObject->undo(); 
             sleep( SCORE_DELAY );
-        } else if ( menu_selection == 3 ) { 
+        } else if ( menu_selection == 11 ) { 
             std::cout << "\n\n\n\n\n\n\n*** Player 1 win ***\n" << std::endl;
             playerWin( gameObject, gameState, 1 );
             sleep( SCORE_DELAY );
-        } else if ( menu_selection == 4 ) { 
+        } else if ( menu_selection == 22 ) { 
             std::cout << "\n\n\n\n\n\n\n*** Player 2 win ***\n" << std::endl;
             playerWin( gameObject, gameState, 2 );
             sleep( SCORE_DELAY );
-        } else if ( menu_selection == 5 ) { 
+        } else if ( menu_selection == 101 ) {
+            resetAll( reset );
+            std::cout << "\n\n\n\n\n\n\n*** Test 01 ***\n" << std::endl;
+            test_01( gameObject, gameState, &loop_count );
+            sleep( SCORE_DELAY );
+            continue;
+        } else if ( menu_selection == 102 ) { 
+            resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 02 ***\n" << std::endl;
             test_02( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
-        } else if ( menu_selection == 6 ) {
+            continue;
+        } else if ( menu_selection == 103 ) {
+            resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 03 ***\n" << std::endl;
             test_03( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
+            continue;
         } else {
             std::cout << "\n\n\n\n\n\n\n*** Invalid selection ***\n" << std::endl;
             sleep( SCORE_DELAY );
@@ -321,10 +340,12 @@ int main( int argc, char *argv[]) {
     int loop_count = 0;
     GameState*  gameState  = new GameState();  // make this 1st!!! cost me 3 days of debugging
     GameObject* gameObject = new GameObject( gameState );
+    Reset* reset = new Reset( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
+
     sleep( .5 );
     gameObject->loopGame();
     sleep( .5 );
-    if ( manual == 1 ) { run_manual_game( gameObject, gameState, 1 ); return 0; }
+    if ( manual == 1 ) { run_manual_game( gameObject, gameState, reset, 1 ); return 0; }
 
     ///// run tests /////
     int test_count = 1;

@@ -133,3 +133,63 @@
 {"timestamp":1702144856000,"id":"Undo_14170955_1702144856000","message":"updating leds...","method":"mode1Undo"}
 {"timestamp":1702144862000,"id":"Undo_331793007_1702144862000","message":"updating leds...","method":"mode1Undo"}
 {"timestamp":1702148260000,"id":"Undo_161123155_1702148260000","message":"updating leds...","method":"mode1Undo"}
+{"timestamp":1702343511000,"id":"Reset_2012776983_1702343511000","message":"resetting scoreboard...","method":"resetScoreboard"}
+{"timestamp":1702343511000,"id":"Reset_2012776984_1702343511000","message":"turning tie leds off... ","method":"resetScoreboard"}
+{"timestamp":1702343512000,"id":"Reset_2012776985_1702343512000","message":"done resetting game.","method":"resetScoreboard"}
+{"timestamp":1702343527000,"id":"Reset_1440002962_1702343527000","message":"resetting scoreboard...","method":"resetScoreboard"}
+{"timestamp":1702343527000,"id":"Reset_1440002963_1702343527000","message":"turning tie leds off... ","method":"resetScoreboard"}
+{"timestamp":1702343527000,"id":"Reset_1440002964_1702343527000","message":"done resetting game.","method":"resetScoreboard"}
+{"timestamp":1702343536000,"id":"Reset_1914901233_1702343536000","message":"resetting scoreboard...","method":"resetScoreboard"}
+{"timestamp":1702343536000,"id":"Reset_1914901234_1702343536000","message":"turning tie leds off... ","method":"resetScoreboard"}
+{"timestamp":1702343537000,"id":"Reset_539762157_1702343537000","message":"done resetting game.","method":"resetScoreboard"}
+{"timestamp":1702343568000,"id":"Reset_1851985770_1702343568000","message":"resetting scoreboard...","method":"resetScoreboard"}
+{"timestamp":1702343568000,"id":"Reset_1851985771_1702343568000","message":"turning tie leds off... ","method":"resetScoreboard"}
+{"timestamp":1702343569000,"id":"Reset_1851985772_1702343569000","message":"done resetting game.","method":"resetScoreboard"}
+{"timestamp":1702343690000,"id":"Reset_1251409257_1702343690000","message":"resetting scoreboard...","method":"resetScoreboard"}
+{"timestamp":1702343691000,"id":"Reset_1251409258_1702343691000","message":"turning tie leds off... ","method":"resetScoreboard"}
+{"timestamp":1702343691000,"id":"Reset_948592300_1702343691000","message":"done resetting game.","method":"resetScoreboard"}
+{"timestamp":1702343701000,"id":"Reset_1124493402_1702343701000","message":"resetting scoreboard...","method":"resetScoreboard"}
+{"timestamp":1702343702000,"id":"Reset_1124493403_1702343702000","message":"turning tie leds off... ","method":"resetScoreboard"}
+{"timestamp":1702343702000,"id":"Reset_825520064_1702343702000","message":"done resetting game.","method":"resetScoreboard"}
+{"timestamp":1702343714000,"id":"Reset_1463752098_1702343714000","message":"resetting scoreboard...","method":"resetScoreboard"}
+{"timestamp":1702343714000,"id":"Reset_1463752099_1702343714000","message":"turning tie leds off... ","method":"resetScoreboard"}
+{"timestamp":1702343714000,"id":"Reset_1463752100_1702343714000","message":"done resetting game.","method":"resetScoreboard"}
+{"timestamp":1702343743000,"id":"Reset_1248191694_1702343743000","message":"resetting scoreboard...","method":"resetScoreboard"}
+{"timestamp":1702343743000,"id":"Reset_1248191695_1702343743000","message":"turning tie leds off... ","method":"resetScoreboard"}
+{"timestamp":1702343743000,"id":"Reset_1248191696_1702343743000","message":"done resetting game.","method":"resetScoreboard"}
+{"timestamp":1702344951000,"id":"Reset_1075961880_1702344951000","message":"resetting scoreboard...","method":"resetScoreboard"}
+{"timestamp":1702344951000,"id":"Reset_1075961881_1702344951000","message":"turning tie leds off... ","method":"resetScoreboard"}
+{"timestamp":1702344951000,"id":"Reset_1075961882_1702344951000","message":"done resetting game.","method":"resetScoreboard"}
+{"timestamp":1702344962000,"id":"Reset_950040765_1702344962000","message":"resetting scoreboard...","method":"resetScoreboard"}
+{"timestamp":1702344962000,"id":"Reset_950040766_1702344962000","message":"turning tie leds off... ","method":"resetScoreboard"}
+{"timestamp":1702344962000,"id":"Reset_950040767_1702344962000","message":"done resetting game.","method":"resetScoreboard"}
+{"timestamp":1702344971000,"id":"Reset_356869714_1702344971000","message":"resetting scoreboard...","method":"resetScoreboard"}
+{"timestamp":1702344971000,"id":"Reset_356869715_1702344971000","message":"turning tie leds off... ","method":"resetScoreboard"}
+{"timestamp":1702344972000,"id":"Reset_356869716_1702344972000","message":"done resetting game.","method":"resetScoreboard"}
+{"timestamp":1702345013000,"id":"Reset_1533140422_1702345013000","message":"resetting scoreboard...","method":"resetScoreboard"}
+{"timestamp":1702345013000,"id":"Reset_1533140423_1702345013000","message":"turning tie leds off... ","method":"resetScoreboard"}
+{"timestamp":1702345013000,"id":"Reset_1533140424_1702345013000","message":"done resetting game.","method":"resetScoreboard"}
+{"timestamp":1702345719000,"id":"Reset_804131834_1702345719000","message":"resetting scoreboard...","method":"resetScoreboard"}
+{"timestamp":1702345719000,"id":"Reset_501413620_1702345719000","message":"turning tie leds off... ","method":"resetScoreboard"}
+{"timestamp":1702345719000,"id":"Reset_501413621_1702345719000","message":"done resetting game.","method":"resetScoreboard"}
+{"timestamp":1702345748000,"id":"Reset_1349213020_1702345748000","message":"resetting scoreboard...","method":"resetScoreboard"}
+{"timestamp":1702345749000,"id":"Reset_1349213021_1702345749000","message":"turning tie leds off... ","method":"resetScoreboard"}
+{"timestamp":1702345749000,"id":"Reset_1047360013_1702345749000","message":"done resetting game.","method":"resetScoreboard"}
+{"timestamp":1702348015000,"id":"Reset_165946067_1702348015000","message":"resetting scoreboard...","method":"resetScoreboard"}
+{"timestamp":1702348016000,"id":"Reset_165946068_1702348016000","message":"turning tie leds off... ","method":"resetScoreboard"}
+{"timestamp":1702348016000,"id":"Reset_2009578234_1702348016000","message":"done resetting game.","method":"resetScoreboard"}
+{"timestamp":1702348044000,"id":"Reset_1004169002_1702348044000","message":"resetting scoreboard...","method":"resetScoreboard"}
+{"timestamp":1702348044000,"id":"Reset_1004169003_1702348044000","message":"turning tie leds off... ","method":"resetScoreboard"}
+{"timestamp":1702348044000,"id":"Reset_1004169004_1702348044000","message":"done resetting game.","method":"resetScoreboard"}
+{"timestamp":1702348072000,"id":"Reset_1071915616_1702348072000","message":"resetting scoreboard...","method":"resetScoreboard"}
+{"timestamp":1702348072000,"id":"Reset_1071915617_1702348072000","message":"turning tie leds off... ","method":"resetScoreboard"}
+{"timestamp":1702348072000,"id":"Reset_1071915618_1702348072000","message":"done resetting game.","method":"resetScoreboard"}
+{"timestamp":1702348083000,"id":"Reset_2027666527_1702348083000","message":"resetting scoreboard...","method":"resetScoreboard"}
+{"timestamp":1702348084000,"id":"Reset_2027666528_1702348084000","message":"turning tie leds off... ","method":"resetScoreboard"}
+{"timestamp":1702348084000,"id":"Reset_647687907_1702348084000","message":"done resetting game.","method":"resetScoreboard"}
+{"timestamp":1702349075000,"id":"Reset_2052407754_1702349075000","message":"resetting scoreboard...","method":"resetScoreboard"}
+{"timestamp":1702349075000,"id":"Reset_2052407755_1702349075000","message":"turning tie leds off... ","method":"resetScoreboard"}
+{"timestamp":1702349075000,"id":"Reset_2052407756_1702349075000","message":"done resetting game.","method":"resetScoreboard"}
+{"timestamp":1702349107000,"id":"Reset_911423565_1702349107000","message":"resetting scoreboard...","method":"resetScoreboard"}
+{"timestamp":1702349107000,"id":"Reset_911423566_1702349107000","message":"turning tie leds off... ","method":"resetScoreboard"}
+{"timestamp":1702349108000,"id":"Reset_911423567_1702349108000","message":"done resetting game.","method":"resetScoreboard"}

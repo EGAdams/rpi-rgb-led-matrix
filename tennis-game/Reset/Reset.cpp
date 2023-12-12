@@ -12,6 +12,22 @@ Reset::Reset( Player* player1,
 }
 Reset::~Reset() { delete _logger; }
 
+void Reset::zeroSetHistory() {
+    std::map<int, int> player1SetHistory = { {0, 0}, {1, 0}, {2, 0} };
+    std::map<int, int> player2SetHistory = { {0, 0}, {1, 0}, {2, 0} };
+    _gameState->setPlayer1SetHistory(player1SetHistory);
+    _gameState->setPlayer2SetHistory(player2SetHistory);
+    // zero player histories
+    _player1->setSetHistory( 0, 0 );
+    _player1->setSetHistory( 1, 0 );
+    _player1->setSetHistory( 2, 0 );
+    _player2->setSetHistory( 0, 0 );
+    _player2->setSetHistory( 1, 0 );
+    _player2->setSetHistory( 2, 0 );
+    // set current set to 0
+    _gameState->setCurrentSet( 1 );
+}
+
 void Reset::resetScoreboard() {
     _logger->logUpdate( "resetting scoreboard...", __FUNCTION__ );
     _pinInterface->pinDigitalWrite( P1_POINTS_LED1, LOW );
