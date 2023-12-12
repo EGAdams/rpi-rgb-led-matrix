@@ -372,14 +372,14 @@ int main( int argc, char *argv[]) {
     // end test_02
     
     
-    gameObject->getScoreBoard()->clearScreen();
-    gameObject->getScoreBoard()->drawText( "Test",  
-    YELLOW, TEST_TEXT__X__POSITION, TEST_TEXT__Y__POSITION );
-    gameObject->getScoreBoard()->drawText( " 03 ",  
-    YELLOW, TEST_NUMBER__X__POSITION, TEST_NUMBER__Y__POSITION );
-    GameTimer::gameDelay( 4000 );
-    std::cout << "calling test_03()..." << std::endl;
-    test_03( gameObject, gameState, &loop_count );
+    // gameObject->getScoreBoard()->clearScreen();
+    // gameObject->getScoreBoard()->drawText( "Test",  
+    // YELLOW, TEST_TEXT__X__POSITION, TEST_TEXT__Y__POSITION );
+    // gameObject->getScoreBoard()->drawText( " 03 ",  
+    // YELLOW, TEST_NUMBER__X__POSITION, TEST_NUMBER__Y__POSITION );
+    // GameTimer::gameDelay( 4000 );
+    // std::cout << "calling test_03()..." << std::endl;
+    // test_03( gameObject, gameState, &loop_count );
     test_count++;
     // end test_03
     // test_04( gameObject, gameState, &loop_count );
