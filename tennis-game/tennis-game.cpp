@@ -107,6 +107,19 @@ void normal_win_one( GameObject* gameObject, GameState* gameState ) {
     playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
 }
 
+void normal_win_one_no_delay( GameObject* gameObject, GameState* gameState ) {
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+}
+
 void normal_win_two( GameObject* gameObject, GameState* gameState ) {
     scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
@@ -179,21 +192,19 @@ void demo_test( GameObject* gameObject, GameState* gameState, int* loop_count ) 
     gameObject->start();
     sleep( 1 );
     
-    normal_win_one( gameObject, gameState );
-    ad_win_one_comeback( gameObject, gameState );
-    normal_win_two( gameObject, gameState );
-    two_win_scramble( gameObject, gameState );
-    one_win_scramble( gameObject, gameState );
-    normal_win_one( gameObject, gameState );
-    exit( 0 );
+    // normal_win_one( gameObject, gameState );
+    // ad_win_one_comeback( gameObject, gameState );
+    // normal_win_two( gameObject, gameState );
+    // two_win_scramble( gameObject, gameState );
+    // one_win_scramble( gameObject, gameState );
+    // normal_win_one( gameObject, gameState );
 
-    playerWinDelay( gameObject, gameState, 2, DEMO_DELAY );
-    playerWinDelay( gameObject, gameState, 2, DEMO_DELAY );
-    playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
-    playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 1 );
-    sleep( 2 );
+    normal_win_one_no_delay( gameObject, gameState );
+
+    // playerWin( gameObject, gameState, 1 );
+    // playerWin( gameObject, gameState, 1 );
+    // playerWin( gameObject, gameState, 1 );
+    sleep( 20 );
 }
 
 void test_01( GameObject* gameObject, GameState* gameState, int* loop_count ) {
