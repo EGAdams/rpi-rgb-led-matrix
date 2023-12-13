@@ -182,7 +182,6 @@ void demo_test( GameObject* gameObject, GameState* gameState, int* loop_count ) 
     // normal_win_two( gameObject, gameState );
     // two_win_scramble( gameObject, gameState );
     one_win_scramble( gameObject, gameState );
-    sleep( 500 );
     exit( 0 );
 
     playerWinDelay( gameObject, gameState, 2, DEMO_DELAY );
