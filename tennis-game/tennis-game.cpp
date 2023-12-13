@@ -107,18 +107,7 @@ void normal_win( GameObject* gameObject, GameState* gameState ) {
     playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
 }
 
-/*
- * Runs a demo with delays until the score reaches 3 - 2
- * Then kicks into high gear and finishes the game at 6 - 2 
- */
-void demo_test( GameObject* gameObject, GameState* gameState, int* loop_count ) {
-    gameObject->getScoreBoard()->clearScreen();
-    gameObject->start();
-    sleep( 1 );
-    
-    normal_win( gameObject, gameState );
-    exit( 0 );
-    
+void ad_win( GameObject* gameObject, GameState* gameState ) {
     scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
@@ -128,9 +117,20 @@ void demo_test( GameObject* gameObject, GameState* gameState, int* loop_count ) 
     scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
     playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
+}
 
+/*
+ * Runs a demo with delays until the score reaches 3 - 2
+ * Then kicks into high gear and finishes the game at 6 - 2 
+ */
+void demo_test( GameObject* gameObject, GameState* gameState, int* loop_count ) {
+    gameObject->getScoreBoard()->clearScreen();
+    gameObject->start();
+    sleep( 1 );
+    
+    // normal_win( gameObject, gameState );
+    ad_win( gameObject, gameState );
     exit( 0 );
-
 
     playerWinDelay( gameObject, gameState, 2, DEMO_DELAY );
     playerWinDelay( gameObject, gameState, 2, DEMO_DELAY );
