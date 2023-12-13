@@ -25,6 +25,7 @@ using namespace rgb_matrix;
 #define A_SPACE        13
 #define FOUR_SPACE     14
 #define THREE_SPACE    15
+#define DEMO_DELAY 1
 
 void writeMessage( GameObject* gameObject, std::string message ) {
     gameObject->getScoreBoard()->clearScreen();
@@ -95,6 +96,17 @@ void playerWin( GameObject* gameObject, GameState* gameState, int player ) {
     }
 }
 
+void normal_win( GameObject* gameObject, GameState* gameState ) {
+    scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
+    playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
+}
+
 /*
  * Runs a demo with delays until the score reaches 3 - 2
  * Then kicks into high gear and finishes the game at 6 - 2 
@@ -103,28 +115,23 @@ void demo_test( GameObject* gameObject, GameState* gameState, int* loop_count ) 
     gameObject->getScoreBoard()->clearScreen();
     gameObject->start();
     sleep( 1 );
-    #define DEMO_DELAY 1
+    
+    normal_win( gameObject, gameState );
+    exit( 0 );
     
     scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
-    scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
-    scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
-    playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
-
-    scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
-    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
-    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
-    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
     playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
 
     exit( 0 );
 
-    
+
     playerWinDelay( gameObject, gameState, 2, DEMO_DELAY );
     playerWinDelay( gameObject, gameState, 2, DEMO_DELAY );
     playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
