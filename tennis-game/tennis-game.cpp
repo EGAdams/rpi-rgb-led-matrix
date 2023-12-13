@@ -179,11 +179,12 @@ void demo_test( GameObject* gameObject, GameState* gameState, int* loop_count ) 
     gameObject->start();
     sleep( 1 );
     
-    // normal_win_one( gameObject, gameState );
-    // ad_win_one_comeback( gameObject, gameState );
-    // normal_win_two( gameObject, gameState );
-    // two_win_scramble( gameObject, gameState );
+    normal_win_one( gameObject, gameState );
+    ad_win_one_comeback( gameObject, gameState );
+    normal_win_two( gameObject, gameState );
+    two_win_scramble( gameObject, gameState );
     one_win_scramble( gameObject, gameState );
+    normal_win_one( gameObject, gameState );
     exit( 0 );
 
     playerWinDelay( gameObject, gameState, 2, DEMO_DELAY );
