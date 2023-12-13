@@ -26,8 +26,8 @@ using namespace rgb_matrix;
 #define FOUR_SPACE     14
 #define THREE_SPACE    15
 #define DEMO_DELAY 1
-#define BLINK_UPDATE_DELAY 250000 // 1000000
-#define FASTER_BLINK_UPDATE_DELAY 100000 // 750000
+#define BLINK_UPDATE_DELAY 1000000 // 250000 // 
+#define FASTER_BLINK_UPDATE_DELAY 750000 // 100000  
 
 void writeMessage( GameObject* gameObject, std::string message ) {
     gameObject->getScoreBoard()->clearScreen();
