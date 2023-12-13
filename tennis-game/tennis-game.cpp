@@ -180,7 +180,8 @@ void demo_test( GameObject* gameObject, GameState* gameState, int* loop_count ) 
     // normal_win_one( gameObject, gameState );
     // ad_win_one_comeback( gameObject, gameState );
     // normal_win_two( gameObject, gameState );
-    two_win_scramble( gameObject, gameState );
+    // two_win_scramble( gameObject, gameState );
+    one_win_scramble( gameObject, gameState );
     sleep( 500 );
     exit( 0 );
 
