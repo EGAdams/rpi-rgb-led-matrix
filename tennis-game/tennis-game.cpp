@@ -105,20 +105,26 @@ void demo_test( GameObject* gameObject, GameState* gameState, int* loop_count ) 
     sleep( 1 );
     #define DEMO_DELAY 1
     
-    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
+    playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
+
     scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
+    playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
 
     exit( 0 );
 
-    playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
-    playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
+    
     playerWinDelay( gameObject, gameState, 2, DEMO_DELAY );
     playerWinDelay( gameObject, gameState, 2, DEMO_DELAY );
     playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
