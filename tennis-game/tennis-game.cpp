@@ -204,19 +204,17 @@ void demo_test( GameObject* gameObject, GameState* gameState, int* loop_count ) 
     gameObject->start();
     sleep( 1 );
     
-    // normal_win_one( gameObject, gameState );
-    // ad_win_one_comeback( gameObject, gameState );
-    // normal_win_two( gameObject, gameState );
-    // two_win_scramble( gameObject, gameState );
-    // one_win_scramble( gameObject, gameState );
-    // normal_win_one( gameObject, gameState );
+    normal_win_one( gameObject, gameState );
+    ad_win_one_comeback( gameObject, gameState );
+    normal_win_two( gameObject, gameState );
+    two_win_scramble( gameObject, gameState );
+    one_win_scramble( gameObject, gameState );
+    normal_win_one( gameObject, gameState );
 
-    // normal_win_one_no_delay( gameObject, gameState );
+    // faster now...
+    normal_win_one_no_delay( gameObject, gameState );
     different_win_one_no_delay( gameObject, gameState );
-    
-    // playerWin( gameObject, gameState, 1 );
-    // playerWin( gameObject, gameState, 1 );
-    // playerWin( gameObject, gameState, 1 );
+    normal_win_one_no_delay( gameObject, gameState );
     sleep( 20 );
 }
 
