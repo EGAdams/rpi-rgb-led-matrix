@@ -97,7 +97,7 @@ void playerWin( GameObject* gameObject, GameState* gameState, int player ) {
     }
 }
 
-void normal_win( GameObject* gameObject, GameState* gameState ) {
+void normal_win_one( GameObject* gameObject, GameState* gameState ) {
     scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
@@ -108,7 +108,22 @@ void normal_win( GameObject* gameObject, GameState* gameState ) {
     playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
 }
 
-void ad_win( GameObject* gameObject, GameState* gameState ) {
+void normal_win_two( GameObject* gameObject, GameState* gameState ) {
+    scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
+    playerWinDelay( gameObject, gameState, 2, DEMO_DELAY );
+}
+
+void ad_win_one_comeback( GameObject* gameObject, GameState* gameState ) {
     scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
@@ -135,8 +150,9 @@ void demo_test( GameObject* gameObject, GameState* gameState, int* loop_count ) 
     gameObject->start();
     sleep( 1 );
     
-    // normal_win( gameObject, gameState );
-    ad_win( gameObject, gameState );
+    // normal_win_one( gameObject, gameState );
+    // ad_win_one_comeback( gameObject, gameState );
+    normal_win_two( gameObject, gameState );
     exit( 0 );
 
     playerWinDelay( gameObject, gameState, 2, DEMO_DELAY );
