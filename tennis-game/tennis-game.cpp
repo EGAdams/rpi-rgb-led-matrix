@@ -37,7 +37,7 @@ void writeMessage( GameObject* gameObject, std::string message ) {
 
 void scoreDelay( GameObject* gameObject, GameState* gameState, int player, int delay ) {
     gameObject->getScoreBoard()->blink_player_score( player );
-    usleep( 500000 );
+    usleep( 1000000 );
     gameObject->playerScore( player );  // flip the player score flag
     gameObject->loopGame();             // handle the player score flag
     usleep( 500000 );
