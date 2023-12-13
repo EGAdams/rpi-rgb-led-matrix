@@ -119,6 +119,19 @@ void normal_win_one_no_delay( GameObject* gameObject, GameState* gameState ) {
     playerWin( gameObject, gameState, 1 );
 }
 
+void different_win_one_no_delay( GameObject* gameObject, GameState* gameState ) {
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 1 );
+}
+
 void normal_win_two( GameObject* gameObject, GameState* gameState ) {
     scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
@@ -198,8 +211,9 @@ void demo_test( GameObject* gameObject, GameState* gameState, int* loop_count ) 
     // one_win_scramble( gameObject, gameState );
     // normal_win_one( gameObject, gameState );
 
-    normal_win_one_no_delay( gameObject, gameState );
-
+    // normal_win_one_no_delay( gameObject, gameState );
+    different_win_one_no_delay( gameObject, gameState );
+    
     // playerWin( gameObject, gameState, 1 );
     // playerWin( gameObject, gameState, 1 );
     // playerWin( gameObject, gameState, 1 );
