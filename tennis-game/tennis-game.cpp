@@ -113,8 +113,6 @@ void normal_win_one_no_delay( GameObject* gameObject, GameState* gameState ) {
     score( gameObject, gameState, 2 );
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 2 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 2 );
     score( gameObject, gameState, 2 );
     score( gameObject, gameState, 1 );
     score( gameObject, gameState, 1 );
