@@ -47,6 +47,7 @@ void scoreDelay( GameObject* gameObject, GameState* gameState, int player, int d
 
 void score( GameObject* gameObject, GameState* gameState, int player ) {
     gameObject->getScoreBoard()->blink_player_score( player );
+    usleep( 750000 );
     gameObject->playerScore( player );  // flip the player score flag
     gameObject->loopGame();             // handle the player score flag
     std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
@@ -65,6 +66,23 @@ void playerWinDelay( GameObject* gameObject, GameState* gameState, int player, i
     }      
 }
 
+void checkeredPlayerOneWinDelay( GameObject* gameObject, GameState* gameState, int delay ) {
+    scoreDelay( gameObject, gameState, 0, delay );
+
+    scoreDelay( gameObject, gameState, 1, delay );
+    scoreDelay( gameObject, gameState, 1, delay );
+    scoreDelay( gameObject, gameState, 0, delay );
+    scoreDelay( gameObject, gameState, 1, delay );
+    scoreDelay( gameObject, gameState, 1, delay );
+    scoreDelay( gameObject, gameState, 0, delay );
+    scoreDelay( gameObject, gameState, 1, delay );
+    scoreDelay( gameObject, gameState, 1, delay );
+    scoreDelay( gameObject, gameState, 0, delay ); 
+    while( gameState->getPlayer1Points() != 0 || gameState->getPlayer2Points() != 0 ) {
+        scoreDelay( gameObject, gameState, 0, delay );
+    }      
+}
+
 void playerWin( GameObject* gameObject, GameState* gameState, int player ) {
     if( player == 1 ) {
         gameState->setServe( PLAYER_ONE_SERVE );
@@ -75,6 +93,31 @@ void playerWin( GameObject* gameObject, GameState* gameState, int player ) {
     while( gameState->getPlayer1Points() != 0 || gameState->getPlayer2Points() != 0 ) {
         score( gameObject, gameState, player );
     }
+}
+
+/*
+ * Runs a demo with delays until the score reaches 3 - 2
+ * Then kicks into high gear and finishes the game at 6 - 2 
+ */
+void demo_test( GameObject* gameObject, GameState* gameState, int* loop_count ) {
+    gameObject->getScoreBoard()->clearScreen();
+    gameObject->start();
+    sleep( 1 );
+    #define DEMO_DELAY 1
+    checkeredPlayerOneWinDelay( gameObject, gameState, DEMO_DELAY );
+
+    exit( 0 );
+    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
+    playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
+    playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
+    playerWinDelay( gameObject, gameState, 2, DEMO_DELAY );
+    playerWinDelay( gameObject, gameState, 2, DEMO_DELAY );
+    playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+    sleep( 2 );
 }
 
 void test_01( GameObject* gameObject, GameState* gameState, int* loop_count ) {
@@ -91,26 +134,6 @@ void test_01( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 1 );
     sleep( 1 );
     score( gameObject, gameState, 1 );
-}
-
-/*
- * Runs a demo with delays until the score reaches 3 - 2
- * Then kicks into high gear and finishes the game at 6 - 2 
- */
-void demo_test( GameObject* gameObject, GameState* gameState, int* loop_count ) {
-    gameObject->getScoreBoard()->clearScreen();
-    gameObject->start();
-    sleep( 1 );
-    #define DEMO_DELAY 1
-    playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
-    playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
-    playerWinDelay( gameObject, gameState, 2, DEMO_DELAY );
-    playerWinDelay( gameObject, gameState, 2, DEMO_DELAY );
-    playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
-    playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 1 );
-    sleep( 2 );
 }
 
 /*
