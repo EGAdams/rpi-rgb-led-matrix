@@ -37,9 +37,10 @@ void writeMessage( GameObject* gameObject, std::string message ) {
 
 void scoreDelay( GameObject* gameObject, GameState* gameState, int player, int delay ) {
     gameObject->getScoreBoard()->blink_player_score( player );
+    usleep( 500000 );
     gameObject->playerScore( player );  // flip the player score flag
     gameObject->loopGame();             // handle the player score flag
-    sleep( delay );
+    usleep( 500000 );
     std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
     std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
 }
@@ -90,6 +91,26 @@ void test_01( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 1 );
     sleep( 1 );
     score( gameObject, gameState, 1 );
+}
+
+/*
+ * Runs a demo with delays until the score reaches 3 - 2
+ * Then kicks into high gear and finishes the game at 6 - 2 
+ */
+void demo_test( GameObject* gameObject, GameState* gameState, int* loop_count ) {
+    gameObject->getScoreBoard()->clearScreen();
+    gameObject->start();
+    sleep( 1 );
+    #define DEMO_DELAY 1
+    playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
+    playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
+    playerWinDelay( gameObject, gameState, 2, DEMO_DELAY );
+    playerWinDelay( gameObject, gameState, 2, DEMO_DELAY );
+    playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+    sleep( 2 );
 }
 
 /*
@@ -332,10 +353,10 @@ int main( int argc, char *argv[]) {
             manual = 1;
         }
     }
-    # define TEST_TEXT__X__POSITION   6
-    # define TEST_TEXT__Y__POSITION   40
-    # define TEST_NUMBER__X__POSITION 5
-    # define TEST_NUMBER__Y__POSITION 80
+    # define X__POS 6
+    # define Y__POS 40
+    # define X__POSITION 5
+    # define Y__POSITION 80
 
     int loop_count = 0;
     GameState*  gameState  = new GameState();  // make this 1st!!! cost me 3 days of debugging
@@ -346,15 +367,23 @@ int main( int argc, char *argv[]) {
     gameObject->loopGame();
     sleep( .5 );
     if ( manual == 1 ) { run_manual_game( gameObject, gameState, reset, 1 ); return 0; }
+    
+    ////// demo tests /////
+    gameObject->getScoreBoard()->clearScreen();
+    gameObject->getScoreBoard()->drawText( "Demo", YELLOW, X__POS, Y__POS );
+    gameObject->getScoreBoard()->drawText( "Test", YELLOW, X__POSITION, Y__POSITION );
+    GameTimer::gameDelay( 4000 );
+    demo_test( gameObject, gameState, &loop_count );
+    exit( 0 );
 
     ///// run tests /////
     int test_count = 1;
     gameObject->getScoreBoard()->drawText( "Win",  YELLOW, 18, 80  );
     gameObject->getScoreBoard()->clearScreen();
     gameObject->getScoreBoard()->drawText( "Test",  
-    YELLOW, TEST_TEXT__X__POSITION, TEST_TEXT__Y__POSITION );
+    YELLOW, X__POS, Y__POS );
     gameObject->getScoreBoard()->drawText( " 01 ",  
-    YELLOW, TEST_NUMBER__X__POSITION, TEST_NUMBER__Y__POSITION );
+    YELLOW, X__POSITION, Y__POSITION );
     GameTimer::gameDelay( 4000 );
     test_01( gameObject, gameState, &loop_count );
     test_count++;
@@ -362,9 +391,9 @@ int main( int argc, char *argv[]) {
 
     gameObject->getScoreBoard()->clearScreen();
     gameObject->getScoreBoard()->drawText( "Test",  
-    YELLOW, TEST_TEXT__X__POSITION, TEST_TEXT__Y__POSITION );
+    YELLOW, X__POS, Y__POS );
     gameObject->getScoreBoard()->drawText( " 02 ",  
-    YELLOW, TEST_NUMBER__X__POSITION, TEST_NUMBER__Y__POSITION );
+    YELLOW, X__POSITION, Y__POSITION );
     GameTimer::gameDelay( 4000 );
     std::cout << "calling test_02()..." << std::endl;
     test_02( gameObject, gameState, &loop_count );
@@ -374,9 +403,9 @@ int main( int argc, char *argv[]) {
     
     // gameObject->getScoreBoard()->clearScreen();
     // gameObject->getScoreBoard()->drawText( "Test",  
-    // YELLOW, TEST_TEXT__X__POSITION, TEST_TEXT__Y__POSITION );
+    // YELLOW, X__POS, Y__POS );
     // gameObject->getScoreBoard()->drawText( " 03 ",  
-    // YELLOW, TEST_NUMBER__X__POSITION, TEST_NUMBER__Y__POSITION );
+    // YELLOW, X__POSITION, Y__POSITION );
     // GameTimer::gameDelay( 4000 );
     // std::cout << "calling test_03()..." << std::endl;
     // test_03( gameObject, gameState, &loop_count );
