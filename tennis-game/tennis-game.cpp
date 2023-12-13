@@ -70,7 +70,6 @@ void playerWinDelay( GameObject* gameObject, GameState* gameState, int player, i
 
 void checkeredPlayerOneWinDelay( GameObject* gameObject, GameState* gameState, int delay ) {
     scoreDelay( gameObject, gameState, 0, delay );
-
     scoreDelay( gameObject, gameState, 1, delay );
     scoreDelay( gameObject, gameState, 1, delay );
     scoreDelay( gameObject, gameState, 0, delay );
