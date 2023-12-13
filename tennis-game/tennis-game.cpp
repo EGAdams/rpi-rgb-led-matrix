@@ -109,7 +109,6 @@ void normal_win_one( GameObject* gameObject, GameState* gameState ) {
 }
 
 void normal_win_two( GameObject* gameObject, GameState* gameState ) {
-    scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
