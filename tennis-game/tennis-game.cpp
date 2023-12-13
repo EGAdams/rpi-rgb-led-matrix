@@ -26,6 +26,7 @@ using namespace rgb_matrix;
 #define FOUR_SPACE     14
 #define THREE_SPACE    15
 #define DEMO_DELAY 1
+#define BLINK_UPDATE_DELAY 1000 // 1000000
 
 void writeMessage( GameObject* gameObject, std::string message ) {
     gameObject->getScoreBoard()->clearScreen();
@@ -38,10 +39,10 @@ void writeMessage( GameObject* gameObject, std::string message ) {
 
 void scoreDelay( GameObject* gameObject, GameState* gameState, int player, int delay ) {
     gameObject->getScoreBoard()->blink_player_score( player );
-    usleep( 1000000 );
+    usleep( BLINK_UPDATE_DELAY );
     gameObject->playerScore( player );  // flip the player score flag
     gameObject->loopGame();             // handle the player score flag
-    usleep( 500000 );
+    usleep( BLINK_UPDATE_DELAY / 2 );
     std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
     std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
 }
@@ -116,6 +117,8 @@ void ad_win( GameObject* gameObject, GameState* gameState ) {
     scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
     scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
+    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
     playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
 }
 
