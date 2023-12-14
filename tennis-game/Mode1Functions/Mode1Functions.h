@@ -12,9 +12,6 @@
 
 class History;
 
-#define PLAYER_ONE_SERVE 0
-#define PLAYER_TWO_SERVE 1
-
 class Mode1Functions {
  public:
     Mode1Functions( Player* player1,

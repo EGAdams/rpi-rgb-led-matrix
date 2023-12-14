@@ -1,5 +1,132 @@
-#include "Mode1Score.h"
+# Persona
+- World-class C++ Tennis Scoreboard Developer
+- Expert C++ Tennis Scoreboard Architect
+- World-class Object-Oriented C++ Programmer
+- Seasoned Tennis Score Keeper
 
+# Background Information
+- The player scores "1", "2", "3", "4", and "5" are translated to "0", "15", "30", "40", and "Ad" respectively.
+
+# Your Goal
+- I think the part that determine who serves is flawed.  Please fix it.
+
+## Mode1Functions.cpp
+```cpp
+#include "Mode1Functions.h"
+
+Mode1Functions::Mode1Functions( Player* player1,
+    Player* player2,
+    PinInterface* pinInterface,
+    GameState* gameState,
+    History* history )
+    : _player1( player1 ),
+    _player2( player2 ),
+    _gameState( gameState ),
+    _history( history ),
+    _undo( player1, player2, pinInterface, gameState ),
+    _pointLeds( player1, player2, pinInterface ),
+    _mode1Score( player1, player2, pinInterface, gameState, history ),
+    _serveLeds( pinInterface, gameState ) {}
+
+Mode1Functions::~Mode1Functions() {}
+
+void Mode1Functions::setScoreBoard( ScoreBoard* scoreBoard ) {
+    _scoreBoard = scoreBoard;
+    _pointLeds.setScoreBoard( scoreBoard );
+    _mode1Score.setScoreBoard( scoreBoard ); }
+
+void Mode1Functions::mode1ButtonFunction() {
+    switch ( _gameState->getPlayerButton()) {
+    case 0:
+        break;
+
+    case 1: // Player 1 Score
+        _undo.snapshot( _history );
+        if ( _gameState->getPointFlash() == 1 ) {
+            _gameState->setPointFlash( 0 );
+            _player1->setPoints( _gameState->getP1PointsMem());
+            _player2->setPoints( _gameState->getP2PointsMem());
+            _gameState->setPlayer1Points( _player1->getPoints());
+            _gameState->setPlayer2Points( _player2->getPoints());
+        }
+        GameTimer::gameDelay( _gameState->getButtonDelay());
+        // if serving, increment score.  if not serving, set serve to 1 and don't increment score.
+        if ( _gameState->getServe() == PLAYER_ONE_SERVE || 
+            /*aways increment when tie break is enabled*/ _gameState->getTieBreak() == 1 )  {
+            _player1->setPoints( _player1->getPoints() + 1 );
+            _gameState->setPlayer1Points( _player1->getPoints());
+        } else {
+            _gameState->setServe( PLAYER_ONE_SERVE ); }
+        _undo.memory();
+        _mode1Score.playerOneScore();
+        break;
+
+    case 3: // UNDO button pressed
+        GameTimer::gameDelay( _gameState->getButtonDelay());
+        _undo.mode1Undo( _history );  // Mode1Undo();
+        break;
+
+    case 2: // Player 2 Score
+        _undo.snapshot( _history );
+        if ( _gameState->getPointFlash() == 1 ) {
+            _gameState->setPointFlash( 0 );
+            _player1->setPoints( _gameState->getP1PointsMem());
+            _player2->setPoints( _gameState->getP2PointsMem());
+            _gameState->setPlayer1Points( _player1->getPoints());
+            _gameState->setPlayer2Points( _player2->getPoints()); }
+
+        GameTimer::gameDelay( _gameState->getButtonDelay());
+        if ( _gameState->getServe() == PLAYER_TWO_SERVE || 
+            /*aways increment when tie break is enabled*/ _gameState->getTieBreak() == 1 )  {
+            _player2->setPoints( _player2->getPoints() + 1 );
+            _gameState->setPlayer2Points( _player2->getPoints());
+        } else {
+            _gameState->setServe( PLAYER_TWO_SERVE ); }
+        _undo.memory();
+        _mode1Score.playerTwoScore();
+        break;
+
+    case 4:
+        GameTimer::gameDelay( _gameState->getButtonDelay());
+        _undo.mode1Undo( _history );
+        break; }                        // end switch ( _gameState->getPlayerButton())
+    _gameState->setPlayerButton( 0 ); } // reset player button here!
+
+void Mode1Functions::mode1ServeFunction() {
+    _undo.snapshot( _history );
+    _serveLeds.serveSwitch(); }
+
+void Mode1Functions::pointFlash() {
+    if ( _gameState->getPointFlash() == 1 ) {
+        if ( _player1->getPoints() > 3 ) {
+            if ( _gameState->getNow() - _gameState->getPreviousTime() > _gameState->getFlashDelay()) {
+                if ( _gameState->getToggle() == 0 ) {
+                    _player1->setPoints( SCORE_CASE_4 );      
+                    _pointLeds.updatePoints();
+                    _gameState->setToggle( 1 );
+                } else {
+                    _player1->setPoints(
+                    _gameState->getP1PointsMem());
+                    _pointLeds.updatePoints();
+                    _gameState->setToggle( 0 ); }
+                _gameState->setPreviousTime( _gameState->getNow()); }}
+
+        if ( _player2->getPoints() > 3 ) {
+                if ( _gameState->getNow() - _gameState->getPreviousTime() > _gameState->getFlashDelay()) {
+                    if ( _gameState->getToggle() == 0 ) {
+                        _player2->setPoints( SCORE_CASE_4 );      
+                        _pointLeds.updatePoints();
+                        _gameState->setToggle( 1 );
+                    } else {
+                        _player2->setPoints(
+                        _gameState->getP2PointsMem());
+                        _pointLeds.updatePoints();
+                        _gameState->setToggle( 0 ); }
+                    _gameState->setPreviousTime( _gameState->getNow()); }}}}
+```
+
+## Mode1Score.cpp
+```cpp
 Mode1Score::Mode1Score( 
     Player* player1,
     Player* player2,
@@ -38,7 +165,7 @@ void Mode1Score::_resetGame() {
     _gameState->setPlayer1Points( 0 );
     _gameState->setPlayer2Points( 0 );
     _gameState->setServeSwitch( 1 );
-    // _gameState->setServe( 0 ); // set serve in game win only
+    _gameState->setServe( 0 );
     _pointLeds.updatePoints(); }
 
 void Mode1Score::updateScore( Player* currentPlayer ) {
@@ -56,7 +183,7 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
                 otherPlayer->setPoints(   3 );
             } else if ( current_player_points > 3 
                 && ( current_player_points - other_player_points ) > 1 ) {
-                currentPlayer->setGames( currentPlayer->getGames() + 1 );
+                currentPlayer->setGames( currentPlayer->getGames() + 1);
                 _undo.memory();
                 currentPlayer->number() == 0 ? playerOneGameWin() : playerTwoGameWin(); } 
 
@@ -81,34 +208,33 @@ void Mode1Score::playerGameWin( Player* player ) {
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
     if (player->getGames() >= GAMES_TO_WIN_SET) {
         if (player->getGames() == GAMES_TO_WIN_SET && opponent->getGames() == GAMES_TO_WIN_SET) {
-            _gameState->setTieBreak( 1 );
+            _gameState->setTieBreak(1);
             _tieBreaker.initializeTieBreakMode();
         }
-        if (_gameState->getTieBreak() == 0) {       // if this is not a tie break game...
-            if ((player->getGames() - opponent->getGames()) > 1 ) {   // player ahead by 2 games.
-                player->setSets(_gameState, player->getSets() + 1 );  // This is a set win that 
-                _setLeds.updateSets();                                // sets the tiebreak, wins
-                                                                      // the match, or just wins the set.
+        if (_gameState->getTieBreak() == 0) {
+            if ((player->getGames() - opponent->getGames()) > 1) {
+                player->setSets(_gameState, player->getSets() + 1);
+                _setLeds.updateSets();
                 
-                if (player->getSets() == opponent->getSets()) {       // set tie break
+                if (player->getSets() == opponent->getSets()) {
                     player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1TBSetWinSequence() : _mode1WinSequences.p2TBSetWinSequence();
-                    _gameState->setSetTieBreak( 1 );
+                    _gameState->setSetTieBreak(1);
                     _tieBreaker.setTieBreakEnable();
-                } else if (player->getSets() == SETS_TO_WIN_MATCH) {  // match win, done playing
+                } else if (player->getSets() == SETS_TO_WIN_MATCH) {
                     player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.playerOneMatchWin() : _mode1WinSequences.playerTwoMatchWin();
                     _gameState->stopGameRunning();
-                } else {                                              // regular set win, then reset
+                } else {
                     _gameState->setPlayer1SetHistory(player->getSetHistory());
                     _gameState->setPlayer2SetHistory(opponent->getSetHistory());
                     player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1SetWinSequence() : _mode1WinSequences.p2SetWinSequence();
-                    _gameState->setCurrentSet(_gameState->getCurrentSet() + 1 );
+                    _gameState->setCurrentSet(_gameState->getCurrentSet() + 1);
                     _setLeds.updateSets();
                     GameTimer::gameDelay(_gameState->getWinDelay());
                     _resetGame();
                 }
-                player->setGames( 0 );
-                opponent->setGames( 0 );
-            } else {                        // player is ahead by 1 game, but not enough to win the set.
+                player->setGames(0);
+                opponent->setGames(0);
+            } else {
                 player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1GameWinSequence() : _mode1WinSequences.p2GameWinSequence();
                 _gameLeds.updateGames();
                 _gameState->setPlayer1SetHistory(player->getSetHistory());
@@ -116,7 +242,7 @@ void Mode1Score::playerGameWin( Player* player ) {
                 _resetGame();
             }
         }
-    } else { // this is a regualar game win...
+    } else {
         if ( player->number() == PLAYER_1_INITIALIZED ) {
             _mode1WinSequences.p1GameWinSequence();
             _gameState->setPlayer1SetHistory(player->getSetHistory());
@@ -235,3 +361,4 @@ void Mode1Score::mode1SetTBP2Games() {
     std::cout << "setting serve switch to: " << _gameState->getServeSwitch() + 1 << std::endl;
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 ); 
 }
+```

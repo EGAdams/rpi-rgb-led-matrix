@@ -34,16 +34,10 @@ void Mode1Functions::mode1ButtonFunction() {
             _player2->setPoints( _gameState->getP2PointsMem());
             _gameState->setPlayer1Points( _player1->getPoints());
             _gameState->setPlayer2Points( _player2->getPoints());
-            // _pointLeds.updatePoints(); jul20
         }
         GameTimer::gameDelay( _gameState->getButtonDelay());
-        // if serving, increment score.  if not serving, set serve to 1 and don't increment score.
-        if ( _gameState->getServe() == PLAYER_ONE_SERVE || 
-            /*aways increment when tie break is enabled*/ _gameState->getTieBreak() == 1 )  {
-            _player1->setPoints( _player1->getPoints() + 1 );
-            _gameState->setPlayer1Points( _player1->getPoints());
-        } else {
-            _gameState->setServe( PLAYER_ONE_SERVE ); }
+        _player1->setPoints( _player1->getPoints() + 1 );
+        _gameState->setPlayer1Points( _player1->getPoints());
         _undo.memory();
         _mode1Score.playerOneScore();
         break;
@@ -60,16 +54,11 @@ void Mode1Functions::mode1ButtonFunction() {
             _player1->setPoints( _gameState->getP1PointsMem());
             _player2->setPoints( _gameState->getP2PointsMem());
             _gameState->setPlayer1Points( _player1->getPoints());
-            _gameState->setPlayer2Points( _player2->getPoints());
-            /*_pointLeds.updatePoints(); jul20 */ }
+            _gameState->setPlayer2Points( _player2->getPoints()); }
 
         GameTimer::gameDelay( _gameState->getButtonDelay());
-        if ( _gameState->getServe() == PLAYER_TWO_SERVE || 
-            /*aways increment when tie break is enabled*/ _gameState->getTieBreak() == 1 )  {
-            _player2->setPoints( _player2->getPoints() + 1 );
-            _gameState->setPlayer2Points( _player2->getPoints());
-        } else {
-            _gameState->setServe( PLAYER_TWO_SERVE ); }
+        _player2->setPoints( _player2->getPoints() + 1 );
+        _gameState->setPlayer2Points( _player2->getPoints());
         _undo.memory();
         _mode1Score.playerTwoScore();
         break;
