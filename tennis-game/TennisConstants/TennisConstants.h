@@ -47,7 +47,7 @@
 #define SCORE_CASE_4                4
 #define SCORE_CASE_5                5
 #define UNDEFINED_SCORE             99
-#define BLUE_BAR_VERTICAL_OFFSET    25
+#define BLUE_BAR_VERTICAL_OFFSET    35
 #define BLUE_BAR_HORIZONTAL_OFFSET  54
 #define RED_BAR_HORIZONTAL_OFFSET   34
 #define GREEN_BAR_HORIZONTAL_OFFSET 30
