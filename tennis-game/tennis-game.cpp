@@ -80,12 +80,7 @@ void checkeredPlayerOneWinDelay( GameObject* gameObject, GameState* gameState, i
     }      
 }
 
-void playerWin( GameObject* gameObject, GameState* gameState, int player ) {
-    if( player == 1 ) {
-        gameState->setServe( PLAYER_ONE_SERVE );
-    } else {
-        gameState->setServe( PLAYER_TWO_SERVE ); }
-        
+void playerWin( GameObject* gameObject, GameState* gameState, int player ) {       
     score( gameObject, gameState, player );
     while( gameState->getPlayer1Points() != 0 || gameState->getPlayer2Points() != 0 ) {
         score( gameObject, gameState, player );
@@ -140,16 +135,16 @@ void two_win_scramble( GameObject* gameObject, GameState* gameState ) {
 }
 
 void one_win_scramble( GameObject* gameObject, GameState* gameState ) {
-    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
-    scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
-    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
-    scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
-    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
-    scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
-    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
-    scoreDelay( gameObject, gameState, 1, DEMO_DELAY );
-    scoreDelay( gameObject, gameState, 2, DEMO_DELAY );
-    playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 1 );
 }
 
 void ad_win_one_comeback( GameObject* gameObject, GameState* gameState ) {
@@ -181,13 +176,13 @@ void demo_test( GameObject* gameObject, GameState* gameState, int* loop_count ) 
     normal_win_two( gameObject, gameState );
     two_win_scramble( gameObject, gameState );
     normal_win_one( gameObject, gameState );
-    one_win_scramble( gameObject, gameState );
 
     // faster now...
+    one_win_scramble( gameObject, gameState );
     normal_win_one_no_delay( gameObject, gameState );
     different_win_one_no_delay( gameObject, gameState );
     normal_win_one_no_delay( gameObject, gameState );
-    // sleep( 20 );
+    sleep( 20 );
 }
 
 void test_01( GameObject* gameObject, GameState* gameState, int* loop_count ) {
