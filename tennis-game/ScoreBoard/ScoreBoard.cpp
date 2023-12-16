@@ -219,7 +219,7 @@ void ScoreBoard::clearScreen() {
         Color flood_color( 0, 0, 0 ); _canvas->Fill( flood_color.r, flood_color.g, flood_color.b ); }}
 
 std::string ScoreBoard::drawPlayerScore( Player* player ) {
-    std::string serve_bar_text = hasCanvas() == true ? "I" : "\033[34m|"; 
+    std::string serve_bar_text = hasCanvas() == true ? " I" : "\033[34m|"; 
     std::string serve_bar = _gameState->getServe() == player->number() ? serve_bar_text : " ";
     std::string score = _translate( player->getPoints());
     if( hasCanvas() == false ) {
