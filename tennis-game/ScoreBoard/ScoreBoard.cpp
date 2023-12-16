@@ -219,7 +219,7 @@ void ScoreBoard::clearScreen() {
         Color flood_color( 0, 0, 0 ); _canvas->Fill( flood_color.r, flood_color.g, flood_color.b ); }}
 
 std::string ScoreBoard::drawPlayerScore( Player* player ) {
-    std::string serve_bar_text = hasCanvas() == true ? " I" : "\033[34m|"; 
+    std::string serve_bar_text = hasCanvas() == true ? "I" : "\033[34m|"; 
     std::string serve_bar = _gameState->getServe() == player->number() ? serve_bar_text : " ";
     std::string score = _translate( player->getPoints());
     if( hasCanvas() == false ) {
@@ -228,7 +228,7 @@ std::string ScoreBoard::drawPlayerScore( Player* player ) {
         std::cout << "\033[31mPLAYER 2: ////// " << serve_bar << "\033[31m " << score << " ////// \033[35m" << std::endl;
     } else {
         int vertical_offset = player->number() == 0 ? 0 : _big_number_font.height();
-        _pipeDrawer->drawNumber( serve_bar, 1, _big_number_font.baseline() + vertical_offset ); // draw pipe
+        _pipeDrawer->drawNumber( serve_bar, 2, _big_number_font.baseline() + vertical_offset );
         int baseline = _big_number_font.baseline();                  // set the coordinates for the text
         int first_offset  = _characterOffset( score.substr( 0, 1 ));
         int second_offset = ( score.length() > 1 ) ? _characterOffset( score.substr( 1, 1 )) : 0;
