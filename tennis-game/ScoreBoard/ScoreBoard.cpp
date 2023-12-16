@@ -227,7 +227,7 @@ std::string ScoreBoard::drawPlayerScore( Player* player ) {
         std::cout << "\033[31mPLAYER 2: ////// " << serve_bar << "\033[31m " << score << " ////// \033[35m" << std::endl;
     } else {
         int vertical_offset = player->number() == 0 ? 0 : _big_number_font.height();
-        _pipeDrawer->drawNumber( /* "serve_bar" */ ".", 1, _big_number_font.baseline() + vertical_offset ); // draw pipe
+        _pipeDrawer->drawNumber( "|", 1, _big_number_font.baseline() + vertical_offset ); // draw pipe
         int baseline = _big_number_font.baseline();                  // set the coordinates for the text
         int first_offset  = _characterOffset( score.substr( 0, 1 ));
         int second_offset = ( score.length() > 1 ) ? _characterOffset( score.substr( 1, 1 )) : 0;
