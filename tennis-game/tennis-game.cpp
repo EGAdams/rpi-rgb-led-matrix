@@ -27,7 +27,7 @@ using namespace rgb_matrix;
 #define THREE_SPACE    15
 #define DEMO_DELAY 1
 #define BLINK_UPDATE_DELAY 1000000 // 250000 // 
-#define FASTER_BLINK_UPDATE_DELAY 750000 // 100000  
+#define FASTER_BLINK_UPDATE_DELAY 100000 // 750000 // 100000  
 
 void writeMessage( GameObject* gameObject, std::string message ) {
     gameObject->getScoreBoard()->clearScreen();
@@ -462,7 +462,11 @@ int main( int argc, char *argv[]) {
     // gameObject->getScoreBoard()->drawText( "Test", YELLOW, X__POSITION, Y__POSITION );
     GameTimer::gameDelay( 4000 );
     demo_test( gameObject, gameState, &loop_count );
+
+    //////////////// exit after demo for now ////////////////
     exit( 0 );
+
+
 
     ///// run tests /////
     int test_count = 1;
