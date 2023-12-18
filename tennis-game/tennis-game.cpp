@@ -470,7 +470,7 @@ int main( int argc, char *argv[]) {
 
     ///// run tests /////
     int test_count = 1;
-    gameObject->getScoreBoard()->drawText( "Win",  YELLOW, 18, 80  );
+    // gameObject->getScoreBoard()->drawText( "Win",  YELLOW, 18, 80  );
     gameObject->getScoreBoard()->clearScreen();
     gameObject->getScoreBoard()->drawText( "Test",  
     YELLOW, X__POS, Y__POS );
