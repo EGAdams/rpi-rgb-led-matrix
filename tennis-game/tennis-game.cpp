@@ -27,7 +27,15 @@ using namespace rgb_matrix;
 #define THREE_SPACE    15
 #define DEMO_DELAY 1
 #define BLINK_UPDATE_DELAY 1000000 // 250000 // 
-#define FASTER_BLINK_UPDATE_DELAY 100000 // 750000 // 100000  
+#define FASTER_BLINK_UPDATE_DELAY 100000 // 750000 // 100000
+# define X__POS 6
+# define Y__POS 40
+# define X__POSITION 5
+# define Y__POSITION 80
+#define MAX_LOOP_COUNT 350
+#define A_SPACE        13
+#define FOUR_SPACE     14
+#define THREE_SPACE    15
 
 void writeMessage( GameObject* gameObject, std::string message ) {
     gameObject->getScoreBoard()->clearScreen();
@@ -339,10 +347,6 @@ void resetAll( Reset* reset ) {
 void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset, int player ) {
     int loop_count = 0;
     int test_count = 0;
-    #define MAX_LOOP_COUNT 350
-    #define A_SPACE        13
-    #define FOUR_SPACE     14
-    #define THREE_SPACE    15
     
     // set games to --games argument
     // set sets to --sets argument
@@ -447,10 +451,6 @@ int main( int argc, char *argv[]) {
             manual = 1;
         }
     }
-    # define X__POS 6
-    # define Y__POS 40
-    # define X__POSITION 5
-    # define Y__POSITION 80
 
     int loop_count = 0;
     GameState*  gameState  = new GameState();  // make this 1st!!! cost me 3 days of debugging
