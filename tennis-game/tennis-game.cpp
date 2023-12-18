@@ -397,6 +397,12 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         } else if ( menu_selection == 101 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 01 ***\n" << std::endl;
+            gameObject->getScoreBoard()->clearScreen();
+        gameObject->getScoreBoard()->drawText( "Test",  
+        YELLOW, X__POS, Y__POS );
+        gameObject->getScoreBoard()->drawText( " 01 ",  
+        YELLOW, X__POSITION, Y__POSITION );
+        GameTimer::gameDelay( 4000 );
             test_01( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
@@ -476,7 +482,7 @@ int main( int argc, char *argv[]) {
     YELLOW, X__POS, Y__POS );
     gameObject->getScoreBoard()->drawText( " 01 ",  
     YELLOW, X__POSITION, Y__POSITION );
-    GameTimer::gameDelay( 4000 );
+    GameTimer::gameDelay( 3000 );
     test_01( gameObject, gameState, &loop_count );
     test_count++;
     // end test_01
