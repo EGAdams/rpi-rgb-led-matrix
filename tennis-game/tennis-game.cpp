@@ -461,14 +461,14 @@ int main( int argc, char *argv[]) {
     if ( manual == 1 ) { run_manual_game( gameObject, gameState, reset, 1 ); return 0; }
     
     ////// demo tests /////
-    gameObject->getScoreBoard()->clearScreen();
-    gameObject->getScoreBoard()->drawText( "Demo", YELLOW, X__POS, Y__POS );
+    // gameObject->getScoreBoard()->clearScreen();
+    // gameObject->getScoreBoard()->drawText( "Demo", YELLOW, X__POS, Y__POS );
     // gameObject->getScoreBoard()->drawText( "Test", YELLOW, X__POSITION, Y__POSITION );
-    GameTimer::gameDelay( 4000 );
-    demo_test( gameObject, gameState, &loop_count );
+    // GameTimer::gameDelay( 4000 );
+    // demo_test( gameObject, gameState, &loop_count );
 
     //////////////// exit after demo for now ////////////////
-    exit( 0 );
+    // exit( 0 );
 
 
 
@@ -485,15 +485,15 @@ int main( int argc, char *argv[]) {
     test_count++;
     // end test_01
 
-    gameObject->getScoreBoard()->clearScreen();
-    gameObject->getScoreBoard()->drawText( "Test",  
-    YELLOW, X__POS, Y__POS );
-    gameObject->getScoreBoard()->drawText( " 02 ",  
-    YELLOW, X__POSITION, Y__POSITION );
-    GameTimer::gameDelay( 4000 );
-    std::cout << "calling test_02()..." << std::endl;
-    test_02( gameObject, gameState, &loop_count );
-    test_count++;
+    // gameObject->getScoreBoard()->clearScreen();
+    // gameObject->getScoreBoard()->drawText( "Test",  
+    // YELLOW, X__POS, Y__POS );
+    // gameObject->getScoreBoard()->drawText( " 02 ",  
+    // YELLOW, X__POSITION, Y__POSITION );
+    // GameTimer::gameDelay( 4000 );
+    // std::cout << "calling test_02()..." << std::endl;
+    // test_02( gameObject, gameState, &loop_count );
+    // test_count++;
     // end test_02
     
     
