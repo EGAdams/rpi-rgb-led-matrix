@@ -485,26 +485,26 @@ int main( int argc, char *argv[]) {
     test_count++;
     // end test_01
 
-    gameObject->getScoreBoard()->clearScreen();
-    gameObject->getScoreBoard()->drawText( "Test",  
-    YELLOW, X__POS, Y__POS );
-    gameObject->getScoreBoard()->drawText( " 02 ",  
-    YELLOW, X__POSITION, Y__POSITION );
-    GameTimer::gameDelay( 4000 );
-    std::cout << "calling test_02()..." << std::endl;
-    test_02( gameObject, gameState, &loop_count );
+    // gameObject->getScoreBoard()->clearScreen();
+    // gameObject->getScoreBoard()->drawText( "Test",  
+    // YELLOW, X__POS, Y__POS );
+    // gameObject->getScoreBoard()->drawText( " 02 ",  
+    // YELLOW, X__POSITION, Y__POSITION );
+    // GameTimer::gameDelay( 4000 );
+    // std::cout << "calling test_02()..." << std::endl;
+    // test_02( gameObject, gameState, &loop_count );
     test_count++;
     // end test_02
     
     
-    // gameObject->getScoreBoard()->clearScreen();
-    // gameObject->getScoreBoard()->drawText( "Test",  
-    // YELLOW, X__POS, Y__POS );
-    // gameObject->getScoreBoard()->drawText( " 03 ",  
-    // YELLOW, X__POSITION, Y__POSITION );
-    // GameTimer::gameDelay( 4000 );
-    // std::cout << "calling test_03()..." << std::endl;
-    // test_03( gameObject, gameState, &loop_count );
+    gameObject->getScoreBoard()->clearScreen();
+    gameObject->getScoreBoard()->drawText( "Test",  
+    YELLOW, X__POS, Y__POS );
+    gameObject->getScoreBoard()->drawText( " 03 ",  
+    YELLOW, X__POSITION, Y__POSITION );
+    GameTimer::gameDelay( 4000 );
+    std::cout << "calling test_03()..." << std::endl;
+    test_03( gameObject, gameState, &loop_count );
     test_count++;
     // end test_03
     // test_04( gameObject, gameState, &loop_count );
