@@ -255,6 +255,7 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getPlayer2()->setGames(  5 );
     gameObject->getScoreBoard()->update();
     score( gameObject, gameState, 2 );
+    GameTimer::gameDelay( 2000 );
     score( gameObject, gameState, 2 );
     GameTimer::gameDelay( 4000 );
     score( gameObject, gameState, 2 );    // now to trigger the tie break...
