@@ -191,7 +191,7 @@ void ScoreBoard::blink_player_score(int player) {
     if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
     #define BLINK_DELAY 100
     #define BLINK_COUNT 3
-    #define PERIOD_LR_OFFSET 52
+    #define PERIOD_LR_OFFSET 51
     #define PERIOD_UD_OFFSET 92
     if ( player == PLAYER_1_SCORE ) {
         for ( int i=0; i < BLINK_COUNT; i++ ) {
