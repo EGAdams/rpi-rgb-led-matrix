@@ -253,6 +253,7 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameState->setPlayer2Points(         2 );
     gameObject->getPlayer1()->setGames(  6 );
     gameObject->getPlayer2()->setGames(  5 );
+    gameObject->getScoreBoard()->update();
     score( gameObject, gameState, 2 );
     score( gameObject, gameState, 2 );
     GameTimer::gameDelay( 4000 );
