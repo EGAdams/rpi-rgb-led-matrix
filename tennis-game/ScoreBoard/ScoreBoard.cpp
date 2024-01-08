@@ -192,7 +192,7 @@ void ScoreBoard::blink_player_score(int player) {
     #define BLINK_DELAY 100
     #define BLINK_COUNT 3
     #define PERIOD_LR_OFFSET 50
-    #define PERIOD_UD_OFFSET 110
+    #define PERIOD_UD_OFFSET 90
     if ( player == PLAYER_1_SCORE ) {
         for ( int i=0; i < BLINK_COUNT; i++ ) {
             _greenPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 38 );
