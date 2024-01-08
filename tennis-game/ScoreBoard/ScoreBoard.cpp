@@ -191,19 +191,20 @@ void ScoreBoard::blink_player_score(int player) {
     if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
     #define BLINK_DELAY 100
     #define BLINK_COUNT 3
+    #define PERIOD_OFFSET 30
     if ( player == PLAYER_1_SCORE ) {
         for ( int i=0; i < BLINK_COUNT; i++ ) {
-            _greenPeriodDrawer->drawNumber( ".", RED_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET - 38 );
+            _greenPeriodDrawer->drawNumber( ".", PERIOD_OFFSET, BLUE_BAR_VERTICAL_OFFSET - 38 );
             GameTimer::gameDelay( BLINK_DELAY );
-            _blankPeriodDrawer->drawNumber( ".", RED_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET - 38 );
+            _blankPeriodDrawer->drawNumber( ".", PERIOD_OFFSET, BLUE_BAR_VERTICAL_OFFSET - 38 );
             GameTimer::gameDelay( BLINK_DELAY );
         }
     } else {
         // do this 5 times
         for ( int i = 0; i < BLINK_COUNT; i++ ) {
-            _redPeriodDrawer->drawNumber( ".", RED_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET -20 );
+            _redPeriodDrawer->drawNumber( ".", PERIOD_OFFSET, BLUE_BAR_VERTICAL_OFFSET -20 );
             GameTimer::gameDelay( BLINK_DELAY );
-            _blankPeriodDrawer->drawNumber( ".", RED_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET -20 );
+            _blankPeriodDrawer->drawNumber( ".", PERIOD_OFFSET, BLUE_BAR_VERTICAL_OFFSET -20 );
             GameTimer::gameDelay( BLINK_DELAY );
         }
     }
