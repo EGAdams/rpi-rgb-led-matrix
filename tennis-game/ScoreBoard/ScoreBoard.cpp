@@ -195,17 +195,17 @@ void ScoreBoard::blink_player_score(int player) {
     #define PERIOD_UD_OFFSET 90
     if ( player == PLAYER_1_SCORE ) {
         for ( int i=0; i < BLINK_COUNT; i++ ) {
-            _greenPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 38 );
+            _greenPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
             GameTimer::gameDelay( BLINK_DELAY );
-            _blankPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 38 );
+            _blankPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
             GameTimer::gameDelay( BLINK_DELAY );
         }
     } else {
         // do this 5 times
         for ( int i = 0; i < BLINK_COUNT; i++ ) {
-            _redPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET -20 );
+            _redPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
             GameTimer::gameDelay( BLINK_DELAY );
-            _blankPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET -20 );
+            _blankPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
             GameTimer::gameDelay( BLINK_DELAY );
         }
     }
