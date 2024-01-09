@@ -500,19 +500,26 @@ int main( int argc, char *argv[]) {
     test_count++;
     // end test_03
 
-    gameObject->getScoreBoard()->clearScreen();
-    gameObject->getScoreBoard()->drawText( "Test",  
-    YELLOW, X__POS, Y__POS );
-    gameObject->getScoreBoard()->drawText( " 04 ",  
-    YELLOW, X__POSITION, Y__POSITION );
-    GameTimer::gameDelay( 4000 );
-    std::cout << "calling test_04()..." << std::endl;
-    test_04( gameObject, gameState, &loop_count );
+    // gameObject->getScoreBoard()->clearScreen();
+    // gameObject->getScoreBoard()->drawText( "Test",  
+    // YELLOW, X__POS, Y__POS );
+    // gameObject->getScoreBoard()->drawText( " 04 ",  
+    // YELLOW, X__POSITION, Y__POSITION );
+    // GameTimer::gameDelay( 4000 );
+    // std::cout << "calling test_04()..." << std::endl;
+    // test_04( gameObject, gameState, &loop_count );
     // end test_04
     test_count++;
 
     // test 05
-    // test_05( gameObject, gameState, &loop_count );
+    gameObject->getScoreBoard()->clearScreen();
+    gameObject->getScoreBoard()->drawText( "Test",  
+    YELLOW, X__POS, Y__POS );
+    gameObject->getScoreBoard()->drawText( " 05 ",  
+    YELLOW, X__POSITION, Y__POSITION );
+    GameTimer::gameDelay( 4000 );
+    std::cout << "calling test_05()..." << std::endl;
+    test_05( gameObject, gameState, &loop_count );
     test_count++;
 
    //  writeMessage( gameObject, "t " + std::to_string( test_count ));
