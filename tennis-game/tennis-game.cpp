@@ -277,7 +277,8 @@ void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameState->setCurrentSet( 2 );
     gameObject->getPlayer1()->setGames(  4 );
     gameObject->getPlayer2()->setGames(  3 );
-    
+    gameObject->getScoreBoard()->update();
+
     sleep( 6 ); }
 
 void test_06( GameObject* gameObject, GameState* gameState, int* loop_count ) {
