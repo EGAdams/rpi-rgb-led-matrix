@@ -274,8 +274,8 @@ void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen();
     gameObject->getPlayer1()->setSetHistory( 1, 6 );
     gameObject->getPlayer2()->setSetHistory( 1, 4 );
-    gameObject->getPlayer1()->setSetHistory( 2, 5 );
-    gameObject->getPlayer2()->setSetHistory( 1, 4 );
+    gameObject->getPlayer1()->setSetHistory( 2, 4 );
+    gameObject->getPlayer2()->setSetHistory( 2, 5 );
     gameState->setCurrentSet( 2 );
     gameObject->getPlayer1()->setGames(  3 );
     gameObject->getPlayer2()->setGames(  2 );
