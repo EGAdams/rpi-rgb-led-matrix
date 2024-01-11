@@ -272,41 +272,12 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
 
 void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen();
-    gameObject->getPlayer1()->setPoints( 0 );
-    gameState->setPlayer1Points(         0 );
-    gameObject->getPlayer2()->setPoints( 2 );
-    gameState->setPlayer2Points(         2 );
-    gameObject->getPlayer1()->setGames(  6 );
-    gameObject->getPlayer2()->setGames(  5 );
-    score( gameObject, gameState, 2 );
-    score( gameObject, gameState, 2 );
-    GameTimer::gameDelay( 4000 );
-    score( gameObject, gameState, 2 );    // now to trigger the tie break...
-    score( gameObject, gameState, 2 );
-    score( gameObject, gameState, 2 );
-    score( gameObject, gameState, 2 );
-    score( gameObject, gameState, 2 );
-    score( gameObject, gameState, 2 );
-    score( gameObject, gameState, 2 );
-    score( gameObject, gameState, 2 );
-    score( gameObject, gameState, 2 );
-    score( gameObject, gameState, 2 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 2 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 2 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 2 );
-    score( gameObject, gameState, 2 );
+    gameObject->getPlayer1()->setSetHistory( 1, 6 );
+    gameObject->getPlayer2()->setSetHistory( 1, 4 );
+    gameState->setCurrentSet( 2 );
+    gameObject->getPlayer1()->setGames(  4 );
+    gameObject->getPlayer2()->setGames(  3 );
+    
     sleep( 6 ); }
 
 void test_06( GameObject* gameObject, GameState* gameState, int* loop_count ) {
@@ -364,6 +335,8 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         std::cout << "  101.) Test 01" << std::endl;
         std::cout << "  102.) Test 02" << std::endl;
         std::cout << "  103.) Test 03" << std::endl;
+        std::cout << "  104.) Test 04" << std::endl;
+        std::cout << "  105.) Test 05" << std::endl;
 
         std::cout << "  0.) Exit" << std::endl;
         // cout
@@ -411,6 +384,18 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 03 ***\n" << std::endl;
             test_03( gameObject, gameState, &loop_count );
+            sleep( SCORE_DELAY );
+            continue;
+        } else if ( menu_selection == 104 ) {
+            resetAll( reset );
+            std::cout << "\n\n\n\n\n\n\n*** Test 04 ***\n" << std::endl;
+            test_04( gameObject, gameState, &loop_count );
+            sleep( SCORE_DELAY );
+            continue;
+        } else if ( menu_selection == 105 ) {
+            resetAll( reset );
+            std::cout << "\n\n\n\n\n\n\n*** Test 05 ***\n" << std::endl;
+            test_05( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
         } else {
