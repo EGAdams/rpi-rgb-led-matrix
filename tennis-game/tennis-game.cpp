@@ -443,15 +443,15 @@ int main( int argc, char *argv[]) {
     sleep( .5 );
     if ( manual == 1 ) { run_manual_game( gameObject, gameState, reset, 1 ); return 0; }
     
-    ////// demo tests /////
-    // gameObject->getScoreBoard()->clearScreen();
-    // gameObject->getScoreBoard()->drawText( "Demo", YELLOW, X__POS, Y__POS );
-    // gameObject->getScoreBoard()->drawText( "Test", YELLOW, X__POSITION, Y__POSITION );
-    // GameTimer::gameDelay( 4000 );
-    // demo_test( gameObject, gameState, &loop_count );
+    //// demo tests /////
+    gameObject->getScoreBoard()->clearScreen();
+    gameObject->getScoreBoard()->drawText( "Demo", YELLOW, X__POS, Y__POS );
+    gameObject->getScoreBoard()->drawText( "Test", YELLOW, X__POSITION, Y__POSITION );
+    GameTimer::gameDelay( 4000 );
+    demo_test( gameObject, gameState, &loop_count );
 
-    //////////////// exit after demo for now ////////////////
-    // exit( 0 );
+    ////////////// exit after demo for now ////////////////
+    exit( 0 );
 
 
 

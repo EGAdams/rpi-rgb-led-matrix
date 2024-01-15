@@ -2,6 +2,9 @@
 #define History_h
 
 #include <stack>
+#include <iostream>
+#include <fstream>
+#include <vector>
 #include "../GameState/GameState.h"
 #include "../Logger/Logger.h"
 
@@ -12,6 +15,9 @@ class History {
     void push( GameState gameState );
     GameState pop();
     int size();
+    void saveGameStateToFile(const GameState& gameState, const std::string& filename);
+    GameState loadGameStateFromFile(const std::string& filename);
+    std::vector<std::string> getSavedGameStatesList();
 
  private:
     std::stack< GameState > _history;

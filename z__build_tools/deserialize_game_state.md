@@ -1,3 +1,42 @@
+# Persona
+World-class C++ Developer
+
+# Background Information
+In the following loadGameStateFromFile of the C++ History Object, we need to implement the deserialization logic based on how GameState is structured.
+
+# Your Goal
+Please implement the deserialization logic based on how the GameState  and Player Objects are structured.
+
+```cpp
+GameState History::loadGameStateFromFile(const std::string& filename) {
+    std::ifstream inFile(filename, std::ios::binary);
+    GameState gameState;
+    if (inFile.is_open()) {
+        // Deserialize gameState object from file
+        // You need to implement the deserialization logic based on how GameState is structured
+        // This is a placeholder for the deserialization logic
+        inFile.read(reinterpret_cast<char*>(&gameState), sizeof(GameState));
+        inFile.close();
+    } else {
+        _logger->logError("Unable to open file for reading: " + filename, __FUNCTION__);
+    }
+    return gameState;
+}
+
+std::vector<std::string> History::getSavedGameStatesList() {
+    std::vector<std::string> fileList;
+    std::string directory = "./"; // Directory where game state files are saved
+    for (const auto& entry : std::filesystem::directory_iterator(directory)) {
+        if (entry.is_regular_file()) {
+            fileList.push_back(entry.path().filename().string());
+        }
+    }
+    return fileList;
+}
+
+
+## GameState including Player Objects that need a serialization process
+```cpp
 #ifndef GameState_h
 #define GameState_h
 
@@ -144,3 +183,68 @@ private:
     std::map<int, int> _game_history;
 };
 #endif
+
+#ifndef Player_h
+#define Player_h
+
+#include "../GameState/GameState.h"
+#include "../TennisConstants/TennisConstants.h"
+#include <map>
+
+class GameState;
+class Player {
+public:
+    Player( GameState* gameState, int player_number );
+    ~Player();
+    
+    void setOpponent(    Player* opponent                 );
+    Player* getOpponent();
+
+    void setSets( GameState* gameState, int sets );
+    int getSets();
+
+    void setPoints( int points  );
+    int getPoints();
+
+    void setGames( int game_value  ); // it knows the current set
+    int getGames();
+
+    void setServeSwitch( int serve_switch                 );
+    int getServeSwitch();
+
+    void setMatches(     int matches );
+    int getMatches();
+
+    void setMode(        int mode    );
+    int getMode();
+
+    void setSetting(     int setting );
+    int getSetting();
+
+    void setSetHistory(  int set, int score               );
+    std::map<int, int> getSetHistory();
+
+    void setGameHistory( int game, int score              );
+    std::map<int, int> getGameHistory();
+
+    int incrementSetting();
+
+    int number(); // only set during construction
+
+private:
+    GameState* _gameState;
+    int _playerNumber;
+    Player* _opponent;
+    int _points;
+    int _games;
+    int _sets;
+    int _matches;
+    int _mode;
+    int _setting;
+    int _serve_switch;
+    std::map<int, int> _set_history;
+    std::map<int, int> _game_history;
+};
+
+#endif
+```
