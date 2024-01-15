@@ -446,7 +446,7 @@ int main( int argc, char *argv[]) {
     //// demo tests /////
     gameObject->getScoreBoard()->clearScreen();
     gameObject->getScoreBoard()->drawText( "Demo", YELLOW, X__POS, Y__POS );
-    gameObject->getScoreBoard()->drawText( "Test", YELLOW, X__POSITION, Y__POSITION );
+    // gameObject->getScoreBoard()->drawText( "Test", YELLOW, X__POSITION, Y__POSITION );
     GameTimer::gameDelay( 4000 );
     demo_test( gameObject, gameState, &loop_count );
 
