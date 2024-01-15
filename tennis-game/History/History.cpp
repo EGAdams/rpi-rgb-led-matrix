@@ -1,5 +1,4 @@
 #include "History.h"
-#include <filesystem>
 
 History::History() { _logger = new Logger( "History" ); }
 History::~History() { delete _logger; }
@@ -44,10 +43,21 @@ GameState History::loadGameStateFromFile(const std::string& filename) {
 std::vector<std::string> History::getSavedGameStatesList() {
     std::vector<std::string> fileList;
     std::string directory = "./"; // Directory where game state files are saved
-    for (const auto& entry : std::filesystem::directory_iterator( directory )) {
-        if (entry.is_regular_file()) {
-            fileList.push_back( entry.path().filename().string());
+
+    DIR *dir; 
+    struct dirent *entry;
+
+    if ((dir = opendir(directory.c_str())) != NULL) {
+        while ((entry = readdir(dir)) != NULL) {
+            // Check if the entry is a regular file
+            if (entry->d_type == DT_REG) {
+                fileList.push_back(entry->d_name);
+            }
         }
+        closedir(dir);
+    } else {
+        // Handle error in opening directory
     }
+
     return fileList;
 }

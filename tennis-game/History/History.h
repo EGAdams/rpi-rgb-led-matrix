@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <dirent.h>
 #include "../GameState/GameState.h"
 #include "../Logger/Logger.h"
 
