@@ -41,13 +41,9 @@ void Undo::snapshot( History* history ) {
     gameState.setPlayer1Sets( _player1->getSets()); gameState.setP1SetsMem( _gameState->getP1SetsMem());
     gameState.setPlayer2Sets( _player2->getSets()); gameState.setP2SetsMem( _gameState->getP2SetsMem());
     gameState.setPlayer1Matches( _player1->getMatches()); gameState.setPlayer2Matches( _player2->getMatches());
-    // std::cout << "setting serve to " << _gameState->getServe() << std::endl;
     gameState.setServe( _gameState->getServe());
-    // std::cout << "setting serve switch to " << _gameState->getServeSwitch() << std::endl;
     gameState.setServeSwitch( _gameState->getServeSwitch());
-    // std::cout << "done setting serve and serve switch.  setting undo..." << std::endl;
     gameState.setUndo( _gameState->getUndo());
-    // std::cout << "done setting undo.  setting started..." << std::endl;
     gameState.setStarted( _gameState->getStarted());
     gameState.setPointFlash( _gameState->getPointFlash());
     gameState.setRotaryPosition( _gameState->getRotaryPosition());
@@ -55,32 +51,23 @@ void Undo::snapshot( History* history ) {
     gameState.setRotaryChange( _gameState->getRotaryChange());
     gameState.setToggle( _gameState->getToggle());
     gameState.setTieLEDsOn( _gameState->getTieLEDsOn());
-    // gameState.setPlayerButton( _gameState->getPlayerButton()); // this is breaking the undo
     gameState.setTieBreak( _gameState->getTieBreak());
     gameState.setSetTieBreak( _gameState->getSetTieBreak());
     gameState.setSetTieBreakMem( _gameState->getSetTieBreakMem());
     gameState.setTieBreakOnly( _gameState->getTieBreakOnly());
     gameState.setTieBreakMem( _gameState->getTieBreakMem());
-    // std::cout << "setting set histories..." << std::endl;
     gameState.setPlayer1SetHistory( _player1->getSetHistory());
     gameState.setPlayer2SetHistory( _player2->getSetHistory());
 
     _gameState->setPlayer1SetHistory( _player1->getSetHistory());
     _gameState->setPlayer2SetHistory( _player2->getSetHistory());
     gameState.setCurrentSet( _gameState->getCurrentSet());
-    // std::cout << "done setting set histories.  pushing gamestate to history..." << std::endl;
     history->push( gameState ); 
-    
-    
-    // print size of gamestate
-    // std::cout << "gamestate size: " << sizeof( gameState ) << std::endl;
-    // std::cout << "done pushing gamestate to history." << std::endl; 
 }
 
 void Undo::mode1Undo( History* history ) {
     GameTimer::gameDelay( 100 );
     if ( history->size() == 0 ) { return; }
-    // std::cout << "inside mode1Undo.  history->size()==" << history->size() << std::endl;
     if ( _scoreBoardSet == false ) { std::cout << "*** ERROR: trying to call undo when _scoreBoardSet == false exiting process... *** \nMake sure to call undo->setScoreBoard before trying to use the Undo object." << std::endl; exit( 1 ); } // TODO: Update Current Set 1st!
     GameState gameState = ( history->pop());
     _gameState->setCurrentSet( gameState.getCurrentSet());

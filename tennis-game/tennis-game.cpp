@@ -190,7 +190,7 @@ void demo_test( GameObject* gameObject, GameState* gameState, int* loop_count ) 
     normal_win_one_no_delay( gameObject, gameState );
     different_win_one_no_delay( gameObject, gameState );
     normal_win_one_no_delay( gameObject, gameState );
-    sleep( 20 );
+    sleep( 5 );
 }
 
 void test_01( GameObject* gameObject, GameState* gameState, int* loop_count ) {
@@ -444,11 +444,13 @@ int main( int argc, char *argv[]) {
     if ( manual == 1 ) { run_manual_game( gameObject, gameState, reset, 1 ); return 0; }
     
     //// demo tests /////
-    gameObject->getScoreBoard()->clearScreen();
-    gameObject->getScoreBoard()->drawText( "Demo", YELLOW, X__POS, Y__POS );
-    // gameObject->getScoreBoard()->drawText( "Test", YELLOW, X__POSITION, Y__POSITION );
-    GameTimer::gameDelay( 4000 );
-    demo_test( gameObject, gameState, &loop_count );
+    while ( 1 ) {
+        gameObject->start();
+        gameObject->getScoreBoard()->clearScreen();
+        gameObject->getScoreBoard()->drawText( "Demo", YELLOW, X__POS, Y__POS );
+        GameTimer::gameDelay( 4000 );
+        demo_test( gameObject, gameState, &loop_count );
+    }
 
     ////////////// exit after demo for now ////////////////
     exit( 0 );

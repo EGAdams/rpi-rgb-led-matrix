@@ -30,11 +30,15 @@ GameState::GameState() {
 
 int GameState::gameRunning() { return _gameRunning; }
 void GameState::stopGameRunning() { _gameRunning = 0; }
-void GameState::setCurrentSet( int current_set ) { 
-    _current_set = current_set; }
-int GameState::getCurrentSet() { return _current_set; }
+void GameState::setCurrentSet( int current_set ) {
+    _current_set = current_set;
+}
+
+
+int GameState::getCurrentSet() const { return _current_set; }
+
 void GameState::setCurrentAction( std::string currentAction ) { _currentAction = currentAction; }
-std::string GameState::getCurrentAction() { return _currentAction; }
+std::string GameState::getCurrentAction() const { return _currentAction; }
 void GameState::setGameWinPulseCount( int gameWinPulseCount ) { _gameWinPulseCount = gameWinPulseCount; }
 int GameState::getGameWinPulseCount() { return _gameWinPulseCount; }
 void GameState::setButtonDelay( int buttonDelay ) { _buttonDelay = buttonDelay; }
@@ -93,19 +97,19 @@ void GameState::setTieBreakMem( int tieBreakMem ) { _tieBreakMem = tieBreakMem; 
 int GameState::getTieBreakMem() { return _tieBreakMem; }
 void GameState::setSetTieBreakMem( int setTieBreakMem ) { _setTieBreakMem = setTieBreakMem; }
 int GameState::getSetTieBreakMem() { return _setTieBreakMem; }
-int GameState::getPlayer1Points() { return _player1_points; }
+int GameState::getPlayer1Points() const { return _player1_points; }
 void GameState::setPlayer1Points( int player1Points ) { _player1_points = player1Points; }
-int GameState::getPlayer2Points() { return _player2_points; }
+int GameState::getPlayer2Points() const { return _player2_points; }
 void GameState::setPlayer2Points( int player2Points ) { _player2_points = player2Points; }
-int GameState::getPlayer1Games() { return _player1_games; }
+int GameState::getPlayer1Games() const { return _player1_games; }
 void GameState::setPlayer1Games( int player1Games ) { _player1_games = player1Games; }
-int GameState::getPlayer2Games() { return _player2_games; }
+int GameState::getPlayer2Games() const { return _player2_games; }
 void GameState::setPlayer2Games( int player2Games ) { _player2_games = player2Games; }
-int GameState::getPlayer1Sets() { return _player1_sets; }
+int GameState::getPlayer1Sets() const { return _player1_sets; }
 void GameState::setPlayer1Sets( int player1Sets ) { _player1_sets = player1Sets; }
-int GameState::getPlayer2Sets() { return _player2_sets; }
+int GameState::getPlayer2Sets() const { return _player2_sets; }
 void GameState::setPlayer2Sets( int player2Sets ) { _player2_sets = player2Sets; }
-int GameState::getPlayer1Matches() { return _player1_matches; }
+int GameState::getPlayer1Matches() const { return _player1_matches; }
 void GameState::setPlayer1Matches( int player1Matches ) { _player1_matches = player1Matches; }
 int GameState::getPlayer2Matches() { return _player2_matches; }
 void GameState::setPlayer2Matches( int player2Matches ) { _player2_matches = player2Matches; }

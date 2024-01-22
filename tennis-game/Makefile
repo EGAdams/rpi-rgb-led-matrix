@@ -9,7 +9,7 @@ GTEST_LIBS=-lgtest_main -lgtest -lpthread
 CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter
 CXXFLAGS=$(CFLAGS) -I$(GTEST_INCDIR)
 # OBJECTS=SetHistoryTextTest.o SetHistoryText.o SetDrawer.o GameLedTranslator.o SubjectManager.o WebLiquidCrystal.o WatchTimer.o Inputs.o TieBreaker.o Mode1Score.o Mode1Functions.o ServeLeds.o Undo.o BatteryTest.o Reset.o SetLeds.o TieLeds.o Mode1WinSequences.o Mode2Functions.o MatchWinSequence.o TennisConstants.o GameLeds.o GameModes.o GameObject.o PinState.o PinInterface.o TranslateConstant.o PointLeds.o Arduino.o CanvasCreator.o FontLoader.o Drawer.o TextDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game.o LoggerFactory.o LogObject.o LogObjectContainer.o LogObjectFactory.o MonitorLedClassObject.o MonitorLed.o JsonParser.o Model.o MonitoredObject.o SourceData.o FetchRunner.o
-BINARIES=tennis-game tennis-game-manual Mode1ScoreTest
+BINARIES=tennis-game Mode1ScoreTest
 
 # Where our library resides. It is assumed here that $(RGB_LIB_DISTRIBUTION) has a
 # compiled library in lib/

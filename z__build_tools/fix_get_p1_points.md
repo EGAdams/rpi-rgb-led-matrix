@@ -1,3 +1,17 @@
+Here is the line of code causing the error:
+```cpp
+while( gameState->getPlayer1Points() != 0 || gameState->getPlayer2Points() != 0 ) {
+```
+
+Here is the error:
+```error
+undefined reference to `GameState::getPlayer2Points()'
+```
+
+This happened after I added the "const".  Please help me fix it.
+
+Here is the GameState Object:
+```cpp
 #ifndef GameState_h
 #define GameState_h
 
@@ -144,3 +158,4 @@ private:
     std::map<int, int> _game_history;
 };
 #endif
+```

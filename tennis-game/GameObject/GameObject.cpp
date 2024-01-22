@@ -103,5 +103,6 @@ void GameObject::start() {
     _scoreBoard->update();
     _gameState->setTieBreakOnly( 0 );     // tieBreakOnly = false;
     std::cout << "setting started to 1... " << std::endl;
+    _gameState->setCurrentSet( 1 );
     _gameState->setStarted( 1 );
 }
