@@ -3,13 +3,13 @@
 using json = nlohmann::json;
 
 bool GameStateSerializer::serialize( const GameState& gameState, const std::string& filePath ) {
-    json j;
+    json nLohmannJsonObject;
 
-    // Serialize each field of GameState into the JSON object `j`
-    j["current_set"]     = gameState.getCurrentSet();
-    j["current_action"]  = gameState.getCurrentAction();
-    j["player_1_points"] = gameState.getPlayer1Points();
-    j["player_2_points"] = gameState.getPlayer2Points();
+    // Serialize each field of GameState into the JSON object `nLohmannJsonObject`
+    nLohmannJsonObject["current_set"]     = gameState.getCurrentSet();
+    nLohmannJsonObject["current_action"]  = gameState.getCurrentAction();
+    nLohmannJsonObject["player_1_points"] = gameState.getPlayer1Points();
+    nLohmannJsonObject["player_2_points"] = gameState.getPlayer2Points();
     
     // Serialize other fields...
 
@@ -20,7 +20,7 @@ bool GameStateSerializer::serialize( const GameState& gameState, const std::stri
     }
 
     try {
-        file << j.dump(); // Convert JSON object to string and write to file
+        file << nLohmannJsonObject.dump(); // Convert JSON object to string and write to file
     }
     catch ( const std::exception& e ) {
         std::cerr << "Exception occurred during serialization: " << e.what() << std::endl;
@@ -44,18 +44,18 @@ bool GameStateSerializer::deserialize(GameState& gameState, const std::string& f
         return false;
     }
 
-    json j;
+    json nLohmannJsonObject;
     try {
-        file >> j; // Read the file content into the JSON object `j`
+        file >> nLohmannJsonObject; // Read the file content into the JSON object `nLohmannJsonObject`
     } catch (const std::exception& e) {
         std::cerr << "Exception occurred during deserialization: " << e.what() << std::endl;
         file.close();
         return false;
     }
 
-    // Deserialize each field from the JSON object `j` into GameState
-    gameState.setCurrentSet(j["current_set"]);
-    gameState.setCurrentAction(j["current_action"]);
+    // Deserialize each field from the JSON object `nLohmannJsonObject` into GameState
+    gameState.setCurrentSet(nLohmannJsonObject["current_set"]);
+    gameState.setCurrentAction(nLohmannJsonObject["current_action"]);
     // Deserialize other fields...
     
     file.close();
