@@ -1,7 +1,7 @@
 #include "ScoreBoard.h"
 
 ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState ):
-    _player1( player1 ), _player2( player2 ), _gameState( gameState ) { 
+    _player1( player1 ), _player2( player2 ), _gameState( gameState ) {
     if ( onRaspberryPi() == false ) {
         std::cout << "constructing scoreboard without matrix..." << std::endl;
         _setDrawer = std::make_unique<SetDrawer>( _canvas.get(), _gameState );
@@ -18,7 +18,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         matrix_options.rows = 64;
         matrix_options.cols = 64;
         matrix_options.chain_length = 1;
-        matrix_options.parallel = 2;
+        matrix_options.parallel = 1;
         matrix_options.show_refresh_rate = false;
         matrix_options.disable_hardware_pulsing = true; // --led-no-hardware-pulse
         matrix_options.brightness = 85; // inc jan 22, 22024 // 35 is best for demo videos in largo
@@ -53,15 +53,15 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         bigNumberFontLoader.LoadFont( bigNumberFont );
         if (!_big_number_font.LoadFont( BIG_NUMBER_FONT )) {
             fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT ); exit( 1 );}
-        
+
         FontLoader periodFontLoader( "fonts/mspgothic_030623.bdf" );            // that period
         periodFontLoader.LoadFont( _period_font );
-        if (!_period_font.LoadFont( "fonts/mspgothic_030623.bdf" )) { 
+        if (!_period_font.LoadFont( "fonts/mspgothic_030623.bdf" )) {
             fprintf( stderr, "*** ERROR: Couldn't load font '%s'\n", "fonts/mspgothic_030623.bdf ***" );exit( 1 );
         } else {
             std::cout << "loaded period font." << std::endl;
         }
-        
+
         // end loading fonts
 
         Color color( 255, 255, 0 );
@@ -171,14 +171,14 @@ void ScoreBoard::update() {
         int playerToBlink = _gameState->getCurrentAction().find( "player1" ) != std::string::npos ?
             PLAYER_1_INITIALIZED : PLAYER_2_INITIALIZED;
         _setDrawer->drawBlinkSets( playerToBlink ); // checks current action ignoring playerToBlink
-    } else { 
+    } else {
         _setDrawer->drawSets(); }
 
     if ( _gameState->getTieBreak() == true ) {
         // std::cout << "tie break is true, calling _drawTieBreakerBar()..." << std::endl;
         _drawTieBreakerBar();
-    } else { 
-        // std::cout << "tie break is false, not calling _drawTieBreakerBar()..." << std::endl; 
+    } else {
+        // std::cout << "tie break is false, not calling _drawTieBreakerBar()..." << std::endl;
     }
 }
 
@@ -221,7 +221,7 @@ void ScoreBoard::clearScreen() {
         Color flood_color( 0, 0, 0 ); _canvas->Fill( flood_color.r, flood_color.g, flood_color.b ); }}
 
 std::string ScoreBoard::drawPlayerScore( Player* player ) {
-    std::string serve_bar_text = hasCanvas() == true ? "i" : "\033[34m|"; 
+    std::string serve_bar_text = hasCanvas() == true ? "i" : "\033[34m|";
     std::string serve_bar = _gameState->getServe() == player->number() ? serve_bar_text : " ";
     std::string score = _translate( player->getPoints());
     if( hasCanvas() == false ) {
