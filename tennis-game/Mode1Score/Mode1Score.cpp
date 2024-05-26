@@ -1,6 +1,6 @@
 #include "Mode1Score.h"
 
-Mode1Score::Mode1Score( 
+Mode1Score::Mode1Score(
     Player* player1,
     Player* player2,
     PinInterface* pinInterface,
@@ -22,12 +22,12 @@ TieBreaker* Mode1Score::getTieBreaker() { return &_tieBreaker; }
 
 void Mode1Score::setScoreBoard( ScoreBoard* scoreBoard ) {
     _scoreBoard = scoreBoard;
-    _pointLeds.setScoreBoard(          scoreBoard ); 
-    _gameLeds.setScoreBoard(           scoreBoard ); 
-    _mode1WinSequences.setScoreBoards( scoreBoard ); 
-    _setLeds.setScoreBoard(            scoreBoard ); 
-    _tieBreaker.setScoreBoards(   scoreBoard );         // all day debug. in the future.
-    _undo.setScoreBoard(               scoreBoard ); }    // need to find a way to avoid this
+    _pointLeds.setScoreBoard(          scoreBoard );
+    _gameLeds.setScoreBoard(           scoreBoard );
+    _mode1WinSequences.setScoreBoards( scoreBoard );
+    _setLeds.setScoreBoard(            scoreBoard );
+    _tieBreaker.setScoreBoards(        scoreBoard );   // all day debug. in the future.
+    _undo.setScoreBoard(               scoreBoard ); } // need to find a way to avoid this
 
 ScoreBoard* Mode1Score::getScoreBoard() { return _scoreBoard; }
 
@@ -43,9 +43,9 @@ void Mode1Score::_resetGame() {
 
 void Mode1Score::updateScore( Player* currentPlayer ) {
     if ( _gameState->getTieBreak() == 1 ) {           // Tie Break
-        _tieBreaker.run( currentPlayer );        
+        _tieBreaker.run( currentPlayer );
     } else if ( _gameState->getSetTieBreak() == 1 ) { // Set Tie Break
-        _tieBreaker.setTieBreaker();            
+        _tieBreaker.setTieBreaker();
     } else {                                          // Regular Game
         Player* otherPlayer = currentPlayer->getOpponent();
         int current_player_points = currentPlayer->getPoints();
@@ -54,11 +54,11 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
             if ( current_player_points == other_player_points ) {
                 currentPlayer->setPoints( 3 );
                 otherPlayer->setPoints(   3 );
-            } else if ( current_player_points > 3 
+            } else if ( current_player_points > 3
                 && ( current_player_points - other_player_points ) > 1 ) {
                 currentPlayer->setGames( currentPlayer->getGames() + 1 );
                 _undo.memory();
-                currentPlayer->number() == 0 ? playerOneGameWin() : playerTwoGameWin(); } 
+                currentPlayer->number() == 0 ? playerOneGameWin() : playerTwoGameWin(); }
 
             if ( currentPlayer->getPoints() == 4 ) {
                 _gameState->setPointFlash( 1 );       // "Ad" mode
@@ -79,18 +79,17 @@ void Mode1Score::playerGameWin( Player* player ) {
     Player* opponent = player->getOpponent();
     std::cout << "player " << player->number() << " games: " << player->getGames() << std::endl;
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
-    if (player->getGames() >= GAMES_TO_WIN_SET) {
-        if (player->getGames() == GAMES_TO_WIN_SET && opponent->getGames() == GAMES_TO_WIN_SET) {
+    if ( player->getGames() >= GAMES_TO_WIN_SET ) {
+        if ( player->getGames() == GAMES_TO_WIN_SET && opponent->getGames() == GAMES_TO_WIN_SET ) {
             _gameState->setTieBreak( 1 );
             _tieBreaker.initializeTieBreakMode();
         }
-        if (_gameState->getTieBreak() == 0) {       // if this is not a tie break game...
-            if ((player->getGames() - opponent->getGames()) > 1 ) {   // player ahead by 2 games.
-                player->setSets(_gameState, player->getSets() + 1 );  // This is a set win that 
-                _setLeds.updateSets();                                // sets the tiebreak, wins
-                                                                      // the match, or just wins the set.
-                
-                if (player->getSets() == opponent->getSets()) {       // set tie break
+        if (_gameState->getTieBreak() == 0) {  // if this is not a tie break game...
+            if ((player->getGames() - opponent->getGames()) > 1 ) {  // player ahead by 2 games.
+                player->setSets(_gameState, player->getSets() + 1 ); // Set win
+                _setLeds.updateSets(); // sets the tiebreak, wins
+                                       // the match, or just wins the set.
+                if (player->getSets() == opponent->getSets()) {  // set tie break
                     player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1TBSetWinSequence() : _mode1WinSequences.p2TBSetWinSequence();
                     _gameState->setSetTieBreak( 1 );
                     _tieBreaker.setTieBreakEnable();
@@ -125,7 +124,7 @@ void Mode1Score::playerGameWin( Player* player ) {
             _mode1WinSequences.p2GameWinSequence();
             _gameState->setPlayer2SetHistory(player->getSetHistory());
             _gameState->setPlayer1SetHistory(opponent->getSetHistory());
-        } 
+        }
         _gameLeds.updateGames();
         _resetGame();
     }
@@ -229,9 +228,9 @@ void Mode1Score::mode1SetTBP2Games() {
         GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
         _mode1WinSequences.p2SetTBWinSequence();
         _tieBreaker.tieLEDsOff();
-        _mode1WinSequences.playerTwoMatchWin(); 
-        _gameState->stopGameRunning(); 
+        _mode1WinSequences.playerTwoMatchWin();
+        _gameState->stopGameRunning();
     }
     std::cout << "setting serve switch to: " << _gameState->getServeSwitch() + 1 << std::endl;
-    _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 ); 
+    _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
 }

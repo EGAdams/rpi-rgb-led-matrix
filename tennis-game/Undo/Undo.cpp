@@ -1,6 +1,6 @@
 #include "Undo.h"
 
-Undo::Undo( Player* player1, Player* player2, PinInterface* pinInterface, GameState* gameState ): 
+Undo::Undo( Player* player1, Player* player2, PinInterface* pinInterface, GameState* gameState ):
     _player1( player1 ), _player2( player2 ),
     _gameState( gameState ),
     _pointLeds( player1, player2, pinInterface ),
@@ -8,7 +8,7 @@ Undo::Undo( Player* player1, Player* player2, PinInterface* pinInterface, GameSt
     _setLeds( player1, player2, pinInterface ),
     _serveLeds( pinInterface, gameState ),
     _tieLeds( pinInterface ) {
-        _logger = new Logger( "Undo" ); 
+        _logger = new Logger( "Undo" );
         _scoreBoardSet = false; };
 Undo::~Undo(){
     // std::cout << "*** Undo destructor called. ***" << std::endl;
@@ -16,9 +16,9 @@ Undo::~Undo(){
 
 void Undo::setScoreBoard( ScoreBoard* scoreBoard ) {
     // _scoreBoard = scoreBoard;
-    _pointLeds.setScoreBoard(          scoreBoard ); 
-    _gameLeds.setScoreBoard(           scoreBoard ); 
-    // _mode1WinSequences.setScoreBoards( scoreBoard ); 
+    _pointLeds.setScoreBoard(          scoreBoard );
+    _gameLeds.setScoreBoard(           scoreBoard );
+    // _mode1WinSequences.setScoreBoards( scoreBoard );
     _setLeds.setScoreBoard(            scoreBoard );
     _scoreBoardSet = true;
 }
@@ -62,13 +62,16 @@ void Undo::snapshot( History* history ) {
     _gameState->setPlayer1SetHistory( _player1->getSetHistory());
     _gameState->setPlayer2SetHistory( _player2->getSetHistory());
     gameState.setCurrentSet( _gameState->getCurrentSet());
-    history->push( gameState ); 
+    history->push( gameState );
 }
 
 void Undo::mode1Undo( History* history ) {
     GameTimer::gameDelay( 100 );
     if ( history->size() == 0 ) { return; }
-    if ( _scoreBoardSet == false ) { std::cout << "*** ERROR: trying to call undo when _scoreBoardSet == false exiting process... *** \nMake sure to call undo->setScoreBoard before trying to use the Undo object." << std::endl; exit( 1 ); } // TODO: Update Current Set 1st!
+    if ( _scoreBoardSet == false ) {
+        std::cout << "*** ERROR: trying to call undo when _scoreBoardSet == false exiting process... *** \nMake sure to call undo->setScoreBoard before trying to use the Undo object." << std::endl;
+        exit( 1 );
+    } // TODO: Update Current Set 1st!
     GameState gameState = ( history->pop());
     _gameState->setCurrentSet( gameState.getCurrentSet());
     _player1->setPoints( gameState.getPlayer1Points());
@@ -102,7 +105,7 @@ void Undo::mode1Undo( History* history ) {
     _gameState->setTieBreakOnly( gameState.getTieBreakOnly());
     _gameState->setTieBreakMem( gameState.getTieBreakMem());
     if ( _gameState->getTieLEDsOn() == 1 ) { _gameState->setTieLEDsOn( 1 );  _tieLeds.turnOn(); }
-    if ( _gameState->getTieLEDsOn() == 0 ) {  _tieLeds.turnOff(); _gameState->setTieLEDsOn( 0 );  } 
+    if ( _gameState->getTieLEDsOn() == 0 ) {  _tieLeds.turnOff(); _gameState->setTieLEDsOn( 0 );  }
     _logger->logUpdate( "updating leds...", __FUNCTION__ );
     _pointLeds.updatePoints();
     _gameLeds.updateGames();

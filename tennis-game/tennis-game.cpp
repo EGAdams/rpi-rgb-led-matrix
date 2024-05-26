@@ -26,7 +26,7 @@ using namespace rgb_matrix;
 #define FOUR_SPACE     14
 #define THREE_SPACE    15
 #define DEMO_DELAY 1
-#define BLINK_UPDATE_DELAY 1000000 // 250000 // 
+#define BLINK_UPDATE_DELAY 1000000 // 250000 //
 #define FASTER_BLINK_UPDATE_DELAY 100000 // 750000 // 100000
 # define X__POS 6
 # define Y__POS 40
@@ -65,11 +65,11 @@ void score( GameObject* gameObject, GameState* gameState, int player ) {
     std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
 }
 
-void playerWinDelay( GameObject* gameObject, GameState* gameState, int player, int delay ) {    
+void playerWinDelay( GameObject* gameObject, GameState* gameState, int player, int delay ) {
     scoreDelay( gameObject, gameState, player, delay );
     while( gameState->getPlayer1Points() != 0 || gameState->getPlayer2Points() != 0 ) {
         scoreDelay( gameObject, gameState, player, delay );
-    }      
+    }
 }
 
 void checkeredPlayerOneWinDelay( GameObject* gameObject, GameState* gameState, int delay ) {
@@ -82,13 +82,13 @@ void checkeredPlayerOneWinDelay( GameObject* gameObject, GameState* gameState, i
     scoreDelay( gameObject, gameState, 0, delay );
     scoreDelay( gameObject, gameState, 1, delay );
     scoreDelay( gameObject, gameState, 1, delay );
-    scoreDelay( gameObject, gameState, 0, delay ); 
+    scoreDelay( gameObject, gameState, 0, delay );
     while( gameState->getPlayer1Points() != 0 || gameState->getPlayer2Points() != 0 ) {
         scoreDelay( gameObject, gameState, 0, delay );
-    }      
+    }
 }
 
-void playerWin( GameObject* gameObject, GameState* gameState, int player ) {       
+void playerWin( GameObject* gameObject, GameState* gameState, int player ) {
     score( gameObject, gameState, player );
     while( gameState->getPlayer1Points() != 0 || gameState->getPlayer2Points() != 0 ) {
         score( gameObject, gameState, player );
@@ -172,13 +172,13 @@ void ad_win_one_comeback( GameObject* gameObject, GameState* gameState ) {
 
 /*
  * Runs a demo with delays until the score reaches 3 - 2
- * Then kicks into high gear and finishes the game at 6 - 2 
+ * Then kicks into high gear and finishes the game at 6 - 2
  */
 void demo_test( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen();
     gameObject->start();
     sleep( 1 );
-    
+
     normal_win_one( gameObject, gameState );
     ad_win_one_comeback( gameObject, gameState );
     normal_win_two( gameObject, gameState );
@@ -209,7 +209,7 @@ void test_01( GameObject* gameObject, GameState* gameState, int* loop_count ) {
 
 /*
  * Runs a demo with delays until the score reaches 3 - 2
- * Then kicks into high gear and finishes the game at 6 - 2 
+ * Then kicks into high gear and finishes the game at 6 - 2
  */
 void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen();
@@ -267,7 +267,7 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 2 );
     score( gameObject, gameState, 2 );
     score( gameObject, gameState, 2 );
-    score( gameObject, gameState, 2 );    
+    score( gameObject, gameState, 2 );
     sleep( 6 ); }
 
 void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
@@ -314,7 +314,7 @@ void resetAll( Reset* reset ) {
 void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset, int player ) {
     int loop_count = 0;
     int test_count = 0;
-    
+
     // set games to --games argument
     // set sets to --sets argument
     // set player1 score to --player1 argument
@@ -327,8 +327,8 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
 
     int menu_selection = 1;
     std::signal( SIGINT, GameObject::_signalHandler );
-    
-    while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { /*/// Begin Game Loop ///*/  
+
+    while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { /*/// Begin Game Loop ///*/
         if ( loop_count >  MAX_LOOP_COUNT ) { gameState->stopGameRunning(); }
         sleep( SCORE_DELAY );
         std::cout << "\n";
@@ -347,7 +347,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         // cout
         std::cout << "  Enter selection: ";
         std::cin >> menu_selection;
-        
+
         if ( menu_selection == 1  ||  menu_selection == 2 ) {
             std::cout << "\n\n\n\n\n\n\n*** Player " << menu_selection << " scored ***\n" << std::endl;
             gameObject->playerScore( menu_selection );  // flip the player score flag
@@ -355,15 +355,15 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         } else if ( menu_selection == 0 ) {
             std::cout << "*** Exiting... ***\n" << std::endl;
             exit( 0 );
-        } else if ( menu_selection == 9 ) { 
+        } else if ( menu_selection == 9 ) {
             std::cout << "\n\n\n\n\n\n\n*** Undo ***\n" << std::endl;
-            gameObject->undo(); 
+            gameObject->undo();
             sleep( SCORE_DELAY );
-        } else if ( menu_selection == 11 ) { 
+        } else if ( menu_selection == 11 ) {
             std::cout << "\n\n\n\n\n\n\n*** Player 1 win ***\n" << std::endl;
             playerWin( gameObject, gameState, 1 );
             sleep( SCORE_DELAY );
-        } else if ( menu_selection == 22 ) { 
+        } else if ( menu_selection == 22 ) {
             std::cout << "\n\n\n\n\n\n\n*** Player 2 win ***\n" << std::endl;
             playerWin( gameObject, gameState, 2 );
             sleep( SCORE_DELAY );
@@ -371,15 +371,15 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 01 ***\n" << std::endl;
             gameObject->getScoreBoard()->clearScreen();
-        gameObject->getScoreBoard()->drawText( "Test",  
+        gameObject->getScoreBoard()->drawText( "Test",
         YELLOW, X__POS, Y__POS );
-        gameObject->getScoreBoard()->drawText( " 01 ",  
+        gameObject->getScoreBoard()->drawText( " 01 ",
         YELLOW, X__POSITION, Y__POSITION );
         GameTimer::gameDelay( 4000 );
             test_01( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
-        } else if ( menu_selection == 102 ) { 
+        } else if ( menu_selection == 102 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 02 ***\n" << std::endl;
             test_02( gameObject, gameState, &loop_count );
@@ -407,7 +407,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             std::cout << "\n\n\n\n\n\n\n*** Invalid selection ***\n" << std::endl;
             sleep( SCORE_DELAY );
             continue; }
-        
+
         gameObject->loopGame();  // handle the player score flag
         loop_count++;
         std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
@@ -434,26 +434,26 @@ int main( int argc, char *argv[]) {
     }
 
     int loop_count = 0;
-    GameState*  gameState  = new GameState();  // make this 1st!!! cost me 3 days of debugging
+    GameState*  gameState  = new GameState();  // make this 1st!!! cost me 3 days
     GameObject* gameObject = new GameObject( gameState );
     Reset* reset = new Reset( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
 
-    sleep( .5 );
-    gameObject->loopGame();
-    sleep( .5 );
+    // sleep( .5 );
+    // gameObject->loopGame();
+    // sleep( .5 );
     if ( manual == 1 ) { run_manual_game( gameObject, gameState, reset, 1 ); return 0; }
-    
+
     //// demo tests /////
-    while ( 1 ) {
-        gameObject->start();
-        gameObject->getScoreBoard()->clearScreen();
-        gameObject->getScoreBoard()->drawText( "Demo", YELLOW, X__POS, Y__POS );
-        GameTimer::gameDelay( 4000 );
-        demo_test( gameObject, gameState, &loop_count );
-    }
+    // while ( 1 ) {
+    //     gameObject->start();
+    //     gameObject->getScoreBoard()->clearScreen();
+    //     gameObject->getScoreBoard()->drawText( "Demo", YELLOW, X__POS, Y__POS );
+    //     GameTimer::gameDelay( 4000 );
+    //     demo_test( gameObject, gameState, &loop_count );
+    // }
 
     ////////////// exit after demo for now ////////////////
-    exit( 0 );
+    // exit( 0 );
 
 
 
@@ -461,9 +461,9 @@ int main( int argc, char *argv[]) {
     int test_count = 1;
     // gameObject->getScoreBoard()->drawText( "Win",  YELLOW, 18, 80  );
     // gameObject->getScoreBoard()->clearScreen();
-    // gameObject->getScoreBoard()->drawText( "Test",  
+    // gameObject->getScoreBoard()->drawText( "Test",
     // YELLOW, X__POS, Y__POS );
-    // gameObject->getScoreBoard()->drawText( " 01 ",  
+    // gameObject->getScoreBoard()->drawText( " 01 ",
     // YELLOW, X__POSITION, Y__POSITION );
     // GameTimer::gameDelay( 3000 );
     // test_01( gameObject, gameState, &loop_count );
@@ -471,20 +471,20 @@ int main( int argc, char *argv[]) {
     // end test_01
 
     // gameObject->getScoreBoard()->clearScreen();
-    // gameObject->getScoreBoard()->drawText( "Test",  
+    // gameObject->getScoreBoard()->drawText( "Test",
     // YELLOW, X__POS, Y__POS );
-    // gameObject->getScoreBoard()->drawText( " 02 ",  
+    // gameObject->getScoreBoard()->drawText( " 02 ",
     // YELLOW, X__POSITION, Y__POSITION );
     // GameTimer::gameDelay( 4000 );
     // std::cout << "calling test_02()..." << std::endl;
     // test_02( gameObject, gameState, &loop_count );
     test_count++;
     // end test_02
-    
+
     // gameObject->getScoreBoard()->clearScreen();
-    // gameObject->getScoreBoard()->drawText( "Test",  
+    // gameObject->getScoreBoard()->drawText( "Test",
     // YELLOW, X__POS, Y__POS );
-    // gameObject->getScoreBoard()->drawText( " 03 ",  
+    // gameObject->getScoreBoard()->drawText( " 03 ",
     // YELLOW, X__POSITION, Y__POSITION );
     // GameTimer::gameDelay( 4000 );
     // std::cout << "calling test_03()..." << std::endl;
@@ -493,9 +493,9 @@ int main( int argc, char *argv[]) {
     // end test_03
 
     // gameObject->getScoreBoard()->clearScreen();
-    // gameObject->getScoreBoard()->drawText( "Test",  
+    // gameObject->getScoreBoard()->drawText( "Test",
     // YELLOW, X__POS, Y__POS );
-    // gameObject->getScoreBoard()->drawText( " 04 ",  
+    // gameObject->getScoreBoard()->drawText( " 04 ",
     // YELLOW, X__POSITION, Y__POSITION );
     // GameTimer::gameDelay( 4000 );
     // std::cout << "calling test_04()..." << std::endl;
@@ -505,9 +505,9 @@ int main( int argc, char *argv[]) {
 
     // test 05
     gameObject->getScoreBoard()->clearScreen();
-    gameObject->getScoreBoard()->drawText( "Test",  
+    gameObject->getScoreBoard()->drawText( "Test",
     YELLOW, X__POS, Y__POS );
-    gameObject->getScoreBoard()->drawText( " 05 ",  
+    gameObject->getScoreBoard()->drawText( " 05 ",
     YELLOW, X__POSITION, Y__POSITION );
     GameTimer::gameDelay( 4000 );
     std::cout << "calling test_05()..." << std::endl;
