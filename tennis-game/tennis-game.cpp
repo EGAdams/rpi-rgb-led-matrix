@@ -434,14 +434,19 @@ int main( int argc, char *argv[]) {
     }
 
     int loop_count = 0;
+    std::cout << "creating game state object..." << std::endl;
     GameState*  gameState  = new GameState();  // make this 1st!!! cost me 3 days
+    std::cout << "creating game object..." << std::endl;
     GameObject* gameObject = new GameObject( gameState );
+    std::cout << "creating reset object..." << std::endl;
     Reset* reset = new Reset( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
 
     // sleep( .5 );
     // gameObject->loopGame();
     // sleep( .5 );
-    if ( manual == 1 ) { run_manual_game( gameObject, gameState, reset, 1 ); return 0; }
+    if ( manual == 1 ) {
+        std::cout << "running manual game..." << std::endl;
+        run_manual_game( gameObject, gameState, reset, 1 ); return 0; }
 
     //// demo tests /////
     // while ( 1 ) {

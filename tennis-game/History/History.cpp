@@ -21,7 +21,8 @@ void History::saveGameStateToFile(const GameState& gameState, const std::string&
         outFile.write(reinterpret_cast<const char*>(&gameState), sizeof(GameState));
         outFile.close();
     } else {
-        _logger->logUpdate( "Unable to open file for writing: " + filename, __FUNCTION__ );
+        _logger->setName( "saveGameStateToFile" );
+        _logger->logUpdate( "Unable to open file for writing: " + filename );
     }
 }
 
@@ -35,7 +36,8 @@ GameState History::loadGameStateFromFile(const std::string& filename) {
         inFile.read(reinterpret_cast<char*>(&gameState), sizeof(GameState));
         inFile.close();
     } else {
-        _logger->logUpdate( "Unable to open file for reading: " + filename, __FUNCTION__ );
+        _logger->setName( "loadGameStateFromFile" );
+        _logger->logUpdate( "Unable to open file for reading: " + filename );
     }
     return gameState;
 }
@@ -44,7 +46,7 @@ std::vector<std::string> History::getSavedGameStatesList() {
     std::vector<std::string> fileList;
     std::string directory = "./"; // Directory where game state files are saved
 
-    DIR *dir; 
+    DIR *dir;
     struct dirent *entry;
 
     if ((dir = opendir(directory.c_str())) != NULL) {

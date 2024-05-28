@@ -100,13 +100,13 @@ public:
 
 private:
     int _current_set;
-    int _player1_points;  
+    int _player1_points;
     int _player2_points;
-    int _player1_games;   
+    int _player1_games;
     int _player2_games;
-    int _player1_sets;    
+    int _player1_sets;
     int _player2_sets;
-    int _player1_matches; 
+    int _player1_matches;
     int _player2_matches;
     int _pointFlash;
     int _serve;
@@ -123,11 +123,11 @@ private:
     unsigned long _now;
     unsigned long _previousTime;
     int _freezePlayerButton;
-    int _p1PointsMem; 
+    int _p1PointsMem;
     int _p2PointsMem;
     int _p1GamesMem;  
     int _p2GamesMem;
-    int _p1SetsMem;   
+    int _p1SetsMem;
     int _p2SetsMem;
     int _toggle;
     int _tieBreakOnly;

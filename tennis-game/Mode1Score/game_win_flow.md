@@ -4,7 +4,7 @@ graph TD
     B -->|Yes| C{Player's games == GAMES_TO_WIN_SET and Opponent's games == GAMES_TO_WIN_SET}
     B -->|No| D[Regular game win sequence]
     C -->|Yes| E[Set tie break, initialize tie break mode]
-    C -->|No| F{Tie break is not active}
+    C -->|No| F{Tie Break ACTIVE?}
     F -->|Yes| G{Player's games - Opponent's games > 1}
     G -->|Yes| H[Player wins the set]
     H --> I{Player's sets == Opponent's sets}

@@ -106,7 +106,7 @@ void Undo::mode1Undo( History* history ) {
     _gameState->setTieBreakMem( gameState.getTieBreakMem());
     if ( _gameState->getTieLEDsOn() == 1 ) { _gameState->setTieLEDsOn( 1 );  _tieLeds.turnOn(); }
     if ( _gameState->getTieLEDsOn() == 0 ) {  _tieLeds.turnOff(); _gameState->setTieLEDsOn( 0 );  }
-    _logger->logUpdate( "updating leds...", __FUNCTION__ );
+    _logger->logUpdate( "updating leds..." );
     _pointLeds.updatePoints();
     _gameLeds.updateGames();
     _setLeds.updateSets();

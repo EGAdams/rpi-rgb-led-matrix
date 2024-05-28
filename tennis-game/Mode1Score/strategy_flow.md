@@ -1,20 +1,19 @@
+Act as an expert Tennis Game Software Developer.
+
+Please analyze the following diagram an check it's accuracy for tennis rules.  I'm not sure if
 ```mermaid
 graph TD
     A[Player wins a game] --> B{Player's games >= GAMES_TO_WIN_SET}
-    B -->|Yes| C{Player's games == GAMES_TO_WIN_SET and Opponent's games == GAMES_TO_WIN_SET}
-    B -->|No| D1[Execute GameWinStrategy]
+    B -->|Yes| C{Player == Opponent == GAMES_TO_WIN_SET}
+    B -->|No| D[Execute GameWinStrategy]
     C -->|Yes| E[Initialize TieBreakStrategy]
     C -->|No| F{Tie break is not active}
-    F -->|Yes| G{Player's games - Opponent's games > 1}
+    F -->|Regular Flow | G{Winning by 2?}
     G -->|Yes| H[Execute SetWinStrategy]
-    G -->|No| I[Execute GameWinStrategy]
-    F -->|No| J[Execute GameWinStrategy]
-    D1 --> K[Update LEDs]
-    D1 --> L[Reset Game]
-    I --> K
-    I --> L
-    J --> K
-    J --> L
+    G -->|No| D
+    F -->|Tie Break ACTIVE| D
+    D --> K[Update LEDs]
+    D --> L[Reset Game]
     E --> M[End]
     H --> M
     K --> M

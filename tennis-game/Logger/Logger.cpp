@@ -4,30 +4,27 @@
 #include <ctime>
 #include <iostream>
 #include <regex>
-#define LOG_FILE_PATH "log.txt"
 
-Logger::Logger( std::string constructor_name ) : _constructor_name( constructor_name ) {
-    // std::cout << "constructing the Logger for " + constructor_name + "..." << std::endl;
-    _log_file.open( LOG_FILE_PATH, std::ios::out | std::ios::app );
+Logger::Logger( std::string name ) : _name( name ) {
+    _log_file.open( name + "/log.txt", std::ios::out | std::ios::app );
 }
 
 Logger::~Logger() {
-    // std::cout << "Destructing Logger..." << std::endl;
     _log_file.close();
 }
 
-void Logger::logUpdate( std::string message, std::string caller = "unknown" ) {
-    if ( caller == "unknown" ) { caller = _constructor_name; }
+void Logger::setName( std::string name ) { _name = name; }
+
+void Logger::logUpdate( std::string message ) {
     message = std::regex_replace( message, std::regex( ":" ), "\\:" );
     int random_variable = this->_get_random_number();
     _log_file << "{\"timestamp\":"
         << this->_get_seconds_since_epoch() * 1000;  // timestamp
-    _log_file << ",\"id\":\"" << _constructor_name << "_" << random_variable << "_"
+    _log_file << ",\"id\":\"" << _name << "_" << random_variable << "_"
         << this->_get_seconds_since_epoch() * 1000;  // id
     _log_file << "\",\"message\":\"" << message;           // message
-    _log_file << "\",\"method\":\"" << caller << "\"}";    // method
+    _log_file << "\",\"method\":\"" << this->_name << "\"}";    // method
     _log_file << std::endl;
-
 }
 
 decltype( std::chrono::seconds().count() ) Logger::_get_seconds_since_epoch() {

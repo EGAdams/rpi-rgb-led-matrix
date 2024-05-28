@@ -70,7 +70,7 @@ void GameModes::mode1() {
         _gameState->setUndo( 0 );
         std::cout << "calling mode1Undo( _history )... " << std::endl;
         std::cout << "calling mode1Undo.setScoreboard... " << std::endl;
-        _undo_.setScoreBoard( _history->getScoreBoard());
+        // _undo_.setScoreBoard( _history->getScoreBoard());
         _undo.mode1Undo( _history ); }
     _inputs.readPlayerButtons();  // digital read on player buttons.  sets playerButton if tripped.
     _serveLeds.serveSwitch(); // if serveSwitch >= 2, serveSwitch = 0; and toggle serve variable

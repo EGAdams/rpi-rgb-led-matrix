@@ -53,12 +53,19 @@ int main() {
     History* history = new History();
     Mode1Score* mode1Score = new Mode1Score( player1, player2, pinInterface, gameState, history );
     GameTimer* gameTimer = new GameTimer();
+    std::cout << "creating game inputs..." << std::endl;
     Inputs* gameInputs = new Inputs( player1, player2, pinInterface, gameState );
+    std::cout << "creating game modes..." << std::endl;
     GameModes* gameModes = new GameModes( player1, player2, pinInterface, gameState, history );
+    std::cout << "creating scoreboard..." << std::endl;
     ScoreBoard* scoreBoard = new ScoreBoard( player1, player2, gameState );
+    std::cout << "creating web lcd..." << std::endl;
     WebLiquidCrystal* lcd = new WebLiquidCrystal();
+    std::cout << "insided main, creating GameObject..." << std::endl;
     GameObject* gameObject = new GameObject( player1, player2, pin_state, pinInterface, gameState, gameTimer, gameInputs, gameModes, scoreBoard, lcd );
+    std::cout << "setting score board for mode1Score..." << std::endl;
     mode1Score->setScoreBoard( scoreBoard );
+    std::cout << "setting current action on gameState..." << std::endl;
     gameState->setCurrentAction( "testing" );
 
     std::string line;
@@ -121,8 +128,8 @@ int main() {
             std::cout << "setting player points; player1: " << player1_score << ", player2: " << player2_score << std::endl;
             player1->setPoints( player1_score );
             player2->setPoints( player2_score );
-            
-            
+
+
             scoreBoard->update();
             sleep( SCORE_DELAY );
             // gameObject->playerScore( PLAYER_1_INITIALIZED );
