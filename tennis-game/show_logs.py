@@ -2,14 +2,20 @@ import pexpect
 import json
 import os
 from datetime import datetime
+BASE_PATH = "/home/adamsl/rpi-rgb-led-matrix/tennis-game/"
+
+def find_directories_with_log():
+    directories_with_log = []
+
+    for root, dirs, files in os.walk( BASE_PATH ):
+        if 'log.txt' in files:
+            relative_path = os.path.relpath( root, BASE_PATH )
+            directories_with_log.append( relative_path )
+
+    return directories_with_log
 
 # Define the list of objects with log.txt
-objects_with_logs = [
-    "GameState", "Drawer", "FontLoader", "GameModes", "GameObject", "GameWinSequence",
-    "LogObjectFactory", "MatchWinSequence", "Mode1Functions", "Mode1Score",
-    "Mode2Functions", "Reset", "ScoreBoard", "SetDrawer", "SetHistoryText",
-    "SetLeds", "TennisConstants", "TieBreaker", "Undo", "WinSequences"
-]
+objects_with_logs = find_directories_with_log()
 
 # Function to format and print log entries
 def print_log_entries(log_entries):

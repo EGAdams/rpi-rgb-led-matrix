@@ -319,7 +319,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     // set sets to --sets argument
     // set player1 score to --player1 argument
     // set player2 score to --player2 argument
-
+    std::cout << "calling loopGame()..." << std::endl;
     gameObject->loopGame();
 
     // std::cout << "done calling loopGame().  sleeping...\n" << std::endl;
@@ -447,20 +447,6 @@ int main( int argc, char *argv[]) {
     if ( manual == 1 ) {
         std::cout << "running manual game..." << std::endl;
         run_manual_game( gameObject, gameState, reset, 1 ); return 0; }
-
-    //// demo tests /////
-    // while ( 1 ) {
-    //     gameObject->start();
-    //     gameObject->getScoreBoard()->clearScreen();
-    //     gameObject->getScoreBoard()->drawText( "Demo", YELLOW, X__POS, Y__POS );
-    //     GameTimer::gameDelay( 4000 );
-    //     demo_test( gameObject, gameState, &loop_count );
-    // }
-
-    ////////////// exit after demo for now ////////////////
-    // exit( 0 );
-
-
 
     ///// run tests /////
     int test_count = 1;

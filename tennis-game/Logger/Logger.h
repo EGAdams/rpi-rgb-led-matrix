@@ -15,6 +15,7 @@ public:
     int _get_random_number();
     bool inArray( int supposed_random_number );
     void setName( std::string name );
+    std::string getName();
 
 private:
     std::string _name;

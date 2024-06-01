@@ -1,14 +1,20 @@
 import os
 import json
 from datetime import datetime
+BASE_PATH = "/home/adamsl/rpi-rgb-led-matrix/tennis-game/"
+
+def find_directories_with_log():
+    directories_with_log = []
+
+    for root, dirs, files in os.walk( BASE_PATH ):
+        if 'log.txt' in files:
+            relative_path = os.path.relpath( root, BASE_PATH )
+            directories_with_log.append( relative_path )
+
+    return directories_with_log
 
 # List of directories with log.txt files
-directories_with_logs = [
-    "GameState", "Drawer", "FontLoader", "GameModes", "GameObject", "GameWinSequence",
-    "LogObjectFactory", "MatchWinSequence", "Mode1Functions", "Mode1Score",
-    "Mode2Functions", "Reset", "ScoreBoard", "SetDrawer", "SetHistoryText",
-    "SetLeds", "TennisConstants", "TieBreaker", "Undo", "WinSequences"
-]
+directories_with_logs = find_directories_with_log()
 
 # Function to format log entries
 def format_log_entries(log_entries):
@@ -25,7 +31,7 @@ def format_log_entries(log_entries):
 # Function to parse and output all logs
 def parse_and_output_all_logs():
     for directory in directories_with_logs:
-        log_file_path = os.path.join(directory, "log.txt")
+        log_file_path = os.path.join(BASE_PATH + directory, "log.txt")
         if os.path.exists(log_file_path):
             with open(log_file_path, 'r') as log_file:
                 log_entries = [json.loads(line) for line in log_file]

@@ -6,17 +6,37 @@
 #include <regex>
 
 Logger::Logger( std::string name ) : _name( name ) {
-    _log_file.open( name + "/log.txt", std::ios::out | std::ios::app );
+    _log_file.open(name + "/log.txt", std::ios::out | std::ios::app);
+    if (!_log_file.is_open()) {
+        std::cerr << "Failed to open log file" << std::endl;
+        // Handle error
+    } else {
+        std::cout << "log file for " << name << " has been opened." << std::endl;
+    }
 }
 
 Logger::~Logger() {
     _log_file.close();
 }
 
-void Logger::setName( std::string name ) { _name = name; }
+std::string Logger::getName() {
+    return _name;
+}
 
-void Logger::logUpdate( std::string message ) {
-    message = std::regex_replace( message, std::regex( ":" ), "\\:" );
+void Logger::setName(std::string name) {
+    std::cout << "inside Logger::setName.  name arg is [" << name << "]" << std::endl;
+    std::cout << "logger name before the rename is [" << this->_name << "]" << std::endl;
+    std::cout << "Logger::setName( " << name << " )" << std::endl;
+    _name = name;
+    std::cout << "done setting name to [" << _name << "]" << std::endl;
+}
+
+void Logger::logUpdate(std::string message) {
+    if (!_log_file.is_open()) {
+        std::cerr << "Log file not open for message [" << message << "]" << std::endl;
+        return;
+    }
+    message = std::regex_replace(message, std::regex(":"), "\\:");
     int random_variable = this->_get_random_number();
     _log_file << "{\"timestamp\":"
         << this->_get_seconds_since_epoch() * 1000;  // timestamp

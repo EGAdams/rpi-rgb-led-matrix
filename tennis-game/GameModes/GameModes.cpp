@@ -24,7 +24,7 @@ GameModes::GameModes(
     _tieBreaker( player1, player2, pinInterface, gameState, history ),
     _mode1Functions( player1, player2, pinInterface, gameState, history ),
     _mode2Functions( player1, player2, pinInterface, gameState ) {
-    _logger = new Logger( "test.txt" );
+    _logger = new Logger( "GameModes" );
 }
 
 void GameModes::undo() { _undo.mode1Undo( _history );}
@@ -62,7 +62,7 @@ void GameModes::gameStart() {
     }}
 
 void GameModes::mode1() {
-    //  std::cout << "inside game mode 1." << std::endl;
+    std::cout << "inside game mode 1." << std::endl;
     _gameState->setNow( GameTimer::gameMillis());
     _inputs.readUndoButton();
     if ( _gameState->getUndo() == 1 ) {  // undo button pressed
@@ -72,11 +72,17 @@ void GameModes::mode1() {
         std::cout << "calling mode1Undo.setScoreboard... " << std::endl;
         // _undo_.setScoreBoard( _history->getScoreBoard());
         _undo.mode1Undo( _history ); }
+    std::cout << "reading player buttons... " << std::endl;
     _inputs.readPlayerButtons();  // digital read on player buttons.  sets playerButton if tripped.
     _serveLeds.serveSwitch(); // if serveSwitch >= 2, serveSwitch = 0; and toggle serve variable
+    std::cout << "checking for tie breaker... " << std::endl;
     if ( _gameState->getSetTieBreak() == 1 ) {
+        _logger->logUpdate( "setting tie breaker..." );
         _tieBreaker.setTieBreaker();
     } else {
+        std::cout << "setting logger name to mode1..." << std::endl;
+        _logger->setName( "mode1" );
+        _logger->logUpdate( "entry point..." );
         _mode1Functions.mode1ButtonFunction(); // <--------- ENTRY POINT --------------<<
         _mode1Functions.pointFlash(); }}
 
@@ -116,7 +122,9 @@ void GameModes::setGameMode( int rotaryPosition ) {
         break;
 
     case 1:
+        std::cout << "calling gameStart()... " << std::endl;
         gameStart();  // sets gameStart to true. resets player and score board.
+        std::cout << "calling mode1()... " << std::endl;
         mode1();
         break;
 

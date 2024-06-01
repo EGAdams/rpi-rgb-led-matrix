@@ -47,7 +47,7 @@ GameObject::GameObject( GameState* gameState ) : _gameState( gameState ) {
     std::cout << "setting scoreBoards in gameModes..." << std::endl;
     _gameModes->setScoreBoards( _scoreBoard );
     _subjectManager = new SubjectManager();
-    // _logger = new Logger( "GameObject" );
+    _logger = new Logger( "GameObject" );
     std::cout << "GameObject constructed." << std::endl;
 }
 
@@ -63,13 +63,20 @@ void GameObject::undo() {
 }
 
 void GameObject::loopGame() {
+        std::cout << "inside loopGame()  setting logger name to loopGame..." << std::endl;
+        _logger->setName( "loopGame" );
+        std::cout << "inside loopGame() done setting logger name to loopGame..." << std::endl;
+        _logger->logUpdate( "starting loopGame()..." );
         // std::cout << "reading reset from loopGame()..." << std::endl;
         // _gameInputs->readReset();
         // std::cout << "reading rotary from loopGame()..." << std::endl;
         std::cout << "*** //////////// starting another loop.  current set is: " << _gameState->getCurrentSet() << " ////////////////// ***" << std::endl;
         int rotaryValue = 1; // int rotaryValue = _gameInputs->readRotary(); TODO: actually read rotary
         // std::cout << "rotaryValue: " << rotaryValue << ".  setting game mode to " << rotaryValue << "." << std::endl;
-        /* ENTRY POINT! don't step over, step into !! */_gameModes->setGameMode( rotaryValue );  // <--- entry point !! --------------<<
+        /* ENTRY POINT! don't step over, step into !! */
+        std::cout << "calling gameModes->setGameMode( " << rotaryValue << " )" << std::endl;
+        _logger->logUpdate( "calling gameModes->setGameMode( " + std::to_string( rotaryValue ) + " )" );
+        _gameModes->setGameMode( rotaryValue );  // <--- entry point !! --------------<<
         // std::cout << "delaying for " << GAME_LOOP_DELAY << " milliseconds..." << std::endl;
         GameTimer::gameDelay( GAME_LOOP_DELAY );
         // std::cout << "updating game state..." << std::endl;

@@ -9,6 +9,7 @@
 #include "../PointLeds/PointLeds.h"
 #include "../PinInterface/PinInterface.h"
 #include "../Undo/Undo.h"
+#include "../Logger/Logger.h"
 
 class History;
 
@@ -35,6 +36,7 @@ class Mode1Functions {
     Mode1Score _mode1Score;
     ServeLeds  _serveLeds;
     ScoreBoard* _scoreBoard;
+    Logger*    _logger;
 };
 
 #endif

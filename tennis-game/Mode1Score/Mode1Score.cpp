@@ -15,7 +15,11 @@ Mode1Score::Mode1Score(
     _gameLeds( player1, player2, pinInterface ),
     _setLeds( player1, player2, pinInterface ),
     _mode1WinSequences( player1, player2, pinInterface, gameState ),
-    _undo( player1, player2, pinInterface, gameState ) {}
+    _undo( player1, player2, pinInterface, gameState ) {
+        std::cout << "creating mode 1 score logger..." << std::endl;
+        _logger = new Logger( "Mode1Score" );
+        std::cout << "created new logger object with name [" << _logger->getName() << "]" << std::endl;
+    }
 Mode1Score::~Mode1Score() {}
 
 TieBreaker* Mode1Score::getTieBreaker() { return &_tieBreaker; }
@@ -27,7 +31,7 @@ void Mode1Score::setScoreBoard( ScoreBoard* scoreBoard ) {
     _mode1WinSequences.setScoreBoards( scoreBoard );
     _setLeds.setScoreBoard(            scoreBoard );
     _tieBreaker.setScoreBoards(        scoreBoard );   // all day debug. in the future.
-    _undo.setScoreBoard(               scoreBoard ); } // need to find a way to avoid this
+    _undo.setScoreBoard(               scoreBoard ); } // find a way to avoid this.
 
 ScoreBoard* Mode1Score::getScoreBoard() { return _scoreBoard; }
 
@@ -42,30 +46,41 @@ void Mode1Score::_resetGame() {
     _pointLeds.updatePoints(); }
 
 void Mode1Score::updateScore( Player* currentPlayer ) {
+    std::cout << "setting logger name to updateScore... " << std::endl;
+    _logger->setName( "updateScore" );
+    std::cout << "done setting name to updateScore." << std::endl;
+    _logger->logUpdate( "updating score for player " + std::to_string( currentPlayer->number()));
     if ( _gameState->getTieBreak() == 1 ) {           // Tie Break
+        _logger->logUpdate( "tie break run..." );
         _tieBreaker.run( currentPlayer );
     } else if ( _gameState->getSetTieBreak() == 1 ) { // Set Tie Break
+        _logger->logUpdate( "set tie breaker..." );
         _tieBreaker.setTieBreaker();
     } else {                                          // Regular Game
         Player* otherPlayer = currentPlayer->getOpponent();
         int current_player_points = currentPlayer->getPoints();
         int other_player_points   = otherPlayer->getPoints();
         if ( current_player_points >= 3 ) {
+            _logger->logUpdate( "player " + std::to_string( currentPlayer->number()) + " has 3 points or more." );
             if ( current_player_points == other_player_points ) {
+                _logger->logUpdate( "player " + std::to_string( currentPlayer->number()) + " has 3 points and tied with " + std::to_string( otherPlayer->number()) + "." );
                 currentPlayer->setPoints( 3 );
                 otherPlayer->setPoints(   3 );
             } else if ( current_player_points > 3
                 && ( current_player_points - other_player_points ) > 1 ) {
+                _logger->logUpdate( "player " + std::to_string( currentPlayer->number()) + " has 3 points and won by " + std::to_string( current_player_points - other_player_points ) + "." );
                 currentPlayer->setGames( currentPlayer->getGames() + 1 );
                 _undo.memory();
                 currentPlayer->number() == 0 ? playerOneGameWin() : playerTwoGameWin(); }
 
             if ( currentPlayer->getPoints() == 4 ) {
+                _logger->logUpdate( "player " + std::to_string( currentPlayer->number()) + " has 4 points." );
                 _gameState->setPointFlash( 1 );       // "Ad" mode
                 _gameState->setPreviousTime( GameTimer::gameMillis());
                 _gameState->setToggle( 0 );
             }
         }
+        _logger->logUpdate( "_pointLeds update points..." );
         _pointLeds.updatePoints();
     }
 }
@@ -77,7 +92,7 @@ void Mode1Score::playerTwoScore() { updateScore( _player2 );}
 //////////////////////////////// GAME WIN SCENARIOS ///////////////////////////
 void Mode1Score::playerGameWin( Player* player ) {
     Player* opponent = player->getOpponent();
-    std::cout << "player " << player->number() << " games: " << player->getGames() << std::endl;
+    std::cout << "player " << std::to_string( player->number()) << " games: " << player->getGames() << std::endl;
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
     if ( player->getGames() >= GAMES_TO_WIN_SET ) {
         if ( player->getGames() == GAMES_TO_WIN_SET && opponent->getGames() == GAMES_TO_WIN_SET ) {

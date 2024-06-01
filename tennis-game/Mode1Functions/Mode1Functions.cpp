@@ -12,7 +12,8 @@ Mode1Functions::Mode1Functions( Player* player1,
     _undo( player1, player2, pinInterface, gameState ),
     _pointLeds( player1, player2, pinInterface ),
     _mode1Score( player1, player2, pinInterface, gameState, history ),
-    _serveLeds( pinInterface, gameState ) {}
+    _serveLeds( pinInterface, gameState ) {
+        _logger = new Logger( "Mode1Functions" );}
 
 Mode1Functions::~Mode1Functions() {}
 
@@ -27,9 +28,11 @@ void Mode1Functions::mode1ButtonFunction() {
         break;
 
     case 1: // Player 1 Score
+        _logger->logUpdate( "player one scored." );
         _undo.snapshot( _history );
         if ( _gameState->getPointFlash() == 1 ) {
             _gameState->setPointFlash( 0 );
+            _logger->logUpdate( "setting players points from gameState " );
             _player1->setPoints( _gameState->getP1PointsMem());
             _player2->setPoints( _gameState->getP2PointsMem());
             _gameState->setPlayer1Points( _player1->getPoints());
@@ -39,6 +42,8 @@ void Mode1Functions::mode1ButtonFunction() {
         _player1->setPoints( _player1->getPoints() + 1 );
         _gameState->setPlayer1Points( _player1->getPoints());
         _undo.memory();
+        _logger->logUpdate( "player one points set to [" + std::to_string( _player1->getPoints()) + "]" );
+        _logger->logUpdate( "calling mode1Score.playerOneScore()..." );
         _mode1Score.playerOneScore();
         break;
 
@@ -78,7 +83,7 @@ void Mode1Functions::pointFlash() {
         if ( _player1->getPoints() > 3 ) {
             if ( _gameState->getNow() - _gameState->getPreviousTime() > _gameState->getFlashDelay()) {
                 if ( _gameState->getToggle() == 0 ) {
-                    _player1->setPoints( SCORE_CASE_4 );      
+                    _player1->setPoints( SCORE_CASE_4 );
                     _pointLeds.updatePoints();
                     _gameState->setToggle( 1 );
                 } else {
@@ -91,7 +96,7 @@ void Mode1Functions::pointFlash() {
         if ( _player2->getPoints() > 3 ) {
                 if ( _gameState->getNow() - _gameState->getPreviousTime() > _gameState->getFlashDelay()) {
                     if ( _gameState->getToggle() == 0 ) {
-                        _player2->setPoints( SCORE_CASE_4 );      
+                        _player2->setPoints( SCORE_CASE_4 );
                         _pointLeds.updatePoints();
                         _gameState->setToggle( 1 );
                     } else {
