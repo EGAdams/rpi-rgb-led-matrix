@@ -82,7 +82,6 @@ void GameModes::mode1() {
     } else {
         std::cout << "setting logger name to mode1..." << std::endl;
         _logger->setName( "mode1" );
-        _logger->logUpdate( "entry point..." );
         _mode1Functions.mode1ButtonFunction(); // <--------- ENTRY POINT --------------<<
         _mode1Functions.pointFlash(); }}
 

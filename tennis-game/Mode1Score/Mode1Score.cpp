@@ -49,7 +49,6 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
     std::cout << "setting logger name to updateScore... " << std::endl;
     _logger->setName( "updateScore" );
     std::cout << "done setting name to updateScore." << std::endl;
-    _logger->logUpdate( "updating score for player " + std::to_string( currentPlayer->number()));
     if ( _gameState->getTieBreak() == 1 ) {           // Tie Break
         _logger->logUpdate( "tie break run..." );
         _tieBreaker.run( currentPlayer );
@@ -80,7 +79,6 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
                 _gameState->setToggle( 0 );
             }
         }
-        _logger->logUpdate( "_pointLeds update points..." );
         _pointLeds.updatePoints();
     }
 }
