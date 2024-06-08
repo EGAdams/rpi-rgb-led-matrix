@@ -8,7 +8,8 @@ GTEST_LIBS=-lgtest_main -lgtest -lpthread
 
 CXX=g++
 CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter
-CXXFLAGS=$(CFLAGS) -I$(GTEST_INCDIR)
+CXXFLAGS=$(CFLAGS) -I$(GTEST_INCDIR) -I$(RGB_INCDIR)
+
 BINARIES=tennis-game Mode1ScoreTest
 
 RGB_LIB_DISTRIBUTION=..
@@ -21,7 +22,8 @@ LDFLAGS+=-L$(RGB_LIBDIR) -l$(RGB_LIBRARY_NAME) -lrt -lm -L$(GTEST_LIBDIR) $(GTES
 
 MAIN_OBJECTS=GameWinSequence.o SetWin.o SetHistoryText.o SetDrawer.o GameLedTranslator.o SubjectManager.o WebLiquidCrystal.o WatchTimer.o Inputs.o TieBreaker.o Mode1Score.o Mode1Functions.o ServeLeds.o Undo.o BatteryTest.o Reset.o SetLeds.o TieLeds.o Mode1WinSequences.o Mode2Functions.o MatchWinSequence.o TennisConstants.o GameLeds.o GameModes.o GameObject.o PinState.o PinInterface.o TranslateConstant.o PointLeds.o Arduino.o CanvasCreator.o FontLoader.o Drawer.o TextDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game.o LogObject.o LogObjectContainer.o LogObjectFactory.o MonitorLedClassObject.o MonitorLed.o JsonParser.o LoggerFactory.o Model.o MonitoredObject.o SourceData.o FetchRunner.o
 
-TEST_OBJECTS=GameState.o Player.o GameTimer.o ScoreBoard.o SetDrawer.o SetHistoryText.o Drawer.o CanvasCreator.o FontLoader.o LogObject.o LogObjectContainer.o LogObjectFactory.o MonitorLedClassObject.o MonitorLed.o JsonParser.o LoggerFactory.o Model.o MonitoredObject.o SourceData.o FetchRunner.o PinInterface.o PinState.o History.o Mode1Score.o Mode1ScoreTest.o TranslateConstant.o Logger.o TieBreaker.o PointLeds.o GameLeds.o SetLeds.o Mode1WinSequences.o Undo.o
+TEST_OBJECTS=TieLeds.o GameLedTranslator.o GameState.o Player.o GameTimer.o ScoreBoard.o SetDrawer.o SetHistoryText.o Drawer.o CanvasCreator.o FontLoader.o LogObject.o LogObjectContainer.o LogObjectFactory.o MonitorLedClassObject.o MonitorLed.o JsonParser.o LoggerFactory.o Model.o MonitoredObject.o SourceData.o FetchRunner.o PinInterface.o PinState.o History.o Mode1Score.o Mode1ScoreTest.o TranslateConstant.o Logger.o TieBreaker.o PointLeds.o GameLeds.o SetLeds.o Mode1WinSequences.o Undo.o ServeLeds.o GameWinSequence.o SetWin.o MatchWinSequence.o Inputs.o WatchTimer.o Reset.o
+
 
 
 all : $(BINARIES)
