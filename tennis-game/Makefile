@@ -30,7 +30,8 @@ MAIN_OBJECTS=GameWinSequence.o SetWin.o SetHistoryText.o SetDrawer.o GameLedTran
 
 MAIN_OBJECTS_MANUAL=GameWinSequence.o SetWin.o SetHistoryText.o SetDrawer.o GameLedTranslator.o SubjectManager.o WebLiquidCrystal.o WatchTimer.o Inputs.o TieBreaker.o Mode1Score.o Mode1Functions.o ServeLeds.o Undo.o BatteryTest.o Reset.o SetLeds.o TieLeds.o Mode1WinSequences.o Mode2Functions.o MatchWinSequence.o TennisConstants.o GameLeds.o GameModes.o GameObject.o PinState.o PinInterface.o TranslateConstant.o PointLeds.o Arduino.o CanvasCreator.o FontLoader.o Drawer.o TextDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game-manual.o, LogObject.o LogObjectContainer.o LogObjectFactory.o MonitorLedClassObject.o MonitorLed.o JsonParser.o LoggerFactory.o Model.o MonitoredObject.o SourceData.o FetchRunner.o
 
-TEST_OBJECTS=GameState.o Player.o GameState.o GameTimer.o ScoreBoard.o SetDrawer.o Drawer.o CanvasCreator.o FontLoader.o GameTimer.o, LogObject.o LogObjectContainer.o LogObjectFactory.o
+TEST_OBJECTS=GameState.o Player.o GameTimer.o ScoreBoard.o SetDrawer.o Drawer.o CanvasCreator.o FontLoader.o LogObject.o LogObjectContainer.o LogObjectFactory.o MonitorLedClassObject.o MonitorLed.o JsonParser.o LoggerFactory.o Model.o MonitoredObject.o SourceData.o FetchRunner.o PinInterface.o PinState.o History.o Mode1Score.o Mode1ScoreTest.o
+
 
 SCORE_TEST_OBJECTS=GameState.o Player.o GameState.o GameTimer.o ScoreBoard.o SetDrawer.o  Mode1Score.o Mode1ScoreTest.o LogObject.o LogObjectContainer.o LogObjectFactory.o MonitorLedClassObject.o MonitorLed.o JsonParser.o LoggerFactory.o Model.o MonitoredObject.o SourceData.o FetchRunner.o PinInterface.o PinState.o History.o
 
@@ -81,11 +82,11 @@ LogObject.o : LogObject/LogObject.cpp
 test-manual: GameWinSequence.o SetWin.o
 	@echo "Temporary rule worked."
 
-Mode1ScoreTest: $(SCORE_TEST_OBJECTS)
-	$(CXX) $(CXXFLAGS) -o Mode1ScoreTest $(SCORE_TEST_OBJECTS) $(LDFLAGS)
-
-Mode1ScoreTest.o: Mode1ScoreTest/Mode1ScoreTest.cpp
+Mode1ScoreTest.o: Mode1Score/Mode1ScoreTest.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+
+Mode1ScoreTest: $(TEST_OBJECTS)
+	$(CXX) $(CXXFLAGS) -o Mode1ScoreTest $(TEST_OBJECTS) $(LDFLAGS)
 
 GameWinSequence.o : GameWinSequence/GameWinSequence.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<

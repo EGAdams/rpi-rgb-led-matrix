@@ -1,3 +1,4 @@
+import subprocess
 import sys
 import os
 from time import sleep
@@ -20,12 +21,21 @@ def walk_directory(directory):
         ".tif",
         ".tiff",
         ".txt",
+        ".js",
+        ".editorconfig",
     ]
     # get current working directory
 
     code_contents = {}
     for root, dirs, files in os.walk(directory):
         for file in files:
+            # ask user if extension should be skipped
+            answer = input(
+                f"Should {file} be included in the prompt? (y/n) " )
+            if answer == "n":
+                # add just the extention to image_extensions array, not the file name.  we need to extract for example the ".png" from "file.png"
+                image_extensions.append( file )
+                continue
             if not any(file.endswith(ext) for ext in image_extensions):
                 try:
                     relative_filepath = os.path.relpath(
@@ -42,18 +52,15 @@ def walk_directory(directory):
 
 
 def main(args):
-    makefile = read_file("Makefile") # read Makefile from current directory
-    
+    makefile = read_file("../Makefile") # read Makefile from current directory
+
     # prompt=args.prompt
-    prompt= """ Please fix this make error ``` output make Mode1ScoreTest
-g++  -o Mode1ScoreTest -L../lib -lrgbmatrix -L/home/adamsl/zero_w_projects/temp/rpi-rgb-led-matrix/tennis-game/googletest/build/lib -lgtest -lgtest_main -lrt -lm -lpthread
-/usr/bin/ld: /usr/local/lib/libgtest_main.a(gtest_main.cc.o): in function `main':
-gtest_main.cc:(.text+0x3a): undefined reference to `testing::InitGoogleTest(int*, char**)'
-/usr/bin/ld: /usr/local/lib/libgtest_main.a(gtest_main.cc.o): in function `RUN_ALL_TESTS()':
-gtest_main.cc:(.text._Z13RUN_ALL_TESTSv[_Z13RUN_ALL_TESTSv]+0x9): undefined reference to `testing::UnitTest::GetInstance()'
-/usr/bin/ld: gtest_main.cc:(.text._Z13RUN_ALL_TESTSv[_Z13RUN_ALL_TESTSv]+0x11): undefined reference to `testing::UnitTest::Run()'
-collect2: error: ld returned 1 exit status
-make: *** [Makefile:40: Mode1ScoreTest] Error 1  ``` """
+    prompt= """ Please fix this make error ``` """
+    # run make command and add the output to the prompt
+    prompt += "make output: " + str(subprocess.check_output(["make"]))
+
+    # add ``` to the end of the prompt
+    prompt += "```"
 
     directory= args.directory
     model=args.model
@@ -62,12 +69,12 @@ make: *** [Makefile:40: Mode1ScoreTest] Error 1  ``` """
     # code_contents = walk_directory( "GameState" )
 
     # Now, `code_contents` is a dictionary that contains the content of all your non-image files
-    # You can send this to OpenAI's text-davinci-003 for help
+
 
     context = "\n".join(
         f"{path}:\n{contents}" for path, contents in code_contents.items()
     )
-    system = "You are an AI debugger who is trying to debug a make error for a user based on their file system. The user has provided you with the following files and their contents, finally folllowed by the error message or issue they are facing."
+    system = "You are an AI debugger who is trying to debug a make error for a user based on thier C++ source files and the Makefile used to build the project.  The user has provided you with the following files and their contents, finally folllowed by the output of the make command:\n"
     prompt = (
         "My files are as follows: "
         + context
@@ -81,12 +88,16 @@ make: *** [Makefile:40: Mode1ScoreTest] Error 1  ``` """
     prompt += (
         "\n\nGive me ideas for what could be wrong and what fixes to do in which files."
     )
+    # print prompt in teal
+    print("\033[96m" + prompt + "\033[0m")
+    if ( input( "press <enter> to continue or q to quit" ) == "q" ):
+        sys.exit()
     res = generate_response(system, prompt, model)
     # print res in teal
     print("\033[96m" + res + "\033[0m")
 
 
-def generate_response(system_prompt, user_prompt, model="gpt-3.5-turbo-16k", *args):
+def generate_response(system_prompt, user_prompt, model="gpt-3.5-turbo-0125", *args):
     import openai
 
     # Set up your OpenAI API credentials
@@ -104,9 +115,9 @@ def generate_response(system_prompt, user_prompt, model="gpt-3.5-turbo-16k", *ar
 
     params = {
         # "model": model,
-        "model": "gpt-3.5-turbo-16k",
+        "model": "gpt-3.5-turbo-0125",
         "messages": messages,
-        "max_tokens": 1500,
+        "max_tokens": 8000,
         "temperature": 0,
     }
 
@@ -128,13 +139,13 @@ def generate_response(system_prompt, user_prompt, model="gpt-3.5-turbo-16k", *ar
 
 
 if __name__ == "__main__":
-    DEFAULT_DIR = "player_debug"
-    DEFAULT_MODEL = "gpt-3.5-turbo-16k"
+    DEFAULT_DIR = "."
+    DEFAULT_MODEL = "gpt-3.5-turbo-0125"
     parser = argparse.ArgumentParser()
     # parser.add_argument(
     #     "prompt",
     #     help="The prompt to use for the AI. This should be the error message or issue you are facing.",
-        
+
     # )
     parser.add_argument(
         "--directory",

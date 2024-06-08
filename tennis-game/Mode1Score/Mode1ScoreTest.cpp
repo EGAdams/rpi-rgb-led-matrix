@@ -1,3 +1,4 @@
+#include <gtest/gtest.h>
 #include "Mode1Score.h"
 class Mode1ScoreTest : public ::testing::Test {
 protected:
@@ -39,8 +40,8 @@ void Mode1ScoreTest::TearDown() {
 TEST_F( Mode1ScoreTest, TestMode1P1Score_LessThan3Points ) {
     _player1->setPoints( 2 );
     _player2->setPoints( 1 );
-    _mode1Score->updateScore( _player1 );
-    EXPECT_EQ( _player1->getPoints(), 2);
+    _mode1Score->updateScore( _player1  );
+    EXPECT_EQ( _player1->getPoints(), 2 );
     EXPECT_EQ( _player2->getPoints(), 1 );
     // Check other changes made by the method
 }
@@ -50,16 +51,6 @@ TEST_F( Mode1ScoreTest, TestMode1P1Score_LessThan3Points ) {
 // Test case: Mode1P1ScoreTest
 TEST_F( Mode1ScoreTest, Mode1P1ScoreTest) {
     // Test implementation here
-}
-
-// Test case: TestMode1P1Score_LessThan3Points
-TEST_F( Mode1ScoreTest, TestMode1P1Score_LessThan3Points ) {
-    _player1->setPoints( 2 );
-    _player2->setPoints( 1 );
-    _mode1Score->updateScore( _player1 );
-    EXPECT_EQ( _player1->getPoints(), 2);
-    EXPECT_EQ( _player2->getPoints(), 1 );
-    // Check other changes made by the method
 }
 
 // Test case: TestMode1P1Score_3Points_LessThan3PointsP2
@@ -103,3 +94,9 @@ TEST_F( Mode1ScoreTest, TestMode1P1Score_4Points ) {
     EXPECT_EQ( _gameState->getPointFlash(), 1 ); // Assuming getPointFlash returns the current pointFlash
     // Check other changes made by the method
 }
+
+
+TEST(BasicTest, TestWorks) {
+    EXPECT_EQ(1, 1);
+}
+
