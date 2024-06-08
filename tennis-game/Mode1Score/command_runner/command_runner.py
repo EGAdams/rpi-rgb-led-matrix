@@ -7,7 +7,7 @@ class CommandRunner:
             output = ""
             while True:
                 try:
-                    child.expect('\r\n', timeout=0.5)
+                    child.expect('\r\n', timeout=10)
                     output += child.before + "\n"
                 except pexpect.exceptions.TIMEOUT:
                     output += child.before

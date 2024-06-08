@@ -31,6 +31,7 @@ def walk_directory(directory):
         ".editorconfig",
         ".md",
         ".py",
+        ".pyc"
     ]
 
     code_contents = {}
@@ -76,7 +77,7 @@ def generate_response(system_prompt, user_prompt, model="gpt-3.5-turbo-0125", *a
         # "model": model,
         "model": "gpt-3.5-turbo-0125",
         "messages": messages,
-        "max_tokens": 8000,
+        "max_tokens": 4096,
         "temperature": 0,
     }
 
@@ -101,18 +102,12 @@ def main( args ):
     print ( "reading make file..." )
     makefile = read_file("/home/adamsl/rpi-rgb-led-matrix/tennis-game/Makefile")  # read Makefile from current directory
     # change directory to /home/adamsl/rpi-rgb-led-matrix/tennis-game/Mode1Score
-    os.chdir("/home/adamsl/rpi-rgb-led-matrix/tennis-game")
-    # prompt=args.prompt
-    prompt = """ Please fix this make error ``` """
-    # run make command and add the output to the prompt. Make sure to consider that the subprocess is going to indeed fail, so we need to capture the failure and add it to the prompt without raising an exception and risk killing THIS process.
-    # result = subprocess.run(["make"], capture_output=True, text=True)
-    print ( "constructing command runner... " )
-    cr = CommandRunner()
-    print ( "running command runner... " )
-    make_output = cr.run_command("make")
-    # make_output = result.stdout + "\n" + result.stderr
+    os.chdir( "/home/adamsl/rpi-rgb-led-matrix/tennis-game" )
 
-    # prompt += "make output: " + make_output
+    prompt = """ Please fix this make error ``` """
+    cr = CommandRunner()
+    make_output = cr.run_command( "make" )
+
     # put make_output into and array of strings
     make_output_array = make_output.splitlines()
     number_of_output_lines = len( make_output_array )
