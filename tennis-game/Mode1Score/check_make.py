@@ -148,7 +148,7 @@ def main( args ):
         + prompt
     )
     prompt += (
-        "\n\nGive me ideas for what could be wrong and what fixes to do in which files."
+        "\n\nPlease help me debug this."
     )
     print("number of lines in prompt: " + str(len(prompt.split("\n"))))
 
