@@ -17,13 +17,8 @@ void SetLeds::setScoreBoard( ScoreBoard* scoreBoard ) { _scoreBoard = scoreBoard
 #define PLAYER_2_TWO_SETS  2
 
 void SetLeds::updateSets() {
-  // std::cout << "inside SetLeds::updateSets()" << std::endl;
-  // std::cout << "player1 sets: " << _player1->getSets() << std::endl;
-  if( !_scoreBoard ) {
-    // std::cout << "scoreboard is null" << std::endl;
-  } else { /* std::cout << "scoreboard is not null" << std::endl; */  }
   switch ( _player1->getSets() ) {
-
+    
     case PLAYER_1_ZERO_SETS:
         std::cout << "player1 has zero sets" << std::endl;
         if ( _scoreBoard->hasCanvas() ) {
@@ -69,7 +64,7 @@ void SetLeds::updateSets() {
         } else {
             _pinInterface->pinDigitalWrite( P2_SETS_LED1, LOW );
             _pinInterface->pinDigitalWrite( P2_SETS_LED2, LOW ); } break;
-            
+
     case PLAYER_2_ONE_SET:
         std::cout << "player2 has one set" << std::endl;
         if ( _scoreBoard->hasCanvas() ) {
