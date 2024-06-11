@@ -67,7 +67,7 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
                 otherPlayer->setPoints(   3 );
             } else if ( current_player_points > 3
                 && ( current_player_points - other_player_points ) > 1 ) {
-                _logger->logUpdate( "player " + std::to_string( currentPlayer->number()) + " has 3 points and won by " + std::to_string( current_player_points - other_player_points ) + "." );
+                _logger->logUpdate( "player " + std::to_string( currentPlayer->number()) + " has " + std::to_string( current_player_points ) + " points and won by " + std::to_string( current_player_points - other_player_points ) + "." );
                 currentPlayer->setGames( currentPlayer->getGames() + 1 );
                 _undo.memory();
                 currentPlayer->number() == 0 ? playerOneGameWin() : playerTwoGameWin(); }

@@ -7,7 +7,6 @@
             "request": "launch",
             "program": "${workspaceFolder}/tennis-game/tennis-game",
             "args": [ "" ],
-            "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
@@ -31,7 +30,6 @@
             "request": "launch",
             "program": "${workspaceFolder}/tennis-game/SourceData/SourceDataTest",
             "args": [],
-            "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
@@ -55,7 +53,6 @@
             "request": "launch",
             "program": "${workspaceFolder}/tennis-game/SourceData/source_data_test",
             "args": [],
-            "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
@@ -79,7 +76,6 @@
             "request": "launch",
             "program": "${workspaceFolder}/tennis-game/SourceData/insert_source_data_test",
             "args": [],
-            "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
@@ -103,11 +99,11 @@
             "request": "launch",
             "program": "${workspaceFolder}/tennis-game/Mode1ScoreTest",
             "args": [],
-            "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
@@ -120,13 +116,6 @@
                     "ignoreFailures": true
                 }
             ]
-        },
-        {
-            "name": "Python: File",
-            "type": "python",
-            "request": "launch",
-            "program": "${file}",
-            "justMyCode": true
         }
     ]
 }
