@@ -14,12 +14,7 @@ Logger::~Logger() { _log_file.close(); }
 
 std::string Logger::getName() { return _name; }
 
-void Logger::setName(std::string name) {
-    std::cout << "inside Logger::setName.  name arg is [" << name << "]" << std::endl;
-    std::cout << "logger name before the rename is [" << this->_name << "]" << std::endl;
-    std::cout << "Logger::setName( " << name << " )" << std::endl;
-    _name = name;
-    std::cout << "done setting name to [" << _name << "]" << std::endl; }
+void Logger::setName(std::string name) { _name = name; }
 
 void Logger::logUpdate(std::string message) {
     if (!_log_file.is_open()) {

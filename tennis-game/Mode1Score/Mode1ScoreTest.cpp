@@ -76,7 +76,7 @@ TEST_F( Mode1ScoreTest, TestMode1P1Score_MoreThan3Points_DifferenceMoreThan1) {
     _mode1Score->updateScore( _player1 );
     EXPECT_EQ( _player1->getPoints(), 0 );
     EXPECT_EQ( _player2->getPoints(), 0 );
-    EXPECT_EQ( _player1->getGames(),  1 ); 
+    EXPECT_EQ( _player1->getGames(),  1 );
 }
 
 // Test case: TestMode1P1Score_4Points
@@ -92,4 +92,66 @@ TEST_F( Mode1ScoreTest, TestMode1P1Score_4Points ) {
     EXPECT_EQ( _gameState->getPointFlash(), 1 ); // Assuming getPointFlash returns the current pointFlash
     // Check other changes made by the method
 }
+
+TEST_F( Mode1ScoreTest, TestMode1P1Score_Deuce ) {
+    _player1->setPoints( 3 );
+    _player2->setPoints( 3 );
+    _mode1Score->updateScore( _player1 );
+    EXPECT_EQ( _player1->getPoints(), 3 );
+    EXPECT_EQ( _player2->getPoints(), 3 );
+    // Check other changes made by the method if any
+}
+
+// Test case: TestMode1P1Score_Advantage
+TEST_F( Mode1ScoreTest, TestMode1P1Score_Advantage ) {
+    _player1->setPoints(4);
+    _player2->setPoints(3);
+    _mode1Score->updateScore( _player1 );
+    EXPECT_EQ( _player1->getPoints(), 4 );
+    EXPECT_EQ( _player2->getPoints(), 3 );
+    // Check other changes made by the method if any
+}
+
+// Test case: TestMode1P1Score_WinAfterAdvantage
+TEST_F( Mode1ScoreTest, TestMode1P1Score_WinAfterAdvantage ) {
+    _player1->setPoints(4);
+    _player2->setPoints(3);
+    _mode1Score->updateScore( _player1 );  // Player 1 at advantage
+    _player1->setPoints(5);
+    _mode1Score->updateScore( _player1 );  // Player 1 wins the game
+    EXPECT_EQ( _player1->getPoints(), 0 );
+    EXPECT_EQ( _player2->getPoints(), 0 );
+    EXPECT_EQ( _player1->getGames(), 1 );
+    // Check other changes made by the method if any
+}
+
+// Test case: TestMode1P1Score_ScoreFromZeroPoints
+TEST_F( Mode1ScoreTest, TestMode1P1Score_ScoreFromZeroPoints ) {
+    _player1->setPoints(0);
+    _player2->setPoints(2);
+    _player1->setPoints(_player1->getPoints() + 1); // Simulate player 1 scores a point
+    _mode1Score->updateScore( _player1 );  // Update the score based on new points
+    EXPECT_EQ( _player1->getPoints(), 1 ); // Expected points after scoring
+    EXPECT_EQ( _player2->getPoints(), 2 );
+    // Check other changes made by the method if any
+}
+
+// Test case: TestMode1P1Score_WinAfterDeuce
+TEST_F( Mode1ScoreTest, TestMode1P1Score_WinAfterDeuce ) {
+    _player1->setPoints(3);
+    _player2->setPoints(3);
+    _mode1Score->updateScore( _player1 );  // Both players at deuce
+    _player1->setPoints(4);  // Player 1 scores and gains advantage
+    _mode1Score->updateScore( _player1 );
+    EXPECT_EQ( _player1->getPoints(), 4 );
+    EXPECT_EQ( _player2->getPoints(), 3 );
+
+    _player1->setPoints(5);  // Player 1 scores and wins the game
+    _mode1Score->updateScore( _player1 );
+    EXPECT_EQ( _player1->getPoints(), 0 );
+    EXPECT_EQ( _player2->getPoints(), 0 );
+    EXPECT_EQ( _player1->getGames(), 1 );
+    // Check other changes made by the method if any
+}
+
 

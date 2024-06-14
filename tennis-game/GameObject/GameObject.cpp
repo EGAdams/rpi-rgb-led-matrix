@@ -63,9 +63,7 @@ void GameObject::undo() {
 }
 
 void GameObject::loopGame() {
-        std::cout << "inside loopGame()  setting logger name to loopGame..." << std::endl;
         _logger->setName( "loopGame" );
-        std::cout << "inside loopGame() done setting logger name to loopGame..." << std::endl;
         // std::cout << "reading reset from loopGame()..." << std::endl;
         // _gameInputs->readReset();
         // std::cout << "reading rotary from loopGame()..." << std::endl;

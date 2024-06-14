@@ -277,12 +277,16 @@ void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getPlayer1()->setSetHistory( 2, 4 );
     gameObject->getPlayer2()->setSetHistory( 2, 5 );
     gameState->setCurrentSet( 2 );
-    gameObject->getPlayer1()->setGames( 4 );
-    gameObject->getPlayer2()->setGames( 5 );
+    gameObject->getPlayer1()->setGames(  4 );
+    gameObject->getPlayer2()->setGames(  5 );
     gameObject->getPlayer1()->setPoints( 2 );
     gameObject->getPlayer2()->setPoints( 3 );
+    std::cout << "updating scoreboard... " << std::endl;
     gameObject->getScoreBoard()->update();
-
+    std::cout << "done updating scoreboard." << std::endl;
+    std::cout << "ready to have player 2 win the set..." << std::endl;
+    playerWin( gameObject, gameState, 2 );
+    std::cout << "player 2 won the set!" << std::endl;
 }
 
 void test_06( GameObject* gameObject, GameState* gameState, int* loop_count ) {
@@ -432,7 +436,7 @@ int main( int argc, char *argv[]) {
             manual = 1;
         }
     }
-
+    manual = 1;  // yes hardcodeing  is bad but ina hurry!!
     int loop_count = 0;
     std::cout << "creating game state object..." << std::endl;
     GameState*  gameState  = new GameState();  // make this 1st!!! cost me 3 days
@@ -512,6 +516,8 @@ int main( int argc, char *argv[]) {
     // gameObject->getScoreBoard()->clearScreen();
     // gameObject->getScoreBoard()->drawText( "10,20",  YELLOW, 10, 20  );
     // gameObject->getScoreBoard()->drawText( "10,80",  YELLOW, 10, 80  );
+
+
     GameTimer::gameDelay( 2000 );
     test_count++;
 }

@@ -21,7 +21,6 @@ void History::saveGameStateToFile(const GameState& gameState, const std::string&
         outFile.write(reinterpret_cast<const char*>(&gameState), sizeof(GameState));
         outFile.close();
     } else {
-        std::cout << "setting logger name to saveGameStateToFile..." << std:: endl;
         _logger->setName( "saveGameStateToFile" );
         _logger->logUpdate( "Unable to open file for writing: " + filename );
     }
@@ -37,7 +36,6 @@ GameState History::loadGameStateFromFile(const std::string& filename) {
         inFile.read(reinterpret_cast<char*>(&gameState), sizeof(GameState));
         inFile.close();
     } else {
-        std::cout << "setting logger name to loadGameStateFromFile... " << std::endl;
         _logger->setName( "loadGameStateFromFile" );
         _logger->logUpdate( "Unable to open file for reading: " + filename );
     }
