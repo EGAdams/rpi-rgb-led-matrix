@@ -102,16 +102,14 @@ void TieBreaker::run( Player* currentPlayer ) {
         exit(1);
     }
     std::cout << "Updating ScoreBoard..." << std::endl;
-    _scoreBoard->update();
-    std::cout << "ScoreBoard updated." << std::endl;
-    if (currentPlayer == nullptr) {
-        std::cerr << "*** ERROR: Current player is null in TieBreaker::run(). ***" << std::endl;
+    if (_scoreBoard != nullptr) {
+        _scoreBoard->update();
+        std::cout << "ScoreBoard updated." << std::endl;
+    } else {
+        std::cerr << "*** ERROR: ScoreBoard is null in TieBreaker::run(). ***" << std::endl;
         exit(1);
     }
-    if (opponent == nullptr) {
-        std::cerr << "*** ERROR: Opponent is null in TieBreaker::run(). ***" << std::endl;
-        exit(1);
-    }
+
     std::cout << "TieBreaker iteration after setting serve: " << _iteration << std::endl;
 
     std::cout << "Current Player Address: " << currentPlayer << std::endl;
@@ -119,30 +117,32 @@ void TieBreaker::run( Player* currentPlayer ) {
     std::cout << "Opponent Address: " << opponent << std::endl;
     std::cout << "Opponent Points: " << opponent->getPoints() << std::endl;
 
-    if ( currentPlayer->getPoints() == TIE_BREAK_MAX_POINTS ) {
+    if (currentPlayer->getPoints() == TIE_BREAK_MAX_POINTS) {
         std::cout << "Current Player has reached TIE_BREAK_MAX_POINTS." << std::endl;
-        _undo.snapshot( _history );                                   
-        currentPlayer->setGames( currentPlayer->getGames() + 1 );     // increment games
+        _undo.snapshot(_history);
+        currentPlayer->setGames(currentPlayer->getGames() + 1); // increment games
         incrementSet();
-        _scoreBoard->update();
-        celebrate( currentPlayer );    // this is a win no matter what.
-        GameTimer::gameDelay( 3000 );
-        endTieBreak(); 
-    } else if ( currentPlayer->getPoints() >= TIE_BREAK_WIN_BY_TWO  && 
-        ( currentPlayer->getPoints() - opponent->getPoints() >= 2)) {
+        if (_scoreBoard != nullptr) {
+            _scoreBoard->update();
+        }
+        celebrate(currentPlayer); // this is a win no matter what.
+        GameTimer::gameDelay(3000);
+        endTieBreak();
+    } else if (currentPlayer->getPoints() >= TIE_BREAK_WIN_BY_TWO &&
+               (currentPlayer->getPoints() - opponent->getPoints() >= 2)) {
         std::cout << "Current Player has won by two points." << std::endl;
-        _undo.snapshot( _history );                                   
-        currentPlayer->setGames( currentPlayer->getGames() + 1 );     // increment games
+        _undo.snapshot(_history);
+        currentPlayer->setGames(currentPlayer->getGames() + 1); // increment games
         incrementSet();
-        _scoreBoard->update();
-        celebrate( currentPlayer );
-        GameTimer::gameDelay( 3000 );
-        endTieBreak(); 
+        if (_scoreBoard != nullptr) {
+            _scoreBoard->update();
+        }
+        celebrate(currentPlayer);
+        GameTimer::gameDelay(3000);
+        endTieBreak();
     } else {
         std::cout << "Incrementing iteration for next serve." << std::endl;
-                               // needed to put this here otherwise tie break would
-                               // be incremented even after a win.
-        incrementIteration();  // need this to determine serve bar location
+        incrementIteration(); // need this to determine serve bar location
     }
 }
 
