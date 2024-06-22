@@ -37,6 +37,7 @@ def show_main_menu():
             print(f"{idx:02}. {obj}")
         print(f"{len(objects_with_logs) + 1:02}. Delete")
         print(f"{len(objects_with_logs) + 2:02}. Delete All")
+        print(f"{len(objects_with_logs) + 3:02}. Exit")
         choice = input("Select an option: ")
 
         try:
@@ -47,6 +48,9 @@ def show_main_menu():
                 delete_log()
             elif choice == len(objects_with_logs) + 2:
                 delete_all_logs()
+            elif choice == len(objects_with_logs) + 3:
+                print("Exiting...")
+                break
             else:
                 print("Invalid choice, please try again.")
         except ValueError:
