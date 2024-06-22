@@ -102,11 +102,14 @@ void TieBreaker::run( Player* currentPlayer ) {
         exit(1);
     }
     std::cout << "Updating ScoreBoard..." << std::endl;
-    if (_scoreBoard != nullptr) {
+    try {
         _scoreBoard->update();
         std::cout << "ScoreBoard updated." << std::endl;
-    } else {
-        std::cerr << "*** ERROR: ScoreBoard is null in TieBreaker::run(). ***" << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "*** EXCEPTION: " << e.what() << " ***" << std::endl;
+        exit(1);
+    } catch (...) {
+        std::cerr << "*** UNKNOWN EXCEPTION in ScoreBoard update ***" << std::endl;
         exit(1);
     }
 
