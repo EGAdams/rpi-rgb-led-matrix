@@ -75,6 +75,19 @@ void TieBreaker::incrementSet() {
 
 void TieBreaker::run( Player* currentPlayer ) { 
     _undo.memory();
+    std::cout << "Current Player Address: " << currentPlayer << std::endl;
+    if (currentPlayer == nullptr) {
+        std::cerr << "*** ERROR: Current player is null in TieBreaker::run(). ***" << std::endl;
+        exit(1);
+    }
+    Player* opponent = currentPlayer->getOpponent();
+    std::cout << "Opponent Address: " << opponent << std::endl;
+    if (opponent == nullptr) {
+        std::cerr << "*** ERROR: Opponent is null in TieBreaker::run(). ***" << std::endl;
+        exit(1);
+    }
+    std::cout << "Current Player Points: " << currentPlayer->getPoints() << std::endl;
+    std::cout << "Opponent Points: " << opponent->getPoints() << std::endl;
     std::cout << "TieBreaker iteration before setting serve: " << _iteration << std::endl;
     int serve = _getServe();
     std::cout << "Serve value from _getServe(): " << serve << std::endl;
