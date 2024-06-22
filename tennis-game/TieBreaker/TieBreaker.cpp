@@ -96,6 +96,7 @@ void TieBreaker::run( Player* currentPlayer ) {
     std::cout << "Opponent Points: " << opponent->getPoints() << std::endl;
 
     if ( currentPlayer->getPoints() == TIE_BREAK_MAX_POINTS ) {
+        std::cout << "Current Player has reached TIE_BREAK_MAX_POINTS." << std::endl;
         _undo.snapshot( _history );                                   
         currentPlayer->setGames( currentPlayer->getGames() + 1 );     // increment games
         incrementSet();
@@ -105,6 +106,7 @@ void TieBreaker::run( Player* currentPlayer ) {
         endTieBreak(); 
     } else if ( currentPlayer->getPoints() >= TIE_BREAK_WIN_BY_TWO  && 
         ( currentPlayer->getPoints() - opponent->getPoints() >= 2)) {
+        std::cout << "Current Player has won by two points." << std::endl;
         _undo.snapshot( _history );                                   
         currentPlayer->setGames( currentPlayer->getGames() + 1 );     // increment games
         incrementSet();
@@ -113,6 +115,7 @@ void TieBreaker::run( Player* currentPlayer ) {
         GameTimer::gameDelay( 3000 );
         endTieBreak(); 
     } else {
+        std::cout << "Incrementing iteration for next serve." << std::endl;
                                // needed to put this here otherwise tie break would
                                // be incremented even after a win.
         incrementIteration();  // need this to determine serve bar location
