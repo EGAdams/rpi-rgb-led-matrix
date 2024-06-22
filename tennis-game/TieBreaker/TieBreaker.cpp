@@ -255,7 +255,23 @@ void TieBreaker::endTieBreak() {
     _gameState->setSetTieBreak( 0 );
     _gameState->setServeSwitch( 1 );
     _gameState->setServe( 0 );
-    _scoreBoard->update(); }
+    std::cout << "Before updating ScoreBoard in TieBreaker::run()." << std::endl;
+    if (_scoreBoard == nullptr) {
+        std::cerr << "*** ERROR: ScoreBoard is null in TieBreaker::run() before update. ***" << std::endl;
+        exit(1);
+    }
+    try {
+        _scoreBoard->update();
+        std::cout << "ScoreBoard updated successfully in TieBreaker::run()." << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "*** EXCEPTION: " << e.what() << " ***" << std::endl;
+        exit(1);
+    } catch (...) {
+        std::cerr << "*** UNKNOWN EXCEPTION in ScoreBoard update ***" << std::endl;
+        exit(1);
+    }
+    std::cout << "After updating ScoreBoard in TieBreaker::run()." << std::endl;
+}
 
 void TieBreaker::mode1TBP1Games() {
     _gameLeds.updateGames();  // UpdateGames();
