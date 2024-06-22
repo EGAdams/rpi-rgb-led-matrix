@@ -24,9 +24,9 @@ int TieBreaker::_getServe() { // bot code, beware...
     const int servePattern[] = {PLAYER_2_SERVE, PLAYER_2_SERVE, PLAYER_1_SERVE, PLAYER_1_SERVE};
 
     if (_iteration < 1) {
-        std::cout << "*** WARNING: _getServe() in TieBreaker.cpp is returning default value. ***"
+        std::cerr << "*** ERROR: _getServe() in TieBreaker.cpp is returning default value. ***"
                   << std::endl;
-        std::cout << "The iteration is: " << _iteration << std::endl;
+        std::cerr << "The iteration is: " << _iteration << std::endl;
         return PLAYER_1_SERVE; // Default to PLAYER_1_SERVE for invalid iterations
     }
 
@@ -142,6 +142,7 @@ void TieBreaker::setTieBreaker() {
 void TieBreaker::initializeTieBreakMode() {
     std::cout << "*** initializeTieBreakMode() called. ***" << std::endl;
     _iteration = 1;  // this is initialized to zero before, so it could be checked as another flag
+    std::cout << "TieBreaker iteration initialized to: " << _iteration << std::endl;
                      // _iteration is used to determine which serve bar to light up
     _player1->setPoints( 0 );
     _player2->setPoints( 0 );
@@ -194,6 +195,7 @@ void TieBreaker::setTieBreakEnable() {
 void TieBreaker::endTieBreak() {
     tieLEDsOff();
     _iteration = 0;
+    std::cout << "TieBreaker iteration reset to: " << _iteration << std::endl;
     _player1->setPoints( 0 );
     _player2->setPoints( 0 );
     _player1->setGames(  0 );
