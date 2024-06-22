@@ -76,7 +76,9 @@ void TieBreaker::incrementSet() {
 void TieBreaker::run( Player* currentPlayer ) { 
     _undo.memory();
     std::cout << "TieBreaker iteration before setting serve: " << _iteration << std::endl;
-    _gameState->setServe(_getServe()); // set the serve bar depending tie-break iteration
+    int serve = _getServe();
+    std::cout << "Serve value from _getServe(): " << serve << std::endl;
+    _gameState->setServe(serve); // set the serve bar depending tie-break iteration
     _scoreBoard->update();
     Player* opponent = currentPlayer->getOpponent();
     std::cout << "TieBreaker iteration after setting serve: " << _iteration << std::endl;
