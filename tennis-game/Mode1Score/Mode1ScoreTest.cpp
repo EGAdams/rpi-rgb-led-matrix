@@ -22,7 +22,9 @@ void Mode1ScoreTest::SetUp() {
     PinState* pin_state = new PinState( pin_map );
     _pinInterface = new PinInterface( pin_state );
     _history = new History();
-    _mode1Score = new Mode1Score( _player1, _player2, _pinInterface, _gameState, _history ); }
+    _mode1Score = new Mode1Score( _player1, _player2, _pinInterface, _gameState, _history );
+    _mode1Score->getTieBreaker()->setIteration(1);  // Initialize iteration to a valid value
+}
 
 // Tear down the test fixture
 void Mode1ScoreTest::TearDown() {
