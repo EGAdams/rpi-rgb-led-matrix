@@ -16,9 +16,13 @@ Mode1Score::Mode1Score(
     _setLeds( player1, player2, pinInterface ),
     _mode1WinSequences( player1, player2, pinInterface, gameState ),
     _undo( player1, player2, pinInterface, gameState ) {
-    std::cout << "creating mode 1 score logger..." << std::endl;
-    _logger = new Logger( "Mode1Score" );
-    std::cout << "created new logger object with name [" << _logger->getName() << "]" << std::endl;
+    try {
+        std::cout << "creating mode 1 score logger..." << std::endl;
+        _logger = new Logger( "Mode1Score" );
+        std::cout << "created new logger object with name [" << _logger->getName() << "]" << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Error creating logger: " << e.what() << std::endl;
+    }
 }
 Mode1Score::~Mode1Score() {}
 
