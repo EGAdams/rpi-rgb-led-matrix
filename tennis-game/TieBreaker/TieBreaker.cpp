@@ -92,6 +92,9 @@ void TieBreaker::run( Player* currentPlayer ) {
     }
     std::cout << "TieBreaker iteration after setting serve: " << _iteration << std::endl;
 
+    std::cout << "Current Player Points: " << currentPlayer->getPoints() << std::endl;
+    std::cout << "Opponent Points: " << opponent->getPoints() << std::endl;
+
     if ( currentPlayer->getPoints() == TIE_BREAK_MAX_POINTS ) {
         _undo.snapshot( _history );                                   
         currentPlayer->setGames( currentPlayer->getGames() + 1 );     // increment games
