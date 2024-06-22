@@ -74,10 +74,12 @@ void TieBreaker::incrementSet() {
 }
 
 void TieBreaker::run( Player* currentPlayer ) { 
-    _undo.memory(); 
-    _gameState->setServe( _getServe()); // set the serve bar depending tie-break iteration
+    _undo.memory();
+    std::cout << "TieBreaker iteration before setting serve: " << _iteration << std::endl;
+    _gameState->setServe(_getServe()); // set the serve bar depending tie-break iteration
     _scoreBoard->update();
     Player* opponent = currentPlayer->getOpponent();
+    std::cout << "TieBreaker iteration after setting serve: " << _iteration << std::endl;
 
     if ( currentPlayer->getPoints() == TIE_BREAK_MAX_POINTS ) {
         _undo.snapshot( _history );                                   
@@ -143,6 +145,7 @@ void TieBreaker::initializeTieBreakMode() {
     std::cout << "*** initializeTieBreakMode() called. ***" << std::endl;
     _iteration = 1;  // this is initialized to zero before, so it could be checked as another flag
     std::cout << "TieBreaker iteration initialized to: " << _iteration << std::endl;
+    std::cout << "TieBreaker iteration initialized to: " << _iteration << std::endl;
                      // _iteration is used to determine which serve bar to light up
     _player1->setPoints( 0 );
     _player2->setPoints( 0 );
@@ -195,6 +198,7 @@ void TieBreaker::setTieBreakEnable() {
 void TieBreaker::endTieBreak() {
     tieLEDsOff();
     _iteration = 0;
+    std::cout << "TieBreaker iteration reset to: " << _iteration << std::endl;
     std::cout << "TieBreaker iteration reset to: " << _iteration << std::endl;
     _player1->setPoints( 0 );
     _player2->setPoints( 0 );
