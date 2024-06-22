@@ -97,7 +97,13 @@ void TieBreaker::run( Player* currentPlayer ) {
         exit(1);
     }
     _gameState->setServe(serve); // set the serve bar depending tie-break iteration
+    if (_scoreBoard == nullptr) {
+        std::cerr << "*** ERROR: ScoreBoard is null in TieBreaker::run(). ***" << std::endl;
+        exit(1);
+    }
+    std::cout << "Updating ScoreBoard..." << std::endl;
     _scoreBoard->update();
+    std::cout << "ScoreBoard updated." << std::endl;
     if (currentPlayer == nullptr) {
         std::cerr << "*** ERROR: Current player is null in TieBreaker::run(). ***" << std::endl;
         exit(1);
