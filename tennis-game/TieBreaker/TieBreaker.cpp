@@ -86,13 +86,19 @@ void TieBreaker::run( Player* currentPlayer ) {
     _gameState->setServe(serve); // set the serve bar depending tie-break iteration
     _scoreBoard->update();
     Player* opponent = currentPlayer->getOpponent();
+    if (currentPlayer == nullptr) {
+        std::cerr << "*** ERROR: Current player is null in TieBreaker::run(). ***" << std::endl;
+        exit(1);
+    }
     if (opponent == nullptr) {
         std::cerr << "*** ERROR: Opponent is null in TieBreaker::run(). ***" << std::endl;
         exit(1);
     }
     std::cout << "TieBreaker iteration after setting serve: " << _iteration << std::endl;
 
+    std::cout << "Current Player Address: " << currentPlayer << std::endl;
     std::cout << "Current Player Points: " << currentPlayer->getPoints() << std::endl;
+    std::cout << "Opponent Address: " << opponent << std::endl;
     std::cout << "Opponent Points: " << opponent->getPoints() << std::endl;
 
     if ( currentPlayer->getPoints() == TIE_BREAK_MAX_POINTS ) {
