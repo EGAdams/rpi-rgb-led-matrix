@@ -154,4 +154,23 @@ TEST_F( Mode1ScoreTest, TestMode1P1Score_WinAfterDeuce ) {
     // Check other changes made by the method if any
 }
 
+// Test case: TestMode1TieBreak_P1Wins
+TEST_F(Mode1ScoreTest, TestMode1TieBreak_P1Wins) {
+    // Simulate a tie-break scenario
+    _gameState->setTieBreak(1);
+    _player1->setPoints(6);
+    _player2->setPoints(6);
+    _mode1Score->updateScore(_player1);  // Player 1 scores, now 7-6
+    EXPECT_EQ(_player1->getPoints(), 7);
+    EXPECT_EQ(_player2->getPoints(), 6);
+
+    // Player 1 must win by at least two points
+    _mode1Score->updateScore(_player1);  // Player 1 scores again, now 8-6, wins the tie-break and set
+    EXPECT_EQ(_player1->getPoints(), 0);
+    EXPECT_EQ(_player2->getPoints(), 0);
+    EXPECT_EQ(_player1->getGames(), 0);
+    EXPECT_EQ(_player2->getGames(), 0);
+    EXPECT_EQ(_player1->getSets(), 1);
+}
+
 
