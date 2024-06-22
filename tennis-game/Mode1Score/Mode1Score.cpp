@@ -19,9 +19,13 @@ Mode1Score::Mode1Score(
     try {
         try {
             try {
-                std::cout << "creating mode 1 score logger..." << std::endl;
-                _logger = new Logger( "Mode1Score" );
-                std::cout << "created new logger object with name [" << _logger->getName() << "]" << std::endl;
+                try {
+                    std::cout << "creating mode 1 score logger..." << std::endl;
+                    _logger = new Logger( "Mode1Score" );
+                    std::cout << "created new logger object with name [" << _logger->getName() << "]" << std::endl;
+                } catch (const std::exception& e) {
+                    std::cerr << "Error creating logger: " << e.what() << std::endl;
+                }
             } catch (const std::exception& e) {
                 std::cerr << "Error creating logger: " << e.what() << std::endl;
             }
