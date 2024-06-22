@@ -19,115 +19,22 @@ TieBreaker::TieBreaker( Player* player1,
 
 TieBreaker::~TieBreaker() {}
 
-int TieBreaker::_getServe() {
-    switch ( _iteration ) {
-    case 1:
-        return PLAYER_2_SERVE; // doesn't matter who scores here.  doesn't concern me.
-        break;
-    
-    case 2:
-        return PLAYER_2_SERVE;
-        break;
+int TieBreaker::_getServe() { // bot code, beware...
+    // Array representing serve sequence in pairs
+    const int servePattern[] = {PLAYER_2_SERVE, PLAYER_2_SERVE, PLAYER_1_SERVE, PLAYER_1_SERVE};
 
-    case 3:
-        return PLAYER_1_SERVE;
-        break;
-
-    case 4:
-        return PLAYER_1_SERVE;
-        break;
-    
-    case 5:
-        return PLAYER_2_SERVE;
-        break;
-    
-    case 6:
-        return PLAYER_2_SERVE;
-        break;
-    
-    case 7:
-        return PLAYER_1_SERVE;
-        break;
-
-    case 8:
-        return PLAYER_1_SERVE;
-        break;
-
-    case 9:
-        return PLAYER_2_SERVE;
-        break;
-
-    case 10:
-        return PLAYER_2_SERVE;
-        break;
-    
-    case 11:
-        return PLAYER_1_SERVE;
-        break;
-
-    case 12:
-        return PLAYER_1_SERVE;
-        break;
-    
-    case 13:
-        return PLAYER_2_SERVE;
-        break;
-
-    case 14:
-        return PLAYER_2_SERVE;
-        break;
-
-    case 15:
-        return PLAYER_1_SERVE;
-        break;
-    
-    case 16:
-        return PLAYER_1_SERVE;
-        break;
-
-    case 17:
-        return PLAYER_2_SERVE;
-        break;
-
-    case 18:
-        return PLAYER_2_SERVE;
-        break;
-
-    case 19:
-        return PLAYER_1_SERVE;
-        break;
-
-    case 20:
-        return PLAYER_1_SERVE;
-        break;
-
-    case 21:
-        return PLAYER_2_SERVE;
-        break;
-
-    case 22:
-        return PLAYER_2_SERVE;
-        break;
-
-    case 23:
-        return PLAYER_1_SERVE;
-        break;
-
-    case 24:
-        return PLAYER_1_SERVE;
-        break;
-
-    case 25:
-        return PLAYER_2_SERVE;
-        break;
-    
-    default:
+    if (_iteration < 1) {
         std::cout << "*** WARNING: _getServe() in TieBreaker.cpp is returning default value. ***"
                   << std::endl;
         std::cout << "The iteration is: " << _iteration << std::endl;
-        return PLAYER_1_SERVE;
-        break;
+        return PLAYER_1_SERVE; // Default to PLAYER_1_SERVE for invalid iterations
     }
+
+    // Adjust the iteration for zero-based indexing and calculate serve index
+    int serveIndex = (_iteration - 1) % 4;
+
+    
+    return servePattern[serveIndex];
 }
 
 void TieBreaker::setIteration( int iteration ) { _iteration = iteration; }
