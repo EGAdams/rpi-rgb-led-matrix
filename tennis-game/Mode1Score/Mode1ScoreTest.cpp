@@ -25,7 +25,7 @@ void Mode1ScoreTest::SetUp() {
     _mode1Score = new Mode1Score( _player1, _player2, _pinInterface, _gameState, _history );
     _mode1Score->getTieBreaker()->setIteration(1);  // Initialize iteration to a valid value
     // Assuming ScoreBoard is a class that needs to be instantiated
-    ScoreBoard* scoreBoard = new ScoreBoard();
+    ScoreBoard* scoreBoard = new ScoreBoard(_player1, _player2, _gameState);
     _mode1Score->getTieBreaker()->setScoreBoards(scoreBoard);
 }
 
