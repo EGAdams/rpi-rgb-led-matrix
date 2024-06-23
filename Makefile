@@ -37,3 +37,8 @@ FORCE:
 .PHONY: FORCE
 TieBreakerTest.o: TieBreakerTest.c
 	$(CC) $(CFLAGS) -c TieBreakerTest.c -o TieBreakerTest.o
+Mode1ScoreTest: TieBreakerTest.o
+	$(CC) $(CFLAGS) Mode1ScoreTest.c TieBreakerTest.o -o Mode1ScoreTest
+
+TieBreakerTest.o: TieBreakerTest.c
+	$(CC) $(CFLAGS) -c TieBreakerTest.c -o TieBreakerTest.o
