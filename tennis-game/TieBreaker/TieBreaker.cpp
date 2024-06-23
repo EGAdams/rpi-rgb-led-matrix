@@ -364,3 +364,39 @@ void TieBreaker::mode1SetTBP1Games() {
         _mode1WinSequences.playerOneMatchWin(); 
         _gameState->stopGameRunning(); }
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 ); }
+#include "TieBreaker.h"
+
+TieBreaker::TieBreaker(Player* player1, Player* player2, GameState* gameState)
+    : _player1(player1), _player2(player2), _gameState(gameState), _iteration(0), _scoreBoard(nullptr) {}
+
+void TieBreaker::setIteration(int iteration) {
+    _iteration = iteration;
+}
+
+int TieBreaker::getIteration() const {
+    return _iteration;
+}
+
+void TieBreaker::setScoreBoards(ScoreBoard* scoreBoard) {
+    _scoreBoard = scoreBoard;
+}
+
+ScoreBoard* TieBreaker::getScoreBoards() const {
+    return _scoreBoard;
+}
+
+void TieBreaker::updateTieBreakerScore(Player* currentPlayer) {
+    // Implement the logic to update the tie-breaker score
+    // This is a placeholder implementation
+    if (_gameState->getTieBreak() == 1) {
+        currentPlayer->setPoints(currentPlayer->getPoints() + 1);
+        if (currentPlayer->getPoints() >= 7 && (currentPlayer->getPoints() - currentPlayer->getOpponent()->getPoints()) >= 2) {
+            currentPlayer->setPoints(0);
+            currentPlayer->getOpponent()->setPoints(0);
+            currentPlayer->setGames(0);
+            currentPlayer->getOpponent()->setGames(0);
+            currentPlayer->setSets(currentPlayer->getSets() + 1);
+            _gameState->setTieBreak(0);
+        }
+    }
+}
