@@ -2,11 +2,10 @@
 #define TIEBREAKERTEST_H
 
 #include <gtest/gtest.h>
-#include "TieBreaker.h"
-#include "Player.h"
-#include "GameState.h"
-#include "PinInterface.h"
-#include "PinState.h"
+#include "../GameState/GameState.h"
+#include "../PinState/PinState.h"
+#include "../PinInterface/PinInterface.h"
+#include "../Player/Player.h"
 
 class TieBreakerTest : public ::testing::Test {
 protected:

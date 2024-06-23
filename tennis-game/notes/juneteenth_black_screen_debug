@@ -1,0 +1,34 @@
+
+
+AC outlet in the crystal park.
+
+The app config has a config_data.options.website.value of mycustombusinessapp.com.  I am changing this in FileZilla to visionteamrealestate.com 11:12AM
+
+From the Logcat, ...www/js/widgets/jquery.min.js is missing.  Putting it in manually...
+
+transferred jquery-ui.css, jquery.min.js, and jquery-ui.min.js
+
+the template.json file is missing from /plugins/MCBA-Wordpress/www/js/widgets.  Putting it there...
+
+ok now.  missing image in in plugins/MCBA-Wordpress/www/templates/TemplateTwo/images/
+
+
+
+
+
+put the correct init.js into the uploads folder.  449pm
+ then the plugins.. 452pm
+deleted from android.
+uninstalled app.
+added UrlUpdater class to make sure that all SendMessage addresses are https and not http.
+
+in RegisterUserClientThreadFactory.java :65 the if json_response.length=0 was not written soon enough.  moved it sooner.
+if catchLog in string for SendMessage, return.
+
+
+
+Got ERROR_EMAIL_ALREADY_IN_USE error.
+
+I have debugged all of the WebView errors.  There was a Firebase error that I finally found out was caused by not having an authentication method selected in the firebase console.
+I selected the Email/Passoword method to get rid of the error. Now, a newly created user is not showing up in the MCBA user database.  I am still in the process of debugging this.
+

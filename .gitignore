@@ -39,3 +39,4 @@ myenv/*
 
 examples-api-use/pixel-mover
 examples-api-use/ledcat
+.aider*
