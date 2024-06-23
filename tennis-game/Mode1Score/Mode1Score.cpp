@@ -83,8 +83,16 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
         std::cout << "Opponent Points: " << currentPlayer->getOpponent()->getPoints() << std::endl;
         std::cout << "TieBreaker iteration before setting serve: " << _tieBreaker.getIteration() << std::endl;
         std::cout << "Serve value from _getServe(): " << _gameState->getServe() << std::endl;
+        std::cout << "Current Player Address: " << currentPlayer << std::endl;
+        std::cout << "Opponent Address: " << currentPlayer->getOpponent() << std::endl;
+        std::cout << "Current Player Points: " << currentPlayer->getPoints() << std::endl;
+        std::cout << "Opponent Points: " << currentPlayer->getOpponent()->getPoints() << std::endl;
+        std::cout << "TieBreaker iteration before setting serve: " << _tieBreaker.getIteration() << std::endl;
+        std::cout << "Serve value from _getServe(): " << _gameState->getServe() << std::endl;
         _tieBreaker.run(currentPlayer);
         std::cout << "Tie Break run completed" << std::endl;
+        std::cout << "TieBreaker iteration after setting serve: " << _tieBreaker.getIteration() << std::endl;
+        std::cout << "Serve value after _tieBreaker.run(): " << _gameState->getServe() << std::endl;
         std::cout << "TieBreaker iteration after setting serve: " << _tieBreaker.getIteration() << std::endl;
         std::cout << "Serve value after _tieBreaker.run(): " << _gameState->getServe() << std::endl;
     }
