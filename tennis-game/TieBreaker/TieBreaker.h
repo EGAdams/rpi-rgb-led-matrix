@@ -15,12 +15,26 @@
 
 class TieBreaker {
  public:
-  TieBreaker(Player* player1, Player* player2, GameState* gameState);
+  TieBreaker(Player* player1, Player* player2, PinInterface* pinInterface, GameState* gameState, History* history);
+  ~TieBreaker();
   void setIteration(int iteration);
-  int getIteration() const;
+  int getIteration();
+  void incrementIteration();
   void setScoreBoards(ScoreBoard* scoreBoard);
-  ScoreBoard* getScoreBoards() const;
-  void updateTieBreakerScore(Player* currentPlayer);
+  void tieLEDsOn();
+  void tieLEDsOff();
+  void celebrate(Player* currentPlayer);
+  void incrementSet();
+  void run(Player* currentPlayer);
+  void mode1SetTBButtonFunction();
+  void setTieBreaker();
+  void initializeTieBreakMode();
+  void setTieBreakEnable();
+  void endTieBreak();
+  void mode1TBP1Games();
+  void mode1TBP2Games();
+  void mode1SetTBP2Games();
+  void mode1SetTBP1Games();
 
  private:
   int  _getServe();    // determine serve based on iteration
