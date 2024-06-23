@@ -15,11 +15,7 @@
 
 class TieBreaker {
  public:
-  TieBreaker( Player* player1,
-                   Player* player2,
-                   PinInterface* pinInterface,
-                   GameState* gameState,
-                   History* history );
+  TieBreaker(Player* player1, Player* player2, PinInterface* pinInterface, GameState* gameState);
   ~TieBreaker();
   void setScoreBoards( ScoreBoard* scoreBoard );
   void run( Player* currentPlayer );
