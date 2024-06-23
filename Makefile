@@ -30,5 +30,8 @@ build-python: $(RGB_LIBRARY)
 install-python: build-python
 	$(MAKE) -C $(PYTHON_LIB_DIR) install
 
+TieBreakerTest.o: TieBreakerTest.c
+	$(CC) $(CFLAGS) -c TieBreakerTest.c -o TieBreakerTest.o
+
 FORCE:
 .PHONY: FORCE
