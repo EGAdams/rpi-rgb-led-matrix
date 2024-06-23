@@ -72,8 +72,16 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
     if ( _gameState->getTieBreak() == 1 ) {           // Tie Break
         std::cout << "Tie Break mode" << std::endl;
         _logger->logUpdate( "tie break run..." );
-        _tieBreaker.run( currentPlayer );
+        std::cout << "Current Player Address: " << currentPlayer << std::endl;
+        std::cout << "Opponent Address: " << currentPlayer->getOpponent() << std::endl;
+        std::cout << "Current Player Points: " << currentPlayer->getPoints() << std::endl;
+        std::cout << "Opponent Points: " << currentPlayer->getOpponent()->getPoints() << std::endl;
+        std::cout << "TieBreaker iteration before setting serve: " << _tieBreaker.getIteration() << std::endl;
+        std::cout << "Serve value from _getServe(): " << _gameState->getServe() << std::endl;
+        _tieBreaker.run(currentPlayer);
         std::cout << "Tie Break run completed" << std::endl;
+        std::cout << "TieBreaker iteration after setting serve: " << _tieBreaker.getIteration() << std::endl;
+        std::cout << "Serve value after _tieBreaker.run(): " << _gameState->getServe() << std::endl;
     }
     else if ( _gameState->getSetTieBreak() == 1 ) { // Set Tie Break
         _logger->logUpdate( "set tie breaker..." );
