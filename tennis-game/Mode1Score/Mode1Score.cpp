@@ -32,11 +32,6 @@ Mode1Score::Mode1Score(
         } catch (const std::exception& e) {
             std::cerr << "Error creating logger: " << e.what() << std::endl;
         }
-        std::cout << "Exiting playerGameWin for player: " << player->number() << std::endl;
-    } catch (const std::exception& e) {
-        std::cerr << "Error creating logger: " << e.what() << std::endl;
-    }
-    std::cout << "Exiting updateScore for player: " << currentPlayer->number() << std::endl;
 }
 Mode1Score::~Mode1Score() {}
 
