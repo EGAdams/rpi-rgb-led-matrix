@@ -48,7 +48,12 @@ void Mode1Score::setScoreBoard( ScoreBoard* scoreBoard ) {
     _gameLeds.setScoreBoard( scoreBoard );
     _mode1WinSequences.setScoreBoards( scoreBoard );
     _setLeds.setScoreBoard( scoreBoard );
-    _tieBreaker.setScoreBoards( scoreBoard );   // all day debug. in the future.
+    if (scoreBoard == nullptr) {
+        std::cerr << "Error: scoreBoard is NULL in setScoreBoard" << std::endl;
+    } else {
+        std::cout << "ScoreBoard Address: " << scoreBoard << std::endl;
+    }
+    _tieBreaker.setScoreBoards(scoreBoard);   // all day debug. in the future.
     _undo.setScoreBoard( scoreBoard );
 } // find a way to avoid this.
 
