@@ -13,7 +13,6 @@ all: $(RGB_LIBRARY)
 
 $(RGB_LIBRARY): | $(RGB_LIBDIR)
 	$(MAKE) -C $(RGB_LIBDIR)
-	$(MAKE) -C examples-api-use
 
 $(RGB_LIBDIR):
 	mkdir -p $(RGB_LIBDIR)
@@ -21,7 +20,6 @@ $(RGB_LIBDIR):
 clean:
 	$(MAKE) -C lib clean
 	$(MAKE) -C utils clean
-	$(MAKE) -C examples-api-use clean
 	$(MAKE) -C $(PYTHON_LIB_DIR) clean
 
 build-csharp:
