@@ -9,11 +9,14 @@ RGB_LIBRARY=$(RGB_LIBDIR)/lib$(RGB_LIBRARY_NAME).a
 PYTHON_LIB_DIR=bindings/python
 CSHARP_LIB_DIR=bindings/c\#
 
-all : $(RGB_LIBRARY)
+all: $(RGB_LIBRARY)
 
-$(RGB_LIBRARY): FORCE
+$(RGB_LIBRARY): | $(RGB_LIBDIR)
 	$(MAKE) -C $(RGB_LIBDIR)
 	$(MAKE) -C examples-api-use
+
+$(RGB_LIBDIR):
+	mkdir -p $(RGB_LIBDIR)
 
 clean:
 	$(MAKE) -C lib clean
