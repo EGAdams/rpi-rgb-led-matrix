@@ -35,7 +35,12 @@ FORCE:
 .PHONY: FORCE
 
 ../Mode1WinSequences/Mode1WinSequences.o: ../Mode1WinSequences/Mode1WinSequences.cpp
-	$(CXX) $(CXXFLAGS) -c ../Mode1WinSequences/Mode1WinSequences.cpp -o ../Mode1WinSequences/Mode1WinSequences.o
+	@if [ -f ../Mode1WinSequences/Mode1WinSequences.cpp ]; then \
+		$(CXX) $(CXXFLAGS) -c ../Mode1WinSequences/Mode1WinSequences.cpp -o ../Mode1WinSequences/Mode1WinSequences.o; \
+	else \
+		echo "Error: ../Mode1WinSequences/Mode1WinSequences.cpp not found."; \
+		exit 1; \
+	fi
 
 TieBreakerTest.o: TieBreakerTest.cpp
 	$(CXX) $(CXXFLAGS) -c TieBreakerTest.cpp -o TieBreakerTest.o
