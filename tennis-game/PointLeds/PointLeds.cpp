@@ -32,9 +32,6 @@ void PointLeds::updatePoints() {
             std::cerr << "Error: _scoreBoard is nullptr" << std::endl;
         }
         std::cout << "scoreboard bool is false, not updating scoreboard." << std::endl;
-    } else {
-        std::cout << "scoreboard bool is false, not updating scoreboard." << std::endl;
-        return; }
 
     switch ( _player1->getPoints()) {
         case 0:
