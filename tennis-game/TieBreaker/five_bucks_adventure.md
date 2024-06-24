@@ -499,7 +499,7 @@ TEST_F(TieBreakerTest, Player2WinsTieBreaker) {
     EXPECT_EQ(_player2->getGames(), 0);
     EXPECT_EQ(_player2->getSets(), 1);
 }
-
+```
 # Makefile:
 ## Makefile for TieBreaker tests
 ```
@@ -507,11 +507,9 @@ CXX = g++
 CXXFLAGS = -std=c++14 -I../ -I../../lib -I../../lib/gtest/include
 LDFLAGS = -L../../lib/gtest -lgtest -lgtest_main -pthread
 
-# Source files
-SRCS = TieBreakerTest.cpp ../Player/Player.cpp ../GameState/GameState.cpp ../PinInterface/PinInterface.cpp ../PinState/PinState.cpp
+SRCS = TieBreakerTest.cpp ../Player/Player.cpp ../GameState/GameState.cpp ../PinInterface/PinInterface.cpp ../PinState/PinState.cpp ../TieBreaker/TieBreaker.cpp ../TranslateConstant/TranslateConstant.cpp ../GameLeds/GameLeds.cpp ../ServeLeds/ServeLeds.cpp ../SetLeds/SetLeds.cpp
 OBJS = $(SRCS:.cpp=.o)
 
-# Target executable
 TARGET = TieBreakerTest
 
 all: $(TARGET)
@@ -523,11 +521,6 @@ clean:
 	rm -f $(OBJS) $(TARGET)
 
 .PHONY: all clean
-```
-
-# The Error
-My issue is as follows:  Please fix this make error:
-``` make output: make: *** No rule to make target 'TieBreakerTest.cpp', needed by 'TieBreakerTest.o'.  Stop.
 ```
 
 Please help me debug this.

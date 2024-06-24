@@ -4,6 +4,7 @@ import os
 from time import sleep
 import argparse
 from openai import OpenAI
+the_makefile_directory = "/home/eg1972/rpi-rgb-led-matrix/tennis-game/TieBreaker"
 
 # import CommandRunner from path: /home/eg1972/rpi-rgb-led-matrix/tennis-game/TieBreader/command_runner/command_runner.
 
@@ -62,7 +63,7 @@ def generate_response(system_prompt, user_prompt, model="gpt-3.5-turbo-0125", *a
 
     # Set up your OpenAI API credentials
     # openai.api_key = os.environ["OPENAI_API_KEY"]
-    # openai.api_key = "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"
+    # openai.api_key = "sk-"
 
     messages = []
     messages.append({"role": "system", "content": system_prompt})
@@ -100,9 +101,9 @@ def generate_response(system_prompt, user_prompt, model="gpt-3.5-turbo-0125", *a
 
 def main( args ):
     print ( "reading make file..." )
-    makefile = read_file("/home/eg1972/rpi-rgb-led-matrix/tennis-game/Makefile")  # read Makefile from current directory
+    makefile = read_file("./Makefile")  # read Makefile from current directory
     # change directory to /home/eg1972/rpi-rgb-led-matrix/tennis-game/TieBreader
-    os.chdir( "/home/eg1972/rpi-rgb-led-matrix/tennis-game" )
+    os.chdir( the_makefile_directory )
 
     prompt = """ Please fix this make error ``` """
     cr = CommandRunner()

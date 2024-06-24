@@ -1,283 +1,179 @@
+#include <gtest/gtest.h>
 #include "Mode1Score.h"
+class Mode1ScoreTest : public ::testing::Test {
+protected:
+    Player* _player1;
+    Player* _player2;
+    PinInterface* _pinInterface;
+    GameState* _gameState;
+    History* _history;
+    Mode1Score* _mode1Score;
 
-Mode1Score::Mode1Score(
-    Player* player1,
-    Player* player2,
-    PinInterface* pinInterface,
-    GameState* gameState,
-    History* history )
-    : _player1( player1 ),
-    _player2( player2 ),
-    _gameState( gameState ),
-    _history( history ),
-    _tieBreaker( player1, player2, pinInterface, gameState, history ),
-    _pointLeds( player1, player2, pinInterface ),
-    _gameLeds( player1, player2, pinInterface ),
-    _setLeds( player1, player2, pinInterface ),
-    _mode1WinSequences( player1, player2, pinInterface, gameState ),
-    _undo( player1, player2, pinInterface, gameState ) {
-    try {
-        try {
-            try {
-                std::cout << "creating mode 1 score logger..." << std::endl;
-                _logger = new Logger( "Mode1Score" );
-                std::cout << "created new logger object with name [" << _logger->getName() << "]" << std::endl;
-            } catch (const std::exception& e) {
-                std::cerr << "Error creating logger: " << e.what() << std::endl;
-            }
-        } catch (const std::exception& e) {
-            std::cerr << "Error creating logger: " << e.what() << std::endl;
-        }
-    } catch (const std::exception& e) {
-        std::cerr << "Error creating logger: " << e.what() << std::endl;
-    }
-}
-Mode1Score::~Mode1Score() {}
+    void SetUp() override;
+    void TearDown() override;
+};
 
-TieBreaker* Mode1Score::getTieBreaker() { return &_tieBreaker; }
-
-void Mode1Score::setScoreBoard( ScoreBoard* scoreBoard ) {
-    _scoreBoard = scoreBoard;
-    _pointLeds.setScoreBoard( scoreBoard );
-    _gameLeds.setScoreBoard( scoreBoard );
-    _mode1WinSequences.setScoreBoards( scoreBoard );
-    _setLeds.setScoreBoard( scoreBoard );
-    _tieBreaker.setScoreBoards( scoreBoard );   // all day debug. in the future.
-    _undo.setScoreBoard( scoreBoard );
-} // find a way to avoid this.
-
-ScoreBoard* Mode1Score::getScoreBoard() { return _scoreBoard; }
-
-void Mode1Score::_resetGame() {
-    GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
-    _player1->setPoints( 0 );
-    _player2->setPoints( 0 );
-    _gameState->setPlayer1Points( 0 );
-    _gameState->setPlayer2Points( 0 );
-    _gameState->setServeSwitch( 1 );
-    // _gameState->setServe( 0 ); // set serve in game win only
-    _pointLeds.updatePoints();
+void Mode1ScoreTest::SetUp() {
+    _gameState = new GameState();
+    _player1 = new Player( _gameState, PLAYER_1_INITIALIZED );
+    _player2 = new Player( _gameState, PLAYER_2_INITIALIZED );
+    _player1->setOpponent( _player2 ); _player2->setOpponent( _player1 );
+    std::map<std::string, int> pin_map;
+    PinState* pin_state = new PinState( pin_map );
+    _pinInterface = new PinInterface( pin_state );
+    _history = new History();
+    _mode1Score = new Mode1Score( _player1, _player2, _pinInterface, _gameState, _history );
+    _mode1Score->getTieBreaker()->setIteration(1);  // Initialize iteration to a valid value
+    // Assuming ScoreBoard is a class that needs to be instantiated
+    ScoreBoard* scoreBoard = new ScoreBoard(_player1, _player2, _gameState);
+    _mode1Score->getTieBreaker()->setScoreBoards(scoreBoard);
 }
 
-void Mode1Score::updateScore( Player* currentPlayer ) {
-    _logger->setName( "updateScore" );
-    std::cout << "done setting name to updateScore." << std::endl;
-    if ( _gameState->getTieBreak() == 1 ) {           // Tie Break
-        _logger->logUpdate( "tie break run..." );
-        _tieBreaker.run( currentPlayer );
-    }
-    else if ( _gameState->getSetTieBreak() == 1 ) { // Set Tie Break
-        _logger->logUpdate( "set tie breaker..." );
-        _tieBreaker.setTieBreaker();
-    }
-    else {                                          // Regular Game
-        Player* otherPlayer = currentPlayer->getOpponent();
-        int current_player_points = currentPlayer->getPoints();
-        int other_player_points = otherPlayer->getPoints();
-        if ( current_player_points >= 3 ) {
-            _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has 3 points or more." );
-            if ( current_player_points == other_player_points ) {
-                _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has 3 points and tied with " + std::to_string( otherPlayer->number() ) + "." );
-                currentPlayer->setPoints( 3 );
-                otherPlayer->setPoints( 3 );
-            }
-            else if ( current_player_points > 3
-             && ( current_player_points - other_player_points ) > 1 ) {
-                _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has " + std::to_string( current_player_points ) + " points and won by " + std::to_string( current_player_points - other_player_points ) + "." );
-                currentPlayer->setGames( currentPlayer->getGames() + 1 );
-                _undo.memory();
-                currentPlayer->number() == 0 ? playerOneGameWin() : playerTwoGameWin();
-            }
+// Tear down the test fixture
+void Mode1ScoreTest::TearDown() {
+    delete _mode1Score;
+    delete _history;
+    delete _gameState;
+    delete _pinInterface;
+    delete _player2;
+    delete _player1; }
 
-            if ( currentPlayer->getPoints() == 4 ) {
-                _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has 4 points." );
-                _gameState->setPointFlash( 1 );       // "Ad" mode
-                _gameState->setPreviousTime( GameTimer::gameMillis() );
-                _gameState->setToggle( 0 );
-            }
-        }
-        _pointLeds.updatePoints();
-    }
+///////////////// Test case: Test Mode 1 P1 Score Less Than 3 Points //////////
+TEST_F( Mode1ScoreTest, TestMode1P1Score_LessThan3Points ) {
+    _player1->setPoints( 2 );
+    _player2->setPoints( 1 );
+    _mode1Score->updateScore( _player1  );
+    EXPECT_EQ( _player1->getPoints(), 2 );
+    EXPECT_EQ( _player2->getPoints(), 1 );
+    // Check other changes made by the method
+}
+///////////////////////////////////////////////////////////////////////////////
+
+// Test case: TestMode1P1Score_3Points_LessThan3PointsP2
+TEST_F( Mode1ScoreTest, TestMode1P1Score_3Points_LessThan3PointsP2) {
+    _player1->setPoints(3);
+    _player2->setPoints( 2 );
+    _mode1Score->updateScore( _player1 );
+    EXPECT_EQ( _player1->getPoints(), 3);
+    EXPECT_EQ( _player2->getPoints(), 2);
+    // Check other changes made by the method
 }
 
-void Mode1Score::playerOneScore() { updateScore( _player1 ); }
-void Mode1Score::playerTwoScore() { updateScore( _player2 ); }
-
-
-//////////////////////////////// GAME WIN SCENARIOS ///////////////////////////
-void Mode1Score::playerGameWin( Player* player ) {
-    Player* opponent = player->getOpponent();
-    std::cout << "player " << std::to_string( player->number() ) << " games: " << player->getGames() << std::endl;
-    _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
-    if ( player->getGames() >= GAMES_TO_WIN_SET ) {
-        if ( player->getGames() == GAMES_TO_WIN_SET && opponent->getGames() == GAMES_TO_WIN_SET ) {
-            _gameState->setTieBreak( 1 );
-            _tieBreaker.initializeTieBreakMode();
-        }
-        if ( _gameState->getTieBreak() == 0 ) {  // if this is not a tie break game...
-            if ( ( player->getGames() - opponent->getGames() ) > 1 ) {  // player ahead by 2 games.
-                player->setSets( _gameState, player->getSets() + 1 ); // Set win
-                _setLeds.updateSets(); // sets the tiebreak, wins
-                // the match, or just wins the set.
-                if ( player->getSets() == opponent->getSets() ) {  // set tie break
-                    player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1TBSetWinSequence() : _mode1WinSequences.p2TBSetWinSequence();
-                    _gameState->setSetTieBreak( 1 );
-                    _tieBreaker.setTieBreakEnable();
-                }
-                else if ( player->getSets() == SETS_TO_WIN_MATCH ) {  // match win, done playing
-                    player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.playerOneMatchWin() : _mode1WinSequences.playerTwoMatchWin();
-                    _gameState->stopGameRunning();
-                }
-                else {                                              // regular set win, then reset
-                    _gameState->setPlayer1SetHistory( player->getSetHistory() );
-                    _gameState->setPlayer2SetHistory( opponent->getSetHistory() );
-                    player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1SetWinSequence() : _mode1WinSequences.p2SetWinSequence();
-                    _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
-                    _setLeds.updateSets();
-                    GameTimer::gameDelay( _gameState->getWinDelay() );
-                    _resetGame();
-                }
-                player->setGames( 0 );
-                opponent->setGames( 0 );
-            }
-            else {                        // player is ahead by 1 game, but not enough to win the set.
-                player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1GameWinSequence() : _mode1WinSequences.p2GameWinSequence();
-                _gameLeds.updateGames();
-                _gameState->setPlayer1SetHistory( player->getSetHistory() );
-                _gameState->setPlayer2SetHistory( opponent->getSetHistory() );
-                _resetGame();
-            }
-        }
-    }
-    else { // this is a regualar game win...
-        if ( player->number() == PLAYER_1_INITIALIZED ) {
-            _mode1WinSequences.p1GameWinSequence();
-            _gameState->setPlayer1SetHistory( player->getSetHistory() );
-            _gameState->setPlayer2SetHistory( opponent->getSetHistory() );
-        }
-        else {
-            _mode1WinSequences.p2GameWinSequence();
-            _gameState->setPlayer2SetHistory( player->getSetHistory() );
-            _gameState->setPlayer1SetHistory( opponent->getSetHistory() );
-        }
-        _gameLeds.updateGames();
-        _resetGame();
-    }
-}
-void Mode1Score::playerOneGameWin() { playerGameWin( _player1 ); }
-void Mode1Score::playerTwoGameWin() { playerGameWin( _player2 ); }
-//////////////////// END GAME WIN SCENARIOS ///////////////////////////////////
-
-void Mode1Score::mode1TBP1Games() {
-    _gameLeds.updateGames();
-    _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
-    GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
-    if ( _player1->getGames() == 15 ) {
-        _player1->setSets( _gameState, _player1->getSets() + 1 );
-
-        if ( _player2->getSets() == _player1->getSets() ) {
-            _tieBreaker.endTieBreak();
-            _mode1WinSequences.p1TBSetWinSequence();
-            _gameState->setSetTieBreak( 1 );
-            _tieBreaker.setTieBreakEnable();
-        }
-        else {
-            _player1->setGames( _player1->getGames() );
-            _gameState->setPlayer1SetHistory( _player1->getSetHistory() );
-            _gameState->setPlayer2SetHistory( _player2->getSetHistory() );
-            _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
-            _mode1WinSequences.p1SetWinSequence();
-            _tieBreaker.endTieBreak();
-        }
-    }
-    if ( _player1->getGames() >= 10 &&
-        ( _player1->getGames() - _player2->getGames() ) > 1 ) {
-        _player1->setSets( _gameState, _player1->getSets() + 1 );
-        if ( _player2->getSets() == _player1->getSets() ) {
-            _tieBreaker.endTieBreak();
-            _mode1WinSequences.p1TBSetWinSequence();
-            _gameState->setSetTieBreak( 1 );
-            _tieBreaker.setTieBreakEnable();
-        }
-        else {
-            _player1->setGames( _player1->getGames() );
-            _gameState->setPlayer1SetHistory( _player1->getSetHistory() );
-            _gameState->setPlayer2SetHistory( _player2->getSetHistory() );
-            _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
-            _mode1WinSequences.p1SetWinSequence();
-            _tieBreaker.endTieBreak();
-        }
-    }
+// Test case: TestMode1P1Score_3Points_EqualPoints
+TEST_F( Mode1ScoreTest, TestMode1P1Score_3Points_EqualPoints ) {
+    _player1->setPoints(3);
+    _player2->setPoints(3);
+    _mode1Score->updateScore( _player1 );
+    EXPECT_EQ( _player1->getPoints(), 3);
+    EXPECT_EQ( _player2->getPoints(), 3);
+    // Check other changes made by the method
 }
 
-void Mode1Score::mode1SetTBP1Games() {
-    _gameLeds.updateGames();
-    GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
-    if ( _player1->getGames() == 7 ) {
-        _player1->setSets( _gameState, _player1->getSets() + 1 );
-        _setLeds.updateSets();
-        GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
-        _mode1WinSequences.p1SetTBWinSequence();
-        _tieBreaker.tieLEDsOff();
-        _mode1WinSequences.playerOneMatchWin();
-        _gameState->stopGameRunning();
-    }
-    _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
+// Test case: TestMode1P1Score_MoreThan3Points_DifferenceMoreThan1
+TEST_F( Mode1ScoreTest, TestMode1P1Score_MoreThan3Points_DifferenceMoreThan1) {
+    _player1->setPoints( 3 );
+    _mode1Score->updateScore( _player1 );
+    _player2->setPoints( 3 );
+    _mode1Score->updateScore( _player2 );
+    _player1->setPoints( 4 );
+    _mode1Score->updateScore( _player1 );
+    _player1->setPoints( 5 );
+    _mode1Score->updateScore( _player1 );
+    EXPECT_EQ( _player1->getPoints(), 0 );
+    EXPECT_EQ( _player2->getPoints(), 0 );
+    EXPECT_EQ( _player1->getGames(),  1 );
 }
 
-void Mode1Score::mode1TBP2Games() {
-    _gameLeds.updateGames();
-    _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
-    GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
-    if ( _player2->getGames() == 15 ) {
-        _player2->setSets( _gameState, _player2->getSets() + 1 );
-        if ( _player2->getSets() == _player1->getSets() ) {
-            _tieBreaker.endTieBreak();
-            _mode1WinSequences.p2TBSetWinSequence();
-            _gameState->setSetTieBreak( 1 );
-            _tieBreaker.setTieBreakEnable();
-        }
-        else {
-            _player1->setGames( _player1->getGames() );
-            _gameState->setPlayer1SetHistory( _player1->getSetHistory() );
-            _gameState->setPlayer2SetHistory( _player2->getSetHistory() );
-            _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
-            _mode1WinSequences.p2SetWinSequence();
-            _tieBreaker.endTieBreak();
-        }
-    }
-    if ( _player2->getGames() >= 10 &&
-        ( _player2->getGames() - _player1->getGames() ) > 1 ) {
-        _player2->setSets( _gameState, _player2->getSets() + 1 );
-        if ( _player2->getSets() == _player1->getSets() ) {
-            _tieBreaker.endTieBreak();
-            _mode1WinSequences.p2TBSetWinSequence();
-            _gameState->setSetTieBreak( 1 );
-            _tieBreaker.setTieBreakEnable();
-        }
-        else {
-            _player1->setGames( _player1->getGames() );
-            _gameState->setPlayer1SetHistory( _player1->getSetHistory() );  // set set history, set++
-            _gameState->setPlayer2SetHistory( _player2->getSetHistory() );
-            _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
-            _mode1WinSequences.p2SetWinSequence();
-            _tieBreaker.endTieBreak();
-        }
-    }
+// Test case: TestMode1P1Score_4Points
+TEST_F( Mode1ScoreTest, TestMode1P1Score_4Points ) {
+    _player1->setPoints( 3 );
+    _mode1Score->updateScore( _player1  );
+    _player2->setPoints( 3 );
+    _mode1Score->updateScore( _player2 );
+    _player1->setPoints( 4 );
+    _mode1Score->updateScore( _player1 );
+    EXPECT_EQ( _player1->getPoints(), 4 );
+    EXPECT_EQ( _player2->getPoints(), 3 );
+    EXPECT_EQ( _gameState->getPointFlash(), 1 ); // Assuming getPointFlash returns the current pointFlash
+    // Check other changes made by the method
 }
 
-void Mode1Score::mode1SetTBP2Games() {
-    _gameLeds.updateGames();
-    GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
-    if ( _player2->getGames() == 7 ) {
-        _player2->setSets( _gameState, _player2->getSets() + 1 );
-        _setLeds.updateSets();
-        GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
-        _mode1WinSequences.p2SetTBWinSequence();
-        _tieBreaker.tieLEDsOff();
-        _mode1WinSequences.playerTwoMatchWin();
-        _gameState->stopGameRunning();
-    }
-    std::cout << "setting serve switch to: " << _gameState->getServeSwitch() + 1 << std::endl;
-    _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
+TEST_F( Mode1ScoreTest, TestMode1P1Score_Deuce ) {
+    _player1->setPoints( 3 );
+    _player2->setPoints( 3 );
+    _mode1Score->updateScore( _player1 );
+    EXPECT_EQ( _player1->getPoints(), 3 );
+    EXPECT_EQ( _player2->getPoints(), 3 );
+    // Check other changes made by the method if any
+}
+
+// Test case: TestMode1P1Score_Advantage
+TEST_F( Mode1ScoreTest, TestMode1P1Score_Advantage ) {
+    _player1->setPoints(4);
+    _player2->setPoints(3);
+    _mode1Score->updateScore( _player1 );
+    EXPECT_EQ( _player1->getPoints(), 4 );
+    EXPECT_EQ( _player2->getPoints(), 3 );
+    // Check other changes made by the method if any
+}
+
+// Test case: TestMode1P1Score_WinAfterAdvantage
+TEST_F( Mode1ScoreTest, TestMode1P1Score_WinAfterAdvantage ) {
+    _player1->setPoints(4);
+    _player2->setPoints(3);
+    _mode1Score->updateScore( _player1 );  // Player 1 at advantage
+    _player1->setPoints(5);
+    _mode1Score->updateScore( _player1 );  // Player 1 wins the game
+    EXPECT_EQ( _player1->getPoints(), 0 );
+    EXPECT_EQ( _player2->getPoints(), 0 );
+    EXPECT_EQ( _player1->getGames(), 1 );
+    // Check other changes made by the method if any
+}
+
+// Test case: TestMode1P1Score_ScoreFromZeroPoints
+TEST_F( Mode1ScoreTest, TestMode1P1Score_ScoreFromZeroPoints ) {
+    _player1->setPoints(0);
+    _player2->setPoints(2);
+    _player1->setPoints(_player1->getPoints() + 1); // Simulate player 1 scores a point
+    _mode1Score->updateScore( _player1 );  // Update the score based on new points
+    EXPECT_EQ( _player1->getPoints(), 1 ); // Expected points after scoring
+    EXPECT_EQ( _player2->getPoints(), 2 );
+    // Check other changes made by the method if any
+}
+
+// Test case: TestMode1P1Score_WinAfterDeuce
+TEST_F( Mode1ScoreTest, TestMode1P1Score_WinAfterDeuce ) {
+    _player1->setPoints(3);
+    _player2->setPoints(3);
+    _mode1Score->updateScore( _player1 );  // Both players at deuce
+    _player1->setPoints(4);  // Player 1 scores and gains advantage
+    _mode1Score->updateScore( _player1 );
+    EXPECT_EQ( _player1->getPoints(), 4 );
+    EXPECT_EQ( _player2->getPoints(), 3 );
+
+    _player1->setPoints(5);  // Player 1 scores and wins the game
+    _mode1Score->updateScore( _player1 );
+    EXPECT_EQ( _player1->getPoints(), 0 );
+    EXPECT_EQ( _player2->getPoints(), 0 );
+    EXPECT_EQ( _player1->getGames(), 1 );
+    // Check other changes made by the method if any
+}
+
+// Test case: TestMode1TieBreak_P1Wins
+TEST_F(Mode1ScoreTest, TestMode1TieBreak_P1Wins) {
+    // Simulate a tie-break scenario
+    _gameState->setTieBreak(1);
+    _player1->setPoints(6);
+    _player2->setPoints(6);
+    _mode1Score->updateScore(_player1);  // Player 1 scores, now 7-6
+    EXPECT_EQ(_player1->getPoints(), 7);
+    EXPECT_EQ(_player2->getPoints(), 6);
+
+    // Player 1 must win by at least two points
+    _mode1Score->updateScore(_player1);  // Player 1 scores again, now 8-6, wins the tie-break and set
+    EXPECT_EQ(_player1->getPoints(), 0);
+    EXPECT_EQ(_player2->getPoints(), 0);
+    EXPECT_EQ(_player1->getGames(), 0);
+    EXPECT_EQ(_player2->getGames(), 0);
+    EXPECT_EQ(_player1->getSets(), 1);
 }
