@@ -31,7 +31,8 @@ protected:
         delete _player2;
         delete _player1;
         delete _gameState;
-    }    
+    }
+};
 
 
 TEST_F(TieBreakerTest, Player1WinsTieBreaker) {
