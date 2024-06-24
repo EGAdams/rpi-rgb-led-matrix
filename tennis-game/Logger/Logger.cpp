@@ -5,7 +5,10 @@
 #include <iostream>
 #include <regex>
 
+#include <filesystem>
+
 Logger::Logger( std::string name ) : _name( name ) {
+    std::filesystem::create_directories(name); // Ensure the directory exists
     _log_file.open(name + "/log.txt", std::ios::out | std::ios::app);
     if (!_log_file.is_open()) { // Handle error
         std::cerr << "Failed to open log file" << std::endl; }}
