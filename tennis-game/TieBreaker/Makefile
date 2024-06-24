@@ -5,7 +5,7 @@ CXXFLAGS = -std=c++11 -I../ -I../../lib -I../../lib/gtest/include
 LDFLAGS = -L../../lib/gtest -lgtest -lgtest_main -pthread
 
 # Source files
-SRCS = TieBreakerTest.cpp ../Player/Player.cpp ../GameState/GameState.cpp ../PinInterface/PinInterface.cpp ../PinState/PinState.cpp
+SRCS = ../Mode1Score/TieBreakerTest.cpp ../Player/Player.cpp ../GameState/GameState.cpp ../PinInterface/PinInterface.cpp ../PinState/PinState.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 # Target executable
