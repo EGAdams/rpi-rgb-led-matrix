@@ -1,7 +1,7 @@
 # Makefile for TieBreaker tests
 
 CXX = g++
-CXXFLAGS = -std=c++11 -I../ -I../../lib -I../../lib/gtest/include
+CXXFLAGS = -std=c++14 -I../ -I../../lib -I../../lib/gtest/include
 LDFLAGS = -L../../lib/gtest -lgtest -lgtest_main -pthread
 
 # Source files
