@@ -12,6 +12,7 @@
 #include "../WinSequences/WinSequences.h"
 #include "../Undo/Undo.h"
 #include "../Inputs/Inputs.h"
+#include "../ScoreBoard/ScoreBoard.h"
 
 class TieBreaker {
  public:

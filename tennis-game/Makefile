@@ -71,7 +71,10 @@ LogObject.o : LogObject/LogObject.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
 test-manual: GameWinSequence.o SetWin.o
-	@echo "Temporary rule worked."
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
+                                                                                                                                                                                
+TieBreakerTest.o: TieBreakerTest.cpp                                                                                                                                                
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $< 
 
 Mode1ScoreTest.o: Mode1Score/Mode1ScoreTest.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<

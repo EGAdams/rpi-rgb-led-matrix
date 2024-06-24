@@ -39,3 +39,6 @@ myenv/*
 
 examples-api-use/pixel-mover
 examples-api-use/ledcat
+.aider.tags.cache.v3/*
+.aider.tags.cache.v3/cache*
+.aider*
