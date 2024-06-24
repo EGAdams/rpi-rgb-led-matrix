@@ -30,23 +30,17 @@ build-python: $(RGB_LIBRARY)
 install-python: build-python
 	$(MAKE) -C $(PYTHON_LIB_DIR) install
 
-TieBreakerTest.o: TieBreakerTest.c
-	$(CC) $(CFLAGS) -c TieBreakerTest.c -o TieBreakerTest.o
-
 FORCE:
 .PHONY: FORCE
-../Mode1WinSequences/Mode1WinSequences.o: ../Mode1WinSequences/Mode1WinSequences.cpp
-	$(CXX) $(CXXFLAGS) -c ../Mode1WinSequences/Mode1WinSequences.cpp -o ../Mode1WinSequences/Mode1WinSequences.o
 
 ../Mode1WinSequences/Mode1WinSequences.o: ../Mode1WinSequences/Mode1WinSequences.cpp
 	$(CXX) $(CXXFLAGS) -c ../Mode1WinSequences/Mode1WinSequences.cpp -o ../Mode1WinSequences/Mode1WinSequences.o
 
 TieBreakerTest.o: TieBreakerTest.c
 	$(CC) $(CFLAGS) -c TieBreakerTest.c -o TieBreakerTest.o
+
 TieBreakerTest: TieBreakerTest.o ../Mode1WinSequences/Mode1WinSequences.o
 	g++ -std=c++14 -I../ -I../../lib -I../../lib/gtest/include -o TieBreakerTest TieBreakerTest.o ../Player/Player.o ../GameState/GameState.o ../PinInterface/PinInterface.o ../PinState/PinState.o ../TieBreaker/TieBreaker.o ../TranslateConstant/TranslateConstant.o ../PointLeds/PointLeds.o ../GameLeds/GameLeds.o ../ServeLeds/ServeLeds.o ../SetLeds/SetLeds.o ../Undo/Undo.o ../GameTimer/GameTimer.o ../SetWin/SetWin.o ../Inputs/Inputs.o ../WatchTimer/WatchTimer.o ../ScoreBoard/ScoreBoard.o ../Mode1WinSequences/Mode1WinSequences.o -L../../lib/gtest -lgtest -lgtest_main -pthread
+
 Mode1ScoreTest: TieBreakerTest.o
 	$(CC) $(CFLAGS) Mode1ScoreTest.c TieBreakerTest.o -o Mode1ScoreTest
-
-TieBreakerTest.o: TieBreakerTest.c
-	$(CC) $(CFLAGS) -c TieBreakerTest.c -o TieBreakerTest.o
