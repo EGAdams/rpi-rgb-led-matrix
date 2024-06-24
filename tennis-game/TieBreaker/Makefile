@@ -20,16 +20,3 @@ clean:
 	rm -f $(OBJS) $(TARGET)
 
 .PHONY: all clean
-
-# Target executable
-TARGET = TieBreakerTest
-
-all: $(TARGET)
-
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS) $(LDFLAGS)
-
-clean:
-	rm -f $(OBJS) $(TARGET)
-
-.PHONY: all clean
