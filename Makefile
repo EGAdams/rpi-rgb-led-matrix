@@ -38,6 +38,9 @@ FORCE:
 ../Mode1WinSequences/Mode1WinSequences.o: ../Mode1WinSequences/Mode1WinSequences.cpp
 	$(CXX) $(CXXFLAGS) -c ../Mode1WinSequences/Mode1WinSequences.cpp -o ../Mode1WinSequences/Mode1WinSequences.o
 
+../Mode1WinSequences/Mode1WinSequences.o: ../Mode1WinSequences/Mode1WinSequences.cpp
+	$(CXX) $(CXXFLAGS) -c ../Mode1WinSequences/Mode1WinSequences.cpp -o ../Mode1WinSequences/Mode1WinSequences.o
+
 TieBreakerTest.o: TieBreakerTest.c
 	$(CC) $(CFLAGS) -c TieBreakerTest.c -o TieBreakerTest.o
 TieBreakerTest: TieBreakerTest.o ../Mode1WinSequences/Mode1WinSequences.o
