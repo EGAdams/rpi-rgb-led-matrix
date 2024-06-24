@@ -23,6 +23,7 @@ protected:
         PinState* pin_state = new PinState(pin_map);
         _pinInterface = new PinInterface(pin_state);
         _tieBreaker = new TieBreaker( _player1, _player2, _pinInterface, _gameState, NULL );
+    }
 
     void TearDown() override {
         delete _tieBreaker;
