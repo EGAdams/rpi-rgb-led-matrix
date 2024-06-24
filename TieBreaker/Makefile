@@ -5,7 +5,7 @@ CXXFLAGS = -std=c++11 -I../ -I../../gtest/include
 LDFLAGS = -L../../gtest/lib -lgtest -lgtest_main -pthread
 
 # Source files
-SRCS = TieBreakerTest.cpp TieBreaker.cpp ../Player/Player.cpp ../GameState/GameState.cpp ../PinInterface/PinInterface.cpp ../PinState/PinState.cpp
+SRCS = ../Mode1Score/TieBreakerTest.cpp TieBreaker.cpp ../Player/Player.cpp ../GameState/GameState.cpp ../PinInterface/PinInterface.cpp ../PinState/PinState.cpp
 
 # Object files
 OBJS = $(SRCS:.cpp=.o)
