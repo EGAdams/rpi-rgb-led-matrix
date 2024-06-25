@@ -16,6 +16,7 @@ Mode1Score::Mode1Score(
     _setLeds( player1, player2, pinInterface ),
     _mode1WinSequences( player1, player2, pinInterface, gameState ),
     _undo( player1, player2, pinInterface, gameState ) {
+        _logger = new Logger( "Mode1Score" );
 }
 Mode1Score::~Mode1Score() {}
 
