@@ -37,12 +37,13 @@ def walk_directory(directory):
     code_contents = {}
     for root, dirs, files in os.walk(directory):
         for file in files:
-            # ask user if extension should be skipped
-            answer = input(f"Should {file} be included in the prompt? (y/n) ")
-            if answer == "n":
-                # add just the extension to image_extensions array, not the file name. we need to extract for example the ".png" from "file.png"
-                image_extensions.append(file)
+            # if file ends in .pyc
+            if file.endswith (".pyc"):
                 continue
+            # if file ends in ".h"
+            if not file.endswith (".h") and not file.endswith (".cpp"):
+                continue
+
             if not any(file.endswith(ext) for ext in image_extensions):
                 try:
                     relative_filepath = os.path.relpath(

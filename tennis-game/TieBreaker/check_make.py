@@ -38,12 +38,9 @@ def walk_directory(directory):
     code_contents = {}
     for root, dirs, files in os.walk(directory):
         for file in files:
-            # ask user if extension should be skipped
-            answer = input(f"Should {file} be included in the prompt? (y/n) ")
-            if answer == "n":
-                # add just the extension to image_extensions array, not the file name. we need to extract for example the ".png" from "file.png"
-                image_extensions.append(file)
+            if not file.endswith((".h", ".cpp", ".cxx", ".c")):
                 continue
+
             if not any(file.endswith(ext) for ext in image_extensions):
                 try:
                     relative_filepath = os.path.relpath(
@@ -101,11 +98,11 @@ def generate_response(system_prompt, user_prompt, model="gpt-3.5-turbo-0125", *a
 
 def main( args ):
     print ( "reading make file..." )
-    makefile = read_file("./Makefile")  # read Makefile from current directory
     # change directory to /home/eg1972/rpi-rgb-led-matrix/tennis-game/TieBreader
     os.chdir( the_makefile_directory )
+    makefile = read_file("./Makefile")  # read Makefile from current directory
 
-    prompt = """ Please fix this make error ``` """
+    prompt = """ \n# Make Output\n```bash\n"""
     cr = CommandRunner()
     make_output = cr.run_command( "make" )
 
@@ -116,12 +113,12 @@ def main( args ):
     if ( number_of_output_lines > 100 ):
         print ( "output of command is greater than 100 lines. Truncating..." )
         # add the first 50 lines of output to prompt
-        prompt += "make output: " + "\n".join( make_output_array[0:50] )
+        prompt += "\n".join( make_output_array[0:50] )
         prompt += "\n... truncated output...\n"
         # add the last 50 lines of output to prompt
         prompt += "\n".join( make_output_array[number_of_output_lines - 50:number_of_output_lines ])
     else:
-        prompt += "make output: " + make_output
+        prompt += make_output
 
     # add ``` to the end of the prompt
     prompt += "```"
@@ -139,19 +136,22 @@ def main( args ):
     )
     system = "You are an AI debugger who is trying to debug a make error for a user based on their C++ source files and the Makefile used to build the project. The user has provided you with the following files and their contents, finally followed by the output of the make command:\n"
     prompt = (
-        "My files are as follows: "
-        + context
-        + "\n\n"
-        + "Makefile: "
+        "# Source Files\n```cpp\n"
+        + context + "```"
+        + "\n\n# Makefile Source\n```bash\n"
         + makefile
-        + "\n\n"
-        + "My issue is as follows: "
+        + "\n```\n"
         + prompt
     )
     prompt += (
         "\n\nPlease help me debug this."
     )
     print("number of lines in prompt: " + str(len(prompt.split("\n"))))
+
+    # open a new file called prompt.md to start writing the final output to.
+    with open(  "prompt.md", "w" ) as f:
+        f.write( system )
+        f.write( prompt )
 
     # print system message in purple
     print("\033[95m" + system + "\033[0m")

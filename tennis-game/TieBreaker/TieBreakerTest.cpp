@@ -35,20 +35,32 @@ protected:
 };
 
 
-TEST_F(TieBreakerTest, Player1WinsTieBreaker) {
-    _gameState->setTieBreak(1);
-    _player1->setPoints(6);
-    _player2->setPoints(6);
-    _tieBreaker->run(_player1);  // Player 1 scores, now 7-6
-    EXPECT_EQ(_player1->getPoints(), 7);
-    EXPECT_EQ(_player2->getPoints(), 6);
+TEST_F( TieBreakerTest, Player1WinsTieBreaker ) {
+    std::cout << "Set tiebreak flag" << std::endl;
+    _gameState->setTieBreak( 1 );
+    std::cout << "Set player 1 points to 6" << std::endl;
+    _player1->setPoints( 6 );
+    std::cout << "Set player 2 points to 6" << std::endl;
+    _player2->setPoints( 6 );
+    std::cout << "Player 1 scores, now 7-6" << std::endl;
+    _tieBreaker->run( _player1 );
+    std::cout << "Expect player 1 points to be 7" << std::endl;
+    EXPECT_EQ( _player1->getPoints(), 7 );
+    std::cout << "Expect player 2 points to be 6" << std::endl;
+    EXPECT_EQ( _player2->getPoints(), 6 );
 
-    _tieBreaker->run(_player1);  // Player 1 scores again, now 8-6, wins the tie-break and set
-    EXPECT_EQ(_player1->getPoints(), 0);
-    EXPECT_EQ(_player2->getPoints(), 0);
-    EXPECT_EQ(_player1->getGames(), 0);
-    EXPECT_EQ(_player2->getGames(), 0);
-    EXPECT_EQ(_player1->getSets(), 1);
+    std::cout << "Player 1 scores again, now 8-6, wins the tie-break and set" << std::endl;
+    _tieBreaker->run( _player1 );
+    std::cout << "Expect player 1 points to be 0" << std::endl;
+    EXPECT_EQ( _player1->getPoints(), 0 );
+    std::cout << "Expect player 2 points to be 0" << std::endl;
+    EXPECT_EQ( _player2->getPoints(), 0 );
+    std::cout << "Expect player 1 games to be 0" << std::endl;
+    EXPECT_EQ( _player1->getGames(), 0 );
+    std::cout << "Expect player 2 games to be 0" << std::endl;
+    EXPECT_EQ( _player2->getGames(), 0 );
+    std::cout << "Expect player 1 sets to be 1" << std::endl;
+    EXPECT_EQ( _player1->getSets(), 1 );
 }
 
 TEST_F(TieBreakerTest, Player2WinsTieBreaker) {

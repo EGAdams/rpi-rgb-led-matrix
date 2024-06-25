@@ -22,6 +22,10 @@ void PointLeds::setScoreBoard( ScoreBoard* scoreBoard ) {
     _scoreBoardSet = true;
 }
 
+void PointLeds::updateTBPoints() {
+    std::cout << "*** ERROR: updateTBPoints is not implemented ***" << std::endl;
+}
+
 void PointLeds::updatePoints() {
     std::cout << "calling _scoreBoard->update() from inside PointLeds.  checking scoreboard bool.. " << std::endl;
     if ( _scoreBoardSet == true && _scoreBoard != nullptr ) {
@@ -32,7 +36,8 @@ void PointLeds::updatePoints() {
             std::cerr << "Error: _scoreBoard is nullptr" << std::endl;
         }
         std::cout << "scoreboard bool is false, not updating scoreboard." << std::endl;
-
+    }
+    
     switch ( _player1->getPoints()) {
         case 0:
             // draw "00"
@@ -91,6 +96,4 @@ void PointLeds::updatePoints() {
     }
 }
 
-void PointLeds::updateTBPoints() {
-    // update tie breaker points
-}
+

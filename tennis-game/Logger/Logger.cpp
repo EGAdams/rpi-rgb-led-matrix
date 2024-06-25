@@ -12,7 +12,9 @@ Logger::Logger( std::string name ) : _name( name ) {
     std::string logFilePath = name + "/log.txt";
     _log_file.open(logFilePath, std::ios::out | std::ios::app);
     if (!_log_file.is_open()) { // Handle error
-        std::cerr << "Failed to open log file at path: " << logFilePath << std::endl; }}
+        std::cerr << "Failed to open log file at path: " << logFilePath << std::endl;
+        std::cerr << "Current working directory: " << std::filesystem::current_path() << std::endl;
+    }}
 
 Logger::~Logger() { _log_file.close(); }
 

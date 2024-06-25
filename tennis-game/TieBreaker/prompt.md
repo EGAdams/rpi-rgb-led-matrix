@@ -1,6 +1,7 @@
-Please read the following .cpp test files that I need a makefile for:
-# TieBreaker.cpp:
+You are an AI debugger who is trying to debug a make error for a user based on their C++ source files and the Makefile used to build the project. The user has provided you with the following files and their contents, finally followed by the output of the make command:
+# Source Files
 ```cpp
+TieBreaker.cpp:
 #include "TieBreaker.h"
 
 TieBreaker::TieBreaker( Player* player1,
@@ -465,20 +466,32 @@ protected:
 };
 
 
-TEST_F(TieBreakerTest, Player1WinsTieBreaker) {
-    _gameState->setTieBreak(1);
-    _player1->setPoints(6);
-    _player2->setPoints(6);
-    _tieBreaker->run(_player1);  // Player 1 scores, now 7-6
-    EXPECT_EQ(_player1->getPoints(), 7);
-    EXPECT_EQ(_player2->getPoints(), 6);
+TEST_F( TieBreakerTest, Player1WinsTieBreaker ) {
+    std::cout << "Set tiebreak flag" << std::endl;
+    _gameState->setTieBreak( 1 );
+    std::cout << "Set player 1 points to 6" << std::endl;
+    _player1->setPoints( 6 );
+    std::cout << "Set player 2 points to 6" << std::endl;
+    _player2->setPoints( 6 );
+    std::cout << "Player 1 scores, now 7-6" << std::endl;
+    _tieBreaker->run( _player1 );
+    std::cout << "Expect player 1 points to be 7" << std::endl;
+    EXPECT_EQ( _player1->getPoints(), 7 );
+    std::cout << "Expect player 2 points to be 6" << std::endl;
+    EXPECT_EQ( _player2->getPoints(), 6 );
 
-    _tieBreaker->run(_player1);  // Player 1 scores again, now 8-6, wins the tie-break and set
-    EXPECT_EQ(_player1->getPoints(), 0);
-    EXPECT_EQ(_player2->getPoints(), 0);
-    EXPECT_EQ(_player1->getGames(), 0);
-    EXPECT_EQ(_player2->getGames(), 0);
-    EXPECT_EQ(_player1->getSets(), 1);
+    std::cout << "Player 1 scores again, now 8-6, wins the tie-break and set" << std::endl;
+    _tieBreaker->run( _player1 );
+    std::cout << "Expect player 1 points to be 0" << std::endl;
+    EXPECT_EQ( _player1->getPoints(), 0 );
+    std::cout << "Expect player 2 points to be 0" << std::endl;
+    EXPECT_EQ( _player2->getPoints(), 0 );
+    std::cout << "Expect player 1 games to be 0" << std::endl;
+    EXPECT_EQ( _player1->getGames(), 0 );
+    std::cout << "Expect player 2 games to be 0" << std::endl;
+    EXPECT_EQ( _player2->getGames(), 0 );
+    std::cout << "Expect player 1 sets to be 1" << std::endl;
+    EXPECT_EQ( _player1->getSets(), 1 );
 }
 
 TEST_F(TieBreakerTest, Player2WinsTieBreaker) {
@@ -498,8 +511,8 @@ TEST_F(TieBreakerTest, Player2WinsTieBreaker) {
 }
 ```
 
-Here is the Makefile one directory above that works:
-```
+# Makefile Source
+```bash
 # google test
 GTEST_DIR=/home/adamsl/rpi-rgb-led-matrix/tennis-game/googletest
 GTEST_INCDIR=$(GTEST_DIR)/googletest/include
@@ -512,9 +525,7 @@ CXX=g++
 CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter
 CXXFLAGS=$(CFLAGS) -I$(GTEST_INCDIR) -I$(RGB_INCDIR)
 
-BINARIES=tennis-game Mode1ScoreTest
-
-RGB_LIB_DISTRIBUTION=..
+RGB_LIB_DISTRIBUTION=../../
 RGB_INCDIR=$(RGB_LIB_DISTRIBUTION)/include
 RGB_LIBDIR=$(RGB_LIB_DISTRIBUTION)/lib
 RGB_LIBRARY_NAME=rgbmatrix
@@ -522,248 +533,43 @@ RGB_LIBRARY=$(RGB_LIBDIR)/lib$(RGB_LIBRARY_NAME).a
 
 LDFLAGS+=-L$(RGB_LIBDIR) -l$(RGB_LIBRARY_NAME) -lrt -lm -L$(GTEST_LIBDIR) $(GTEST_LIBS) -ljsoncpp -lcurl -lpthread
 
-MAIN_OBJECTS=GameWinSequence.o SetWin.o SetHistoryText.o SetDrawer.o GameLedTranslator.o SubjectManager.o WebLiquidCrystal.o WatchTimer.o Inputs.o TieBreaker.o Mode1Score.o Mode1Functions.o ServeLeds.o Undo.o BatteryTest.o Reset.o SetLeds.o TieLeds.o Mode1WinSequences.o Mode2Functions.o MatchWinSequence.o TennisConstants.o GameLeds.o GameModes.o GameObject.o PinState.o PinInterface.o TranslateConstant.o PointLeds.o Arduino.o CanvasCreator.o FontLoader.o Drawer.o TextDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game.o LogObject.o LogObjectContainer.o LogObjectFactory.o MonitorLedClassObject.o MonitorLed.o JsonParser.o LoggerFactory.o Model.o MonitoredObject.o SourceData.o FetchRunner.o
+TEST_OBJECTS=../TieLeds/TieLeds.o ../GameLedTranslator/GameLedTranslator.o ../GameState/GameState.o ../Player/Player.o ../GameTimer/GameTimer.o ../ScoreBoard/ScoreBoard.o ../SetDrawer/SetDrawer.o ../SetHistoryText/SetHistoryText.o ../Drawer/Drawer.o ../CanvasCreator/CanvasCreator.o ../FontLoader/FontLoader.o ../LogObject/LogObject.o ../LogObjectContainer/LogObjectContainer.o ../LogObjectFactory/LogObjectFactory.o ../MonitorLedClassObject/MonitorLedClassObject.o ../MonitorLed/MonitorLed.o ../JsonParser/JsonParser.o ../LoggerFactory/LoggerFactory.o ../Model/Model.o ../MonitoredObject/MonitoredObject.o ../SourceData/SourceData.o ../FetchRunner/FetchRunner.o ../PinInterface/PinInterface.o ../PinState/PinState.o ../History/History.o ../Mode1Score/Mode1Score.o Mode1ScoreTest.o TieBreakerTest.o ../TranslateConstant/TranslateConstant.o ../Logger/Logger.o TieBreaker.o ../PointLeds/PointLeds.o ../GameLeds/GameLeds.o ../SetLeds/SetLeds.o ../WinSequences/WinSequences.o ../Undo/Undo.o ../ServeLeds/ServeLeds.o ../GameWinSequence/GameWinSequence.o ../SetWin/SetWin.o ../MatchWinSequence/MatchWinSequence.o ../Inputs/Inputs.o ../WatchTimer/WatchTimer.o ../Reset/Reset.o
 
-TEST_OBJECTS=TieLeds.o GameLedTranslator.o GameState.o Player.o GameTimer.o ScoreBoard.o SetDrawer.o SetHistoryText.o Drawer.o CanvasCreator.o FontLoader.o LogObject.o LogObjectContainer.o LogObjectFactory.o MonitorLedClassObject.o MonitorLed.o JsonParser.o LoggerFactory.o Model.o MonitoredObject.o SourceData.o FetchRunner.o PinInterface.o PinState.o History.o Mode1Score.o Mode1ScoreTest.o TieBreakerTest.o TranslateConstant.o Logger.o TieBreaker.o PointLeds.o GameLeds.o SetLeds.o Mode1WinSequences.o Undo.o ServeLeds.o GameWinSequence.o SetWin.o MatchWinSequence.o Inputs.o WatchTimer.o Reset.o
+all: TieBreakerTest
 
+TieBreakerTest: $(TEST_OBJECTS)
+	$(CXX) $(CXXFLAGS) -o TieBreakerTest $(TEST_OBJECTS) $(LDFLAGS)
 
-
-all : $(BINARIES)
-
-$(RGB_LIBRARY): FORCE
-	$(MAKE) -C $(RGB_LIBDIR)
-
-tennis-game: $(MAIN_OBJECTS)
-	$(CXX) $^ -o $@ $(LDFLAGS)
-
-tennis-game-manual: GameWinSequence.o SetWin.o SetHistoryText.o SetDrawer.o GameLedTranslator.o SubjectManager.o WebLiquidCrystal.o WatchTimer.o Inputs.o TieBreaker.o Mode1Score.o Mode1Functions.o ServeLeds.o Undo.o BatteryTest.o Reset.o SetLeds.o TieLeds.o Mode1WinSequences.o Mode2Functions.o MatchWinSequence.o TennisConstants.o GameLeds.o GameModes.o GameObject.o PinState.o PinInterface.o TranslateConstant.o PointLeds.o Arduino.o CanvasCreator.o FontLoader.o Drawer.o TextDrawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game-manual.o LogObject.o LogObjectContainer.o LogObjectFactory.o MonitorLedClassObject.o MonitorLed.o JsonParser.o LoggerFactory.o Model.o MonitoredObject.o SourceData.o FetchRunner.o
-	$(CXX) $^ -o $@ $(LDFLAGS)
-
-FetchRunner.o : FetchRunner/FetchRunner.cpp
+TieBreakerTest.o: TieBreakerTest.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
-SourceData.o : SourceData/SourceData.cpp
+Mode1ScoreTest.o: ../Mode1Score/Mode1ScoreTest.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
-Model.o : Model/Model.cpp
+TieBreaker.o: TieBreaker.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-MonitoredObject.o : MonitoredObject/MonitoredObject.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-LoggerFactory.o : LoggerFactory/LoggerFactory.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-JsonParser.o : JsonParser/JsonParser.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-MonitorLed.o : MonitorLed/MonitorLed.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-MonitorLedClassObject.o : MonitorLedClassObject/MonitorLedClassObject.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-LogObjectFactory.o : LogObjectFactory/LogObjectFactory.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-LogObjectContainer.o : LogObjectContainer/LogObjectContainer.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-LogObject.o : LogObject/LogObject.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-test-manual: GameWinSequence.o SetWin.o
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-                                                                                                                                                                                
-TieBreakerTest.o: TieBreakerTest.cpp                                                                                                                                                
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $< 
-
-Mode1ScoreTest.o: Mode1Score/Mode1ScoreTest.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-Mode1ScoreTest: $(TEST_OBJECTS)
-	$(CXX) $(CXXFLAGS) -o Mode1ScoreTest $(TEST_OBJECTS) $(LDFLAGS)
-
-GameWinSequence.o : GameWinSequence/GameWinSequence.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-SetWin.o : SetWin/SetWin.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-SetDrawer.o : SetDrawer/SetDrawer.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-GameLedTranslator.o : GameLedTranslator/GameLedTranslator.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-CanvasCreator.o : CanvasCreator/CanvasCreator.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-FontLoader.o : FontLoader/FontLoader.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-Drawer.o : Drawer/Drawer.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-TextDrawer.o : TextDrawer/TextDrawer.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-GameTimer.o : GameTimer/GameTimer.cpp
-	$(CXX) -I$(RGB_INCDIR) -I../Arduino $(CXXFLAGS) -c -o $@ $<
-
-GameState.o : GameState/GameState.cpp
-	$(CXX) -I$(RGB_INCDIR) -I../Arduino $(CXXFLAGS) -c -o $@ $<
-
-GameObject.o : GameObject/GameObject.cpp
-	$(CXX) -I$(RGB_INCDIR) -I../Arduino $(CXXFLAGS) -c -o $@ $<
-
-GameModes.o : GameModes/GameModes.cpp
-	$(CXX) -I$(RGB_INCDIR) -I../Arduino $(CXXFLAGS) -c -o $@ $<
-
-GameLeds.o : GameLeds/GameLeds.cpp
-	$(CXX) -I$(RGB_INCDIR) -I../Arduino $(CXXFLAGS) -c -o $@ $<
-
-Arduino.o : Arduino/Arduino.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-Logger.o : Logger/Logger.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-History.o : History/History.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-ScoreBoard.o : ScoreBoard/ScoreBoard.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-Player.o : Player/Player.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-PinInterface.o : PinInterface/PinInterface.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-TranslateConstant.o : TranslateConstant/TranslateConstant.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-PointLeds.o : PointLeds/PointLeds.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-PinState.o : PinState/PinState.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-TennisConstants.o : TennisConstants/TennisConstants.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-Mode1Functions.o : Mode1Functions/Mode1Functions.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-Mode2Functions.o : Mode2Functions/Mode2Functions.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-Mode1WinSequences.o : WinSequences/WinSequences.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-SetLeds.o : SetLeds/SetLeds.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-TieLeds.o : TieLeds/TieLeds.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-Reset.o : Reset/Reset.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-MatchWinSequence.o : MatchWinSequence/MatchWinSequence.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-BatteryTest.o : BatteryTest/BatteryTest.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-WebLiquidCrystal.o : WebLiquidCrystal/WebLiquidCrystal.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-Undo.o : Undo/Undo.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-ServeLeds.o : ServeLeds/ServeLeds.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-Mode1Score.o : Mode1Score/Mode1Score.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-TieBreaker.o : TieBreaker/TieBreaker.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-Inputs.o : Inputs/Inputs.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-WatchTimer.o : WatchTimer/WatchTimer.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-SubjectManager.o : SubjectManager/SubjectManager.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-SetHistoryText.o : SetHistoryText/SetHistoryText.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-tennis-game.o : tennis-game.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-tennis-game-manual.o : tennis-game-manual.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-
 
 clean:
-	rm -f $(MAIN_OBJECTS) $(TEST_OBJECTS) $(BINARIES)
+	rm -f $(TEST_OBJECTS) TieBreakerTest
 
 FORCE:
 .PHONY: FORCE
 
 print-%:
-	@echo $* = $($*)d
-```
+	@echo $* = $($*)
 
-Here is the partial output of the Linux tree command to give you an idea of the folder structure one level up:
+```
+ 
+# Make Output
 ```bash
-...
-├── text_scoreboard_test.cpp
-├── TieBreaker
-│   ├── Makefile
-│   ├── prompt.md
-│   ├── TieBreaker.cpp
-│   ├── TieBreaker.h
-│   └── TieBreakerTest.cpp
-├── TieLeds
-│   ├── TieLeds.cpp
-│   └── TieLeds.h
-├── TranslateConstant
-│   ├── TranslateConstant.cpp
-│   └── TranslateConstant.h
-├── Undo
-│   ├── log.txt
-│   ├── Makefile
-│   ├── run_tests
-│   ├── Undo.cpp
-│   ├── Undo.h
-│   └── UndoTest.cpp
-├── unit_run_bug.md
-├── use_arguments.md
-├── WatchTimer
-│   ├── WatchTimer.cpp
-│   └── WatchTimer.h
-├── WebLiquidCrystal
-│   ├── WebLiquidCrystal.cpp
-│   └── WebLiquidCrystal.h
-├── WinSequence
-│   ├── WinSequence.cpp
-│   └── WinSequence.h
-├── WinSequences
-│   ├── WinSequences.cpp
-│   └── WinSequences.h
-...
+9.96s - pydevd: Sending message related to process being replaced timed-out after 5 seconds
+g++ -Wall -O3 -g -Wextra -Wno-unused-parameter -I/home/adamsl/rpi-rgb-led-matrix/tennis-game/googletest/googletest/include -I../..//include -o TieBreakerTest ../TieLeds/TieLeds.o ../GameLedTranslator/GameLedTranslator.o ../GameState/GameState.o ../Player/Player.o ../GameTimer/GameTimer.o ../ScoreBoard/ScoreBoard.o ../SetDrawer/SetDrawer.o ../SetHistoryText/SetHistoryText.o ../Drawer/Drawer.o ../CanvasCreator/CanvasCreator.o ../FontLoader/FontLoader.o ../LogObject/LogObject.o ../LogObjectContainer/LogObjectContainer.o ../LogObjectFactory/LogObjectFactory.o ../MonitorLedClassObject/MonitorLedClassObject.o ../MonitorLed/MonitorLed.o ../JsonParser/JsonParser.o ../LoggerFactory/LoggerFactory.o ../Model/Model.o ../MonitoredObject/MonitoredObject.o ../SourceData/SourceData.o ../FetchRunner/FetchRunner.o ../PinInterface/PinInterface.o ../PinState/PinState.o ../History/History.o ../Mode1Score/Mode1Score.o Mode1ScoreTest.o TieBreakerTest.o ../TranslateConstant/TranslateConstant.o ../Logger/Logger.o TieBreaker.o ../PointLeds/PointLeds.o ../GameLeds/GameLeds.o ../SetLeds/SetLeds.o ../WinSequences/WinSequences.o ../Undo/Undo.o ../ServeLeds/ServeLeds.o ../GameWinSequence/GameWinSequence.o ../SetWin/SetWin.o ../MatchWinSequence/MatchWinSequence.o ../Inputs/Inputs.o ../WatchTimer/WatchTimer.o ../Reset/Reset.o -L../..//lib -lrgbmatrix -lrt -lm -L/home/adamsl/rpi-rgb-led-matrix/tennis-game/googletest/build/lib -lgtest_main -lgtest -lpthread -ljsoncpp -lcurl -lpthread
+/usr/bin/ld: ../WinSequences/WinSequences.o: in function `Mode1WinSequences::playerOneMatchWin()':
+/home/eg1972/rpi-rgb-led-matrix/tennis-game/TieBreaker/../WinSequences/WinSequences.cpp:54: undefined reference to `PointLeds::updateTBPoints()'
+/usr/bin/ld: ../WinSequences/WinSequences.o: in function `Mode1WinSequences::playerTwoMatchWin()':
+/home/eg1972/rpi-rgb-led-matrix/tennis-game/TieBreaker/../WinSequences/WinSequences.cpp:60: undefined reference to `PointLeds::updateTBPoints()'
+collect2: error: ld returned 1 exit status
+make: *** [Makefile:26: TieBreakerTest] Error 1
 ```
 
-Notice how I have added a new directory called TieBreaker.  I need you to rewrite the Makefile in this TieBreaker directory using the provided Makefile as a guide.  Please make the necessary path adjustments as the libries are in the same place as the provided Makefile, just one directoy up.  I am going to delete the file in the TieBreaker folder and replace it with the one that you write.  Please pay attention to the directory structure.
-
-
-
-Please write the Makefile for this TieBreaker test.
+Please help me debug this.

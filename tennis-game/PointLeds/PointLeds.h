@@ -13,6 +13,7 @@ class PointLeds {
   PointLeds( Player* player1, Player* player2, ScoreBoard*   scoreBoard   );
   ~PointLeds();
   void updatePoints();
+       
   void updateTBPoints();
   void setScoreBoard( ScoreBoard* scoreBoard );
 
