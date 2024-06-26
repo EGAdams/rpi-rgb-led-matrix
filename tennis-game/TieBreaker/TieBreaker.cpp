@@ -21,7 +21,7 @@ TieBreaker::~TieBreaker() {}
 
 int TieBreaker::_getServe() { // bot code, beware...
     // Array representing serve sequence in pairs
-    const int servePattern[] = {PLAYER_2_SERVE, PLAYER_2_SERVE, PLAYER_1_SERVE, PLAYER_1_SERVE};
+    const int servePattern[] = { PLAYER_2_SERVE, PLAYER_2_SERVE, PLAYER_1_SERVE, PLAYER_1_SERVE };
 
     if (_iteration < 1) {
         std::cerr << "*** ERROR: _getServe() in TieBreaker.cpp is returning default value. ***"
@@ -31,7 +31,7 @@ int TieBreaker::_getServe() { // bot code, beware...
     }
 
     // Adjust the iteration for zero-based indexing and calculate serve index
-    int serveIndex = (_iteration - 1) % 4;
+    int serveIndex = ( _iteration - 1 ) % 4;
 
     
     return servePattern[serveIndex];
