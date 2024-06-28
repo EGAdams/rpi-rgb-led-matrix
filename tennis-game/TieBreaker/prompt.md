@@ -1,6 +1,65 @@
 You are an AI debugger who is trying to debug a make error for a user based on their C++ source files and the Makefile used to build the project. The user has provided you with the following files and their contents, finally followed by the output of the make command:
 # Source Files
 ```cpp
+TieBreaker.h:
+#ifndef TieBreaker_h
+#define TieBreaker_h
+#include "../Arduino/Arduino.h"
+#include "../GameLeds/GameLeds.h"
+#include "../GameTimer/GameTimer.h"
+#include "../PointLeds/PointLeds.h"
+#include "../PinInterface/PinInterface.h"
+#include "../Player/Player.h"
+#include "../ServeLeds/ServeLeds.h"
+#include "../SetLeds/SetLeds.h"
+#include "../WatchTimer/WatchTimer.h"
+#include "../WinSequences/WinSequences.h"
+#include "../Undo/Undo.h"
+#include "../Inputs/Inputs.h"
+#include "../ScoreBoard/ScoreBoard.h"
+
+class TieBreaker {
+ public:
+  TieBreaker(Player* player1, Player* player2, PinInterface* pinInterface, GameState* gameState, History* history);
+  ~TieBreaker();
+  void setIteration(int iteration);
+  int getIteration();
+  void incrementIteration();
+  void setScoreBoards(ScoreBoard* scoreBoard);
+  void tieLEDsOn();
+  void tieLEDsOff();
+  void celebrate(Player* currentPlayer);
+  void incrementSet();
+  void run(Player* currentPlayer);
+  void mode1SetTBButtonFunction();
+  void setTieBreaker();
+  void initializeTieBreakMode();
+  void setTieBreakEnable();
+  void endTieBreak();
+  void mode1TBP1Games();
+  void mode1TBP2Games();
+  void mode1SetTBP2Games();
+  void mode1SetTBP1Games();
+
+ private:
+  int  _getServe();    // determine serve based on iteration
+  Player* _player1;
+  Player* _player2;
+  PinInterface* _pinInterface;
+  GameState* _gameState;
+  History* _history;
+  PointLeds _pointLeds;
+  GameLeds _gameLeds;
+  ServeLeds _serveLeds;
+  SetLeds _setLeds;
+  Mode1WinSequences _mode1WinSequences;
+  Undo _undo;
+  ScoreBoard* _scoreBoard;
+  int _iteration;
+};
+
+#endif
+
 TieBreaker.cpp:
 #include "TieBreaker.h"
 
@@ -25,7 +84,7 @@ TieBreaker::~TieBreaker() {}
 
 int TieBreaker::_getServe() { // bot code, beware...
     // Array representing serve sequence in pairs
-    const int servePattern[] = {PLAYER_2_SERVE, PLAYER_2_SERVE, PLAYER_1_SERVE, PLAYER_1_SERVE};
+    const int servePattern[] = { PLAYER_2_SERVE, PLAYER_2_SERVE, PLAYER_1_SERVE, PLAYER_1_SERVE };
 
     if (_iteration < 1) {
         std::cerr << "*** ERROR: _getServe() in TieBreaker.cpp is returning default value. ***"
@@ -35,7 +94,7 @@ int TieBreaker::_getServe() { // bot code, beware...
     }
 
     // Adjust the iteration for zero-based indexing and calculate serve index
-    int serveIndex = (_iteration - 1) % 4;
+    int serveIndex = ( _iteration - 1 ) % 4;
 
     
     return servePattern[serveIndex];
@@ -369,65 +428,6 @@ void TieBreaker::mode1SetTBP1Games() {
         _gameState->stopGameRunning(); }
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 ); }
 
-TieBreaker.h:
-#ifndef TieBreaker_h
-#define TieBreaker_h
-#include "../Arduino/Arduino.h"
-#include "../GameLeds/GameLeds.h"
-#include "../GameTimer/GameTimer.h"
-#include "../PointLeds/PointLeds.h"
-#include "../PinInterface/PinInterface.h"
-#include "../Player/Player.h"
-#include "../ServeLeds/ServeLeds.h"
-#include "../SetLeds/SetLeds.h"
-#include "../WatchTimer/WatchTimer.h"
-#include "../WinSequences/WinSequences.h"
-#include "../Undo/Undo.h"
-#include "../Inputs/Inputs.h"
-#include "../ScoreBoard/ScoreBoard.h"
-
-class TieBreaker {
- public:
-  TieBreaker(Player* player1, Player* player2, PinInterface* pinInterface, GameState* gameState, History* history);
-  ~TieBreaker();
-  void setIteration(int iteration);
-  int getIteration();
-  void incrementIteration();
-  void setScoreBoards(ScoreBoard* scoreBoard);
-  void tieLEDsOn();
-  void tieLEDsOff();
-  void celebrate(Player* currentPlayer);
-  void incrementSet();
-  void run(Player* currentPlayer);
-  void mode1SetTBButtonFunction();
-  void setTieBreaker();
-  void initializeTieBreakMode();
-  void setTieBreakEnable();
-  void endTieBreak();
-  void mode1TBP1Games();
-  void mode1TBP2Games();
-  void mode1SetTBP2Games();
-  void mode1SetTBP1Games();
-
- private:
-  int  _getServe();    // determine serve based on iteration
-  Player* _player1;
-  Player* _player2;
-  PinInterface* _pinInterface;
-  GameState* _gameState;
-  History* _history;
-  PointLeds _pointLeds;
-  GameLeds _gameLeds;
-  ServeLeds _serveLeds;
-  SetLeds _setLeds;
-  Mode1WinSequences _mode1WinSequences;
-  Undo _undo;
-  ScoreBoard* _scoreBoard;
-  int _iteration;
-};
-
-#endif
-
 TieBreakerTest.cpp:
 #include <gtest/gtest.h>
 #include "TieBreaker.h"
@@ -453,7 +453,7 @@ protected:
         std::map<std::string, int> pin_map;
         PinState* pin_state = new PinState(pin_map);
         _pinInterface = new PinInterface(pin_state);
-        _tieBreaker = new TieBreaker( _player1, _player2, _pinInterface, _gameState, NULL );
+        _tieBreaker = new TieBreaker(_player1, _player2, _pinInterface, _gameState, NULL);
     }
 
     void TearDown() override {
@@ -465,50 +465,48 @@ protected:
     }
 };
 
+TEST_F(TieBreakerTest, SetUpSetTieBreakScenario) {
+    _gameObject->getScoreBoard()->clearScreen();
+    _player1->setSetHistory(1, 6);
+    _player2->setSetHistory(1, 4);
+    _player1->setSetHistory(2, 5);
+    _player2->setSetHistory(2, 5);
+    _gameState->setCurrentSet(2);
+    _player1->setGames(5);
+    _player2->setGames(5);
+    _player1->setPoints(2);
+    _player2->setPoints(3);
+    
+    std::cout << "Updating scoreboard..." << std::endl;
+    _gameObject->getScoreBoard()->update();
+    std::cout << "Done updating scoreboard." << std::endl;
 
-TEST_F( TieBreakerTest, Player1WinsTieBreaker ) {
-    std::cout << "Set tiebreak flag" << std::endl;
-    _gameState->setTieBreak( 1 );
-    std::cout << "Set player 1 points to 6" << std::endl;
-    _player1->setPoints( 6 );
-    std::cout << "Set player 2 points to 6" << std::endl;
-    _player2->setPoints( 6 );
-    std::cout << "Player 1 scores, now 7-6" << std::endl;
-    _tieBreaker->run( _player1 );
-    std::cout << "Expect player 1 points to be 7" << std::endl;
-    EXPECT_EQ( _player1->getPoints(), 7 );
-    std::cout << "Expect player 2 points to be 6" << std::endl;
-    EXPECT_EQ( _player2->getPoints(), 6 );
+    // Simulate Player 2 winning the next point
+    _player2->setPoints(4);
+    std::cout << "Player 2 scores the next point..." << std::endl;
+    
+    // Check if Player 2 wins the set and if the tie-breaker is ready
+    if (_player2->getPoints() >= 4 && (_player2->getPoints() - _player1->getPoints()) >= 2) {
+        _player2->setGames(_player2->getGames() + 1);
+        EXPECT_EQ(_player2->getGames(), 6);  // Player 2 should now have 6 games
+    }
 
-    std::cout << "Player 1 scores again, now 8-6, wins the tie-break and set" << std::endl;
-    _tieBreaker->run( _player1 );
-    std::cout << "Expect player 1 points to be 0" << std::endl;
-    EXPECT_EQ( _player1->getPoints(), 0 );
-    std::cout << "Expect player 2 points to be 0" << std::endl;
-    EXPECT_EQ( _player2->getPoints(), 0 );
-    std::cout << "Expect player 1 games to be 0" << std::endl;
-    EXPECT_EQ( _player1->getGames(), 0 );
-    std::cout << "Expect player 2 games to be 0" << std::endl;
-    EXPECT_EQ( _player2->getGames(), 0 );
-    std::cout << "Expect player 1 sets to be 1" << std::endl;
-    EXPECT_EQ( _player1->getSets(), 1 );
-}
-
-TEST_F(TieBreakerTest, Player2WinsTieBreaker) {
-    _gameState->setTieBreak(1);
-    _player1->setPoints(6);
-    _player2->setPoints(6);
-    _tieBreaker->run(_player2);  // Player 2 scores, now 7-6
-    EXPECT_EQ(_player1->getPoints(), 6);
-    EXPECT_EQ(_player2->getPoints(), 7);
-
-    _tieBreaker->run(_player2);  // Player 2 scores again, now 8-6, wins the tie-break and set
+    // Update and check the tie-breaker initiation
+    _tieBreaker->initializeTieBreakMode();
+    EXPECT_EQ(_tieBreaker->getIteration(), 1);
     EXPECT_EQ(_player1->getPoints(), 0);
     EXPECT_EQ(_player2->getPoints(), 0);
-    EXPECT_EQ(_player1->getGames(), 0);
-    EXPECT_EQ(_player2->getGames(), 0);
-    EXPECT_EQ(_player2->getSets(), 1);
+    EXPECT_EQ(_gameState->getServeSwitch(), 1);
+    EXPECT_EQ(_gameState->getServe(), 0);
+    EXPECT_EQ(_gameState->getTieLEDsOn(), 1);
+    std::cout << "Tie-breaker mode initialized." << std::endl;
 }
+
+tennis-game/TieBreaker/TieBreaker.cpp:
+
+tennis-game/TieBreaker/TieBreaker.h:
+
+tennis-game/TieBreaker/TieBreakerTest.cpp:
 ```
 
 # Makefile Source
@@ -533,7 +531,7 @@ RGB_LIBRARY=$(RGB_LIBDIR)/lib$(RGB_LIBRARY_NAME).a
 
 LDFLAGS+=-L$(RGB_LIBDIR) -l$(RGB_LIBRARY_NAME) -lrt -lm -L$(GTEST_LIBDIR) $(GTEST_LIBS) -ljsoncpp -lcurl -lpthread
 
-TEST_OBJECTS=../TieLeds/TieLeds.o ../GameLedTranslator/GameLedTranslator.o ../GameState/GameState.o ../Player/Player.o ../GameTimer/GameTimer.o ../ScoreBoard/ScoreBoard.o ../SetDrawer/SetDrawer.o ../SetHistoryText/SetHistoryText.o ../Drawer/Drawer.o ../CanvasCreator/CanvasCreator.o ../FontLoader/FontLoader.o ../LogObject/LogObject.o ../LogObjectContainer/LogObjectContainer.o ../LogObjectFactory/LogObjectFactory.o ../MonitorLedClassObject/MonitorLedClassObject.o ../MonitorLed/MonitorLed.o ../JsonParser/JsonParser.o ../LoggerFactory/LoggerFactory.o ../Model/Model.o ../MonitoredObject/MonitoredObject.o ../SourceData/SourceData.o ../FetchRunner/FetchRunner.o ../PinInterface/PinInterface.o ../PinState/PinState.o ../History/History.o ../Mode1Score/Mode1Score.o Mode1ScoreTest.o TieBreakerTest.o ../TranslateConstant/TranslateConstant.o ../Logger/Logger.o TieBreaker.o ../PointLeds/PointLeds.o ../GameLeds/GameLeds.o ../SetLeds/SetLeds.o ../WinSequences/WinSequences.o ../Undo/Undo.o ../ServeLeds/ServeLeds.o ../GameWinSequence/GameWinSequence.o ../SetWin/SetWin.o ../MatchWinSequence/MatchWinSequence.o ../Inputs/Inputs.o ../WatchTimer/WatchTimer.o ../Reset/Reset.o
+TEST_OBJECTS=../TieLeds/TieLeds.o ../GameLedTranslator/GameLedTranslator.o ../GameState/GameState.o ../Player/Player.o ../GameTimer/GameTimer.o ../ScoreBoard/ScoreBoard.o ../SetDrawer/SetDrawer.o ../SetHistoryText/SetHistoryText.o ../Drawer/Drawer.o ../CanvasCreator/CanvasCreator.o ../FontLoader/FontLoader.o ../LogObject/LogObject.o ../LogObjectContainer/LogObjectContainer.o ../LogObjectFactory/LogObjectFactory.o ../MonitorLedClassObject/MonitorLedClassObject.o ../MonitorLed/MonitorLed.o ../JsonParser/JsonParser.o ../LoggerFactory/LoggerFactory.o ../Model/Model.o ../MonitoredObject/MonitoredObject.o ../SourceData/SourceData.o ../FetchRunner/FetchRunner.o ../PinInterface/PinInterface.o ../PinState/PinState.o ../History/History.o ../Mode1Score/Mode1Score.o TieBreakerTest.o ../TranslateConstant/TranslateConstant.o ../Logger/Logger.o TieBreaker.o ../PointLeds/PointLeds.o ../GameLeds/GameLeds.o ../SetLeds/SetLeds.o ../WinSequences/WinSequences.o ../Undo/Undo.o ../ServeLeds/ServeLeds.o ../GameWinSequence/GameWinSequence.o ../SetWin/SetWin.o ../MatchWinSequence/MatchWinSequence.o ../Inputs/Inputs.o ../WatchTimer/WatchTimer.o ../Reset/Reset.o
 
 all: TieBreakerTest
 
@@ -541,9 +539,6 @@ TieBreakerTest: $(TEST_OBJECTS)
 	$(CXX) $(CXXFLAGS) -o TieBreakerTest $(TEST_OBJECTS) $(LDFLAGS)
 
 TieBreakerTest.o: TieBreakerTest.cpp
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
-
-Mode1ScoreTest.o: ../Mode1Score/Mode1ScoreTest.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
 TieBreaker.o: TieBreaker.cpp
@@ -562,14 +557,12 @@ print-%:
  
 # Make Output
 ```bash
-9.96s - pydevd: Sending message related to process being replaced timed-out after 5 seconds
-g++ -Wall -O3 -g -Wextra -Wno-unused-parameter -I/home/adamsl/rpi-rgb-led-matrix/tennis-game/googletest/googletest/include -I../..//include -o TieBreakerTest ../TieLeds/TieLeds.o ../GameLedTranslator/GameLedTranslator.o ../GameState/GameState.o ../Player/Player.o ../GameTimer/GameTimer.o ../ScoreBoard/ScoreBoard.o ../SetDrawer/SetDrawer.o ../SetHistoryText/SetHistoryText.o ../Drawer/Drawer.o ../CanvasCreator/CanvasCreator.o ../FontLoader/FontLoader.o ../LogObject/LogObject.o ../LogObjectContainer/LogObjectContainer.o ../LogObjectFactory/LogObjectFactory.o ../MonitorLedClassObject/MonitorLedClassObject.o ../MonitorLed/MonitorLed.o ../JsonParser/JsonParser.o ../LoggerFactory/LoggerFactory.o ../Model/Model.o ../MonitoredObject/MonitoredObject.o ../SourceData/SourceData.o ../FetchRunner/FetchRunner.o ../PinInterface/PinInterface.o ../PinState/PinState.o ../History/History.o ../Mode1Score/Mode1Score.o Mode1ScoreTest.o TieBreakerTest.o ../TranslateConstant/TranslateConstant.o ../Logger/Logger.o TieBreaker.o ../PointLeds/PointLeds.o ../GameLeds/GameLeds.o ../SetLeds/SetLeds.o ../WinSequences/WinSequences.o ../Undo/Undo.o ../ServeLeds/ServeLeds.o ../GameWinSequence/GameWinSequence.o ../SetWin/SetWin.o ../MatchWinSequence/MatchWinSequence.o ../Inputs/Inputs.o ../WatchTimer/WatchTimer.o ../Reset/Reset.o -L../..//lib -lrgbmatrix -lrt -lm -L/home/adamsl/rpi-rgb-led-matrix/tennis-game/googletest/build/lib -lgtest_main -lgtest -lpthread -ljsoncpp -lcurl -lpthread
-/usr/bin/ld: ../WinSequences/WinSequences.o: in function `Mode1WinSequences::playerOneMatchWin()':
-/home/eg1972/rpi-rgb-led-matrix/tennis-game/TieBreaker/../WinSequences/WinSequences.cpp:54: undefined reference to `PointLeds::updateTBPoints()'
-/usr/bin/ld: ../WinSequences/WinSequences.o: in function `Mode1WinSequences::playerTwoMatchWin()':
-/home/eg1972/rpi-rgb-led-matrix/tennis-game/TieBreaker/../WinSequences/WinSequences.cpp:60: undefined reference to `PointLeds::updateTBPoints()'
-collect2: error: ld returned 1 exit status
-make: *** [Makefile:26: TieBreakerTest] Error 1
+g++ -I../..//include -Wall -O3 -g -Wextra -Wno-unused-parameter -I/home/adamsl/rpi-rgb-led-matrix/tennis-game/googletest/googletest/include -I../..//include -c -o TieBreakerTest.o TieBreakerTest.cpp
+[01m[KTieBreakerTest.cpp:[m[K In member function ‘[01m[Kvirtual void TieBreakerTest_SetUpSetTieBreakScenario_Test::TestBody()[m[K’:
+[01m[KTieBreakerTest.cpp:38:5:[m[K [01;31m[Kerror: [m[K‘[01m[K_gameObject[m[K’ was not declared in this scope
+   38 |     [01;31m[K_gameObject[m[K->getScoreBoard()->clearScreen();
+      |     [01;31m[K^~~~~~~~~~~[m[K
+make: *** [Makefile:29: TieBreakerTest.o] Error 1
 ```
 
 Please help me debug this.

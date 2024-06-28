@@ -45,3 +45,11 @@ examples-api-use/ledcat
 tennis-game/Mode1Score/command_runner/__pycache__/__init__.cpython-311.pyc
 tennis-game/Mode1Score/command_runner/__pycache__/command_runner.cpython-311.pyc
 tennis-game/TieBreaker/prompt.md
+tennis-game/TieBreaker/prompt.md
+tennis-game/command_runner/__pycache__/command_runner.cpython-39.pyc
+tennis-game/command_runner/__pycache__/*
+tennis-game/TieBreaker/TieBreakerTest
+tennis-game/TieBreaker/tie_breaker_test
+tennis-game/*/log.txt
+tennis-game/Reset/log.txt
+tennis-game/Mode1ScoreTest

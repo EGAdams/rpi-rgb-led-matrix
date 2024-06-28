@@ -4,7 +4,13 @@ import os
 from time import sleep
 import argparse
 from openai import OpenAI
+# TieBreaker Directory
+# the_makefile_directory = "/home/eg1972/rpi-rgb-led-matrix/tennis-game/TieBreaker"
 the_makefile_directory = "/home/eg1972/rpi-rgb-led-matrix/tennis-game/TieBreaker"
+
+# Tennis Game directory
+# the_makefile_directory = "/home/eg1972/rpi-rgb-led-matrix/tennis-game"
+
 
 # import CommandRunner from path: /home/eg1972/rpi-rgb-led-matrix/tennis-game/TieBreader/command_runner/command_runner.
 
@@ -39,6 +45,7 @@ def walk_directory(directory):
     for root, dirs, files in os.walk(directory):
         for file in files:
             if not file.endswith((".h", ".cpp", ".cxx", ".c")):
+                print ( "skipping file: " + file )
                 continue
 
             if not any(file.endswith(ext) for ext in image_extensions):

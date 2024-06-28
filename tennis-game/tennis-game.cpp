@@ -274,20 +274,19 @@ void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen();
     gameObject->getPlayer1()->setSetHistory( 1, 6 );
     gameObject->getPlayer2()->setSetHistory( 1, 4 );
-    gameObject->getPlayer1()->setSetHistory( 2, 4 );
-    gameObject->getPlayer2()->setSetHistory( 2, 5 );
+    gameObject->getPlayer1()->setSetHistory( 2, 5 );
+    gameObject->getPlayer2()->setSetHistory( 2, 5 ); // Set games to 5-5 to test tie-break transition
     gameState->setCurrentSet( 2 );
-    gameObject->getPlayer1()->setGames(  4 );
-    gameObject->getPlayer2()->setGames(  5 );
+    gameObject->getPlayer1()->setGames( 5 );
+    gameObject->getPlayer2()->setGames( 5 ); // Both players should have 5 games each
     gameObject->getPlayer1()->setPoints( 2 );
     gameObject->getPlayer2()->setPoints( 3 );
     std::cout << "updating scoreboard... " << std::endl;
     gameObject->getScoreBoard()->update();
     std::cout << "done updating scoreboard." << std::endl;
-    std::cout << "ready to have player 2 win the set..." << std::endl;
-    playerWin( gameObject, gameState, 2 );
-    std::cout << "player 2 won the set!" << std::endl;
+    std::cout << "ready to test tie-breaker scenario..." << std::endl;
 }
+
 
 void test_06( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen(); // Initialize the game state
@@ -521,3 +520,7 @@ int main( int argc, char *argv[]) {
     GameTimer::gameDelay( 2000 );
     test_count++;
 }
+
+
+
+

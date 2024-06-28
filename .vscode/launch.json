@@ -26,10 +26,10 @@
             ]
         },
         {
-            "name": "TieBreakerTest",
+            "name": "tie_breaker_test",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/tennis-game/TieBreaker/TieBreakerTest",
+            "program": "${workspaceFolder}/tennis-game/TieBreaker/tie_breaker_test",
             "args": [],
             "cwd": "${fileDirname}",
             "environment": [],

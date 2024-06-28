@@ -73,8 +73,8 @@ LogObject.o : LogObject/LogObject.cpp
 test-manual: GameWinSequence.o SetWin.o
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
                                                                                                                                                                                 
-TieBreakerTest.o: TieBreakerTest.cpp                                                                                                                                                
-	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $< 
+TieBreakerTest.o: TieBreaker/TieBreakerTest.cpp
+	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
 Mode1ScoreTest.o: Mode1Score/Mode1ScoreTest.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
