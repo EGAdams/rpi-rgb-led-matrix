@@ -6,6 +6,7 @@
 #include <regex>
 
 #include <filesystem>
+namespace fs = std::filesystem;
 
 Logger::Logger( std::string name ) : _name( name ) {
     std::filesystem::create_directories(name); // Ensure the directory exists
@@ -16,26 +17,31 @@ Logger::Logger( std::string name ) : _name( name ) {
         std::cerr << "Current working directory: " << std::filesystem::current_path() << std::endl;
     }}
 
-Logger::~Logger() { _log_file.close(); }
+Logger::~Logger() {
+    if (_log_file.is_open()) {
+        _log_file.close();
+    }
+}
 
 std::string Logger::getName() { return _name; }
 
 void Logger::setName(std::string name) { _name = name; }
 
 void Logger::logUpdate(std::string message) {
-    if (!_log_file.is_open()) {
-        std::cerr << "Log file not open for message [" << message << "]" << std::endl;
-        return;
-    }
-    message = std::regex_replace(message, std::regex(":"), "\\:");
-    int random_variable = this->_get_random_number();
-    _log_file << "{\"timestamp\":"
-        << this->_get_seconds_since_epoch() * 1000;  // timestamp
-    _log_file << ",\"id\":\"" << _name << "_" << random_variable << "_"
-        << this->_get_seconds_since_epoch() * 1000;  // id
-    _log_file << "\",\"message\":\"" << message;           // message
-    _log_file << "\",\"method\":\"" << this->_name << "\"}";    // method
-    _log_file << std::endl;
+    std::cout << message << std::endl;
+    // if (!_log_file.is_open()) {
+    //     std::cerr << "Log file not open for message [" << message << "]" << std::endl;
+    //     return;
+    // }
+    // message = std::regex_replace(message, std::regex(":"), "\\:");
+    // int random_variable = this->_get_random_number();
+    // _log_file << "{\"timestamp\":"
+    //     << this->_get_seconds_since_epoch() * 1000;  // timestamp
+    // _log_file << ",\"id\":\"" << _name << "_" << random_variable << "_"
+    //     << this->_get_seconds_since_epoch() * 1000;  // id
+    // _log_file << "\",\"message\":\"" << message;           // message
+    // _log_file << "\",\"method\":\"" << this->_name << "\"}";    // method
+    // _log_file << std::endl;
 }
 
 decltype( std::chrono::seconds().count() ) Logger::_get_seconds_since_epoch() {

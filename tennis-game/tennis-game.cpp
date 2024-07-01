@@ -272,18 +272,23 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
 
 void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen();
-    gameObject->getPlayer1()->setSetHistory( 1, 6 );
-    gameObject->getPlayer2()->setSetHistory( 1, 4 );
-    gameObject->getPlayer1()->setSetHistory( 2, 5 );
-    gameObject->getPlayer2()->setSetHistory( 2, 5 ); // Set games to 5-5 to test tie-break transition
-    gameState->setCurrentSet( 2 );
-    gameObject->getPlayer1()->setGames( 5 );
-    gameObject->getPlayer2()->setGames( 5 ); // Both players should have 5 games each
-    gameObject->getPlayer1()->setPoints( 2 );
-    gameObject->getPlayer2()->setPoints( 3 );
-    std::cout << "updating scoreboard... " << std::endl;
-    gameObject->getScoreBoard()->update();
-    std::cout << "done updating scoreboard." << std::endl;
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+     
+    // now for player 2 to wing the set...
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 2 );
     std::cout << "ready to test tie-breaker scenario..." << std::endl;
 }
 
@@ -322,7 +327,6 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     // set sets to --sets argument
     // set player1 score to --player1 argument
     // set player2 score to --player2 argument
-    std::cout << "calling loopGame()..." << std::endl;
     gameObject->loopGame();
 
     // std::cout << "done calling loopGame().  sleeping...\n" << std::endl;
@@ -334,21 +338,19 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { /*/// Begin Game Loop ///*/
         if ( loop_count >  MAX_LOOP_COUNT ) { gameState->stopGameRunning(); }
         sleep( SCORE_DELAY );
-        std::cout << "\n";
-        std::cout << "  1.) Player 1 score" << std::endl;
-        std::cout << "  2.) Player 2 score" << std::endl;
-        std::cout << "  11.) Player 1 win" << std::endl;
-        std::cout << "  22.) Player 2 win" << std::endl;
-        std::cout << "  9.) Undo" << std::endl;
-        std::cout << "  101.) Test 01" << std::endl;
-        std::cout << "  102.) Test 02" << std::endl;
-        std::cout << "  103.) Test 03" << std::endl;
-        std::cout << "  104.) Test 04" << std::endl;
-        std::cout << "  105.) Test 05" << std::endl;
-
-        std::cout << "  0.) Exit" << std::endl;
-        // cout
-        std::cout << "  Enter selection: ";
+        // std::cout << "\n";
+        // std::cout << "  1.) Player 1 score" << std::endl;
+        // std::cout << "  2.) Player 2 score" << std::endl;
+        // std::cout << "  11.) Player 1 win" << std::endl;
+        // std::cout << "  22.) Player 2 win" << std::endl;
+        // std::cout << "  9.) Undo" << std::endl;
+        // std::cout << "  101.) Test 01" << std::endl;
+        // std::cout << "  102.) Test 02" << std::endl;
+        // std::cout << "  103.) Test 03" << std::endl;
+        // std::cout << "  104.) Test 04" << std::endl;
+        std::cout << "  105.) Test 05       9.) Undo" << std::endl;
+        // std::cout << "  0.) Exit" << std::endl;
+        // std::cout << "  Enter selection: ";
         std::cin >> menu_selection;
 
         if ( menu_selection == 1  ||  menu_selection == 2 ) {

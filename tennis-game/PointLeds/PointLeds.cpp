@@ -27,7 +27,7 @@ void PointLeds::updateTBPoints() {
 }
 
 void PointLeds::updatePoints() {
-    std::cout << "calling _scoreBoard->update() from inside PointLeds.  checking scoreboard bool.. " << std::endl;
+    // std::cout << "calling _scoreBoard->update() from inside PointLeds.  checking scoreboard bool.. " << std::endl;
     if ( _scoreBoardSet == true && _scoreBoard != nullptr ) {
         std::cout << "Updating scoreboard..." << std::endl;
         _scoreBoard->update();
@@ -35,7 +35,7 @@ void PointLeds::updatePoints() {
         if (_scoreBoard == nullptr) {
             std::cerr << "Error: _scoreBoard is nullptr" << std::endl;
         }
-        std::cout << "scoreboard bool is false, not updating scoreboard." << std::endl;
+        // std::cout << "scoreboard bool is false, not updating scoreboard." << std::endl;
     }
     
     switch ( _player1->getPoints()) {

@@ -214,7 +214,7 @@ void ScoreBoard::blink_player_score(int player) {
 void ScoreBoard::clearScreen() {
     if ( hasCanvas() == false ) {
         // Terminal scoreboard.  Clear screen and move cursor to the top-left
-        // std::cout << "\033[2J\033[H";
+        std::cout << "\033[2J\033[H";
     } else {
         if ( !hasCanvas()) { std::cout << "*** ERROR: canvas == NULL.  exiting... ***" << std::endl; exit( 1 ); }
         // std::cout << "clearScreen called, hasCanvas() is good.  clearing matrix...." << std::endl;

@@ -4,6 +4,7 @@
 #include "../GameState/GameState.h"
 #include "../PinInterface/PinInterface.h"
 #include "../PinState/PinState.h"
+#include "../ScoreBoard/ScoreBoard.h"
 
 class TieBreakerTest : public ::testing::Test {
 protected:
@@ -12,6 +13,7 @@ protected:
     GameState* _gameState;
     PinInterface* _pinInterface;
     TieBreaker* _tieBreaker;
+    ScoreBoard* _scoreBoard;
 
     void SetUp() override {
         _gameState = new GameState();
@@ -23,6 +25,7 @@ protected:
         PinState* pin_state = new PinState(pin_map);
         _pinInterface = new PinInterface(pin_state);
         _tieBreaker = new TieBreaker(_player1, _player2, _pinInterface, _gameState, NULL);
+        _scoreBoard = new ScoreBoard(  _player1, _player2, _gameState );
     }
 
     void TearDown() override {
@@ -31,11 +34,12 @@ protected:
         delete _player2;
         delete _player1;
         delete _gameState;
+        delete _scoreBoard;
     }
 };
 
 TEST_F(TieBreakerTest, SetUpSetTieBreakScenario) {
-    _gameObject->getScoreBoard()->clearScreen();
+    _scoreBoard->clearScreen();
     _player1->setSetHistory(1, 6);
     _player2->setSetHistory(1, 4);
     _player1->setSetHistory(2, 5);
@@ -47,7 +51,7 @@ TEST_F(TieBreakerTest, SetUpSetTieBreakScenario) {
     _player2->setPoints(3);
     
     std::cout << "Updating scoreboard..." << std::endl;
-    _gameObject->getScoreBoard()->update();
+    _scoreBoard->update();
     std::cout << "Done updating scoreboard." << std::endl;
 
     // Simulate Player 2 winning the next point

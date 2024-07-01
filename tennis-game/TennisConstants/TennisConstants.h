@@ -16,13 +16,13 @@
 #define ACTIVE_BLINK                "blink"
 #define NORMAL_GAME_STATE           "normal game state"
 #define TESTING                     1
-#define GAME_FLASH_DELAY            200
+#define GAME_FLASH_DELAY            50 // 200
 #define SET_WIN_FLASH_DELAY         200
 #define FLASH_DELAY                 1000
-#define BUTTON_DELAY                300
-#define WIN_DELAY                   1000
+#define BUTTON_DELAY                50 // 300
+#define WIN_DELAY                   50 // 1000
 #define WATCH_INTERVAL              250
-#define UPDATE_DISPLAY_DELAY        50
+#define UPDATE_DISPLAY_DELAY        5 // 50
 #define LOOP_MATCH_LAMP_WIN         2
 #define NUMBER_OF_GAME_LAMPS        7
 #define LOOP_GAME_LAMP_WIN          5

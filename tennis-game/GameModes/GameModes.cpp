@@ -39,10 +39,10 @@ void GameModes::setScoreBoards( ScoreBoard* scoreBoard ) {
 void GameModes::gameStart() {
     // std::cout << "inside gameStart() checking if gameStarted = zero or not..." << std::endl;
     if ( _gameState->getStarted() == 0 ) {  // if not started...
-        std::cout << "setting player points... " << std::endl;
+        // std::cout << "setting player points... " << std::endl;
         _player1->setPoints( 0 );             // p1Points = 0;
         _player2->setPoints( 0 );             // p2Points = 0;
-        std::cout << "setting player games... " << std::endl;
+        // std::cout << "setting player games... " << std::endl;
         _player1->setGames( 0 );              // p1Games = 0;
         _player2->setGames( 0 );              // p2Games = 0;
         // std::cout << "setting player sets... " << std::endl;
@@ -62,20 +62,20 @@ void GameModes::gameStart() {
     }}
 
 void GameModes::mode1() {
-    std::cout << "inside game mode 1." << std::endl;
+    // std::cout << "inside game mode 1." << std::endl;
     _gameState->setNow( GameTimer::gameMillis());
     _inputs.readUndoButton();
     if ( _gameState->getUndo() == 1 ) {  // undo button pressed
-        std::cout << "undo button pressed!" << std::endl;
+        // std::cout << "undo button pressed!" << std::endl;
         _gameState->setUndo( 0 );
-        std::cout << "calling mode1Undo( _history )... " << std::endl;
-        std::cout << "calling mode1Undo.setScoreboard... " << std::endl;
+        // std::cout << "calling mode1Undo( _history )... " << std::endl;
+        // std::cout << "calling mode1Undo.setScoreboard... " << std::endl;
         // _undo_.setScoreBoard( _history->getScoreBoard());
         _undo.mode1Undo( _history ); }
-    std::cout << "reading player buttons... " << std::endl;
+    // std::cout << "reading player buttons... " << std::endl;
     _inputs.readPlayerButtons();  // digital read on player buttons.  sets playerButton if tripped.
     _serveLeds.serveSwitch(); // if serveSwitch >= 2, serveSwitch = 0; and toggle serve variable
-    std::cout << "checking for tie breaker... " << std::endl;
+    // std::cout << "checking for tie breaker... " << std::endl;
     if ( _gameState->getSetTieBreak() == 1 ) {
         _logger->logUpdate( "setting tie breaker..." );
         _tieBreaker.setTieBreaker();
@@ -120,9 +120,9 @@ void GameModes::setGameMode( int rotaryPosition ) {
         break;
 
     case 1:
-        std::cout << "calling gameStart()... " << std::endl;
+        // std::cout << "calling gameStart()... " << std::endl;
         gameStart();  // sets gameStart to true. resets player and score board.
-        std::cout << "calling mode1()... " << std::endl;
+        // std::cout << "calling mode1()... " << std::endl;
         mode1();
         break;
 
