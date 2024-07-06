@@ -161,6 +161,7 @@ void ScoreBoard::update() {
     // std::cout << "inside ScoreBoard::update()  player2 points: " << _player2->getPoints() << std::endl;
     drawPlayerScore( _player1 );
     drawPlayerScore( _player2 );
+    std::cout << "==========================" << std::endl;
     // _setDrawer->drawSets();
 
     // std::cout << "scoreboard has a canvas.  checking for blink in action..." << std::endl;
@@ -183,7 +184,11 @@ void ScoreBoard::update() {
 }
 
 void ScoreBoard::_drawTieBreakerBar() {
-    _bluePipeDrawer->drawNumber( "I", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
+    if ( onRaspberryPi() == false ) {
+        std::cout << "/// TIE BREAK ///" << std::endl;
+    } else {
+        _bluePipeDrawer->drawNumber( "I", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
+    }
 }
 
 
@@ -223,11 +228,25 @@ void ScoreBoard::clearScreen() {
 std::string ScoreBoard::drawPlayerScore( Player* player ) {
     std::string serve_bar_text = hasCanvas() == true ? "i" : "\033[34m|";
     std::string serve_bar = _gameState->getServe() == player->number() ? serve_bar_text : " ";
+    std::string other_serve_bar = _gameState->getServe() == player->getOpponent()->number() ? serve_bar_text : " ";
     std::string score = _translate( player->getPoints());
     if( hasCanvas() == false ) {
+        std::cout << "==========================" << std::endl;
         player->number() == PLAYER_1_INITIALIZED ?  // type player 1 score, else type player 2 score
-        std::cout << "\033[32mPLAYER 1: ////// " << serve_bar << "\033[32m " << score << " ////// " << std::endl :
-        std::cout << "\033[31mPLAYER 2: ////// " << serve_bar << "\033[31m " << score << " ////// \033[35m" << std::endl;
+        std::cout << "| \033[92mPLAYER 1: //// " << serve_bar << "\033[92m " << score << " //// " << std::endl :
+        std::cout << "| \033[31mPLAYER 2: //// " << serve_bar << "\033[31m " << score << " //// \033[35m" << std::endl;
+
+        // std::cout << "==========================" << std::endl;
+
+        // player->number() == PLAYER_1_INITIALIZED ?
+        // _displayAsciiScoreboard( player->getPoints(), 
+        //                          player->getOpponent()->getPoints(),
+        //                          _gameState->getTieBreak(),
+        //                          serve_bar, other_serve_bar ) :
+        // _displayAsciiScoreboard( player->getOpponent()->getPoints(),
+        //                          player->getPoints(),
+        //                          _gameState->getTieBreak(),
+        //                          other_serve_bar, serve_bar );
     } else {
         int vertical_offset = player->number() == 0 ? 0 : _big_number_font.height();
         _pipeDrawer->drawNumber( serve_bar, 2, _big_number_font.baseline() + vertical_offset );
@@ -316,3 +335,30 @@ bool ScoreBoard::onRaspberryPi() {
         if (line.find("Raspberry Pi") != std::string::npos) { return true; }
     }
     return false; }
+
+void ScoreBoard::_displayAsciiScoreboard( int player1_score, int player2_score, bool tieBreaker, std::string serve_bar1, std::string serve_bar2 ) {
+    const std::string bright_green = "\033[92m";  // Bright green
+    const std::string bright_red = "\033[91m";    // Bright red
+    const std::string bright_blue = "\033[94m";   // Bright blue
+    const std::string reset_color = "\033[0m";
+
+    std::string frame_top = " +========================================================+ ";
+    std::string frame_middle = "|                                                        |";
+    std::string frame_bottom = " +========================================================+ ";
+
+    // Convert scores to strings
+    std::string player1_score_str = std::to_string(player1_score);
+    std::string player2_score_str = std::to_string(player2_score);
+
+    std::cout << frame_top << std::endl;
+
+    std::cout << "| " << bright_green << "PLAYER 1: " << serve_bar1 << " " << player1_score_str << " " << frame_middle.substr(player1_score_str.size() + serve_bar1.size() + 10) << reset_color << " |" << std::endl;
+    std::cout << "| " << bright_red << "PLAYER 2: " << serve_bar2 << " " << player2_score_str << " " << frame_middle.substr(player2_score_str.size() + serve_bar2.size() + 10) << reset_color << " |" << std::endl;
+
+    if (tieBreaker) {
+        std::cout << "| " << bright_blue << "TIE BREAKER ACTIVE!" << reset_color << frame_middle.substr(18) << " |" << std::endl;
+    }
+
+    std::cout << frame_bottom << std::endl;
+}
+

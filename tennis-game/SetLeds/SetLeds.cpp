@@ -20,7 +20,10 @@ void SetLeds::updateSets() {
   switch ( _player1->getSets() ) {
     
     case PLAYER_1_ZERO_SETS:
-        std::cout << "player1 has zero sets" << std::endl;
+        // std::cout << "player1 has zero sets" << std::endl;
+        if ( _scoreBoard == NULL ) {
+            std::cerr << "*** ERROR: scoreboard is null in SetLeds::updateSets(). ***" << std::endl;
+            break; }
         if ( _scoreBoard->hasCanvas() ) {
             // // std::cout << "scoreboard has canvas.  updating..." << std::endl;
             _scoreBoard->update();
@@ -29,7 +32,11 @@ void SetLeds::updateSets() {
             _pinInterface->pinDigitalWrite( P1_SETS_LED2, LOW ); } break;
 
     case PLAYER_1_ONE_SET:
-        std::cout << "player1 has one set" << std::endl;
+        // std::cout << "player1 has one set" << std::endl;
+        // if scoreboard is null, break
+        if ( _scoreBoard == NULL ) {
+            std::cerr << "*** ERROR: scoreboard is null in SetLeds::updateSets(). ***" << std::endl;
+            break; }                    
         if ( _scoreBoard->hasCanvas() ) {
             // std::cout << "scoreboard has canvas.  updating..." << std::endl;
             _scoreBoard->update();
@@ -39,6 +46,9 @@ void SetLeds::updateSets() {
 
     case PLAYER_1_TWO_SETS:
         // std::cout << "player1 has two sets" << std::endl;
+        if ( _scoreBoard == NULL ) {
+            std::cerr << "*** ERROR: scoreboard is null in SetLeds::updateSets(). ***" << std::endl;
+            break; }
         if ( _scoreBoard->hasCanvas() ) {
             // std::cout << "scoreboard has canvas.  updating..." << std::endl;
             _scoreBoard->update();
@@ -46,7 +56,7 @@ void SetLeds::updateSets() {
             _pinInterface->pinDigitalWrite( P1_SETS_LED1, HIGH );
             _pinInterface->pinDigitalWrite( P1_SETS_LED2, HIGH ); } break;
     case 3:
-        std::cout << "player1 has three sets" << std::endl;
+        // std::cout << "player1 has three sets" << std::endl;
         if ( _scoreBoard->hasCanvas() ) {
             // std::cout << "scoreboard has canvas.  updating..." << std::endl;
             _scoreBoard->update();
@@ -58,6 +68,9 @@ void SetLeds::updateSets() {
   switch (_player2->getSets()) {
     case PLAYER_2_ZERO_SETS:
         // std::cout << "player2 has zero sets" << std::endl;
+        if ( _scoreBoard == NULL ) {
+            std::cerr << "*** ERROR: scoreboard is null in SetLeds::updateSets(). ***" << std::endl;
+            break; }
         if ( _scoreBoard->hasCanvas() ) {
             // std::cout << "scoreboard has canvas.  updating..." << std::endl;
             _scoreBoard->update();
@@ -66,7 +79,10 @@ void SetLeds::updateSets() {
             _pinInterface->pinDigitalWrite( P2_SETS_LED2, LOW ); } break;
 
     case PLAYER_2_ONE_SET:
-        std::cout << "player2 has one set" << std::endl;
+        // std::cout << "player2 has one set" << std::endl;
+        if ( _scoreBoard == NULL ) {
+            std::cerr << "*** ERROR: scoreboard is null in SetLeds::updateSets(). ***" << std::endl;
+            break; }
         if ( _scoreBoard->hasCanvas() ) {
             // std::cout << "scoreboard has canvas.  updating..." << std::endl;
             _scoreBoard->update();
@@ -75,7 +91,10 @@ void SetLeds::updateSets() {
             _pinInterface->pinDigitalWrite( P2_SETS_LED2, LOW ); } break;
 
     case PLAYER_2_TWO_SETS:
-        std::cout << "player2 has two sets" << std::endl;
+        // std::cout << "player2 has two sets" << std::endl;
+        if ( _scoreBoard == NULL ) {
+            std::cerr << "*** ERROR: scoreboard is null in SetLeds::updateSets(). ***" << std::endl;
+            break; }
         if ( _scoreBoard->hasCanvas() ) {
             // std::cout << "scoreboard has canvas.  updating..." << std::endl;
             _scoreBoard->update();
@@ -83,7 +102,10 @@ void SetLeds::updateSets() {
             _pinInterface->pinDigitalWrite( P2_SETS_LED1, HIGH );
             _pinInterface->pinDigitalWrite( P2_SETS_LED2, HIGH ); } break;
     case 3:
-        std::cout << "player2 has three sets" << std::endl;
+        // std::cout << "player2 has three sets" << std::endl;
+        if ( _scoreBoard == NULL ) {
+            std::cerr << "*** ERROR: scoreboard is null in SetLeds::updateSets(). ***" << std::endl;
+            break; }
         if ( _scoreBoard->hasCanvas() ) {
             // std::cout << "scoreboard has canvas.  updating..." << std::endl;
             _scoreBoard->update();

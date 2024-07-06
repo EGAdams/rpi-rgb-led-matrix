@@ -63,9 +63,7 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
                 _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has 3 points and tied with " + std::to_string( otherPlayer->number() ) + "." );
                 currentPlayer->setPoints( 3 );
                 otherPlayer->setPoints( 3 );
-            }
-            else if ( current_player_points > 3
-             && ( current_player_points - other_player_points ) > 1 ) {
+            } else if ( current_player_points > 3 && ( current_player_points - other_player_points ) > 1 ) {
                 _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has " + std::to_string( current_player_points ) + " points and won by " + std::to_string( current_player_points - other_player_points ) + "." );
                 currentPlayer->setGames( currentPlayer->getGames() + 1 );
                 _undo.memory();
@@ -75,7 +73,7 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
             if ( currentPlayer->getPoints() == 4 ) {
                 _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has 4 points." );
                 _gameState->setPointFlash( 1 );       // "Ad" mode
-                _gameState->setPreviousTime( GameTimer::gameMillis() );
+                _gameState->setPreviousTime( GameTimer::gameMillis());
                 _gameState->setToggle( 0 );
             }
         }
