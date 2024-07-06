@@ -98,8 +98,7 @@ void Mode1Score::playerGameWin( Player* player ) {
         if ( _gameState->getTieBreak() == 0 ) {  // if this is not a tie break game...
             if (( player->getGames() - opponent->getGames() ) > 1 ) {  // player ahead by 2 games.
                 player->setSets( _gameState, player->getSets() + 1 ); // Set win
-                _setLeds.updateSets(); // sets the tiebreak, wins
-                // the match, or just wins the set.
+                _setLeds.updateSets(); // sets the tiebreak, wins the match, or just wins the set.
                 if ( player->getSets() == opponent->getSets() ) {  // set tie break
                     player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1TBSetWinSequence() : _mode1WinSequences.p2TBSetWinSequence();
                     _gameState->setSetTieBreak( 1 );

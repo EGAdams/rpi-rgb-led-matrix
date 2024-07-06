@@ -10,7 +10,8 @@ ScoreBoard* GameLeds::getScoreBoard() { return _scoreBoard; }
 
 void GameLeds::updateGames() {
     if ( _scoreBoard   == NULL ) {
-        std::cout << "*** ERROR: scoreBoard is null. ***  returning to sender... " << std::endl; return; }
+        // std::cout << "*** ERROR: scoreBoard is null. ***  returning to sender... " << std::endl;
+        return; }
 
     if ( _gameLedTranslator == NULL ) {
         std::cout << "*** ERROR: _gameLedTranslator is null. ***  exiting... " << std::endl; exit( 1 ); }

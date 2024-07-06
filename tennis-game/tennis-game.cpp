@@ -20,7 +20,7 @@
 #include "LoggerFactory/LoggerFactory.h"
 
 using namespace rgb_matrix;
-#define SCORE_DELAY    1
+#define SCORE_DELAY    0
 #define MAX_LOOP_COUNT 350
 #define A_SPACE        13
 #define FOUR_SPACE     14
@@ -354,7 +354,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         std::cin >> menu_selection;
 
         if ( menu_selection == 1  ||  menu_selection == 2 ) {
-            std::cout << "\n\n\n\n\n\n\n*** Player " << menu_selection << " scored ***\n" << std::endl;
+            // std::cout << "\n\n\n\n\n\n\n*** Player " << menu_selection << " scored ***\n" << std::endl;
             gameObject->playerScore( menu_selection );  // flip the player score flag
             sleep( SCORE_DELAY );
         } else if ( menu_selection == 0 ) {

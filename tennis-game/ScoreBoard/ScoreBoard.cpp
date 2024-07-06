@@ -190,9 +190,9 @@ void ScoreBoard::_drawTieBreakerBar() {
     const std::string blue = "\033[94m";  // Blue
     if ( onRaspberryPi() == false ) {
         if ( _gameState->getTieLEDsOn() == 1 ) {
-            std::cout << reset << "==========================" << std::endl;
-            std::cout << blue <<  "/// TIE BREAK ///" << std::endl;
-            std::cout << reset << "==========================" << std::endl;
+            // std::cout << reset << "==========================" << std::endl;
+            std::cout << blue <<  "/// TIE BREAK MODE ///" << std::endl;
+            // std::cout << reset << "==========================" << std::endl;
         }
     } else {
         _bluePipeDrawer->drawNumber( "I", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe

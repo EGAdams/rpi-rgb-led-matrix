@@ -77,6 +77,8 @@ void TieBreaker::incrementSet() {
     _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 ); // increment set
 }
 
+// the mode 1 tb part updates games.  this is ok for when we have the LEDs,,,,,,,,,,,,,,,,,,,,,,,,
+// but when there is a matrix, we update the points instead.
 void TieBreaker::run( Player* currentPlayer ) { 
     _undo.memory();
     std::cout << "Current Player Address: " << currentPlayer << std::endl;
@@ -162,7 +164,7 @@ void TieBreaker::mode1SetTBButtonFunction() {
         GameTimer::gameDelay( _gameState->getButtonDelay());
         _undo.snapshot( _history );
         _player1->setGames( _player1->getGames() + 1 );
-        mode1SetTBP1Games();
+        mode1SetTBP1Games(); // updates game LEDs in the other game.  we need points here!
         break;
 
     case 2:

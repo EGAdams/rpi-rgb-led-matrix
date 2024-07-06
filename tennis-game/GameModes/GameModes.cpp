@@ -78,7 +78,8 @@ void GameModes::mode1() {
     // std::cout << "checking for tie breaker... " << std::endl;
     if ( _gameState->getSetTieBreak() == 1 ) {
         _logger->logUpdate( "setting tie breaker..." );
-        _tieBreaker.setTieBreaker();
+        // _tieBreaker.setTieBreaker();
+        // _tieBreaker.run();  // we need a player here.  there must be some place else...
     } else {
         _logger->setName( "mode1" );
         _mode1Functions.mode1ButtonFunction(); // <--------- ENTRY POINT --------------<<
