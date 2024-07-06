@@ -56,12 +56,14 @@ void TieBreaker::setScoreBoards( ScoreBoard* scoreBoard ) {
 void TieBreaker::tieLEDsOn() {
     _gameState->setTieLEDsOn( 1 );
     _pinInterface->pinDigitalWrite( P1_TIEBREAKER, HIGH );
-    _pinInterface->pinDigitalWrite( P2_TIEBREAKER, HIGH ); }
+    _pinInterface->pinDigitalWrite( P2_TIEBREAKER, HIGH ); 
+    _scoreBoard->update(); }
 
 void TieBreaker::tieLEDsOff() {
     _gameState->setTieLEDsOn( 0 );
     _pinInterface->pinDigitalWrite( P1_TIEBREAKER, LOW );
-    _pinInterface->pinDigitalWrite( P2_TIEBREAKER, LOW ); }
+    _pinInterface->pinDigitalWrite( P2_TIEBREAKER, LOW ); 
+    _scoreBoard->update(); }
 
 void TieBreaker::celebrate( Player* currentPlayer) {
     std::cout << "*** celebrateWin() called. ***" << std::endl;
@@ -288,7 +290,8 @@ void TieBreaker::mode1TBP1Games() {
         if ( _player2->getSets() == _player1->getSets()) {
             endTieBreak();
             _mode1WinSequences.p1TBSetWinSequence();
-            _gameState->setSetTieBreak( 1 );          
+            _gameState->setSetTieBreak( 1 );
+            _gameState->setTieBreak( 1 );        
             setTieBreakEnable();                     
         } else {
             _mode1WinSequences.p1SetWinSequence();  
@@ -298,7 +301,8 @@ void TieBreaker::mode1TBP1Games() {
         if ( _player2->getSets() == _player1->getSets()) {
             endTieBreak();                         
             _mode1WinSequences.p1TBSetWinSequence(); 
-            _gameState->setSetTieBreak( 1 );           
+            _gameState->setSetTieBreak( 1 );   
+            _gameState->setTieBreak( 1 );        
             setTieBreakEnable();                    
         } else {
             _mode1WinSequences.p1SetWinSequence();  
@@ -318,6 +322,7 @@ void TieBreaker::mode1TBP2Games() {
             endTieBreak();                        
             _mode1WinSequences.p2TBSetWinSequence(); 
             _gameState->setSetTieBreak( 1 );
+            _gameState->setTieBreak( 1 );
             setTieBreakEnable();
         } else {
             _mode1WinSequences.p2SetWinSequence();
@@ -331,6 +336,7 @@ void TieBreaker::mode1TBP2Games() {
             endTieBreak();
             _mode1WinSequences.p2TBSetWinSequence();
             _gameState->setSetTieBreak( 1 );
+            _gameState->setTieBreak( 1 );
             setTieBreakEnable();
         } else {
             _mode1WinSequences.p2SetWinSequence();

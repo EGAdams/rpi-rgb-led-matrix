@@ -184,8 +184,16 @@ void ScoreBoard::update() {
 }
 
 void ScoreBoard::_drawTieBreakerBar() {
+    const std::string yellow = "\033[93m";
+    const std::string reset = "\033[0m";
+    const std::string bright_green = "\033[92m";  // Bright green
+    const std::string blue = "\033[94m";  // Blue
     if ( onRaspberryPi() == false ) {
-        std::cout << "/// TIE BREAK ///" << std::endl;
+        if ( _gameState->getTieLEDsOn() == 1 ) {
+            std::cout << reset << "==========================" << std::endl;
+            std::cout << blue <<  "/// TIE BREAK ///" << std::endl;
+            std::cout << reset << "==========================" << std::endl;
+        }
     } else {
         _bluePipeDrawer->drawNumber( "I", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
     }
