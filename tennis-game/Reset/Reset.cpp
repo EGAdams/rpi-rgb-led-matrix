@@ -29,7 +29,7 @@ void Reset::zeroSetHistory() {
 }
 
 void Reset::resetScoreboard() {
-    _logger->logUpdate( "resetting scoreboard..." );
+    // _logger->logUpdate( "resetting scoreboard..." );
     _pinInterface->pinDigitalWrite( P1_POINTS_LED1, LOW );
     _pinInterface->pinDigitalWrite( P1_POINTS_LED2, LOW );
     _pinInterface->pinDigitalWrite( P1_POINTS_LED3, LOW );
@@ -69,19 +69,19 @@ void Reset::resetScoreboard() {
     _pinInterface->pinDigitalWrite( P1_SERVE, LOW );
     _pinInterface->pinDigitalWrite( P2_SERVE, LOW );
 
-    _logger->logUpdate( "turning tie leds off... " );
+    // _logger->logUpdate( "turning tie leds off... " );
     tieLEDsOff();
 
     _gameState->setTieBreak( 0 );
     _gameState->setSetTieBreak( 0 );
-    std::cout << "setting serve switch and serve inside Reset.cpp..." << std::endl;
+    // std::cout << "setting serve switch and serve inside Reset.cpp..." << std::endl;
     _gameState->setServeSwitch( 1 );
     _gameState->setServe( 0 );
     _gameState->setPlayerButton( 0 );
     _gameState->setStarted(
         /*1*/ 0 );  // gameStart = true; TODO: the placing of this is questionable
     GameTimer::gameDelay( 200 );  // delay( 200 );
-    _logger->logUpdate( "done resetting game." );
+    // _logger->logUpdate( "done resetting game." );
 }
 
 void Reset::refresh() {

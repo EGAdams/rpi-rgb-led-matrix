@@ -39,7 +39,7 @@ class GameModes {
   void mode2();
   void mode4();
   void noCode();
-  void setGameMode(int rotaryPosition);
+  void runGameMode(int rotaryPosition);
   void setScoreBoards( ScoreBoard* scoreBoard );
 
  private:

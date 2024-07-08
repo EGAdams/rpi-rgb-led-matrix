@@ -191,7 +191,7 @@ void ScoreBoard::_drawTieBreakerBar() {
     if ( onRaspberryPi() == false ) {
         if ( _gameState->getTieLEDsOn() == 1 ) {
             // std::cout << reset << "==========================" << std::endl;
-            std::cout << blue <<  "/// TIE BREAK MODE ///" << std::endl;
+            std::cout << blue <<  "/// TIE BREAK MODE ///" << reset << std::endl;
             // std::cout << reset << "==========================" << std::endl;
         }
     } else {

@@ -30,7 +30,7 @@
 #define SET_WIN_PULSE_COUNT         5
 #define TIE_BREAK_WIN_BY_TWO        10
 #define TIE_BREAK_MAX_POINTS        13
-#define TIE_BREAK_BLINK_DELAY       100 // 750
+#define TIE_BREAK_BLINK_DELAY       750
 #define TIE_BREAK_WATCH_INTERVAL    50
 #define BATTERY_TEST_BLINK_DELAY    1000
 #define GAMES_TO_WIN_SET            6

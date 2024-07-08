@@ -259,6 +259,6 @@ void Mode1Score::mode1SetTBP2Games() {
         _mode1WinSequences.playerTwoMatchWin();
         _gameState->stopGameRunning();
     }
-    std::cout << "setting serve switch to: " << _gameState->getServeSwitch() + 1 << std::endl;
+    // std::cout << "setting serve switch to: " << _gameState->getServeSwitch() + 1 << std::endl;
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
 }

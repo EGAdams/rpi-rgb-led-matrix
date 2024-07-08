@@ -17,7 +17,7 @@ PointLeds::PointLeds( Player* player1,
 PointLeds::~PointLeds() {}
 
 void PointLeds::setScoreBoard( ScoreBoard* scoreBoard ) {
-    std::cout << "*** setting _scoreBoard in PointLeds object ... ***" << std::endl;
+    // std::cout << "*** setting _scoreBoard in PointLeds object ... ***" << std::endl;
     _scoreBoard = scoreBoard;
     _scoreBoardSet = true;
 }
@@ -29,7 +29,7 @@ void PointLeds::updateTBPoints() {
 void PointLeds::updatePoints() {
     // std::cout << "calling _scoreBoard->update() from inside PointLeds.  checking scoreboard bool.. " << std::endl;
     if ( _scoreBoardSet == true && _scoreBoard != nullptr ) {
-        std::cout << "Updating scoreboard..." << std::endl;
+        // std::cout << "Updating scoreboard..." << std::endl;
         _scoreBoard->update();
     } else {
         if (_scoreBoard == nullptr) {

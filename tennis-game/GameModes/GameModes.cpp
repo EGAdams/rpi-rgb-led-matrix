@@ -34,7 +34,8 @@ void GameModes::setScoreBoards( ScoreBoard* scoreBoard ) {
     _gameLeds.setScoreBoard(       scoreBoard );
     _setLeds.setScoreBoard(        scoreBoard );
     _mode1Functions.setScoreBoard( scoreBoard );
-    _undo.setScoreBoard(           scoreBoard ); }
+    _undo.setScoreBoard(           scoreBoard ); 
+    _tieBreaker.setScoreBoards(    scoreBoard ); }
 
 void GameModes::gameStart() {
     // std::cout << "inside gameStart() checking if gameStarted = zero or not..." << std::endl;
@@ -77,9 +78,19 @@ void GameModes::mode1() {
     _serveLeds.serveSwitch(); // if serveSwitch >= 2, serveSwitch = 0; and toggle serve variable
     // std::cout << "checking for tie breaker... " << std::endl;
     if ( _gameState->getSetTieBreak() == 1 ) {
-        _logger->logUpdate( "setting tie breaker..." );
+        _logger->logUpdate( "running tie breaker..." );
         // _tieBreaker.setTieBreaker();
+        // if the _playerButton member fo _gameState is 1, use player 1 in the _tieBreker.run( _player1 ) method
+        // if it is 2, use player 2
+        if ( _gameState->getPlayerButton() == 1 ) {
+            _logger->logUpdate( "calling tieBreaker.run( _player1 )" );
+            _tieBreaker.run( _player1 );
+        } else if ( _gameState->getPlayerButton() == 2 ) {
+            _logger->logUpdate( "calling tieBreaker.run( _player2 )" );
+            _tieBreaker.run( _player2 );
+        }
         // _tieBreaker.run();  // we need a player here.  there must be some place else...
+        // got player above
     } else {
         _logger->setName( "mode1" );
         _mode1Functions.mode1ButtonFunction(); // <--------- ENTRY POINT --------------<<
@@ -113,7 +124,7 @@ void GameModes::noCode() {
     _pointLeds.updatePoints();                        // UpdatePoints();
     GameTimer::gameDelay( 1000 ); }
 
-void GameModes::setGameMode( int rotaryPosition ) {
+void GameModes::runGameMode( int rotaryPosition ) {
     WatchTimer *watchTimer = new WatchTimer();
     BatteryTest batteryTest( _player1, _player2, _pinInterface, &_pointLeds, &_inputs );
     switch ( rotaryPosition ) {
