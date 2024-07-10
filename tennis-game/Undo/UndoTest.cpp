@@ -87,7 +87,7 @@ TEST_F(UndoTest, TestMemoryFunction) {
     player2->setGames( 2 );
     player2->setSets( gameState, 0 );
     gameState->setTieBreak( 1 );
-    gameState->setSetTieBreak( 0 );
+    gameState->setMatchTieBreak( 0 );
 
     // Call the memory function
     undoObj->memory();
@@ -100,7 +100,7 @@ TEST_F(UndoTest, TestMemoryFunction) {
     ASSERT_EQ( 1, gameState->getP1SetsMem());
     ASSERT_EQ( 0, gameState->getP2SetsMem());
     ASSERT_EQ( 1, gameState->getTieBreakMem());
-    ASSERT_EQ( 0, gameState->getSetTieBreakMem());
+    ASSERT_EQ( 0, gameState->getMatchTieBreakMem());
 }
 
 TEST_F( UndoTest, TestUndoFunctionality ) {

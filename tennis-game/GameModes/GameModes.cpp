@@ -77,24 +77,27 @@ void GameModes::mode1() {
     _inputs.readPlayerButtons();  // digital read on player buttons.  sets playerButton if tripped.
     _serveLeds.serveSwitch(); // if serveSwitch >= 2, serveSwitch = 0; and toggle serve variable
     // std::cout << "checking for tie breaker... " << std::endl;
-    if ( _gameState->getSetTieBreak() == 1 ) {
-        _logger->logUpdate( "running tie breaker..." );
-        // _tieBreaker.setTieBreaker();
-        // if the _playerButton member fo _gameState is 1, use player 1 in the _tieBreker.run( _player1 ) method
-        // if it is 2, use player 2
-        if ( _gameState->getPlayerButton() == 1 ) {
-            _logger->logUpdate( "calling tieBreaker.run( _player1 )" );
-            _tieBreaker.run( _player1 );
-        } else if ( _gameState->getPlayerButton() == 2 ) {
-            _logger->logUpdate( "calling tieBreaker.run( _player2 )" );
-            _tieBreaker.run( _player2 );
-        }
+    // TODO: took out on july 8
+    // if ( _gameState->getSetMatchBreak() == 1 ) { //TODO: took out on july 8
+    //     _logger->logUpdate( "running tie breaker..." );
+    //     // _tieBreaker.setTieBreaker();
+    //     // if the _playerButton member fo _gameState is 1, use player 1 in the _tieBreker.run( _player1 ) method
+    //     // if it is 2, use player 2
+    //     if ( _gameState->getPlayerButton() == 1 ) {
+    //         _logger->logUpdate( "calling tieBreaker.run( _player1 )" );
+    //         _tieBreaker.run( _player1 );
+    //     } else if ( _gameState->getPlayerButton() == 2 ) {
+    //         _logger->logUpdate( "calling tieBreaker.run( _player2 )" );
+    //         _tieBreaker.run( _player2 );
+    //     }
         // _tieBreaker.run();  // we need a player here.  there must be some place else...
         // got player above
-    } else {
+    // } else {
         _logger->setName( "mode1" );
         _mode1Functions.mode1ButtonFunction(); // <--------- ENTRY POINT --------------<<
-        _mode1Functions.pointFlash(); }}
+        _mode1Functions.pointFlash();
+    //}
+}
 
 void GameModes::mode2() {
     _gameState->setNow( GameTimer::gameMillis() );

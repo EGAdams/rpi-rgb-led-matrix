@@ -50,7 +50,7 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
     if ( _gameState->getTieBreak() == 1 ) {           // Tie Break
         _logger->logUpdate( "tie break run..." );
         _tieBreaker.run( currentPlayer );
-    } else if ( _gameState->getSetTieBreak() == 1 ) { // Set Tie Break
+    } else if ( _gameState->getTieBreak() == 1 ) { // Set Tie Break
         _logger->logUpdate( "set tie breaker..." );
         _tieBreaker.setTieBreaker();
     } else {                                          // Regular Game
@@ -61,10 +61,12 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
             _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has 3 points or more." );
             if ( current_player_points == other_player_points ) {
                 _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has 3 points and tied with " + std::to_string( otherPlayer->number() ) + "." );
-                currentPlayer->setPoints( 3 );
+                currentPlayer->setPoints( 3 );  
                 otherPlayer->setPoints( 3 );
             } else if ( current_player_points > 3 && ( current_player_points - other_player_points ) > 1 ) {
-                _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has " + std::to_string( current_player_points ) + " points and won by " + std::to_string( current_player_points - other_player_points ) + "." );
+                _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has " 
+                + std::to_string( current_player_points ) + " points and won by " 
+                + std::to_string( current_player_points - other_player_points ) + "." );
                 currentPlayer->setGames( currentPlayer->getGames() + 1 );
                 _undo.memory();
                 currentPlayer->number() == 0 ? playerOneGameWin() : playerTwoGameWin();
@@ -90,18 +92,18 @@ void Mode1Score::playerGameWin( Player* player ) {
     Player* opponent = player->getOpponent();
     std::cout << "player " << std::to_string( player->number() ) << " games: " << player->getGames() << std::endl;
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
-    if ( player->getGames() >= GAMES_TO_WIN_SET ) {
+    if ( player->getGames() >= GAMES_TO_WIN_SET ) { // if so, see of they are equal...
         if ( player->getGames() == GAMES_TO_WIN_SET && opponent->getGames() == GAMES_TO_WIN_SET ) {
-            _gameState->setTieBreak( 1 );
-            _tieBreaker.initializeTieBreakMode();
-        }
-        if ( _gameState->getTieBreak() == 0 ) {  // if this is not a tie break game...
+            _gameState->setTieBreak( 1 );           // they are equal, set the tiebreak flag.
+            _tieBreaker.initializeTieBreakMode();   // now initialize tie-break mode.
+        } // else this is not a regular tie break, but it may be a Match tie break.  let's see...
+        if ( _gameState->getTieBreak() == 0 ) {     // if this is not a tie break game...
             if (( player->getGames() - opponent->getGames() ) > 1 ) {  // player ahead by 2 games.
                 player->setSets( _gameState, player->getSets() + 1 ); // Set win
                 _setLeds.updateSets(); // sets the tiebreak, wins the match, or just wins the set.
-                if ( player->getSets() == opponent->getSets() ) {  // set tie break
+                if ( player->getSets() == opponent->getSets() && player->getSets() == SETS_TO_WIN_MATCH ) {  // MATCH Tie Break
                     player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1TBSetWinSequence() : _mode1WinSequences.p2TBSetWinSequence();
-                    _gameState->setSetTieBreak( 1 );
+                    _gameState->setMatchTieBreak( 1 );
                     _gameState->setTieBreak( 1 );
                     _tieBreaker.setTieBreakEnable();
                 } else if ( player->getSets() == SETS_TO_WIN_MATCH ) {  // match win, done playing
@@ -155,7 +157,7 @@ void Mode1Score::mode1TBP1Games() {
         if ( _player2->getSets() == _player1->getSets() ) {
             _tieBreaker.endTieBreak();
             _mode1WinSequences.p1TBSetWinSequence();
-            _gameState->setSetTieBreak( 1 );
+            _gameState->setMatchTieBreak( 1 );
             _gameState->setTieBreak( 1 );
             _tieBreaker.setTieBreakEnable();
         }
@@ -174,7 +176,7 @@ void Mode1Score::mode1TBP1Games() {
         if ( _player2->getSets() == _player1->getSets() ) {
             _tieBreaker.endTieBreak();
             _mode1WinSequences.p1TBSetWinSequence();
-            _gameState->setSetTieBreak( 1 );
+            _gameState->setMatchTieBreak( 1 );
             _gameState->setTieBreak( 1 );
             _tieBreaker.setTieBreakEnable();
         }
@@ -213,7 +215,7 @@ void Mode1Score::mode1TBP2Games() {
         if ( _player2->getSets() == _player1->getSets() ) {
             _tieBreaker.endTieBreak();
             _mode1WinSequences.p2TBSetWinSequence();
-            _gameState->setSetTieBreak( 1 );
+            _gameState->setMatchTieBreak( 1 );
             _gameState->setTieBreak( 1 );
             _tieBreaker.setTieBreakEnable();
         }
@@ -232,7 +234,7 @@ void Mode1Score::mode1TBP2Games() {
         if ( _player2->getSets() == _player1->getSets() ) {
             _tieBreaker.endTieBreak();
             _mode1WinSequences.p2TBSetWinSequence();
-            _gameState->setSetTieBreak( 1 );
+            _gameState->setMatchTieBreak( 1 );
             _gameState->setTieBreak( 1 );
             _tieBreaker.setTieBreakEnable();
         }

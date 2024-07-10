@@ -289,7 +289,10 @@ void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 2 );
-    std::cout << "ready to test tie-breaker scenario..." << std::endl;
+    score(     gameObject, gameState, 2 );
+    score(     gameObject, gameState, 2 );
+    score(     gameObject, gameState, 2 );
+    std::cout << "ready to test tie-breaker scenario...  triggered after next player 2 score." << std::endl;
 }
 
 

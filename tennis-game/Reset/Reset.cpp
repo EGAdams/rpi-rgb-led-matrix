@@ -73,7 +73,7 @@ void Reset::resetScoreboard() {
     tieLEDsOff();
 
     _gameState->setTieBreak( 0 );
-    _gameState->setSetTieBreak( 0 );
+    _gameState->setMatchTieBreak( 0 );
     // std::cout << "setting serve switch and serve inside Reset.cpp..." << std::endl;
     _gameState->setServeSwitch( 1 );
     _gameState->setServe( 0 );

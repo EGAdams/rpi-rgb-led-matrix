@@ -76,8 +76,8 @@ public:
     int getUndo() ;
     void setStarted(int started) ;
     int getStarted() ;
-    void setSetTieBreak(int setTieBreak) ;
-    int getSetTieBreak() ;
+    void setMatchTieBreak(int setTieBreak) ;
+    int getMatchTieBreak() ;
     void setRotaryChange(int rotaryChange) ;
     int getRotaryChange() ;
     void setPreviousTime(unsigned long previousTime) ;
@@ -114,8 +114,8 @@ public:
     int getGameWinPulseCount() ;
     void setTieBreakMem(int tieBreakMem) ;
     int getTieBreakMem() ;
-    void setSetTieBreakMem(int setTieBreakMem) ;
-    int getSetTieBreakMem() ;
+    void setMatchTieBreakMem(int setTieBreakMem) ;
+    int getMatchTieBreakMem() ;
     void setPlayer1Points(int player1Points) ;
     int getPlayer1Points() ;
     void setPlayer2Points(int player2Points) ;

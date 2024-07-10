@@ -28,7 +28,7 @@ void Undo::memory() {
     _gameState->setP1GamesMem(        _player1->getGames());  _gameState->setP2GamesMem(  _player2->getGames());
     _gameState->setP1SetsMem(         _player1->getSets());   _gameState->setP2SetsMem(   _player2->getSets());
     _gameState->setTieBreakMem(       _gameState->getTieBreak());
-    _gameState->setSetTieBreakMem(    _gameState->getSetTieBreak());
+    _gameState->setMatchTieBreakMem(  _gameState->getMatchTieBreak());
     _gameState->setPlayer1SetHistory( _player1->getSetHistory());
     _gameState->setPlayer2SetHistory( _player2->getSetHistory()); }
 
@@ -52,8 +52,8 @@ void Undo::snapshot( History* history ) {
     gameState.setToggle( _gameState->getToggle());
     gameState.setTieLEDsOn( _gameState->getTieLEDsOn());
     gameState.setTieBreak( _gameState->getTieBreak());
-    gameState.setSetTieBreak( _gameState->getSetTieBreak());
-    gameState.setSetTieBreakMem( _gameState->getSetTieBreakMem());
+    gameState.setMatchTieBreak( _gameState->getMatchTieBreak());
+    gameState.setMatchTieBreakMem( _gameState->getMatchTieBreakMem());
     gameState.setTieBreakOnly( _gameState->getTieBreakOnly());
     gameState.setTieBreakMem( _gameState->getTieBreakMem());
     gameState.setPlayer1SetHistory( _player1->getSetHistory());
@@ -100,8 +100,8 @@ void Undo::mode1Undo( History* history ) {
     _gameState->setTieLEDsOn( gameState.getTieLEDsOn());
     // _gameState->setPlayerButton( gameState.getPlayerButton()); // this is breaking the undo
     _gameState->setTieBreak( gameState.getTieBreak());
-    _gameState->setSetTieBreak( gameState.getSetTieBreak());
-    _gameState->setSetTieBreakMem( gameState.getSetTieBreakMem());
+    _gameState->setMatchTieBreak( gameState.getMatchTieBreak());
+    _gameState->setMatchTieBreakMem( gameState.getMatchTieBreakMem());
     _gameState->setTieBreakOnly( gameState.getTieBreakOnly());
     _gameState->setTieBreakMem( gameState.getTieBreakMem());
     if ( _gameState->getTieLEDsOn() == 1 ) { _gameState->setTieLEDsOn( 1 );  _tieLeds.turnOn(); }

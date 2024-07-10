@@ -51,8 +51,8 @@ public:
     int getUndo() ;
     void setStarted(int started) ;
     int getStarted() ;
-    void setSetTieBreak(int setTieBreak) ;
-    int getSetTieBreak() ;
+    void setMatchTieBreak(int setTieBreak) ;
+    int getMatchTieBreak() ;
     void setRotaryChange(int rotaryChange) ;
     int getRotaryChange() ;
     void setPreviousTime(unsigned long previousTime) ;

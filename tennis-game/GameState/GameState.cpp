@@ -7,7 +7,7 @@ GameState::GameState() {
     _pointFlash = 0;
     _serve = 0;
     _tieBreak = 0;
-    _setTieBreak = 0;
+    _matchTieBreak = 0;
     _tieLEDsOn = 0;
     _started = 0;
     _serveSwitch = 1;
@@ -19,7 +19,7 @@ GameState::GameState() {
     _flashDelay         = 250;
     _gameWinPulseCount = 4;
     _tieBreakMem     = 0;
-    _setTieBreakMem  = 0;
+    _matchTieBreakMem  = 0;
     _p1PointsMem     = 0; _p2PointsMem     = 0;
     _p1GamesMem      = 0; _p2GamesMem      = 0;
     _p1SetsMem       = 0; _p2SetsMem       = 0;
@@ -53,8 +53,8 @@ void GameState::setServe( int serve ) { /* std::cout << "setting serve in GameSt
 int GameState::getServe() { /*std::cout << "getting serve in GameState: " << _serve << std::endl;*/ return _serve; }
 void GameState::setTieBreak( int tieBreak ) { _tieBreak = tieBreak; }
 int GameState::getTieBreak() { return _tieBreak; }
-void GameState::setSetTieBreak( int setTieBreak ) { _setTieBreak = setTieBreak; }
-int GameState::getSetTieBreak() { return _setTieBreak; }
+void GameState::setMatchTieBreak( int matchTieBreak ) { _matchTieBreak = matchTieBreak; }
+int GameState::getMatchTieBreak() { return _matchTieBreak; }
 void GameState::setTieLEDsOn( int tieLEDsOn ) { _tieLEDsOn = tieLEDsOn; }
 int GameState::getTieLEDsOn() { return _tieLEDsOn; }
 void GameState::setServeSwitch( int serveSwitch ) { _serveSwitch = serveSwitch; }
@@ -95,8 +95,8 @@ void GameState::setTieBreakOnly( int tieBreakOnly ) { _tieBreakOnly = tieBreakOn
 int GameState::getTieBreakOnly() { return _tieBreakOnly; }
 void GameState::setTieBreakMem( int tieBreakMem ) { _tieBreakMem = tieBreakMem; }
 int GameState::getTieBreakMem() { return _tieBreakMem; }
-void GameState::setSetTieBreakMem( int setTieBreakMem ) { _setTieBreakMem = setTieBreakMem; }
-int GameState::getSetTieBreakMem() { return _setTieBreakMem; }
+void GameState::setMatchTieBreakMem( int setMatchTieBreakMem ) { _matchTieBreakMem = setMatchTieBreakMem; }
+int GameState::getMatchTieBreakMem() { return _matchTieBreakMem; }
 int GameState::getPlayer1Points() const { return _player1_points; }
 void GameState::setPlayer1Points( int player1Points ) { _player1_points = player1Points; }
 int GameState::getPlayer2Points() const { return _player2_points; }

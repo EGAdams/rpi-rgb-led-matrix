@@ -37,8 +37,8 @@ public:
     int getUndo() ;
     void setStarted(int started) ;
     int getStarted() ;
-    void setSetTieBreak(int setTieBreak) ;
-    int getSetTieBreak() ;
+    void setMatchTieBreak(int matchTieBreak) ;
+    int getMatchTieBreak() ;
     void setRotaryChange(int rotaryChange) ;
     int getRotaryChange() ;
     void setPreviousTime(unsigned long previousTime) ;
@@ -75,8 +75,8 @@ public:
     int getGameWinPulseCount() ;
     void setTieBreakMem(int tieBreakMem) ;
     int getTieBreakMem() ;
-    void setSetTieBreakMem(int setTieBreakMem) ;
-    int getSetTieBreakMem() ;
+    void setMatchTieBreakMem(int setMatchTieBreakMem) ;
+    int getMatchTieBreakMem() ;
     void setPlayer1Points(int player1Points) ;
     int getPlayer1Points() const;
     void setPlayer2Points(int player2Points) ;
@@ -111,7 +111,7 @@ private:
     int _pointFlash;
     int _serve;
     int _tieBreak;
-    int _setTieBreak;
+    int _matchTieBreak;
     int _tieLEDsOn;
     int _started;
     int _serveSwitch;
@@ -135,7 +135,7 @@ private:
     int _buttonDelay;
     unsigned long _flashDelay;
     int _gameWinPulseCount;
-    int _setTieBreakMem;
+    int _matchTieBreakMem;
     int _tieBreakMem;
     int _gameRunning;
     std::string _currentAction;
