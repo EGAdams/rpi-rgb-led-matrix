@@ -147,6 +147,7 @@ bool ScoreBoard::hasCanvas() {
     } else { /* std::cout << "*** WARNING: canvas is NULL ***" << std::endl; */ return false; }}
 
 void ScoreBoard::update() {
+    bool tie_break_on = _gameState->getTieBreak() == true  || _gameState->getMatchTieBreak() == true;
     // std::cout << "inside ScoreBoard::update() ... " << std::endl;
     // std::cout << "checking for _player1 or _player2 null values..." << std::endl;
     if ( _player1 == nullptr ) {
@@ -173,9 +174,9 @@ void ScoreBoard::update() {
             PLAYER_1_INITIALIZED : PLAYER_2_INITIALIZED;
         _setDrawer->drawBlinkSets( playerToBlink ); // checks current action ignoring playerToBlink
     } else {
-        _setDrawer->drawSets(); }
+        if ( !tie_break_on ) { _setDrawer->drawSets(); }}
 
-    if ( _gameState->getTieBreak() == true ) {
+    if ( tie_break_on ) {
         // std::cout << "tie break is true, calling _drawTieBreakerBar()..." << std::endl;
         _drawTieBreakerBar();
     } else {
@@ -191,7 +192,12 @@ void ScoreBoard::_drawTieBreakerBar() {
     if ( onRaspberryPi() == false ) {
         if ( _gameState->getTieLEDsOn() == 1 ) {
             // std::cout << reset << "==========================" << std::endl;
-            std::cout << blue <<  "/// TIE BREAK MODE ///" << reset << std::endl;
+            if ( _gameState->getMatchTieBreak()) {
+                std::cout << blue <<  "/// MATCH TIE BREAK MODE ///\n" << reset << std::endl;
+            } else {
+                std::cout << blue <<  "/// TIE BREAK MODE ///\n"       << reset << std::endl;
+            }
+            
             // std::cout << reset << "==========================" << std::endl;
         }
     } else {
@@ -227,7 +233,7 @@ void ScoreBoard::blink_player_score(int player) {
 void ScoreBoard::clearScreen() {
     if ( hasCanvas() == false ) {
         std::cout << "\033[2J\033[H";   // Clear screen and move cursor to the top-left
-        system( "clear" );              // execute a system `clear` command  
+        // system( "clear" );              // execute a system `clear` command  
     } else {
         if ( !hasCanvas()) { std::cout << "*** ERROR: canvas == NULL.  exiting... ***" << std::endl; exit( 1 ); }
         Color flood_color( 0, 0, 0 ); _canvas->Fill( flood_color.r, flood_color.g, flood_color.b ); }}

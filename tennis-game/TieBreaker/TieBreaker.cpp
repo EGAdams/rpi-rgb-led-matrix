@@ -105,6 +105,7 @@ void TieBreaker::run( Player* currentPlayer ) {
         endTieBreak();
     } else if (currentPlayer->getPoints() >= TIE_BREAK_WIN_BY_TWO &&
                (currentPlayer->getPoints() - opponent->getPoints() >= 2)) {
+
         _undo.snapshot(_history);
         currentPlayer->setGames(currentPlayer->getGames() + 1); // increment games
         incrementSet();
