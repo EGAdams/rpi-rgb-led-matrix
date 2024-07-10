@@ -50,9 +50,11 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
     if ( _gameState->getTieBreak() == 1 ) {           // Tie Break
         _logger->logUpdate( "tie break run..." );
         _tieBreaker.run( currentPlayer );
-    } else if ( _gameState->getTieBreak() == 1 ) { // Set Tie Break
-        _logger->logUpdate( "set tie breaker..." );
-        _tieBreaker.setTieBreaker();
+    } else if ( _gameState->getMatchTieBreak() == 1 ) { // Set Tie Break
+        // _logger->logUpdate( "set tie breaker..." );
+        // _tieBreaker.setTieBreaker();
+
+        _tieBreaker.run( currentPlayer );
     } else {                                          // Regular Game
         Player* otherPlayer = currentPlayer->getOpponent();
         int current_player_points = currentPlayer->getPoints();
@@ -94,17 +96,18 @@ void Mode1Score::playerGameWin( Player* player ) {
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
     if ( player->getGames() >= GAMES_TO_WIN_SET ) { // if so, see of they are equal...
         if ( player->getGames() == GAMES_TO_WIN_SET && opponent->getGames() == GAMES_TO_WIN_SET ) {
-            _gameState->setTieBreak( 1 );           // they are equal, set the tiebreak flag.
+            _gameState->setTieBreak( 1 );           // they are equal, set the NORMAL tiebreak flag.
             _tieBreaker.initializeTieBreakMode();   // now initialize tie-break mode.
         } // else this is not a regular tie break, but it may be a Match tie break.  let's see...
         if ( _gameState->getTieBreak() == 0 ) {     // if this is not a tie break game...
             if (( player->getGames() - opponent->getGames() ) > 1 ) {  // player ahead by 2 games.
                 player->setSets( _gameState, player->getSets() + 1 ); // Set win
                 _setLeds.updateSets(); // sets the tiebreak, wins the match, or just wins the set.
-                if ( player->getSets() == opponent->getSets() && player->getSets() == SETS_TO_WIN_MATCH ) {  // MATCH Tie Break
+                if ( player->getSets() == opponent->getSets() && player->getSets() == SETS_TO_WIN_MATCH - 1 ) {  // MATCH Tie Break
                     player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1TBSetWinSequence() : _mode1WinSequences.p2TBSetWinSequence();
                     _gameState->setMatchTieBreak( 1 );
-                    _gameState->setTieBreak( 1 );
+                    // _gameState->setTieBreak( 1 );   this may have been the source of much confusion.
+                    _tieBreaker.incrementSet();
                     _tieBreaker.setTieBreakEnable();
                 } else if ( player->getSets() == SETS_TO_WIN_MATCH ) {  // match win, done playing
                     player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.playerOneMatchWin() : _mode1WinSequences.playerTwoMatchWin();

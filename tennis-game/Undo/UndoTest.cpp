@@ -25,9 +25,9 @@ protected:
         player2 = new Player( gameState, PLAYER_2_INITIALIZED ); 
         player1->setOpponent( player2 ); 
         player2->setOpponent( player1 );
-        player1->setServe( 1 ); 
-        player2->setServe( 0 );
-        gameState->setServe( 1 );
+        player1->setServeSwitch( 1 ); 
+        player2->setServeSwitch( 0 );
+        gameState->setServeSwitch( 1 );
         gameState->setTieBreak( 0 );
         scoreBoard = new ScoreBoard( player1, player2, gameState );
         history = new History();
@@ -59,7 +59,7 @@ TEST_F( UndoTest, TestSetMode1Undo ) {
     player2->setPoints( 2 );
     
     // Save the game state to history
-    undoObj->setMode1Undo( history );
+    undoObj->mode1Undo( history );
 
     // Change the game state
     player1->setPoints( 5 );
@@ -107,7 +107,7 @@ TEST_F( UndoTest, TestUndoFunctionality ) {
     // TODO: Add checks before the undo operation to verify initial state
     player1->setPoints( 2 );
     player2->setPoints( 2 );
-    undoObj->setMode1Undo( history );
+    undoObj->mode1Undo( history );
     player1->setPoints( 3 );
     mode1Score->updateScore( player1 );  // player 1 scores
     ASSERT_EQ( 3, player1->getPoints());
