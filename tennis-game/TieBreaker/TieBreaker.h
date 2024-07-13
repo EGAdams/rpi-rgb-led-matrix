@@ -41,6 +41,7 @@ class TieBreaker {
   int  _getServe();    // determine serve based on iteration
   Player* _player1;
   Player* _player2;
+  void _tieBreakWin( Player* currentPlayer ); // things are getting messy, break it up
   PinInterface* _pinInterface;
   GameState* _gameState;
   History* _history;

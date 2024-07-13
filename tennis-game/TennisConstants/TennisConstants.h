@@ -18,7 +18,7 @@
 #define TESTING                     1
 #define GAME_FLASH_DELAY            50 // 200
 #define SET_WIN_FLASH_DELAY         200
-#define FLASH_DELAY                 1000
+#define FLASH_DELAY                 250 // 1000
 #define BUTTON_DELAY                50 // 300
 #define WIN_DELAY                   50 // 1000
 #define WATCH_INTERVAL              250
@@ -30,11 +30,11 @@
 #define SET_WIN_PULSE_COUNT         5
 #define TIE_BREAK_WIN_BY_TWO        10
 #define TIE_BREAK_MAX_POINTS        13
-#define TIE_BREAK_BLINK_DELAY       750
+#define TIE_BREAK_BLINK_DELAY       250 // 750
 #define TIE_BREAK_WATCH_INTERVAL    50
 #define BATTERY_TEST_BLINK_DELAY    1000
 #define GAMES_TO_WIN_SET            6
-#define SET_WIN_DELAY               3000
+#define SET_WIN_DELAY               500 // 3000
 #define PLAYER_1_INITIALIZED        0
 #define PLAYER_2_INITIALIZED        1
 #define SET_HISTORY_COLUMN_1        1

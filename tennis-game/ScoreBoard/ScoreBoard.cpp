@@ -300,7 +300,7 @@ int ScoreBoard::_characterOffset( std::string character ) {
     default: return 0; }}
 
 std::string ScoreBoard::_translate( int raw_score ) {
-    if( _gameState->getTieBreak() == false ) {
+    if( _gameState->getTieBreak() == false  && _gameState->getMatchTieBreak() == false ) {
         switch ( raw_score ) {
         case 0:               return "00";
         case 1:               return "15";

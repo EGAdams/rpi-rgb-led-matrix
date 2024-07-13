@@ -85,7 +85,7 @@ void TieBreaker::run( Player* currentPlayer ) {
     if (_scoreBoard == nullptr) {
         std::cerr << "*** ERROR: ScoreBoard is null in TieBreaker::run(). ***" << std::endl; return; }
     try {
-        _scoreBoard->update();
+        _scoreBoard->update();  // player has scored and points already incremented.
     } catch (const std::exception& e) {
         std::cerr << "*** EXCEPTION: " << e.what() << " ***" << std::endl;
         exit( 1 );
@@ -105,8 +105,16 @@ void TieBreaker::run( Player* currentPlayer ) {
         endTieBreak();
     } else if (currentPlayer->getPoints() >= TIE_BREAK_WIN_BY_TWO &&
                (currentPlayer->getPoints() - opponent->getPoints() >= 2)) {
+        _tieBreakWin( currentPlayer );  
+    } else { incrementIteration(); } // need this to determine serve bar location
+}
 
-        _undo.snapshot(_history);
+void TieBreaker::_tieBreakWin( Player* currentPlayer ) {
+    _undo.snapshot(_history);
+    if ( _gameState->getMatchTieBreak() == true ) { // match win
+        MatchWinSequence  mws;
+        mws.run(  currentPlayer, _gameState, &_gameLeds, &_setLeds );
+    } else { // regular tie break win.
         currentPlayer->setGames(currentPlayer->getGames() + 1); // increment games
         incrementSet();
         if (_scoreBoard != nullptr) {
@@ -114,8 +122,8 @@ void TieBreaker::run( Player* currentPlayer ) {
         }
         celebrate(currentPlayer);
         GameTimer::gameDelay(3000);
-        endTieBreak();
-    } else { incrementIteration(); } // need this to determine serve bar location
+    }
+    endTieBreak();       
 }
 
 /**
@@ -246,9 +254,10 @@ void TieBreaker::setTieBreakEnable() {
         tieLEDsOn();
         if ( _watchTimer.watchInputDelay( TIE_BREAK_BLINK_DELAY, &_inputs, TIE_BREAK_WATCH_INTERVAL ) > 0 ) { return; }}
     if ( _gameState->getTieLEDsOn() == 0 ) { tieLEDsOn(); }
-    _player1->setGames( 0 );
-    _player2->setGames( 0 );
-    _gameLeds.updateGames();
+    // _player1->setGames( 0 );
+    // _player2->setGames( 0 );  // not here!  we are using points for the scoring.
+    // _gameLeds.updateGames();  // no need for this.
+    incrementSet();
     GameTimer::gameDelay( UPDATE_DISPLAY_DELAY  ); }
 
 void TieBreaker::endTieBreak() {

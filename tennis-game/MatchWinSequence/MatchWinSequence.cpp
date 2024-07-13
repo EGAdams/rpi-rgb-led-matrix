@@ -8,7 +8,6 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
     std::cout << "//////////////////////// MatchWinSequence::run() ////////////////////////" << std::endl;
     GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
     if ( gameLeds->getScoreBoard()->hasCanvas()) {
-        // std::cout << "scoreboard has canvas.  updating..." << std::endl;
         gameLeds->getScoreBoard()->clearScreen();
         gameLeds->getScoreBoard()->drawText( "Match",  YELLOW, 10, 60  );
         gameLeds->getScoreBoard()->drawText( "Win",  YELLOW, 18, 80  );
@@ -24,5 +23,4 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
                 player->setGames( current_lamp );
                 gameLeds->updateGames();
                 GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY ); }
-            GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY ); }} // end run().
-}
+            GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY ); }}} // end run().

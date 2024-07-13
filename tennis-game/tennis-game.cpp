@@ -292,7 +292,19 @@ void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score(     gameObject, gameState, 2 );
     score(     gameObject, gameState, 2 );
     score(     gameObject, gameState, 2 );
-    std::cout << "ready to test tie-breaker scenario...  triggered after next player 2 score." << std::endl;
+    score(     gameObject, gameState, 2 );
+
+    // now player 1 win match
+    score(     gameObject, gameState, 1 );
+    score(     gameObject, gameState, 1 );
+    score(     gameObject, gameState, 1 );
+    score(     gameObject, gameState, 1 );
+    score(     gameObject, gameState, 1 );
+    score(     gameObject, gameState, 1 );
+    score(     gameObject, gameState, 1 );
+    score(     gameObject, gameState, 1 );
+    score(     gameObject, gameState, 1 );
+    score(     gameObject, gameState, 1 );
 }
 
 

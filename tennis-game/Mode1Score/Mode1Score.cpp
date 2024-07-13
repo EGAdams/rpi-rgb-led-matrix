@@ -47,10 +47,10 @@ void Mode1Score::_resetGame() {
 
 void Mode1Score::updateScore( Player* currentPlayer ) {
     _logger->setName( "updateScore" );
-    if ( _gameState->getTieBreak() == 1 ) {           // Tie Break
+    if ( _gameState->getTieBreak() == 1 ) {             // Set Tie Break
         _logger->logUpdate( "tie break run..." );
         _tieBreaker.run( currentPlayer );
-    } else if ( _gameState->getMatchTieBreak() == 1 ) { // Set Tie Break
+    } else if ( _gameState->getMatchTieBreak() == 1 ) { // Match Tie Break
         // _logger->logUpdate( "set tie breaker..." );
         // _tieBreaker.setTieBreaker();
 
@@ -121,7 +121,7 @@ void Mode1Score::playerGameWin( Player* player ) {
                     GameTimer::gameDelay( _gameState->getWinDelay() );
                     _resetGame();
                 }
-                player->setGames( 0 );
+                player->setGames( 0 );   // not sure about this but move on...
                 opponent->setGames( 0 );
             } else {     // player is ahead by 1 game, but not enough to win the set.
                 player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1GameWinSequence() : _mode1WinSequences.p2GameWinSequence();
