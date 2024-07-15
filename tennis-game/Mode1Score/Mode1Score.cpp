@@ -48,10 +48,10 @@ void Mode1Score::_resetGame() {
 void Mode1Score::updateScore( Player* currentPlayer ) {
     _logger->setName( "updateScore" );
     if ( _gameState->getTieBreak() == 1 ) {             // Set Tie Break
-        _logger->logUpdate( "tie break run..." );
+        // _logger->logUpdate( "tie break run..." );
         _tieBreaker.run( currentPlayer );
     } else if ( _gameState->getMatchTieBreak() == 1 ) { // Match Tie Break
-        // _logger->logUpdate( "set tie breaker..." );
+        // // _logger->logUpdate( "set tie breaker..." );
         // _tieBreaker.setTieBreaker();
 
         _tieBreaker.run( currentPlayer );
@@ -60,22 +60,22 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
         int current_player_points = currentPlayer->getPoints();
         int other_player_points = otherPlayer->getPoints();
         if ( current_player_points >= 3 ) {
-            _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has 3 points or more." );
+            // _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has 3 points or more." );
             if ( current_player_points == other_player_points ) {
-                _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has 3 points and tied with " + std::to_string( otherPlayer->number() ) + "." );
+                // _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has 3 points and tied with " + std::to_string( otherPlayer->number() ) + "." );
                 currentPlayer->setPoints( 3 );  
                 otherPlayer->setPoints( 3 );
             } else if ( current_player_points > 3 && ( current_player_points - other_player_points ) > 1 ) {
-                _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has " 
-                + std::to_string( current_player_points ) + " points and won by " 
-                + std::to_string( current_player_points - other_player_points ) + "." );
+                // _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has " 
+                // + std::to_string( current_player_points ) + " points and won by " 
+                // + std::to_string( current_player_points - other_player_points ) + "." );
                 currentPlayer->setGames( currentPlayer->getGames() + 1 );
                 _undo.memory();
                 currentPlayer->number() == 0 ? playerOneGameWin() : playerTwoGameWin();
             }
 
             if ( currentPlayer->getPoints() == 4 ) {
-                _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has 4 points." );
+                // _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has 4 points." );
                 _gameState->setPointFlash( 1 );       // "Ad" mode
                 _gameState->setPreviousTime( GameTimer::gameMillis());
                 _gameState->setToggle( 0 );
