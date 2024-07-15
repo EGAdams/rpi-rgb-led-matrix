@@ -2,6 +2,7 @@
 
 GameState::~GameState() {}
 GameState::GameState() {
+    _match_blink_on = 1;
     _gameRunning = 1;
     _current_set = 1;
     _pointFlash = 0;
@@ -34,9 +35,10 @@ void GameState::setCurrentSet( int current_set ) {
     _current_set = current_set;
 }
 
-
+void GameState::setMatchBlinkOn() {  _match_blink_on = 1;    }
+void GameState::setMatchBlinkOff() { _match_blink_on = 0;    }
+int  GameState::getMatchBlink() {    return _match_blink_on; }
 int GameState::getCurrentSet() const { return _current_set; }
-
 void GameState::setCurrentAction( std::string currentAction ) { _currentAction = currentAction; }
 std::string GameState::getCurrentAction() const { return _currentAction; }
 void GameState::setGameWinPulseCount( int gameWinPulseCount ) { _gameWinPulseCount = gameWinPulseCount; }
@@ -55,7 +57,9 @@ void GameState::setTieBreak( int tieBreak ) { _tieBreak = tieBreak; }
 int GameState::getTieBreak() { return _tieBreak; }
 void GameState::setMatchTieBreak( int matchTieBreak ) { _matchTieBreak = matchTieBreak; }
 int GameState::getMatchTieBreak() { return _matchTieBreak; }
-void GameState::setTieLEDsOn( int tieLEDsOn ) { _tieLEDsOn = tieLEDsOn; }
+void GameState::setTieLEDsOn( int tieLEDsOn ) { 
+    _tieLEDsOn = tieLEDsOn; 
+}
 int GameState::getTieLEDsOn() { return _tieLEDsOn; }
 void GameState::setServeSwitch( int serveSwitch ) { _serveSwitch = serveSwitch; }
 int GameState::getServeSwitch() { return _serveSwitch; }

@@ -15,6 +15,7 @@
 #define PLAYER_TWO_SERVE            1
 #define ACTIVE_BLINK                "blink"
 #define NORMAL_GAME_STATE           "normal game state"
+#define RUNNING_MATCH_WIN_SEQUENCE  "running match win sequence"
 #define TESTING                     1
 #define GAME_FLASH_DELAY            50 // 200
 #define SET_WIN_FLASH_DELAY         200
@@ -24,6 +25,7 @@
 #define WATCH_INTERVAL              250
 #define UPDATE_DISPLAY_DELAY        5 // 50
 #define LOOP_MATCH_LAMP_WIN         2
+#define MATCH_WIN_BLINK_COUNT       5 // added on clermont hill
 #define NUMBER_OF_GAME_LAMPS        7
 #define LOOP_GAME_LAMP_WIN          5
 #define TIE_PULSE_COUNT             5
@@ -67,7 +69,7 @@
 #define LOG_FILE_PATH          "C:\\Users\\EG\\Desktop\\2022\\june\\4th_week\\test.txt"
 #define PIN_FILE_PATH          "C:\\Users\\EG\\Desktop\\2022\\june\\2nd_week\\tennis_cpp\\pin_data\\"
 #define GAME_STATE_UPDATE_PATH "C:\\Users\\EG\\Desktop\\2022\\june\\2nd_week\\tennis_cpp\\game_state_data\\"
-#define MATCH_WIN_FLASH_DELAY  100
+#define MATCH_WIN_FLASH_DELAY  250 // 100
 #define BATTERY_TEST_DELAY      500
 #define BATTERY_TEST_FLASH_COUNT 5
 #include <iostream>

@@ -74,7 +74,8 @@ private:
     std::unique_ptr<SetDrawer>  _setDrawer;
     std::unique_ptr<RGBMatrix>  _canvas;
 
-    void _drawTieBreakerBar( /* void */            );
-    int  _characterOffset(   std::string character );
-    std::string _translate(  int raw_score         ); };
+    void _drawTieBreakerBar(    /* void */            );
+    void _drawMatchWinDisplay(  /* void */            );
+    int  _characterOffset(   std::string character    );
+    std::string _translate(  int raw_score            ); };
 #endif

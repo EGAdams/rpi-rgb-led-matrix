@@ -363,7 +363,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         // std::cout << "  102.) Test 02" << std::endl;
         // std::cout << "  103.) Test 03" << std::endl;
         // std::cout << "  104.) Test 04" << std::endl;
-        std::cout << "  105.) Test 05       9.) Undo" << std::endl;
+        std::cout << "1.) green score  2.) red score  105.) Test 05       9.) Undo" << std::endl;
         // std::cout << "  0.) Exit" << std::endl;
         // std::cout << "  Enter selection: ";
         std::cin >> menu_selection;

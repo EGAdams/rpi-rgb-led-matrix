@@ -10,6 +10,9 @@ public:
     GameState();
     ~GameState() ;
 
+    void setMatchBlinkOn();
+    void setMatchBlinkOff();
+    int  getMatchBlink();
     int getUpdateDisplayDelay() ;
     void stopGameRunning() ;
     int gameRunning() ;
@@ -99,6 +102,7 @@ public:
     std::map<int, int> getPlayer2SetHistory() ;
 
 private:
+    int _match_blink_on;
     int _current_set;
     int _player1_points;
     int _player2_points;

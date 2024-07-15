@@ -1,6 +1,6 @@
 
 
-CH TIE BREAK MODE ///
+/// MATCH TIE BREAK MODE ///
 
 *** inside WinSequences class.  p1GameWinSequence() ***
 *** SetWin::execute() ***

@@ -106,12 +106,15 @@ void TieBreaker::run( Player* currentPlayer ) {
     } else if (currentPlayer->getPoints() >= TIE_BREAK_WIN_BY_TWO &&
                (currentPlayer->getPoints() - opponent->getPoints() >= 2)) {
         _tieBreakWin( currentPlayer );  
-    } else { incrementIteration(); } // need this to determine serve bar location
+    } else { 
+        incrementIteration();
+    } // need this to determine serve bar location
 }
 
 void TieBreaker::_tieBreakWin( Player* currentPlayer ) {
     _undo.snapshot(_history);
     if ( _gameState->getMatchTieBreak() == true ) { // match win
+        endTieBreak();
         MatchWinSequence  mws;
         mws.run(  currentPlayer, _gameState, &_gameLeds, &_setLeds );
     } else { // regular tie break win.
@@ -122,8 +125,9 @@ void TieBreaker::_tieBreakWin( Player* currentPlayer ) {
         }
         celebrate(currentPlayer);
         GameTimer::gameDelay(3000);
-    }
-    endTieBreak();       
+        std::cout << "calling end tie break Object.. " << std::endl;
+        endTieBreak();  
+    }      
 }
 
 /**
@@ -265,14 +269,14 @@ void TieBreaker::endTieBreak() {
     _iteration = 0;
     _player1->setPoints( 0 );
     _player2->setPoints( 0 );
-    _player1->setGames(  0 );
+    _player1->setGames(  0 );  // this is because we where using game LEDs for the scoring
     _player2->setGames(  0 );
     _pointLeds.updatePoints();
     _gameLeds.updateGames();
-    _gameState->setTieBreak(    0 );
+    _gameState->setTieBreak(      0 );
     _gameState->setMatchTieBreak( 0 );
-    _gameState->setServeSwitch( 1 );
-    _gameState->setServe( 0 );
+    _gameState->setServeSwitch(   1 );
+    _gameState->setServe(         0 );
     if (_scoreBoard == nullptr) {
         std::cerr << "*** ERROR: ScoreBoard is null in TieBreaker::run() before update. ***" << std::endl;
         exit( 1 );
