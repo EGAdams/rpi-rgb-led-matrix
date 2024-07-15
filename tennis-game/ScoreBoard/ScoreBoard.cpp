@@ -124,7 +124,6 @@ Color ScoreBoard::_getColor( int color_constant ) {
 }
 
 void ScoreBoard::writeMessage( std::string message ) {
-    // std::cout << "inside ScoreBoard::_writeMessage()..." << std::endl;
     if ( hasCanvas() == false ) {
         std::cout << "/// " << message << " ///" << std::endl;
     } else {
@@ -134,7 +133,6 @@ void ScoreBoard::writeMessage( std::string message ) {
         int baseline = _big_number_font.baseline();            // set the coordinates for the text
         int first_offset  = 2;
         _drawer->drawNumber( message, first_offset, baseline + _big_number_font.height());
-        // std::cout << "inside ScoreBoard::writeMessage(), sleeping for 3 seconds..." << std::endl;
         GameTimer::gameDelay( 3000 );
         std::cout << "done sleeping." << std::endl; }}
 
@@ -149,27 +147,20 @@ bool ScoreBoard::hasCanvas() {
 void ScoreBoard::update() {
     bool tie_break_on = _gameState->getTieBreak() == true  || _gameState->getMatchTieBreak() == true;
     // std::cout << "inside ScoreBoard::update() ... " << std::endl;
-    // std::cout << "checking for _player1 or _player2 null values..." << std::endl;
     if ( _player1 == nullptr ) {
         std::cout << "*** ERROR: _player1 == NULL ***" << std::endl;
         exit( 1 ); }
     if ( _player2 == nullptr ) {
         std::cout << "*** ERROR: _player2 == NULL ***" << std::endl;
         exit( 1 ); }
-    // std::cout << "gamestate current action: " << _gameState->getCurrentAction() << std::endl;
     clearScreen();
-    // std::cout << "inside ScoreBoard::update()  player1 points: " << _player1->getPoints() << std::endl;
-    // std::cout << "inside ScoreBoard::update()  player2 points: " << _player2->getPoints() << std::endl;
     drawPlayerScore( _player1 );
     drawPlayerScore( _player2 );
     std::cout << "==========================" << std::endl;
     // _setDrawer->drawSets();
 
-    // std::cout << "scoreboard has a canvas.  checking for blink in action..." << std::endl;
     bool blink = _gameState->getCurrentAction().find( "blink" ) != std::string::npos;
     if ( blink ) {
-        // std::cout << "blink is true, calling _setDrawer->drawBlinkSets()..." << std::endl;
-        // std::cout << "gamestate current action: " << _gameState->getCurrentAction() << std::endl;
         int playerToBlink = _gameState->getCurrentAction().find( "player1" ) != std::string::npos ?
             PLAYER_1_INITIALIZED : PLAYER_2_INITIALIZED;
         _setDrawer->drawBlinkSets( playerToBlink ); // checks current action ignoring playerToBlink

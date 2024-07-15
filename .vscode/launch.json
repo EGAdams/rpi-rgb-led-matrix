@@ -29,7 +29,7 @@
             "name": "tie_breaker_test",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/tennis-game/TieBreaker/tie_breaker_test",
+            "program": "${workspaceFolder}/tennis-game/TieBreaker/TieBreakerTest",
             "args": [],
             "cwd": "${fileDirname}",
             "environment": [],

@@ -57,6 +57,7 @@ TEST_F(TieBreakerTest, SetUpSetTieBreakScenario) {
     // Simulate Player 2 winning the next point
     _player2->setPoints(4);
     std::cout << "Player 2 scores the next point..." << std::endl;
+    _scoreBoard->update();
     
     // Check if Player 2 wins the set and if the tie-breaker is ready
     if (_player2->getPoints() >= 4 && (_player2->getPoints() - _player1->getPoints()) >= 2) {
