@@ -92,7 +92,7 @@ void Mode1Score::playerTwoScore() { updateScore( _player2 ); }
 //////////////////////////// GAME WIN SCENARIOS ///////////////////////////////
 void Mode1Score::playerGameWin( Player* player ) {
     Player* opponent = player->getOpponent();
-    std::cout << "player " << std::to_string( player->number() ) << " games: " << player->getGames() << std::endl;
+    // std::cout << "player " << std::to_string( player->number() ) << " games: " << player->getGames() << std::endl;
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
     if ( player->getGames() >= GAMES_TO_WIN_SET ) { // if so, see of they are equal...
         if ( player->getGames() == GAMES_TO_WIN_SET && opponent->getGames() == GAMES_TO_WIN_SET ) {

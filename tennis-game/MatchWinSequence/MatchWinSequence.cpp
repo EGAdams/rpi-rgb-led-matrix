@@ -26,4 +26,5 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
         }
         std::cout << "setting current action back to normal game state..." << std::endl;
         gameState->setCurrentAction( NORMAL_GAME_STATE );
-        delete scoreBoard; }} // end run().
+        delete scoreBoard; 
+        gameState->setStarted( 0 ); }} // trigger game reset, end run().

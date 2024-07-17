@@ -5,6 +5,7 @@
 #include "../PinInterface/PinInterface.h"
 #include "../PinState/PinState.h"
 #include "../ScoreBoard/ScoreBoard.h"
+#include "../GameObject/GameObject.h"
 
 class TieBreakerTest : public ::testing::Test {
 protected:
@@ -14,6 +15,7 @@ protected:
     PinInterface* _pinInterface;
     TieBreaker* _tieBreaker;
     ScoreBoard* _scoreBoard;
+    GameObject* _gameObject;
 
     void SetUp() override {
         _gameState = new GameState();
@@ -34,7 +36,8 @@ protected:
         delete _player2;
         delete _player1;
         delete _gameState;
-        delete _scoreBoard;
+        delete _scoreBoard; 
+        delete _gameObject;
     }
 };
 
