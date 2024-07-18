@@ -37,7 +37,7 @@ protected:
         delete _player1;
         delete _gameState;
         delete _scoreBoard; 
-        delete _gameObject;
+        // delete _gameObject;
     }
 };
 
