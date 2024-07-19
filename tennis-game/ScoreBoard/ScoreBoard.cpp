@@ -14,7 +14,8 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         Color outline_color( 0, 0, 0 );
         RGBMatrix::Options matrix_options; // seems like the only logical place to create the canvas
         matrix_options.hardware_mapping = "regular";  // or e.g. "adafruit-hat"
-        matrix_options.pixel_mapper_config = "Rotate:180;264-Mapper"; // or e.g. "U-mapper"
+        // matrix_options.pixel_mapper_config = "Rotate:180;264-Mapper"; // or e.g. "U-mapper"
+        matrix_options.pixel_mapper_config = "264-Mapper"; // or e.g. "U-mapper"
         matrix_options.rows = 64;
         matrix_options.cols = 64;
         matrix_options.chain_length = 1;
