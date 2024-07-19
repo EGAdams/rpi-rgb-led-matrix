@@ -166,10 +166,11 @@ void ScoreBoard::update() {
             PLAYER_1_INITIALIZED : PLAYER_2_INITIALIZED;
         _setDrawer->drawBlinkSets( playerToBlink ); // checks current action ignoring playerToBlink
     } else {
-        if ( !tie_break_on &&  
-             strcmp( _gameState->getCurrentAction().c_str(),
-                     RUNNING_MATCH_WIN_SEQUENCE ) != 0) {
-            _setDrawer->drawSets(); }}
+        // if ( !tie_break_on &&  strcmp( _gameState->getCurrentAction().c_str(), RUNNING_MATCH_WIN_SEQUENCE ) != 0) {
+        //     _setDrawer->drawSets();
+        // }
+        _setDrawer->drawSets();
+    }
 
     if ( tie_break_on ) {
         _drawTieBreakerBar();
