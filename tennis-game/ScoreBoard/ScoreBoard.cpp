@@ -22,7 +22,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         matrix_options.parallel = 1;
         matrix_options.show_refresh_rate = false;
         matrix_options.disable_hardware_pulsing = true; // --led-no-hardware-pulse
-        matrix_options.brightness = 35; // inc jan 22, 22024 // 35 is best for demo videos in largo
+        matrix_options.brightness = 85; // inc jan 22, 22024 // 35 is best for demo videos in largo
         matrix_options.pwm_bits = 11;
         matrix_options.multiplexing = 1;
         rgb_matrix::RuntimeOptions runtime_opt;
