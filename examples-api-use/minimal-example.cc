@@ -70,10 +70,11 @@ int main(int argc, char *argv[])
 {
     printf( "starting main\n" );
     RGBMatrix::Options defaults;
-    defaults.hardware_mapping = "adafruit-hat"; // or e.g. "adafruit-hat"
+    defaults.hardware_mapping = "regular"; // "adafruit-hat"; // or e.g. "adafruit-hat"
     defaults.rows = 64;
     defaults.cols = 64;
-    defaults.brightness = 35;
+    defaults.brightness = 85;
+    defaults.pixel_mapper_config = "Rotate:180;264-Mapper";
     // defaults.pixel_mapper_config = "U-mapper";
     defaults.multiplexing = 2; // 19 is the Superbowl mapper
     defaults.show_refresh_rate = false;
