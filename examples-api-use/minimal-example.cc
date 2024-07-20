@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
     printf( "starting main\n" );
     RGBMatrix::Options defaults;
     defaults.hardware_mapping = "regular"; // "adafruit-hat"; // or e.g. "adafruit-hat"
-    defaults.rows = 128;
+    defaults.rows = 64;
     defaults.cols = 64;
     defaults.brightness = 85;
     defaults.pixel_mapper_config = "Rotate:180;264-Mapper";
