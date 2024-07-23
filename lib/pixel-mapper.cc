@@ -256,62 +256,54 @@ class TwoSixtyFourMapper : public PixelMapper {
                 //initialize the panels
                 Panel firstPanel;
                 firstPanel.name = "firstPanel";
-                firstPanel.order = 7;
+                firstPanel.order = 3;
                 firstPanel.rotate = 0;
                 firstPanel.y_offset = 0;
                 firstPanel.x_offset = 0;
-                // _panels[ 0 ] = firstPanel;
-                _panels[ 7 ] = firstPanel;
+                _panels[ 0 ] = firstPanel;
 
                 Panel secondPanel;
                 secondPanel.name = "secondPanel";
-                secondPanel.order = 6;
+                secondPanel.order = 2;
                 secondPanel.rotate = 0;
-                // _panels[ 1 ] = secondPanel;
-                _panels[ 6 ] = secondPanel;
+                _panels[ 1 ] = secondPanel;
 
                 Panel thirdPanel;
                 thirdPanel.name = "thirdPanel";
-                thirdPanel.order = 5;
+                thirdPanel.order = 1;
                 thirdPanel.rotate = 0;
-                // _panels[ 2 ] = thirdPanel;
-                _panels[ 5 ] = thirdPanel;
+                _panels[ 2 ] = thirdPanel;
 
                 Panel fourthPanel;
                 fourthPanel.name = "fourthPanel";
-                fourthPanel.order = 4;
+                fourthPanel.order = 0;
                 fourthPanel.rotate = 0;
-                // _panels[ 3 ] = fourthPanel;
-                _panels[ 4 ] = fourthPanel;
+                _panels[ 3 ] = fourthPanel;
 
                 Panel fifthPanel;
                 fifthPanel.name = "fifthPanel";
-                fifthPanel.order = 3;
+                fifthPanel.order = 7;
                 fifthPanel.rotate = 0;
-                // _panels[ 4 ] = fifthPanel;
-                _panels[ 3 ] = fifthPanel;
+                _panels[ 4 ] = fifthPanel;
 
                 Panel sixthPanel;
                 sixthPanel.name = "sixthPanel";
-                sixthPanel.order = 2;
+                sixthPanel.order = 6;
                 sixthPanel.rotate = 0;
-                // _panels[ 5 ] = sixthPanel;
-                _panels[ 2 ] = sixthPanel;
+                _panels[ 5 ] = sixthPanel;
 
                 Panel seventhPanel;
                 seventhPanel.name = "seventhPanel";
-                seventhPanel.order = 1;
+                seventhPanel.order = 5;
                 seventhPanel.rotate = 0;
-                // _panels[ 6 ] = seventhPanel;
-                _panels[ 1 ] = seventhPanel;
+                _panels[ 6 ] = seventhPanel;
 
                 Panel eighthPanel;
                 eighthPanel.name = "eighthPanel";
-                eighthPanel.order = 0;
+                eighthPanel.order = 4;
                 eighthPanel.rotate = 0;
-                // _panels[ 7 ] = eighthPanel; 
-                _panels[ 0 ] = eighthPanel; 
-                printf( "264 mapper constructed. \n" ); }
+                _panels[ 7 ] = eighthPanel; 
+                printf( "264 Mapper constructed. \n" ); }
 
             virtual const char *GetName() const { return "264-Mapper"; }
 
@@ -415,57 +407,49 @@ class TwoSixtyFourMapper : public PixelMapper {
                 firstPanel.rotate = 0;
                 firstPanel.y_offset = 0;
                 firstPanel.x_offset = 0;
-                // _panels[ 0 ] = firstPanel;
-                _panels[ 5 ] = firstPanel;
+                _panels[ 0 ] = firstPanel;
 
                 Panel secondPanel;
                 secondPanel.name = "secondPanel";
                 secondPanel.order = 6;
                 secondPanel.rotate = 0;
-                // _panels[ 1 ] = secondPanel;
-                _panels[ 6 ] = firstPanel;
+                _panels[ 1 ] = secondPanel;
 
                 Panel thirdPanel;
                 thirdPanel.name = "thirdPanel";
                 thirdPanel.order = 7;
                 thirdPanel.rotate = 0;
-                // _panels[ 2 ] = thirdPanel;
-                _panels[ 7 ] = thirdPanel;
+                _panels[ 2 ] = thirdPanel;
 
                 Panel fourthPanel;
                 fourthPanel.name = "fourthPanel";
                 fourthPanel.order = 4;
                 fourthPanel.rotate = 0;
-                // _panels[ 3 ] = fourthPanel;
-                _panels[ 4 ] = fourthPanel;
+                _panels[ 3 ] = fourthPanel;
 
                 Panel fifthPanel;
                 fifthPanel.name = "fifthPanel";
                 fifthPanel.order = 1;
                 fifthPanel.rotate = 0;
-                // _panels[ 4 ] = fifthPanel;
-                _panels[ 1 ] = fifthPanel;
+                _panels[ 4 ] = fifthPanel;
 
                 Panel sixthPanel;
                 sixthPanel.name = "sixthPanel";
                 sixthPanel.order = 2;
                 sixthPanel.rotate = 0;
-                // _panels[ 5 ] = sixthPanel;
-                _panels[ 2 ] = sixthPanel;
+                _panels[ 5 ] = sixthPanel;
 
                 Panel seventhPanel;
                 seventhPanel.name = "seventhPanel";
                 seventhPanel.order = 3;
                 seventhPanel.rotate = 0;
-                // _panels[ 6 ] = seventhPanel;
-                _panels[ 3 ] = seventhPanel;
+                _panels[ 6 ] = seventhPanel;
 
                 Panel eighthPanel;
                 eighthPanel.name = "eighthPanel";
                 eighthPanel.order = 0;
                 eighthPanel.rotate = 0;
-                // _panels[ 7 ] = eighthPanel;
-                _panels[ 0 ] = eighthPanel;
+                _panels[ 7 ] = eighthPanel;
 
                 // Panel ninthPanel;
                 // ninthPanel.name = "ninthPanel";
