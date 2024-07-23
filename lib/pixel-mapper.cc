@@ -305,7 +305,7 @@ class TwoSixtyFourMapper : public PixelMapper {
                 _panels[ 7 ] = eighthPanel; 
                 printf( "264 mapper constructed. \n" ); }
 
-            virtual const char *GetName() const { return "264-mapper"; }
+            virtual const char *GetName() const { return "264-Mapper"; }
 
             virtual bool SetParameters( int chain, int parallel, const char *param) { parallel_ = parallel; return true; } 
                                                         
