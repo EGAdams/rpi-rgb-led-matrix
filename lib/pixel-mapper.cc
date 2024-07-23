@@ -256,7 +256,7 @@ class TwoSixtyFourMapper : public PixelMapper {
                 //initialize the panels
                 Panel firstPanel;
                 firstPanel.name = "firstPanel";
-                firstPanel.order = 2;
+                firstPanel.order = 3;
                 firstPanel.rotate = 0;
                 firstPanel.y_offset = 0;
                 firstPanel.x_offset = 0;
@@ -264,43 +264,43 @@ class TwoSixtyFourMapper : public PixelMapper {
 
                 Panel secondPanel;
                 secondPanel.name = "secondPanel";
-                secondPanel.order = 1;
+                secondPanel.order = 2;
                 secondPanel.rotate = 0;
                 _panels[ 1 ] = secondPanel;
 
                 Panel thirdPanel;
                 thirdPanel.name = "thirdPanel";
-                thirdPanel.order = 0;
+                thirdPanel.order = 1;
                 thirdPanel.rotate = 0;
                 _panels[ 2 ] = thirdPanel;
 
                 Panel fourthPanel;
                 fourthPanel.name = "fourthPanel";
-                fourthPanel.order = 3;
+                fourthPanel.order = 0;
                 fourthPanel.rotate = 0;
                 _panels[ 3 ] = fourthPanel;
 
                 Panel fifthPanel;
                 fifthPanel.name = "fifthPanel";
-                fifthPanel.order = 4;
+                fifthPanel.order = 7;
                 fifthPanel.rotate = 0;
                 _panels[ 4 ] = fifthPanel;
 
                 Panel sixthPanel;
                 sixthPanel.name = "sixthPanel";
-                sixthPanel.order = 5;
+                sixthPanel.order = 6;
                 sixthPanel.rotate = 0;
                 _panels[ 5 ] = sixthPanel;
 
                 Panel seventhPanel;
                 seventhPanel.name = "seventhPanel";
-                seventhPanel.order = 6;
+                seventhPanel.order = 5;
                 seventhPanel.rotate = 0;
                 _panels[ 6 ] = seventhPanel;
 
                 Panel eighthPanel;
                 eighthPanel.name = "eighthPanel";
-                eighthPanel.order = 7;
+                eighthPanel.order = 4;
                 eighthPanel.rotate = 0;
                 _panels[ 7 ] = eighthPanel; 
                 printf( "264 mapper constructed. \n" ); }
