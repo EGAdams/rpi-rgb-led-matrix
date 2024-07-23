@@ -1,0 +1,3 @@
+[submodule "tennis-game/agency-swarm"]
+	path = tennis-game/agency-swarm
+	url = https://github.com/VRSEN/agency-swarm.git

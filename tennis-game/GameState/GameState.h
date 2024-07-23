@@ -10,15 +10,18 @@ public:
     GameState();
     ~GameState() ;
 
+    void setMatchBlinkOn();
+    void setMatchBlinkOff();
+    int  getMatchBlink();
     int getUpdateDisplayDelay() ;
     void stopGameRunning() ;
     int gameRunning() ;
     void setGameHistory(std::map<int, int> game_history) ;
     std::map<int, int> getGameHistory() ;
     void setCurrentAction(std::string currentAction) ;
-    std::string getCurrentAction() ;
-    void setCurrentSet(int current_set) ;
-    int getCurrentSet() ;
+    std::string getCurrentAction() const;
+    void setCurrentSet(int current_set);
+    int getCurrentSet() const;
     void setWinDelay(int winDelay) ;
     int getWinDelay() ;
     void setPointFlash(int pointFlash) ;
@@ -37,8 +40,8 @@ public:
     int getUndo() ;
     void setStarted(int started) ;
     int getStarted() ;
-    void setSetTieBreak(int setTieBreak) ;
-    int getSetTieBreak() ;
+    void setMatchTieBreak(int matchTieBreak) ;
+    int getMatchTieBreak() ;
     void setRotaryChange(int rotaryChange) ;
     int getRotaryChange() ;
     void setPreviousTime(unsigned long previousTime) ;
@@ -75,22 +78,22 @@ public:
     int getGameWinPulseCount() ;
     void setTieBreakMem(int tieBreakMem) ;
     int getTieBreakMem() ;
-    void setSetTieBreakMem(int setTieBreakMem) ;
-    int getSetTieBreakMem() ;
+    void setMatchTieBreakMem(int setMatchTieBreakMem) ;
+    int getMatchTieBreakMem() ;
     void setPlayer1Points(int player1Points) ;
-    int getPlayer1Points() ;
+    int getPlayer1Points() const;
     void setPlayer2Points(int player2Points) ;
-    int getPlayer2Points() ;
+    int getPlayer2Points() const;
     void setPlayer1Games(int player1Games) ;
-    int getPlayer1Games() ;
+    int getPlayer1Games() const;
     void setPlayer2Games(int player2Games) ;
-    int getPlayer2Games() ;
+    int getPlayer2Games() const;
     void setPlayer1Sets(int player1Sets) ;
-    int getPlayer1Sets() ;
+    int getPlayer1Sets() const;
     void setPlayer2Sets(int player2Sets) ;
-    int getPlayer2Sets() ;
+    int getPlayer2Sets() const;
     void setPlayer1Matches(int player1Matches) ;
-    int getPlayer1Matches() ;
+    int getPlayer1Matches() const;
     void setPlayer2Matches(int player2Matches) ;
     int getPlayer2Matches() ;
     void setPlayer1SetHistory(std::map<int, int> player1_set_history) ;
@@ -99,19 +102,20 @@ public:
     std::map<int, int> getPlayer2SetHistory() ;
 
 private:
+    int _match_blink_on;
     int _current_set;
-    int _player1_points;  
+    int _player1_points;
     int _player2_points;
-    int _player1_games;   
+    int _player1_games;
     int _player2_games;
-    int _player1_sets;    
+    int _player1_sets;
     int _player2_sets;
-    int _player1_matches; 
+    int _player1_matches;
     int _player2_matches;
     int _pointFlash;
     int _serve;
     int _tieBreak;
-    int _setTieBreak;
+    int _matchTieBreak;
     int _tieLEDsOn;
     int _started;
     int _serveSwitch;
@@ -123,11 +127,11 @@ private:
     unsigned long _now;
     unsigned long _previousTime;
     int _freezePlayerButton;
-    int _p1PointsMem; 
+    int _p1PointsMem;
     int _p2PointsMem;
     int _p1GamesMem;  
     int _p2GamesMem;
-    int _p1SetsMem;   
+    int _p1SetsMem;
     int _p2SetsMem;
     int _toggle;
     int _tieBreakOnly;
@@ -135,7 +139,7 @@ private:
     int _buttonDelay;
     unsigned long _flashDelay;
     int _gameWinPulseCount;
-    int _setTieBreakMem;
+    int _matchTieBreakMem;
     int _tieBreakMem;
     int _gameRunning;
     std::string _currentAction;
@@ -143,5 +147,4 @@ private:
     std::map<int, int> _player2_set_history;
     std::map<int, int> _game_history;
 };
-
 #endif

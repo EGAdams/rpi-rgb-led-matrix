@@ -12,8 +12,24 @@ Reset::Reset( Player* player1,
 }
 Reset::~Reset() { delete _logger; }
 
+void Reset::zeroSetHistory() {
+    std::map<int, int> player1SetHistory = { {0, 0}, {1, 0}, {2, 0} };
+    std::map<int, int> player2SetHistory = { {0, 0}, {1, 0}, {2, 0} };
+    _gameState->setPlayer1SetHistory(player1SetHistory);
+    _gameState->setPlayer2SetHistory(player2SetHistory);
+    // zero player histories
+    _player1->setSetHistory( 0, 0 );
+    _player1->setSetHistory( 1, 0 );
+    _player1->setSetHistory( 2, 0 );
+    _player2->setSetHistory( 0, 0 );
+    _player2->setSetHistory( 1, 0 );
+    _player2->setSetHistory( 2, 0 );
+    // set current set to 0
+    _gameState->setCurrentSet( 1 );
+}
+
 void Reset::resetScoreboard() {
-    _logger->logUpdate( "resetting scoreboard...", __FUNCTION__ );
+    // _logger->logUpdate( "resetting scoreboard..." );
     _pinInterface->pinDigitalWrite( P1_POINTS_LED1, LOW );
     _pinInterface->pinDigitalWrite( P1_POINTS_LED2, LOW );
     _pinInterface->pinDigitalWrite( P1_POINTS_LED3, LOW );
@@ -53,19 +69,19 @@ void Reset::resetScoreboard() {
     _pinInterface->pinDigitalWrite( P1_SERVE, LOW );
     _pinInterface->pinDigitalWrite( P2_SERVE, LOW );
 
-    _logger->logUpdate( "turning tie leds off... ", __FUNCTION__ );
+    // _logger->logUpdate( "turning tie leds off... " );
     tieLEDsOff();
 
     _gameState->setTieBreak( 0 );
-    _gameState->setSetTieBreak( 0 );
-    std::cout << "setting serve switch and serve inside Reset.cpp..." << std::endl;
+    _gameState->setMatchTieBreak( 0 );
+    // std::cout << "setting serve switch and serve inside Reset.cpp..." << std::endl;
     _gameState->setServeSwitch( 1 );
     _gameState->setServe( 0 );
     _gameState->setPlayerButton( 0 );
     _gameState->setStarted(
         /*1*/ 0 );  // gameStart = true; TODO: the placing of this is questionable
     GameTimer::gameDelay( 200 );  // delay( 200 );
-    _logger->logUpdate( "done resetting game.", __FUNCTION__ );
+    // _logger->logUpdate( "done resetting game." );
 }
 
 void Reset::refresh() {

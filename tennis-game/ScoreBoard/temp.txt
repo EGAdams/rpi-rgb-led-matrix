@@ -1,0 +1,9 @@
+```bash
+6 4 0
+4 6 0
+```
+
+Here is the code for the scoreboard updater:
+```cpp
+
+```

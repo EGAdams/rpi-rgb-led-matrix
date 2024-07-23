@@ -9,11 +9,9 @@
 #include "../PointLeds/PointLeds.h"
 #include "../PinInterface/PinInterface.h"
 #include "../Undo/Undo.h"
+#include "../Logger/Logger.h"
 
 class History;
-
-#define PLAYER_ONE_SERVE 0
-#define PLAYER_TWO_SERVE 1
 
 class Mode1Functions {
  public:
@@ -38,6 +36,7 @@ class Mode1Functions {
     Mode1Score _mode1Score;
     ServeLeds  _serveLeds;
     ScoreBoard* _scoreBoard;
+    Logger*    _logger;
 };
 
 #endif

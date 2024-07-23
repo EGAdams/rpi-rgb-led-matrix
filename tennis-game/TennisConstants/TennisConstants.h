@@ -11,28 +11,32 @@
 #define PLAYER_2_BLINK              "player2 blink"
 #define PLAYER_ONE_BUTTON           1
 #define PLAYER_TWO_BUTTON           2
+#define PLAYER_ONE_SERVE            0
+#define PLAYER_TWO_SERVE            1
 #define ACTIVE_BLINK                "blink"
 #define NORMAL_GAME_STATE           "normal game state"
+#define RUNNING_MATCH_WIN_SEQUENCE  "running match win sequence"
 #define TESTING                     1
-#define GAME_FLASH_DELAY            200
+#define GAME_FLASH_DELAY            50 // 200
 #define SET_WIN_FLASH_DELAY         200
-#define FLASH_DELAY                 1000
-#define BUTTON_DELAY                300
-#define WIN_DELAY                   1000
+#define FLASH_DELAY                 250 // 1000
+#define BUTTON_DELAY                50 // 300
+#define WIN_DELAY                   50 // 1000
 #define WATCH_INTERVAL              250
-#define UPDATE_DISPLAY_DELAY        50
+#define UPDATE_DISPLAY_DELAY        5 // 50
 #define LOOP_MATCH_LAMP_WIN         2
+#define MATCH_WIN_BLINK_COUNT       5 // added on clermont hill
 #define NUMBER_OF_GAME_LAMPS        7
 #define LOOP_GAME_LAMP_WIN          5
 #define TIE_PULSE_COUNT             5
 #define SET_WIN_PULSE_COUNT         5
 #define TIE_BREAK_WIN_BY_TWO        10
 #define TIE_BREAK_MAX_POINTS        13
-#define TIE_BREAK_BLINK_DELAY       100 // 750
+#define TIE_BREAK_BLINK_DELAY       250 // 750
 #define TIE_BREAK_WATCH_INTERVAL    50
 #define BATTERY_TEST_BLINK_DELAY    1000
 #define GAMES_TO_WIN_SET            6
-#define SET_WIN_DELAY               3000
+#define SET_WIN_DELAY               500 // 3000
 #define PLAYER_1_INITIALIZED        0
 #define PLAYER_2_INITIALIZED        1
 #define SET_HISTORY_COLUMN_1        1
@@ -47,7 +51,7 @@
 #define UNDEFINED_SCORE             99
 #define BLUE_BAR_VERTICAL_OFFSET    121
 #define BLUE_BAR_HORIZONTAL_OFFSET  54
-#define RED_BAR_HORIZONTAL_OFFSET   34
+#define RED_BAR_HORIZONTAL_OFFSET   44
 #define GREEN_BAR_HORIZONTAL_OFFSET 30
 
 
@@ -65,7 +69,7 @@
 #define LOG_FILE_PATH          "C:\\Users\\EG\\Desktop\\2022\\june\\4th_week\\test.txt"
 #define PIN_FILE_PATH          "C:\\Users\\EG\\Desktop\\2022\\june\\2nd_week\\tennis_cpp\\pin_data\\"
 #define GAME_STATE_UPDATE_PATH "C:\\Users\\EG\\Desktop\\2022\\june\\2nd_week\\tennis_cpp\\game_state_data\\"
-#define MATCH_WIN_FLASH_DELAY  100
+#define MATCH_WIN_FLASH_DELAY  250 // 100
 #define BATTERY_TEST_DELAY      500
 #define BATTERY_TEST_FLASH_COUNT 5
 #include <iostream>

@@ -1,7 +1,7 @@
 #include "ScoreBoard.h"
 
 ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState ):
-    _player1( player1 ), _player2( player2 ), _gameState( gameState ) { 
+    _player1( player1 ), _player2( player2 ), _gameState( gameState ) {
     if ( onRaspberryPi() == false ) {
         std::cout << "constructing scoreboard without matrix..." << std::endl;
         _setDrawer = std::make_unique<SetDrawer>( _canvas.get(), _gameState );
@@ -14,14 +14,15 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         Color outline_color( 0, 0, 0 );
         RGBMatrix::Options matrix_options; // seems like the only logical place to create the canvas
         matrix_options.hardware_mapping = "regular";  // or e.g. "adafruit-hat"
-        matrix_options.pixel_mapper_config = "Rotate:180;264-Mapper"; // or e.g. "U-mapper"
+        // matrix_options.pixel_mapper_config = "Rotate:180;264-Mapper"; // or e.g. "U-mapper"
+        matrix_options.pixel_mapper_config = "264-mapper"; // or e.g. "U-mapper"
         matrix_options.rows = 64;
         matrix_options.cols = 64;
         matrix_options.chain_length = 1;
-        matrix_options.parallel = 2;
+        matrix_options.parallel = 1;
         matrix_options.show_refresh_rate = false;
         matrix_options.disable_hardware_pulsing = true; // --led-no-hardware-pulse
-        matrix_options.brightness = 35; // 35 is best for demo videos in largo
+        matrix_options.brightness = 85; // inc jan 22, 22024 // 35 is best for demo videos in largo
         matrix_options.pwm_bits = 11;
         matrix_options.multiplexing = 1;
         rgb_matrix::RuntimeOptions runtime_opt;
@@ -53,15 +54,15 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         bigNumberFontLoader.LoadFont( bigNumberFont );
         if (!_big_number_font.LoadFont( BIG_NUMBER_FONT )) {
             fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT ); exit( 1 );}
-        
+
         FontLoader periodFontLoader( "fonts/mspgothic_030623.bdf" );            // that period
         periodFontLoader.LoadFont( _period_font );
-        if (!_period_font.LoadFont( "fonts/mspgothic_030623.bdf" )) { 
+        if (!_period_font.LoadFont( "fonts/mspgothic_030623.bdf" )) {
             fprintf( stderr, "*** ERROR: Couldn't load font '%s'\n", "fonts/mspgothic_030623.bdf ***" );exit( 1 );
         } else {
             std::cout << "loaded period font." << std::endl;
         }
-        
+
         // end loading fonts
 
         Color color( 255, 255, 0 );
@@ -124,7 +125,6 @@ Color ScoreBoard::_getColor( int color_constant ) {
 }
 
 void ScoreBoard::writeMessage( std::string message ) {
-    // std::cout << "inside ScoreBoard::_writeMessage()..." << std::endl;
     if ( hasCanvas() == false ) {
         std::cout << "/// " << message << " ///" << std::endl;
     } else {
@@ -134,7 +134,6 @@ void ScoreBoard::writeMessage( std::string message ) {
         int baseline = _big_number_font.baseline();            // set the coordinates for the text
         int first_offset  = 2;
         _drawer->drawNumber( message, first_offset, baseline + _big_number_font.height());
-        // std::cout << "inside ScoreBoard::writeMessage(), sleeping for 3 seconds..." << std::endl;
         GameTimer::gameDelay( 3000 );
         std::cout << "done sleeping." << std::endl; }}
 
@@ -147,43 +146,78 @@ bool ScoreBoard::hasCanvas() {
     } else { /* std::cout << "*** WARNING: canvas is NULL ***" << std::endl; */ return false; }}
 
 void ScoreBoard::update() {
+    bool tie_break_on = _gameState->getTieBreak() == true  || _gameState->getMatchTieBreak() == true;
     // std::cout << "inside ScoreBoard::update() ... " << std::endl;
-    // std::cout << "checking for _player1 or _player2 null values..." << std::endl;
     if ( _player1 == nullptr ) {
         std::cout << "*** ERROR: _player1 == NULL ***" << std::endl;
         exit( 1 ); }
     if ( _player2 == nullptr ) {
         std::cout << "*** ERROR: _player2 == NULL ***" << std::endl;
         exit( 1 ); }
-    // std::cout << "gamestate current action: " << _gameState->getCurrentAction() << std::endl;
     clearScreen();
-    // std::cout << "inside ScoreBoard::update()  player1 points: " << _player1->getPoints() << std::endl;
-    // std::cout << "inside ScoreBoard::update()  player2 points: " << _player2->getPoints() << std::endl;
     drawPlayerScore( _player1 );
     drawPlayerScore( _player2 );
+    std::cout << "==========================" << std::endl;
     // _setDrawer->drawSets();
 
-    // std::cout << "scoreboard has a canvas.  checking for blink in action..." << std::endl;
     bool blink = _gameState->getCurrentAction().find( "blink" ) != std::string::npos;
     if ( blink ) {
-        // std::cout << "blink is true, calling _setDrawer->drawBlinkSets()..." << std::endl;
-        // std::cout << "gamestate current action: " << _gameState->getCurrentAction() << std::endl;
         int playerToBlink = _gameState->getCurrentAction().find( "player1" ) != std::string::npos ?
             PLAYER_1_INITIALIZED : PLAYER_2_INITIALIZED;
         _setDrawer->drawBlinkSets( playerToBlink ); // checks current action ignoring playerToBlink
-    } else { 
-        _setDrawer->drawSets(); }
+    } else {
+        // if ( !tie_break_on &&  strcmp( _gameState->getCurrentAction().c_str(), RUNNING_MATCH_WIN_SEQUENCE ) != 0) {
+        //     _setDrawer->drawSets();
+        // }
+        _setDrawer->drawSets();
+    }
 
-    if ( _gameState->getTieBreak() == true ) {
-        // std::cout << "tie break is true, calling _drawTieBreakerBar()..." << std::endl;
+    if ( tie_break_on ) {
         _drawTieBreakerBar();
-    } else { 
-        // std::cout << "tie break is false, not calling _drawTieBreakerBar()..." << std::endl; 
+    } else if( _gameState->getCurrentAction() == RUNNING_MATCH_WIN_SEQUENCE ) {
+        _drawMatchWinDisplay();
+    } else {
+        // std::cout << "tie break is false, not calling _drawTieBreakerBar()..." << std::endl;
+    }
+}
+
+void ScoreBoard::_drawMatchWinDisplay() {
+    const std::string yellow = "\033[93m";
+    const std::string reset = "\033[0m";
+    const std::string bright_green = "\033[92m";  // Bright green
+    const std::string blue = "\033[94m";  // Blue
+    if ( onRaspberryPi() == false ) {
+        if ( _gameState->getMatchBlink() == 1 ) {
+            if ( strcmp( _gameState->getCurrentAction().c_str(), RUNNING_MATCH_WIN_SEQUENCE ) == 0 ) {
+                std::cout << bright_green <<  "/// *** !!! MATCH WIN !!! *** ///\n" << reset << std::endl;
+            } else {
+                std::cout << "\n" << reset << std::endl;
+            }
+        }
+    } else {
+        _bluePipeDrawer->drawNumber( "I", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
     }
 }
 
 void ScoreBoard::_drawTieBreakerBar() {
-    _bluePipeDrawer->drawNumber( "I", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
+    const std::string yellow = "\033[93m";
+    const std::string reset = "\033[0m";
+    const std::string bright_green = "\033[92m";  // Bright green
+    const std::string blue = "\033[94m";  // Blue
+    if ( onRaspberryPi() == false ) {
+        if ( _gameState->getTieLEDsOn() == 1 ) {
+            // std::cout << reset << "==========================" << std::endl;
+            if ( _gameState->getMatchTieBreak()) {
+                std::cout << blue <<  "/// MATCH TIE BREAK MODE ///\n" << reset << std::endl;
+            } else {
+                std::cout << blue <<  "/// TIE BREAK MODE ///\n"       << reset << std::endl;
+            }
+            
+            // std::cout << reset << "==========================" << std::endl;
+        }
+    } else {
+        _bluePipeDrawer->drawNumber( "I", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
+    }
 }
 
 
@@ -191,19 +225,21 @@ void ScoreBoard::blink_player_score(int player) {
     if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
     #define BLINK_DELAY 100
     #define BLINK_COUNT 3
+    #define PERIOD_LR_OFFSET 51
+    #define PERIOD_UD_OFFSET 92
     if ( player == PLAYER_1_SCORE ) {
         for ( int i=0; i < BLINK_COUNT; i++ ) {
-            _greenPeriodDrawer->drawNumber( ".", RED_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET - 38 );
+            _greenPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
             GameTimer::gameDelay( BLINK_DELAY );
-            _blankPeriodDrawer->drawNumber( ".", RED_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET - 38 );
+            _blankPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
             GameTimer::gameDelay( BLINK_DELAY );
         }
     } else {
         // do this 5 times
         for ( int i = 0; i < BLINK_COUNT; i++ ) {
-            _redPeriodDrawer->drawNumber( ".", RED_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET -20 );
+            _redPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
             GameTimer::gameDelay( BLINK_DELAY );
-            _blankPeriodDrawer->drawNumber( ".", RED_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET -20 );
+            _blankPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
             GameTimer::gameDelay( BLINK_DELAY );
         }
     }
@@ -211,23 +247,37 @@ void ScoreBoard::blink_player_score(int player) {
 
 void ScoreBoard::clearScreen() {
     if ( hasCanvas() == false ) {
-        // Terminal scoreboard.  Clear screen and move cursor to the top-left
-        std::cout << "\033[2J\033[H";
+        std::cout << "\033[2J\033[H";   // Clear screen and move cursor to the top-left
+        // system( "clear" );           // execute a system `clear` command  
     } else {
         if ( !hasCanvas()) { std::cout << "*** ERROR: canvas == NULL.  exiting... ***" << std::endl; exit( 1 ); }
-        // std::cout << "clearScreen called, hasCanvas() is good.  clearing matrix...." << std::endl;
         Color flood_color( 0, 0, 0 ); _canvas->Fill( flood_color.r, flood_color.g, flood_color.b ); }}
 
 std::string ScoreBoard::drawPlayerScore( Player* player ) {
-    std::string serve_bar = _gameState->getServe() == player->number() ? "\033[34m|" : " "; // or p1 serve and swap
+    std::string serve_bar_text = hasCanvas() == true ? "i" : "\033[34m|";
+    std::string serve_bar = _gameState->getServe() == player->number() ? serve_bar_text : " ";
+    std::string other_serve_bar = _gameState->getServe() == player->getOpponent()->number() ? serve_bar_text : " ";
     std::string score = _translate( player->getPoints());
     if( hasCanvas() == false ) {
+        std::cout << "==========================" << std::endl;
         player->number() == PLAYER_1_INITIALIZED ?  // type player 1 score, else type player 2 score
-        std::cout << "\033[32mPLAYER 1: ////// " << serve_bar << "\033[32m " << score << " ////// " << std::endl :
-        std::cout << "\033[31mPLAYER 2: ////// " << serve_bar << "\033[31m " << score << " ////// \033[35m" << std::endl;
+        std::cout << "| \033[92mPLAYER 1: //// " << serve_bar << "\033[92m " << score << " //// " << std::endl :
+        std::cout << "| \033[31mPLAYER 2: //// " << serve_bar << "\033[31m " << score << " //// \033[35m" << std::endl;
+
+        // std::cout << "==========================" << std::endl;
+
+        // player->number() == PLAYER_1_INITIALIZED ?
+        // _displayAsciiScoreboard( player->getPoints(), 
+        //                          player->getOpponent()->getPoints(),
+        //                          _gameState->getTieBreak(),
+        //                          serve_bar, other_serve_bar ) :
+        // _displayAsciiScoreboard( player->getOpponent()->getPoints(),
+        //                          player->getPoints(),
+        //                          _gameState->getTieBreak(),
+        //                          other_serve_bar, serve_bar );
     } else {
         int vertical_offset = player->number() == 0 ? 0 : _big_number_font.height();
-        _pipeDrawer->drawNumber( serve_bar, 1, _big_number_font.baseline() + vertical_offset ); // draw pipe
+        _pipeDrawer->drawNumber( serve_bar, 2, _big_number_font.baseline() + vertical_offset );
         int baseline = _big_number_font.baseline();                  // set the coordinates for the text
         int first_offset  = _characterOffset( score.substr( 0, 1 ));
         int second_offset = ( score.length() > 1 ) ? _characterOffset( score.substr( 1, 1 )) : 0;
@@ -265,7 +315,7 @@ int ScoreBoard::_characterOffset( std::string character ) {
     default: return 0; }}
 
 std::string ScoreBoard::_translate( int raw_score ) {
-    if( _gameState->getTieBreak() == false ) {
+    if( _gameState->getTieBreak() == false  && _gameState->getMatchTieBreak() == false ) {
         switch ( raw_score ) {
         case 0:               return "00";
         case 1:               return "15";
@@ -313,3 +363,30 @@ bool ScoreBoard::onRaspberryPi() {
         if (line.find("Raspberry Pi") != std::string::npos) { return true; }
     }
     return false; }
+
+void ScoreBoard::_displayAsciiScoreboard( int player1_score, int player2_score, bool tieBreaker, std::string serve_bar1, std::string serve_bar2 ) {
+    const std::string bright_green = "\033[92m";  // Bright green
+    const std::string bright_red = "\033[91m";    // Bright red
+    const std::string bright_blue = "\033[94m";   // Bright blue
+    const std::string reset_color = "\033[0m";
+
+    std::string frame_top = " +========================================================+ ";
+    std::string frame_middle = "|                                                        |";
+    std::string frame_bottom = " +========================================================+ ";
+
+    // Convert scores to strings
+    std::string player1_score_str = std::to_string(player1_score);
+    std::string player2_score_str = std::to_string(player2_score);
+
+    std::cout << frame_top << std::endl;
+
+    std::cout << "| " << bright_green << "PLAYER 1: " << serve_bar1 << " " << player1_score_str << " " << frame_middle.substr(player1_score_str.size() + serve_bar1.size() + 10) << reset_color << " |" << std::endl;
+    std::cout << "| " << bright_red << "PLAYER 2: " << serve_bar2 << " " << player2_score_str << " " << frame_middle.substr(player2_score_str.size() + serve_bar2.size() + 10) << reset_color << " |" << std::endl;
+
+    if (tieBreaker) {
+        std::cout << "| " << bright_blue << "TIE BREAKER ACTIVE!" << reset_color << frame_middle.substr(18) << " |" << std::endl;
+    }
+
+    std::cout << frame_bottom << std::endl;
+}
+

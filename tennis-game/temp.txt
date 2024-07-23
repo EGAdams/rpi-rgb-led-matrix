@@ -1,0 +1,2 @@
+cc -L../lib -lrgbmatrix -lrt -lm -lpthread -L/home/adamsl/rpi-rgb-led-matrix/tennis-game/googletest/build/lib -lgtest_main -lgtest -lpthread -ljsoncpp -lcurl  Mode1ScoreTest.o   -o Mode1ScoreTest
+cc -L../lib -lrgbmatrix -lrt -lm -lpthread -L/home/adamsl/rpi-rgb-led-matrix/tennis-game/googletest/build/lib -lgtest_main -lgtest -lpthread -ljsoncpp -lcurl  Mode1ScoreTest.o   -o Mode1ScoreTest

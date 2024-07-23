@@ -30,3 +30,15 @@ print(check_library_installation('rgbmatrix'))
 
 # Create the match win unit test
 - Find the g4 instructions for this about the expert who explains the whole elaborate scoring system.
+
+
+
+
+@golden_system_that_needs_to_be_followed.md This file is a guide to what we need to implement in the future. The objects in this diagram have not been built yet. The ultimate goal will be to refactor the system that is in this codebase right now to conform to the design in this mermaid sequence diagram. Let's do this piece by piece and start with where the player serve status logic is.
+
+A place in the code changes the server bar status after every game. There is also a place in the code that changes the server bar status after every Set. The logic needs to be fixed here because the serve bar works up to the point where a player wins a Set.
+
+Please use your vast knowledge of C++ Scoreboard Systems to find this flawed logic.  Think about how we could fix the flawed logic, keeping the system depicted in the mermaid diagram in mind. Take as many shortcuts as you have to because the code is already in a state of disarray.
+
+The serve should alternate between players after each game, but when a new set begins, the player who did not serve first in the previous set should serve first in the new set.
+

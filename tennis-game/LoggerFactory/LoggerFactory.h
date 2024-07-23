@@ -10,10 +10,10 @@ public:
     static std::string FACTORY_ID;
     static std::string OBJECT_STORAGE_URL;
 
-    static std::unique_ptr<MonitoredObject> createLogger(const std::string& target_object);
+    static std::unique_ptr<MonitoredObject> createLogger(const std::string& logger_name );
 
 private:
-    LoggerFactory();  // Private constructor to prevent instantiation
+    LoggerFactory();  // Private to prevent instantiation
 };
 
 #endif // LOGGERFACTORY_H

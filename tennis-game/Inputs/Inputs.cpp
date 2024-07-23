@@ -13,9 +13,11 @@ Inputs::Inputs( Player* player1,
     _pinInterface( pinInterface ),
     _gameState( gameState ),
     _reset( player1, player2, pinInterface, gameState ) {
-    _logger = new Logger( "Inputs" ); }
+    _logger = new Logger( "Inputs" );
+}
+
 Inputs::~Inputs() {
-    std::cout << "*** Inputs destructor called. ***" << std::endl;
+    // std::cout << "*** Inputs destructor called. ***" << std::endl;
     delete _logger; }
 
 void Inputs::readReset() {
@@ -26,12 +28,12 @@ void Inputs::readReset() {
 void Inputs::readUndoButton() {
     return; // DISABLED
     if ( _pinInterface->pinDigitalRead( UNDO ) == LOW ) {
-        if ( SIMULATION == 0 ) { 
-            while ( _pinInterface->pinDigitalRead( UNDO ) == LOW ) { 
-                GameTimer::gameDelay( 25 ); 
+        if ( SIMULATION == 0 ) {
+            while ( _pinInterface->pinDigitalRead( UNDO ) == LOW ) {
+                GameTimer::gameDelay( 25 );
             }
         } // Wait for the button to be released
-        _gameState->setUndo( 1 ); 
+        _gameState->setUndo( 1 );
     }
 }
 

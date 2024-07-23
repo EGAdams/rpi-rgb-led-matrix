@@ -4,30 +4,44 @@
 #include <ctime>
 #include <iostream>
 #include <regex>
-#define LOG_FILE_PATH "log.txt"
 
-Logger::Logger( std::string constructor_name ) : _constructor_name( constructor_name ) {
-    // std::cout << "constructing the Logger for " + constructor_name + "..." << std::endl;
-    _log_file.open( LOG_FILE_PATH, std::ios::out | std::ios::app );
-}
+#include <filesystem>
+namespace fs = std::filesystem;
+
+Logger::Logger( std::string name ) : _name( name ) {
+    std::filesystem::create_directories(name); // Ensure the directory exists
+    std::string logFilePath = name + "/log.txt";
+    _log_file.open(logFilePath, std::ios::out | std::ios::app);
+    if (!_log_file.is_open()) { // Handle error
+        std::cerr << "Failed to open log file at path: " << logFilePath << std::endl;
+        std::cerr << "Current working directory: " << std::filesystem::current_path() << std::endl;
+    }}
 
 Logger::~Logger() {
-    // std::cout << "Destructing Logger..." << std::endl;
-    _log_file.close();
+    if (_log_file.is_open()) {
+        _log_file.close();
+    }
 }
 
-void Logger::logUpdate( std::string message, std::string caller = "unknown" ) {
-    if ( caller == "unknown" ) { caller = _constructor_name; }
-    message = std::regex_replace( message, std::regex( ":" ), "\\:" );
-    int random_variable = this->_get_random_number();
-    _log_file << "{\"timestamp\":"
-        << this->_get_seconds_since_epoch() * 1000;  // timestamp
-    _log_file << ",\"id\":\"" << _constructor_name << "_" << random_variable << "_"
-        << this->_get_seconds_since_epoch() * 1000;  // id
-    _log_file << "\",\"message\":\"" << message;           // message
-    _log_file << "\",\"method\":\"" << caller << "\"}";    // method
-    _log_file << std::endl;
+std::string Logger::getName() { return _name; }
 
+void Logger::setName(std::string name) { _name = name; }
+
+void Logger::logUpdate(std::string message) {
+    std::cout << message << std::endl;
+    // if (!_log_file.is_open()) {
+    //     std::cerr << "Log file not open for message [" << message << "]" << std::endl;
+    //     return;
+    // }
+    // message = std::regex_replace(message, std::regex(":"), "\\:");
+    // int random_variable = this->_get_random_number();
+    // _log_file << "{\"timestamp\":"
+    //     << this->_get_seconds_since_epoch() * 1000;  // timestamp
+    // _log_file << ",\"id\":\"" << _name << "_" << random_variable << "_"
+    //     << this->_get_seconds_since_epoch() * 1000;  // id
+    // _log_file << "\",\"message\":\"" << message;           // message
+    // _log_file << "\",\"method\":\"" << this->_name << "\"}";    // method
+    // _log_file << std::endl;
 }
 
 decltype( std::chrono::seconds().count() ) Logger::_get_seconds_since_epoch() {
@@ -55,6 +69,4 @@ bool Logger::inArray( int supposed_random_number ) {
         supposed_random_number ) > 0 ) {
         return true;
     }
-    return false;
-}
-
+    return false; }

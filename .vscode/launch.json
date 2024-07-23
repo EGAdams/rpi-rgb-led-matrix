@@ -6,12 +6,36 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/tennis-game/tennis-game",
-            "args": [],
-            "stopAtEntry": false,
+            "args": [ "" ],
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "tie_breaker_test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/tennis-game/TieBreaker/TieBreakerTest",
+            "args": [],
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
@@ -31,31 +55,6 @@
             "request": "launch",
             "program": "${workspaceFolder}/tennis-game/SourceData/SourceDataTest",
             "args": [],
-            "stopAtEntry": false,
-            "cwd": "${fileDirname}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                },
-                {
-                    "description": "Set Disassembly Flavor to Intel",
-                    "text": "-gdb-set disassembly-flavor intel",
-                    "ignoreFailures": true
-                }
-            ]
-        },
-        {
-            "name": "manual tennis game",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/tennis-game/tennis-game-manual",
-            "args": [],
-            "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
@@ -79,7 +78,6 @@
             "request": "launch",
             "program": "${workspaceFolder}/tennis-game/SourceData/source_data_test",
             "args": [],
-            "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
@@ -103,7 +101,6 @@
             "request": "launch",
             "program": "${workspaceFolder}/tennis-game/SourceData/insert_source_data_test",
             "args": [],
-            "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
@@ -127,11 +124,11 @@
             "request": "launch",
             "program": "${workspaceFolder}/tennis-game/Mode1ScoreTest",
             "args": [],
-            "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
@@ -144,13 +141,6 @@
                     "ignoreFailures": true
                 }
             ]
-        },
-        {
-            "name": "Python: File",
-            "type": "python",
-            "request": "launch",
-            "program": "${file}",
-            "justMyCode": true
         }
     ]
 }

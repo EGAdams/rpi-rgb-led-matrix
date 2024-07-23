@@ -6,23 +6,25 @@ MatchWinSequence::~MatchWinSequence() {}
 
 void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* gameLeds, SetLeds* setLeds ) {
     std::cout << "//////////////////////// MatchWinSequence::run() ////////////////////////" << std::endl;
+    gameState->setCurrentAction( RUNNING_MATCH_WIN_SEQUENCE ); // so scoreboard knows...
     GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
     if ( gameLeds->getScoreBoard()->hasCanvas()) {
-        // std::cout << "scoreboard has canvas.  updating..." << std::endl;
         gameLeds->getScoreBoard()->clearScreen();
         gameLeds->getScoreBoard()->drawText( "Match",  YELLOW, 10, 60  );
-        gameLeds->getScoreBoard()->drawText( "Win",  YELLOW, 18, 80  );
+        gameLeds->getScoreBoard()->drawText( "Win",    YELLOW, 18, 80  );
         GameTimer::gameDelay( 7000 );
         std::cout << "game delay done." << std::endl;
     } else {
-        std::cout << "scoreboard does not have canvas.  not updating..." << std::endl;
-        for ( int blink_sequence_count = 0; blink_sequence_count < LOOP_MATCH_LAMP_WIN; blink_sequence_count++ ) {
-            for ( int current_lamp = 0; current_lamp < NUMBER_OF_GAME_LAMPS; current_lamp++ ) {
-                player->setGames( 6 );
-                gameLeds->updateGames();
-                GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
-                player->setGames( current_lamp );
-                gameLeds->updateGames();
-                GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY ); }
-            GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY ); }} // end run().
-}
+        ScoreBoard* scoreBoard = gameLeds->getScoreBoard();
+        for ( int blink_count = 0; blink_count < MATCH_WIN_BLINK_COUNT; blink_count++ ) {
+            gameState->setMatchBlinkOn();
+            scoreBoard->update();
+            GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
+            gameState->setMatchBlinkOff(); 
+            scoreBoard->update();
+            GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
+        }
+        std::cout << "setting current action back to normal game state..." << std::endl;
+        gameState->setCurrentAction( NORMAL_GAME_STATE );
+        delete scoreBoard; 
+        gameState->setStarted( 0 ); }} // trigger game reset, end run().

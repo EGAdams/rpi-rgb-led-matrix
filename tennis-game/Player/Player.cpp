@@ -42,7 +42,7 @@ int Player::number() {
     return _playerNumber; }
 
 void Player::setSetHistory( int set, int games ) {
-    std::cout << "setting set history for player " << number() << " set " << set << " to " << games << std::endl;
+    // std::cout << "setting set history for player " << number() << " set " << set << " to " << games << std::endl;
     _set_history[  set ] = games; 
     number() == PLAYER_1_INITIALIZED ? 
         _gameState->setPlayer1SetHistory( _set_history ) : _gameState->setPlayer2SetHistory( _set_history ); } 

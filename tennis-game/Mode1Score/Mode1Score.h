@@ -14,8 +14,9 @@
 #include "../SetLeds/SetLeds.h"
 #include "../Undo/Undo.h"
 #include "../TennisConstants/TennisConstants.h"
+#include "../Logger/Logger.h"
 #include <iostream>
-// #include "../../tennis-game/googletest/googletest/include/gtest/gtest.h" 
+#include "../../tennis-game/googletest/googletest/include/gtest/gtest.h"
 
 class Mode1Score {
  public:
@@ -51,5 +52,6 @@ class Mode1Score {
     SetLeds _setLeds;
     Mode1WinSequences _mode1WinSequences;
     Undo _undo;
-    ScoreBoard* _scoreBoard; };
+    ScoreBoard* _scoreBoard;
+    Logger* _logger; };
 #endif

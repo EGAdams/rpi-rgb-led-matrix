@@ -33,9 +33,9 @@ void SubjectManager::gameStateUpdate( GameState* gameState, Player* player1, Pla
     stringifiedGameState += "\"buttonDelay\": \"" + std::to_string( gameState->getButtonDelay() ) + "\",\n";
     stringifiedGameState += "\"flashDelay\": \"" + std::to_string( gameState->getFlashDelay() ) + "\",\n";
     stringifiedGameState += "\"gameWinPulseCount\": \" " + std::to_string( gameState->getGameWinPulseCount() ) + "\",\n";
-    stringifiedGameState += "\"setTieBreak\": \" " + std::to_string( gameState->getSetTieBreak() ) + "\",\n";
+    stringifiedGameState += "\"setTieBreak\": \" " + std::to_string( gameState->getMatchTieBreak() ) + "\",\n";
     stringifiedGameState += "\"serveSwitch\": \" " + std::to_string( gameState->getServeSwitch() ) + "\",\n";
-    stringifiedGameState += "\"setTieBreakMem\": \" " + std::to_string( gameState->getSetTieBreakMem() ) + "\",\n";
+    stringifiedGameState += "\"setTieBreakMem\": \" " + std::to_string( gameState->getMatchTieBreakMem() ) + "\",\n";
     stringifiedGameState += "\"tieBreakMem\": \" " + std::to_string( gameState->getTieBreakMem() ) + "\",\n";
     stringifiedGameState += "\"p1PointsMem\": \"" + std::to_string( gameState->getP1PointsMem() ) + "\",\n";
     stringifiedGameState += "\"p2PointsMem\": \"" + std::to_string( gameState->getP2PointsMem() ) + "\",\n";

@@ -10,7 +10,10 @@ SetDrawer::SetDrawer( RGBMatrix* canvas, GameState* gameState ) :
     if ( !_little_font.LoadFont( LITTLE_FONT )) { 
         fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_FONT ); exit( 1 ); }}
     
-SetDrawer::~SetDrawer() { std::cout << "destructing SetDrawer..." << std::endl; }
+SetDrawer::~SetDrawer() { 
+    std::cout << "inside the SetDrawer destructor code... " << std::endl;
+    std::cout << "destructing SetDrawer..." << std::endl;
+}
 
 void SetDrawer::drawTextOnCanvas( int x, int y, const Color& color, const std::string& text ) {
     Color background_color( 0, 0, 0 );

@@ -1,13 +1,14 @@
 #include "GameState.h"
 
 GameState::~GameState() {}
-GameState::GameState() { 
+GameState::GameState() {
+    _match_blink_on = 1;
     _gameRunning = 1;
     _current_set = 1;
     _pointFlash = 0;
     _serve = 0;
     _tieBreak = 0;
-    _setTieBreak = 0;
+    _matchTieBreak = 0;
     _tieLEDsOn = 0;
     _started = 0;
     _serveSwitch = 1;
@@ -19,7 +20,7 @@ GameState::GameState() {
     _flashDelay         = 250;
     _gameWinPulseCount = 4;
     _tieBreakMem     = 0;
-    _setTieBreakMem  = 0;
+    _matchTieBreakMem  = 0;
     _p1PointsMem     = 0; _p2PointsMem     = 0;
     _p1GamesMem      = 0; _p2GamesMem      = 0;
     _p1SetsMem       = 0; _p2SetsMem       = 0;
@@ -30,13 +31,16 @@ GameState::GameState() {
 
 int GameState::gameRunning() { return _gameRunning; }
 void GameState::stopGameRunning() { _gameRunning = 0; }
-void GameState::setCurrentSet( int current_set ) { 
-    // std::cout << "\ngamestate current set: " << _current_set << "\n" << std::endl;
-    // std::cout << "Now setting current set in GameState to: " << current_set << "\n" << std::endl;
-    _current_set = current_set; }
-int GameState::getCurrentSet() { return _current_set; }
+void GameState::setCurrentSet( int current_set ) {
+    _current_set = current_set;
+}
+
+void GameState::setMatchBlinkOn() {  _match_blink_on = 1;    }
+void GameState::setMatchBlinkOff() { _match_blink_on = 0;    }
+int  GameState::getMatchBlink() {    return _match_blink_on; }
+int GameState::getCurrentSet() const { return _current_set; }
 void GameState::setCurrentAction( std::string currentAction ) { _currentAction = currentAction; }
-std::string GameState::getCurrentAction() { return _currentAction; }
+std::string GameState::getCurrentAction() const { return _currentAction; }
 void GameState::setGameWinPulseCount( int gameWinPulseCount ) { _gameWinPulseCount = gameWinPulseCount; }
 int GameState::getGameWinPulseCount() { return _gameWinPulseCount; }
 void GameState::setButtonDelay( int buttonDelay ) { _buttonDelay = buttonDelay; }
@@ -51,9 +55,11 @@ void GameState::setServe( int serve ) { /* std::cout << "setting serve in GameSt
 int GameState::getServe() { /*std::cout << "getting serve in GameState: " << _serve << std::endl;*/ return _serve; }
 void GameState::setTieBreak( int tieBreak ) { _tieBreak = tieBreak; }
 int GameState::getTieBreak() { return _tieBreak; }
-void GameState::setSetTieBreak( int setTieBreak ) { _setTieBreak = setTieBreak; }
-int GameState::getSetTieBreak() { return _setTieBreak; }
-void GameState::setTieLEDsOn( int tieLEDsOn ) { _tieLEDsOn = tieLEDsOn; }
+void GameState::setMatchTieBreak( int matchTieBreak ) { _matchTieBreak = matchTieBreak; }
+int GameState::getMatchTieBreak() { return _matchTieBreak; }
+void GameState::setTieLEDsOn( int tieLEDsOn ) { 
+    _tieLEDsOn = tieLEDsOn; 
+}
 int GameState::getTieLEDsOn() { return _tieLEDsOn; }
 void GameState::setServeSwitch( int serveSwitch ) { _serveSwitch = serveSwitch; }
 int GameState::getServeSwitch() { return _serveSwitch; }
@@ -93,47 +99,35 @@ void GameState::setTieBreakOnly( int tieBreakOnly ) { _tieBreakOnly = tieBreakOn
 int GameState::getTieBreakOnly() { return _tieBreakOnly; }
 void GameState::setTieBreakMem( int tieBreakMem ) { _tieBreakMem = tieBreakMem; }
 int GameState::getTieBreakMem() { return _tieBreakMem; }
-void GameState::setSetTieBreakMem( int setTieBreakMem ) { _setTieBreakMem = setTieBreakMem; }
-int GameState::getSetTieBreakMem() { return _setTieBreakMem; }
-int GameState::getPlayer1Points() { return _player1_points; }
+void GameState::setMatchTieBreakMem( int setMatchTieBreakMem ) { _matchTieBreakMem = setMatchTieBreakMem; }
+int GameState::getMatchTieBreakMem() { return _matchTieBreakMem; }
+int GameState::getPlayer1Points() const { return _player1_points; }
 void GameState::setPlayer1Points( int player1Points ) { _player1_points = player1Points; }
-int GameState::getPlayer2Points() { return _player2_points; }
+int GameState::getPlayer2Points() const { return _player2_points; }
 void GameState::setPlayer2Points( int player2Points ) { _player2_points = player2Points; }
-int GameState::getPlayer1Games() { return _player1_games; }
+int GameState::getPlayer1Games() const { return _player1_games; }
 void GameState::setPlayer1Games( int player1Games ) { _player1_games = player1Games; }
-int GameState::getPlayer2Games() { return _player2_games; }
+int GameState::getPlayer2Games() const { return _player2_games; }
 void GameState::setPlayer2Games( int player2Games ) { _player2_games = player2Games; }
-int GameState::getPlayer1Sets() { return _player1_sets; }
+int GameState::getPlayer1Sets() const { return _player1_sets; }
 void GameState::setPlayer1Sets( int player1Sets ) { _player1_sets = player1Sets; }
-int GameState::getPlayer2Sets() { return _player2_sets; }
+int GameState::getPlayer2Sets() const { return _player2_sets; }
 void GameState::setPlayer2Sets( int player2Sets ) { _player2_sets = player2Sets; }
-int GameState::getPlayer1Matches() { return _player1_matches; }
+int GameState::getPlayer1Matches() const { return _player1_matches; }
 void GameState::setPlayer1Matches( int player1Matches ) { _player1_matches = player1Matches; }
 int GameState::getPlayer2Matches() { return _player2_matches; }
 void GameState::setPlayer2Matches( int player2Matches ) { _player2_matches = player2Matches; }
 
-std::map<int, int> GameState::getPlayer1SetHistory() { 
-    // std::cout << "getting player1_set_history in GameState..." << std::endl;
-    // std::cout << "player1_set_history: " << _player1_set_history[ 1 ];
-    //                     std::cout << " " << _player1_set_history[ 2 ];
-    //                     std::cout << " " << _player1_set_history[ 3 ] << std::endl;
+std::map<int, int> GameState::getPlayer1SetHistory() {
     return _player1_set_history; }
-void GameState::setPlayer1SetHistory( std::map<int, int> player1_set_history ) { 
-    _player1_set_history = player1_set_history; 
-    // std::cout << "set player1_set_history in GameState..." << std::endl;
-    // std::cout << "breakpoint here!" << std::endl;
+void GameState::setPlayer1SetHistory( std::map<int, int> player1_set_history ) {
+    _player1_set_history = player1_set_history;
 }
-std::map<int, int> GameState::getPlayer2SetHistory() { 
-    // std::cout << "getting player2_set_history in GameState..." << std::endl;
-    // std::cout << "player2_set_history: " << _player2_set_history[ 1 ];
-    // std::cout << " " << _player2_set_history[ 2 ];
-    // std::cout << " " << _player2_set_history[ 3 ] << std::endl;
+std::map<int, int> GameState::getPlayer2SetHistory() {
     return _player2_set_history; }
-void GameState::setPlayer2SetHistory( std::map<int, int> player2_set_history ) { 
+void GameState::setPlayer2SetHistory( std::map<int, int> player2_set_history ) {
     _player2_set_history = player2_set_history;}
 
 int GameState::getUpdateDisplayDelay() { return 0; }
-// void GameState::setSetHistory(std::map<int, int> set_history) { _set_history = set_history; }
-// std::map<int, int> GameState::getSetHistory() { return _set_history; }
 void GameState::setGameHistory(std::map<int, int> game_history) { _game_history = game_history; }
 std::map<int, int> GameState::getGameHistory() { return _game_history; }

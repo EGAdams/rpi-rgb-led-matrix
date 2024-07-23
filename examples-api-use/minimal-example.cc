@@ -41,25 +41,25 @@ static void DrawOnCanvas(Canvas *canvas)
         float dot_y = sin(a * 2 * M_PI) * r;
         canvas->SetPixel(center_x + dot_x, center_y + dot_y,
                          255, 0, 0);
-        usleep(1 * 1000); // wait a little to slow down things.
+        usleep(1 * 500); // wait a little to slow down things.
     }
 }
 
 static void DrawLine(Canvas *canvas)
 {
     canvas->Fill(0, 0, 0);
-    
+
     for ( int test_count = 0; test_count < 500; test_count++ ) {
-        for ( int y_position = 0; y_position < 64; y_position++ ) {
+        for ( int y_position = 0; y_position < 128; y_position++ ) {
             for ( int x_position = 0; x_position < 64; x_position++ ) {
-                // canvas->Fill( 0, 0, 0 ); 
+                // canvas->Fill( 0, 0, 0 );
                 canvas->SetPixel( x_position, y_position, 0, 255, 0 );
                 // printf( "canvas width: %d  canvas height: %d \n", canvas->width(), canvas->height() );
                 usleep ( 1 * 200 * 100 );
             }
         }
-        usleep ( 1 * 1000 * 1000 );
-        canvas->Fill( 0, 0, 0 );    
+        usleep ( 1 * 500 * 500 );
+        canvas->Fill( 0, 0, 0 );
     } // wait a little to slow down things.
 
     printf("done drawing lines\n\n");
@@ -70,15 +70,17 @@ int main(int argc, char *argv[])
 {
     printf( "starting main\n" );
     RGBMatrix::Options defaults;
-    defaults.hardware_mapping = "adafruit-hat"; // or e.g. "adafruit-hat"
-    defaults.rows = 32;
-    defaults.cols = 32;
-    defaults.brightness = 20;
+    defaults.hardware_mapping = "regular"; // "adafruit-hat"; // or e.g. "adafruit-hat"
+    defaults.rows = 64;
+    defaults.cols = 64;
+    defaults.brightness = 85;
+    defaults.pixel_mapper_config = "Rotate:180;264-Mapper";
     // defaults.pixel_mapper_config = "U-mapper";
     defaults.multiplexing = 2; // 19 is the Superbowl mapper
     defaults.show_refresh_rate = false;
     defaults.chain_length = 1;
     defaults.parallel = 1;
+
     printf( "creating canvas from flags\n" );
     Canvas *canvas = RGBMatrix::CreateFromFlags(&argc, &argv, &defaults);
     if ( canvas == NULL ) { return 1; }

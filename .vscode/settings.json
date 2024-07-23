@@ -65,7 +65,17 @@
         "unordered_set": "cpp",
         "iomanip": "cpp",
         "mutex": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "codecvt": "cpp",
+        "compare": "cpp",
+        "complex": "cpp",
+        "concepts": "cpp",
+        "numbers": "cpp",
+        "ranges": "cpp",
+        "semaphore": "cpp",
+        "span": "cpp",
+        "stop_token": "cpp",
+        "valarray": "cpp"
     },
     "cSpell.words": [
         "Adafruit",

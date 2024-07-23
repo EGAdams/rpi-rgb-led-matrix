@@ -12,39 +12,36 @@
 #include "../WinSequences/WinSequences.h"
 #include "../Undo/Undo.h"
 #include "../Inputs/Inputs.h"
+#include "../ScoreBoard/ScoreBoard.h"
 
 class TieBreaker {
  public:
-  TieBreaker( Player* player1,
-                   Player* player2,
-                   PinInterface* pinInterface,
-                   GameState* gameState,
-                   History* history );
+  TieBreaker(Player* player1, Player* player2, PinInterface* pinInterface, GameState* gameState, History* history);
   ~TieBreaker();
-  void setScoreBoards( ScoreBoard* scoreBoard );
-  void run( Player* currentPlayer );
-  void setTieBreaker();
-  void buttonAction();
-  void mode1SetTBButtonFunction();
-  void initializeTieBreakMode();
-  void setTieBreakEnable();
+  void setIteration(int iteration);
+  int getIteration();
+  void incrementIteration();
+  void setScoreBoards(ScoreBoard* scoreBoard);
   void tieLEDsOn();
   void tieLEDsOff();
+  void celebrate(Player* currentPlayer);
+  void incrementSet();
+  void run(Player* currentPlayer);
+  void mode1SetTBButtonFunction();
+  void setTieBreaker();
+  void initializeTieBreakMode();
+  void setTieBreakEnable();
   void endTieBreak();
   void mode1TBP1Games();
   void mode1TBP2Games();
   void mode1SetTBP2Games();
   void mode1SetTBP1Games();
-  void celebrate( Player* currentPlayer );
-  void incrementSet();
-  void setIteration( int iteration );
-  int  getIteration();
-  void incrementIteration();
 
  private:
   int  _getServe();    // determine serve based on iteration
   Player* _player1;
   Player* _player2;
+  void _tieBreakWin( Player* currentPlayer ); // things are getting messy, break it up
   PinInterface* _pinInterface;
   GameState* _gameState;
   History* _history;

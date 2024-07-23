@@ -18,6 +18,7 @@ class Reset {
   ~Reset();
   void resetScoreboard();
   void zeroPlayerValues();
+  void zeroSetHistory();
   void refresh();
   void tieLEDsOn();
   void tieLEDsOff();

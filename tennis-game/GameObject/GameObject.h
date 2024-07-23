@@ -6,19 +6,19 @@
 #include "../GameTimer/GameTimer.h"
 #include "../History/History.h"
 #include "../Inputs/Inputs.h"
-#include "../Logger/Logger.h"
 #include "../PinInterface/PinInterface.h"
 #include "../PinState/PinState.h"
 #include "../Player/Player.h"
 #include "../ScoreBoard/ScoreBoard.h"
 #include "../SubjectManager/SubjectManager.h"
 #include "../WebLiquidCrystal/WebLiquidCrystal.h"
-#include <map>
 #include "../../include/led-matrix.h"
 #include "../../include/graphics.h"
 #include "../TennisConstants/TennisConstants.h"
+#include "../Logger/Logger.h"
+#include <map>
 
-#define GAME_LOOP_DELAY 100
+#define GAME_LOOP_DELAY 5 // 100
 class GameObject {
  public:
   GameObject( Player*       player1,
@@ -31,7 +31,7 @@ class GameObject {
               GameModes*    gameModes,
               ScoreBoard*   scoreBoard,
               WebLiquidCrystal* lcd );
-             
+
   GameObject( GameState* gameState );
   ~GameObject();
   void start();
@@ -48,7 +48,7 @@ class GameObject {
   Undo* createUndo();
   History* getHistory();
   void undo();
-  
+
  private:
   Player*           _player1;
   Player*           _player2;
