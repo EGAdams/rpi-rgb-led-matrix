@@ -15,6 +15,10 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         RGBMatrix::Options matrix_options; // seems like the only logical place to create the canvas
         matrix_options.hardware_mapping = "regular";  // or e.g. "adafruit-hat"
         // matrix_options.pixel_mapper_config = "Rotate:180;264-Mapper"; // or e.g. "U-mapper"
+        // The UArrangementMapper is using the _panels[] array to adjust each individual
+        // panel orientation.  Thje 264-Mapper doesnt seemm to be using the _panels[] array
+        // for anything after populating it.  The adjusments seen fto be used in the 
+        // MapVisibleToMatrix method of each pixel mapper class.
         matrix_options.pixel_mapper_config = "Rotate:180;264-Mapper"; // or e.g. "U-mapper" 
         matrix_options.rows = 64;
         matrix_options.cols = 64;
