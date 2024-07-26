@@ -15,7 +15,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         RGBMatrix::Options matrix_options; // seems like the only logical place to create the canvas
         matrix_options.hardware_mapping = "regular";  // or e.g. "adafruit-hat"
         // matrix_options.pixel_mapper_config = "Rotate:180;264-Mapper"; // or e.g. "U-mapper"
-        matrix_options.pixel_mapper_config = "264-mapper"; // or e.g. "U-mapper"
+        matrix_options.pixel_mapper_config = "Rotate:180;264-Mapper"; // or e.g. "U-mapper"
         matrix_options.rows = 64;
         matrix_options.cols = 64;
         matrix_options.chain_length = 1;
@@ -23,7 +23,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         matrix_options.show_refresh_rate = false;
         matrix_options.disable_hardware_pulsing = true; // --led-no-hardware-pulse
         matrix_options.brightness = 85; // inc jan 22, 22024 // 35 is best for demo videos in largo
-        matrix_options.pwm_bits = 11;
+        matrix_options.pwm_bits = 11;   
         matrix_options.multiplexing = 1;
         rgb_matrix::RuntimeOptions runtime_opt;
         runtime_opt.drop_privileges = 0;
@@ -64,7 +64,6 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         }
 
         // end loading fonts
-
         Color color( 255, 255, 0 );
         Color bg_color( 0, 0, 0 );
         Color blue_color( 0, 0, 255 );
