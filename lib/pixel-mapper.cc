@@ -256,7 +256,7 @@ class TwoSixtyFourMapper : public PixelMapper {
                 //initialize the panels
                 Panel firstPanel;
                 firstPanel.name = "firstPanel";
-                firstPanel.order = 2;
+                firstPanel.order = 7;
                 firstPanel.rotate = 0;
                 firstPanel.y_offset = 0;
                 firstPanel.x_offset = 0;
@@ -264,48 +264,48 @@ class TwoSixtyFourMapper : public PixelMapper {
 
                 Panel secondPanel;
                 secondPanel.name = "secondPanel";
-                secondPanel.order = 1;
+                secondPanel.order = 6;
                 secondPanel.rotate = 0;
                 _panels[ 1 ] = secondPanel;
 
                 Panel thirdPanel;
                 thirdPanel.name = "thirdPanel";
-                thirdPanel.order = 0;
+                thirdPanel.order = 5;
                 thirdPanel.rotate = 0;
                 _panels[ 2 ] = thirdPanel;
 
                 Panel fourthPanel;
                 fourthPanel.name = "fourthPanel";
-                fourthPanel.order = 3;
+                fourthPanel.order = 4;
                 fourthPanel.rotate = 0;
                 _panels[ 3 ] = fourthPanel;
 
                 Panel fifthPanel;
                 fifthPanel.name = "fifthPanel";
-                fifthPanel.order = 4;
+                fifthPanel.order = 3;
                 fifthPanel.rotate = 0;
                 _panels[ 4 ] = fifthPanel;
 
                 Panel sixthPanel;
                 sixthPanel.name = "sixthPanel";
-                sixthPanel.order = 5;
+                sixthPanel.order = 2;
                 sixthPanel.rotate = 0;
                 _panels[ 5 ] = sixthPanel;
 
                 Panel seventhPanel;
                 seventhPanel.name = "seventhPanel";
-                seventhPanel.order = 6;
+                seventhPanel.order = 1;
                 seventhPanel.rotate = 0;
                 _panels[ 6 ] = seventhPanel;
 
                 Panel eighthPanel;
                 eighthPanel.name = "eighthPanel";
-                eighthPanel.order = 7;
+                eighthPanel.order = 0;
                 eighthPanel.rotate = 0;
                 _panels[ 7 ] = eighthPanel; 
-                printf( "264 mapper constructed. \n" ); }
+                printf( "264 Mapper constructed. \n" ); }
 
-            virtual const char *GetName() const { return "264-mapper"; }
+            virtual const char *GetName() const { return "264-Mapper"; }
 
             virtual bool SetParameters( int chain, int parallel, const char *param) { parallel_ = parallel; return true; } 
                                                         
