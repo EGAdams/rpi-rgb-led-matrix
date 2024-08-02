@@ -126,8 +126,13 @@ void Mode1Score::playerGameWin( Player* player ) {
             } else {     // player is ahead by 1 game, but not enough to win the set.
                 player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1GameWinSequence() : _mode1WinSequences.p2GameWinSequence();
                 _gameLeds.updateGames();
-                _gameState->setPlayer1SetHistory( player->getSetHistory() );
-                _gameState->setPlayer2SetHistory( opponent->getSetHistory() );
+                if ( player->number() == PLAYER_1_INITIALIZED ) {
+                    _gameState->setPlayer1SetHistory( player->getSetHistory());
+                    _gameState->setPlayer2SetHistory( opponent->getSetHistory());
+                } else {
+                    _gameState->setPlayer2SetHistory( player->getSetHistory());
+                    _gameState->setPlayer1SetHistory( opponent->getSetHistory());
+                }
                 _resetGame();
             }
         }
