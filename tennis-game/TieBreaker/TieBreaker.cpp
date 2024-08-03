@@ -348,9 +348,9 @@ void TieBreaker::mode1TBP2Games() {
         if ( _player2->getSets() == _player1->getSets() ) {
             endTieBreak();
             _mode1WinSequences.p2TBSetWinSequence();
-            _gameState->setMatchTieBreak( 1 );
-            _gameState->setTieBreak( 1 );
-            setTieBreakEnable();
+            // _gameState->setMatchTieBreak( 1 );
+            // _gameState->setTieBreak( 1 );
+            // setTieBreakEnable();
         } else {
             _mode1WinSequences.p2SetWinSequence();
             endTieBreak();
