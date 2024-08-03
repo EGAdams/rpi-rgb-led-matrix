@@ -120,13 +120,13 @@ void TieBreaker::_tieBreakWin( Player* currentPlayer ) {
     } else { // regular tie break win.
         currentPlayer->setGames(currentPlayer->getGames() + 1); // increment games
         incrementSet();
+        endTieBreak();  
         if (_scoreBoard != nullptr) {
             _scoreBoard->update();
         }
         celebrate(currentPlayer);
         GameTimer::gameDelay(3000);
-        std::cout << "calling end tie break Object.. " << std::endl;
-        endTieBreak();  
+        std::cout << "calling end tie break Object in regular tie break win.. " << std::endl;
     }      
 }
 
@@ -346,11 +346,14 @@ void TieBreaker::mode1TBP2Games() {
         _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
         _player2->setSets( _gameState, _player2->getSets() + 1 );
         if ( _player2->getSets() == _player1->getSets() ) {
+            std::cout << "calling end tie break on august 3.." << std::endl;
             endTieBreak();
+            std::cout << "calling p2TBSetWinSequence() on august 3.." << std::endl;
             _mode1WinSequences.p2TBSetWinSequence();
             // _gameState->setMatchTieBreak( 1 );
             // _gameState->setTieBreak( 1 );
             // setTieBreakEnable();
+            std::cout << "end mode1TBP2Games on august 3.." << std::endl;
         } else {
             _mode1WinSequences.p2SetWinSequence();
             endTieBreak();
