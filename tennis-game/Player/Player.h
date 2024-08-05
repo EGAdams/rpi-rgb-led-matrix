@@ -41,6 +41,9 @@ public:
     void setGameHistory( int game, int score              );
     std::map<int, int> getGameHistory();
 
+    void clearGameHistory();
+    void clearSetHistory();
+
     int incrementSetting();
 
     int number(); // only set during construction

@@ -23,7 +23,7 @@ void PointLeds::setScoreBoard( ScoreBoard* scoreBoard ) {
 }
 
 void PointLeds::updateTBPoints() {
-    std::cout << "*** ERROR: updateTBPoints is not implemented ***" << std::endl;
+    /* std::cout << "*** ERROR: updateTBPoints is not implemented ***" << std::endl; */
 }
 
 void PointLeds::updatePoints() {

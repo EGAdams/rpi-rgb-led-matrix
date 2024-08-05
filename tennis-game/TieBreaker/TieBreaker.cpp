@@ -371,8 +371,10 @@ void TieBreaker::mode1SetTBP2Games() {
         _mode1WinSequences.p2SetTBWinSequence();
         tieLEDsOff();
         _mode1WinSequences.playerTwoMatchWin(); 
-        _gameState->stopGameRunning(); }
-    _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 ); }
+        // _gameState->stopGameRunning();
+    }
+    _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
+}
 
 void TieBreaker::mode1SetTBP1Games() {
     _gameLeds.updateGames();
@@ -386,5 +388,6 @@ void TieBreaker::mode1SetTBP1Games() {
         _mode1WinSequences.p1SetTBWinSequence();
         tieLEDsOff();
         _mode1WinSequences.playerOneMatchWin(); 
-        _gameState->stopGameRunning(); }
+        // _gameState->stopGameRunning();
+    }
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 ); }

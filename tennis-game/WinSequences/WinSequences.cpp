@@ -53,13 +53,25 @@ void Mode1WinSequences::playerOneMatchWin() {
     _undo.memory();
     _pointLeds.updateTBPoints();
     MatchWinSequence matchWinSequence; matchWinSequence.run( _player1, _gameState, &_gameLeds, &_setLeds );
-    _reset.resetScoreboard(); }
+    _player1->clearGameHistory();
+    _player2->clearGameHistory();
+    _player1->clearSetHistory();
+    _player2->clearSetHistory();
+    _gameState->setCurrentSet( 1 );
+    _reset.resetScoreboard();
+}
 
 void Mode1WinSequences::playerTwoMatchWin() {
     _undo.memory();
     _pointLeds.updateTBPoints();
     MatchWinSequence matchWinSequence; matchWinSequence.run( _player2, _gameState, &_gameLeds, &_setLeds );
-    _reset.resetScoreboard(); }
+    _player1->clearGameHistory();
+    _player2->clearGameHistory();
+    _player1->clearSetHistory();
+    _player2->clearSetHistory();
+    _gameState->setCurrentSet( 1 );   
+    _reset.resetScoreboard(); 
+}
 
 
 void Mode1WinSequences::p2GameWinSequence() {

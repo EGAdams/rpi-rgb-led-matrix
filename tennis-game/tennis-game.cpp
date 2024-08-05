@@ -351,7 +351,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     std::signal( SIGINT, GameObject::_signalHandler );
 
     while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { /*/// Begin Game Loop ///*/
-        if ( loop_count >  MAX_LOOP_COUNT ) { gameState->stopGameRunning(); }
+        // if ( loop_count >  MAX_LOOP_COUNT ) { gameState->stopGameRunning(); }
         sleep( SCORE_DELAY );
         // std::cout << "\n";
         // std::cout << "  1.) Player 1 score" << std::endl;
@@ -391,11 +391,11 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 01 ***\n" << std::endl;
             gameObject->getScoreBoard()->clearScreen();
-        gameObject->getScoreBoard()->drawText( "Test",
-        YELLOW, X__POS, Y__POS );
-        gameObject->getScoreBoard()->drawText( " 01 ",
-        YELLOW, X__POSITION, Y__POSITION );
-        GameTimer::gameDelay( 4000 );
+            gameObject->getScoreBoard()->drawText( "Test",
+            YELLOW, X__POS, Y__POS );
+            gameObject->getScoreBoard()->drawText( " 01 ",
+            YELLOW, X__POSITION, Y__POSITION );
+            GameTimer::gameDelay( 4000 );
             test_01( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
@@ -426,20 +426,22 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         } else {
             std::cout << "\n\n\n\n\n\n\n*** Invalid selection ***\n" << std::endl;
             sleep( SCORE_DELAY );
-            continue; }
-
+            continue; 
+        }
         gameObject->loopGame();  // handle the player score flag
         loop_count++;
         std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
         std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
     } ///////// End Game Loop /////////
-    std::cout << "game loop exited.  loop_count: " << loop_count << std::endl;
-    if ( loop_count > MAX_LOOP_COUNT ) {
-        // sleep for 5 seconds
-        std::cout << "sleeping for 5 seconds..." << std::endl;
-        sleep( 120 );
-        std::cout << "MAX_LOOP_COUNT reached.  Exiting...\n\n\n\n\n" << std::endl; }
-    return; }
+    // std::cout << "game loop exited.  loop_count: " << loop_count << std::endl;
+    // if ( loop_count > MAX_LOOP_COUNT ) {
+    //     // sleep for 5 seconds
+    //     std::cout << "sleeping for 5 seconds..." << std::endl;
+    //     sleep( 120 );
+    //     std::cout << "MAX_LOOP_COUNT reached.  Exiting...\n\n\n\n\n" << std::endl; 
+    //     return; 
+    // }
+}
 
 int main( int argc, char *argv[]) {
     std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );

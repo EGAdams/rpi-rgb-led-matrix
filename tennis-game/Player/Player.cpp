@@ -51,3 +51,9 @@ std::map< int, int> Player::getSetHistory() {
 
 void Player::setGameHistory( int game, int score ) { _game_history[ game ] = score; } 
 std::map< int, int> Player::getGameHistory() { return _game_history;}
+
+void Player::clearGameHistory() {
+    _game_history[ 1 ] = 0; _game_history[ 2 ] = 0; _game_history[ 3 ] = 0; }
+
+void Player::clearSetHistory() {
+    _set_history[  1 ] = 0;  _set_history[ 2 ] = 0; _set_history[  3 ] = 0; }
