@@ -83,8 +83,8 @@ void matchWinTest(  GameObject* gameObject, GameState* gameState ) {
     for ( int x = 0; x < 11; x++ ) { 
         playerWin( gameObject, gameState, 1 ); 
     }
-    // playerWin( gameObject, gameState, 1 ); 
-    // std::cout << "done with match win test." << std::endl; 
+    playerWin( gameObject, gameState, 1 ); 
+    std::cout << "done with match win test." << std::endl; 
 }
 
 void checkeredPlayerOneWinDelay( GameObject* gameObject, GameState* gameState, int delay ) {
