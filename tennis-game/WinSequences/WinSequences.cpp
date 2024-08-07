@@ -57,6 +57,8 @@ void Mode1WinSequences::playerOneMatchWin() {
     _player2->clearGameHistory();
     _player1->clearSetHistory();
     _player2->clearSetHistory();
+    _gameState->setPlayer1SetHistory( _player1->getSetHistory());
+    _gameState->setPlayer2SetHistory( _player2->getSetHistory());
     _gameState->setCurrentSet( 1 );
     _reset.resetScoreboard();
 }
@@ -69,6 +71,8 @@ void Mode1WinSequences::playerTwoMatchWin() {
     _player2->clearGameHistory();
     _player1->clearSetHistory();
     _player2->clearSetHistory();
+    _gameState->setPlayer1SetHistory( _player1->getSetHistory());
+    _gameState->setPlayer2SetHistory( _player2->getSetHistory());
     _gameState->setCurrentSet( 1 );   
     _reset.resetScoreboard(); 
 }

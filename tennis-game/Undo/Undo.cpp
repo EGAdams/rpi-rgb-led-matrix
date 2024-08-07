@@ -58,7 +58,6 @@ void Undo::snapshot( History* history ) {
     gameState.setTieBreakMem( _gameState->getTieBreakMem());
     gameState.setPlayer1SetHistory( _player1->getSetHistory());
     gameState.setPlayer2SetHistory( _player2->getSetHistory());
-
     _gameState->setPlayer1SetHistory( _player1->getSetHistory());
     _gameState->setPlayer2SetHistory( _player2->getSetHistory());
     gameState.setCurrentSet( _gameState->getCurrentSet());
@@ -73,6 +72,8 @@ void Undo::mode1Undo( History* history ) {
         exit( 1 );
     } // TODO: Update Current Set 1st!
     GameState gameState = ( history->pop());
+    _gameState->setPlayer1SetHistory( gameState.getPlayer1SetHistory());
+    _gameState->setPlayer2SetHistory( gameState.getPlayer2SetHistory());
     _gameState->setCurrentSet( gameState.getCurrentSet());
     _player1->setPoints( gameState.getPlayer1Points());
     _gameState->setP1PointsMem( gameState.getP1PointsMem());
@@ -82,9 +83,9 @@ void Undo::mode1Undo( History* history ) {
     _gameState->setP1GamesMem( gameState.getP1GamesMem());
     _player2->setGames( gameState.getPlayer2Games());
     _gameState->setP2GamesMem( gameState.getP2GamesMem());
-    _player1->setSets( &gameState, gameState.getPlayer1Sets());
+    // _player1->setSets( &gameState, gameState.getPlayer1Sets());
     _gameState->setP1SetsMem( gameState.getP1SetsMem());
-    _player2->setSets( &gameState, gameState.getPlayer2Sets());
+    // _player2->setSets( &gameState, gameState.getPlayer2Sets());
     _gameState->setP2SetsMem( gameState.getP2SetsMem());
     _player1->setMatches( gameState.getPlayer1Matches());
     _player2->setMatches( gameState.getPlayer2Matches());

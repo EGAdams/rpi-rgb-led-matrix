@@ -72,6 +72,21 @@ void playerWinDelay( GameObject* gameObject, GameState* gameState, int player, i
     }
 }
 
+void playerWin( GameObject* gameObject, GameState* gameState, int player ) {
+    score( gameObject, gameState, player );
+    while( gameState->getPlayer1Points() != 0 || gameState->getPlayer2Points() != 0 ) {
+        score( gameObject, gameState, player );
+    }
+}
+
+void matchWinTest(  GameObject* gameObject, GameState* gameState ) {
+    for ( int x = 0; x < 11; x++ ) { 
+        playerWin( gameObject, gameState, 1 ); 
+    }
+    // playerWin( gameObject, gameState, 1 ); 
+    // std::cout << "done with match win test." << std::endl; 
+}
+
 void checkeredPlayerOneWinDelay( GameObject* gameObject, GameState* gameState, int delay ) {
     scoreDelay( gameObject, gameState, 0, delay );
     scoreDelay( gameObject, gameState, 1, delay );
@@ -85,13 +100,6 @@ void checkeredPlayerOneWinDelay( GameObject* gameObject, GameState* gameState, i
     scoreDelay( gameObject, gameState, 0, delay );
     while( gameState->getPlayer1Points() != 0 || gameState->getPlayer2Points() != 0 ) {
         scoreDelay( gameObject, gameState, 0, delay );
-    }
-}
-
-void playerWin( GameObject* gameObject, GameState* gameState, int player ) {
-    score( gameObject, gameState, player );
-    while( gameState->getPlayer1Points() != 0 || gameState->getPlayer2Points() != 0 ) {
-        score( gameObject, gameState, player );
     }
 }
 
@@ -363,10 +371,15 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         // std::cout << "  102.) Test 02" << std::endl;
         // std::cout << "  103.) Test 03" << std::endl;
         // std::cout << "  104.) Test 04" << std::endl;
-        std::cout << "1.) green score   2.) red score   105.) Test 05  102.) Demo   9.) Undo" << std::endl;
+        std::cout << "1.) green score    " << std::endl;
+        std::cout << "2.) red score      " << std::endl;
+        std::cout << "3.) Demo           " << std::endl;
+        std::cout << "4.) Match Win Test " << std::endl;
+        std::cout << "5.) Test 05        " << std::endl;
+        std::cout << "9.) Undo           " << std::endl;
         // std::cout << "  0.) Exit" << std::endl;
         // std::cout << "  Enter selection: ";
-        std::cin >> menu_selection;
+        std::cin >> menu_selection; 
 
         if ( menu_selection == 1  ||  menu_selection == 2 ) {
             // std::cout << "\n\n\n\n\n\n\n*** Player " << menu_selection << " scored ***\n" << std::endl;
@@ -417,10 +430,14 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             test_04( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
-        } else if ( menu_selection == 105 ) {
+        } else if ( menu_selection == 5 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 05 ***\n" << std::endl;
             test_05( gameObject, gameState, &loop_count );
+            sleep( SCORE_DELAY );
+            continue;
+        } else if ( menu_selection == 4 ) {
+            matchWinTest( gameObject, gameState );
             sleep( SCORE_DELAY );
             continue;
         } else {
