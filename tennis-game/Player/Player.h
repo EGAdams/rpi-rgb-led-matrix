@@ -11,11 +11,13 @@ public:
     Player( GameState* gameState, int player_number );
     ~Player();
     
-    void setOpponent(    Player* opponent                 );
+    void setOpponent(    Player* opponent           );
     Player* getOpponent();
 
     void setSets( GameState* gameState, int sets );
     int getSets();
+
+    void setSets( int sets );
 
     void setPoints( int points  );
     int getPoints();
@@ -35,10 +37,12 @@ public:
     void setSetting(     int setting );
     int getSetting();
 
-    void setSetHistory(  int set, int score               );
+    void setSetHistory(  int set, int score  );
     std::map<int, int> getSetHistory();
 
-    void setGameHistory( int game, int score              );
+    void setSetHistory( std::map<int, int> );
+
+    void setGameHistory( int game, int score );
     std::map<int, int> getGameHistory();
 
     void clearGameHistory();

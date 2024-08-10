@@ -390,6 +390,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             exit( 0 );
         } else if ( menu_selection == 9 ) {
             std::cout << "\n\n\n\n\n\n\n*** Undo ***\n" << std::endl;
+
             gameObject->undo();
             sleep( SCORE_DELAY );
         } else if ( menu_selection == 11 ) {
