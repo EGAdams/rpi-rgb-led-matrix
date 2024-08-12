@@ -52,7 +52,7 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
         _tieBreaker.run( currentPlayer );
     } else if ( _gameState->getMatchTieBreak() == 1 ) { // Match Tie Break
         // _logger->logUpdate( "set tie breaker..." );
-        _tieBreaker.setTieBreaker();
+        // _tieBreaker.setTieBreaker();
         _tieBreaker.run( currentPlayer );
     } else {                                          // Regular Game
         Player* otherPlayer = currentPlayer->getOpponent();
@@ -104,7 +104,7 @@ void Mode1Score::playerGameWin( Player* player ) {
                     player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1TBSetWinSequence() : _mode1WinSequences.p2TBSetWinSequence();
                     _gameState->setMatchTieBreak( 1 );
                     // _gameState->setTieBreak( 1 );   this may have been the source of much confusion.
-                    _tieBreaker.incrementSet();
+                    // _tieBreaker.incrementSet();
                     _tieBreaker.setTieBreakEnable();
                 } else if ( player->getSets() == SETS_TO_WIN_MATCH ) {  // match win, done playing
                     player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.playerOneMatchWin() : _mode1WinSequences.playerTwoMatchWin();

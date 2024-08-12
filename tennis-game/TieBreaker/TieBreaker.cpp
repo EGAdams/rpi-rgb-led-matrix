@@ -261,7 +261,8 @@ void TieBreaker::setTieBreakEnable() {
     // _player1->setGames( 0 );
     // _player2->setGames( 0 );  // not here!  we are using points for the scoring.
     // _gameLeds.updateGames();  // no need for this.
-    incrementSet();
+    // incrementSet(); // 081224 removed this for match win.  THIS MAY BREAK SOMETHING ELSE
+    // a better way would be to set a match win tie break flag and check it here.
     GameTimer::gameDelay( UPDATE_DISPLAY_DELAY  ); }
 
 void TieBreaker::endTieBreak() {
