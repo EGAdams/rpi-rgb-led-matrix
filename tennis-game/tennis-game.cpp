@@ -79,6 +79,17 @@ void playerWin( GameObject* gameObject, GameState* gameState, int player ) {
     }
 }
 
+void matchWinTieBreakerTest(  GameObject* gameObject, GameState* gameState ) {
+    for ( int x = 0; x < 6; x++ ) { 
+        playerWin( gameObject, gameState, 1 ); 
+    }
+    for ( int x = 0; x < 5; x++ ) { 
+        playerWin( gameObject, gameState, 2 ); 
+    }
+    // playerWin( gameObject, gameState, 1 ); 
+    // std::cout << "done with match win test." << std::endl; 
+}
+
 void matchWinTest(  GameObject* gameObject, GameState* gameState ) {
     for ( int x = 0; x < 11; x++ ) { 
         playerWin( gameObject, gameState, 1 ); 
@@ -376,6 +387,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         std::cout << "3.) Demo           " << std::endl;
         std::cout << "4.) Match Win Test " << std::endl;
         std::cout << "5.) Test 05        " << std::endl;
+        std::cout << "6.) Match Win Tie Break Test" << std::endl;
         std::cout << "9.) Undo           " << std::endl;
         // std::cout << "  0.) Exit" << std::endl;
         // std::cout << "  Enter selection: ";
@@ -435,6 +447,12 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 05 ***\n" << std::endl;
             test_05( gameObject, gameState, &loop_count );
+            sleep( SCORE_DELAY );
+            continue;} 
+        else if ( menu_selection == 6 ) {
+            resetAll( reset );
+            std::cout << "\n\n\n\n\n\n\n*** Match Win Tie Break Test ***\n" << std::endl;
+            matchWinTieBreakerTest( gameObject, gameState );
             sleep( SCORE_DELAY );
             continue;
         } else if ( menu_selection == 4 ) {

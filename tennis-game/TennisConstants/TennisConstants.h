@@ -18,11 +18,11 @@
 #define RUNNING_MATCH_WIN_SEQUENCE  "running match win sequence"
 #define TESTING                     1
 #define GAME_FLASH_DELAY            50 // 200
-#define SET_WIN_FLASH_DELAY         200
-#define FLASH_DELAY                 250 // 1000
-#define BUTTON_DELAY                50 // 300
-#define WIN_DELAY                   50 // 1000
-#define WATCH_INTERVAL              250
+#define SET_WIN_FLASH_DELAY         5 // 200
+#define FLASH_DELAY                 5 // 250 // 1000
+#define BUTTON_DELAY                5 // 50 // 300
+#define WIN_DELAY                   5 // 50 // 1000
+#define WATCH_INTERVAL              5 // 250
 #define UPDATE_DISPLAY_DELAY        5 // 50
 #define LOOP_MATCH_LAMP_WIN         2
 #define MATCH_WIN_BLINK_COUNT       5 // added on clermont hill

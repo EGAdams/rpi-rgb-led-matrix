@@ -51,9 +51,8 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
         // _logger->logUpdate( "tie break run..." );
         _tieBreaker.run( currentPlayer );
     } else if ( _gameState->getMatchTieBreak() == 1 ) { // Match Tie Break
-        // // _logger->logUpdate( "set tie breaker..." );
-        // _tieBreaker.setTieBreaker();
-
+        // _logger->logUpdate( "set tie breaker..." );
+        _tieBreaker.setTieBreaker();
         _tieBreaker.run( currentPlayer );
     } else {                                          // Regular Game
         Player* otherPlayer = currentPlayer->getOpponent();

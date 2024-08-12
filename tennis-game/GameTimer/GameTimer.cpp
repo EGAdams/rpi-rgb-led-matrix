@@ -4,7 +4,7 @@ GameTimer::GameTimer() {}
 GameTimer::~GameTimer(){}
 
 void GameTimer::gameDelay( int milliseconds ) {
-    return; // TODO: REMOVE THIS HARD CODE!
+    // return; // TODO: REMOVE THIS HARD CODE!
     std::this_thread::sleep_for( std::chrono::milliseconds( milliseconds )); 
 }
 
