@@ -45,7 +45,11 @@ int Player::number() {
 void Player::setSetHistory( std::map<int, int> set_history ) { _set_history = set_history; }
 
 void Player::setSetHistory( int set, int games ) {
-    // std::cout << "setting set history for player " << number() << " set " << set << " to " << games << std::endl;
+    std::cout << "setting set history for player " << number() << " set " << set << " to " << games << std::endl;
+    if ( set > SETS_TO_WIN_MATCH ) {
+        std::cerr << "*** ERROR: set > SETS_TO_WIN_MATCH in Player::setSetHistory(). ***" << std::endl;
+        exit( 1 );
+    }
     _set_history[ set ] = games; 
     number() == PLAYER_1_INITIALIZED ? 
         _gameState->setPlayer1SetHistory( _set_history ) : _gameState->setPlayer2SetHistory( _set_history ); } 

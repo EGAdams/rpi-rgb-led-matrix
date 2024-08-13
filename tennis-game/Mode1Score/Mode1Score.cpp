@@ -53,6 +53,7 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
     } else if ( _gameState->getMatchTieBreak() == 1 ) { // Match Tie Break
         // _logger->logUpdate( "set tie breaker..." );
         // _tieBreaker.setTieBreaker();
+        std::cout << "running tie breaker..." << std::endl;
         _tieBreaker.run( currentPlayer );
     } else {                                          // Regular Game
         Player* otherPlayer = currentPlayer->getOpponent();

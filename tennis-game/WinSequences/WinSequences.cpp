@@ -164,10 +164,10 @@ void Mode1WinSequences::p1TBSetWinSequence() {  // for entering set t/b
     _player2->setGames( 0 );
     tieLEDsOn();}
 
-void Mode1WinSequences::p2TBSetWinSequence() {  // for entering set t/b
+void Mode1WinSequences::p2TBSetWinSequence() {  // for entering match t/b
     _undo.memory();
     for ( int currentPulseCount = 0; currentPulseCount < SET_WIN_PULSE_COUNT; currentPulseCount++ ) {
-        _player2->setSets( _gameState, 0 );
+        // _player2->setSets( _gameState, 0 );
         tieLEDsOff();
         _setLeds.updateSets();
         GameTimer::gameDelay( _gameState->getFlashDelay());

@@ -228,9 +228,13 @@ void TieBreaker::initializeTieBreakMode() {
     _serveLeds.serveSwitch();
     if ( _gameState->getTieLEDsOn() == 0 ) { tieLEDsOn(); }
     if( _player1->getGames() != 6 ) {
-        exit( 1 ); }
-    if( _player1->getGames() != 6 ) {
-        exit( 1 ); }
+        std::cout << "*** Error: player 1 games do not equal 6 while initializing tie break mode! ***" << std::endl;
+        exit( 1 );
+    }
+    if( _player2->getGames() != 6 ) {
+        std::cout << "*** Error: player 2 games do not equal 6 while initializing tie break mode! ***" << std::endl;
+        exit( 1 );
+    }
     _gameLeds.updateGames();
     Inputs _inputs( _player1, _player2, _pinInterface, _gameState );
     WatchTimer _watchTimer;
