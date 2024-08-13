@@ -425,7 +425,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             test_01( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
-        } else if ( menu_selection == 102 ) {
+        } else if ( menu_selection == 3 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Demo ***\n" << std::endl;
             demo_test( gameObject, gameState, &loop_count );
