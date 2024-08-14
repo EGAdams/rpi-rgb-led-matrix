@@ -29,14 +29,14 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         matrix_options.disable_hardware_pulsing = true; // --led-no-hardware-pulse
         // read /home/roy/brightness.txt, change it from a string to an integer and use it for brightess
         // open brigtness.txt
-        std::ifstream brightness_file("/home/roy/rpi-rgb-led-matrix/brightness.txt");
-        std::string brightness_string;
-        if (brightness_file.is_open()) {
-            std::getline(brightness_file, brightness_string);
-            brightness_file.close();
-        }
-        int brightness_value = std::stoi(brightness_string);
-        matrix_options.brightness = brightness_value; // 35; // 85; // inc jan 22, 22024 // 35 is best for demo videos in largo
+        // std::ifstream brightness_file("/home/roy/rpi-rgb-led-matrix/brightness.txt");
+        // std::string brightness_string;
+        // if (brightness_file.is_open()) {
+        //     std::getline(brightness_file, brightness_string);
+        //     brightness_file.close();
+        // }
+        // int brightness_value = std::stoi(brightness_string);
+        matrix_options.brightness = 100; // brightness_value; // 35; // 85; // inc jan 22, 22024 // 35 is best for demo videos in largo
         matrix_options.pwm_bits = 11;   
         matrix_options.multiplexing = 1;
         rgb_matrix::RuntimeOptions runtime_opt;
