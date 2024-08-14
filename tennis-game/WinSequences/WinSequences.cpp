@@ -171,12 +171,12 @@ void Mode1WinSequences::p2TBSetWinSequence() {  // for entering match t/b
         tieLEDsOff();
         _setLeds.updateSets();
         GameTimer::gameDelay( _gameState->getFlashDelay());
-        _player2->setSets( _gameState, 1 );
+        // _player2->setSets( _gameState, 1 );
         tieLEDsOn();
         _setLeds.updateSets();
         GameTimer::gameDelay( _gameState->getFlashDelay());}
-    _player1->setGames( 0 );
-    _player2->setGames( 0 );
+    // _player1->setGames( 0 ); // August 14, 2014  // don't do this.
+    // _player2->setGames( 0 );
     tieLEDsOn();}
 ///////////////////////////// END OF SET WIN SEQUENCES ////////////////////////////////////////////
 

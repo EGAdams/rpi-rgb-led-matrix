@@ -245,7 +245,8 @@ void TieBreaker::initializeTieBreakMode() {
         if ( _watchTimer.watchInputDelay( TIE_BREAK_BLINK_DELAY, &_inputs, TIE_BREAK_WATCH_INTERVAL ) > 0 ) { return; }}
     _gameLeds.updateGames();
     GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
-    tieLEDsOn(); } // not coming on?
+    tieLEDsOn();
+}
 
 void TieBreaker::setTieBreakEnable() {
     _player1->setPoints( 0 );
