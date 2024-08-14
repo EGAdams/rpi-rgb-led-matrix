@@ -194,22 +194,24 @@ void ad_win_one_comeback( GameObject* gameObject, GameState* gameState ) {
  * Then kicks into high gear and finishes the game at 6 - 2
  */
 void demo_test( GameObject* gameObject, GameState* gameState, int* loop_count ) {
-    gameObject->getScoreBoard()->clearScreen();
-    gameObject->start();
-    sleep( 1 );
+    while ( 1 )  {
+        gameObject->getScoreBoard()->clearScreen();
+        gameObject->start();
+        sleep( 1 );
 
-    normal_win_one( gameObject, gameState );
-    ad_win_one_comeback( gameObject, gameState );
-    normal_win_two( gameObject, gameState );
-    two_win_scramble( gameObject, gameState );
-    normal_win_one( gameObject, gameState );
+        normal_win_one( gameObject, gameState );
+        ad_win_one_comeback( gameObject, gameState );
+        normal_win_two( gameObject, gameState );
+        two_win_scramble( gameObject, gameState );
+        normal_win_one( gameObject, gameState );
 
-    // faster now...
-    one_win_scramble( gameObject, gameState );
-    normal_win_one_no_delay( gameObject, gameState );
-    different_win_one_no_delay( gameObject, gameState );
-    normal_win_one_no_delay( gameObject, gameState );
-    sleep( 5 );
+        // faster now...
+        one_win_scramble( gameObject, gameState );
+        normal_win_one_no_delay( gameObject, gameState );
+        different_win_one_no_delay( gameObject, gameState );
+        normal_win_one_no_delay( gameObject, gameState );
+        sleep( 5 );
+    }
 }
 
 void test_01( GameObject* gameObject, GameState* gameState, int* loop_count ) {
