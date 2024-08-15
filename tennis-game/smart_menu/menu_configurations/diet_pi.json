@@ -1,0 +1,20 @@
+[
+    {
+        "title": "Game Control",
+        "action": "notepad.exe",
+        "working_directory": "",
+        "open_in_subprocess": false
+    },
+    {
+        "title": "Configuration Menu",
+        "action": "ls",
+        "working_directory": "",
+        "open_in_subprocess": false
+    },
+    {
+        "title": "Show JSON Config",
+        "action": "cat ./diet_pi.json",
+        "working_directory": "",
+        "open_in_subprocess": false
+    }
+]
