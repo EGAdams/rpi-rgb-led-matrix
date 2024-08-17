@@ -27,6 +27,16 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
         std::cout << "setting current action back to normal game state..." << std::endl;
         gameState->setCurrentAction( NORMAL_GAME_STATE );
         // delete scoreBoard; // this causes a segmentation fault
+        player->clearSetHistory();
+        player->getOpponent()->clearSetHistory();
+        player->clearGameHistory();
+        player->getOpponent()-> clearGameHistory();
+        gameState->setPlayer1SetHistory( player->getSetHistory() ); // both zero
+        gameState->setPlayer2SetHistory( player->getOpponent()->getSetHistory() );
+        gameState->setGameHistory( player->getGameHistory() );
+        gameState->setGameHistory( player->getOpponent()->getGameHistory() );
+        gameState->setCurrentSet( 1 );
+        gameLeds->getScoreBoard()->update();
         gameState->setStarted( 0 );  // trigger game reset, end run().
     }
 }
