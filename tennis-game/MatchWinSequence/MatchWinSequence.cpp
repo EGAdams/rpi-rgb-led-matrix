@@ -12,7 +12,7 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
         gameLeds->getScoreBoard()->clearScreen();
         gameLeds->getScoreBoard()->drawText( "Match",  YELLOW, 10, 60  );
         gameLeds->getScoreBoard()->drawText( "Win",    YELLOW, 18, 80  );
-        GameTimer::gameDelay( 7000 );
+        GameTimer::gameDelay( 3000 );
         std::cout << "game delay done." << std::endl;
     } else {
         ScoreBoard* scoreBoard = gameLeds->getScoreBoard();
@@ -38,6 +38,7 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
         gameState->setCurrentSet( 1 );
         gameLeds->getScoreBoard()->clearScreen();
         gameLeds->getScoreBoard()->update();
-        gameState->setStarted( 0 );  // trigger game reset, end run().
+        // gameState->setStarted( 0 );  // trigger game reset, end run().
+        gameState->setCurrentAction( NORMAL_GAME_STATE );
     }
 }
