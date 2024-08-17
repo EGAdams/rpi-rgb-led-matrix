@@ -36,6 +36,7 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
         gameState->setGameHistory( player->getGameHistory() );
         gameState->setGameHistory( player->getOpponent()->getGameHistory() );
         gameState->setCurrentSet( 1 );
+        gameLeds->getScoreBoard()->clearScreen();
         gameLeds->getScoreBoard()->update();
         gameState->setStarted( 0 );  // trigger game reset, end run().
     }
