@@ -12,7 +12,7 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
         gameLeds->getScoreBoard()->clearScreen();
         gameLeds->getScoreBoard()->drawText( "Match",  YELLOW, 10, 60  );
         gameLeds->getScoreBoard()->drawText( "Win",    YELLOW, 18, 80  );
-        GameTimer::gameDelay( 3000 );
+        GameTimer::gameDelay( SHOW_MATCH_WIN_TEXT_DELAY );
         std::cout << "game delay done." << std::endl;
     } else {
         ScoreBoard* scoreBoard = gameLeds->getScoreBoard();
