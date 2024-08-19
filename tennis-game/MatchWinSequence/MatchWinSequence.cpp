@@ -31,8 +31,8 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
         player->getOpponent()->clearSetHistory();
         player->clearGameHistory();
         player->getOpponent()-> clearGameHistory();
-        gameState->setPlayer1SetHistory( player->getSetHistory() ); // both zero
-        gameState->setPlayer2SetHistory( player->getOpponent()->getSetHistory() );
+        gameState->setPlayer1SetHistory( player->getSetHistory()); // both zero
+        gameState->setPlayer2SetHistory( player->getOpponent()->getSetHistory());
         gameState->setGameHistory( player->getGameHistory() );
         gameState->setGameHistory( player->getOpponent()->getGameHistory() );
         gameState->setCurrentSet( 1 );
