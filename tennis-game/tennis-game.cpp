@@ -484,8 +484,8 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         loop_count++;
         std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
         std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
-        std::cout << "updating scoreboard after loopGame() ..."  << std::endl;
-        gameObject->getScoreBoard()->update();
+        // std::cout << "updating scoreboard after loopGame() ..."  << std::endl;
+        // gameObject->getScoreBoard()->update();
     } ///////// End Game Loop /////////
     // std::cout << "game loop exited.  loop_count: " << loop_count << std::endl;
     // if ( loop_count > MAX_LOOP_COUNT ) {
