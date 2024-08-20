@@ -403,6 +403,8 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             InputWithTimer inputWithTimer( &blinker );
             menu_selection = inputWithTimer.getInput();
             gameState->setCurrentAction( NORMAL_GAME_STATE ); // stop sleep mode
+            gameObject->getScoreBoard()->clearScreen();
+            gameObject->getScoreBoard()->update();
             continue;
         } else {
             std::cin >> menu_selection;
