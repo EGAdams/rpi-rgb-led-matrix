@@ -12,3 +12,14 @@ int WatchTimer::watchInputDelay( int delay, Inputs* input, int watchInterval  ) 
         totalDelay += watchInterval;
     }
     return 0; }
+
+int WatchTimer::watchPLayerButtonDelay( int delay, int watchInterval ) {
+    int playerButton = 0;
+    int totalDelay = 0;
+    while ( totalDelay < delay ) {
+        GameTimer::gameDelay( watchInterval );
+        // get player button here
+        if ( playerButton != 0 ) { return 1; }
+        totalDelay += watchInterval;
+    }
+    return 0; }

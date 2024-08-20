@@ -17,6 +17,7 @@
 #define ACTIVE_BLINK                "blink"
 #define NORMAL_GAME_STATE           "normal game state"
 #define RUNNING_MATCH_WIN_SEQUENCE  "running match win sequence"
+#define SLEEP_MODE                  "sleep mode for power saving"
 #define TESTING                     1
 #define GAME_FLASH_DELAY            50 // 200
 #define SET_WIN_FLASH_DELAY         5 // 200

@@ -9,8 +9,8 @@ class WatchTimer {
   WatchTimer();
   ~WatchTimer();
 
-  int watchInputDelay( int delay, Inputs* input, int watchInterval );
-
+  int watchInputDelay(        int delay, Inputs* input, int watchInterval );
+  int watchPLayerButtonDelay( int delay,                int watchInterval );
 };
 
 #endif
