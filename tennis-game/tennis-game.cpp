@@ -394,6 +394,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         std::cout << "4.) Match Win Test " << std::endl;
         std::cout << "5.) Test 05        " << std::endl;
         std::cout << "6.) Match Win Tie Break Test" << std::endl;
+        std::cout << "7.) Sleep Mode Test" << std::endl;
         std::cout << "9.) Undo           " << std::endl;
         // std::cout << "  0.) Exit" << std::endl;
         // std::cout << "  Enter selection: ";
@@ -482,6 +483,11 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         }
         else if ( menu_selection == 4 ) {
             matchWinTest( gameObject, gameState );
+            sleep( SCORE_DELAY );
+            continue;
+
+        }else if ( menu_selection == 7 ) {
+            gameState->setCurrentAction( SLEEP_MODE );
             sleep( SCORE_DELAY );
             continue;
         }

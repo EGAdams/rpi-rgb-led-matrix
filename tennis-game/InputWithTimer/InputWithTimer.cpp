@@ -3,7 +3,7 @@
 
 
 InputWithTimer::InputWithTimer( ScoreboardBlinker* blinker) : _blinker( blinker ) {}
-InputWithTimer::~InputWithTimer() { delete _blinker; }
+InputWithTimer::~InputWithTimer() {}
 
 int InputWithTimer::getInput() {
     int menu_selection;
