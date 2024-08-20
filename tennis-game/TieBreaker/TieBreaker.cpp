@@ -117,6 +117,7 @@ void TieBreaker::_tieBreakWin( Player* currentPlayer ) {
         endTieBreak();
         MatchWinSequence  mws;
         mws.run(  currentPlayer, _gameState, &_gameLeds, &_setLeds );
+        _gameState->setCurrentAction( SLEEP_MODE );
     } else { // regular tie break win.
         currentPlayer->setGames(currentPlayer->getGames() + 1); // increment games
         incrementSet();

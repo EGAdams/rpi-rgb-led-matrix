@@ -5,9 +5,12 @@
 
 class InputWithTimer {
 private:
-    ScoreboardBlinker blinker;
+    ScoreboardBlinker* _blinker;
 
 public:
+    InputWithTimer( ScoreboardBlinker* blinker );
+    ~InputWithTimer();
+
     int getInput();
 };
 

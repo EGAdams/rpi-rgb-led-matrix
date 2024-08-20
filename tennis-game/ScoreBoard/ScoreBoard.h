@@ -38,6 +38,9 @@ public:
     void update();
     bool hasCanvas();
     void clearScreen();
+    void drawGreenPeriod();
+    void drawRedPeriod();
+    void drawBlankPeriod();
     void drawGames();
     void drawSets();
     void writeMessage( std::string message );

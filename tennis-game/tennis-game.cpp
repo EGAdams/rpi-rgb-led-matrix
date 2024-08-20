@@ -18,6 +18,7 @@
 #include "ScoreBoard/ScoreBoard.h"
 #include "GameObject/GameObject.h"
 #include "LoggerFactory/LoggerFactory.h"
+#include "InputWithTimer/InputWithTimer.h"
 
 using namespace rgb_matrix;
 #define SCORE_DELAY    0
@@ -360,6 +361,7 @@ void resetAll( Reset* reset ) {
 void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset, int player ) {
     int loop_count = 0;
     int test_count = 0;
+    
 
     // set games to --games argument
     // set sets to --sets argument
@@ -395,7 +397,15 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         std::cout << "9.) Undo           " << std::endl;
         // std::cout << "  0.) Exit" << std::endl;
         // std::cout << "  Enter selection: ";
-        std::cin >> menu_selection;
+        if( gameState->getCurrentAction() == SLEEP_MODE ) {
+            ScoreboardBlinker blinker( gameObject->getScoreBoard());    
+            InputWithTimer inputWithTimer( &blinker );
+            menu_selection = inputWithTimer.getInput();
+            gameState->setCurrentAction( NORMAL_GAME_STATE ); // stop sleep mode
+            continue;
+        } else {
+            std::cin >> menu_selection;
+        }
 
         if ( menu_selection == 1 || menu_selection == 2 ) {
             // std::cout << "\n\n\n\n\n\n\n*** Player " << menu_selection << " scored ***\n" << std::endl;

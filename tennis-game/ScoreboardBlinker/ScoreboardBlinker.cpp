@@ -2,6 +2,11 @@
 #include <chrono>
 #include <thread>
 
+ScoreboardBlinker::ScoreboardBlinker( ScoreBoard* scoreBoard ) : 
+    _scoreboard( scoreBoard ) {}
+
+ScoreboardBlinker::~ScoreboardBlinker() { stop();}
+
 void ScoreboardBlinker::blinkLoop() {
     while (!should_stop) {
         blinkTennisBall(true);
@@ -14,6 +19,11 @@ void ScoreboardBlinker::blinkLoop() {
 void ScoreboardBlinker::blinkTennisBall(bool show) {
     // Implement the logic to show/hide the tennis ball on the scoreboard
     // This will depend on your existing scoreboard implementation
+    if ( show ) {
+        _scoreboard->drawGreenPeriod();
+    } else {
+        _scoreboard->clearScreen();
+    }
 }
 
 void ScoreboardBlinker::start() {

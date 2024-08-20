@@ -235,6 +235,26 @@ void ScoreBoard::_drawTieBreakerBar() {
     }
 }
 
+void ScoreBoard::drawGreenPeriod() {
+    if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
+    #define PERIOD_LR_OFFSET 51
+    #define PERIOD_UD_OFFSET 92
+    _greenPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
+}
+
+void ScoreBoard::drawRedPeriod() {
+    if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
+    #define PERIOD_LR_OFFSET 51
+    #define PERIOD_UD_OFFSET 92
+    _redPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
+}
+
+void ScoreBoard::drawBlankPeriod() {
+    if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
+    #define PERIOD_LR_OFFSET 51
+    #define PERIOD_UD_OFFSET 92
+    _blankPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
+}
 
 void ScoreBoard::blink_player_score(int player) {
     if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
@@ -250,7 +270,6 @@ void ScoreBoard::blink_player_score(int player) {
             GameTimer::gameDelay( BLINK_DELAY );
         }
     } else {
-        // do this 5 times
         for ( int i = 0; i < BLINK_COUNT; i++ ) {
             _redPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
             GameTimer::gameDelay( BLINK_DELAY );
