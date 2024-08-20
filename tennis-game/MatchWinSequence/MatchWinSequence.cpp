@@ -45,7 +45,5 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
     gameState->setCurrentSet( 1 );
     gameLeds->getScoreBoard()->clearScreen();
     gameLeds->getScoreBoard()->update();
-    // gameState->setStarted( 0 );  // trigger game reset, end run().
-    gameState->setCurrentAction( NORMAL_GAME_STATE );
     std::cout << "match win sequence is done." << std::endl;
 }
