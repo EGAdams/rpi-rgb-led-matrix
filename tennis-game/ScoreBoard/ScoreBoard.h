@@ -39,6 +39,7 @@ public:
     bool hasCanvas();
     void clearScreen();
     void drawGames();
+    void drawSets();
     void writeMessage( std::string message );
     void drawText( std::string message, int color, int x, int y );
     std::string drawPlayerScore(   Player* player );

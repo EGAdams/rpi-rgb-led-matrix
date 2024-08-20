@@ -154,6 +154,8 @@ void ScoreBoard::drawGames() { /* std::cout << "inside ScoreBoard::drawGames()" 
 
 RGBMatrix* ScoreBoard::getCanvas() { return _canvas.get(); }
 
+void ScoreBoard::drawSets() { _setDrawer->drawSets(); }
+
 bool ScoreBoard::hasCanvas() {
     if ( _canvas != NULL ) { return true;
     } else { /* std::cout << "*** WARNING: canvas is NULL ***" << std::endl; */ return false; }}
