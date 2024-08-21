@@ -195,7 +195,7 @@ void ad_win_one_comeback( GameObject* gameObject, GameState* gameState ) {
  * Then kicks into high gear and finishes the game at 6 - 2
  */
 void demo_test( GameObject* gameObject, GameState* gameState, int* loop_count ) {
-    while ( 1 )  {
+    while ( 1 ) {
         gameObject->getScoreBoard()->clearScreen();
         gameObject->start();
         sleep( 1 );
@@ -361,7 +361,7 @@ void resetAll( Reset* reset ) {
 void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset, int player ) {
     int loop_count = 0;
     int test_count = 0;
-    
+
 
     // set games to --games argument
     // set sets to --sets argument
@@ -398,15 +398,16 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         std::cout << "9.) Undo           " << std::endl;
         // std::cout << "  0.) Exit" << std::endl;
         // std::cout << "  Enter selection: ";
-        if( gameState->getCurrentAction() == SLEEP_MODE ) {
-            ScoreboardBlinker blinker( gameObject->getScoreBoard());    
+        if ( gameState->getCurrentAction() == SLEEP_MODE ) {
+            ScoreboardBlinker blinker( gameObject->getScoreBoard() );
             InputWithTimer inputWithTimer( &blinker );
             menu_selection = inputWithTimer.getInput();
             gameState->setCurrentAction( NORMAL_GAME_STATE ); // stop sleep mode
             gameObject->getScoreBoard()->clearScreen();
             gameObject->getScoreBoard()->update();
             continue;
-        } else {
+        }
+        else {
             std::cin >> menu_selection;
         }
 
@@ -488,7 +489,8 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             sleep( SCORE_DELAY );
             continue;
 
-        }else if ( menu_selection == 7 ) {
+        }
+        else if ( menu_selection == 7 ) {
             gameState->setCurrentAction( SLEEP_MODE );
             sleep( SCORE_DELAY );
             continue;

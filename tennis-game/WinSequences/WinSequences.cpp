@@ -151,33 +151,40 @@ void Mode1WinSequences::p2TBGameWinSequence() {
 ////////////////////////////////// SET WIN SEQUENCES //////////////////////////////////////////////
 void Mode1WinSequences::p1TBSetWinSequence() {  // for entering set t/b
     _undo.memory();
-    for ( int currentPulseCount = 0; currentPulseCount < SET_WIN_PULSE_COUNT; currentPulseCount++ ) {
-        _player1->setSets( _gameState, 0 );
-        tieLEDsOff();
-        _setLeds.updateSets();
-        GameTimer::gameDelay( _gameState->getFlashDelay());
-        _player1->setSets( _gameState, 1 );
-        tieLEDsOn();
-        _setLeds.updateSets();
-        GameTimer::gameDelay( _gameState->getFlashDelay());}
-    _player1->setGames( 0 );
-    _player2->setGames( 0 );
-    tieLEDsOn();}
+    // for ( int currentPulseCount = 0; currentPulseCount < SET_WIN_PULSE_COUNT; currentPulseCount++ ) {
+    //     _player1->setSets( _gameState, 0 );
+    //     tieLEDsOff();
+    //     _setLeds.updateSets();
+    //     GameTimer::gameDelay( _gameState->getFlashDelay());
+    //     _player1->setSets( _gameState, 1 );
+    //     tieLEDsOn();
+    //     _setLeds.updateSets();
+    //     GameTimer::gameDelay( _gameState->getFlashDelay());
+    // }
+    _gameState->setCurrentAction( BOTH_PLAYER_BLINK );
+    _gameLeds.getScoreBoard()->drawBlinkSets( 0 );     // player number is irrelevant when both flag set
+    // _player1->setGames( 0 ); 082124 comented out below.  following suit for now...
+    // _player2->setGames( 0 );
+    tieLEDsOn();
+}
 
 void Mode1WinSequences::p2TBSetWinSequence() {  // for entering match t/b
     _undo.memory();
-    for ( int currentPulseCount = 0; currentPulseCount < SET_WIN_PULSE_COUNT; currentPulseCount++ ) {
-        // _player2->setSets( _gameState, 0 );
-        tieLEDsOff();
-        _setLeds.updateSets();
-        GameTimer::gameDelay( _gameState->getFlashDelay());
-        // _player2->setSets( _gameState, 1 );
-        tieLEDsOn();
-        _setLeds.updateSets();
-        GameTimer::gameDelay( _gameState->getFlashDelay());}
+    // for ( int currentPulseCount = 0; currentPulseCount < SET_WIN_PULSE_COUNT; currentPulseCount++ ) {
+    //     // _player2->setSets( _gameState, 0 );
+    //     tieLEDsOff();
+    //     _setLeds.updateSets();
+    //     GameTimer::gameDelay( _gameState->getFlashDelay());
+    //     // _player2->setSets( _gameState, 1 );
+    //     tieLEDsOn();
+    //     _setLeds.updateSets();
+    //     GameTimer::gameDelay( _gameState->getFlashDelay());}
+    _gameState->setCurrentAction( BOTH_PLAYER_BLINK );
+    _gameLeds.getScoreBoard()->drawBlinkSets( 0 );     // player number is irrelevant when both flag set
     // _player1->setGames( 0 ); // August 14, 2014  // don't do this.
     // _player2->setGames( 0 );
-    tieLEDsOn();}
+    tieLEDsOn();
+}
 ///////////////////////////// END OF SET WIN SEQUENCES ////////////////////////////////////////////
 
 

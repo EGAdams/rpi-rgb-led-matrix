@@ -71,7 +71,7 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
                 // + std::to_string( current_player_points - other_player_points ) + "." );
                 currentPlayer->setGames( currentPlayer->getGames() + 1 );
                 _undo.memory();
-                currentPlayer->number() == 0 ? playerOneGameWin() : playerTwoGameWin();
+                currentPlayer->number() == 0 ? playerOneGameWin() : playerTwoGameWin(); 
             } else  if ( currentPlayer->getPoints() == 4 ) {
                 // _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has 4 points." );
                 _gameState->setPointFlash( 1 );       // "Ad" mode

@@ -43,6 +43,7 @@ public:
     void drawBlankPeriod();
     void drawGames();
     void drawSets();
+    void drawBlinkSets( int player_number );
     void writeMessage( std::string message );
     void drawText( std::string message, int color, int x, int y );
     std::string drawPlayerScore(   Player* player );
