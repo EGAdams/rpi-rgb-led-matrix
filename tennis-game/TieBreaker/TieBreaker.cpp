@@ -272,12 +272,14 @@ void TieBreaker::setTieBreakEnable() {
     _serveLeds.serveSwitch();
     Inputs _inputs( _player1, _player2, _pinInterface, _gameState );
     WatchTimer _watchTimer;
-    for ( int currentPulseCount = 0; currentPulseCount < TIE_PULSE_COUNT; currentPulseCount++ ) {
-        tieLEDsOff();
-        if ( _watchTimer.watchInputDelay( TIE_BREAK_BLINK_DELAY, &_inputs, TIE_BREAK_WATCH_INTERVAL ) > 0 ) { return; }
-        tieLEDsOn();
-        if ( _watchTimer.watchInputDelay( TIE_BREAK_BLINK_DELAY, &_inputs, TIE_BREAK_WATCH_INTERVAL ) > 0 ) { return; }
-    }
+    if ( !_scoreBoard->onRaspberryPi()) {
+        for ( int currentPulseCount = 0; currentPulseCount < TIE_PULSE_COUNT; currentPulseCount++ ) {
+            tieLEDsOff();
+            if ( _watchTimer.watchInputDelay( TIE_BREAK_BLINK_DELAY, &_inputs, TIE_BREAK_WATCH_INTERVAL ) > 0 ) { return; }
+            tieLEDsOn();
+            if ( _watchTimer.watchInputDelay( TIE_BREAK_BLINK_DELAY, &_inputs, TIE_BREAK_WATCH_INTERVAL ) > 0 ) { return; }
+        }
+    } // end not on pi
     if ( _gameState->getTieLEDsOn() == 0 ) { tieLEDsOn(); }
     // _player1->setGames( 0 );
     // _player2->setGames( 0 );  // not here!  we are using points for the scoring.
@@ -327,7 +329,7 @@ void TieBreaker::mode1TBP1Games() {
 
         if ( _player2->getSets() == _player1->getSets() ) {
             endTieBreak();
-            _mode1WinSequences.p1TBSetWinSequence();
+            _mode1WinSequences.enterMatchTieBreak();
             _gameState->setMatchTieBreak( 1 );
             _gameState->setTieBreak( 1 );
             setTieBreakEnable();
@@ -341,7 +343,7 @@ void TieBreaker::mode1TBP1Games() {
         _player1->setSets( _gameState, _player1->getSets() + 1 );
         if ( _player2->getSets() == _player1->getSets() ) {
             endTieBreak();
-            _mode1WinSequences.p1TBSetWinSequence();
+            _mode1WinSequences.enterMatchTieBreak(); // p1TBSetWinSequence();
             // _gameState->setMatchTieBreak( 1 );   
             // _gameState->setTieBreak( 1 );        
             // setTieBreakEnable();                    
@@ -365,7 +367,7 @@ void TieBreaker::mode1TBP2Games() {
         _player2->setSets( _gameState, _player2->getSets() + 1 );
         if ( _player2->getSets() == _player1->getSets() ) {
             endTieBreak();
-            _mode1WinSequences.p2TBSetWinSequence();
+            _mode1WinSequences.enterMatchTieBreak(); //  p2TBSetWinSequence();
             _gameState->setMatchTieBreak( 1 );
             _gameState->setTieBreak( 1 );
             setTieBreakEnable();
@@ -384,7 +386,7 @@ void TieBreaker::mode1TBP2Games() {
             std::cout << "calling end tie break on august 3.." << std::endl;
             endTieBreak();
             std::cout << "calling p2TBSetWinSequence() on august 3.." << std::endl;
-            _mode1WinSequences.p2TBSetWinSequence();
+            _mode1WinSequences.enterMatchTieBreak(); // p2TBSetWinSequence();
             // _gameState->setMatchTieBreak( 1 );
             // _gameState->setTieBreak( 1 );
             // setTieBreakEnable();

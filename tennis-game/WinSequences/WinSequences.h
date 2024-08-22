@@ -33,8 +33,7 @@ class Mode1WinSequences {
     void playerTwoMatchWin();
     void p1TBGameWinSequence();
     void p2TBGameWinSequence();
-    void p1TBSetWinSequence();
-    void p2TBSetWinSequence();
+    void enterMatchTieBreak();
     void p1SetTBWinSequence();
     void p2SetTBWinSequence();
     void p1TBMatchWinSequence();

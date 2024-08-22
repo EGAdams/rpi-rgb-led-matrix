@@ -102,10 +102,8 @@ void Mode1Score::playerGameWin( Player* player ) {
                 player->setSets( _gameState, player->getSets() + 1 ); // Set win
                 _setLeds.updateSets(); // sets the tiebreak, wins the match, or just wins the set.
                 if ( player->getSets() == opponent->getSets() && player->getSets() == SETS_TO_WIN_MATCH - 1 ) {  // MATCH Tie Break
-                    player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1TBSetWinSequence() : _mode1WinSequences.p2TBSetWinSequence();
+                    _mode1WinSequences.enterMatchTieBreak();
                     _gameState->setMatchTieBreak( 1 );
-                    // _gameState->setTieBreak( 1 );   this may have been the source of much confusion.
-                    // _tieBreaker.incrementSet();
                     _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
                     _tieBreaker.setTieBreakEnable();
                 } else if ( player->getSets() == SETS_TO_WIN_MATCH ) {  // match win, done playing
@@ -164,7 +162,7 @@ void Mode1Score::mode1TBP1Games() {
 
         if ( _player2->getSets() == _player1->getSets() ) {
             _tieBreaker.endTieBreak();
-            _mode1WinSequences.p1TBSetWinSequence();
+            _mode1WinSequences.enterMatchTieBreak();
             _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
             _gameState->setMatchTieBreak( 1 );
             _gameState->setTieBreak( 1 );
@@ -184,7 +182,7 @@ void Mode1Score::mode1TBP1Games() {
         _player1->setSets( _gameState, _player1->getSets() + 1 );
         if ( _player2->getSets() == _player1->getSets() ) {
             _tieBreaker.endTieBreak();
-            _mode1WinSequences.p1TBSetWinSequence();
+            _mode1WinSequences.enterMatchTieBreak();
             _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
             _gameState->setMatchTieBreak( 1 );
             _gameState->setTieBreak( 1 );
@@ -224,7 +222,7 @@ void Mode1Score::mode1TBP2Games() {
         _player2->setSets( _gameState, _player2->getSets() + 1 );
         if ( _player2->getSets() == _player1->getSets() ) {
             _tieBreaker.endTieBreak();
-            _mode1WinSequences.p2TBSetWinSequence();
+            _mode1WinSequences.enterMatchTieBreak();
             _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
             _gameState->setMatchTieBreak( 1 );
             _gameState->setTieBreak( 1 );
@@ -244,7 +242,7 @@ void Mode1Score::mode1TBP2Games() {
         _player2->setSets( _gameState, _player2->getSets() + 1 );
         if ( _player2->getSets() == _player1->getSets() ) {
             _tieBreaker.endTieBreak();
-            _mode1WinSequences.p2TBSetWinSequence();
+            _mode1WinSequences.enterMatchTieBreak();
             _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
             _gameState->setMatchTieBreak( 1 );
             _gameState->setTieBreak( 1 );

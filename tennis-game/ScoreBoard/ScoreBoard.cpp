@@ -163,13 +163,6 @@ bool ScoreBoard::hasCanvas() {
 
 void ScoreBoard::update() {
     bool tie_break_on = _gameState->getTieBreak() == true  || _gameState->getMatchTieBreak() == true;
-    // std::cout << "inside ScoreBoard::update() ... " << std::endl;
-    if ( _player1 == nullptr ) {
-        std::cout << "*** ERROR: _player1 == NULL ***" << std::endl;
-        exit( 1 ); }
-    if ( _player2 == nullptr ) {
-        std::cout << "*** ERROR: _player2 == NULL ***" << std::endl;
-        exit( 1 ); }
     clearScreen();
     drawPlayerScore( _player1 );
     drawPlayerScore( _player2 );
@@ -181,13 +174,15 @@ void ScoreBoard::update() {
         int playerToBlink = _gameState->getCurrentAction().find( "player1" ) != std::string::npos ?
             PLAYER_1_INITIALIZED : PLAYER_2_INITIALIZED;
         _setDrawer->drawBlinkSets( playerToBlink ); // checks current action ignoring playerToBlink
-    } else {
-        // if ( !tie_break_on &&  strcmp( _gameState->getCurrentAction().c_str(), RUNNING_MATCH_WIN_SEQUENCE ) != 0) {
-        //     _setDrawer->drawSets();
-        // }
-        _setDrawer->drawSets();
     }
 
+    if ( _gameState->getCurrentAction() == DRAW_BLANK_SETS ) {
+        _setDrawer->blankSets();
+    
+    } else {
+        _setDrawer->drawSets();
+    }
+    
     if ( tie_break_on ) {
         _drawTieBreakerBar();
     } else if( _gameState->getCurrentAction() == RUNNING_MATCH_WIN_SEQUENCE ) {
@@ -257,20 +252,20 @@ void ScoreBoard::drawBlankPeriod() {
     _blankPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
 }
 
-void ScoreBoard::blink_player_score(int player) {
+void ScoreBoard::blink_player_score(int player) {  // fast blinking ball code here
     if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
     #define BLINK_DELAY 100
     #define BLINK_COUNT 3
     #define PERIOD_LR_OFFSET 51
     #define PERIOD_UD_OFFSET 92
-    if ( player == PLAYER_1_SCORE ) {
+    if ( player == PLAYER_1_SCORE ) {           // blink player 1
         for ( int i=0; i < BLINK_COUNT; i++ ) {
             _greenPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
             GameTimer::gameDelay( BLINK_DELAY );
             _blankPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
             GameTimer::gameDelay( BLINK_DELAY );
         }
-    } else {
+    } else {                                    // blink player 2
         for ( int i = 0; i < BLINK_COUNT; i++ ) {
             _redPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
             GameTimer::gameDelay( BLINK_DELAY );
