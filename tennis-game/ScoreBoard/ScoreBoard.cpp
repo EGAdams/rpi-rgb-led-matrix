@@ -231,8 +231,17 @@ void ScoreBoard::_drawTieBreakerBar() {
     }
 }
 
+void ScoreBoard::drawYellowPeriod() {
+    if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
+    int period_lr_offset = 60;
+    int period_ud_offset = 100;
+    _greenPeriodDrawer->drawNumber( ".", period_lr_offset, period_ud_offset - 20 );
+}
+
 void ScoreBoard::drawGreenPeriod() {
     if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
+    // #define PERIOD_LR_OFFSET 51
+    // #define PERIOD_UD_OFFSET 92
     #define PERIOD_LR_OFFSET 51
     #define PERIOD_UD_OFFSET 92
     _greenPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );

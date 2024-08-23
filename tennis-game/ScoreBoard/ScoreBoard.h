@@ -40,6 +40,7 @@ public:
     void clearScreen();
     void drawGreenPeriod();
     void drawRedPeriod();
+    void drawYellowPeriod();
     void drawBlankPeriod();
     void drawGames();
     void drawSets();

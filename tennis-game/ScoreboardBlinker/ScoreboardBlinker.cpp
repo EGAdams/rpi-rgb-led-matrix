@@ -20,8 +20,8 @@ void ScoreboardBlinker::blinkTennisBall(bool show) {
     // Implement the logic to show/hide the tennis ball on the scoreboard
     // This will depend on your existing scoreboard implementation
     if ( show ) {
-        std::cout <<  "drawing green period... " << std::endl;
-        _scoreboard->drawGreenPeriod();
+        std::cout <<  "drawing yellow period... " << std::endl;
+        _scoreboard->drawYellowPeriod();
     } else {
         _scoreboard->clearScreen();
     }
