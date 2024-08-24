@@ -107,9 +107,9 @@ void Mode1Score::playerGameWin( Player* player ) {
                     _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
                     _tieBreaker.setTieBreakEnable();
                 } else if ( player->getSets() == SETS_TO_WIN_MATCH ) {  // match win, done playing
-                    player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.playerOneMatchWin() : _mode1WinSequences.playerTwoMatchWin();
-                    // _gameState->stopGameRunning();
-                    _resetGame();
+                    MatchWinSequence  mws;
+                    mws.run( player, _gameState, &_gameLeds, &_setLeds );
+                    _gameState->setCurrentAction( SLEEP_MODE );
                 } else {                                              // regular set win, then reset
                     _gameState->setPlayer1SetHistory( player->getSetHistory() );
                     _gameState->setPlayer2SetHistory( opponent->getSetHistory() );

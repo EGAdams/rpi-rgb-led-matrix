@@ -11,11 +11,11 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
     if ( gameLeds->getScoreBoard()->hasCanvas()) {
         gameLeds->getScoreBoard()->clearScreen();
         if ( player->number() == 0 )                {
-            gameLeds->getScoreBoard()->drawText( "Match",  GREEN, 10, 60  );
-            gameLeds->getScoreBoard()->drawText( "Win",    GREEN, 18, 80  );
+            gameLeds->getScoreBoard()->drawText( "Match",  YELLOW, 10, 60  );
+            gameLeds->getScoreBoard()->drawText( "Win",    YELLOW, 18, 80  );
         } else {
-            gameLeds->getScoreBoard()->drawText( "Match",  RED, 10, 60  );
-            gameLeds->getScoreBoard()->drawText( "Win",    RED, 18, 80  );
+            gameLeds->getScoreBoard()->drawText( "Match",  YELLOW, 10, 60  );
+            gameLeds->getScoreBoard()->drawText( "Win",    YELLOW, 18, 80  );
         }
         gameLeds->getScoreBoard()->drawSets();
         GameTimer::gameDelay( SHOW_MATCH_WIN_TEXT_DELAY );
