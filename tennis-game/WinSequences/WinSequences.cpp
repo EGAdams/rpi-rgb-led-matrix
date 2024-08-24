@@ -150,7 +150,7 @@ void Mode1WinSequences::p2TBGameWinSequence() {
 
 //////////////////////////// ENTER MATCH TIE BREAK  ///////////////////////////
 void Mode1WinSequences::enterMatchTieBreak() {  
-    // _undo.memory();
+    _undo.memory();
     _gameLeds.getScoreBoard()->update();
     for( int flash_count = 0; flash_count < ALL_SETS_FLASH_COUNT; flash_count++ ) {
         GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
