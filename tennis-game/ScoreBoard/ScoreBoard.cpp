@@ -235,7 +235,7 @@ void ScoreBoard::_drawTieBreakerBar() {
 void ScoreBoard::drawYellowPeriod() {
     if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
     int period_lr_offset = 53;
-    int period_ud_offset = 130;
+    int period_ud_offset = 129;
     _yellowPeriodDrawer->drawNumber( ".", period_lr_offset, period_ud_offset - 20 );
 }
 
