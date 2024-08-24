@@ -225,7 +225,6 @@ void ScoreBoard::_drawTieBreakerBar() {
             } else {
                 std::cout << blue <<  "/// TIE BREAK MODE ///\n"       << reset << std::endl;
             }
-            
             // std::cout << reset << "==========================" << std::endl;
         }
     } else {
