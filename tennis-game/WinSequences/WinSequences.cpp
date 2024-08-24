@@ -150,7 +150,7 @@ void Mode1WinSequences::p2TBGameWinSequence() {
 
 //////////////////////////// ENTER MATCH TIE BREAK  ///////////////////////////
 void Mode1WinSequences::enterMatchTieBreak() {  
-    _undo.memory();
+    // _undo.memory();
     _gameLeds.getScoreBoard()->update();
     for( int flash_count = 0; flash_count < ALL_SETS_FLASH_COUNT; flash_count++ ) {
         GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
@@ -160,8 +160,6 @@ void Mode1WinSequences::enterMatchTieBreak() {
         _gameState->setCurrentAction( NORMAL_GAME_STATE );
         _gameLeds.getScoreBoard()->update();
     }
-    // _player1->setGames( 0 ); 082124 comented out below.  following suit for now...
-    // _player2->setGames( 0 );
     tieLEDsOn();
 }
 ///////////////////////////// END MATCH TIE BREAK /////////////////////////////
