@@ -83,6 +83,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         Color blue_color( 0, 0, 255 );
         Color red_color( 255, 0, 0 );
         Color green_color( 0, 255, 0 );
+        Color yellow_color( 255, 255, 0 );
         Color black_color( 0, 0, 0 );
 
         _playerOneScoreDrawer   = std::make_unique<Drawer>(
@@ -90,16 +91,17 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         _playerTwoScoreDrawer   = std::make_unique<Drawer>(
             _canvas.get(), &_big_number_font, Drawer::BIG, player_two_score_color, bg_color );
 
-        _drawer            = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::SMALL, color, bg_color     );
-        _pipeDrawer        = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, color, bg_color       );
-        _bluePipeDrawer    = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, blue_color, bg_color  );
-        _redPipeDrawer     = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, red_color, bg_color   );
-        _greenPipeDrawer   = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, green_color, bg_color );
-        _blankPipeDrawer   = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, black_color, bg_color );
-        _redPeriodDrawer   = std::make_unique<Drawer>(    _canvas.get(), &_period_font, Drawer::BIG, red_color, bg_color );
-        _greenPeriodDrawer = std::make_unique<Drawer>(    _canvas.get(), &_period_font, Drawer::BIG, green_color, bg_color );
-        _blankPeriodDrawer = std::make_unique<Drawer>(    _canvas.get(), &_period_font, Drawer::BIG, black_color, bg_color );
-        _setDrawer         = std::make_unique<SetDrawer>( _canvas.get(), _gameState                                            );
+        _drawer             = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::SMALL, color, bg_color     );
+        _pipeDrawer         = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, color, bg_color       );
+        _bluePipeDrawer     = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, blue_color, bg_color  );
+        _redPipeDrawer      = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, red_color, bg_color   );
+        _greenPipeDrawer    = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, green_color, bg_color );
+        _blankPipeDrawer    = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, black_color, bg_color );
+        _redPeriodDrawer    = std::make_unique<Drawer>(    _canvas.get(), &_period_font, Drawer::BIG, red_color, bg_color );
+        _greenPeriodDrawer  = std::make_unique<Drawer>(    _canvas.get(), &_period_font, Drawer::BIG, green_color, bg_color );
+        _yellowPeriodDrawer = std::make_unique<Drawer>(    _canvas.get(), &_period_font, Drawer::BIG, yellow_color, bg_color );
+        _blankPeriodDrawer  = std::make_unique<Drawer>(    _canvas.get(), &_period_font, Drawer::BIG, black_color, bg_color );
+        _setDrawer          = std::make_unique<SetDrawer>( _canvas.get(), _gameState                                            );
         } // fi onRaspberryPi
     update();
 }
@@ -233,8 +235,8 @@ void ScoreBoard::_drawTieBreakerBar() {
 
 void ScoreBoard::drawYellowPeriod() {
     if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
-    int period_lr_offset = 60;
-    int period_ud_offset = 100;
+    int period_lr_offset = 53;
+    int period_ud_offset = 119;
     _greenPeriodDrawer->drawNumber( ".", period_lr_offset, period_ud_offset - 20 );
 }
 
