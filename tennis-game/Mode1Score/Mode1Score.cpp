@@ -107,7 +107,7 @@ void Mode1Score::playerGameWin( Player* player ) {
                     _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
                     _tieBreaker.setTieBreakEnable();
                 } else if ( player->getSets() == SETS_TO_WIN_MATCH ) {  // match win, done playing
-                    // _history->pop();  // otherwise Huston, there will be a problem
+                    _history->pop();  // otherwise Huston, there will be a problem
                     for( int flash_count = 0; flash_count < ALL_SETS_FLASH_COUNT; flash_count++ ) {
                     GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
                     _gameState->setCurrentAction( DRAW_BLANK_SETS ); // set flag before update
