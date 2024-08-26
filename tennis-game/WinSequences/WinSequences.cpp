@@ -148,37 +148,21 @@ void Mode1WinSequences::p2TBGameWinSequence() {
     _gameLeds.updateGames(); }
 
 
-////////////////////////////////// SET WIN SEQUENCES //////////////////////////////////////////////
-void Mode1WinSequences::p1TBSetWinSequence() {  // for entering set t/b
+//////////////////////////// ENTER MATCH TIE BREAK  ///////////////////////////
+void Mode1WinSequences::enterMatchTieBreak() {  
     _undo.memory();
-    for ( int currentPulseCount = 0; currentPulseCount < SET_WIN_PULSE_COUNT; currentPulseCount++ ) {
-        _player1->setSets( _gameState, 0 );
-        tieLEDsOff();
-        _setLeds.updateSets();
-        GameTimer::gameDelay( _gameState->getFlashDelay());
-        _player1->setSets( _gameState, 1 );
-        tieLEDsOn();
-        _setLeds.updateSets();
-        GameTimer::gameDelay( _gameState->getFlashDelay());}
-    _player1->setGames( 0 );
-    _player2->setGames( 0 );
-    tieLEDsOn();}
-
-void Mode1WinSequences::p2TBSetWinSequence() {  // for entering match t/b
-    _undo.memory();
-    for ( int currentPulseCount = 0; currentPulseCount < SET_WIN_PULSE_COUNT; currentPulseCount++ ) {
-        // _player2->setSets( _gameState, 0 );
-        tieLEDsOff();
-        _setLeds.updateSets();
-        GameTimer::gameDelay( _gameState->getFlashDelay());
-        _player2->setSets( _gameState, 1 );
-        tieLEDsOn();
-        _setLeds.updateSets();
-        GameTimer::gameDelay( _gameState->getFlashDelay());}
-    _player1->setGames( 0 );
-    _player2->setGames( 0 );
-    tieLEDsOn();}
-///////////////////////////// END OF SET WIN SEQUENCES ////////////////////////////////////////////
+    _gameLeds.getScoreBoard()->update();
+    for( int flash_count = 0; flash_count < ALL_SETS_FLASH_COUNT; flash_count++ ) {
+        GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
+        _gameState->setCurrentAction( DRAW_BLANK_SETS ); // set flag before update
+        _gameLeds.getScoreBoard()->update();
+        GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
+        _gameState->setCurrentAction( NORMAL_GAME_STATE );
+        _gameLeds.getScoreBoard()->update();
+    }
+    tieLEDsOn();
+}
+///////////////////////////// END MATCH TIE BREAK /////////////////////////////
 
 
 ////////////////////////// SET TIE BREAKER WIN SEQUENCES //////////////////////////////////////////

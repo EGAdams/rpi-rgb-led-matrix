@@ -18,6 +18,7 @@
 #include "ScoreBoard/ScoreBoard.h"
 #include "GameObject/GameObject.h"
 #include "LoggerFactory/LoggerFactory.h"
+#include "InputWithTimer/InputWithTimer.h"
 
 using namespace rgb_matrix;
 #define SCORE_DELAY    0
@@ -67,35 +68,35 @@ void score( GameObject* gameObject, GameState* gameState, int player ) {
 
 void playerWinDelay( GameObject* gameObject, GameState* gameState, int player, int delay ) {
     scoreDelay( gameObject, gameState, player, delay );
-    while( gameState->getPlayer1Points() != 0 || gameState->getPlayer2Points() != 0 ) {
+    while ( gameState->getPlayer1Points() != 0 || gameState->getPlayer2Points() != 0 ) {
         scoreDelay( gameObject, gameState, player, delay );
     }
 }
 
 void playerWin( GameObject* gameObject, GameState* gameState, int player ) {
     score( gameObject, gameState, player );
-    while( gameState->getPlayer1Points() != 0 || gameState->getPlayer2Points() != 0 ) {
+    while ( gameState->getPlayer1Points() != 0 || gameState->getPlayer2Points() != 0 ) {
         score( gameObject, gameState, player );
     }
 }
 
-void matchWinTieBreakerTest(  GameObject* gameObject, GameState* gameState ) {
-    for ( int x = 0; x < 6; x++ ) { 
-        playerWin( gameObject, gameState, 1 ); 
+void matchWinTieBreakerTest( GameObject* gameObject, GameState* gameState ) {
+    for ( int x = 0; x < 6; x++ ) {
+        playerWin( gameObject, gameState, 1 );
     }
-    for ( int x = 0; x < 5; x++ ) { 
-        playerWin( gameObject, gameState, 2 ); 
+    for ( int x = 0; x < 5; x++ ) {
+        playerWin( gameObject, gameState, 2 );
     }
     // playerWin( gameObject, gameState, 1 ); 
     // std::cout << "done with match win test." << std::endl; 
 }
 
-void matchWinTest(  GameObject* gameObject, GameState* gameState ) {
-    for ( int x = 0; x < 11; x++ ) { 
-        playerWin( gameObject, gameState, 1 ); 
+void matchWinTest( GameObject* gameObject, GameState* gameState ) {
+    for ( int x = 0; x < 11; x++ ) {
+        playerWin( gameObject, gameState, 1 );
     }
-    playerWin( gameObject, gameState, 1 ); 
-    std::cout << "done with match win test." << std::endl; 
+    playerWin( gameObject, gameState, 1 );
+    std::cout << "done with match win test." << std::endl;
 }
 
 void checkeredPlayerOneWinDelay( GameObject* gameObject, GameState* gameState, int delay ) {
@@ -109,7 +110,7 @@ void checkeredPlayerOneWinDelay( GameObject* gameObject, GameState* gameState, i
     scoreDelay( gameObject, gameState, 1, delay );
     scoreDelay( gameObject, gameState, 1, delay );
     scoreDelay( gameObject, gameState, 0, delay );
-    while( gameState->getPlayer1Points() != 0 || gameState->getPlayer2Points() != 0 ) {
+    while ( gameState->getPlayer1Points() != 0 || gameState->getPlayer2Points() != 0 ) {
         scoreDelay( gameObject, gameState, 0, delay );
     }
 }
@@ -194,22 +195,24 @@ void ad_win_one_comeback( GameObject* gameObject, GameState* gameState ) {
  * Then kicks into high gear and finishes the game at 6 - 2
  */
 void demo_test( GameObject* gameObject, GameState* gameState, int* loop_count ) {
-    gameObject->getScoreBoard()->clearScreen();
-    gameObject->start();
-    sleep( 1 );
+    while ( 1 ) {
+        gameObject->getScoreBoard()->clearScreen();
+        gameObject->start();
+        sleep( 1 );
 
-    normal_win_one( gameObject, gameState );
-    ad_win_one_comeback( gameObject, gameState );
-    normal_win_two( gameObject, gameState );
-    two_win_scramble( gameObject, gameState );
-    normal_win_one( gameObject, gameState );
+        normal_win_one( gameObject, gameState );
+        ad_win_one_comeback( gameObject, gameState );
+        normal_win_two( gameObject, gameState );
+        two_win_scramble( gameObject, gameState );
+        normal_win_one( gameObject, gameState );
 
-    // faster now...
-    one_win_scramble( gameObject, gameState );
-    normal_win_one_no_delay( gameObject, gameState );
-    different_win_one_no_delay( gameObject, gameState );
-    normal_win_one_no_delay( gameObject, gameState );
-    sleep( 5 );
+        // faster now...
+        one_win_scramble( gameObject, gameState );
+        normal_win_one_no_delay( gameObject, gameState );
+        different_win_one_no_delay( gameObject, gameState );
+        normal_win_one_no_delay( gameObject, gameState );
+        sleep( 5 );
+    }
 }
 
 void test_01( GameObject* gameObject, GameState* gameState, int* loop_count ) {
@@ -234,7 +237,7 @@ void test_02( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen();
     gameObject->start();
     sleep( 1 );
-    #define DEMO_DELAY 1
+#define DEMO_DELAY 1
     playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
     playerWinDelay( gameObject, gameState, 1, DEMO_DELAY );
     playerWinDelay( gameObject, gameState, 2, DEMO_DELAY );
@@ -262,16 +265,17 @@ void test_03( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
-    sleep( 4 ); }
+    sleep( 4 );
+}
 
 void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen();
     gameObject->getPlayer1()->setPoints( 0 );
-    gameState->setPlayer1Points(         0 );
+    gameState->setPlayer1Points( 0 );
     gameObject->getPlayer2()->setPoints( 2 );
-    gameState->setPlayer2Points(         2 );
-    gameObject->getPlayer1()->setGames(  6 );
-    gameObject->getPlayer2()->setGames(  5 );
+    gameState->setPlayer2Points( 2 );
+    gameObject->getPlayer1()->setGames( 6 );
+    gameObject->getPlayer2()->setGames( 5 );
     gameObject->getScoreBoard()->update();
     score( gameObject, gameState, 2 );
     GameTimer::gameDelay( 2000 );
@@ -287,7 +291,8 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 2 );
     score( gameObject, gameState, 2 );
     score( gameObject, gameState, 2 );
-    sleep( 6 ); }
+    sleep( 6 );
+}
 
 void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen();
@@ -299,7 +304,7 @@ void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
-     
+
     // now for player 2 to win the set...
     playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 2 );
@@ -308,22 +313,22 @@ void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 2 );
-    score(     gameObject, gameState, 2 );
-    score(     gameObject, gameState, 2 );
-    score(     gameObject, gameState, 2 );
-    score(     gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
+    score( gameObject, gameState, 2 );
 
     // now player 1 win match
-    score(     gameObject, gameState, 1 );
-    score(     gameObject, gameState, 1 );
-    score(     gameObject, gameState, 1 );
-    score(     gameObject, gameState, 1 );
-    score(     gameObject, gameState, 1 );
-    score(     gameObject, gameState, 1 );
-    score(     gameObject, gameState, 1 );
-    score(     gameObject, gameState, 1 );
-    score(     gameObject, gameState, 1 );
-    score(     gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
+    score( gameObject, gameState, 1 );
 }
 
 
@@ -335,7 +340,7 @@ void test_06( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameState->setPlayer2Points( 0 );
     gameObject->getPlayer1()->setGames( 5 );
     gameObject->getPlayer2()->setGames( 4 );
-    playerWin(gameObject, gameState, 1); // Player 1 wins the first set
+    playerWin( gameObject, gameState, 1 ); // Player 1 wins the first set
     gameObject->getPlayer1()->setPoints( 0 ); // Reset points for the next set
     gameState->setPlayer1Points( 0 );
     gameObject->getPlayer2()->setPoints( 0 );
@@ -343,7 +348,7 @@ void test_06( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getPlayer1()->setGames( 5 );
     gameObject->getPlayer2()->setGames( 4 );
     playerWin( gameObject, gameState, 1 ); // Player 1 wins the second set and the match
-    if ( !gameState->gameRunning()) { // Check match win condition and display the result
+    if ( !gameState->gameRunning() ) { // Check match win condition and display the result
     }
 }
 
@@ -356,6 +361,7 @@ void resetAll( Reset* reset ) {
 void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset, int player ) {
     int loop_count = 0;
     int test_count = 0;
+
 
     // set games to --games argument
     // set sets to --sets argument
@@ -388,32 +394,49 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         std::cout << "4.) Match Win Test " << std::endl;
         std::cout << "5.) Test 05        " << std::endl;
         std::cout << "6.) Match Win Tie Break Test" << std::endl;
+        std::cout << "7.) Sleep Mode Test" << std::endl;
         std::cout << "9.) Undo           " << std::endl;
         // std::cout << "  0.) Exit" << std::endl;
         // std::cout << "  Enter selection: ";
-        std::cin >> menu_selection; 
+        if ( gameState->getCurrentAction() == SLEEP_MODE ) {
+            ScoreboardBlinker blinker( gameObject->getScoreBoard() );
+            InputWithTimer inputWithTimer( &blinker );
+            menu_selection = inputWithTimer.getInput();
+            gameState->setCurrentAction( NORMAL_GAME_STATE ); // stop sleep mode
+            gameObject->getScoreBoard()->clearScreen();
+            gameObject->getScoreBoard()->update();
+            continue;
+        }
+        else {
+            std::cin >> menu_selection;
+        }
 
-        if ( menu_selection == 1  ||  menu_selection == 2 ) {
+        if ( menu_selection == 1 || menu_selection == 2 ) {
             // std::cout << "\n\n\n\n\n\n\n*** Player " << menu_selection << " scored ***\n" << std::endl;
             gameObject->playerScore( menu_selection );  // flip the player score flag
             sleep( SCORE_DELAY );
-        } else if ( menu_selection == 0 ) {
+        }
+        else if ( menu_selection == 0 ) {
             std::cout << "*** Exiting... ***\n" << std::endl;
             exit( 0 );
-        } else if ( menu_selection == 9 ) {
+        }
+        else if ( menu_selection == 9 ) {
             std::cout << "\n\n\n\n\n\n\n*** Undo ***\n" << std::endl;
 
             gameObject->undo();
             sleep( SCORE_DELAY );
-        } else if ( menu_selection == 11 ) {
+        }
+        else if ( menu_selection == 11 ) {
             std::cout << "\n\n\n\n\n\n\n*** Player 1 win ***\n" << std::endl;
             playerWin( gameObject, gameState, 1 );
             sleep( SCORE_DELAY );
-        } else if ( menu_selection == 22 ) {
+        }
+        else if ( menu_selection == 22 ) {
             std::cout << "\n\n\n\n\n\n\n*** Player 2 win ***\n" << std::endl;
             playerWin( gameObject, gameState, 2 );
             sleep( SCORE_DELAY );
-        } else if ( menu_selection == 101 ) {
+        }
+        else if ( menu_selection == 101 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 01 ***\n" << std::endl;
             gameObject->getScoreBoard()->clearScreen();
@@ -425,49 +448,64 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             test_01( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
-        } else if ( menu_selection == 3 ) {
+        }
+        else if ( menu_selection == 3 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Demo ***\n" << std::endl;
             demo_test( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
-        } else if ( menu_selection == 103 ) {
+        }
+        else if ( menu_selection == 103 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 03 ***\n" << std::endl;
             test_03( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
-        } else if ( menu_selection == 104 ) {
+        }
+        else if ( menu_selection == 104 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 04 ***\n" << std::endl;
             test_04( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
-        } else if ( menu_selection == 5 ) {
+        }
+        else if ( menu_selection == 5 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 05 ***\n" << std::endl;
             test_05( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
-            continue;} 
+            continue;
+        }
         else if ( menu_selection == 6 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Match Win Tie Break Test ***\n" << std::endl;
             matchWinTieBreakerTest( gameObject, gameState );
             sleep( SCORE_DELAY );
             continue;
-        } else if ( menu_selection == 4 ) {
+        }
+        else if ( menu_selection == 4 ) {
             matchWinTest( gameObject, gameState );
             sleep( SCORE_DELAY );
             continue;
-        } else {
+
+        }
+        else if ( menu_selection == 7 ) {
+            gameState->setCurrentAction( SLEEP_MODE );
+            sleep( SCORE_DELAY );
+            continue;
+        }
+        else {
             std::cout << "\n\n\n\n\n\n\n*** Invalid selection ***\n" << std::endl;
             sleep( SCORE_DELAY );
-            continue; 
+            continue;
         }
         gameObject->loopGame();  // handle the player score flag
         loop_count++;
         std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
         std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
+        // std::cout << "updating scoreboard after loopGame() ..."  << std::endl;
+        // gameObject->getScoreBoard()->update();
     } ///////// End Game Loop /////////
     // std::cout << "game loop exited.  loop_count: " << loop_count << std::endl;
     // if ( loop_count > MAX_LOOP_COUNT ) {
@@ -479,13 +517,13 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     // }
 }
 
-int main( int argc, char *argv[]) {
+int main( int argc, char* argv[] ) {
     std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );
     // if --argument is manual then run manual tests
     int manual = 0;
-    if( argc > 1 ) {
+    if ( argc > 1 ) {
         std::string arg1 = argv[1];
-        if( arg1 == "--manual" ) {
+        if ( arg1 == "--manual" ) {
             std::cout << "running manual tests..." << std::endl;
             manual = 1;
         }
@@ -493,7 +531,7 @@ int main( int argc, char *argv[]) {
     manual = 1;  // yes hardcodeing  is bad but ina hurry!!
     int loop_count = 0;
     std::cout << "creating game state object..." << std::endl;
-    GameState*  gameState  = new GameState();  // make this 1st!!! cost me 3 days
+    GameState* gameState = new GameState();  // make this 1st!!! cost me 3 days
     std::cout << "creating game object..." << std::endl;
     GameObject* gameObject = new GameObject( gameState );
     std::cout << "creating reset object..." << std::endl;
@@ -504,7 +542,8 @@ int main( int argc, char *argv[]) {
     // sleep( .5 );
     if ( manual == 1 ) {
         std::cout << "running manual game..." << std::endl;
-        run_manual_game( gameObject, gameState, reset, 1 ); return 0; }
+        run_manual_game( gameObject, gameState, reset, 1 ); return 0;
+    }
 
     ///// run tests /////
     int test_count = 1;
@@ -563,13 +602,13 @@ int main( int argc, char *argv[]) {
     test_05( gameObject, gameState, &loop_count );
     test_count++;
 
-   //  writeMessage( gameObject, "t " + std::to_string( test_count ));
-    // writeMessage( gameObject, "Match" );
-    // sleep( 6 );
-    // test_06( gameObject, gameState, &loop_count );
-    // gameObject->getScoreBoard()->clearScreen();
-    // gameObject->getScoreBoard()->drawText( "10,20",  YELLOW, 10, 20  );
-    // gameObject->getScoreBoard()->drawText( "10,80",  YELLOW, 10, 80  );
+    //  writeMessage( gameObject, "t " + std::to_string( test_count ));
+     // writeMessage( gameObject, "Match" );
+     // sleep( 6 );
+     // test_06( gameObject, gameState, &loop_count );
+     // gameObject->getScoreBoard()->clearScreen();
+     // gameObject->getScoreBoard()->drawText( "10,20",  YELLOW, 10, 20  );
+     // gameObject->getScoreBoard()->drawText( "10,80",  YELLOW, 10, 80  );
 
 
     GameTimer::gameDelay( 2000 );

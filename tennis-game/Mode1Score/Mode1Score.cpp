@@ -41,21 +41,18 @@ void Mode1Score::_resetGame() {
     _gameState->setPlayer1Points( 0 );
     _gameState->setPlayer2Points( 0 );
     _gameState->setServeSwitch( 1 );
-        // _gameState->setServe( 0 ); // set serve in game win only
     _pointLeds.updatePoints();
 }
 
 void Mode1Score::updateScore( Player* currentPlayer ) {
     _logger->setName( "updateScore" );
     if ( _gameState->getTieBreak() == 1 ) {             // Set Tie Break
-        // _logger->logUpdate( "tie break run..." );
         _tieBreaker.run( currentPlayer );
     } else if ( _gameState->getMatchTieBreak() == 1 ) { // Match Tie Break
-        // _logger->logUpdate( "set tie breaker..." );
-        // _tieBreaker.setTieBreaker();
+        _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
         std::cout << "running tie breaker..." << std::endl;
         _tieBreaker.run( currentPlayer );
-    } else {                                          // Regular Game
+    } else {                                            // Regular Game
         Player* otherPlayer = currentPlayer->getOpponent();
         int current_player_points = currentPlayer->getPoints();
         int other_player_points = otherPlayer->getPoints();
@@ -71,7 +68,7 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
                 // + std::to_string( current_player_points - other_player_points ) + "." );
                 currentPlayer->setGames( currentPlayer->getGames() + 1 );
                 _undo.memory();
-                currentPlayer->number() == 0 ? playerOneGameWin() : playerTwoGameWin();
+                currentPlayer->number() == 0 ? playerOneGameWin() : playerTwoGameWin(); 
             } else  if ( currentPlayer->getPoints() == 4 ) {
                 // _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has 4 points." );
                 _gameState->setPointFlash( 1 );       // "Ad" mode
@@ -102,17 +99,24 @@ void Mode1Score::playerGameWin( Player* player ) {
                 player->setSets( _gameState, player->getSets() + 1 ); // Set win
                 _setLeds.updateSets(); // sets the tiebreak, wins the match, or just wins the set.
                 if ( player->getSets() == opponent->getSets() && player->getSets() == SETS_TO_WIN_MATCH - 1 ) {  // MATCH Tie Break
-                    player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1TBSetWinSequence() : _mode1WinSequences.p2TBSetWinSequence();
+                    _mode1WinSequences.enterMatchTieBreak();
                     _gameState->setMatchTieBreak( 1 );
-                    // _gameState->setTieBreak( 1 );   this may have been the source of much confusion.
-                    // _tieBreaker.incrementSet();
+                    _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
                     _tieBreaker.setTieBreakEnable();
                 } else if ( player->getSets() == SETS_TO_WIN_MATCH ) {  // match win, done playing
-                    player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.playerOneMatchWin() : _mode1WinSequences.playerTwoMatchWin();
-                    // _gameState->stopGameRunning();
-                    _resetGame();
+                    // _history->pop();  // otherwise Huston, there will be a problem
+                    // decrement 
+                    for( int flash_count = 0; flash_count < ALL_SETS_FLASH_COUNT; flash_count++ ) {
+                    GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
+                    _gameState->setCurrentAction( DRAW_BLANK_SETS ); // set flag before update
+                    _gameLeds.getScoreBoard()->update();
+                    GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
+                    _gameState->setCurrentAction( NORMAL_GAME_STATE );
+                    _gameLeds.getScoreBoard()->update(); }
+                    MatchWinSequence mws;
+                    mws.run( player, _gameState, &_gameLeds, &_setLeds );
+                    _gameState->setCurrentAction( SLEEP_MODE );
                 } else {                                              // regular set win, then reset
-
                     _gameState->setPlayer1SetHistory( player->getSetHistory() );
                     _gameState->setPlayer2SetHistory( opponent->getSetHistory() );
                     player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1SetWinSequence() : _mode1WinSequences.p2SetWinSequence();
@@ -120,9 +124,9 @@ void Mode1Score::playerGameWin( Player* player ) {
                     _setLeds.updateSets();
                     GameTimer::gameDelay( _gameState->getWinDelay() );
                     _resetGame();
+                    player->setGames( 0 );   // not sure about this but move on...
+                    opponent->setGames( 0 ); // These are match win bugs!!
                 }
-                player->setGames( 0 );   // not sure about this but move on...
-                opponent->setGames( 0 );
             } else {     // player is ahead by 1 game, but not enough to win the set.
                 player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1GameWinSequence() : _mode1WinSequences.p2GameWinSequence();
                 _gameLeds.updateGames();
@@ -164,7 +168,8 @@ void Mode1Score::mode1TBP1Games() {
 
         if ( _player2->getSets() == _player1->getSets() ) {
             _tieBreaker.endTieBreak();
-            _mode1WinSequences.p1TBSetWinSequence();
+            _mode1WinSequences.enterMatchTieBreak();
+            _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
             _gameState->setMatchTieBreak( 1 );
             _gameState->setTieBreak( 1 );
             _tieBreaker.setTieBreakEnable();
@@ -183,7 +188,8 @@ void Mode1Score::mode1TBP1Games() {
         _player1->setSets( _gameState, _player1->getSets() + 1 );
         if ( _player2->getSets() == _player1->getSets() ) {
             _tieBreaker.endTieBreak();
-            _mode1WinSequences.p1TBSetWinSequence();
+            _mode1WinSequences.enterMatchTieBreak();
+            _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
             _gameState->setMatchTieBreak( 1 );
             _gameState->setTieBreak( 1 );
             _tieBreaker.setTieBreakEnable();
@@ -222,7 +228,8 @@ void Mode1Score::mode1TBP2Games() {
         _player2->setSets( _gameState, _player2->getSets() + 1 );
         if ( _player2->getSets() == _player1->getSets() ) {
             _tieBreaker.endTieBreak();
-            _mode1WinSequences.p2TBSetWinSequence();
+            _mode1WinSequences.enterMatchTieBreak();
+            _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
             _gameState->setMatchTieBreak( 1 );
             _gameState->setTieBreak( 1 );
             _tieBreaker.setTieBreakEnable();
@@ -241,7 +248,8 @@ void Mode1Score::mode1TBP2Games() {
         _player2->setSets( _gameState, _player2->getSets() + 1 );
         if ( _player2->getSets() == _player1->getSets() ) {
             _tieBreaker.endTieBreak();
-            _mode1WinSequences.p2TBSetWinSequence();
+            _mode1WinSequences.enterMatchTieBreak();
+            _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
             _gameState->setMatchTieBreak( 1 );
             _gameState->setTieBreak( 1 );
             _tieBreaker.setTieBreakEnable();
@@ -267,6 +275,7 @@ void Mode1Score::mode1SetTBP2Games() {
         _mode1WinSequences.p2SetTBWinSequence();
         _tieBreaker.tieLEDsOff();
         _mode1WinSequences.playerTwoMatchWin();
+        _gameState->setCurrentAction( "after player two match win" );
         // _gameState->stopGameRunning();
     }
     // std::cout << "setting serve switch to: " << _gameState->getServeSwitch() + 1 << std::endl;

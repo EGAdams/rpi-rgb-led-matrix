@@ -38,9 +38,7 @@ void Player::setMatches(int matches) { _matches = matches; } int Player::getMatc
 void Player::setMode(int mode) { _mode = mode; }             int Player::getMode() {    return _mode;    }
 void Player::setSetting(int setting) { _setting = setting; } int Player::getSetting() { return _setting; }
 int Player::incrementSetting() { return ++_setting; }
-int Player::number() { 
-    // std::cout << "Player::number() returning " << _playerNumber << std::endl;
-    return _playerNumber; }
+int Player::number() { return _playerNumber; }
 
 void Player::setSetHistory( std::map<int, int> set_history ) { _set_history = set_history; }
 

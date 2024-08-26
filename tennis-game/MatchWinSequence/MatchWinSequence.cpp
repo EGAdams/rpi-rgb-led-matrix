@@ -10,9 +10,15 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
     GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
     if ( gameLeds->getScoreBoard()->hasCanvas()) {
         gameLeds->getScoreBoard()->clearScreen();
-        gameLeds->getScoreBoard()->drawText( "Match",  YELLOW, 10, 60  );
-        gameLeds->getScoreBoard()->drawText( "Win",    YELLOW, 18, 80  );
-        GameTimer::gameDelay( 7000 );
+        if ( player->number() == 0 )                {
+            gameLeds->getScoreBoard()->drawText( "Match",  YELLOW, 10, 60  );
+            gameLeds->getScoreBoard()->drawText( "Win",    YELLOW, 18, 80  );
+        } else {
+            gameLeds->getScoreBoard()->drawText( "Match",  YELLOW, 10, 60  );
+            gameLeds->getScoreBoard()->drawText( "Win",    YELLOW, 18, 80  );
+        }
+        gameLeds->getScoreBoard()->drawSets();
+        GameTimer::gameDelay( SHOW_MATCH_WIN_TEXT_DELAY );
         std::cout << "game delay done." << std::endl;
     } else {
         ScoreBoard* scoreBoard = gameLeds->getScoreBoard();
@@ -24,9 +30,20 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
             scoreBoard->update();
             GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
         }
-        std::cout << "setting current action back to normal game state..." << std::endl;
-        gameState->setCurrentAction( NORMAL_GAME_STATE );
-        // delete scoreBoard; // this causes a segmentation fault
-        gameState->setStarted( 0 );  // trigger game reset, end run().
     }
+    std::cout << "setting current action back to normal game state..." << std::endl;
+    gameState->setCurrentAction( NORMAL_GAME_STATE );
+    // delete scoreBoard; // this causes a segmentation fault
+    player->clearSetHistory();
+    player->getOpponent()->clearSetHistory();
+    player->clearGameHistory();
+    player->getOpponent()-> clearGameHistory();
+    gameState->setPlayer1SetHistory( player->getSetHistory()); // both zero
+    gameState->setPlayer2SetHistory( player->getOpponent()->getSetHistory());
+    gameState->setGameHistory( player->getGameHistory() );
+    gameState->setGameHistory( player->getOpponent()->getGameHistory() );
+    gameState->setCurrentSet( 1 );
+    gameLeds->getScoreBoard()->clearScreen();
+    gameLeds->getScoreBoard()->update();
+    std::cout << "match win sequence is done." << std::endl;
 }

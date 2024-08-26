@@ -6,6 +6,7 @@
 //  Written by Chris Bean for Teensy 4.1 only
 //  re-written in C++ by EG in June 2022
 
+#define RUNNING_MATCH_TIE_BREAK     "running match tie breaker"
 #define BOTH_PLAYER_BLINK           "blink both players"
 #define PLAYER_1_BLINK              "player1 blink"
 #define PLAYER_2_BLINK              "player2 blink"
@@ -16,6 +17,8 @@
 #define ACTIVE_BLINK                "blink"
 #define NORMAL_GAME_STATE           "normal game state"
 #define RUNNING_MATCH_WIN_SEQUENCE  "running match win sequence"
+#define DRAW_BLANK_SETS             "draw blank sets"
+#define SLEEP_MODE                  "sleep mode for power saving"
 #define TESTING                     1
 #define GAME_FLASH_DELAY            50 // 200
 #define SET_WIN_FLASH_DELAY         5 // 200
@@ -24,12 +27,15 @@
 #define WIN_DELAY                   5 // 50 // 1000
 #define WATCH_INTERVAL              5 // 250
 #define UPDATE_DISPLAY_DELAY        5 // 50
+#define ALL_SETS_FLASH_DELAY        500 
 #define LOOP_MATCH_LAMP_WIN         2
 #define MATCH_WIN_BLINK_COUNT       5 // added on clermont hill
+#define SHOW_MATCH_WIN_TEXT_DELAY   3000 // 45000 // added anna marie island monday
 #define NUMBER_OF_GAME_LAMPS        7
 #define LOOP_GAME_LAMP_WIN          5
 #define TIE_PULSE_COUNT             5
 #define SET_WIN_PULSE_COUNT         5
+#define ALL_SETS_FLASH_COUNT        5
 #define TIE_BREAK_WIN_BY_TWO        10
 #define TIE_BREAK_MAX_POINTS        13
 #define TIE_BREAK_BLINK_DELAY       250 // 750

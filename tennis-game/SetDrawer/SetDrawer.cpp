@@ -37,6 +37,21 @@ void SetDrawer::drawSets() {
         Color fourthRowColor( 255, 0, 0 );
         drawTextOnCanvas( x + SMALL_BEFORE, y, fourthRowColor, playerTwoSetString ); }}
 
+void SetDrawer::blankSets() {
+    int y = START_ROW; 
+    int x = 0;
+    std::string playerOneSetString = "";
+    std::string playerTwoSetString = "";
+    Color thirdRowColor( 0, 255, 0 );
+    if ( _canvas == NULL ) {
+        std::cout << playerOneSetString << std::endl;
+        std::cout << playerTwoSetString << std::endl;
+    } else {
+        drawTextOnCanvas( x + SMALL_BEFORE, y, thirdRowColor, playerOneSetString );
+        y += _little_font.height() - 5;
+        Color fourthRowColor( 255, 0, 0 );
+        drawTextOnCanvas( x + SMALL_BEFORE, y, fourthRowColor, playerTwoSetString ); }}
+
 void SetDrawer::drawBlinkSets( int playerToBlink ) {
     int y = START_ROW; 
     int x = 0;

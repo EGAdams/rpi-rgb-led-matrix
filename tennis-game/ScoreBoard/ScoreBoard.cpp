@@ -27,7 +27,16 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         matrix_options.parallel = 2;
         matrix_options.show_refresh_rate = false;
         matrix_options.disable_hardware_pulsing = true; // --led-no-hardware-pulse
-        matrix_options.brightness = 35; // 85; // inc jan 22, 22024 // 35 is best for demo videos in largo
+        // read /home/roy/brightness.txt, change it from a string to an integer and use it for brightess
+        // open brigtness.txt
+        std::ifstream brightness_file("smart_menu/brightness.txt");
+        std::string brightness_string;
+        if (brightness_file.is_open()) {
+            std::getline(brightness_file, brightness_string);
+            brightness_file.close();
+        }
+        int brightness_value = std::stoi(brightness_string);
+        matrix_options.brightness = brightness_value; // 35; // 85; // inc jan 22, 22024 // 35 is best for demo videos in largo
         matrix_options.pwm_bits = 11;   
         matrix_options.multiplexing = 1;
         rgb_matrix::RuntimeOptions runtime_opt;
@@ -74,6 +83,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         Color blue_color( 0, 0, 255 );
         Color red_color( 255, 0, 0 );
         Color green_color( 0, 255, 0 );
+        Color yellow_color( 255, 255, 0 );
         Color black_color( 0, 0, 0 );
 
         _playerOneScoreDrawer   = std::make_unique<Drawer>(
@@ -81,16 +91,17 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         _playerTwoScoreDrawer   = std::make_unique<Drawer>(
             _canvas.get(), &_big_number_font, Drawer::BIG, player_two_score_color, bg_color );
 
-        _drawer            = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::SMALL, color, bg_color     );
-        _pipeDrawer        = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, color, bg_color       );
-        _bluePipeDrawer    = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, blue_color, bg_color  );
-        _redPipeDrawer     = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, red_color, bg_color   );
-        _greenPipeDrawer   = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, green_color, bg_color );
-        _blankPipeDrawer   = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, black_color, bg_color );
-        _redPeriodDrawer   = std::make_unique<Drawer>(    _canvas.get(), &_period_font, Drawer::BIG, red_color, bg_color );
-        _greenPeriodDrawer = std::make_unique<Drawer>(    _canvas.get(), &_period_font, Drawer::BIG, green_color, bg_color );
-        _blankPeriodDrawer = std::make_unique<Drawer>(    _canvas.get(), &_period_font, Drawer::BIG, black_color, bg_color );
-        _setDrawer         = std::make_unique<SetDrawer>( _canvas.get(), _gameState                                            );
+        _drawer             = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::SMALL, color, bg_color     );
+        _pipeDrawer         = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, color, bg_color       );
+        _bluePipeDrawer     = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, blue_color, bg_color  );
+        _redPipeDrawer      = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, red_color, bg_color   );
+        _greenPipeDrawer    = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, green_color, bg_color );
+        _blankPipeDrawer    = std::make_unique<Drawer>(    _canvas.get(), &_big_number_font, Drawer::BIG, black_color, bg_color );
+        _redPeriodDrawer    = std::make_unique<Drawer>(    _canvas.get(), &_period_font, Drawer::BIG, red_color, bg_color );
+        _greenPeriodDrawer  = std::make_unique<Drawer>(    _canvas.get(), &_period_font, Drawer::BIG, green_color, bg_color );
+        _yellowPeriodDrawer = std::make_unique<Drawer>(    _canvas.get(), &_period_font, Drawer::BIG, yellow_color, bg_color );
+        _blankPeriodDrawer  = std::make_unique<Drawer>(    _canvas.get(), &_period_font, Drawer::BIG, black_color, bg_color );
+        _setDrawer          = std::make_unique<SetDrawer>( _canvas.get(), _gameState                                            );
         } // fi onRaspberryPi
     update();
 }
@@ -145,19 +156,15 @@ void ScoreBoard::drawGames() { /* std::cout << "inside ScoreBoard::drawGames()" 
 
 RGBMatrix* ScoreBoard::getCanvas() { return _canvas.get(); }
 
+void ScoreBoard::drawSets() { _setDrawer->drawSets(); }
+void ScoreBoard::drawBlinkSets( int player_number ) { _setDrawer->drawBlinkSets( player_number ); }
+
 bool ScoreBoard::hasCanvas() {
     if ( _canvas != NULL ) { return true;
     } else { /* std::cout << "*** WARNING: canvas is NULL ***" << std::endl; */ return false; }}
 
 void ScoreBoard::update() {
     bool tie_break_on = _gameState->getTieBreak() == true  || _gameState->getMatchTieBreak() == true;
-    // std::cout << "inside ScoreBoard::update() ... " << std::endl;
-    if ( _player1 == nullptr ) {
-        std::cout << "*** ERROR: _player1 == NULL ***" << std::endl;
-        exit( 1 ); }
-    if ( _player2 == nullptr ) {
-        std::cout << "*** ERROR: _player2 == NULL ***" << std::endl;
-        exit( 1 ); }
     clearScreen();
     drawPlayerScore( _player1 );
     drawPlayerScore( _player2 );
@@ -169,13 +176,15 @@ void ScoreBoard::update() {
         int playerToBlink = _gameState->getCurrentAction().find( "player1" ) != std::string::npos ?
             PLAYER_1_INITIALIZED : PLAYER_2_INITIALIZED;
         _setDrawer->drawBlinkSets( playerToBlink ); // checks current action ignoring playerToBlink
-    } else {
-        // if ( !tie_break_on &&  strcmp( _gameState->getCurrentAction().c_str(), RUNNING_MATCH_WIN_SEQUENCE ) != 0) {
-        //     _setDrawer->drawSets();
-        // }
-        _setDrawer->drawSets();
     }
 
+    if ( _gameState->getCurrentAction() == DRAW_BLANK_SETS ) {
+        _setDrawer->blankSets();
+    
+    } else {
+        _setDrawer->drawSets();
+    }
+    
     if ( tie_break_on ) {
         _drawTieBreakerBar();
     } else if( _gameState->getCurrentAction() == RUNNING_MATCH_WIN_SEQUENCE ) {
@@ -216,7 +225,6 @@ void ScoreBoard::_drawTieBreakerBar() {
             } else {
                 std::cout << blue <<  "/// TIE BREAK MODE ///\n"       << reset << std::endl;
             }
-            
             // std::cout << reset << "==========================" << std::endl;
         }
     } else {
@@ -224,22 +232,50 @@ void ScoreBoard::_drawTieBreakerBar() {
     }
 }
 
+void ScoreBoard::drawYellowPeriod() {
+    if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
+    int period_lr_offset = 53;
+    int period_ud_offset = 129;
+    _yellowPeriodDrawer->drawNumber( ".", period_lr_offset, period_ud_offset - 20 );
+}
 
-void ScoreBoard::blink_player_score(int player) {
+void ScoreBoard::drawGreenPeriod() {
+    if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
+    // #define PERIOD_LR_OFFSET 51
+    // #define PERIOD_UD_OFFSET 92
+    #define PERIOD_LR_OFFSET 51
+    #define PERIOD_UD_OFFSET 92
+    _greenPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
+}
+
+void ScoreBoard::drawRedPeriod() {
+    if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
+    #define PERIOD_LR_OFFSET 51
+    #define PERIOD_UD_OFFSET 92
+    _redPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
+}
+
+void ScoreBoard::drawBlankPeriod() {
+    if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
+    #define PERIOD_LR_OFFSET 51
+    #define PERIOD_UD_OFFSET 92
+    _blankPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
+}
+
+void ScoreBoard::blink_player_score(int player) {  // fast blinking ball code here
     if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
     #define BLINK_DELAY 100
     #define BLINK_COUNT 3
     #define PERIOD_LR_OFFSET 51
     #define PERIOD_UD_OFFSET 92
-    if ( player == PLAYER_1_SCORE ) {
+    if ( player == PLAYER_1_SCORE ) {           // blink player 1
         for ( int i=0; i < BLINK_COUNT; i++ ) {
             _greenPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
             GameTimer::gameDelay( BLINK_DELAY );
             _blankPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
             GameTimer::gameDelay( BLINK_DELAY );
         }
-    } else {
-        // do this 5 times
+    } else {                                    // blink player 2
         for ( int i = 0; i < BLINK_COUNT; i++ ) {
             _redPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
             GameTimer::gameDelay( BLINK_DELAY );

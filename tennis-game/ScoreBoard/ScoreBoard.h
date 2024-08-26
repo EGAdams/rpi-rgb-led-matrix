@@ -38,7 +38,13 @@ public:
     void update();
     bool hasCanvas();
     void clearScreen();
+    void drawGreenPeriod();
+    void drawRedPeriod();
+    void drawYellowPeriod();
+    void drawBlankPeriod();
     void drawGames();
+    void drawSets();
+    void drawBlinkSets( int player_number );
     void writeMessage( std::string message );
     void drawText( std::string message, int color, int x, int y );
     std::string drawPlayerScore(   Player* player );
@@ -70,6 +76,7 @@ private:
     std::unique_ptr<Drawer>     _blankPipeDrawer;
     std::unique_ptr<Drawer>     _redPeriodDrawer;
     std::unique_ptr<Drawer>     _greenPeriodDrawer;
+    std::unique_ptr<Drawer>     _yellowPeriodDrawer;
     std::unique_ptr<Drawer>     _blankPeriodDrawer;
     std::unique_ptr<SetDrawer>  _setDrawer;
     std::unique_ptr<RGBMatrix>  _canvas;
