@@ -35,6 +35,7 @@ void Undo::memory() {
 void Undo::snapshot( History* history ) {
     if ( _gameState->getCurrentAction() == RUNNING_MATCH_TIE_BREAK && _player2->getSetHistory()[ 2 ] == 0 ) { 
         std::cout << "*** ERROR: player two set history is blank during match win tie break! ***" << std::endl;
+        exit( 0 );
     }
     GameState gameState;
     gameState.setPlayer1Points( _player1->getPoints()); gameState.setP1PointsMem( _gameState->getP1PointsMem());

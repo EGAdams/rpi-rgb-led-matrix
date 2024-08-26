@@ -41,7 +41,7 @@ void Mode1Functions::mode1ButtonFunction() {
         GameTimer::gameDelay( _gameState->getButtonDelay());
         _player1->setPoints( _player1->getPoints() + 1 );
         _gameState->setPlayer1Points( _player1->getPoints());
-        _undo.memory();
+        _undo.memory(); //
         // _logger->logUpdate( "player one points set to [" + std::to_string( _player1->getPoints()) + "]" );
         // _logger->logUpdate( "calling mode1Score.playerOneScore()..." );
         _mode1Score.playerOneScore();
@@ -71,8 +71,10 @@ void Mode1Functions::mode1ButtonFunction() {
     case 4:
         GameTimer::gameDelay( _gameState->getButtonDelay());
         _undo.mode1Undo( _history );
-        break; }                        // end switch ( _gameState->getPlayerButton())
-    _gameState->setPlayerButton( 0 ); } // reset player button here!
+        break; 
+    } // end switch ( _gameState->getPlayerButton())
+    _gameState->setPlayerButton( 0 );   // reset player button here!
+}
 
 void Mode1Functions::mode1ServeFunction() {
     _undo.snapshot( _history );

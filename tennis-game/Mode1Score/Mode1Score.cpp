@@ -41,21 +41,18 @@ void Mode1Score::_resetGame() {
     _gameState->setPlayer1Points( 0 );
     _gameState->setPlayer2Points( 0 );
     _gameState->setServeSwitch( 1 );
-        // _gameState->setServe( 0 ); // set serve in game win only
     _pointLeds.updatePoints();
 }
 
 void Mode1Score::updateScore( Player* currentPlayer ) {
     _logger->setName( "updateScore" );
     if ( _gameState->getTieBreak() == 1 ) {             // Set Tie Break
-        // _logger->logUpdate( "tie break run..." );
         _tieBreaker.run( currentPlayer );
     } else if ( _gameState->getMatchTieBreak() == 1 ) { // Match Tie Break
-        // _logger->logUpdate( "set tie breaker..." );
         _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
         std::cout << "running tie breaker..." << std::endl;
         _tieBreaker.run( currentPlayer );
-    } else {                                          // Regular Game
+    } else {                                            // Regular Game
         Player* otherPlayer = currentPlayer->getOpponent();
         int current_player_points = currentPlayer->getPoints();
         int other_player_points = otherPlayer->getPoints();
@@ -108,6 +105,7 @@ void Mode1Score::playerGameWin( Player* player ) {
                     _tieBreaker.setTieBreakEnable();
                 } else if ( player->getSets() == SETS_TO_WIN_MATCH ) {  // match win, done playing
                     // _history->pop();  // otherwise Huston, there will be a problem
+                    // decrement 
                     for( int flash_count = 0; flash_count < ALL_SETS_FLASH_COUNT; flash_count++ ) {
                     GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
                     _gameState->setCurrentAction( DRAW_BLANK_SETS ); // set flag before update

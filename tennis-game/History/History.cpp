@@ -3,14 +3,19 @@
 History::History() { _logger = new Logger( "History" ); }
 History::~History() { delete _logger; }
 
-void History::push( GameState state ) { _history.push( state );}
+void History::push( GameState state ) {
+    std::cout << "pushing state... " << std::endl;
+    _history.push( state );
+    std::cout <<   "done pushing state." << std::endl;
+}
 
 int History::size() { return _history.size(); }
 
 GameState History::pop() {
     GameState lastGameState = _history.top();
     _history.pop();
-    return lastGameState; }
+    return lastGameState;
+}
 
 void History::saveGameStateToFile(const GameState& gameState, const std::string& filename) {
     std::ofstream outFile(filename, std::ios::binary);
