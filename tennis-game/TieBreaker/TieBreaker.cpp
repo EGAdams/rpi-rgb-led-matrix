@@ -126,6 +126,7 @@ void TieBreaker::_tieBreakWin( Player* currentPlayer ) {
     _undo.snapshot( _history );
     if ( _gameState->getMatchTieBreak() == true ) { // match win
         endTieBreak();
+        _history->decrementWinningPlayerScore( currentPlayer );
         MatchWinSequence  mws;
         mws.run( currentPlayer, _gameState, &_gameLeds, &_setLeds );
         _gameState->setCurrentAction( SLEEP_MODE );

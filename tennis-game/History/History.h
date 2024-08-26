@@ -16,6 +16,7 @@ class History {
     void push( GameState gameState );
     GameState pop();
     int size();
+    void decrementWinningPlayerScore( Player* player );
     void saveGameStateToFile(const GameState& gameState, const std::string& filename);
     GameState loadGameStateFromFile(const std::string& filename);
     std::vector<std::string> getSavedGameStatesList();

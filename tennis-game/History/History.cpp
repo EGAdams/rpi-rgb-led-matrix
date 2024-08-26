@@ -17,6 +17,20 @@ GameState History::pop() {
     return lastGameState;
 }
 
+void History::decrementWinningPlayerScore( Player* player ) {
+    GameState gamestate = _history.top();   // populate game state to modify
+    _history.pop();                         // clear it, well put it back in a second..
+    if ( player->number() == 0 ) {
+        gamestate.setPlayer1Points( gamestate.getPlayer1Points() - 1 );
+        gamestate.setP1PointsMem( gamestate.getP1PointsMem() - 1 );
+    } else {
+        gamestate.setPlayer2Points( gamestate.getPlayer2Points() - 1 );
+        gamestate.setP2PointsMem( gamestate.getP2PointsMem() - 1 );
+    }
+    _history.pop(); // one more for some reason...
+    _history.push( gamestate );
+}
+
 void History::saveGameStateToFile(const GameState& gameState, const std::string& filename) {
     std::ofstream outFile(filename, std::ios::binary);
     if (outFile.is_open()) {
