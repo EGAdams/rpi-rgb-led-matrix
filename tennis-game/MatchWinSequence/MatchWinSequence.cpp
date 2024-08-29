@@ -50,6 +50,10 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
     gameState->setGameHistory( player->getGameHistory() );
     gameState->setGameHistory( player->getOpponent()->getGameHistory() );
     gameState->setCurrentSet( 1 );
+    player->setPoints( 0 );
+    player->getOpponent()->setPoints( 0 );
+    gameState->setPlayer1Points( 0 );
+    gameState->setPlayer2Points( 0 );
     gameLeds->getScoreBoard()->clearScreen();
     gameLeds->getScoreBoard()->update();
     std::cout << "match win sequence is done." << std::endl;
