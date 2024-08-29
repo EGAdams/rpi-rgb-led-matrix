@@ -6,6 +6,14 @@ MatchWinSequence::~MatchWinSequence() {}
 
 void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* gameLeds, SetLeds* setLeds ) {
     std::cout << "//////////////////////// MatchWinSequence::run() ////////////////////////" << std::endl;
+    for( int flash_count = 0; flash_count < ALL_SETS_FLASH_COUNT; flash_count++ ) {
+        GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
+        gameState->setCurrentAction( DRAW_BLANK_SETS ); // set flag before update
+        gameLeds->getScoreBoard()->update();
+        GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
+        gameState->setCurrentAction( NORMAL_GAME_STATE );
+        gameLeds->getScoreBoard()->update();
+    }
     gameState->setCurrentAction( RUNNING_MATCH_WIN_SEQUENCE ); // so scoreboard knows...
     GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
     if ( gameLeds->getScoreBoard()->hasCanvas()) {
@@ -33,7 +41,6 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
     }
     std::cout << "setting current action back to normal game state..." << std::endl;
     gameState->setCurrentAction( NORMAL_GAME_STATE );
-    // delete scoreBoard; // this causes a segmentation fault
     player->clearSetHistory();
     player->getOpponent()->clearSetHistory();
     player->clearGameHistory();

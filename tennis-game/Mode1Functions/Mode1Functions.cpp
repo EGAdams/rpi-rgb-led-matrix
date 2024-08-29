@@ -28,11 +28,9 @@ void Mode1Functions::mode1ButtonFunction() {
         break;
 
     case 1: // Player 1 Score
-        // _logger->logUpdate( "player one scored." );
         _undo.snapshot( _history );
         if ( _gameState->getPointFlash() == 1 ) {
             _gameState->setPointFlash( 0 );
-            // _logger->logUpdate( "setting players points from gameState " );
             _player1->setPoints( _gameState->getP1PointsMem());
             _player2->setPoints( _gameState->getP2PointsMem());
             _gameState->setPlayer1Points( _player1->getPoints());
@@ -42,8 +40,6 @@ void Mode1Functions::mode1ButtonFunction() {
         _player1->setPoints( _player1->getPoints() + 1 );
         _gameState->setPlayer1Points( _player1->getPoints());
         _undo.memory(); //
-        // _logger->logUpdate( "player one points set to [" + std::to_string( _player1->getPoints()) + "]" );
-        // _logger->logUpdate( "calling mode1Score.playerOneScore()..." );
         _mode1Score.playerOneScore();
         break;
 

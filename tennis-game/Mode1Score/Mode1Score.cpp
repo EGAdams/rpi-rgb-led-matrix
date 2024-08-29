@@ -57,20 +57,14 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
         int current_player_points = currentPlayer->getPoints();
         int other_player_points = otherPlayer->getPoints();
         if ( current_player_points >= 3 ) {
-            // _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has 3 points or more." );
             if ( current_player_points == other_player_points ) {
-                // _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has 3 points and tied with " + std::to_string( otherPlayer->number() ) + "." );
                 currentPlayer->setPoints( 3 );  
                 otherPlayer->setPoints( 3 );
             } else if ( current_player_points > 3 && ( current_player_points - other_player_points ) > 1 ) {
-                // _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has " 
-                // + std::to_string( current_player_points ) + " points and won by " 
-                // + std::to_string( current_player_points - other_player_points ) + "." );
                 currentPlayer->setGames( currentPlayer->getGames() + 1 );
                 _undo.memory();
-                currentPlayer->number() == 0 ? playerOneGameWin() : playerTwoGameWin(); 
+                currentPlayer->number() == 0 ? playerOneGameWin() : playerTwoGameWin();  // Game Win
             } else  if ( currentPlayer->getPoints() == 4 ) {
-                // _logger->logUpdate( "player " + std::to_string( currentPlayer->number() ) + " has 4 points." );
                 _gameState->setPointFlash( 1 );       // "Ad" mode
                 _gameState->setPreviousTime( GameTimer::gameMillis());
                 _gameState->setToggle( 0 );
@@ -87,7 +81,6 @@ void Mode1Score::playerTwoScore() { updateScore( _player2 ); }
 //////////////////////////// GAME WIN SCENARIOS ///////////////////////////////
 void Mode1Score::playerGameWin( Player* player ) {
     Player* opponent = player->getOpponent();
-    // std::cout << "player " << std::to_string( player->number() ) << " games: " << player->getGames() << std::endl;
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
     if ( player->getGames() >= GAMES_TO_WIN_SET ) { // if so, see of they are equal...
         if ( player->getGames() == GAMES_TO_WIN_SET && opponent->getGames() == GAMES_TO_WIN_SET ) {
@@ -104,15 +97,6 @@ void Mode1Score::playerGameWin( Player* player ) {
                     _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
                     _tieBreaker.setTieBreakEnable();
                 } else if ( player->getSets() == SETS_TO_WIN_MATCH ) {  // match win, done playing
-                    // _history->pop();  // otherwise Huston, there will be a problem
-                    // decrement 
-                    for( int flash_count = 0; flash_count < ALL_SETS_FLASH_COUNT; flash_count++ ) {
-                    GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
-                    _gameState->setCurrentAction( DRAW_BLANK_SETS ); // set flag before update
-                    _gameLeds.getScoreBoard()->update();
-                    GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
-                    _gameState->setCurrentAction( NORMAL_GAME_STATE );
-                    _gameLeds.getScoreBoard()->update(); }
                     MatchWinSequence mws;
                     mws.run( player, _gameState, &_gameLeds, &_setLeds );
                     _gameState->setCurrentAction( SLEEP_MODE );
@@ -276,8 +260,6 @@ void Mode1Score::mode1SetTBP2Games() {
         _tieBreaker.tieLEDsOff();
         _mode1WinSequences.playerTwoMatchWin();
         _gameState->setCurrentAction( "after player two match win" );
-        // _gameState->stopGameRunning();
     }
-    // std::cout << "setting serve switch to: " << _gameState->getServeSwitch() + 1 << std::endl;
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
 }

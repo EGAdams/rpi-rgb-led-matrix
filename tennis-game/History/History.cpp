@@ -3,11 +3,7 @@
 History::History() { _logger = new Logger( "History" ); }
 History::~History() { delete _logger; }
 
-void History::push( GameState state ) {
-    std::cout << "pushing state... " << std::endl;
-    _history.push( state );
-    std::cout <<   "done pushing state." << std::endl;
-}
+void History::push( GameState state ) { _history.push( state );}
 
 int History::size() { return _history.size(); }
 
@@ -34,9 +30,6 @@ void History::decrementWinningPlayerScore( Player* player ) {
 void History::saveGameStateToFile(const GameState& gameState, const std::string& filename) {
     std::ofstream outFile(filename, std::ios::binary);
     if (outFile.is_open()) {
-        // Serialize gameState object to file
-        // You need to implement the serialization logic based on how GameState is structured
-        // This is a placeholder for the serialization logic
         outFile.write(reinterpret_cast<const char*>(&gameState), sizeof(GameState));
         outFile.close();
     } else {
@@ -49,9 +42,6 @@ GameState History::loadGameStateFromFile(const std::string& filename) {
     std::ifstream inFile(filename, std::ios::binary);
     GameState gameState;
     if (inFile.is_open()) {
-        // Deserialize gameState object from file
-        // You need to implement the deserialization logic based on how GameState is structured
-        // This is a placeholder for the deserialization logic
         inFile.read(reinterpret_cast<char*>(&gameState), sizeof(GameState));
         inFile.close();
     } else {
@@ -79,6 +69,5 @@ std::vector<std::string> History::getSavedGameStatesList() {
     } else {
         // Handle error in opening directory
     }
-
     return fileList;
 }
