@@ -125,10 +125,10 @@ void TieBreaker::run( Player* currentPlayer ) {
 void TieBreaker::_tieBreakWin( Player* currentPlayer ) {
     _undo.snapshot( _history ); // maybe this is why we need the decrement?
     if ( _gameState->getMatchTieBreak() == true ) { // match win
-        // endTieBreak();
         _history->decrementWinningPlayerScore( currentPlayer );
         MatchWinSequence  mws;
         mws.run( currentPlayer, _gameState, &_gameLeds, &_setLeds );
+        endTieBreak();
         _gameState->setCurrentAction( SLEEP_MODE );
     }
     else { // regular tie break win.
