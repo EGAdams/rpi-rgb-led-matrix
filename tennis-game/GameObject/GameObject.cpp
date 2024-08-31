@@ -92,6 +92,30 @@ void GameObject::playerScore( int playerNumber ) {  // sets the gamestate player
     _gameState->setCurrentAction( "after player score in GameObject" );
 }
 
+void GameObject::resetMatch() {
+    GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
+    _player1->clearSetHistory();  // Clear Player's Set history
+    _player2->clearSetHistory();
+    _player1->clearGameHistory(); // Clear Player's Game history
+    _player2->clearGameHistory();
+    _gameState->setPlayer1SetHistory( _player1->getSetHistory() ); // now gamestate sets
+    _gameState->setPlayer2SetHistory( _player2->getSetHistory() );
+    _gameState->setGameHistory( _player1->getGameHistory() );      // now gamestate games
+    _gameState->setGameHistory( _player2->getGameHistory() );
+    _gameState->setCurrentSet( 1 );                               // set back to beginning
+    _gameState->setServeSwitch( 1 );
+    _player1->setPoints( 0 );           // Reset Player's points
+    _player2->setPoints( 0 );
+    _gameState->setPlayer1Points( 0 );  // now gamestate points
+    _gameState->setPlayer2Points( 0 );
+    _gameState->setTieBreak( 0 );       // turn tie break flags off
+    _gameState->setMatchTieBreak( 0 );
+    _gameState->setServe( 0 );          // reset serve
+    // _pointLeds.updatePoints(); may need this for the digi
+    _scoreBoard->clearScreen();
+    _scoreBoard->update();
+}
+
 PinInterface* GameObject::getPinInterface() { return _pinInterface; }
 
 ScoreBoard* GameObject::getScoreBoard() { return _scoreBoard; }

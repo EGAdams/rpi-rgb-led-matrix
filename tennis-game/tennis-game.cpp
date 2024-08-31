@@ -19,6 +19,7 @@
 #include "GameObject/GameObject.h"
 #include "LoggerFactory/LoggerFactory.h"
 #include "InputWithTimer/InputWithTimer.h"
+#include "TennisConstants/TennisConstants.h"
 
 using namespace rgb_matrix;
 #define SCORE_DELAY    0
@@ -403,9 +404,20 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             InputWithTimer inputWithTimer( &blinker );
             menu_selection = inputWithTimer.getInput();
             gameState->setCurrentAction( NORMAL_GAME_STATE ); // stop sleep mode
+            std::cout << "time slept: " << inputWithTimer.getTimeSlept() << std::endl;
+            // if ( inputWithTimer.getTimeSlept() > MAX_SLEEP ) { //180000 ) {
+            //     gameObject->resetMatch();
+            //     continue;
+            // }
+            if ( menu_selection == 1 || 
+                 menu_selection == 2 || 
+                 ( inputWithTimer.getTimeSlept() > MAX_SLEEP)) {
+                gameObject->resetMatch();
+                continue;
+            }
             gameObject->getScoreBoard()->clearScreen();
             gameObject->getScoreBoard()->update();
-            continue;
+            // continue;
         }
         else {
             std::cin >> menu_selection;

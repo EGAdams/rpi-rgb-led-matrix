@@ -3,7 +3,10 @@
 History::History() { _logger = new Logger( "History" ); }
 History::~History() { delete _logger; }
 
-void History::push( GameState state ) { _history.push( state );}
+void History::push( GameState state ) {
+    std::cout << " pushing game state..." << std::endl;
+    _history.push( state );
+}
 
 int History::size() { return _history.size(); }
 
@@ -23,7 +26,7 @@ void History::decrementWinningPlayerScore( Player* player ) {
         gamestate.setPlayer2Points( gamestate.getPlayer2Points() - 1 );
         gamestate.setP2PointsMem( gamestate.getP2PointsMem() - 1 );
     }
-    _history.pop(); // one more for some reason...
+    // _history.pop(); // one more for some reason...
     _history.push( gamestate );
 }
 

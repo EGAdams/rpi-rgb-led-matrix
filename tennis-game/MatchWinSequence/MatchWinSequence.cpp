@@ -18,16 +18,10 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
     GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
     if ( gameLeds->getScoreBoard()->hasCanvas()) {
         gameLeds->getScoreBoard()->clearScreen();
-        if ( player->number() == 0 )                {
-            gameLeds->getScoreBoard()->drawText( "Match",  YELLOW, 10, 60  );
-            gameLeds->getScoreBoard()->drawText( "Win",    YELLOW, 18, 80  );
-        } else {
-            gameLeds->getScoreBoard()->drawText( "Match",  YELLOW, 10, 60  );
-            gameLeds->getScoreBoard()->drawText( "Win",    YELLOW, 18, 80  );
-        }
+        gameLeds->getScoreBoard()->drawText( "Match",  YELLOW, 10, 60  );
+        gameLeds->getScoreBoard()->drawText( "Win",    YELLOW, 18, 80  );
         gameLeds->getScoreBoard()->drawSets();
         GameTimer::gameDelay( SHOW_MATCH_WIN_TEXT_DELAY );
-        std::cout << "game delay done." << std::endl;
     } else {
         ScoreBoard* scoreBoard = gameLeds->getScoreBoard();
         for ( int blink_count = 0; blink_count < MATCH_WIN_BLINK_COUNT; blink_count++ ) {
@@ -41,20 +35,5 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
     }
     std::cout << "setting current action back to normal game state..." << std::endl;
     gameState->setCurrentAction( NORMAL_GAME_STATE );
-    player->clearSetHistory();
-    player->getOpponent()->clearSetHistory();
-    player->clearGameHistory();
-    player->getOpponent()-> clearGameHistory();
-    gameState->setPlayer1SetHistory( player->getSetHistory()); // both zero
-    gameState->setPlayer2SetHistory( player->getOpponent()->getSetHistory());
-    gameState->setGameHistory( player->getGameHistory() );
-    gameState->setGameHistory( player->getOpponent()->getGameHistory() );
-    gameState->setCurrentSet( 1 );
-    player->setPoints( 0 );
-    player->getOpponent()->setPoints( 0 );
-    gameState->setPlayer1Points( 0 );
-    gameState->setPlayer2Points( 0 );
-    gameLeds->getScoreBoard()->clearScreen();
-    gameLeds->getScoreBoard()->update();
     std::cout << "match win sequence is done." << std::endl;
 }

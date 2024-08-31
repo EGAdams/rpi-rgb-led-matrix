@@ -31,6 +31,7 @@
 #define LOOP_MATCH_LAMP_WIN         2
 #define MATCH_WIN_BLINK_COUNT       5 // added on clermont hill
 #define SHOW_MATCH_WIN_TEXT_DELAY   3000 // 45000 // added anna marie island monday
+#define MAX_SLEEP                   10000 // last day of august tarpon
 #define NUMBER_OF_GAME_LAMPS        7
 #define LOOP_GAME_LAMP_WIN          5
 #define TIE_PULSE_COUNT             5

@@ -34,6 +34,7 @@ class GameObject {
 
   GameObject( GameState* gameState );
   ~GameObject();
+  void resetMatch();
   void start();
   PinInterface* getPinInterface();
   void loopGame();
