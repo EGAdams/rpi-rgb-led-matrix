@@ -105,7 +105,6 @@ void Mode1Score::playerGameWin( Player* player ) {
                     MatchWinSequence mws;
                     mws.run( player, _gameState, &_gameLeds, &_setLeds );
                     _gameState->setCurrentAction( SLEEP_MODE );
-                    std::cout << "done setting "
                 }
                 else {                                              // regular set win, then reset
                     _gameState->setPlayer1SetHistory( player->getSetHistory() );
