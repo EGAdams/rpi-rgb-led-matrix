@@ -82,8 +82,8 @@ GameState* GameObject::getGameState() { return _gameState; }
 
 void GameObject::playerScore( int playerNumber ) {  // sets the gamestate player button
     if ( _gameState->getCurrentAction() == SLEEP_MODE ) {
-        std::cout << "*** No player score during sleep mode. ***" << std::endl;
-        return;
+        std::cout << "*** WARNING: player score during sleep mode. ***" << std::endl;
+        // return;
     }
     _gameState->setCurrentAction( "Updating state after player " + std::to_string( playerNumber ) + " scored." );
     // // std::cout << "GameObject::playerScore( " << playerNumber << " )" << std::endl;
