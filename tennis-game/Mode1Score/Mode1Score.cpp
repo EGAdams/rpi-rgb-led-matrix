@@ -74,7 +74,7 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
                 _gameState->setToggle( 0 );
             }
         }
-        // _pointLeds.updatePoints();  took out 090624 showing score before sleeping.
+        _pointLeds.updatePoints();  // took out 090624 showing score before sleeping.
     }
 }
 
