@@ -411,7 +411,8 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             // }
             if ( menu_selection == 1 || 
                  menu_selection == 2 || 
-                 ( inputWithTimer.getTimeSlept() > MAX_SLEEP)) {
+                 ( inputWithTimer.getTimeSlept() > MAX_SLEEP &&
+                   inputWithTimer.getTimeSlept() < MIN_SLEEP )) {
                 gameObject->resetMatch();
                 continue;
             }
