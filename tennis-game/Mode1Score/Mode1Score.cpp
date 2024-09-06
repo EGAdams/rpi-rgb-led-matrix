@@ -74,7 +74,7 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
                 _gameState->setToggle( 0 );
             }
         }
-        _pointLeds.updatePoints();  // took out 090624 showing score before sleeping.
+        _pointLeds.updatePoints();
     }
 }
 
@@ -105,7 +105,7 @@ void Mode1Score::playerGameWin( Player* player ) {
                     MatchWinSequence mws;
                     mws.run( player, _gameState, &_gameLeds, &_setLeds );
                     _gameState->setCurrentAction( SLEEP_MODE );
-                    std::cout << "done setting current action to sleep mode. 090624" << std::endl;
+                    std::cout << "done setting "
                 }
                 else {                                              // regular set win, then reset
                     _gameState->setPlayer1SetHistory( player->getSetHistory() );
@@ -118,7 +118,8 @@ void Mode1Score::playerGameWin( Player* player ) {
                     player->setGames( 0 );   // not sure about this but move on...
                     opponent->setGames( 0 ); // These are match win bugs!!
                 }
-            } else {     // player is ahead by 1 game, but not enough to win the set.
+            }
+            else {     // player is ahead by 1 game, but not enough to win the set.
                 player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1GameWinSequence() : _mode1WinSequences.p2GameWinSequence();
                 _gameLeds.updateGames();
                 if ( player->number() == PLAYER_1_INITIALIZED ) {
@@ -132,7 +133,8 @@ void Mode1Score::playerGameWin( Player* player ) {
                 _resetGame();
             }
         }
-    } else { // this is a regualar game win...
+    }
+    else { // this is a regualar game win...
         if ( player->number() == PLAYER_1_INITIALIZED ) {
             _mode1WinSequences.p1GameWinSequence();
             _gameState->setPlayer1SetHistory( player->getSetHistory() );
@@ -146,7 +148,6 @@ void Mode1Score::playerGameWin( Player* player ) {
         _gameLeds.updateGames();
         _resetGame();
     }
-    std::cout << "finished player game win. 090624" << std::endl;
 }
 void Mode1Score::playerOneGameWin() { playerGameWin( _player1 ); }
 void Mode1Score::playerTwoGameWin() { playerGameWin( _player2 ); }
