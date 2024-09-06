@@ -23,6 +23,10 @@ void Mode1Functions::setScoreBoard( ScoreBoard* scoreBoard ) {
     _mode1Score.setScoreBoard( scoreBoard ); }
 
 void Mode1Functions::mode1ButtonFunction() {
+    if ( _gameState->getCurrentAction() ==  RUNNING_MATCH_WIN_SEQUENCE ) {
+        std::cout << "*** NO buttons during Match Win Sequence! ***" << std::endl;
+        return;
+    }
     switch ( _gameState->getPlayerButton()) {
     case 0:
         break;
