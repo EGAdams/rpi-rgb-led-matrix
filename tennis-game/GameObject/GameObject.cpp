@@ -76,7 +76,14 @@ GameState* GameObject::getGameState() { return _gameState; }
 
 void GameObject::playerScore( int playerNumber ) {  // sets the gamestate player button
     if ( _gameState->getCurrentAction() == SLEEP_MODE ) {
-        std::cout << "*** WARNING: player score during sleep mode, retruning... ***" << std::endl;
+        std::cout << "*** WARNING: player score during sleep mode, delaying for 3 seconds... ***" << std::endl;
+
+        // Start a separate thread to handle the delayed scoring
+        std::thread([this, playerNumber]() {
+            std::this_thread::sleep_for(std::chrono::seconds( 3 ));  // Delay for 3 seconds
+            // this->handleSleepMode( playerNumber );  // Call the method to score after delay
+        }).detach();  // Detach the thread so it can run independently
+
         return;
     }
     _gameState->setCurrentAction( "Updating state after player " + std::to_string( playerNumber ) + " scored." );
