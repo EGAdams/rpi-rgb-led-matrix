@@ -74,28 +74,10 @@ void GameObject::loopGame() {
 
 GameState* GameObject::getGameState() { return _gameState; }
 
-void GameObject::sleepModeDelay() {
-    // Block this thread for 3 seconds
-    std::this_thread::sleep_for(std::chrono::seconds( 3 ));
-
-    // After 3 seconds, allow scoring again
-    _allowScore.store( true );
-}
-
 void GameObject::playerScore( int playerNumber ) {  // sets the gamestate player button
-    if ( _gameState->getCurrentAction() == SLEEP_MODE ) {  // #define AFTER_MATCH_WIN for this?
+    if ( _gameState->getCurrentAction() == SLEEP_MODE ) {
         std::cout << "*** WARNING: player score during sleep mode, returning... ***" << std::endl;
-
-        // Check if the timer is already running
-        if ( !_allowScore.load()) {
-            // The timer is still running, ignore the score
-            return;
-        }
-
-        // Disable scoring and start the timer to allow scoring again after 3 seconds
-        _allowScore.store( false );
-        std::thread( &GameObject::sleepModeDelay, this ).detach();
-        return;  // Ignore this score attempt
+        return;
     }
     _gameState->setCurrentAction( "Updating state after player " + std::to_string( playerNumber ) + " scored." );
     _gameState->setPlayerButton( playerNumber );
