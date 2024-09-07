@@ -14,11 +14,16 @@
 #define PLAYER_TWO_BUTTON           2
 #define PLAYER_ONE_SERVE            0
 #define PLAYER_TWO_SERVE            1
+
+///////////////////// GAME STATES /////////////////////////////////////////////
 #define ACTIVE_BLINK                "blink"
 #define NORMAL_GAME_STATE           "normal game state"
 #define RUNNING_MATCH_WIN_SEQUENCE  "running match win sequence"
 #define DRAW_BLANK_SETS             "draw blank sets"
 #define SLEEP_MODE                  "sleep mode for power saving"
+#define AFTER_UPDATE_GO_SCORE       "after update player score in GameObject"
+///////////////////////////////////////////////////////////////////////////////
+
 #define TESTING                     1
 #define GAME_FLASH_DELAY            50 // 200
 #define SET_WIN_FLASH_DELAY         5 // 200
