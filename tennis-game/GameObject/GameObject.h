@@ -51,18 +51,21 @@ class GameObject {
   void undo();
 
  private:
-  Player*           _player1;
-  Player*           _player2;
-  PinState*         _pinState;
-  PinInterface*     _pinInterface;
-  GameState*        _gameState;
-  GameTimer*        _gameTimer;
-  Inputs*           _gameInputs;
-  GameModes*        _gameModes;
-  ScoreBoard*       _scoreBoard;
-  WebLiquidCrystal* _webLiquidCrystal;
-  SubjectManager*   _subjectManager;
-  Logger*           _logger;
-  History*          _history;
+  void sleepModeDelay();
+
+  Player*             _player1;
+  Player*             _player2;
+  PinState*           _pinState;
+  PinInterface*       _pinInterface;
+  GameState*          _gameState;
+  GameTimer*          _gameTimer;
+  Inputs*             _gameInputs;
+  GameModes*          _gameModes;
+  ScoreBoard*         _scoreBoard;
+  WebLiquidCrystal*   _webLiquidCrystal;
+  SubjectManager*     _subjectManager;
+  Logger*             _logger;
+  History*            _history;
+  std::atomic< bool > _allowScore{ true };  // Used to control when scoring is allowed
   std::map<std::string, int> _pin_map; };
 #endif
