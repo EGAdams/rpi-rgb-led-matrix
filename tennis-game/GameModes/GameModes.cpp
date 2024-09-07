@@ -1,6 +1,9 @@
 #include "GameModes.h"
 
-GameModes::~GameModes() { delete _logger; }
+GameModes::~GameModes() {
+    // std::cout << "*** GameModes destructor called. ***" << std::endl;
+    delete _logger; }
+
 GameModes::GameModes(
     Player*       player1,
     Player*       player2,
@@ -60,17 +63,40 @@ void GameModes::gameStart() {
     }}
 
 void GameModes::mode1() {
+    // std::cout << "inside game mode 1." << std::endl;
     _gameState->setNow( GameTimer::gameMillis());
     _inputs.readUndoButton();
     if ( _gameState->getUndo() == 1 ) {  // undo button pressed
+        // std::cout << "undo button pressed!" << std::endl;
         _gameState->setUndo( 0 );
-        _undo.mode1Undo( _history );
-    }
+        // std::cout << "calling mode1Undo( _history )... " << std::endl;
+        // std::cout << "calling mode1Undo.setScoreboard... " << std::endl;
+        // _undo_.setScoreBoard( _history->getScoreBoard());
+        _undo.mode1Undo( _history ); }
+    // std::cout << "reading player buttons... " << std::endl;
     _inputs.readPlayerButtons();  // digital read on player buttons.  sets playerButton if tripped.
     _serveLeds.serveSwitch(); // if serveSwitch >= 2, serveSwitch = 0; and toggle serve variable
-    _logger->setName( "mode1" );
-    _mode1Functions.mode1ButtonFunction(); // <--------- ENTRY POINT --------------<<
-    _mode1Functions.pointFlash();
+    // std::cout << "checking for tie breaker... " << std::endl;
+    // TODO: took out on july 8
+    // if ( _gameState->getSetMatchBreak() == 1 ) { //TODO: took out on july 8
+    //     _logger->logUpdate( "running tie breaker..." );
+    //     // _tieBreaker.setTieBreaker();
+    //     // if the _playerButton member fo _gameState is 1, use player 1 in the _tieBreker.run( _player1 ) method
+    //     // if it is 2, use player 2
+    //     if ( _gameState->getPlayerButton() == 1 ) {
+    //         _logger->logUpdate( "calling tieBreaker.run( _player1 )" );
+    //         _tieBreaker.run( _player1 );
+    //     } else if ( _gameState->getPlayerButton() == 2 ) {
+    //         _logger->logUpdate( "calling tieBreaker.run( _player2 )" );
+    //         _tieBreaker.run( _player2 );
+    //     }
+        // _tieBreaker.run();  // we need a player here.  there must be some place else...
+        // got player above
+    // } else {
+        _logger->setName( "mode1" );
+        _mode1Functions.mode1ButtonFunction(); // <--------- ENTRY POINT --------------<<
+        _mode1Functions.pointFlash();
+    //}
 }
 
 void GameModes::mode2() {

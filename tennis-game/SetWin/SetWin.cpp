@@ -5,9 +5,6 @@ SetWin::SetWin( Undo* undo, GameState* gameState, SetLeds* setLeds ):
 SetWin::~SetWin() {}
 
 void SetWin::execute( Player* player, ScoreBoard* scoreBoard ) {
-    if ( _gameState->getCurrentAction() == SLEEP_MODE ) {
-        std::cout << "*** No SetWin execute while in sleep mode! ***" << std::endl;
-    }
     std::cout << "//////////////////////// SetWin::execute() ////////////////////////" << std::endl;
      for ( int blink_sequence_count = 0; blink_sequence_count < LOOP_GAME_LAMP_WIN; blink_sequence_count++ ) {
             std::cout << "cloaking ... " << std::endl;
