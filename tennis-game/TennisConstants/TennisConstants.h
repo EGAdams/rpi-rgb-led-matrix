@@ -22,6 +22,7 @@
 #define DRAW_BLANK_SETS             "draw blank sets"
 #define SLEEP_MODE                  "sleep mode for power saving"
 #define AFTER_UPDATE_GO_SCORE       "after update player score in GameObject"
+#define IGNORE_EXTRA_SCORES         "ignoring scores after match win"
 ///////////////////////////////////////////////////////////////////////////////
 
 #define TESTING                     1
@@ -37,6 +38,7 @@
 #define MATCH_WIN_BLINK_COUNT       5 // added on clermont hill
 #define SHOW_MATCH_WIN_TEXT_DELAY   3000 // 45000 // added anna marie island monday
 #define MAX_SLEEP                   10000 // last day of august tarpon
+#define MIN_SLEEP                   3000 // sleep for a few seconds in case of buttons pressed.
 #define NUMBER_OF_GAME_LAMPS        7
 #define LOOP_GAME_LAMP_WIN          5
 #define TIE_PULSE_COUNT             5

@@ -100,6 +100,10 @@ public:
     std::map<int, int> getPlayer1SetHistory() ;
     void setPlayer2SetHistory(std::map<int, int> player2_set_history) ;
     std::map<int, int> getPlayer2SetHistory() ;
+    void startIgnoreScoreTimer( unsigned long start_time ) {
+        _ignore_extra_score_timer = start_time;
+    }
+    unsigned long getIgnoreScoreTimer()  { return _ignore_extra_score_timer; }
 
 private:
     int _match_blink_on;
@@ -126,6 +130,7 @@ private:
     int _rotaryChange;
     unsigned long _now;
     unsigned long _previousTime;
+    unsigned long _ignore_extra_score_timer;
     int _freezePlayerButton;
     int _p1PointsMem;
     int _p2PointsMem;
