@@ -23,6 +23,7 @@ void Mode1Functions::setScoreBoard( ScoreBoard* scoreBoard ) {
     _mode1Score.setScoreBoard( scoreBoard ); }
 
 void Mode1Functions::mode1ButtonFunction() {
+    
     switch ( _gameState->getPlayerButton()) {
     case 0:
         break;

@@ -12,8 +12,7 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
         gameLeds->getScoreBoard()->update();
         GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
         gameState->setCurrentAction( NORMAL_GAME_STATE );
-        gameLeds->getScoreBoard()->update();
-    }
+        gameLeds->getScoreBoard()->update(); }
     gameState->setCurrentAction( RUNNING_MATCH_WIN_SEQUENCE ); // so scoreboard knows...
     GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
     if ( gameLeds->getScoreBoard()->hasCanvas()) {
@@ -31,9 +30,6 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
             gameState->setMatchBlinkOff(); 
             scoreBoard->update();
             GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
-        }
-    }
-    std::cout << "setting current action back to normal game state..." << std::endl;
-    gameState->setCurrentAction( NORMAL_GAME_STATE );
+        }}
     std::cout << "match win sequence is done." << std::endl;
 }
