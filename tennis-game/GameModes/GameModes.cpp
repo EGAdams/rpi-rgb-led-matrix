@@ -71,7 +71,11 @@ void GameModes::mode1() {
     _serveLeds.serveSwitch(); // if serveSwitch >= 2, serveSwitch = 0; and toggle serve variable
     _logger->setName( "mode1" );
     _mode1Functions.mode1ButtonFunction(); // <--------- ENTRY POINT --------------<<
-    _mode1Functions.pointFlash();
+    if ( _gameState->getCurrentAction() == SLEEP_MODE ) {
+        print( "not running point flash because sleep mode has been detected..." );
+    } else {
+        _mode1Functions.pointFlash();
+    }
 }
 
 void GameModes::mode2() {
