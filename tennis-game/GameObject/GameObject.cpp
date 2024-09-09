@@ -63,18 +63,7 @@ void GameObject::undo() {
 }
 
 void GameObject::loopGame() {
-    _logger->setName( "loopGame" );
-    print( "checking _gameState before processing button..." );
-    // if ( _gameState->getCurrentAction() doesn't contain the string "update" ) {...
-    if ( _gameState->getCurrentAction() != "after update player score in GameObject" ) {
-        print( "_gameState->getCurrentAction() = " << _gameState->getCurrentAction());   
-        GameTimer::gameDelay( 2000 );
-    } else if ( _gameState->getCurrentAction() == SLEEP_MODE ) {
-        print( "_gameState->getCurrentAction() = " << _gameState->getCurrentAction());   
-        GameTimer::gameDelay( 2000 );
-    } else {
-        print( "_gameState->getCurrentAction() = " << _gameState->getCurrentAction());
-    }                     
+    _logger->setName( "loopGame" );                   
     // _gameInputs->readReset();
     int rotaryValue = 1; // int rotaryValue = _gameInputs->readRotary(); TODO: actually read rotary
     /* ENTRY POINT! don't step over, step into !! */
