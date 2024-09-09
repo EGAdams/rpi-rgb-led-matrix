@@ -74,7 +74,9 @@ void Mode1Score::updateScore( Player* currentPlayer ) {
                 _gameState->setToggle( 0 );
             }
         }
-        _pointLeds.updatePoints();
+        if ( _gameState->getCurrentAction() != SLEEP_MODE ) {
+            _pointLeds.updatePoints();
+        }
     }
 }
 
