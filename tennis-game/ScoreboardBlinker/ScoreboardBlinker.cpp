@@ -14,9 +14,15 @@ void ScoreboardBlinker::blinkLoop() {
         blinkTennisBall( true );
         std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
         print( "slept for " << _time_slept++ << " seconds.  The maximum sleep time is " << MAX_SLEEP/1000 << " seconds" );
+        if ( _time_slept <  MAX_SLEEP ) {
+            print( "UNDO: Enter last match  Player1 Score: Reset Game  Player2 Score: Reset Game" );    
+        }
         blinkTennisBall( false );
         std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
         print( "slept for " << _time_slept++ << " seconds.  The maximum sleep time is " << MAX_SLEEP/1000 << " seconds" );
+        if ( _time_slept >  MAX_SLEEP ) {
+            print( "UNDO: Reset Game        Player1 Score: Reset Game  Player2 Score: Reset Game" );    
+        }
     }
 }
 
