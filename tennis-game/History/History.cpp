@@ -4,7 +4,6 @@ History::History() { _logger = new Logger( "History" ); }
 History::~History() { delete _logger; }
 
 void History::push( GameState state ) {
-    std::cout << " pushing game state..." << std::endl;
     _history.push( state );
 }
 
