@@ -3,19 +3,20 @@
 #include <thread>
 
 ScoreboardBlinker::ScoreboardBlinker( ScoreBoard* scoreBoard ) :
-    _scoreboard( scoreBoard ) {}
+    _scoreboard( scoreBoard ) {
+        _time_slept = 0;
+    }
 
 ScoreboardBlinker::~ScoreboardBlinker() { stop(); }
 
 void ScoreboardBlinker::blinkLoop() {
     while ( !should_stop ) {
-        int sleep_time = 0;
         blinkTennisBall( true );
         std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
-        print( "slept for " << sleep_time++ << " seconds.  The maximum sleep time is " << MAX_SLEEP << " seconds" );
+        print( "slept for " << _time_slept++ << " seconds.  The maximum sleep time is " << MAX_SLEEP/1000 << " seconds" );
         blinkTennisBall( false );
         std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
-        print( "slept for " << sleep_time++ << " seconds.  The maximum sleep time is " << MAX_SLEEP << " seconds" );
+        print( "slept for " << _time_slept++ << " seconds.  The maximum sleep time is " << MAX_SLEEP/1000 << " seconds" );
     }
 }
 
