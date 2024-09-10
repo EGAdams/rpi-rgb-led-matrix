@@ -7,12 +7,8 @@ SetWin::~SetWin() {}
 void SetWin::execute( Player* player, ScoreBoard* scoreBoard ) {
     std::cout << "//////////////////////// SetWin::execute() ////////////////////////" << std::endl;
      for ( int blink_sequence_count = 0; blink_sequence_count < LOOP_GAME_LAMP_WIN; blink_sequence_count++ ) {
-            std::cout << "cloaking ... " << std::endl;
-            std::cout << "setting blink for player number: " << player->number() << std::endl;
             _gameState->setCurrentAction( BOTH_PLAYER_BLINK );
-            std::cout << "gamestate current action: " << _gameState->getCurrentAction() << std::endl;
             scoreBoard->update();
-            // std::cout << "uncloaking ... " << std::endl;
             GameTimer::gameDelay( SET_WIN_FLASH_DELAY );  /*** wait ***/
             _gameState->setCurrentAction( "normal operation" );
             scoreBoard->update(); 

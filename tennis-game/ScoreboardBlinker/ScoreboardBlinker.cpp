@@ -14,7 +14,7 @@ void ScoreboardBlinker::blinkLoop() {
         blinkTennisBall( true );
         std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
         if ( _time_slept >  MAX_SLEEP ) {
-            print( "UNDO (9): Reset Game        Player1 Score (1): Reset Game  Player2 Score (2): Reset Game slept " << _time_slept++ << " seconds." );    
+            print( "UNDO (9): Reset Game        Player1 Score (1): Reset Game  Player2 Score (2): Reset Game   slept " << _time_slept++ << " seconds." );    
         }
         blinkTennisBall( false );
         std::this_thread::sleep_for( std::chrono::seconds( 1 ) );

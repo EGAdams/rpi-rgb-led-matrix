@@ -398,7 +398,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             std::cout << "time slept: " << inputWithTimer.getTimeSlept() << std::endl;
             if ( menu_selection == 1 || 
                  menu_selection == 2 || 
-                 ( inputWithTimer.getTimeSlept() > MAX_SLEEP)) {
+                 ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 )) {
                 gameObject->resetMatch();
                 continue;
             }
