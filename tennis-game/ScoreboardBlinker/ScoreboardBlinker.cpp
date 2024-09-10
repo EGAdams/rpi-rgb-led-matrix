@@ -9,10 +9,13 @@ ScoreboardBlinker::~ScoreboardBlinker() { stop(); }
 
 void ScoreboardBlinker::blinkLoop() {
     while ( !should_stop ) {
+        int sleep_time = 0;
         blinkTennisBall( true );
         std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
+        print( "slept for " << sleep_time++ << " seconds.  The maximum sleep time is " << MAX_SLEEP << " seconds" );
         blinkTennisBall( false );
         std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
+        print( "slept for " << sleep_time++ << " seconds.  The maximum sleep time is " << MAX_SLEEP << " seconds" );
     }
 }
 
@@ -20,7 +23,7 @@ void ScoreboardBlinker::blinkTennisBall( bool show ) {
     // Implement the logic to show/hide the tennis ball on the scoreboard
     // This will depend on your existing scoreboard implementation
     if ( show ) {
-        std::cout << "drawing yellow period... " << std::endl;
+        // std::cout << "drawing yellow period... " << std::endl;
         _scoreboard->drawYellowPeriod();
     }
     else {
