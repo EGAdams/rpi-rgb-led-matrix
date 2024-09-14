@@ -18,12 +18,14 @@ void ScoreboardBlinker::blinkLoop() {
         std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
         if ( _time_slept >  MAX_SLEEP ) {
             time_now = GameTimer::gameMillis();
-            time_elapsed = ( time_now - sleep_start ) / 1000;
+            time_elapsed = ( sleep_start - time_now ) / 1000;
             print( "UNDO (9): Reset Game        Player1 Score (1): Reset Game  Player2 Score (2): Reset Game   slept " << time_elapsed << " seconds." );    
         }
         blinkTennisBall( false );
         std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
         if (_time_slept <= MAX_SLEEP ) {
+            time_now = GameTimer::gameMillis();
+            time_elapsed = ( sleep_start - time_now ) / 1000;
             print( "UNDO (9): Enter last match  Player1 Score (1): Reset Game  Player2 Score (2): Reset Game   slept " << time_elapsed << " seconds.");    
         }
     }
