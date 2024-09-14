@@ -168,7 +168,9 @@ void ScoreBoard::update() {
     clearScreen();
     drawPlayerScore( _player1 );
     drawPlayerScore( _player2 );
-    // std::cout << "==========================" << std::endl;
+    if ( hasCanvas() == false ) {
+        std::cout << "==========================" << std::endl;
+    }
     // _setDrawer->drawSets();
 
     bool blink = _gameState->getCurrentAction().find( "blink" ) != std::string::npos;
