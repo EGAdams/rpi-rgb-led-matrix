@@ -114,9 +114,7 @@ void GameModes::runGameMode( int rotaryPosition ) {
         break;
 
     case 1:
-        // std::cout << "calling gameStart()... " << std::endl;
         gameStart();  // sets gameStart to true. resets player and score board.
-        // std::cout << "calling mode1()... " << std::endl;
         mode1();
         break;
 

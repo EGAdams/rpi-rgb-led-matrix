@@ -156,7 +156,10 @@ void ScoreBoard::drawGames() { /* std::cout << "inside ScoreBoard::drawGames()" 
 
 RGBMatrix* ScoreBoard::getCanvas() { return _canvas.get(); }
 
-void ScoreBoard::drawSets() { _setDrawer->drawSets(); }
+void ScoreBoard::drawSets() { 
+    _setDrawer->drawSets();
+}
+
 void ScoreBoard::drawBlinkSets( int player_number ) { _setDrawer->drawBlinkSets( player_number ); }
 
 bool ScoreBoard::hasCanvas() {
