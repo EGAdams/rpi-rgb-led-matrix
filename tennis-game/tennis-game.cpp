@@ -402,6 +402,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
                 gameObject->resetMatch();
                 continue;
             }
+            print( "*** Going into last Match! ***" )
             gameObject->getScoreBoard()->clearScreen();
             gameObject->getScoreBoard()->update();
         } else {
