@@ -10,16 +10,21 @@ ScoreboardBlinker::ScoreboardBlinker( ScoreBoard* scoreBoard ) :
 ScoreboardBlinker::~ScoreboardBlinker() { stop(); }
 
 void ScoreboardBlinker::blinkLoop() {
+    unsigned long sleep_start = GameTimer::gameMillis();
+    unsigned long time_now    = GameTimer::gameMillis();
+    unsigned long time_elapsed = time_now - sleep_start;
     while ( !should_stop ) {
         blinkTennisBall( true );
         std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
         if ( _time_slept >  MAX_SLEEP ) {
-            print( "UNDO (9): Reset Game        Player1 Score (1): Reset Game  Player2 Score (2): Reset Game   slept " << _time_slept++ << " seconds." );    
+            time_now = GameTimer::gameMillis();
+            time_elapsed = ( time_now - sleep_start ) / 1000;
+            print( "UNDO (9): Reset Game        Player1 Score (1): Reset Game  Player2 Score (2): Reset Game   slept " << time_elapsed << " seconds." );    
         }
         blinkTennisBall( false );
         std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
         if (_time_slept <= MAX_SLEEP ) {
-            print( "UNDO (9): Enter last match  Player1 Score (1): Reset Game  Player2 Score (2): Reset Game   slept " << _time_slept++ << " seconds.");    
+            print( "UNDO (9): Enter last match  Player1 Score (1): Reset Game  Player2 Score (2): Reset Game   slept " << time_elapsed << " seconds.");    
         }
     }
 }
