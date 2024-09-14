@@ -10,7 +10,7 @@ private:
     std::atomic<bool> should_stop{false};
     std::thread blink_thread;
     ScoreBoard* _scoreboard;
-    int         _time_slept;
+    unsigned long _sleep_start;
 
     void blinkLoop();
     void blinkTennisBall(bool show);
