@@ -38,8 +38,6 @@ int  GameState::getMatchBlink() {    return _match_blink_on; }
 int GameState::getCurrentSet() const { return _current_set; }
 void GameState::setCurrentAction( std::string currentAction ) { _current_action = currentAction; }
 std::string GameState::getCurrentAction() const { return _current_action; }
-void GameState::setCurrentState( std::string current_state_arg ) { _current_state = current_state_arg; }
-std::string GameState::getCurrentState() const { return _current_state; }
 void GameState::setGameWinPulseCount( int gameWinPulseCount ) { _gameWinPulseCount = gameWinPulseCount; }
 int GameState::getGameWinPulseCount() { return _gameWinPulseCount; }
 void GameState::setButtonDelay( int buttonDelay ) { _buttonDelay = buttonDelay; }
