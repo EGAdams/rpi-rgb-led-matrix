@@ -73,7 +73,7 @@ void GameObject::playerScore( int playerNumber ) {  // sets the gamestate player
 
 void GameObject::resetMatch() {
     GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
-    _player1->clearSetHistory();  // Clear Player's Set history
+    _player1->clearSetHistory();  // Clear Player's Set history 
     _player2->clearSetHistory();
     _player1->clearGameHistory(); // Clear Player's Game history
     _player2->clearGameHistory();
