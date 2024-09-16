@@ -81,6 +81,7 @@ void Undo::mode1Undo( History* history ) {
     print( "done popping history." );
     _gameState->setPlayer1SetHistory( gameState.getPlayer1SetHistory());
     _gameState->setPlayer2SetHistory( gameState.getPlayer2SetHistory());
+    print( "done setting players histories" );
     _gameState->setCurrentSet( gameState.getCurrentSet());
     _player1->setPoints( gameState.getPlayer1Points());
     _gameState->setP1PointsMem( gameState.getP1PointsMem());
@@ -91,10 +92,12 @@ void Undo::mode1Undo( History* history ) {
     _player2->setGames( gameState.getPlayer2Games());
     _gameState->setP2GamesMem( gameState.getP2GamesMem());
     _player1->setSets( gameState.getPlayer1Sets());
+    print( "setting set histories... " );
     _player1->setSetHistory( gameState.getPlayer1SetHistory());
     _gameState->setP1SetsMem( gameState.getP1SetsMem());
     _player2->setSets( gameState.getPlayer2Sets());
     _player2->setSetHistory( gameState.getPlayer2SetHistory());
+    print( "done setting set histories" );
     _gameState->setP2SetsMem( gameState.getP2SetsMem());
     _player1->setMatches( gameState.getPlayer1Matches());
     _player2->setMatches( gameState.getPlayer2Matches());
@@ -109,11 +112,13 @@ void Undo::mode1Undo( History* history ) {
     _gameState->setToggle( gameState.getToggle());
     _gameState->setTieLEDsOn( gameState.getTieLEDsOn());
     // _gameState->setPlayerButton( gameState.getPlayerButton()); // this is breaking the undo
+    print ( "setting tie break flags..." );
     _gameState->setTieBreak( gameState.getTieBreak());
     _gameState->setMatchTieBreak( gameState.getMatchTieBreak());
     _gameState->setMatchTieBreakMem( gameState.getMatchTieBreakMem());
     _gameState->setTieBreakOnly( gameState.getTieBreakOnly());
     _gameState->setTieBreakMem( gameState.getTieBreakMem());
+    print( "done setting tie break flags" );
     if ( _gameState->getTieLEDsOn() == 1 ) { _gameState->setTieLEDsOn( 1 );  _tieLeds.turnOn(); }
     if ( _gameState->getTieLEDsOn() == 0 ) {  _tieLeds.turnOff(); _gameState->setTieLEDsOn( 0 );  }
     _logger->logUpdate( "updating leds..." );
@@ -121,4 +126,5 @@ void Undo::mode1Undo( History* history ) {
     _gameLeds.updateGames();
     _setLeds.updateSets();
     _serveLeds.updateServeLED();
+    print ( "done mode1Undo." );
 }
