@@ -379,6 +379,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     int menu_selection = 1;
     std::signal( SIGINT, GameObject::_signalHandler );
     while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { /*/// Begin Game Loop ///*/
+        print(  "entered while loop." );
         sleep( SCORE_DELAY );
         std::cout << "1.) green score    " << std::endl;
         std::cout << "2.) red score      " << std::endl;
@@ -411,7 +412,9 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             gameState->setCurrentAction( AFTER_SLEEP_MODE );
             print( "*** Going into last Match! ***" )
             gameObject->getScoreBoard()->clearScreen();
+            print( "done clearing screen. " );
             gameObject->getScoreBoard()->update();
+            print( "done updating scoreboard. " );
         } else {
             std::cin >> menu_selection;
         }
