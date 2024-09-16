@@ -388,7 +388,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         std::cout << "6.) Match Win Tie Break Test" << std::endl;
         std::cout << "7.) Sleep Mode Test" << std::endl;
         std::cout << "9.) Undo           " << std::endl;
-        if ( gameState->getCurrentState() == SLEEP_MODE ) {
+        if ( gameState->getCurrentAction() == SLEEP_MODE ) {
             ScoreboardBlinker blinker( gameObject->getScoreBoard() );
             InputWithTimer inputWithTimer( &blinker );
             menu_selection = inputWithTimer.getInput();
@@ -397,11 +397,11 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             if ( inputWithTimer.getTimeSlept() >= MAX_SLEEP * 1000 ) {
                 gameObject->resetMatch();
                 gameObject->getHistory()->clearHistory();
-                gameState->setCurrentState( AFTER_SLEEP_MODE ); // stop sleep mode
+                gameState->setCurrentAction( AFTER_SLEEP_MODE ); // stop sleep mode
                 continue;
             } else if( inputWithTimer.getTimeSlept() < MAX_SLEEP ) {
                 if ( menu_selection == 9 ) {
-                    gameState->setCurrentState( NORMAL_GAME_STATE ); // stop sleep mode
+                    gameState->setCurrentAction( NORMAL_GAME_STATE ); // stop sleep mode
                     continue;
                 }
             } else {
