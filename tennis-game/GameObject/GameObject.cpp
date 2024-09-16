@@ -73,6 +73,7 @@ void GameObject::loopGame() {
 GameState* GameObject::getGameState() { return _gameState; }
 
 void GameObject::playerScore( int playerNumber ) {  // sets the gamestate player button
+    if( _gameState->getCurrentAction() == AFTER_SLEEP_MODE ) { getHistory()->clearHistory(); }
     _gameState->setCurrentAction( "Updating state after player " + std::to_string( playerNumber ) + " scored." );
     _gameState->setPlayerButton( playerNumber );
     _gameState->setCurrentAction( AFTER_UPDATE_GO_SCORE );

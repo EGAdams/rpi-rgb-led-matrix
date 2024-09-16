@@ -24,6 +24,7 @@
 #define SLEEP_MODE                  "sleep mode for power saving"
 #define AFTER_UPDATE_GO_SCORE       "after update player score in GameObject"
 #define IGNORE_EXTRA_SCORES         "ignoring scores after match win"
+#define AFTER_SLEEP_MODE            "after sleep mode"
 ///////////////////////////////////////////////////////////////////////////////
 
 #define TESTING                     1

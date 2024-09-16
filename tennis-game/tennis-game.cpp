@@ -400,8 +400,10 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
                  menu_selection == 2 || 
                  ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 )) {
                 gameObject->resetMatch();
+                gameObject->getHistory()->clearHistory();
                 continue;
             }
+            gameState->setCurrentAction( AFTER_SLEEP_MODE );
             print( "*** Going into last Match! ***" )
             gameObject->getScoreBoard()->clearScreen();
             gameObject->getScoreBoard()->update();
