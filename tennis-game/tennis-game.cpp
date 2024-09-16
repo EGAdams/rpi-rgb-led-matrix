@@ -400,7 +400,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
                 gameObject->getHistory()->clearHistory();
                 gameState->setCurrentAction( AFTER_SLEEP_MODE ); // stop sleep mode
                 continue;
-            } else if( inputWithTimer.getTimeSlept() < MAX_SLEEP ) {
+            } else if( inputWithTimer.getTimeSlept() < MAX_SLEEP * 1000 ) {
                 if ( menu_selection == 9 ) {
                     gameState->setCurrentAction( NORMAL_GAME_STATE ); // stop sleep mode
                     continue;
