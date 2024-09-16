@@ -379,7 +379,6 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     int menu_selection = 1;
     std::signal( SIGINT, GameObject::_signalHandler );
     while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { /*/// Begin Game Loop ///*/
-        print(  "entered while loop." );
         sleep( SCORE_DELAY );
         std::cout << "1.) green score    " << std::endl;
         std::cout << "2.) red score      " << std::endl;
@@ -393,28 +392,19 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             ScoreboardBlinker blinker( gameObject->getScoreBoard() );
             InputWithTimer inputWithTimer( &blinker );
             menu_selection = inputWithTimer.getInput();
-            
+            gameState->setCurrentAction( NORMAL_GAME_STATE ); // stop sleep mode
             std::cout << "time slept: " << inputWithTimer.getTimeSlept() << std::endl;
-            if ( inputWithTimer.getTimeSlept() >= MAX_SLEEP * 1000 ) {
+            if ( menu_selection == 1 || 
+                 menu_selection == 2 || 
+                 ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 )) {
                 gameObject->resetMatch();
                 gameObject->getHistory()->clearHistory();
-                gameState->setCurrentAction( AFTER_SLEEP_MODE ); // stop sleep mode
                 continue;
-            } else if( inputWithTimer.getTimeSlept() < MAX_SLEEP * 1000 ) {
-                if ( menu_selection == 9 ) {
-                    gameState->setCurrentAction( NORMAL_GAME_STATE ); // stop sleep mode
-                    continue;
-                }
-            } else {
-                print( "*** Warning: input with timer not >= max or < max?  this is not possible. ***" );
-                print( " time slept: " << inputWithTimer.getTimeSlept() << std::endl );
             }
             gameState->setCurrentAction( AFTER_SLEEP_MODE );
             print( "*** Going into last Match! ***" )
             gameObject->getScoreBoard()->clearScreen();
-            print( "done clearing screen. " );
             gameObject->getScoreBoard()->update();
-            print( "done updating scoreboard. " );
         } else {
             std::cin >> menu_selection;
         }
