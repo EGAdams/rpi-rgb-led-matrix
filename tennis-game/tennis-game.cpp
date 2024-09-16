@@ -406,6 +406,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
                 }
             } else {
                 print( "*** Warning: input with timer not >= max or < max?  this is not possible. ***" );
+                print( " time slept: " << inputWithTimer.getTimeSlept() << std::endl );
             }
             gameState->setCurrentAction( AFTER_SLEEP_MODE );
             print( "*** Going into last Match! ***" )
