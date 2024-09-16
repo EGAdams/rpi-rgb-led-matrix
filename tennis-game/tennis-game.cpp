@@ -103,8 +103,6 @@ void matchWinTieBreakerTest( GameObject* gameObject, GameState* gameState ) {
     for ( int x = 0; x < 5; x++ ) {
         playerWin( gameObject, gameState, 2 );
     }
-    // playerWin( gameObject, gameState, 1 ); 
-    // std::cout << "done with match win test." << std::endl; 
 }
 
 void matchWinTest( GameObject* gameObject, GameState* gameState ) {
@@ -390,18 +388,24 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         std::cout << "6.) Match Win Tie Break Test" << std::endl;
         std::cout << "7.) Sleep Mode Test" << std::endl;
         std::cout << "9.) Undo           " << std::endl;
-        if ( gameState->getCurrentAction() == SLEEP_MODE ) {
+        if ( gameState->getCurrentState() == SLEEP_MODE ) {
             ScoreboardBlinker blinker( gameObject->getScoreBoard() );
             InputWithTimer inputWithTimer( &blinker );
             menu_selection = inputWithTimer.getInput();
-            gameState->setCurrentAction( NORMAL_GAME_STATE ); // stop sleep mode
+            
             std::cout << "time slept: " << inputWithTimer.getTimeSlept() << std::endl;
-            if ( menu_selection == 1 || 
-                 menu_selection == 2 || 
-                 ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 )) {
+            if ( inputWithTimer.getTimeSlept() >= MAX_SLEEP * 1000 ) {
                 gameObject->resetMatch();
                 gameObject->getHistory()->clearHistory();
+                gameState->setCurrentState( AFTER_SLEEP_MODE ); // stop sleep mode
                 continue;
+            } else if( inputWithTimer.getTimeSlept() < MAX_SLEEP ) {
+                if ( menu_selection == 9 ) {
+                    gameState->setCurrentState( NORMAL_GAME_STATE ); // stop sleep mode
+                    continue;
+                }
+            } else {
+                print( "*** Warning: input with timer not >= max or < max?  this is not possible. ***" );
             }
             gameState->setCurrentAction( AFTER_SLEEP_MODE );
             print( "*** Going into last Match! ***" )

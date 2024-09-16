@@ -16,10 +16,12 @@ public:
     int getUpdateDisplayDelay() ;
     void stopGameRunning() ;
     int gameRunning() ;
-    void setGameHistory(std::map<int, int> game_history) ;
+    void setGameHistory(std::map<int, int> game_history ) ;
     std::map<int, int> getGameHistory() ;
-    void setCurrentAction(std::string currentAction) ;
+    void setCurrentAction(std::string current_action ) ;
     std::string getCurrentAction() const;
+    void setCurrentState( std::string _current_state ) ;
+    std::string getCurrentState() const;
     void setCurrentSet(int current_set);
     int getCurrentSet() const;
     void setWinDelay(int winDelay) ;
@@ -105,6 +107,7 @@ public:
     }
     unsigned long getIgnoreScoreTimer()  { return _ignore_extra_score_timer; }
 
+
 private:
     int _match_blink_on;
     int _current_set;
@@ -147,7 +150,8 @@ private:
     int _matchTieBreakMem;
     int _tieBreakMem;
     int _gameRunning;
-    std::string _currentAction;
+    std::string _current_action;
+    std::string _current_state;
     std::map<int, int> _player1_set_history;
     std::map<int, int> _player2_set_history;
     std::map<int, int> _game_history;

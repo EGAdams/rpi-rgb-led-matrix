@@ -32,23 +32,15 @@ GameObject::GameObject( GameState* gameState ) : _gameState( gameState ) {
     _player1 = new Player( _gameState, PLAYER_1_INITIALIZED );
     _player2 = new Player( _gameState, PLAYER_2_INITIALIZED ); // now set each other as opponents...
     _player2->setOpponent( _player1 ); _player1->setOpponent( _player2 );
-    // std::cout << "constructing new PinState object..." << std::endl;
     _pinState = new PinState( _pin_map );
-    // std::cout << "constructing new PinInterface object..." << std::endl;
     _pinInterface = new PinInterface( _pinState );
-    // std::cout << "constructing new History object..." << std::endl;
     _history = new History();
-    // std::cout << "calling new Inputs..." << std::endl;
     _gameInputs = new Inputs( _player1, _player2, _pinInterface, _gameState );
-    // std::cout << "constructing new GameModes object..." << std::endl;
     _gameModes =  new GameModes( _player1, _player2, _pinInterface, _gameState, _history );
-    // std::cout << "constructing new ScoreBoard object..." << std::endl;
     _scoreBoard = new ScoreBoard( _player1, _player2, _gameState );
-    // std::cout << "setting scoreBoards in gameModes..." << std::endl;
     _gameModes->setScoreBoards( _scoreBoard );
     _subjectManager = new SubjectManager();
     _logger = new Logger( "GameObject" );
-    // std::cout << "GameObject constructed." << std::endl;
 }
 
 Player* GameObject::getPlayer1() { return _player1; }
@@ -126,8 +118,8 @@ void GameObject::start() {
     _player2->setPoints( 0 );             // p2Points = 0;
     _player1->setGames( 0 );              // p1Games = 0;
     _player2->setGames( 0 );              // p2Games = 0;
-    _player1->setSets( _gameState, 0 );               // p1Sets = 0;
-    _player2->setSets( _gameState, 0 );               // p2Sets = 0;
+    _player1->setSets( _gameState, 0 );   // p1Sets = 0;
+    _player2->setSets( _gameState, 0 );   // p2Sets = 0;
     _scoreBoard->update();
     _gameState->setTieBreakOnly( 0 );     // tieBreakOnly = false;
     _gameState->setCurrentSet( 1 );
