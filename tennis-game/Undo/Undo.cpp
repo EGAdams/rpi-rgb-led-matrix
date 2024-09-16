@@ -70,12 +70,15 @@ void Undo::snapshot( History* history ) {
 
 void Undo::mode1Undo( History* history ) {
     GameTimer::gameDelay( 100 );
+    print( "history size: " << history->size() );
     if ( history->size() == 0 ) { return; }
     if ( _scoreBoardSet == false ) {
         std::cout << "*** ERROR: trying to call undo when _scoreBoardSet == false exiting process... *** \nMake sure to call undo->setScoreBoard before trying to use the Undo object." << std::endl;
         exit( 1 );
     } // TODO: Update Current Set 1st!
+    print( "popping history..." );
     GameState gameState = ( history->pop());
+    print( "done popping history." );
     _gameState->setPlayer1SetHistory( gameState.getPlayer1SetHistory());
     _gameState->setPlayer2SetHistory( gameState.getPlayer2SetHistory());
     _gameState->setCurrentSet( gameState.getCurrentSet());
