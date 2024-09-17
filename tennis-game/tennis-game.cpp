@@ -392,7 +392,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             ScoreboardBlinker blinker( gameObject->getScoreBoard() );
             InputWithTimer inputWithTimer( &blinker );
             menu_selection = inputWithTimer.getInput();
-            gameState->setCurrentAction( NORMAL_GAME_STATE ); // stop sleep mode
+            gameState->setCurrentAction( AFTER_SLEEP_MODE ); // stop sleep mode
             std::cout << "time slept: " << inputWithTimer.getTimeSlept() << std::endl;
             if ( menu_selection == 1 || 
                  menu_selection == 2 || 
@@ -400,9 +400,12 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
                 print( "reset match." );
                 gameObject->resetMatch();
                 print( "done resetting match." );
-                print( "clearing history... " );
-                gameObject->getHistory()->clearHistory();
-                print( "cleared history." );
+                if ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 ) {
+                    print( "time slept: " << inputWithTimer.getTimeSlept() * 1000 << " seconds." << std::endl );
+                    print( "clearing History because max sleep time has been reached or exceeded." );
+                    gameObject->getHistory()->clearHistory();
+                    print( "done clearing history because max sleep time has been reached or exceeded." );
+                }
                 continue;
             }
             print("setting game state current action to after sleep mode");

@@ -66,9 +66,9 @@ GameState* GameObject::getGameState() { return _gameState; }
 
 void GameObject::playerScore( int playerNumber ) {  // sets the gamestate player button
     if( _gameState->getCurrentAction() == AFTER_SLEEP_MODE ) { 
-        print( "clearing history... " );
+        print( "clearing history because of after sleep and 1st player score... " );
         getHistory()->clearHistory();
-        print( "done clearing history." );
+        print( "done clearing history because of after sleep and 1st player score... " );
     }
     _gameState->setCurrentAction( "Updating state after player " + std::to_string( playerNumber ) + " scored." );
     _gameState->setPlayerButton( playerNumber );
