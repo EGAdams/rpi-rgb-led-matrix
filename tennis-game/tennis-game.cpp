@@ -400,8 +400,8 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
                 print( "reset match." );
                 gameObject->resetMatch();
                 print( "done resetting match." );
-                print( "clearing history... TEMPORARILY DISABLED" );
-                // gameObject->getHistory()->clearHistory();
+                print( "clearing history... " );
+                gameObject->getHistory()->clearHistory();
                 print( "cleared history." );
                 continue;
             }
