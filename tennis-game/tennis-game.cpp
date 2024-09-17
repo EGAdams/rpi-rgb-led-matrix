@@ -398,7 +398,9 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
                  menu_selection == 2 || 
                  ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 )) {
                 gameObject->resetMatch();
-                gameObject->getHistory()->clearHistory();
+                print( "clearing history... TEMPORARILY DISABLED" );
+                // gameObject->getHistory()->clearHistory();
+                print( "cleared history." );
                 continue;
             }
             gameState->setCurrentAction( AFTER_SLEEP_MODE );
