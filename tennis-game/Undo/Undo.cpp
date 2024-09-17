@@ -80,8 +80,9 @@ void Undo::mode1Undo( History* history ) {
     GameState gameState = ( history->pop());
     print( "done popping history." );
     _gameState->setPlayer1SetHistory( gameState.getPlayer1SetHistory());
+    print( "done setting player 1 histories" );
     _gameState->setPlayer2SetHistory( gameState.getPlayer2SetHistory());
-    print( "done setting players histories" );
+    print( "done setting player 2 histories" );
     _gameState->setCurrentSet( gameState.getCurrentSet());
     _player1->setPoints( gameState.getPlayer1Points());
     _gameState->setP1PointsMem( gameState.getP1PointsMem());
