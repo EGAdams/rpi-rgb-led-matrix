@@ -397,16 +397,22 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             if ( menu_selection == 1 || 
                  menu_selection == 2 || 
                  ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 )) {
+                print( "reset match." );
                 gameObject->resetMatch();
+                print( "done resetting match." );
                 print( "clearing history... TEMPORARILY DISABLED" );
                 // gameObject->getHistory()->clearHistory();
                 print( "cleared history." );
                 continue;
             }
+            print("setting game state current action to after sleep mode");
             gameState->setCurrentAction( AFTER_SLEEP_MODE );
             print( "*** Going into last Match! ***" )
+            print( "clearing screen..." );
             gameObject->getScoreBoard()->clearScreen();
+            print( "cleared screen." );
             gameObject->getScoreBoard()->update();
+            print( "updated scoreboard." );
         } else {
             std::cin >> menu_selection;
         }
