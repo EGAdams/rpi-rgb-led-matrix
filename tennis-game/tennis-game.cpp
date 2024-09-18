@@ -377,6 +377,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     gameObject->loopGame();
     sleep( 1 );
     int menu_selection = 1;
+    int remote_pairing = 1;
     std::signal( SIGINT, GameObject::_signalHandler );
     while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { /*/// Begin Game Loop ///*/
         sleep( SCORE_DELAY );
@@ -388,6 +389,14 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         std::cout << "6.) Match Win Tie Break Test" << std::endl;
         std::cout << "7.) Sleep Mode Test" << std::endl;
         std::cout << "9.) Undo           " << std::endl;
+
+        // if remote pairing, write the words.  if not, snap out of the loop
+        if ( remote_pairing ) {
+            print( "executing remote pairing instructions" );
+        } else {
+            print( "remote pairing finished, continuing..." );
+        }
+
         if ( gameState->getCurrentAction() == SLEEP_MODE ) {
             ScoreboardBlinker blinker( gameObject->getScoreBoard() );
             InputWithTimer inputWithTimer( &blinker );
