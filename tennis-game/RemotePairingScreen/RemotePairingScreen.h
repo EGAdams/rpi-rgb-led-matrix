@@ -6,27 +6,21 @@
 class RemotePairingScreen {
 public:
     RemotePairingScreen();
+    ~RemotePairingScreen();
+    void draw();                // Method to display the instructions on the screen
 
-    // Method to display the instructions on the screen
-    void draw();
+    void greenPlayerPressed();  // Called when the Green Player presses their button
+   
+    void redPlayerPressed();    // Called when the Red Player presses their button
 
-    // Called when the Green Player presses their button
-    void greenPlayerPressed();
-
-    // Called when the Red Player presses their button
-    void redPlayerPressed();
-
-    // Check if still in pairing mode
-    bool inPairingMode() const;
+    bool inPairingMode() const; // Check if still in pairing mode
 
 private:
-    bool greenPlayerPaired;
-    bool redPlayerPaired;
+    bool _green_player_paired;
+    bool _red_player_paired;
 
-    // Helper to clear the screen or specific text area
-    void clearGreenPlayerText();
+    void clearGreenPlayerText(); // Helper to clear the screen or specific text area
     void clearRedPlayerText();
     void clearAllText();
 };
-
 #endif // REMOTE_PAIRING_SCREEN_H

@@ -2,16 +2,18 @@
 #include <iostream>
 
 RemotePairingScreen::RemotePairingScreen() 
-    : greenPlayerPaired(false), redPlayerPaired(false) {}
+    : _green_player_paired( false ), _red_player_paired( false ) {}
+
+RemotePairingScreen::~RemotePairingScreen(){}
 
 void RemotePairingScreen::draw() {
-    if (!greenPlayerPaired) {
+    if (!_green_player_paired) {
         std::cout << "     Green Player\n";
         std::cout << "Press your Remote\n";
         std::cout << "     Green button\n\n";
     }
 
-    if (!redPlayerPaired) {
+    if (!_red_player_paired) {
         std::cout << "       Red Player\n";
         std::cout << "Press your Remote\n";
         std::cout << "        Red button\n";
@@ -19,23 +21,23 @@ void RemotePairingScreen::draw() {
 }
 
 void RemotePairingScreen::greenPlayerPressed() {
-    greenPlayerPaired = true;
+    _green_player_paired = true;
     clearGreenPlayerText();
-    if (redPlayerPaired) {
+    if (_red_player_paired) {
         clearAllText();
     }
 }
 
 void RemotePairingScreen::redPlayerPressed() {
-    redPlayerPaired = true;
+    _red_player_paired = true;
     clearRedPlayerText();
-    if (greenPlayerPaired) {
+    if (_green_player_paired) {
         clearAllText();
     }
 }
 
 bool RemotePairingScreen::inPairingMode() const {
-    return !(greenPlayerPaired && redPlayerPaired);
+    return !(_green_player_paired && _red_player_paired);
 }
 
 void RemotePairingScreen::clearGreenPlayerText() {

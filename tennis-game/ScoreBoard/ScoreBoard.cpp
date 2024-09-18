@@ -292,7 +292,7 @@ void ScoreBoard::blink_player_score(int player) {  // fast blinking ball code he
 
 void ScoreBoard::clearScreen() {
     if ( hasCanvas() == false ) {
-        // std::cout << "\033[2J\033[H";   // Clear screen and move cursor to the top-left 
+        std::cout << "\033[2J\033[H";   // Clear screen and move cursor to the top-left 
         // system( "clear" );           // execute a system `clear` command  
     } else {
         if ( !hasCanvas()) { std::cout << "*** ERROR: canvas == NULL.  exiting... ***" << std::endl; exit( 1 ); }

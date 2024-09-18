@@ -20,6 +20,7 @@
 #include "LoggerFactory/LoggerFactory.h"
 #include "InputWithTimer/InputWithTimer.h"
 #include "TennisConstants/TennisConstants.h"
+#include "RemotePairingScreen/RemotePairingScreen.h"
 
 using namespace rgb_matrix;
 #define SCORE_DELAY    0
@@ -379,8 +380,23 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     int menu_selection = 1;
     int remote_pairing = 1;
     std::signal( SIGINT, GameObject::_signalHandler );
+    RemotePairingScreen remotePairingScreen;
     while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { /*/// Begin Game Loop ///*/
         sleep( SCORE_DELAY );
+        // if remote pairing, write the words.  if not, snap out of the loop
+        while ( remotePairingScreen.inPairingMode()) {
+            remotePairingScreen.draw();
+            std::cin >> menu_selection;
+            if ( menu_selection == 1 ) {
+                remotePairingScreen.greenPlayerPressed();
+            } else if ( menu_selection == 2 ) {
+                remotePairingScreen.redPlayerPressed();
+            } else {
+                print( "*** invalid selection during remote pairing. ***" );
+                GameTimer::gameDelay( 1000 );
+            }
+        }
+        
         std::cout << "1.) green score    " << std::endl;
         std::cout << "2.) red score      " << std::endl;
         std::cout << "3.) Demo           " << std::endl;
@@ -390,12 +406,6 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         std::cout << "7.) Sleep Mode Test" << std::endl;
         std::cout << "9.) Undo           " << std::endl;
 
-        // if remote pairing, write the words.  if not, snap out of the loop
-        if ( remote_pairing ) {
-            print( "executing remote pairing instructions" );
-        } else {
-            print( "remote pairing finished, continuing..." );
-        }
 
         if ( gameState->getCurrentAction() == SLEEP_MODE ) {
             ScoreboardBlinker blinker( gameObject->getScoreBoard() );
