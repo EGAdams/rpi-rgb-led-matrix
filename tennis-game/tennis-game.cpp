@@ -383,25 +383,26 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     int remote_pairing = 1;
     std::signal( SIGINT, GameObject::_signalHandler );
     RemotePairingScreen remotePairingScreen( gameObject->getScoreBoard());
+    PairingBlinker pairingBlinker( gameObject->getScoreBoard());  // Use PairingBlinker
+    InputWithTimer inputWithTimer( &pairingBlinker );  // Pass PairingBlinker
     while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { /*/// Begin Game Loop ///*/
         sleep( SCORE_DELAY );
         // if remote pairing, write the words.  if not, snap out of the loop
         while ( remotePairingScreen.inPairingMode()) {
-            PairingBlinker pairingBlinker( gameObject->getScoreBoard());
-            InputWithTimer inputWithTimer( &pairingBlinker);
-            
             int menu_selection = inputWithTimer.getInput();
-            
-            if ( menu_selection == 1 ) {
+    
+            if (menu_selection == 1) {
                 remotePairingScreen.greenPlayerPressed();
-            } else if ( menu_selection == 2 ) {
+                pairingBlinker.setGreenPlayerPaired(true);  // Notify blinker that Green player is paired
+            } else if (menu_selection == 2) {
                 remotePairingScreen.redPlayerPressed();
+                pairingBlinker.setRedPlayerPaired(true);  // Notify blinker that Red player is paired
             } else {
                 std::cout << "*** Invalid selection during remote pairing. ***\n";
                 GameTimer::gameDelay(1000);
             }
         }
-        
+        pairingBlinker.stop();  // Stop blinking once both players are paired
         std::cout << "1.) green score    " << std::endl;
         std::cout << "2.) red score      " << std::endl;
         std::cout << "3.) Demo           " << std::endl;

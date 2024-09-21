@@ -4,7 +4,7 @@
 #include <iostream>
 
 PairingBlinker::PairingBlinker(ScoreBoard* scoreBoard)
-    : _scoreboard(scoreBoard), should_stop(false) {}
+    : _scoreboard(scoreBoard), should_stop(false), green_player_paired(false), red_player_paired(false) {}
 
 PairingBlinker::~PairingBlinker() {
     stop();
@@ -15,18 +15,27 @@ void PairingBlinker::blinkLoop() {
     
     while (!should_stop) {
         _scoreboard->clearScreen();
-        
-        // Alternate between showing Green and Red instructions
-        if (show_green) {
+
+        // Check if both players are paired
+        if (green_player_paired && red_player_paired) {
+            // Both players are paired, stop blinking
+            break;
+        }
+
+        // Only show instructions for the player who hasn't paired yet
+        if (!green_player_paired && show_green) {
             showGreenInstructions();
-        } else {
+        } else if (!red_player_paired && !show_green) {
             showRedInstructions();
         }
 
-        show_green = !show_green;  // Alternate for next cycle
-        
+        // Alternate for next cycle if both players are unpaired
+        if (!green_player_paired && !red_player_paired) {
+            show_green = !show_green;
+        }
+
         // Delay for 1 second between switching
-        std::this_thread::sleep_for( std::chrono::seconds( 1 ));
+        std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 }
 
@@ -66,4 +75,13 @@ void PairingBlinker::stop() {
     if (blink_thread.joinable()) {
         blink_thread.join();
     }
+}
+
+// Methods to set the pairing status of players
+void PairingBlinker::setGreenPlayerPaired(bool paired) {
+    green_player_paired = paired;
+}
+
+void PairingBlinker::setRedPlayerPaired(bool paired) {
+    red_player_paired = paired;
 }

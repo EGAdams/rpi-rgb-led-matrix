@@ -11,7 +11,10 @@ public:
     ~PairingBlinker();
     
     void start() override;
-    void stop()  override;
+    void stop() override;
+    
+    void setGreenPlayerPaired(bool paired);  // New method to track Green player status
+    void setRedPlayerPaired(bool paired);    // New method to track Red player status
 
 private:
     void blinkLoop();         // Alternates between Green and Red instructions
@@ -21,6 +24,10 @@ private:
     ScoreBoard* _scoreboard;
     bool should_stop;
     std::thread blink_thread;
+
+    // New state tracking
+    bool green_player_paired;
+    bool red_player_paired;
 };
 
 #endif
