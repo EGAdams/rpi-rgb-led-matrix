@@ -16,22 +16,27 @@ void PairingBlinker::blinkLoop() {
     while (!should_stop) {
         _scoreboard->clearScreen();
 
-        // Check if both players are paired
+        // If both players are paired, stop blinking
         if (green_player_paired && red_player_paired) {
-            // Both players are paired, stop blinking
             break;
         }
 
-        // Only show instructions for the player who hasn't paired yet
-        if (!green_player_paired && show_green) {
-            showGreenInstructions();
-        } else if (!red_player_paired && !show_green) {
+        // If only the Green player is paired, show Red player instructions
+        if (green_player_paired && !red_player_paired) {
             showRedInstructions();
         }
-
-        // Alternate for next cycle if both players are unpaired
-        if (!green_player_paired && !red_player_paired) {
-            show_green = !show_green;
+        // If only the Red player is paired, show Green player instructions
+        else if (!green_player_paired && red_player_paired) {
+            showGreenInstructions();
+        }
+        // If neither player is paired, alternate between Green and Red instructions
+        else if (!green_player_paired && !red_player_paired) {
+            if (show_green) {
+                showGreenInstructions();
+            } else {
+                showRedInstructions();
+            }
+            show_green = !show_green;  // Alternate between Green and Red
         }
 
         // Delay for 1 second between switching
