@@ -10,13 +10,13 @@ void RemotePairingScreen::draw() {
     if (!_green_player_paired) {
         if ( _scoreboard->onRaspberryPi()) {
             _scoreboard->clearScreen();
-            _scoreboard->drawText( "Green",     GREEN, 2,  5  );
-            _scoreboard->drawText( "Player",    GREEN, 2, 20  );
-            _scoreboard->drawText( "Press",     GREEN, 2, 35  );
-            _scoreboard->drawText( "Your",      GREEN, 2, 50  );
-            _scoreboard->drawText( "Remote",    GREEN, 2, 65  );
-            _scoreboard->drawText( "Green",     GREEN, 2, 80  );
-            _scoreboard->drawText( "Button",    GREEN, 2, 95  );
+            _scoreboard->drawText( "Green",     GREEN, 2, 15   );
+            _scoreboard->drawText( "Player",    GREEN, 2, 30   );
+            _scoreboard->drawText( "Press",     GREEN, 2, 45   );
+            _scoreboard->drawText( "Your",      GREEN, 2, 60   );
+            _scoreboard->drawText( "Remote",    GREEN, 2, 75   );
+            _scoreboard->drawText( "Green",     GREEN, 2, 90   );
+            _scoreboard->drawText( "Button",    GREEN, 2, 105  );
         } else {
             std::cout << "     Green Player\n";
             std::cout << "     Player\n";
@@ -69,4 +69,8 @@ void RemotePairingScreen::clearRedPlayerText() {
 
 void RemotePairingScreen::clearAllText() {
     std::cout << "Both players paired, starting the game...\n";
+    _scoreboard->drawText( "Paired", GREEN, 25, 50  );
+    GameTimer::gameDelay( 2000 );
+    _scoreboard->clearScreen();
+    _scoreboard->update();
 }
