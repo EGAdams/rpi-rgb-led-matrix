@@ -380,7 +380,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     int menu_selection = 1;
     int remote_pairing = 1;
     std::signal( SIGINT, GameObject::_signalHandler );
-    RemotePairingScreen remotePairingScreen;
+    RemotePairingScreen remotePairingScreen( gameObject->getScoreBoard());
     while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { /*/// Begin Game Loop ///*/
         sleep( SCORE_DELAY );
         // if remote pairing, write the words.  if not, snap out of the loop
