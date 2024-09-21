@@ -15,7 +15,7 @@ void RemotePairingScreen::draw() {
             _scoreboard->drawText( "Player",  GREEN, LEFT_MARGIN + 0, 34  );
             _scoreboard->drawText( "Press",   GREEN, LEFT_MARGIN + 1, 51  );
             _scoreboard->drawText( "Your",    GREEN, LEFT_MARGIN + 2, 68  );
-            _scoreboard->drawText( "Remote",  GREEN, LEFT_MARGIN + -4, 85 );
+            _scoreboard->drawText( "Remote",  GREEN, LEFT_MARGIN + -6, 85 );
             _scoreboard->drawText( "Green",   GREEN, LEFT_MARGIN + 1, 102 );
             _scoreboard->drawText( "Button",  GREEN, LEFT_MARGIN + 0, 119 );
         } else {
@@ -25,19 +25,25 @@ void RemotePairingScreen::draw() {
             std::cout << "     Green button\n\n";  
         }
     }
-
+    GameTimer::gameDelay( 1000 );
     if (!_red_player_paired) {
         if( _scoreboard->onRaspberryPi()) {
+            #define LEFT_MARGIN 8
             _scoreboard->clearScreen();
-            _scoreboard->writeMessage( "     Red Player\n" );
-            _scoreboard->writeMessage( "Press your Remote\n" );
-            _scoreboard->writeMessage( "     Red button\n\n" );
+            _scoreboard->drawText( "Red",   GREEN, LEFT_MARGIN + 3, 17  );
+            _scoreboard->drawText( "Player",  GREEN, LEFT_MARGIN + 0, 34  );
+            _scoreboard->drawText( "Press",   GREEN, LEFT_MARGIN + 1, 51  );
+            _scoreboard->drawText( "Your",    GREEN, LEFT_MARGIN + 2, 68  );
+            _scoreboard->drawText( "Remote",  GREEN, LEFT_MARGIN + -6, 85 );
+            _scoreboard->drawText( "Red",   GREEN, LEFT_MARGIN + 3, 102 );
+            _scoreboard->drawText( "Button",  GREEN, LEFT_MARGIN + 0, 119 );
         } else {
             std::cout << "     Red Player\n";
             std::cout << "Press your Remote\n";
             std::cout << "     Red button\n\n";
         }
     }
+    GameTimer::gameDelay( 1000 );
 }
 
 void RemotePairingScreen::greenPlayerPressed() {
@@ -71,7 +77,7 @@ void RemotePairingScreen::clearRedPlayerText() {
 void RemotePairingScreen::clearAllText() {
     std::cout << "Both players paired, starting the game...\n";
     _scoreboard->clearScreen();
-    _scoreboard->drawText( "Paired", YELLOW, 5, 50  );
+    _scoreboard->drawText( "Paired", YELLOW, 5, 65 );
     GameTimer::gameDelay( 2000 );
     _scoreboard->clearScreen();
     _scoreboard->update();
