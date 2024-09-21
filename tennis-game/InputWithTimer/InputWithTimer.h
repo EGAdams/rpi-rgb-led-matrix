@@ -1,16 +1,18 @@
 #ifndef INPUT_WITH_TIMER_H
 #define INPUT_WITH_TIMER_H
 
-#include "../ScoreboardBlinker/ScoreboardBlinker.h"
+#include "../Blinker/Blinker.h"
 #include "../GameTimer/GameTimer.h"
+
+class Blinker;  // Forward declaration
 
 class InputWithTimer {
 private:
-    ScoreboardBlinker* _blinker;
+    Blinker* _blinker;
     unsigned long _time_slept;
 
 public:
-    InputWithTimer( ScoreboardBlinker* blinker );
+    InputWithTimer( Blinker* blinker );
     ~InputWithTimer();
 
     int getInput();

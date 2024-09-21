@@ -21,6 +21,8 @@
 #include "InputWithTimer/InputWithTimer.h"
 #include "TennisConstants/TennisConstants.h"
 #include "RemotePairingScreen/RemotePairingScreen.h"
+#include "PairingBlinker/PairingBlinker.h"
+#include "ScoreboardBlinker/ScoreboardBlinker.h"
 
 using namespace rgb_matrix;
 #define SCORE_DELAY    0
@@ -385,15 +387,18 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         sleep( SCORE_DELAY );
         // if remote pairing, write the words.  if not, snap out of the loop
         while ( remotePairingScreen.inPairingMode()) {
-            remotePairingScreen.draw();
-            std::cin >> menu_selection;
+            PairingBlinker pairingBlinker( gameObject->getScoreBoard());
+            InputWithTimer inputWithTimer( &pairingBlinker);
+            
+            int menu_selection = inputWithTimer.getInput();
+            
             if ( menu_selection == 1 ) {
                 remotePairingScreen.greenPlayerPressed();
             } else if ( menu_selection == 2 ) {
                 remotePairingScreen.redPlayerPressed();
             } else {
-                print( "*** invalid selection during remote pairing. ***" );
-                GameTimer::gameDelay( 1000 );
+                std::cout << "*** Invalid selection during remote pairing. ***\n";
+                GameTimer::gameDelay(1000);
             }
         }
         
@@ -413,8 +418,8 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             menu_selection = inputWithTimer.getInput();
             gameState->setCurrentAction( AFTER_SLEEP_MODE ); // stop sleep mode
             std::cout << "time slept: " << inputWithTimer.getTimeSlept() << std::endl;
-            if ( menu_selection == 1 || 
-                 menu_selection == 2 || 
+            if (  menu_selection == 1  || 
+                  menu_selection == 2  || 
                  ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 )) {
                 print( "reset match." );
                 gameObject->resetMatch();
@@ -429,7 +434,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             }
             print("setting game state current action to after sleep mode");
             gameState->setCurrentAction( AFTER_SLEEP_MODE );
-            print( "*** Going into last Match! ***" )
+            print( "*** Going into last Match! ***" );
             print( "clearing screen..." );
             gameObject->getScoreBoard()->clearScreen();
             print( "cleared screen." );
@@ -439,31 +444,31 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             std::cin >> menu_selection;
         }
 
-        if ( menu_selection == 1 || menu_selection == 2 ) {
+        if (  menu_selection == 1  ||  menu_selection == 2  ) {
             gameObject->playerScore( menu_selection );  // flip the player score flag
             sleep( SCORE_DELAY );
         }
-        else if ( menu_selection == 0 ) {
+        else if (  menu_selection == 0  ) {
             std::cout << "*** Exiting... ***\n" << std::endl;
             exit( 0 );
         }
-        else if ( menu_selection == 9 ) {
+        else if (  menu_selection == 9  ) {
             std::cout << "\n\n\n\n\n\n\n*** Undo ***\n" << std::endl;
 
             gameObject->undo();
             sleep( SCORE_DELAY );
         }
-        else if ( menu_selection == 11 ) {
+        else if (  menu_selection == 11 ) {
             std::cout << "\n\n\n\n\n\n\n*** Player 1 win ***\n" << std::endl;
             playerWin( gameObject, gameState, 1 );
             sleep( SCORE_DELAY );
         }
-        else if ( menu_selection == 22 ) {
+        else if (  menu_selection == 22 ) {
             std::cout << "\n\n\n\n\n\n\n*** Player 2 win ***\n" << std::endl;
             playerWin( gameObject, gameState, 2 );
             sleep( SCORE_DELAY );
         }
-        else if ( menu_selection == 101 ) {
+        else if (  menu_selection == 101 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 01 ***\n" << std::endl;
             gameObject->getScoreBoard()->clearScreen();
@@ -476,48 +481,48 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             sleep( SCORE_DELAY );
             continue;
         }
-        else if ( menu_selection == 3 ) {
+        else if (  menu_selection == 3  ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Demo ***\n" << std::endl;
             demo_test( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
         }
-        else if ( menu_selection == 103 ) {
+        else if (  menu_selection == 103 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 03 ***\n" << std::endl;
             test_03( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
         }
-        else if ( menu_selection == 104 ) {
+        else if (  menu_selection == 104 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 04 ***\n" << std::endl;
             test_04( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
         }
-        else if ( menu_selection == 5 ) {
+        else if (  menu_selection == 5  ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 05 ***\n" << std::endl;
             test_05( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
         }
-        else if ( menu_selection == 6 ) {
+        else if (  menu_selection == 6  ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Match Win Tie Break Test ***\n" << std::endl;
             matchWinTieBreakerTest( gameObject, gameState );
             sleep( SCORE_DELAY );
             continue;
         }
-        else if ( menu_selection == 4 ) {
+        else if (  menu_selection == 4  ) {
             matchWinTest( gameObject, gameState );
             sleep( SCORE_DELAY );
             continue;
 
         }
-        else if ( menu_selection == 7 ) {
+        else if (  menu_selection == 7  ) {
             gameState->setCurrentAction( SLEEP_MODE );
             sleep( SCORE_DELAY );
             continue;
@@ -533,7 +538,6 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
     } ///////// End Game Loop /////////
 }
-
 int main( int argc, char* argv[] ) {
     std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );
     int manual = 0;

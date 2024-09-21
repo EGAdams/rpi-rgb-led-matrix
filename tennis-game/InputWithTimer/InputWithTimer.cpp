@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-InputWithTimer::InputWithTimer( ScoreboardBlinker* blinker) : _blinker( blinker ) {}
+InputWithTimer::InputWithTimer( Blinker* blinker) : _blinker( blinker ) {}
 InputWithTimer::~InputWithTimer() {}
 
 int InputWithTimer::getInput() {
