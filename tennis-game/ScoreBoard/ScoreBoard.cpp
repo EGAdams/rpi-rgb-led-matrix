@@ -143,7 +143,6 @@ void ScoreBoard::writeMessage( std::string message ) {
     if ( hasCanvas() == false ) {
         std::cout << "/// " << message << " ///" << std::endl;
     } else {
-        std::cout << "the matrix should be constructed at this point.  writing message..." << std::endl;
         Color color( 255, 255, 0 );
         Color bg_color( 0, 0, 0 );
         int baseline = _big_number_font.baseline();            // set the coordinates for the text
