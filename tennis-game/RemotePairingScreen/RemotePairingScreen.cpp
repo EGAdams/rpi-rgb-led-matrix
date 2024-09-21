@@ -9,7 +9,7 @@ RemotePairingScreen::~RemotePairingScreen(){}
 void RemotePairingScreen::draw() {
     if (!_green_player_paired) {
         if ( _scoreboard->onRaspberryPi()) {
-            #define LEFT_MARGIN 10
+            #define LEFT_MARGIN 8
             _scoreboard->clearScreen();
             _scoreboard->drawText( "Green",     GREEN, LEFT_MARGIN + 1, 17  );
             _scoreboard->drawText( "Player",    GREEN, LEFT_MARGIN + 0, 34  );
@@ -71,7 +71,7 @@ void RemotePairingScreen::clearRedPlayerText() {
 void RemotePairingScreen::clearAllText() {
     std::cout << "Both players paired, starting the game...\n";
     _scoreboard->clearScreen();
-    _scoreboard->drawText( "Paired", YELLOW, 10, 50  );
+    _scoreboard->drawText( "Paired", YELLOW, 5, 50  );
     GameTimer::gameDelay( 2000 );
     _scoreboard->clearScreen();
     _scoreboard->update();
