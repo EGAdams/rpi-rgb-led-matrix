@@ -9,27 +9,27 @@ RemotePairingScreen::~RemotePairingScreen(){}
 void RemotePairingScreen::draw() {
     if (!_green_player_paired) {
         if ( _scoreboard->onRaspberryPi()) {
-            std::cout << "     Green Player\n";
-            std::cout << "Press your Remote\n";
-            std::cout << "     Green button\n\n";  
-        } else {
             _scoreboard->clearScreen();
             _scoreboard->writeMessage( "     Green Player\n" );
             _scoreboard->writeMessage( "Press your Remote\n" );
             _scoreboard->writeMessage( "     Green button\n\n" );
+        } else {
+            std::cout << "     Green Player\n";
+            std::cout << "Press your Remote\n";
+            std::cout << "     Green button\n\n";  
         }
     }
 
     if (!_red_player_paired) {
         if( _scoreboard->onRaspberryPi()) {
-            std::cout << "     Red Player\n";
-            std::cout << "Press your Remote\n";
-            std::cout << "     Red button\n\n";
-        } else {
             _scoreboard->clearScreen();
             _scoreboard->writeMessage( "     Red Player\n" );
             _scoreboard->writeMessage( "Press your Remote\n" );
             _scoreboard->writeMessage( "     Red button\n\n" );
+        } else {
+            std::cout << "     Red Player\n";
+            std::cout << "Press your Remote\n";
+            std::cout << "     Red button\n\n";
         }
     }
 }
