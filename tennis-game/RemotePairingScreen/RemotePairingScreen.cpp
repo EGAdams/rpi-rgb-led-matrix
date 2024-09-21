@@ -10,9 +10,9 @@ void RemotePairingScreen::draw() {
     if (!_green_player_paired) {
         if ( _scoreboard->onRaspberryPi()) {
             _scoreboard->clearScreen();
-            _scoreboard->drawText( "Green Player",       GREEN, 2, 60  );
+            _scoreboard->drawText( "Green Player",       GREEN, 2,  45  );
             _scoreboard->drawText( "Press Your Remote",  GREEN, 10, 60  );
-            _scoreboard->drawText( "Green Button",       GREEN, 18, 80  );
+            _scoreboard->drawText( "Green Button",       GREEN, 18, 85  );
         } else {
             std::cout << "     Green Player\n";
             std::cout << "Press your Remote\n";
