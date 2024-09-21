@@ -11,13 +11,13 @@ void RemotePairingScreen::draw() {
         if ( _scoreboard->onRaspberryPi()) {
             #define LEFT_MARGIN 8
             _scoreboard->clearScreen();
-            _scoreboard->drawText( "Green",     GREEN, LEFT_MARGIN + 1, 17  );
-            _scoreboard->drawText( "Player",    GREEN, LEFT_MARGIN + 0, 34  );
-            _scoreboard->drawText( "Press",     GREEN, LEFT_MARGIN + 1, 51  );
-            _scoreboard->drawText( "Your",      GREEN, LEFT_MARGIN + 2, 68  );
-            _scoreboard->drawText( "Remote",    GREEN, LEFT_MARGIN + 0, 85  );
-            _scoreboard->drawText( "Green",     GREEN, LEFT_MARGIN + 1, 102 );
-            _scoreboard->drawText( "Button",    GREEN, LEFT_MARGIN + 0, 119 );
+            _scoreboard->drawText( "Green",   GREEN, LEFT_MARGIN + 1, 17  );
+            _scoreboard->drawText( "Player",  GREEN, LEFT_MARGIN + 0, 34  );
+            _scoreboard->drawText( "Press",   GREEN, LEFT_MARGIN + 1, 51  );
+            _scoreboard->drawText( "Your",    GREEN, LEFT_MARGIN + 2, 68  );
+            _scoreboard->drawText( "Remote",  GREEN, LEFT_MARGIN + -4, 85 );
+            _scoreboard->drawText( "Green",   GREEN, LEFT_MARGIN + 1, 102 );
+            _scoreboard->drawText( "Button",  GREEN, LEFT_MARGIN + 0, 119 );
         } else {
             std::cout << "     Green Player\n";
             std::cout << "     Player\n";
