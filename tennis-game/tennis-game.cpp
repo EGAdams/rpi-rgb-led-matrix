@@ -23,7 +23,6 @@
 #include "RemotePairingScreen/RemotePairingScreen.h"
 #include "PairingBlinker/PairingBlinker.h"
 #include "ScoreboardBlinker/ScoreboardBlinker.h"
-#include "../../../../usr/include/c++/13/bits/fs_fwd.h"
 
 using namespace rgb_matrix;
 #define SCORE_DELAY    0
