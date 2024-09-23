@@ -115,14 +115,14 @@ ScoreBoard::~ScoreBoard() {
 
 void ScoreBoard::drawText( std::string message, int color, int x, int y ) {
     if ( onRaspberryPi() == false ) { std::cout << "/// " << message << " ///" << std::endl; return; }
-    // FontLoader fontLoader( LITTLE_NUMBER_FONT );     // construct font loader
-    rgb_matrix::Font font_type;                         // declare font type variable
-    // fontLoader.LoadFont( font_type );                // is this even used?
-    if ( !font_type.LoadFont( LITTLE_NUMBER_FONT )) { fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_NUMBER_FONT ); exit( 1 );}
-    Color fg_color = _getColor( color );
-    Color bg_color( 0, 0, 0 );
-    Drawer drawer( _canvas.get(), &font_type, Drawer::SMALL, fg_color, bg_color );
-    drawer.drawText( message, x, y );
+    // rgb_matrix::Font font_type;  // declare font type variable
+    // if ( !font_type.LoadFont( LITTLE_NUMBER_FONT )) { fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_NUMBER_FONT ); exit( 1 );}
+    // Color fg_color = _getColor( color );
+    // Color bg_color( 0, 0, 0 );
+    // Drawer drawer( _canvas.get(), &font_type, Drawer::SMALL, fg_color, bg_color );
+    // drawer.drawText( message, x, y );
+
+    _drawer->drawText( message, x, y );
 }
 
 Color ScoreBoard::_getColor( int color_constant ) {
@@ -433,3 +433,7 @@ void ScoreBoard::_displayAsciiScoreboard( int player1_score, int player2_score, 
     std::cout << frame_bottom << std::endl;
 }
 
+void ScoreBoard::setDrawerBackgroundColor( const Color& color ) { _drawer->setBackgroundColor( color ); }
+void ScoreBoard::setDrawerForegroundColor( const Color& color ) { _drawer->setForegroundColor( color ); }
+void ScoreBoard::setDrawerFont( const rgb_matrix::Font* font )  { _drawer->setFont(             font ); }
+void ScoreBoard::setDrawerSize( Drawer::Size size )             { _drawer->setSize(             size ); }

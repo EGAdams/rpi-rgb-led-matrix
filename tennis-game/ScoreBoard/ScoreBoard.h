@@ -57,6 +57,10 @@ public:
                                   bool tieBreaker,
                                   std::string serve_bar1, 
                                   std::string serve_bar2 );
+    void setDrawerForegroundColor( const Color& color );
+    void setDrawerBackgroundColor( const Color& color );
+    void setDrawerFont( const rgb_matrix::Font* font  );
+    void setDrawerSize( Drawer::Size            size  );
 
 private:
     Player*                     _player1;
