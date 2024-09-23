@@ -18,7 +18,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         // }
         
         // If the file exists, set the font file
-        setFontFile(font_file.c_str());
+        // setFontFile(font_file.c_str());
         printf( "setting up matrix...\n" );
         Color pipe_color( 255, 255, 0 ); // yellow
         Color background_color( 0, 0, 0 );
