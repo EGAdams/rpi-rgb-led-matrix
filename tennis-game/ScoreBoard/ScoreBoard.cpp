@@ -115,14 +115,13 @@ ScoreBoard::~ScoreBoard() {
 
 void ScoreBoard::drawText( std::string message, int color, int x, int y ) {
     if ( onRaspberryPi() == false ) { std::cout << "/// " << message << " ///" << std::endl; return; }
-    FontLoader bigNumberFontLoader( LITTLE_NUMBER_FONT );
-    rgb_matrix::Font big_number_font;
-    bigNumberFontLoader.LoadFont( big_number_font );
-    if (!big_number_font.LoadFont( LITTLE_NUMBER_FONT )) {
-        fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_NUMBER_FONT ); exit( 1 );}
-    Color fg_color = _getColor(color);
+    // FontLoader fontLoader( LITTLE_NUMBER_FONT );     // construct font loader
+    rgb_matrix::Font font_type;                         // declare font type variable
+    // fontLoader.LoadFont( font_type );                // is this even used?
+    if ( !font_type.LoadFont( LITTLE_NUMBER_FONT )) { fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_NUMBER_FONT ); exit( 1 );}
+    Color fg_color = _getColor( color );
     Color bg_color( 0, 0, 0 );
-    Drawer drawer( _canvas.get(), &big_number_font, Drawer::SMALL, fg_color, bg_color );
+    Drawer drawer( _canvas.get(), &font_type, Drawer::SMALL, fg_color, bg_color );
     drawer.drawText( message, x, y );
 }
 
