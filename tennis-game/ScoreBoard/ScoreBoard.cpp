@@ -6,19 +6,20 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         std::cout << "constructing scoreboard without matrix..." << std::endl;
         _setDrawer = std::make_unique<SetDrawer>( _canvas.get(), _gameState );
     } else {
-        // _font_file = LITTLE_NUMBER_FONT;
-        std::cout << "Enter the path to the font file: ";
-        std::string font_file;
-        std::cin >> font_file;
-        // Check if file exists
-        std::ifstream file_check(font_file);
-        if (!file_check) {
-            std::cerr << "Warning: The specified font file does not exist.\n";
-            return;  // Continue with the program flow without setting the font file
-        }
-        
-        //If the file exists, set the font file
-        setFontFile(font_file.c_str());
+        _font_file = LITTLE_NUMBER_FONT;
+
+
+        // std::cout << "Enter the path to the font file: ";
+        // std::string font_file;
+        // std::cin >> font_file;
+        // std::ifstream file_check(font_file);
+        // if (!file_check) {
+        //     std::cerr << "Warning: The specified font file does not exist.\n";
+        //     return;  // Continue with the program flow without setting the font file
+        // }
+        // setFontFile(font_file.c_str());
+
+
         printf( "setting up matrix...\n" );
         Color pipe_color( 255, 255, 0 ); // yellow
         Color background_color( 0, 0, 0 );
@@ -131,7 +132,11 @@ void ScoreBoard::setFontFile( const char* font_file_arg ) { _font_file = font_fi
 void ScoreBoard::drawText( std::string message, int color, int x, int y ) {
     if ( onRaspberryPi() == false ) { std::cout << "/// " << message << " ///" << std::endl; return; }
     rgb_matrix::Font font_type;  // declare font type variable
-    if ( !font_type.LoadFont( _font_file )) { fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_NUMBER_FONT ); exit( 1 );}
+    if ( !font_type.LoadFont( _font_file )) { 
+        fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_NUMBER_FONT ); exit( 1 );
+    } else {
+        fprintf( stdout, "loaded font '%s'\n", LITTLE_NUMBER_FONT );
+    }
     Color fg_color = _getColor( color );
     _drawer->setForegroundColor( fg_color );
     _drawer->setFont( &font_type );
