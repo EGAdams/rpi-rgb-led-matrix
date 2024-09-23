@@ -6,16 +6,16 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         std::cout << "constructing scoreboard without matrix..." << std::endl;
         _setDrawer = std::make_unique<SetDrawer>( _canvas.get(), _gameState );
     } else {
-        // _font_file = LITTLE_NUMBER_FONT;
-        std::cout << "Enter the path to the font file: ";
-        std::string font_file;
-        std::cin >> font_file;
-        // Check if file exists
-        std::ifstream file_check(font_file);
-        if (!file_check) {
-            std::cerr << "Warning: The specified font file does not exist.\n";
-            return;  // Continue with the program flow without setting the font file
-        }
+        _font_file = LITTLE_NUMBER_FONT;
+        // std::cout << "Enter the path to the font file: ";
+        // std::string font_file;
+        // std::cin >> font_file;
+        // // Check if file exists
+        // std::ifstream file_check(font_file);
+        // if (!file_check) {
+        //     std::cerr << "Warning: The specified font file does not exist.\n";
+        //     return;  // Continue with the program flow without setting the font file
+        // }
         
         // If the file exists, set the font file
         setFontFile(font_file.c_str());
