@@ -6,6 +6,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         std::cout << "constructing scoreboard without matrix..." << std::endl;
         _setDrawer = std::make_unique<SetDrawer>( _canvas.get(), _gameState );
     } else {
+        _font_file = LITTLE_NUMBER_FONT;
         printf( "setting up matrix...\n" );
         Color pipe_color( 255, 255, 0 ); // yellow
         Color background_color( 0, 0, 0 );
@@ -113,21 +114,18 @@ ScoreBoard::~ScoreBoard() {
         // delete _canvas.get(); // this causes some error.  only one scoreBoard is created anyway.
     } else { /* std::cout << "*** WARNING: _canvas == NULL, not deleting. ***" << std::endl; */ }}
 
+void ScoreBoard::setFontFile( const char* font_file_arg ) { _font_file = font_file_arg; }
+
 void ScoreBoard::drawText( std::string message, int color, int x, int y ) {
     if ( onRaspberryPi() == false ) { std::cout << "/// " << message << " ///" << std::endl; return; }
     rgb_matrix::Font font_type;  // declare font type variable
-    if ( !font_type.LoadFont( LITTLE_NUMBER_FONT )) { fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_NUMBER_FONT ); exit( 1 );}
+    if ( !font_type.LoadFont( _font_file )) { fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_NUMBER_FONT ); exit( 1 );}
     Color fg_color = _getColor( color );
-    // Color bg_color( 0, 0, 0 );
-    // Drawer drawer( _canvas.get(), &font_type, Drawer::SMALL, fg_color, bg_color );
-    // drawer.drawText( message, x, y );
     _drawer->setForegroundColor( fg_color );
     _drawer->setFont( &font_type );
     _drawer->drawText( message, x, y );
 }
-
-Color ScoreBoard::_getColor( int color_constant ) {
-    switch ( color_constant ) {
+Color ScoreBoard::_getColor( int color_constant ) {    switch ( color_constant ) {
         case RED:    return Color( 255, 0, 0 );
         case GREEN:  return Color( 0, 255, 0 );
         case BLUE:   return Color( 0, 0, 255 );

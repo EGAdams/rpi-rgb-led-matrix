@@ -61,32 +61,36 @@ public:
     void setDrawerBackgroundColor( const Color& color );
     void setDrawerFont( const rgb_matrix::Font* font  );
     void setDrawerSize( Drawer::Size            size  );
+    void setFontFile(   const char*             font_file  );
 
 private:
-    Player*                     _player1;
-    Player*                     _player2;
-    GameState*                  _gameState;
-    rgb_matrix::Font            _big_number_font;
-    rgb_matrix::Font            _little_number_font;
-    rgb_matrix::Font            _period_font;
-    std::unique_ptr<Drawer>     _drawer;
-    std::unique_ptr<Drawer>     _smallDrawer;
-    std::unique_ptr<Drawer>     _playerOneScoreDrawer;
-    std::unique_ptr<Drawer>     _playerTwoScoreDrawer;
-    std::unique_ptr<Drawer>     _pipeDrawer;
-    std::unique_ptr<Drawer>     _bluePipeDrawer;
-    std::unique_ptr<Drawer>     _redPipeDrawer;
-    std::unique_ptr<Drawer>     _greenPipeDrawer;
-    std::unique_ptr<Drawer>     _blankPipeDrawer;
-    std::unique_ptr<Drawer>     _redPeriodDrawer;
-    std::unique_ptr<Drawer>     _greenPeriodDrawer;
-    std::unique_ptr<Drawer>     _yellowPeriodDrawer;
-    std::unique_ptr<Drawer>     _blankPeriodDrawer;
-    std::unique_ptr<SetDrawer>  _setDrawer;
-    std::unique_ptr<RGBMatrix>  _canvas;
+    Player*                      _player1;
+    Player*                      _player2;
+    GameState*                   _gameState;
+    rgb_matrix::Font             _big_number_font;
+    rgb_matrix::Font             _little_number_font;
+    rgb_matrix::Font             _period_font;
+    std::unique_ptr<Drawer>      _drawer;
+    std::unique_ptr<Drawer>      _smallDrawer;
+    std::unique_ptr<Drawer>      _playerOneScoreDrawer;
+    std::unique_ptr<Drawer>      _playerTwoScoreDrawer;
+    std::unique_ptr<Drawer>      _pipeDrawer;
+    std::unique_ptr<Drawer>      _bluePipeDrawer;
+    std::unique_ptr<Drawer>      _redPipeDrawer;
+    std::unique_ptr<Drawer>      _greenPipeDrawer;
+    std::unique_ptr<Drawer>      _blankPipeDrawer;
+    std::unique_ptr<Drawer>      _redPeriodDrawer;
+    std::unique_ptr<Drawer>      _greenPeriodDrawer;
+    std::unique_ptr<Drawer>      _yellowPeriodDrawer;
+    std::unique_ptr<Drawer>      _blankPeriodDrawer;
+    std::unique_ptr<SetDrawer>   _setDrawer;
+    std::unique_ptr<RGBMatrix>   _canvas;
+    const char*                 _font_file;
 
     void _drawTieBreakerBar(    /* void */            );
     void _drawMatchWinDisplay(  /* void */            );
     int  _characterOffset(   std::string character    );
-    std::string _translate(  int raw_score            ); };
+    std::string _translate(  int raw_score            );
+};
+
 #endif

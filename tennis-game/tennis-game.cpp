@@ -23,6 +23,7 @@
 #include "RemotePairingScreen/RemotePairingScreen.h"
 #include "PairingBlinker/PairingBlinker.h"
 #include "ScoreboardBlinker/ScoreboardBlinker.h"
+#include "../../../../usr/include/c++/13/bits/fs_fwd.h"
 
 using namespace rgb_matrix;
 #define SCORE_DELAY    0
@@ -410,6 +411,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         std::cout << "5.) Test 05        " << std::endl;
         std::cout << "6.) Match Win Tie Break Test" << std::endl;
         std::cout << "7.) Sleep Mode Test" << std::endl;
+        std::cout << "8.) Font File"       << std::endl;
         std::cout << "9.) Undo           " << std::endl;
 
 
@@ -452,6 +454,22 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         else if (  menu_selection == 0  ) {
             std::cout << "*** Exiting... ***\n" << std::endl;
             exit( 0 );
+        }
+        else if (menu_selection == 8) {
+            // get font file from user
+            std::string font_file;
+            std::cout << "Enter the path to the font file: ";
+            std::getline(std::cin, font_file);  // get input from the user
+
+            // Check if file exists
+            std::ifstream file_check(font_file);
+            if (!file_check) {
+                std::cerr << "Warning: The specified font file does not exist.\n";
+                return;  // Continue with the program flow without setting the font file
+            }
+            
+            // If the file exists, set the font file
+            gameObject->getScoreBoard()->setFontFile(font_file.c_str());
         }
         else if (  menu_selection == 9  ) {
             std::cout << "\n\n\n\n\n\n\n*** Undo ***\n" << std::endl;
@@ -538,9 +556,11 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
         std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
     } ///////// End Game Loop /////////
+
+
 }
-int main( int argc, char* argv[] ) {
-    std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );
+
+int main( int argc, char* argv[] ) {    std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );
     int manual = 0;
     if ( argc > 1 ) {
         std::string arg1 = argv[1];
