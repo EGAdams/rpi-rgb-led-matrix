@@ -82,6 +82,7 @@ TEST_F( Mode1ScoreTest, TestMode1P1Score_MoreThan3Points_DifferenceMoreThan1) {
     EXPECT_EQ( _player1->getPoints(), 0 );
     EXPECT_EQ( _player2->getPoints(), 0 );
     EXPECT_EQ( _player1->getGames(),  1 );
+    print( "finished TestMode1P1Score_MoreThan3Points_DifferenceMoreThan1" );
 }
 
 // Test case: TestMode1P1Score_4Points
