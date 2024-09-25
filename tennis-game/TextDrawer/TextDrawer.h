@@ -1,22 +1,23 @@
-#pragma once
+// TextDrawer.h
+#ifndef TEXTDRAWER_H
+#define TEXTDRAWER_H
 
-#include "../../include/led-matrix.h"
-#include "../../include/graphics.h"
+#include "../IDisplay/IDisplay.h"
+#include "graphics.h"  // For rgb_matrix::Font and rgb_matrix::Color
 
-using namespace rgb_matrix;
 class TextDrawer {
 public:
-    TextDrawer(RGBMatrix* canvas, rgb_matrix::Font& font, int x, int y, const Color& color, const Color& bg_color, const char* text, int letter_spacing);
+    TextDrawer(IDisplay* display, const rgb_matrix::Font& font, const rgb_matrix::Color& color);
 
-    void DrawText();
+    void setFont(const rgb_matrix::Font& font);
+    void setColor(const rgb_matrix::Color& color);
+
+    void drawText(const std::string& text, int x, int y);
 
 private:
-    RGBMatrix* _canvas;
-    rgb_matrix::Font& _font;
-    int _x;
-    int _y;
-    const Color& _color;
-    const Color& _bg_color;
-    const char* _text;
-    int _letter_spacing;
+    IDisplay* _display;
+    const rgb_matrix::Font* _font;
+    rgb_matrix::Color _color;
 };
+
+#endif // TEXTDRAWER_H

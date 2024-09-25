@@ -32,7 +32,7 @@ class GameObject {
               ScoreBoard*   scoreBoard,
               WebLiquidCrystal* lcd );
 
-  GameObject( GameState* gameState );
+  GameObject( GameState* gameState, IDisplay* display );
   ~GameObject();
   void resetMatch();
   void start();
@@ -55,6 +55,7 @@ class GameObject {
   Player*           _player2;
   PinState*         _pinState;
   PinInterface*     _pinInterface;
+  IDisplay*         _display;
   GameState*        _gameState;
   GameTimer*        _gameTimer;
   Inputs*           _gameInputs;

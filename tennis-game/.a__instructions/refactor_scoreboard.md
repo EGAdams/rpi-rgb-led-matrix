@@ -1,18 +1,25 @@
-#include "ScoreBoard.h"
-#include "ConsoleDisplay.h"
+# Persona
+You Are a world-class C++ developer and seasoned user of the GoF Design Patterns
 
-ScoreBoard::ScoreBoard(Player* player1, Player* player2, GameState* gameState, IDisplay* display,
-                       FontManager* fontManager, ColorManager* colorManager)
-    : _player1(player1), _player2(player2), _gameState(gameState),
-      _display(display), _fontManager(fontManager), _colorManager(colorManager) {
+# Problem
+The ScoreBoard class listed below has WAY to many responsibilities
+
+# Your Task
+Break up the ScoreBoard class into many smaller testable objects so that we can simplify the debugging of this scoreboard object.
+
+# ScoreBoard Source code
+```cpp
+#include "ScoreBoard.h"
+
+ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState ):
+    _player1( player1 ), _player2( player2 ), _gameState( gameState ) {
     if ( onRaspberryPi() == false ) {
         std::cout << "constructing scoreboard without matrix..." << std::endl;
         _setDrawer = std::make_unique<SetDrawer>( _canvas.get(), _gameState );
     } else {
-        const rgb_matrix::Font& defaultFont = _fontManager->getFont("fonts/fgm_27_ee.bdf");
-        rgb_matrix::Color defaultColor = _colorManager->getColor("WHITE");
-        _textDrawer = new TextDrawer(_display, defaultFont, defaultColor);
         _font_file = LITTLE_NUMBER_FONT;
+
+
         // std::cout << "Enter the path to the font file: ";
         // std::string font_file;
         // std::cin >> font_file;
@@ -126,21 +133,28 @@ ScoreBoard::ScoreBoard(Player* player1, Player* player2, GameState* gameState, I
     update();
     print( "done updating scoreboard." );
 }
-
 ScoreBoard::~ScoreBoard() {
     // std::cout << "destroying ScoreBoard..." << std::endl;
     if ( _canvas != NULL ) {
         std::cout << "NOT deleting _canvas..." << std::endl;
-        delete _textDrawer;
         // delete _canvas.get(); // this causes some error.  only one scoreBoard is created anyway.
     } else { /* std::cout << "*** WARNING: _canvas == NULL, not deleting. ***" << std::endl; */ }}
 
 void ScoreBoard::setFontFile( const char* font_file_arg ) { _font_file = font_file_arg; }
 
-void ScoreBoard::drawText(const std::string& message, int x, int y) {
-    _textDrawer->drawText(message, x, y);
+void ScoreBoard::drawText( std::string message, int color, int x, int y ) {
+    if ( onRaspberryPi() == false ) { std::cout << "/// " << message << " ///" << std::endl; return; }
+    rgb_matrix::Font font_type;  // declare font type variable
+    if ( !font_type.LoadFont( _font_file )) { 
+        fprintf( stderr, "Couldn't load font '%s'\n", LITTLE_NUMBER_FONT ); exit( 1 );
+    } else {
+        fprintf( stdout, "loaded font '%s'\n", LITTLE_NUMBER_FONT );
+    }
+    Color fg_color = _getColor( color );
+    _drawer->setForegroundColor( fg_color );
+    _drawer->setFont( &font_type );
+    _drawer->drawText( message, x, y );
 }
-
 Color ScoreBoard::_getColor( int color_constant ) {    switch ( color_constant ) {
         case RED:    return Color( 255, 0, 0 );
         case GREEN:  return Color( 0, 255, 0 );
@@ -454,3 +468,6 @@ void ScoreBoard::setDrawerBackgroundColor( const Color& color ) { _drawer->setBa
 void ScoreBoard::setDrawerForegroundColor( const Color& color ) { _drawer->setForegroundColor( color ); }
 void ScoreBoard::setDrawerFont( const rgb_matrix::Font* font )  { _drawer->setFont(             font ); }
 void ScoreBoard::setDrawerSize( Drawer::Size size )             { _drawer->setSize(             size ); }
+```
+
+I want to be able to incrementally make and test each object that you suggest that we need.

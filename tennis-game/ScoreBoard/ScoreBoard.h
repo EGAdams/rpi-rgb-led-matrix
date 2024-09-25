@@ -1,6 +1,9 @@
 #ifndef SCOREBOARD_H
 #define SCOREBOARD_H
 
+#include "../TextDrawer/TextDrawer.h"
+#include "../FontManager/FontManager.h"
+#include "../ColorManager/ColorManager.h"
 #include "../GameTimer/GameTimer.h"
 #include "../Player/Player.h"
 #include "../GameState/GameState.h"
@@ -33,7 +36,8 @@
 
 class ScoreBoard {
 public:
-    ScoreBoard( Player* player1, Player* player2, GameState* gameState );
+    ScoreBoard(Player* player1, Player* player2, GameState* gameState, IDisplay* display,
+               FontManager* fontManager, ColorManager* colorManager);
     ~ScoreBoard();
     void update();
     bool hasCanvas();
@@ -46,7 +50,7 @@ public:
     void drawSets();
     void drawBlinkSets( int player_number );
     void writeMessage( std::string message );
-    void drawText( std::string message, int color, int x, int y );
+    void drawText( const std::string& message, int x, int y );
     std::string drawPlayerScore(   Player* player );
     RGBMatrix* getCanvas();
     Color _getColor( int color );
@@ -67,6 +71,10 @@ private:
     Player*                      _player1;
     Player*                      _player2;
     GameState*                   _gameState;
+    IDisplay*                    _display;
+    FontManager*                 _fontManager;
+    ColorManager*                _colorManager;
+    TextDrawer*                  _textDrawer;
     rgb_matrix::Font             _big_number_font;
     rgb_matrix::Font             _little_number_font;
     rgb_matrix::Font             _period_font;

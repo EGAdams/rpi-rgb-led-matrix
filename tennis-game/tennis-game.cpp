@@ -490,10 +490,8 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 01 ***\n" << std::endl;
             gameObject->getScoreBoard()->clearScreen();
-            gameObject->getScoreBoard()->drawText( "Test",
-            YELLOW, X__POS, Y__POS );
-            gameObject->getScoreBoard()->drawText( " 01 ",
-            YELLOW, X__POSITION, Y__POSITION );
+            gameObject->getScoreBoard()->drawText( "Test", X__POS, Y__POS );
+            gameObject->getScoreBoard()->drawText( " 01 ", X__POSITION, Y__POSITION );
             GameTimer::gameDelay( 4000 );
             test_01( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
@@ -586,10 +584,8 @@ int main( int argc, char* argv[] ) {    std::unique_ptr<MonitoredObject> logger 
     test_count++;
     test_count++;
     gameObject->getScoreBoard()->clearScreen(); // test 05
-    gameObject->getScoreBoard()->drawText( "Test",
-    YELLOW, X__POS, Y__POS );
-    gameObject->getScoreBoard()->drawText( " 05 ",
-    YELLOW, X__POSITION, Y__POSITION );
+    gameObject->getScoreBoard()->drawText( "Test", X__POS, Y__POS );
+    gameObject->getScoreBoard()->drawText( " 05 ", X__POSITION, Y__POSITION );
     GameTimer::gameDelay( 4000 );
     std::cout << "calling test_05()..." << std::endl;
     test_05( gameObject, gameState, &loop_count );
@@ -597,7 +593,3 @@ int main( int argc, char* argv[] ) {    std::unique_ptr<MonitoredObject> logger 
     GameTimer::gameDelay( 2000 );
     test_count++;
 }
-
-
-
-

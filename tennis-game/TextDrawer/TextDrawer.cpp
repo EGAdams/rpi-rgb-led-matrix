@@ -1,7 +1,17 @@
+// TextDrawer.cpp
 #include "TextDrawer.h"
 
-TextDrawer::TextDrawer(RGBMatrix* canvas, rgb_matrix::Font& font, int x, int y, const Color& color, const Color& bg_color, const char* text, int letter_spacing) : _canvas(canvas), _font(font), _x(x), _y(y), _color(color), _bg_color(bg_color), _text(text), _letter_spacing(letter_spacing) {}
+TextDrawer::TextDrawer(IDisplay* display, const rgb_matrix::Font& font, const rgb_matrix::Color& color)
+    : _display(display), _font(&font), _color(color) {}
 
-void TextDrawer::DrawText() {
-    rgb_matrix::DrawText(_canvas, _font, _x, _y + _font.baseline(), _color, NULL, _text, _letter_spacing);
+void TextDrawer::setFont(const rgb_matrix::Font& font) {
+    _font = &font;
+}
+
+void TextDrawer::setColor(const rgb_matrix::Color& color) {
+    _color = color;
+}
+
+void TextDrawer::drawText(const std::string& text, int x, int y) {
+    _display->drawText(text, x, y, _color, *_font);
 }

@@ -47,26 +47,26 @@ void PairingBlinker::blinkLoop() {
 void PairingBlinker::showGreenInstructions() {
     int left_margin = 8;
     _scoreboard->clearScreen();
-    _scoreboard->drawText( "Green",   GREEN, left_margin + 1, 17  );
-    _scoreboard->drawText( "Player",  GREEN, left_margin + 0, 34  );
-    _scoreboard->drawText( "Press",   GREEN, left_margin + 1, 51  );
-    _scoreboard->drawText( "Your",    GREEN, left_margin + 2, 68  );
-    _scoreboard->drawText( "Remote",  GREEN, left_margin + -8, 85 );
-    _scoreboard->drawText( "Green",   GREEN, left_margin + 1, 102 );
-    _scoreboard->drawText( "Button",  GREEN, left_margin + 0, 119 );
+    _scoreboard->drawText( "Green",  left_margin + 1, 17  );
+    _scoreboard->drawText( "Player", left_margin + 0, 34  );
+    _scoreboard->drawText( "Press",  left_margin + 1, 51  );
+    _scoreboard->drawText( "Your",   left_margin + 2, 68  );
+    _scoreboard->drawText( "Remote", left_margin + -8, 85 );
+    _scoreboard->drawText( "Green",  left_margin + 1, 102 );
+    _scoreboard->drawText( "Button", left_margin + 0, 119 );
 }
 
 void PairingBlinker::showRedInstructions() {
     if( _scoreboard->onRaspberryPi()) {
          int left_margin = 8;
         _scoreboard->clearScreen();
-        _scoreboard->drawText( "Red",   RED, left_margin + 4, 17  );
-        _scoreboard->drawText( "Player",  RED, left_margin + 0, 34  );
-        _scoreboard->drawText( "Press",   RED, left_margin + 1, 51  );
-        _scoreboard->drawText( "Your",    RED, left_margin + 2, 68  );
-        _scoreboard->drawText( "Remote",  RED, left_margin + -8, 85 );
-        _scoreboard->drawText( "Red",   RED, left_margin + 4, 102 );
-        _scoreboard->drawText( "Button",  RED, left_margin + 0, 119 );
+        _scoreboard->drawText( "Red",     left_margin + 4, 17  );
+        _scoreboard->drawText( "Player",  left_margin + 0, 34  );
+        _scoreboard->drawText( "Press",   left_margin + 1, 51  );
+        _scoreboard->drawText( "Your",    left_margin + 2, 68  );
+        _scoreboard->drawText( "Remote",  left_margin + -8, 85 );
+        _scoreboard->drawText( "Red",     left_margin + 4, 102 );
+        _scoreboard->drawText( "Button",  left_margin + 0, 119 );
     }
 }
 

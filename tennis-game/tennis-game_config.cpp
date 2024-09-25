@@ -21,6 +21,7 @@
 #include "ScoreBoard/ScoreBoard.h"
 #include "GameObject/GameObject.h"
 #include "Inputs/Inputs.h"
+#include "ConsoleDisplay/ConsoleDisplay.h"
 
 using namespace rgb_matrix;
 
@@ -58,7 +59,10 @@ int main() {
     std::cout << "creating game modes..." << std::endl;
     GameModes* gameModes = new GameModes( player1, player2, pinInterface, gameState, history );
     std::cout << "creating scoreboard..." << std::endl;
-    ScoreBoard* scoreBoard = new ScoreBoard( player1, player2, gameState );
+    IDisplay* display = new ConsoleDisplay();
+    FontManager* fontManager = new FontManager();
+    ColorManager* colorManager = new ColorManager();
+    ScoreBoard* scoreBoard = new ScoreBoard( player1, player2, gameState, display, fontManager, colorManager);
     std::cout << "creating web lcd..." << std::endl;
     WebLiquidCrystal* lcd = new WebLiquidCrystal();
     std::cout << "insided main, creating GameObject..." << std::endl;
@@ -75,6 +79,8 @@ int main() {
         if ( line.find( "## Test " ) != std::string::npos ) {
             std::cout << "Test " << test_count << std::endl;
             test_count++;
+
+
             scoreBoard->clearScreen();
             scoreBoard->writeMessage( "t " + std::to_string( test_count ));
             // print the line
@@ -107,36 +113,24 @@ int main() {
             // Now, set up the game state and run the test
             player1->setGames( player1_games );
             player2->setGames( player2_games );
-            // std::cout << "player 1 games: " << player1->getGames() << std::endl;
-            // std::cout << "player 2 games: " << player2->getGames() << std::endl;
             player1->setSets( gameState, player1_sets );
             player2->setSets( gameState, player2_sets );
-            // std::cout << "setting points in gameState..." << std::endl;
             gameState->setPlayer1Points( player1_score );
             gameState->setPlayer2Points( player2_score );
-            // std::cout << "setting sets in gameState..." << std::endl;
             gameState->setPlayer1Sets( player1_sets );
             gameState->setPlayer2Sets( player2_sets );
-            // std::cout << "setting games in gamestate..." << std::endl;
             gameState->setPlayer1Games( player1_games );
             gameState->setPlayer2Games( player2_games );
-            // std::cout << "updating scoreboard..." << std::endl;
+
             scoreBoard->update();
-            // std::cout << "sleeping for 2 seconds..." << std::endl;
             sleep( SCORE_DELAY );
 
-            // std::cout << "setting player points; player1: " << player1_score << ", player2: " << player2_score << std::endl;
             player1->setPoints( player1_score );
             player2->setPoints( player2_score );
 
-
             scoreBoard->update();
             sleep( SCORE_DELAY );
-            // gameObject->playerScore( PLAYER_1_INITIALIZED );
-            // std::cout << "clearing scoreboard before updating..." << std::endl;
             mode1Score->getScoreBoard()->clearScreen();
-            // std::cout << "updating score for player 1.  player 1 score is: " << player1->getPoints() << std::endl;
-            // std::cout << "simulating player 1 score..." << std::endl;
             player1->setPoints( player1->getPoints() + 1 ); // simulate player 1 scoring!!
             mode1Score->updateScore( player1 );
             sleep( SCORE_DELAY );
@@ -144,6 +138,7 @@ int main() {
             player2->setSets( gameState, 0 );
             player1->setGames( 0 );
             player2->setGames( 0 );
+
             scoreBoard->update();
             sleep( SCORE_DELAY );
             sleep( SCORE_DELAY );
@@ -151,10 +146,22 @@ int main() {
         }
     }
 
-    delete gameState;  // delete all of the "newed" objects
+    delete gameState;
     delete gameObject;
     delete player1;
     delete player2;
+    delete pin_state;
+    delete pinInterface;
+    delete history;
+    delete mode1Score;
+    delete gameTimer;
+    delete gameInputs;
+    delete gameModes;
+    delete display;
+    delete fontManager;
+    delete colorManager;
+    delete lcd;
+    delete scoreBoard;
     configFile.close();
     return 0;
 }

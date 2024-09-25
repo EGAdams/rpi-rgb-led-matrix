@@ -26,7 +26,8 @@ GameObject::GameObject( Player* player1,
     _webLiquidCrystal = lcd;
 }
 
-GameObject::GameObject( GameState* gameState ) : _gameState( gameState ) {
+GameObject::GameObject( GameState* gameState, IDisplay* display ) :
+                        _gameState( gameState ), _display(display) {
     _webLiquidCrystal = new WebLiquidCrystal();
     _gameTimer = new GameTimer();
     _player1 = new Player( _gameState, PLAYER_1_INITIALIZED );
@@ -37,7 +38,9 @@ GameObject::GameObject( GameState* gameState ) : _gameState( gameState ) {
     _history = new History();
     _gameInputs = new Inputs( _player1, _player2, _pinInterface, _gameState );
     _gameModes =  new GameModes( _player1, _player2, _pinInterface, _gameState, _history );
-    _scoreBoard = new ScoreBoard( _player1, _player2, _gameState );
+    FontManager* fontManager = new FontManager();
+    ColorManager* colorManager = new ColorManager();
+    ScoreBoard* scoreBoard = new ScoreBoard( _player1, _player2, gameState, display, fontManager, colorManager);
     _gameModes->setScoreBoards( _scoreBoard );
     _subjectManager = new SubjectManager();
     _logger = new Logger( "GameObject" );
