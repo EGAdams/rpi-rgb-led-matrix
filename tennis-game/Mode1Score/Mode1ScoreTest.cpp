@@ -44,12 +44,20 @@ void Mode1ScoreTest::SetUp() {
 
 // Tear down the test fixture
 void Mode1ScoreTest::TearDown() {
+    print("deleting _mode1Score...");
     delete _mode1Score;
+    print("deleting _history...");
     delete _history;
+    print("deleting _gameState...");
     delete _gameState;
+    print("deleting _pinInterface...");
     delete _pinInterface;
+    print("deleting _player2...");
     delete _player2;
-    delete _player1; }
+    print("deleting _player1...");
+    delete _player1;
+    print( "done with Mode1ScoreTest::TearDown()" );
+}
 
 ///////////////// Test case: Test Mode 1 P1 Score Less Than 3 Points //////////
 TEST_F( Mode1ScoreTest, TestMode1P1Score_LessThan3Points ) {
