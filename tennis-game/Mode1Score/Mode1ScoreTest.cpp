@@ -86,16 +86,26 @@ TEST_F( Mode1ScoreTest, TestMode1P1Score_MoreThan3Points_DifferenceMoreThan1) {
 
 // Test case: TestMode1P1Score_4Points
 TEST_F( Mode1ScoreTest, TestMode1P1Score_4Points ) {
+    print( "setting player one points to 3... " );
     _player1->setPoints( 3 );
+    print( "updating score for player one... " );
     _mode1Score->updateScore( _player1  );
+    print( "setting player two points to 3... " );
     _player2->setPoints( 3 );
+    print( "updating score for player two... " );
     _mode1Score->updateScore( _player2 );
+    print( "setting player one points to 4... " );
     _player1->setPoints( 4 );
+    print( "updating score for player one... " );
     _mode1Score->updateScore( _player1 );
+    print( "checking if player one has 4 points... " );
     EXPECT_EQ( _player1->getPoints(), 4 );
+    print( "checking if player two has 3 points... " );
     EXPECT_EQ( _player2->getPoints(), 3 );
+    print( "checking if point flash is 1... " );
     EXPECT_EQ( _gameState->getPointFlash(), 1 ); // Assuming getPointFlash returns the current pointFlash
     // Check other changes made by the method
+    print( "finished TestMode1P1Score_4Points tests." );
 }
 
 TEST_F( Mode1ScoreTest, TestMode1P1Score_Deuce ) {
