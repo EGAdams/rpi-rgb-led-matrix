@@ -14,19 +14,32 @@ protected:
 };
 
 void Mode1ScoreTest::SetUp() {
+    print("constructing GameState...");
     _gameState = new GameState();
-    _player1 = new Player( _gameState, PLAYER_1_INITIALIZED );
-    _player2 = new Player( _gameState, PLAYER_2_INITIALIZED );
-    _player1->setOpponent( _player2 ); _player2->setOpponent( _player1 );
+    print("creating Player 1...");
+    _player1 = new Player(_gameState, PLAYER_1_INITIALIZED);
+    print("creating Player 2...");
+    _player2 = new Player(_gameState, PLAYER_2_INITIALIZED);
+    print("setting opponents for players...");
+    _player1->setOpponent(_player2); _player2->setOpponent(_player1);
+    print("creating pin map...");
     std::map<std::string, int> pin_map;
-    PinState* pin_state = new PinState( pin_map );
-    _pinInterface = new PinInterface( pin_state );
+    print("creating PinState...");
+    PinState* pin_state = new PinState(pin_map);
+    print("creating PinInterface...");
+    _pinInterface = new PinInterface(pin_state);
+    print("creating History...");
     _history = new History();
-    _mode1Score = new Mode1Score( _player1, _player2, _pinInterface, _gameState, _history );
+    print("creating Mode1Score...");
+    _mode1Score = new Mode1Score(_player1, _player2, _pinInterface, _gameState, _history);
+    print("initializing TieBreaker iteration...");
     _mode1Score->getTieBreaker()->setIteration(1);  // Initialize iteration to a valid value
+    print("creating ScoreBoard...");
     // Assuming ScoreBoard is a class that needs to be instantiated
     ScoreBoard* scoreBoard = new ScoreBoard(_player1, _player2, _gameState);
+    print("setting ScoreBoard for TieBreaker...");
     _mode1Score->getTieBreaker()->setScoreBoards(scoreBoard);
+    print( "finished Mode1ScoreTest::SetUp()" );
 }
 
 // Tear down the test fixture
