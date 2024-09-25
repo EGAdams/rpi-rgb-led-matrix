@@ -99,7 +99,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         Color green_color( 0, 255, 0 );
         Color yellow_color( 255, 255, 0 );
         Color black_color( 0, 0, 0 );
-
+        print( "done loading Color objects.  contructing unique pointers..." );
         _playerOneScoreDrawer   = std::make_unique<Drawer>(
             _canvas.get(), &_big_number_font, Drawer::BIG, player_one_score_color, bg_color );
         _playerTwoScoreDrawer   = std::make_unique<Drawer>(
@@ -115,7 +115,8 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         _greenPeriodDrawer  = std::make_unique<Drawer>(    _canvas.get(), &_period_font, Drawer::BIG, green_color, bg_color );
         _yellowPeriodDrawer = std::make_unique<Drawer>(    _canvas.get(), &_period_font, Drawer::BIG, yellow_color, bg_color );
         _blankPeriodDrawer  = std::make_unique<Drawer>(    _canvas.get(), &_period_font, Drawer::BIG, black_color, bg_color );
-        _setDrawer          = std::make_unique<SetDrawer>( _canvas.get(), _gameState                                            );
+        _setDrawer          = std::make_unique<SetDrawer>( _canvas.get(), _gameState                                           );
+        print( "done constructing unique pointers.  updating scoreboard..." );
         } // fi onRaspberryPi
     update();
 
