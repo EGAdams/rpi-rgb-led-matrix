@@ -117,9 +117,10 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         _blankPeriodDrawer  = std::make_unique<Drawer>(    _canvas.get(), &_period_font, Drawer::BIG, black_color, bg_color );
         _setDrawer          = std::make_unique<SetDrawer>( _canvas.get(), _gameState                                           );
         print( "done constructing unique pointers.  updating scoreboard..." );
-        } // fi onRaspberryPi
+    } // fi onRaspberryPi
+    print( "updating scoreboard..." );
     update();
-
+    print( "done updating scoreboard." );
 }
 ScoreBoard::~ScoreBoard() {
     // std::cout << "destroying ScoreBoard..." << std::endl;
