@@ -58,17 +58,17 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState )
         runtime_opt.gpio_slowdown = 2;
         runtime_opt.daemon = 0;
         runtime_opt.do_gpio_init = 1;
-        printf( "Matrix options:\n" );
-        printf( "  rows: %d\n", matrix_options.rows );
-        printf( "  chain_length: %d\n", matrix_options.chain_length );
-        printf( "  parallel: %d\n", matrix_options.parallel );
-        printf( "  pwm_bits: %d\n", matrix_options.pwm_bits );
-        printf( "  pwm_lsb_nanoseconds: %d\n", matrix_options.pwm_lsb_nanoseconds );
-        printf( "  Runtime options:\n" );
-        printf( "  daemon: %d\n", runtime_opt.daemon );
-        printf( "  do_gpio_init: %d\n", runtime_opt.do_gpio_init );
-        printf( "  drop_privileges: %d\n", runtime_opt.drop_privileges );
-        printf( "  gpio_slowdown: %d\n", runtime_opt.gpio_slowdown );
+        // printf( "Matrix options:\n" );
+        // printf( "  rows: %d\n", matrix_options.rows );
+        // printf( "  chain_length: %d\n", matrix_options.chain_length );
+        // printf( "  parallel: %d\n", matrix_options.parallel );
+        // printf( "  pwm_bits: %d\n", matrix_options.pwm_bits );
+        // printf( "  pwm_lsb_nanoseconds: %d\n", matrix_options.pwm_lsb_nanoseconds );
+        // printf( "  Runtime options:\n" );
+        // printf( "  daemon: %d\n", runtime_opt.daemon );
+        // printf( "  do_gpio_init: %d\n", runtime_opt.do_gpio_init );
+        // printf( "  drop_privileges: %d\n", runtime_opt.drop_privileges );
+        // printf( "  gpio_slowdown: %d\n", runtime_opt.gpio_slowdown );
         CanvasCreator canvasCreator( matrix_options, runtime_opt );
         _canvas = std::unique_ptr<rgb_matrix::RGBMatrix>( canvasCreator.createCanvas());
 
