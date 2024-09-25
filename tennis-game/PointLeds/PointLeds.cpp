@@ -33,7 +33,7 @@ void PointLeds::updatePoints() {
         _scoreBoard->update();
     } else {
         if (_scoreBoard == nullptr) {
-            std::cerr << "Error: _scoreBoard is nullptr" << std::endl;
+            // std::cerr << "Error: _scoreBoard is nullptr" << std::endl;
         }
         // std::cout << "scoreboard bool is false, not updating scoreboard." << std::endl;
     }

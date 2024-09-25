@@ -69,6 +69,7 @@ TEST_F(TieBreakerTest, SetUpSetTieBreakScenario) {
     }
 
     // Update and check the tie-breaker initiation
+    _tieBreaker->setScoreBoards( _scoreBoard );
     _tieBreaker->initializeTieBreakMode();
     EXPECT_EQ(_tieBreaker->getIteration(), 1);
     EXPECT_EQ(_player1->getPoints(), 0);

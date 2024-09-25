@@ -54,3 +54,4 @@ tennis-game/*/log.txt
 tennis-game/Reset/log.txt
 tennis-game/Mode1ScoreTest
 tennis-game/googletest
+tennis-game/git_revert.py

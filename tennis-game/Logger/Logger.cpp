@@ -16,7 +16,7 @@ Logger::Logger( std::string name ) : _name( name ) {
     //     std::cerr << "Failed to open log file at path: " << logFilePath << std::endl;
     //     std::cerr << "Current working directory: " << std::filesystem::current_path() << std::endl;
     // }
-    std::cout <<  "not creating logger." << std::endl;
+    // std::cout <<  "not creating logger." << std::endl;
 }
 
 Logger::~Logger() {

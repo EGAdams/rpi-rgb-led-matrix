@@ -181,7 +181,9 @@ bool ScoreBoard::hasCanvas() {
     } else { /* std::cout << "*** WARNING: canvas is NULL ***" << std::endl; */ return false; }}
 
 void ScoreBoard::update() {
-    bool tie_break_on = _gameState->getTieBreak() == true  || _gameState->getMatchTieBreak() == true;
+    bool tie_break = _gameState->getTieBreak();
+    bool match_tie_break = _gameState->getMatchTieBreak();
+    bool tie_break_on = tie_break || match_tie_break;
     clearScreen();
     drawPlayerScore( _player1 );
     drawPlayerScore( _player2 );

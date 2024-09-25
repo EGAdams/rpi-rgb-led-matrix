@@ -49,7 +49,11 @@ void TieBreaker::tieLEDsOn() {
     _gameState->setTieLEDsOn( 1 );
     _pinInterface->pinDigitalWrite( P1_TIEBREAKER, HIGH );
     _pinInterface->pinDigitalWrite( P2_TIEBREAKER, HIGH );
-    _scoreBoard->update();
+    if (_scoreBoard != nullptr) {
+        _scoreBoard->update();
+    } else {
+        print( "*** ERROR: _scoreBoard is NULL in TieBreaker::tieLEDsOn! ***" );
+    }
 }
 
 void TieBreaker::tieLEDsOff() {
@@ -241,14 +245,8 @@ void TieBreaker::initializeTieBreakMode() {
     _gameState->setServeSwitch( 1 );
     _gameState->setServe( 0 );
     _serveLeds.serveSwitch();
-    if ( _gameState->getTieLEDsOn() == 0 ) { tieLEDsOn(); }
-    if ( _player1->getGames() != 6 ) {
-        std::cout << "*** Error: player 1 games do not equal 6 while initializing tie break mode! ***" << std::endl;
-        exit( 1 );
-    }
-    if ( _player2->getGames() != 6 ) {
-        std::cout << "*** Error: player 2 games do not equal 6 while initializing tie break mode! ***" << std::endl;
-        exit( 1 );
+    if ( _gameState->getTieLEDsOn() == 0 ) { 
+        tieLEDsOn(); 
     }
     _gameLeds.updateGames();
     Inputs _inputs( _player1, _player2, _pinInterface, _gameState );
