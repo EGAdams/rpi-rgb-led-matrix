@@ -108,6 +108,7 @@ TEST_F( Mode1ScoreTest, TestMode1P1Score_MoreThan3Points_DifferenceMoreThan1) {
 
 // Test case: TestMode1P1Score_4Points
 TEST_F( Mode1ScoreTest, TestMode1P1Score_4Points ) {
+    print ( "*** starting TestMode1P1Score_4Points ***" );
     print( "setting player one points to 3... " );
     _player1->setPoints( 3 );
     print( "updating score for player one... " );
