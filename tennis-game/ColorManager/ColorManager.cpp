@@ -1,7 +1,7 @@
 #include "ColorManager.h"
 
-rgb_matrix::Color ColorManager::getColor(const std::string& colorName) {
-    static std::unordered_map<std::string, rgb_matrix::Color> colorMap = {
+const rgb_matrix::Color& ColorManager::getColor(const std::string& colorName) {
+    static const std::unordered_map<std::string, rgb_matrix::Color> colorMap = {
         {"RED", rgb_matrix::Color(255, 0, 0)},
         {"GREEN", rgb_matrix::Color(0, 255, 0)},
         {"BLUE", rgb_matrix::Color(0, 0, 255)},
@@ -17,6 +17,7 @@ rgb_matrix::Color ColorManager::getColor(const std::string& colorName) {
         return it->second;
     } else {
         // Default to black if color not found
-        return rgb_matrix::Color(0, 0, 0);
+        static const rgb_matrix::Color black(0, 0, 0);
+        return black;
     }
 }

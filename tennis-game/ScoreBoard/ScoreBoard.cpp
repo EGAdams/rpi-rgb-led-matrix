@@ -13,17 +13,6 @@ ScoreBoard::ScoreBoard(Player* player1, Player* player2, GameState* gameState, I
         rgb_matrix::Color defaultColor = _colorManager->getColor("WHITE");
         _textDrawer = new TextDrawer(_display, defaultFont, defaultColor);
         _font_file = LITTLE_NUMBER_FONT;
-        // std::cout << "Enter the path to the font file: ";
-        // std::string font_file;
-        // std::cin >> font_file;
-        // std::ifstream file_check(font_file);
-        // if (!file_check) {
-        //     std::cerr << "Warning: The specified font file does not exist.\n";
-        //     return;  // Continue with the program flow without setting the font file
-        // }
-        // setFontFile(font_file.c_str());
-
-
         printf( "setting up matrix...\n" );
         Color pipe_color( 255, 255, 0 ); // yellow
         Color background_color( 0, 0, 0 );
@@ -32,11 +21,6 @@ ScoreBoard::ScoreBoard(Player* player1, Player* player2, GameState* gameState, I
         Color outline_color( 0, 0, 0 );
         RGBMatrix::Options matrix_options; // seems like the only logical place to create the canvas
         matrix_options.hardware_mapping = "regular";  // or e.g. "adafruit-hat"
-        // matrix_options.pixel_mapper_config = "Rotate:180;264-Mapper"; // or e.g. "U-mapper"
-        // The UArrangementMapper is using the _panels[] array to adjust each individual
-        // panel orientation.  Thje 264-Mapper doesnt seemm to be using the _panels[] array
-        // for anything after populating it.  The adjusments seen fto be used in the 
-        // MapVisibleToMatrix method of each pixel mapper class.
         matrix_options.pixel_mapper_config = "Rotate:180;264-Mapper"; // or e.g. "U-mapper" 
         matrix_options.rows = 64;
         matrix_options.cols = 64;
@@ -45,8 +29,6 @@ ScoreBoard::ScoreBoard(Player* player1, Player* player2, GameState* gameState, I
         matrix_options.parallel = 2;
         matrix_options.show_refresh_rate = false;
         matrix_options.disable_hardware_pulsing = true; // --led-no-hardware-pulse
-        // read /home/roy/brightness.txt, change it from a string to an integer and use it for brightess
-        // open brigtness.txt
         std::ifstream brightness_file("smart_menu/brightness.txt");
         std::string brightness_string;
         if (brightness_file.is_open()) {

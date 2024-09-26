@@ -1,4 +1,3 @@
-// FontManager.h
 #ifndef FONTMANAGER_H
 #define FONTMANAGER_H
 
@@ -14,5 +13,4 @@ private:
     std::unordered_map<std::string, rgb_matrix::Font> _fontCache;
     void _loadFont(const std::string& fontName);
 };
-
 #endif // FONTMANAGER_H
