@@ -1,5 +1,6 @@
 #include "ScoreBoard.h"
 #include "../ConsoleDisplay/ConsoleDisplay.h"
+#include "../TextDrawer/TextDrawer.h"
 
 ScoreBoard::ScoreBoard(Player* player1, Player* player2, GameState* gameState, IDisplay* display,
                        FontManager* fontManager, ColorManager* colorManager)
