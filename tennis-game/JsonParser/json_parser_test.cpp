@@ -2,7 +2,7 @@
 #include <iostream>
 #include "JsonParser.h"
 
-int main() {
+int jsonParserMain() {
     std::string jsonString = "{\"runner\":\"FetchRunner\",\"url\":\"https://americansjewelry.com/libraries/local-php-api/index.php/\",\"new_id\":\"InitSupervisor_2021\"}";
     JsonParser parser;
     auto parsedJson = parser.parse(jsonString);

@@ -22,34 +22,31 @@ INCLUDES = -I$(GTEST_INCDIR) -I$(GMOCK_INCDIR) -I$(RGB_INCDIR) -I.
 
 # Source Files
 SRC_DIR = .
-SRCS = $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(SRC_DIR)/*/*.cpp)
-
-# Exclude main.cpp
-SRCS := $(filter-out $(SRC_DIR)/main.cpp, $(SRCS))
+SRCS = $(filter-out $(SRC_DIR)/main.cpp, $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(SRC_DIR)/*/*.cpp))
 
 OBJS = $(SRCS:.cpp=.o)
 
 # Binaries
 BINARIES = tennis-game Mode1ScoreTest
 
-# All Target
+# Default Target
 all: $(BINARIES)
 
 # Tennis Game
 tennis-game: $(OBJS)
-	$(CXX) $(CFLAGS) $(INCLUDES) -o $@ $^ -L$(RGB_LIBDIR) -l$(RGB_LIBRARY_NAME) $(LDFLAGS)
+	@$(CXX) $(CFLAGS) $(INCLUDES) -o $@ $^ $(RGB_LIBRARY) $(LDFLAGS)
 
 # Mode1ScoreTest
 Mode1ScoreTest: $(OBJS)
-	$(CXX) $(CFLAGS) $(INCLUDES) -o $@ $^ -L$(GTEST_LIBDIR) $(GTEST_LIBS) -L$(RGB_LIBDIR) -l$(RGB_LIBRARY_NAME) $(LDFLAGS)
+	@$(CXX) $(CFLAGS) $(INCLUDES) -o $@ $^ -L$(GTEST_LIBDIR) $(GTEST_LIBS) $(RGB_LIBRARY) $(LDFLAGS)
 
 # Pattern Rule for Object Files
 %.o: %.cpp
-	$(CXX) $(CFLAGS) $(INCLUDES) -c -o $@ $<
+	@$(CXX) $(CFLAGS) $(INCLUDES) -c -o $@ $<
 
 # Clean
 clean:
-	rm -f $(OBJS) $(BINARIES)
+	@rm -f $(OBJS) $(BINARIES)
 
 .PHONY: all clean
 print-%:
