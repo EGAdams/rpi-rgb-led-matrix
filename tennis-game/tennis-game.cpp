@@ -23,6 +23,7 @@
 #include "RemotePairingScreen/RemotePairingScreen.h"
 #include "PairingBlinker/PairingBlinker.h"
 #include "ScoreboardBlinker/ScoreboardBlinker.h"
+#include "ConsoleDisplay/ConsoleDisplay.h"
 
 using namespace rgb_matrix;
 #define SCORE_DELAY    0
@@ -566,12 +567,15 @@ int main( int argc, char* argv[] ) {    std::unique_ptr<MonitoredObject> logger 
             manual = 1;
         }
     }
-    manual = 1;  // yes hardcodeing  is bad but ina hurry!!
+    manual = 1;  // yes hardcodeing  is bad but ina hurry!! 
     int loop_count = 0;
     std::cout << "creating game state object..." << std::endl;
     GameState* gameState = new GameState();  // make this 1st!!! cost me 3 days
     std::cout << "creating game object..." << std::endl;
-    GameObject* gameObject = new GameObject( gameState );
+    FontManager* fontManager = new FontManager();
+    ColorManager* colorManager = new ColorManager();
+    IDisplay* display = new ConsoleDisplay();
+    GameObject* gameObject = new GameObject( gameState, display );
     std::cout << "creating reset object..." << std::endl;
     Reset* reset = new Reset( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
     if ( manual == 1 ) {

@@ -8,48 +8,45 @@
 class GameState;
 class Player {
 public:
-    Player( GameState* gameState, int player_number );
+    Player(GameState* gameState, int player_number);
     ~Player();
-    
-    void setOpponent(    Player* opponent           );
-    Player* getOpponent();
 
-    void setSets( GameState* gameState, int sets );
-    int getSets();
+    virtual void setOpponent(Player* opponent);  // Mark as virtual
+    virtual Player* getOpponent();               // Mark as virtual
 
-    void setSets( int sets );
+    virtual void setSets(GameState* gameState, int sets); // Mark as virtual
+    virtual int getSets();                                // Mark as virtual
 
-    void setPoints( int points  );
-    int getPoints();
+    virtual void setSets(int sets);             // Mark as virtual
+    virtual void setPoints(int points);         // Mark as virtual
+    virtual int getPoints();                    // Mark as virtual
 
-    void setGames( int game_value  ); // it knows the current set
-    int getGames();
+    virtual void setGames(int game_value);      // Mark as virtual
+    virtual int getGames();                     // Mark as virtual
 
-    void setServeSwitch( int serve_switch                 );
-    int getServeSwitch();
+    virtual void setServeSwitch(int serve_switch);  // Mark as virtual
+    virtual int getServeSwitch();                   // Mark as virtual
 
-    void setMatches(     int matches );
-    int getMatches();
+    virtual void setMatches(int matches);           // Mark as virtual
+    virtual int getMatches();                       // Mark as virtual
 
-    void setMode(        int mode    );
-    int getMode();
+    virtual void setMode(int mode);                 // Mark as virtual
+    virtual int getMode();                          // Mark as virtual
 
-    void setSetting(     int setting );
-    int getSetting();
+    virtual void setSetting(int setting);           // Mark as virtual
+    virtual int getSetting();                       // Mark as virtual
 
-    void setSetHistory(  int set, int score  );
-    std::map<int, int> getSetHistory();
+    virtual void setSetHistory(int set, int score); // Mark as virtual
+    virtual std::map<int, int> getSetHistory();     // Mark as virtual
 
-    void setSetHistory( std::map<int, int> );
+    virtual void setSetHistory(std::map<int, int>);  // Mark as virtual
+    virtual void setGameHistory(int game, int score); // Mark as virtual
+    virtual std::map<int, int> getGameHistory();     // Mark as virtual
 
-    void setGameHistory( int game, int score );
-    std::map<int, int> getGameHistory();
+    virtual void clearGameHistory();                 // Mark as virtual
+    virtual void clearSetHistory();                  // Mark as virtual
 
-    void clearGameHistory();
-    void clearSetHistory();
-
-    int incrementSetting();
-
+    virtual int incrementSetting();                  // Mark as virtual
     int number(); // only set during construction
 
 private:
@@ -66,5 +63,4 @@ private:
     std::map<int, int> _set_history;
     std::map<int, int> _game_history;
 };
-
-#endif
+#endif /* Player_h */
