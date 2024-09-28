@@ -13,7 +13,7 @@
 #include <csignal>
 #include <map>
 #include "FontLoader/FontLoader.h"
-#include "TextDrawer/TextDrawer.h"
+#include "ITextDrawer/ITextDrawer.h"
 #include "Drawer/Drawer.h"
 #include "ScoreBoard/ScoreBoard.h"
 #include "GameObject/GameObject.h"
@@ -34,10 +34,10 @@ using namespace rgb_matrix;
 #define DEMO_DELAY 1
 #define BLINK_UPDATE_DELAY 1000000 // 250000 //
 #define FASTER_BLINK_UPDATE_DELAY 100000 // 750000 // 100000
-# define X__POS 6
-# define Y__POS 40
-# define X__POSITION 5
-# define Y__POSITION 80
+#define X__POS 6
+#define Y__POS 40
+#define X__POSITION 5
+#define Y__POSITION 80
 #define MAX_LOOP_COUNT 350
 #define A_SPACE        13
 #define FOUR_SPACE     14
@@ -381,7 +381,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     gameObject->loopGame();
     sleep( 1 );
     int menu_selection = 1;
-    int remote_pairing = 1;
+    // int remote_pairing = 1;
     std::signal( SIGINT, GameObject::_signalHandler );
     RemotePairingScreen remotePairingScreen( gameObject->getScoreBoard());
     PairingBlinker pairingBlinker( gameObject->getScoreBoard());  // Use PairingBlinker
@@ -553,8 +553,17 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
         std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
     } ///////// End Game Loop /////////
+}
 
-
+bool is_on_raspberry_pi() {
+    std::ifstream file( "/proc/device-tree/model" );
+    std::string line;
+    if ( file.is_open() ) {
+        std::getline( file, line );
+        file.close();
+        if ( line.find( "Raspberry Pi" ) != std::string::npos ) { return true; }
+    }
+    return false;
 }
 
 int main( int argc, char* argv[] ) {    std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );
@@ -571,9 +580,17 @@ int main( int argc, char* argv[] ) {    std::unique_ptr<MonitoredObject> logger 
     std::cout << "creating game state object..." << std::endl;
     GameState* gameState = new GameState();  // make this 1st!!! cost me 3 days
     std::cout << "creating game object..." << std::endl;
-    FontManager* fontManager = new FontManager();
+    // FontManager* fontManager = new FontManager();
     ColorManager* colorManager = new ColorManager();
-    IDisplay* display = new ConsoleDisplay();
+    bool isOnPi = is_on_raspberry_pi();
+    print( "isOnPi: " << isOnPi );
+    IDisplay* display;
+    if ( isOnPi ) {
+        std::cout << "creating display object with matrix display..." << std::endl;
+    } else {
+        std::cout << "creating display object with console display..." << std::endl;
+        // display = new ConsoleDisplay( *colorManager );
+    }
     GameObject* gameObject = new GameObject( gameState, display );
     std::cout << "creating reset object..." << std::endl;
     Reset* reset = new Reset( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );

@@ -16,8 +16,29 @@ const rgb_matrix::Color& ColorManager::getColor(const std::string& colorName) {
     if (it != colorMap.end()) {
         return it->second;
     } else {
-        // Default to black if color not found
         static const rgb_matrix::Color black(0, 0, 0);
         return black;
+    }
+}
+
+const std::string& ColorManager::getAsciiColorCode(const std::string& colorName) {
+    static const std::unordered_map<std::string, std::string> asciiColorMap = {
+        {"RED", "\033[31m"},
+        {"GREEN", "\033[32m"},
+        {"BLUE", "\033[34m"},
+        {"YELLOW", "\033[33m"},
+        {"ORANGE", "\033[38;5;214m"},
+        {"PURPLE", "\033[35m"},
+        {"WHITE", "\033[37m"},
+        {"BLACK", "\033[30m"},
+        {"RESET", "\033[0m"}
+    };
+
+    auto it = asciiColorMap.find(colorName);
+    if (it != asciiColorMap.end()) {
+        return it->second;
+    } else {
+        static const std::string reset = "\033[0m";
+        return reset;
     }
 }

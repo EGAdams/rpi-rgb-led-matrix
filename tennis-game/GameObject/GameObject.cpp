@@ -3,6 +3,7 @@
 #include <chrono>
 #include <thread>
 #include <iostream>
+#include "../IDisplay/IDisplay.h"
 
 GameObject::GameObject( Player* player1,
     Player* player2,

@@ -55,7 +55,6 @@ class GameObject {
   Player*           _player2;
   PinState*         _pinState;
   PinInterface*     _pinInterface;
-  IDisplay*         _display;
   GameState*        _gameState;
   GameTimer*        _gameTimer;
   Inputs*           _gameInputs;
@@ -65,5 +64,6 @@ class GameObject {
   SubjectManager*   _subjectManager;
   Logger*           _logger;
   History*          _history;
-  std::map<std::string, int> _pin_map; };
+  std::map<std::string, int> _pin_map;
+  IDisplay*         _display; };
 #endif

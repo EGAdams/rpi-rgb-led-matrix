@@ -1,19 +1,24 @@
-#include "ConsoleDisplay.h"
+#include "../ColorManager/ColorManager.h"
+#include "../ConsoleDisplay/ConsoleDisplay.h"
 
-ConsoleDisplay::ConsoleDisplay() {
-    // Constructor implementation
-}
-ConsoleDisplay::~ConsoleDisplay() {
-    // Destructor implementation
+ConsoleDisplay::ConsoleDisplay( ColorManager* colorManager ) : _colorManager( colorManager ) {
+    // Initialize the console display
+    // ...
 }
 
-void ConsoleDisplay::drawText(const std::string& text, int x, int y, const rgb_matrix::Color& color, const rgb_matrix::Font& font) {
-    std::cout << "Drawing text: " << text << " at (" << x << ", " << y << ")" << std::endl;
+void ConsoleDisplay::drawText( const std::string& text, int x, int y ) {
+    // Retrieve the ASCII color code from ColorManager
+    const std::string& colorCode = _colorManager->getAsciiColorCode( _current_color_string );
+    const std::string& resetCode = _colorManager->getAsciiColorCode( "RESET" );
+
+    // Move the cursor to the specified position
+    std::cout << "\033[" << y << ";" << x << "H";  // Cursor movement to (x, y)
+
+    // Output the text with the color and then reset the color
+    std::cout << colorCode << text << resetCode << std::endl;
 }
 
 void ConsoleDisplay::clearScreen() {
-    std::cout << "Clearing screen" << std::endl;
-    
-    // ANSI escape code to clear the screen
+    // Clear the terminal screen and move cursor to the top-left
     std::cout << "\033[2J\033[H";
 }

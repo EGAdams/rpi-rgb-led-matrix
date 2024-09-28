@@ -1,7 +1,9 @@
 #ifndef SCOREBOARD_H
 #define SCOREBOARD_H
 
-#include "../TextDrawer/TextDrawer.h"
+#include "../ConsoleDisplay/ConsoleDisplay.h"
+#include "../IDisplay/IDisplay.h"
+#include "../ITextDrawer/ITextDrawer.h"
 #include "../FontManager/FontManager.h"
 #include "../ColorManager/ColorManager.h"
 #include "../GameTimer/GameTimer.h"
@@ -69,7 +71,7 @@ private:
     IDisplay*                    _display;
     FontManager*                 _fontManager;
     ColorManager*                _colorManager;
-    TextDrawer*                  _textDrawer;
+    ITextDrawer*                  _textDrawer;
     rgb_matrix::Font             _big_number_font;
     rgb_matrix::Font             _little_number_font;
     rgb_matrix::Font             _period_font;

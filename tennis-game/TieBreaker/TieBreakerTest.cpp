@@ -30,7 +30,7 @@ protected:
         _tieBreaker = new TieBreaker(_player1, _player2, _pinInterface, _gameState, NULL);
         FontManager* fontManager = new FontManager();
         ColorManager* colorManager = new ColorManager();
-        IDisplay* display = new ConsoleDisplay();
+        IDisplay* display = new ConsoleDisplay( colorManager );
         ScoreBoard* scoreBoard = new ScoreBoard( _player1, _player2, _gameState, display, fontManager, colorManager);
         _scoreBoard = new ScoreBoard(_player1, _player2, _gameState, display, fontManager, colorManager);
     }

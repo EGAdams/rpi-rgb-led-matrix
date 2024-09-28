@@ -1,6 +1,4 @@
 #include "ScoreBoard.h"
-#include "../ConsoleDisplay/ConsoleDisplay.h"
-#include "../TextDrawer/TextDrawer.h"
 
 ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, IDisplay* display,
                        FontManager* fontManager, ColorManager* colorManager )
@@ -11,9 +9,8 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         _setDrawer = std::make_unique<SetDrawer>( _canvas.get(), _gameState );
     }
     else {
-        const rgb_matrix::Font& defaultFont = _fontManager->getFont( "fonts/fgm_27_ee.bdf" );
+        // const rgb_matrix::Font& defaultFont = _fontManager->getFont( "fonts/fgm_27_ee.bdf" );
         rgb_matrix::Color defaultColor = _colorManager->getColor( "WHITE" );
-        _textDrawer = new TextDrawer( _display, defaultFont, defaultColor );
         _font_file = LITTLE_NUMBER_FONT;
         printf( "setting up matrix...\n" );
         Color pipe_color( 255, 255, 0 ); // yellow

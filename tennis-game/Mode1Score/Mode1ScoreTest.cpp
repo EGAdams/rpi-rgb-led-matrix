@@ -40,7 +40,7 @@ void Mode1ScoreTest::SetUp() {
     // Assuming ScoreBoard is a class that needs to be instantiated
     FontManager* fontManager = new FontManager();
     ColorManager* colorManager = new ColorManager();
-    IDisplay* display = new ConsoleDisplay();
+    IDisplay* display = new ConsoleDisplay( colorManager );
     ScoreBoard* scoreBoard = new ScoreBoard( _player1, _player2, _gameState, display, fontManager, colorManager);
     print("setting ScoreBoard for TieBreaker...");
     _mode1Score->getTieBreaker()->setScoreBoards(scoreBoard);

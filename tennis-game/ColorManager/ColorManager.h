@@ -1,16 +1,13 @@
 #ifndef COLORMANAGER_H
 #define COLORMANAGER_H
 
-#include <unordered_map>
+#include "../../include/graphics.h" // rgb_matrix::Color defined here
 #include <string>
-#include "../../include/graphics.h" // Assuming this is where rgb_matrix::Color is defined
+#include <unordered_map>
 
 class ColorManager {
 public:
-    // Returns a reference to the color corresponding to the colorName
-    // If the color is not found, returns a reference to the color black
-    const rgb_matrix::Color& getColor(const std::string& colorName);
+    const rgb_matrix::Color& getColor(const std::string& colorName);  // Correct declaration
+    const std::string& getAsciiColorCode(const std::string& colorName);  // Correct declaration
 };
-
 #endif // COLORMANAGER_H
-
