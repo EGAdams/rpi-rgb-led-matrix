@@ -4,7 +4,14 @@
 #include <iostream>
 
 PairingBlinker::PairingBlinker(ScoreBoard* scoreBoard)
-    : _scoreboard(scoreBoard), should_stop(false), green_player_paired(false), red_player_paired(false) {}
+    : _scoreboard(scoreBoard), should_stop(false), green_player_paired(false), red_player_paired(false) {
+        std::cout << "PairingBlinker constructing..." << std::endl;
+        // check for null _scoreboard
+        if (_scoreboard == nullptr) {
+            std::cerr << "Error: _scoreboard is null in PairingBlinker constructor." << std::endl;
+            return;  // TODO: loudeer error and exit!
+        }
+    }
 
 PairingBlinker::~PairingBlinker() {
     stop();

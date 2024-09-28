@@ -414,7 +414,6 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         std::cout << "8.) Font File"       << std::endl;
         std::cout << "9.) Undo           " << std::endl;
 
-
         if ( gameState->getCurrentAction() == SLEEP_MODE ) {
             ScoreboardBlinker blinker( gameObject->getScoreBoard() );
             InputWithTimer inputWithTimer( &blinker );
