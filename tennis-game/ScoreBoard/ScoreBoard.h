@@ -56,11 +56,6 @@ public:
     Color _getColor( int color );
     bool onRaspberryPi();
     void blink_player_score( int player );
-    void _displayAsciiScoreboard( int player1_score, 
-                                  int player2_score, 
-                                  bool tieBreaker,
-                                  std::string serve_bar1, 
-                                  std::string serve_bar2 );
     void setDrawerForegroundColor( const Color& color );
     void setDrawerBackgroundColor( const Color& color );
     void setDrawerFont( const rgb_matrix::Font* font  );
