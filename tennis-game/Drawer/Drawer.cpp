@@ -8,7 +8,8 @@ void Drawer::drawNumber( const std::string& number, int x, int y ) {
 }
 
 void Drawer::drawText( const std::string& text, int x, int y ) {
-    rgb_matrix::DrawText( _canvas, *_font, x, y, _color, &_bg_color, text.c_str(), 0 );}
+    rgb_matrix::DrawText( _canvas, *_font, x, y, _color, &_bg_color, text.c_str(), 0 );
+}
 
 void Drawer::setForegroundColor( const Color& color ) { _color = color; }
 

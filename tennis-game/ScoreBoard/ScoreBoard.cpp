@@ -110,9 +110,8 @@ void ScoreBoard::setFontFile( const char* font_file_arg ) { _font_file = font_fi
 void ScoreBoard::setDisplay( IDisplay* display ) { _display = display; }
 
 void ScoreBoard::drawText( const std::string& message, int x, int y ) {
-    print( "drawing text: " + message + " at x: " + std::to_string( x ) + ", y: " + std::to_string( y ) );
+    print( "drawing text: " + message + " at x: " + std::to_string( x ) + ", y: " + std::to_string( y ));
     print( "checking if _display is null..." );
-    // make sure _display is not null
     if ( _display == NULL ) {
         print( "*** ERROR: _display == NULL, not drawing message: " + message + " ***" );
         exit( 1 );
@@ -120,7 +119,6 @@ void ScoreBoard::drawText( const std::string& message, int x, int y ) {
     else {
         _display->drawText( message, x, y );
     }
-    _display->drawText( message, x, y );
 }
 
 Color ScoreBoard::_getColor( int color_constant ) {

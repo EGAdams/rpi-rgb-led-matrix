@@ -12,6 +12,7 @@ private:
   rgb_matrix::RGBMatrix* _canvas;
   rgb_matrix::Font       _currentFont;
   rgb_matrix::Color      _currentColor;
+  rgb_matrix::Color      _bg_color;
 
 public:
   MatrixDisplay( rgb_matrix::RGBMatrix* canvas );
