@@ -6,6 +6,7 @@
 #include "../../include/led-matrix.h"
 #include "../ColorManager/ColorManager.h"
 #include "../FontManager/FontManager.h"
+#include "../Drawer/Drawer.h"
 
 class MatrixDisplay : public IDisplay {
 private:
@@ -13,9 +14,10 @@ private:
   rgb_matrix::Font       _currentFont;
   rgb_matrix::Color      _currentColor;
   rgb_matrix::Color      _bg_color;
+  Drawer*                _drawer;
 
 public:
-  MatrixDisplay( rgb_matrix::RGBMatrix* canvas );
+  MatrixDisplay( rgb_matrix::RGBMatrix* canvas, Drawer* drawer );
   ~MatrixDisplay();
 
   void setFont( const std::string& fontName );

@@ -64,6 +64,7 @@ public:
     void setDrawerSize( Drawer::Size            size  );
     void setFontFile(   const char*             font_file  );
     void setDisplay(     IDisplay*             display  );
+    Drawer* getDrawer();
 
 private:
     Player*                      _player1;

@@ -25,6 +25,7 @@
 #include "ScoreboardBlinker/ScoreboardBlinker.h"
 #include "ConsoleDisplay/ConsoleDisplay.h"
 #include "MatrixDisplay/MatrixDisplay.h"
+#include "Drawer/Drawer.h"
 
 using namespace rgb_matrix;
 #define SCORE_DELAY    0
@@ -603,7 +604,8 @@ int main( int argc, char* argv[] ) {    std::unique_ptr<MonitoredObject> logger 
         std::cout << "creating matrix display object..." << std::endl;
         ScoreBoard* scoreBoard = gameObject->getScoreBoard();
         rgb_matrix::RGBMatrix* canvas = scoreBoard->getCanvas();
-        scoreBoard->setDisplay( new MatrixDisplay( canvas ));
+        Drawer* drawer = scoreBoard->getDrawer();
+        scoreBoard->setDisplay( new MatrixDisplay( canvas, drawer ));
     }
     
     std::cout << "creating reset object..." << std::endl;

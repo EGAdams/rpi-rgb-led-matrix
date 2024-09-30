@@ -106,6 +106,8 @@ ScoreBoard::~ScoreBoard() {
     else { /* std::cout << "*** WARNING: _canvas == NULL, not deleting. ***" << std::endl; */ }
 }
 
+Drawer* ScoreBoard::getDrawer() { return _drawer.get(); }
+
 void ScoreBoard::setFontFile( const char* font_file_arg ) { _font_file = font_file_arg; }
 void ScoreBoard::setDisplay( IDisplay* display ) { _display = display; }
 
