@@ -9,8 +9,6 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         _setDrawer = std::make_unique<SetDrawer>( _canvas.get(), _gameState );
     }
     else {
-        // const rgb_matrix::Font& defaultFont = _fontManager->getFont( "fonts/fgm_27_ee.bdf" );
-        rgb_matrix::Color defaultColor = _colorManager->getColor( "WHITE" );
         _font_file = LITTLE_NUMBER_FONT;
         printf( "setting up matrix...\n" );
         Color pipe_color( 255, 255, 0 ); // yellow
@@ -109,8 +107,11 @@ ScoreBoard::~ScoreBoard() {
 }
 
 void ScoreBoard::setFontFile( const char* font_file_arg ) { _font_file = font_file_arg; }
+void ScoreBoard::setDisplay( IDisplay* display ) { _display = display; }
 
 void ScoreBoard::drawText( const std::string& message, int x, int y ) {
+    print( "drawing text: " + message + " at x: " + std::to_string( x ) + ", y: " + std::to_string( y ) );
+    print( "checking if _display is null..." );
     // make sure _display is not null
     if ( _display == NULL ) {
         print( "*** ERROR: _display == NULL, not drawing message: " + message + " ***" );

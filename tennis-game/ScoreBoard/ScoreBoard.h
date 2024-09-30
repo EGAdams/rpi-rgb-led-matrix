@@ -63,6 +63,7 @@ public:
     void setDrawerFont( const rgb_matrix::Font* font  );
     void setDrawerSize( Drawer::Size            size  );
     void setFontFile(   const char*             font_file  );
+    void setDisplay(     IDisplay*             display  );
 
 private:
     Player*                      _player1;

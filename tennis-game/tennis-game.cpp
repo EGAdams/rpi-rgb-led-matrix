@@ -24,6 +24,7 @@
 #include "PairingBlinker/PairingBlinker.h"
 #include "ScoreboardBlinker/ScoreboardBlinker.h"
 #include "ConsoleDisplay/ConsoleDisplay.h"
+#include "MatrixDisplay/MatrixDisplay.h"
 
 using namespace rgb_matrix;
 #define SCORE_DELAY    0
@@ -597,6 +598,14 @@ int main( int argc, char* argv[] ) {    std::unique_ptr<MonitoredObject> logger 
         display = new ConsoleDisplay( colorManager );
     }
     GameObject* gameObject = new GameObject( gameState, display );
+
+    if ( isOnPi ) { // if on pi then replace the console display object with the matrix display object 
+        std::cout << "creating matrix display object..." << std::endl;
+        ScoreBoard* scoreBoard = gameObject->getScoreBoard();
+        rgb_matrix::RGBMatrix* canvas = scoreBoard->getCanvas();
+        scoreBoard->setDisplay( new MatrixDisplay( canvas ));
+    }
+    
     std::cout << "creating reset object..." << std::endl;
     Reset* reset = new Reset( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
     if ( manual == 1 ) {
