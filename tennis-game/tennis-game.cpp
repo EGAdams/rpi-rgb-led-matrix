@@ -395,7 +395,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         while ( remotePairingScreen.inPairingMode()) {
             print( "starting inputtWithTimer.getInput()..." );
             int menu_selection = inputWithTimer.getInput();
-    
+            print( "done with inputtWithTimer.getInput()..." );
             if (menu_selection == 1) {
                 remotePairingScreen.greenPlayerPressed();
                 pairingBlinker.setGreenPlayerPaired(true);  // Notify blinker that Green player is paired
