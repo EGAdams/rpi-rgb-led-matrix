@@ -1,6 +1,7 @@
 #ifndef MATRIX_DISPLAY_H
 #define MATRIX_DISPLAY_H
 
+#include "../TennisConstants/TennisConstants.h"
 #include "../IDisplay/IDisplay.h"
 #include "../../include/led-matrix.h"
 #include "../ColorManager/ColorManager.h"

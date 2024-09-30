@@ -2,7 +2,7 @@
 #include <iostream>
 
 MatrixDisplay::MatrixDisplay( rgb_matrix::RGBMatrix* canvas ) : _canvas( canvas ) {
-    _currentFont  = FontManager::getFont(   "defaultFont" );  // Assuming FontManager provides default font
+    _currentFont  = FontManager::getFont(   LITTLE_NUMBER_FONT );  // Assuming FontManager provides default font
     _currentColor = ColorManager::getColor( "WHITE"       );  // Default color is white
 }
 MatrixDisplay::~MatrixDisplay() { if ( _canvas ) { delete _canvas; _canvas = nullptr; }}

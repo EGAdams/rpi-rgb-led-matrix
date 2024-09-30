@@ -7,6 +7,8 @@
 //  Written by Chris Bean for Teensy 4.1 only
 //  re-written in C++ by EG in June 2022
 
+#define LITTLE_NUMBER_FONT "fonts/little_numbers.bdf"
+
 #define RUNNING_MATCH_TIE_BREAK     "running match tie breaker"
 #define BOTH_PLAYER_BLINK           "blink both players"
 #define PLAYER_1_BLINK              "player1 blink"
