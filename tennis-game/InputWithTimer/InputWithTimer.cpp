@@ -1,7 +1,5 @@
 #include "InputWithTimer.h"
 #include <iostream>
-#include <TennisConstants.h>
-
 
 InputWithTimer::InputWithTimer( Blinker* blinker) : _blinker( blinker ) {}
 InputWithTimer::~InputWithTimer() {}
