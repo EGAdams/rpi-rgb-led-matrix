@@ -15,7 +15,7 @@ public:
   ConsoleDisplay( ColorManager* colorManager );
   ~ConsoleDisplay() override = default;
 
-  // Override drawText with colorName (no default value)
+  void setColor( const std::string& colorName ) override;
   void drawText( const std::string& text, int x, int y ) override;
   void clearScreen() override;
 };

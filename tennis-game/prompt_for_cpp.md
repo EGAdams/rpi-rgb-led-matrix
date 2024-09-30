@@ -1,3 +1,15 @@
+# Persona
+World-class C++ Developer and seasoned user of GoF Design Patterns.
+
+# The Problem
+The Scoreboard.cpp class has too many responsibilities.
+
+# Your task
+Create the MatrixDisplay.h and MatrixDisplay.cpp files.  Analyze the Scoreboard.cpp file and move all of the relevant code into MatrixDisplay.h and MatrixDisplay.cpp files.
+
+# C++ Source Code
+## The ScoreBoard Class that has too many responsibilities
+```cpp
 #include "ScoreBoard.h"
 
 ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, IDisplay* display,
@@ -421,3 +433,23 @@ void ScoreBoard::setDrawerBackgroundColor( const Color& color ) { _drawer->setBa
 void ScoreBoard::setDrawerForegroundColor( const Color& color ) { _drawer->setForegroundColor( color ); }
 void ScoreBoard::setDrawerFont( const rgb_matrix::Font* font ) { _drawer->setFont( font ); }
 void ScoreBoard::setDrawerSize( Drawer::Size size ) { _drawer->setSize( size ); }
+```
+
+## The IDisplay interface that we are going to use to help us refactor
+```cpp
+#ifndef IDISPLAY_H
+#define IDISPLAY_H
+#include <string>
+#include "../../include/graphics.h"  // Adjust this path as necessary
+
+class IDisplay {
+public:
+    virtual void setColor( const std::string& colorName ) = 0;
+    virtual void drawText( const std::string& text, int x, int y ) = 0;
+    virtual void clearScreen() = 0;
+    virtual ~IDisplay() = default;
+};
+
+
+#endif // IDISPLAY_H
+```

@@ -589,7 +589,7 @@ int main( int argc, char* argv[] ) {    std::unique_ptr<MonitoredObject> logger 
         std::cout << "creating display object with matrix display..." << std::endl;
     } else {
         std::cout << "creating display object with console display..." << std::endl;
-        // display = new ConsoleDisplay( *colorManager );
+        display = new ConsoleDisplay( colorManager );
     }
     GameObject* gameObject = new GameObject( gameState, display );
     std::cout << "creating reset object..." << std::endl;

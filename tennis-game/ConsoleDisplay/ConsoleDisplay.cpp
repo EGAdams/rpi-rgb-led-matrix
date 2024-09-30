@@ -2,14 +2,16 @@
 #include "../ConsoleDisplay/ConsoleDisplay.h"
 
 ConsoleDisplay::ConsoleDisplay( ColorManager* colorManager ) : _colorManager( colorManager ) {
-    // Initialize the console display
-    // ...
+    _current_color_string = "WHITE";
+}
+
+void ConsoleDisplay::setColor( const std::string& color ) { 
+    _current_color_string = color; 
 }
 
 void ConsoleDisplay::drawText( const std::string& text, int x, int y ) {
-    // Retrieve the ASCII color code from ColorManager
-    const std::string& colorCode = _colorManager->getAsciiColorCode( _current_color_string );
-    const std::string& resetCode = _colorManager->getAsciiColorCode( "RESET" );
+    const std::string& colorCode = ColorManager::getAsciiColorCode( _current_color_string );
+    const std::string& resetCode = ColorManager::getAsciiColorCode( "RESET" );
 
     // Move the cursor to the specified position
     std::cout << "\033[" << y << ";" << x << "H";  // Cursor movement to (x, y)
@@ -18,7 +20,4 @@ void ConsoleDisplay::drawText( const std::string& text, int x, int y ) {
     std::cout << colorCode << text << resetCode << std::endl;
 }
 
-void ConsoleDisplay::clearScreen() {
-    // Clear the terminal screen and move cursor to the top-left
-    std::cout << "\033[2J\033[H";
-}
+void ConsoleDisplay::clearScreen() { std::cout << "\033[2J\033[H";}

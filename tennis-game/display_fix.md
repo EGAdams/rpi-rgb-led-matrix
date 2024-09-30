@@ -1,41 +1,26 @@
-#ifndef SCOREBOARD_H
-#define SCOREBOARD_H
+```cpp
+class IDisplay {
+public:
+    virtual void setColor( const std::string& colorName ) = 0;
+    virtual void drawText( const std::string& text, int x, int y ) = 0;
+    virtual void clearScreen() = 0;
+    virtual ~IDisplay() = default;
+}
+```
 
-#include "../ConsoleDisplay/ConsoleDisplay.h"
-#include "../IDisplay/IDisplay.h"
-#include "../ITextDrawer/ITextDrawer.h"
-#include "../FontManager/FontManager.h"
-#include "../ColorManager/ColorManager.h"
-#include "../GameTimer/GameTimer.h"
-#include "../Player/Player.h"
-#include "../GameState/GameState.h"
-#include "../Drawer/Drawer.h"
-#include "../CanvasCreator/CanvasCreator.h"
-#include "../FontLoader/FontLoader.h"
-#include "../SetDrawer/SetDrawer.h"
-#include <string.h>
-#include <stdio.h>
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <memory>
-#include <thread> // Include the <thread> header for sleep function
+```cpp
 
-#define PLAYER_1_SERVE  0
-#define PLAYER_2_SERVE  1
-#define PLAYER_1_SCORE  1
-#define PLAYER_2_SCORE  2
-#define BIG_NUMBER_FONT    "fonts/fgm_27_ee.bdf"
-#define LITTLE_NUMBER_FONT "fonts/little_numbers.bdf"
-#define RED    2
-#define GREEN  5
-#define BLUE   6
-#define YELLOW 4
-#define ORANGE 3
-#define PURPLE 7
-#define WHITE  9
-#define BLACK  0
 
+void printFilledLarge1() {
+```
+
+```cpp
+
+
+void printFilledLarge10() {
+```
+
+```cpp
 class ScoreBoard {
 public:
     ScoreBoard(Player* player1, Player* player2, GameState* gameState, IDisplay* display,
@@ -96,6 +81,29 @@ private:
     void _drawMatchWinDisplay(  /* void */            );
     int  _characterOffset(   std::string character    );
     std::string _translate(  int raw_score            );
-};
+}
+```
 
-#endif
+```cpp
+
+
+void printFilledLargePipe10() {
+```
+
+```cpp
+
+    : _player1( player1 ), _player2( player2 ), _gameState( gameState ),
+    _display( display ), _fontManager( fontManager ), _colorManager( colorManager ) {
+    if ( onRaspberryPi() == false ) {
+        std::string brightness_string;
+        if ( brightness_file.is_open() ) {
+        if ( _gameState->getMatchBlink() == 1 ) {
+            if ( strcmp( _gameState->getCurrentAction().c_str(), RUNNING_MATCH_WIN_SEQUENCE ) == 0 ) {
+```
+
+```cpp
+
+
+void printFilledLarge1() {
+```
+

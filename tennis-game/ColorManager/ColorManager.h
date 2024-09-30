@@ -7,7 +7,7 @@
 
 class ColorManager {
 public:
-    const rgb_matrix::Color& getColor(const std::string& colorName);  // Correct declaration
-    const std::string& getAsciiColorCode(const std::string& colorName);  // Correct declaration
+    static const rgb_matrix::Color& getColor(const std::string& colorName);
+    static const std::string& getAsciiColorCode(const std::string& colorName);
 };
 #endif // COLORMANAGER_H

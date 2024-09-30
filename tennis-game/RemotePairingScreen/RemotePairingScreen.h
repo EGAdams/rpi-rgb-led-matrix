@@ -9,11 +9,8 @@ public:
     RemotePairingScreen( ScoreBoard* scoreboard );
     ~RemotePairingScreen();
     void draw();                // Method to display the instructions on the screen
-
     void greenPlayerPressed();  // Called when the Green Player presses their button
-   
     void redPlayerPressed();    // Called when the Red Player presses their button
-
     bool inPairingMode() const; // Check if still in pairing mode
 
 private:
