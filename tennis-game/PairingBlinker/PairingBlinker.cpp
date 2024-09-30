@@ -17,26 +17,38 @@ PairingBlinker::~PairingBlinker() { stop(); }
 void PairingBlinker::blinkLoop() {
     bool show_green = true;  // Start with Green instructions
 
+    print( "entering blinkLoop..." );
     while ( !should_stop ) {
+        print( "clearing screen..." );
         _scoreboard->clearScreen();
+        print( "done clearing screen..." );
         if ( green_player_paired && red_player_paired ) { break; } // If both players are paired, stop blinking
 
         // If only the Green player is paired, show Red player instructions
-        if ( green_player_paired && !red_player_paired ) { showRedInstructions(); }
+        if ( green_player_paired && !red_player_paired ) {
+            print( "showing red instructions..." );
+            showRedInstructions();
+        }
 
         // If only the Red player is paired, show Green player instructions
-        else if ( !green_player_paired && red_player_paired ) { showGreenInstructions(); }
+        else if ( !green_player_paired && red_player_paired ) {
+            print( "showing green instructions..." );
+            showGreenInstructions();
+        }
 
         // If neither player is paired, alternate between Green and Red instructions
         else if ( !green_player_paired && !red_player_paired ) {
             if ( show_green ) {
+                print( "showing green instructions..." );
                 showGreenInstructions();
             }
             else {
+                print( "showing red instructions..." );
                 showRedInstructions();
             }
             show_green = !show_green;  // Alternate between Green and Red
         }
+        print( "sleeping for 1 second..." );
         std::this_thread::sleep_for( std::chrono::seconds( 1 )); // Delay for 1 second between switching
     }
 }
