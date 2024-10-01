@@ -22,8 +22,10 @@ void MatrixDisplay::setColor( const std::string& colorName ) { _currentColor = C
 
 void MatrixDisplay::drawText( const std::string& text, int x, int y ) {
     if ( !_canvas ) { std::cerr << "Canvas is not initialized. Cannot draw text." << std::endl; return; }
-    print( "inside MatrixDisplay::drawText, calling _drawer->drawText..." );
+    print( "inside MatrixDisplay::drawText, calling rgb_matrix::DrawText..." );
+    // print( "inside MatrixDisplay::drawText, calling _drawer->drawText..." );
     // _drawer->drawText( text, x, y );
+    print( "writing text: " + text );
     rgb_matrix::DrawText( _canvas, _currentFont, x, y  /* + _currentFont.baseline() */, _currentColor, &_bg_color, text.c_str(), 0 );
     print( "inside MatrixDisplay::drawText, done calling _drawer->drawText..." );
 }
