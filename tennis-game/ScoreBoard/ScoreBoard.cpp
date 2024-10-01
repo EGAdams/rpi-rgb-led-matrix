@@ -119,9 +119,10 @@ void ScoreBoard::drawText( const std::string& message, int x, int y ) {
     if ( _display == NULL ) {
         print( "*** ERROR: _display == NULL, not drawing message: " + message + " ***" );
         exit( 1 );
-    }
-    else {
+    } else {
+        print( "not null, drawing message: " + message + " at x: " + std::to_string( x ) + ", y: " + std::to_string( y ));
         _display->drawText( message, x, y );
+        print( "done calling _diisplay->drawText( message, x, y )" );
     }
 }
 
