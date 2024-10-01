@@ -122,7 +122,7 @@ void ScoreBoard::drawText( const std::string& message, int x, int y ) {
     } else {
         print( "not null, drawing message: " + message + " at x: " + std::to_string( x ) + ", y: " + std::to_string( y ));
         _display->drawText( message, x, y );
-        print( "done calling _diisplay->drawText( message, x, y )" );
+        print( "done calling _display->drawText( message, x, y )" );
     }
 }
 
