@@ -389,7 +389,8 @@ void run_font_menu( GameObject* gameObject ) {
             std::string font_file_name;
             std::cout << "Enter font file name: ";
             std::cin >> font_file_name;
-            gameObject->getScoreBoard()->getDisplay()->setFont( font_file_name );
+            std::string full_path = "fonts/" + font_file_name;
+            gameObject->getScoreBoard()->getDisplay()->setFont( full_path );
         }
         if ( menu_selection == 2 ) {
             std::string text;
