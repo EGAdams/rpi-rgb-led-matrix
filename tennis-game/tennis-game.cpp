@@ -399,8 +399,10 @@ void run_font_menu( GameObject* gameObject ) {
             gameObject->getScoreBoard()->drawText( text, 9, 17 );
         }
         if (  menu_selection == 0 ) {
-            std::cout << "Exiting..." << std::endl;
-            exit( 0 );
+            std::cout << "Exiting Font Loader..." << std::endl;
+            // sleep a second
+            sleep( 1 );
+            return;
         }
     }
 }
