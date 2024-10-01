@@ -77,7 +77,8 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         _playerTwoScoreDrawer = std::make_unique<Drawer>(
             _canvas.get(), &_big_number_font, Drawer::BIG, player_two_score_color, bg_color );
 
-        _drawer = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::SMALL, color, bg_color );
+        // _drawer = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::SMALL, color, bg_color );
+        _drawer = std::make_unique<Drawer>( _canvas.get(), &small_number_font, Drawer::SMALL, color, bg_color );
         _pipeDrawer = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::BIG, color, bg_color );
         _bluePipeDrawer = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::BIG, blue_color, bg_color );
         _redPipeDrawer = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::BIG, red_color, bg_color );
