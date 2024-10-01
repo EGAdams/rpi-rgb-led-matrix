@@ -13,6 +13,7 @@
 #include <csignal>
 #include <map>
 #include "FontLoader/FontLoader.h"
+#include "FontManager/FontManager.h"
 #include "ITextDrawer/ITextDrawer.h"
 #include "Drawer/Drawer.h"
 #include "ScoreBoard/ScoreBoard.h"
@@ -390,7 +391,15 @@ void run_font_menu( GameObject* gameObject ) {
             std::cout << "Enter font file name: ";
             std::cin >> font_file_name;
             std::string full_path = "fonts/" + font_file_name;
-            gameObject->getScoreBoard()->getDisplay()->setFont( full_path );
+            std::cout << "creating matrix display object..." << std::endl;
+            ScoreBoard* scoreBoard = gameObject->getScoreBoard();
+            rgb_matrix::RGBMatrix* canvas = scoreBoard->getCanvas();
+            Drawer* drawer = scoreBoard->getDrawer();
+            FontLoader newFontLoader(full_path.c_str());       // little numbers
+            rgb_matrix::Font new_font;
+            newFontLoader.LoadFont( new_font );
+            drawer->setFont( &new_font );
+            scoreBoard->setDisplay( new MatrixDisplay( canvas, drawer )); // check for memory leak here
         }
         if ( menu_selection == 2 ) {
             std::string text;
@@ -406,7 +415,6 @@ void run_font_menu( GameObject* gameObject ) {
         }
     }
 }
-
 void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset, int player ) {
     run_font_menu( gameObject );
     int loop_count = 0;
