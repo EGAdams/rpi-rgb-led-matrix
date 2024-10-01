@@ -2,13 +2,17 @@
 #include <iostream>
 
 MatrixDisplay::MatrixDisplay( rgb_matrix::RGBMatrix* canvas, Drawer* drawer ) : _canvas( canvas ), _drawer( drawer ) {
-    _currentFont  = FontManager::getFont(   LITTLE_NUMBER_FONT );  // Assuming FontManager provides default font
+    _currentFont = FontManager::getFont( LITTLE_NUMBER_FONT );  // Assuming FontManager provides default font
     _currentColor = ColorManager::getColor( "WHITE" );  // Default color is white
-    _bg_color     = ColorManager::getColor( "BLACK" );  // Default background color is black
+    _bg_color = ColorManager::getColor( "BLACK" );  // Default background color is black
 }
 MatrixDisplay::~MatrixDisplay() { if ( _canvas ) { delete _canvas; _canvas = nullptr; }}
 
-void MatrixDisplay::setFont(  const std::string& fontName ) {  _currentFont  = FontManager::getFont(   fontName );  }
+void MatrixDisplay::setFont( const std::string& fontName ) {
+    _currentFont = FontManager::getFont( fontName );
+    _drawer->setFont( &_currentFont );
+}
+
 void MatrixDisplay::setColor( const std::string& colorName ) { _currentColor = ColorManager::getColor( colorName ); }
 
 // void Drawer::drawText( const std::string& text, int x, int y ) {
@@ -22,7 +26,9 @@ void MatrixDisplay::drawText( const std::string& text, int x, int y ) {
 }
 
 void MatrixDisplay::clearScreen() {
-    if ( _canvas ) { _canvas->Clear();  // Clear the RGB matrix canvas
-    } else { std::cerr << "Canvas is not initialized. Cannot clear screen." << std::endl; }
+    if ( _canvas ) {
+        _canvas->Clear();  // Clear the RGB matrix canvas
+    }
+    else { std::cerr << "Canvas is not initialized. Cannot clear screen." << std::endl; }
 }
 

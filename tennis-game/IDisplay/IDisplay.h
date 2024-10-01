@@ -6,6 +6,7 @@
 class IDisplay {
 public:
     virtual void setColor( const std::string& colorName ) = 0;
+    virtual void setFont( const std::string& fontName ) = 0;
     virtual void drawText( const std::string& text, int x, int y ) = 0;
     virtual void clearScreen() = 0;
     virtual ~IDisplay() = default;

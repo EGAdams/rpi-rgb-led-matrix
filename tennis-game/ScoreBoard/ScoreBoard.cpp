@@ -7,8 +7,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
     if ( onRaspberryPi() == false ) {
         std::cout << "constructing scoreboard without matrix..." << std::endl;
         _setDrawer = std::make_unique<SetDrawer>( _canvas.get(), _gameState );
-    }
-    else {
+    } else {
         _font_file = LITTLE_NUMBER_FONT;
         printf( "setting up matrix...\n" );
         Color pipe_color( 255, 255, 0 ); // yellow
@@ -58,7 +57,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         FontLoader periodFontLoader( "fonts/mspgothic_030623.bdf" );            // that period
         periodFontLoader.LoadFont( _period_font );
         if ( !_period_font.LoadFont( "fonts/mspgothic_030623.bdf" ) ) {
-            fprintf( stderr, "*** ERROR: Couldn't load font '%s'\n", "fonts/mspgothic_030623.bdf ***" );exit( 1 );
+            fprintf( stderr, "*** ERROR: Couldn't load font '%s'\n", "fonts/mspgothic_030623.bdf ***" ); exit( 1 );
         }
         else {
             std::cout << "loaded period font." << std::endl;
@@ -108,8 +107,11 @@ ScoreBoard::~ScoreBoard() {
 
 Drawer* ScoreBoard::getDrawer() { return _drawer.get(); }
 
-void ScoreBoard::setFontFile( const char* font_file_arg ) { _font_file = font_file_arg; }
+void ScoreBoard::setFontFile( const char* font_file_arg ) { 
+    _font_file = font_file_arg; 
+}
 void ScoreBoard::setDisplay( IDisplay* display ) { _display = display; }
+IDisplay* ScoreBoard::getDisplay() { return _display; }
 
 void ScoreBoard::drawText( const std::string& message, int x, int y ) {
     print( "drawing text: " + message + " at x: " + std::to_string( x ) + ", y: " + std::to_string( y ));

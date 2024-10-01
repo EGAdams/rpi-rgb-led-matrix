@@ -20,9 +20,8 @@ public:
   MatrixDisplay( rgb_matrix::RGBMatrix* canvas, Drawer* drawer );
   ~MatrixDisplay();
 
-  void setFont( const std::string& fontName );
+  void setFont(  const std::string& fontName  );
   void setColor( const std::string& colorName );
- 
   void drawText( const std::string& text, int x, int y ) override; // IDisplay implementations
   void clearScreen() override;
 };

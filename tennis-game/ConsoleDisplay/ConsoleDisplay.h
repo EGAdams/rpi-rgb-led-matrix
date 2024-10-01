@@ -16,6 +16,7 @@ public:
   ~ConsoleDisplay() override = default;
 
   void setColor( const std::string& colorName ) override;
+  void setFont( const std::string& fontName ) override;
   void drawText( const std::string& text, int x, int y ) override;
   void clearScreen() override;
 };

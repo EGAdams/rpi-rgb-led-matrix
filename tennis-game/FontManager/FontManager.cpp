@@ -24,11 +24,11 @@ const rgb_matrix::Font& FontManager::getFont( const std::string& fontName ) {
 void FontManager::_loadFont( const std::string& fontName ) {
     rgb_matrix::Font font;
 
-    if ( !font.LoadFont( fontName.c_str())) { // Attempt to load the font file
+    if ( !font.LoadFont( fontName.c_str())) {   // Attempt to load the font file
         std::cerr << "Failed to load font: " << fontName << std::endl;
         exit( 1 );
     }
 
-    _fontCache[ fontName ] = font; // Store the font in the cache
+    _fontCache[ fontName ] = font;              // Store the font in the cache
     std::cout << "Font '" << fontName << "' loaded and cached." << std::endl;
 }

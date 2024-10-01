@@ -1,3 +1,4 @@
+#include "../TennisConstants/TennisConstants.h"
 #include "../ColorManager/ColorManager.h"
 #include "../ConsoleDisplay/ConsoleDisplay.h"
 
@@ -7,6 +8,11 @@ ConsoleDisplay::ConsoleDisplay( ColorManager* colorManager ) : _colorManager( co
 
 void ConsoleDisplay::setColor( const std::string& color ) { 
     _current_color_string = color; 
+}
+
+void ConsoleDisplay::setFont( const std::string& fontName ) {
+    // ConsoleDisplay does not have a font, so this method is a placeholder
+    print( "Warning: ConsoleDisplay does not have a font, so this method is a placeholder." );
 }
 
 void ConsoleDisplay::drawText( const std::string& text, int x, int y ) {

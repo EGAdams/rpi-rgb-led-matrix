@@ -378,7 +378,34 @@ void resetAll( Reset* reset ) {
     reset->resetScoreboard();
 }
 
+void run_font_menu( GameObject* gameObject ) {
+    int menu_selection = 1;
+    while( menu_selection != 0 ) {
+        std::cout << "0.) quit           " << std::endl;
+        std::cout << "1.) load font file " << std::endl;
+        std::cout << "2.) show text      " << std::endl;
+        std::cin >> menu_selection;
+        if ( menu_selection == 1 ) {
+            std::string font_file_name;
+            std::cout << "Enter font file name: ";
+            std::cin >> font_file_name;
+            gameObject->getScoreBoard()->getDisplay()->setFont( font_file_name );
+        }
+        if ( menu_selection == 2 ) {
+            std::string text;
+            std::cout << "Enter text: ";
+            std::cin >> text;
+            gameObject->getScoreBoard()->drawText( text, 9, 17 );
+        }
+        if (  menu_selection == 0 ) {
+            std::cout << "Exiting..." << std::endl;
+            exit( 0 );
+        }
+    }
+}
+
 void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset, int player ) {
+    run_font_menu( gameObject );
     int loop_count = 0;
     gameObject->loopGame();
     sleep( 1 );
@@ -582,7 +609,7 @@ int main( int argc, char* argv[] ) {    std::unique_ptr<MonitoredObject> logger 
             manual = 1;
         }
     }
-    manual = 1;  // yes hardcodeing  is bad but ina hurry!! 
+    manual = 1;  // yes hardcodeing is bad, but in a hurry!! 
     int loop_count = 0;
     std::cout << "creating game state object..." << std::endl;
     GameState* gameState = new GameState();  // make this 1st!!! cost me 3 days
