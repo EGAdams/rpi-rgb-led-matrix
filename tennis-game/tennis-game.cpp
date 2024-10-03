@@ -388,11 +388,13 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     PairingBlinker pairingBlinker( gameObject->getScoreBoard());  // Use PairingBlinker
     print( "constructing input with timer from run manual game" );
     InputWithTimer inputWithTimer( &pairingBlinker );  // Pass PairingBlinker
-    print( "finished done constructing input with timer from run manual game" );
+    print( "finished constructing input with timer from run manual game" );
     while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { /*/// Begin Game Loop ///*/
+        print( "entered while loop from run manual game" );
         sleep( SCORE_DELAY );
         // if remote pairing, write the words.  if not, snap out of the loop
         while ( remotePairingScreen.inPairingMode()) {
+            print( "inside remote pairing screen from run manual game.  before starting input timer..." );
             int menu_selection = inputWithTimer.getInput();
     
             if (menu_selection == 1) {
@@ -406,6 +408,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
                 GameTimer::gameDelay(1000);
             }
         }
+        
         pairingBlinker.stop();  // Stop blinking once both players are paired
         std::cout << "1.) green score    " << std::endl;
         std::cout << "2.) red score      " << std::endl;
