@@ -112,7 +112,7 @@ void ScoreBoard::setFontFile( const char* font_file_arg ) { _font_file = font_fi
 
 void ScoreBoard::drawText( const std::string& message, int x, int y ) {
     // _display->drawText( message, x, y );
-    writeMessage( message );
+    _drawer->drawText( message, x, y );
 }
 
 Color ScoreBoard::_getColor( int color_constant ) {
@@ -139,7 +139,7 @@ void ScoreBoard::writeMessage( std::string message ) {
         int baseline = _big_number_font.baseline();            // set the coordinates for the text
         int first_offset = 2;
         _drawer->drawNumber( message, first_offset, baseline + _big_number_font.height() );
-        GameTimer::gameDelay( 1000 );
+        //GameTimer::gameDelay( 1000 );
         std::cout << "done sleeping." << std::endl;
     }
 }
