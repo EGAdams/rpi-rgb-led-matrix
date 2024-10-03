@@ -416,7 +416,7 @@ void run_font_menu( GameObject* gameObject ) {
     }
 }
 void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset, int player ) {
-    run_font_menu( gameObject );
+    // run_font_menu( gameObject );
     int loop_count = 0;
     gameObject->loopGame();
     sleep( 1 );
