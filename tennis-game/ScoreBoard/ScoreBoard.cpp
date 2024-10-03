@@ -1,9 +1,8 @@
 #include "ScoreBoard.h"
 
-ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, IDisplay* display,
+ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState,
                        FontManager* fontManager, ColorManager* colorManager )
-    : _player1( player1 ), _player2( player2 ), _gameState( gameState ),
-    _display( display ), _fontManager( fontManager ), _colorManager( colorManager ) {
+    : _player1( player1 ), _player2( player2 ), _gameState( gameState ), _fontManager( fontManager ), _colorManager( colorManager ) {
     if ( onRaspberryPi() == false ) {
         std::cout << "constructing scoreboard without matrix..." << std::endl;
         _setDrawer = std::make_unique<SetDrawer>( _canvas.get(), _gameState );
@@ -89,7 +88,8 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         _yellowPeriodDrawer = std::make_unique<Drawer>( _canvas.get(), &_period_font, Drawer::BIG, yellow_color, bg_color );
         _blankPeriodDrawer = std::make_unique<Drawer>( _canvas.get(), &_period_font, Drawer::BIG, black_color, bg_color );
         _setDrawer = std::make_unique<SetDrawer>( _canvas.get(), _gameState );
-        print( "done constructing unique pointers.  updating scoreboard..." );
+        print( "done constructing unique pointers.  creating display matrix..." );
+        _display = new MatrixDisplay( _canvas.get(), _drawer.get());
     } // fi onRaspberryPi
     print( "updating scoreboard..." );
     update();
