@@ -41,7 +41,7 @@ void Mode1ScoreTest::SetUp() {
     FontManager* fontManager = new FontManager();
     ColorManager* colorManager = new ColorManager();
     IDisplay* display = new ConsoleDisplay( colorManager );
-    ScoreBoard* scoreBoard = new ScoreBoard( _player1, _player2, _gameState, display, fontManager, colorManager);
+    ScoreBoard* scoreBoard = new ScoreBoard( _player1, _player2, _gameState, fontManager, colorManager);
     print("setting ScoreBoard for TieBreaker...");
     _mode1Score->getTieBreaker()->setScoreBoards(scoreBoard);
     print( "finished Mode1ScoreTest::SetUp()" );

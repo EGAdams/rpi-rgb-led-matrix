@@ -41,7 +41,7 @@ GameObject::GameObject( GameState* gameState, IDisplay* display ) :
     _gameModes =  new GameModes( _player1, _player2, _pinInterface, _gameState, _history );
     FontManager* fontManager = new FontManager();
     ColorManager* colorManager = new ColorManager();
-    _scoreBoard = new ScoreBoard( _player1, _player2, gameState, display, fontManager, colorManager);
+    _scoreBoard = new ScoreBoard( _player1, _player2, gameState, fontManager, colorManager);
     _gameModes->setScoreBoards( _scoreBoard );
     _subjectManager = new SubjectManager();
     _logger = new Logger( "GameObject" );
