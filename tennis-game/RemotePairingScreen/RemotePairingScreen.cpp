@@ -77,7 +77,7 @@ void RemotePairingScreen::clearRedPlayerText() {
 void RemotePairingScreen::clearAllText() {
     std::cout << "Both players paired, starting the game...\n";
     _scoreboard->clearScreen();
-    _scoreboard->drawText( "Paired", 5, 65 );
+    // _scoreboard->drawText( "Paired", 5, 65 );
     GameTimer::gameDelay( 2000 );
     _scoreboard->clearScreen();
     _scoreboard->update();
