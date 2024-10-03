@@ -638,13 +638,13 @@ int main( int argc, char* argv[] ) {    std::unique_ptr<MonitoredObject> logger 
     }
     GameObject* gameObject = new GameObject( gameState, display );
 
-    if ( isOnPi ) { // if on pi then replace the console display object with the matrix display object 
-        std::cout << "creating matrix display object..." << std::endl;
-        ScoreBoard* scoreBoard = gameObject->getScoreBoard();
-        rgb_matrix::RGBMatrix* canvas = scoreBoard->getCanvas();
-        Drawer* drawer = scoreBoard->getDrawer();
-        scoreBoard->setDisplay( new MatrixDisplay( canvas, drawer ));
-    }
+    // if ( isOnPi ) { // if on pi then replace the console display object with the matrix display object 
+    //     std::cout << "creating matrix display object..." << std::endl;
+    //     ScoreBoard* scoreBoard = gameObject->getScoreBoard();
+    //     rgb_matrix::RGBMatrix* canvas = scoreBoard->getCanvas();
+    //     Drawer* drawer = scoreBoard->getDrawer();
+    //     scoreBoard->setDisplay( new MatrixDisplay( canvas, drawer ));
+    // }
     
     std::cout << "creating reset object..." << std::endl;
     Reset* reset = new Reset( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );

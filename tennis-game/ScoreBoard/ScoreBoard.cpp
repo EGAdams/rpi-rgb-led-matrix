@@ -122,9 +122,10 @@ void ScoreBoard::drawText( const std::string& message, int x, int y ) {
         exit( 1 );
     } else {
         print( "not null, drawing message: " + message + " at x: " + std::to_string( x ) + ", y: " + std::to_string( y ));
-        // _display->drawText( message, x, y );
+        _display->drawText( message, x, y );
+        GameTimer::gameDelay( 1000 );
         // writeMessage( message );
-        print( "skipping writeMessage.  message: " << message << std::endl );
+        // print( "skipping writeMessage.  message: " << message << std::endl );
         print( "done calling _display->drawText( message, x, y )" );
     }
 }
