@@ -46,8 +46,11 @@ void PairingBlinker::blinkLoop() {
 
 void PairingBlinker::showGreenInstructions() {
     int left_margin = 8;
+    print( "clearing screen..." );
     _scoreboard->clearScreen();
+    print( "drawing Green text..." );
     _scoreboard->drawText( "Green", left_margin + 1, 17 );
+    print( "drawing Player text..." );
     _scoreboard->drawText( "Player", left_margin + 0, 34 );
     _scoreboard->drawText( "Press", left_margin + 1, 51 );
     _scoreboard->drawText( "Your", left_margin + 2, 68 );
