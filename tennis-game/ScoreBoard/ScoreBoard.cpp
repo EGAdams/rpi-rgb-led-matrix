@@ -112,7 +112,7 @@ void ScoreBoard::setFontFile( const char* font_file_arg ) { _font_file = font_fi
 
 void ScoreBoard::drawText( const std::string& message, int x, int y ) {
     // _display->drawText( message, x, y );
-    writeMessage( "test" );
+    writeMessage( message );
 }
 
 Color ScoreBoard::_getColor( int color_constant ) {
