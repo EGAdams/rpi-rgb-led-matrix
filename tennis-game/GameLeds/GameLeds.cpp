@@ -16,5 +16,7 @@ void GameLeds::updateGames() {
     if ( _gameLedTranslator == NULL ) {
         std::cout << "*** ERROR: _gameLedTranslator is null. ***  exiting... " << std::endl; exit( 1 ); }
 
-    if ( _scoreBoard->hasCanvas()) { _scoreBoard->update();
+    if ( _scoreBoard->hasCanvas()) { 
+        print( "updateGames() - canvas is not null.  calling _scoreBoard->update()... " );
+        _scoreBoard->update();
     } else { _gameLedTranslator->drawGameLeds(); }}
