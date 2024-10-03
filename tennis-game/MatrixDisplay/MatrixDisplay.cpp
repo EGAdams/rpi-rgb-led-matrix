@@ -24,6 +24,7 @@ void MatrixDisplay::drawText( const std::string& text, int x, int y ) {
     // print( "inside MatrixDisplay::drawText.  about to call _drawer->drawText..." );
     // _drawer->drawText( text, x, y );
     print( "inside MatrixDisplay::drawText.  calling rgb_matrix::DrawText..." );
+    
     rgb_matrix::DrawText( _canvas, _currentFont, x, y, _currentColor, &_bg_color, text.c_str(), 0 );
 }
 void MatrixDisplay::clearScreen() {
