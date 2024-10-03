@@ -126,8 +126,10 @@ void ScoreBoard::drawText( const std::string& message, int x, int y ) {
         int baseline = _big_number_font.baseline();            // set the coordinates for the text
         int first_offset = 2;
         // _drawer->drawText( "test",  first_offset, baseline + _big_number_font.height());
-        _drawer->drawNumber( "a", first_offset, baseline + _big_number_font.height() );
-        GameTimer::gameDelay( 1000 );
+        for ( int x = 0; x < 10; x++ ) {
+            _drawer->drawNumber( "a", first_offset, baseline + _big_number_font.height() + x );
+            GameTimer::gameDelay( 250 );
+        }
         // writeMessage( message );
         // print( "skipping writeMessage.  message: " << message << std::endl );
         print( "done calling _display->drawText( message, x, y )" );
