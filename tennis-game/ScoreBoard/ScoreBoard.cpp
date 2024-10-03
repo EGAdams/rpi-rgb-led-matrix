@@ -122,7 +122,10 @@ void ScoreBoard::drawText( const std::string& message, int x, int y ) {
         exit( 1 );
     } else {
         print( "not null, drawing message: " + message + " at x: " + std::to_string( x ) + ", y: " + std::to_string( y ));
-        _display->drawText( message, x, y );
+        // _display->drawText( message, x, y );
+        int baseline = _big_number_font.baseline();            // set the coordinates for the text
+        int first_offset = 2;
+        _drawer->drawText( "test",  first_offset, baseline + _big_number_font.height()  );
         GameTimer::gameDelay( 1000 );
         // writeMessage( message );
         // print( "skipping writeMessage.  message: " << message << std::endl );
