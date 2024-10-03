@@ -16,8 +16,9 @@ PairingBlinker::~PairingBlinker() { stop(); }
 
 void PairingBlinker::blinkLoop() {
     bool show_green = true;  // Start with Green instructions
-
+    print( "sttarting blink loop..." );
     while ( !should_stop ) {
+        print( "in blink loop..." );
         _scoreboard->clearScreen();
         if ( green_player_paired && red_player_paired ) { break; } // If both players are paired, stop blinking
 
@@ -30,10 +31,12 @@ void PairingBlinker::blinkLoop() {
         // If neither player is paired, alternate between Green and Red instructions
         else if ( !green_player_paired && !red_player_paired ) {
             if ( show_green ) {
+                print( "showing green instructions..." );
                 showGreenInstructions();
             }
             else {
                 showRedInstructions();
+                print( "showing red instructions..." );
             }
             show_green = !show_green;  // Alternate between Green and Red
         }
