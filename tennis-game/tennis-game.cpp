@@ -419,7 +419,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         std::cout << "7.) Sleep Mode Test" << std::endl;
         std::cout << "8.) Font File"       << std::endl;
         std::cout << "9.) Undo           " << std::endl;
-        std::cout << "10.) Write Message " << std::endl;
+        std::cout << "10.) Test Font     " << std::endl;
 
         if ( gameState->getCurrentAction() == SLEEP_MODE ) {
             ScoreboardBlinker blinker( gameObject->getScoreBoard() );
