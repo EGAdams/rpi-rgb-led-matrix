@@ -121,6 +121,7 @@ void ScoreBoard::drawText( const std::string& message, int x, int y ) {
 }
 
 void ScoreBoard::drawNewText( const std::string& message, int x, int y ) {
+    print( "drawing new text: " << message << " at " << x << ", " << y );
     _text_drawer->drawText( message, x, y );
 }
 
