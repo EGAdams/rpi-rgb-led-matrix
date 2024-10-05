@@ -463,6 +463,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             // print( "done calling set little drawer font." );
 
             // std::cout << "Enter the message to write: ";
+            print( "setting message.... " );
             std::string message;
             // std::cin >> message;
             // add ":{current time}" to the message
@@ -472,10 +473,15 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             char buffer[80];
             strftime(buffer, sizeof(buffer), ":%m/%d/%Y %H:%M:%S", timeinfo);
             message += "\n\n";
+            print ( "adding time to message... " );
             message += buffer;
+            print( "clearing screen..." );
             gameObject->getScoreBoard()->clearScreen();
+            print( "cleared screen." );
             gameObject->getScoreBoard()->drawNewText( message, 5, 20 );
+            print( "done drawing new text." );
             GameTimer::gameDelay( 1000 );
+            print( "continuing..." );
             continue;
         }
 
