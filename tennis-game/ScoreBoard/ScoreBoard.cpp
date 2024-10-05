@@ -439,9 +439,55 @@ void ScoreBoard::setLittleDrawerFont( const std::string& font_file ) {
     Color bg_color( 0, 0, 0 );
     print( "loading little number font: " + font_file );
     FontLoader fontLoader( font_file.c_str());
-    fontLoader.LoadFont( _little_number_font );
-    
-    // delete _text_drawer;  // seg fault!
+    fontLoader.LoadFont( _little_number_font );    
     _text_drawer = new Drawer( _canvas.get(), &_little_number_font, Drawer::BIG, color, bg_color );
     print( "little number font loaded" );
+}
+
+// namespace fs = std::filesystem;
+
+void ScoreBoard::displayAndLoadFontMenu(const std::string& fontDirectory) {
+    // Step 1: Get the list of font files in the directory
+    std::vector<std::string> fonts;
+    for (const auto& entry : std::filesystem::directory_iterator(fontDirectory)) {
+        if (entry.is_regular_file()) {
+            std::string fileName = entry.path().filename().string();
+            // Check if it's a .bdf or .fon file
+            if (fileName.find(".bdf") != std::string::npos || fileName.find(".fon") != std::string::npos) {
+                fonts.push_back(fileName);
+            }
+        }
+    }
+
+    // Step 2: Display the font options
+    if (fonts.empty()) {
+        std::cout << "No fonts available in the directory." << std::endl;
+        return;
+    }
+
+    std::cout << "Available fonts:" << std::endl;
+    for (size_t i = 0; i < fonts.size(); ++i) {
+        std::cout << i + 1 << ". " << fonts[i] << std::endl;
+    }
+
+    // Step 3: Get user input
+    int fontChoice = 0;
+    while (true) {
+        std::cout << "Enter the number of the font to load: ";
+        std::cin >> fontChoice;
+
+        if (fontChoice > 0 && fontChoice <= static_cast<int>(fonts.size())) {
+            break;
+        } else {
+            std::cout << "Invalid choice. Please try again." << std::endl;
+        }
+    }
+
+    // Step 4: Load the selected font
+    std::string selectedFont = fonts[fontChoice - 1];
+    std::string fontFilePath = fontDirectory + "/" + selectedFont;
+    
+    FontLoader fontLoader(fontFilePath.c_str());
+    fontLoader.LoadFont(_little_number_font);  // Assuming _little_number_font is available
+    std::cout << "Loaded font: " << selectedFont << std::endl;
 }

@@ -19,6 +19,8 @@
 #include <string>
 #include <fstream>
 #include <memory>
+#include <vector>
+#include <filesystem>
 #include <thread> // Include the <thread> header for sleep function
 
 #define PLAYER_1_SERVE  0
@@ -65,6 +67,7 @@ public:
     void setDrawerSize( Drawer::Size            size  );
     void setFontFile(   const char*             font_file  );
     void setLittleDrawerFont( const std::string& font_file );
+    void displayAndLoadFontMenu( const std::string& fontDirectory );
 
 private:
     Player*                      _player1;

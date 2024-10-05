@@ -454,6 +454,8 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         }
 
         if ( menu_selection == 10 ) {
+            gameObject->getScoreBoard()->displayAndLoadFontMenu( "fonts" );
+            exit(0);
             std::cout << "Enter the font file name: ";
             std::string font_file;
             std::cin >> font_file;
