@@ -50,8 +50,8 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         rgb_matrix::Font small_number_font;
         smallNumberFontLoader.LoadFont( small_number_font );
 
-        if ( !_little_number_font.LoadFont( BIG_NUMBER_FONT )) {
-            fprintf( stderr, "*** ERROR: Could not load font '%s' ***\n", BIG_NUMBER_FONT ); exit( 1 );
+        if ( !_little_number_font.LoadFont( LITTLE_NUMBER_FONT )) {
+            fprintf( stderr, "*** ERROR: Could not load font '%s' ***\n", LITTLE_NUMBER_FONT ); exit( 1 );
         }        
 
         FontLoader bigNumberFontLoader( "fonts/fgm_27_ee.bdf" );                // big numbers
