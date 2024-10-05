@@ -441,7 +441,7 @@ void ScoreBoard::setLittleDrawerFont( const std::string& font_file ) {
     Color color( 255, 255, 0 );
     Color bg_color( 0, 0, 0 );
     print( "loading little number font: " + font_file );
-    FontLoader fontLoader( font_file.c_str() );
+    FontLoader fontLoader( "fonts/little_numbers.bdf" /* font_file.c_str() */ );
     fontLoader.LoadFont( _little_number_font );
     _text_drawer = new Drawer( _canvas.get(), &_little_number_font, Drawer::BIG, color, bg_color );
     print( "little number font loaded" );
@@ -449,7 +449,7 @@ void ScoreBoard::setLittleDrawerFont( const std::string& font_file ) {
 
 // namespace fs = std::filesystem;
 
-void ScoreBoard::displayAndLoadFontMenu( const std::string& fontDirectory ) {
+std::string ScoreBoard::displayAndLoadFontMenu( const std::string& fontDirectory ) {
     // Step 1: Get the list of font files in the directory
     std::vector<std::string> fonts;
     for ( const auto& entry : std::filesystem::directory_iterator( fontDirectory ) ) {
@@ -465,7 +465,7 @@ void ScoreBoard::displayAndLoadFontMenu( const std::string& fontDirectory ) {
     // Step 2: Display the font options
     if ( fonts.empty() ) {
         std::cout << "No fonts available in the directory." << std::endl;
-        return;
+        return "*** ERROR: no fonts available in the directory. ***";
     }
 
     std::cout << "Available fonts:" << std::endl;
@@ -491,7 +491,5 @@ void ScoreBoard::displayAndLoadFontMenu( const std::string& fontDirectory ) {
     std::string selectedFont = fonts[fontChoice - 1];
     std::string fontFilePath = fontDirectory + "/" + selectedFont;
     print( "using font loader to load path: " + fontFilePath );
-    FontLoader fontLoader( fontFilePath.c_str() );
-    fontLoader.LoadFont( _little_number_font );  // Assuming _little_number_font is available
-    std::cout << "Loaded font: " << selectedFont << std::endl;
+    return fontFilePath;
 }

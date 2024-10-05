@@ -56,7 +56,7 @@ public:
     void writeMessage( std::string message );
     void drawText(    const std::string& text, int x, int y );
     void drawNewText( const std::string& text, int x, int y );
-    std::string drawPlayerScore(   Player* player );
+    std::string drawPlayerScore( Player* player );
     RGBMatrix* getCanvas();
     Color _getColor( int color );
     bool onRaspberryPi();
@@ -67,7 +67,7 @@ public:
     void setDrawerSize( Drawer::Size            size  );
     void setFontFile(   const char*             font_file  );
     void setLittleDrawerFont( const std::string& font_file );
-    void displayAndLoadFontMenu( const std::string& fontDirectory );
+    std::string displayAndLoadFontMenu( const std::string& fontDirectory );
 
 private:
     Player*                      _player1;

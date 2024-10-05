@@ -454,12 +454,12 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         }
 
         if ( menu_selection == 10 ) {
-            gameObject->getScoreBoard()->displayAndLoadFontMenu( "fonts" );
+            // std::string font_path = gameObject->getScoreBoard()->displayAndLoadFontMenu( "fonts" );
             // std::cout << "Enter the font file name: ";
-            // std::string font_file;
+            std::string font_file;
             // std::cin >> font_file;
             // print( "calling set little drawer font... " );
-            // gameObject->getScoreBoard()->setLittleDrawerFont( font_file );
+            gameObject->getScoreBoard()->setLittleDrawerFont( font_file );
             // print( "done calling set little drawer font." );
 
             // std::cout << "Enter the message to write: ";
