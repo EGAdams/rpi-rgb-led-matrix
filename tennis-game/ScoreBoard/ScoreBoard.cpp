@@ -441,7 +441,7 @@ void ScoreBoard::setLittleDrawerFont( const std::string& font_file ) {
     Color color( 255, 255, 0 );
     Color bg_color( 0, 0, 0 );
     print( "loading little number font: " + font_file );
-    FontLoader fontLoader( "fonts/little_numbers.bdf" /* font_file.c_str() */ );
+    FontLoader fontLoader( font_file.c_str());
     fontLoader.LoadFont( _little_number_font );
     _text_drawer = new Drawer( _canvas.get(), &_little_number_font, Drawer::BIG, color, bg_color );
     print( "little number font loaded" );
