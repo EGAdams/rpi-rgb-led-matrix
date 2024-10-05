@@ -430,6 +430,11 @@ void ScoreBoard::setDrawerForegroundColor( const Color& color ) { _drawer->setFo
 void ScoreBoard::setDrawerFont( const rgb_matrix::Font* font ) { _drawer->setFont( font ); }
 void ScoreBoard::setDrawerSize( Drawer::Size size ) { _drawer->setSize( size ); }
 
-void ScoreBoard::setLittleDrawerFont( const std::string& font_file ) { 
-    _little_number_font.LoadFont( font_file.c_str() );
+void ScoreBoard::setLittleDrawerFont( const std::string& font_file ) {
+    Color color( 255, 255, 0 );
+    Color bg_color( 0, 0, 0 );
+    print( "loading little number font: " + font_file );
+    _little_number_font.LoadFont( font_file.c_str());
+    _new_drawer = std::make_unique<Drawer>( _canvas.get(), &_little_number_font, Drawer::BIG, color, bg_color );
+    print( "little number font loaded" );
 }
