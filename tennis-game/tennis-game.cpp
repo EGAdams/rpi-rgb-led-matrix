@@ -465,7 +465,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             message += "\n";
             message += buffer;
             gameObject->getScoreBoard()->clearScreen();
-            gameObject->getScoreBoard()->drawText( message, 10, 20 );
+            gameObject->getScoreBoard()->drawNewText( message, 10, 20 );
             GameTimer::gameDelay( 1000 );
             continue;
         }
