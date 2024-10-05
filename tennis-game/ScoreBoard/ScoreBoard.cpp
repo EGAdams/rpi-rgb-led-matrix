@@ -121,7 +121,7 @@ void ScoreBoard::drawText( const std::string& message, int x, int y ) {
 }
 
 void ScoreBoard::drawNewText( const std::string& message, int x, int y ) {
-    _new_drawer.drawText( message, x, y );
+    _text_drawer->drawText( message, x, y );
 }
 
 Color ScoreBoard::_getColor( int color_constant ) {
@@ -435,6 +435,7 @@ void ScoreBoard::setLittleDrawerFont( const std::string& font_file ) {
     Color bg_color( 0, 0, 0 );
     print( "loading little number font: " + font_file );
     _little_number_font.LoadFont( font_file.c_str());
-    _new_drawer = Drawer( _canvas.get(), &_little_number_font, Drawer::BIG, color, bg_color );
+    delete _text_drawer;
+    _text_drawer = new Drawer( _canvas.get(), &_little_number_font, Drawer::BIG, color, bg_color );
     print( "little number font loaded" );
 }
