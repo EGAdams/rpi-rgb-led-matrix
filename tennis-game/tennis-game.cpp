@@ -468,13 +468,13 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             // std::cin >> message;
             // add ":{current time}" to the message
             message = "test";
-            std::time_t now = std::time(nullptr);
-            std::tm* timeinfo = std::localtime(&now);
-            char buffer[80];
-            strftime(buffer, sizeof(buffer), ":%m/%d/%Y %H:%M:%S", timeinfo);
-            message += "\n\n";
-            print ( "adding time to message... " );
-            message += buffer;
+            // std::time_t now = std::time(nullptr);
+            // std::tm* timeinfo = std::localtime(&now);
+            // char buffer[80];
+            // strftime(buffer, sizeof(buffer), ":%m/%d/%Y %H:%M:%S", timeinfo);
+            // message += "\n\n";
+            // print ( "adding time to message... " );
+            // message += buffer;
             print( "clearing screen..." );
             gameObject->getScoreBoard()->clearScreen();
             print( "cleared screen." );
