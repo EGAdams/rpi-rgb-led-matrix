@@ -50,6 +50,10 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         rgb_matrix::Font small_number_font;
         smallNumberFontLoader.LoadFont( small_number_font );
 
+        if ( !_little_number_font.LoadFont( BIG_NUMBER_FONT )) {
+            fprintf( stderr, "*** ERROR: Could not load font '%s' ***\n", BIG_NUMBER_FONT ); exit( 1 );
+        }        
+
         FontLoader bigNumberFontLoader( "fonts/fgm_27_ee.bdf" );                // big numbers
         rgb_matrix::Font bigNumberFont;
         bigNumberFontLoader.LoadFont( bigNumberFont );
@@ -320,8 +324,7 @@ std::string ScoreBoard::drawPlayerScore( Player* player ) {
         player->number() == PLAYER_1_INITIALIZED ?  // type player 1 score, else type player 2 score
             std::cout << "| \033[92mPLAYER 1: //// " << serve_bar << "\033[92m " << score << " //// " << std::endl :
             std::cout << "| \033[31mPLAYER 2: //// " << serve_bar << "\033[31m " << score << " //// \033[35m" << std::endl;
-    }
-    else {
+    } else {
         int vertical_offset = player->number() == 0 ? 0 : _big_number_font.height();
         _pipeDrawer->drawNumber( serve_bar, 2, _big_number_font.baseline() + vertical_offset );
         int baseline = _big_number_font.baseline();                  // set the coordinates for the text
