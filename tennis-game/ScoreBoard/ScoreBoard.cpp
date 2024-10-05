@@ -53,7 +53,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         FontLoader bigNumberFontLoader( "fonts/fgm_27_ee.bdf" );                // big numbers
         rgb_matrix::Font bigNumberFont;
         bigNumberFontLoader.LoadFont( bigNumberFont );
-        if ( !_big_number_font.LoadFont( BIG_NUMBER_FONT ) ) {
+        if ( !_big_number_font.LoadFont( BIG_NUMBER_FONT )) {
             fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT ); exit( 1 );
         }
 
@@ -81,7 +81,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
             _canvas.get(), &_big_number_font, Drawer::BIG, player_two_score_color, bg_color );
 
         _drawer     = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::SMALL, color, bg_color );
-        _new_drawer = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::BIG, color, bg_color );
+        _new_drawer = std::make_unique<Drawer>( _canvas.get(), &_little_number_font, Drawer::BIG, color, bg_color );
         _pipeDrawer = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::BIG, color, bg_color );
         _bluePipeDrawer = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::BIG, blue_color, bg_color );
         _redPipeDrawer = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::BIG, red_color, bg_color );
@@ -137,8 +137,7 @@ Color ScoreBoard::_getColor( int color_constant ) {
 void ScoreBoard::writeMessage( std::string message ) {
     if ( hasCanvas() == false ) {
         std::cout << "/// " << message << " ///" << std::endl;
-    }
-    else {
+    } else {
         Color color( 255, 255, 0 );
         Color bg_color( 0, 0, 0 );
         int baseline = _big_number_font.baseline();            // set the coordinates for the text
