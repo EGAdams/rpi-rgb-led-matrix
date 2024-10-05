@@ -462,7 +462,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             std::tm* timeinfo = std::localtime(&now);
             char buffer[80];
             strftime(buffer, sizeof(buffer), ":%m/%d/%Y %H:%M:%S", timeinfo);
-            message += " ";
+            message += "\n";
             message += buffer;
             gameObject->getScoreBoard()->clearScreen();
             gameObject->getScoreBoard()->drawText( message, 10, 20 );
