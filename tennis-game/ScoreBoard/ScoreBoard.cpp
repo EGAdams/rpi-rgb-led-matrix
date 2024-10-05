@@ -7,7 +7,8 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
     if ( onRaspberryPi() == false ) {
         std::cout << "constructing scoreboard without matrix..." << std::endl;
         _setDrawer = std::make_unique<SetDrawer>( _canvas.get(), _gameState );
-    } else {
+    }
+    else {
         // const rgb_matrix::Font& defaultFont = _fontManager->getFont( "fonts/fgm_27_ee.bdf" );
         rgb_matrix::Color defaultColor = _colorManager->getColor( "WHITE" );
         _font_file = LITTLE_NUMBER_FONT;
@@ -49,7 +50,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         rgb_matrix::Font small_number_font;
         smallNumberFontLoader.LoadFont( small_number_font );
 
-        if ( !_little_number_font.LoadFont( BIG_NUMBER_FONT )) {
+        if ( !_little_number_font.LoadFont( BIG_NUMBER_FONT ) ) {
             fprintf( stderr, "*** ERROR: Could not load font '%s' ***\n", BIG_NUMBER_FONT ); exit( 1 );
         }
         // if ( !_little_number_font.LoadFont( LITTLE_NUMBER_FONT )) {
@@ -59,7 +60,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         FontLoader bigNumberFontLoader( "fonts/fgm_27_ee.bdf" );                // big numbers
         rgb_matrix::Font bigNumberFont;
         bigNumberFontLoader.LoadFont( bigNumberFont );
-        if ( !_big_number_font.LoadFont( BIG_NUMBER_FONT )) {
+        if ( !_big_number_font.LoadFont( BIG_NUMBER_FONT ) ) {
             fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT ); exit( 1 );
         }
 
@@ -72,7 +73,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
             std::cout << "loaded period font." << std::endl;
         }
         // end loading fonts
-        
+
         Color color( 255, 255, 0 );
         Color bg_color( 0, 0, 0 );
         Color blue_color( 0, 0, 255 );
@@ -86,7 +87,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         _playerTwoScoreDrawer = std::make_unique<Drawer>(
             _canvas.get(), &_big_number_font, Drawer::BIG, player_two_score_color, bg_color );
 
-        _drawer     = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::SMALL, color, bg_color );
+        _drawer = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::SMALL, color, bg_color );
         _new_drawer = std::make_unique<Drawer>( _canvas.get(), &_little_number_font, Drawer::BIG, color, bg_color );
         _pipeDrawer = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::BIG, color, bg_color );
         _bluePipeDrawer = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::BIG, blue_color, bg_color );
@@ -145,12 +146,13 @@ Color ScoreBoard::_getColor( int color_constant ) {
 void ScoreBoard::writeMessage( std::string message ) {
     if ( hasCanvas() == false ) {
         std::cout << "/// " << message << " ///" << std::endl;
-    } else {
+    }
+    else {
         Color color( 255, 255, 0 );
         Color bg_color( 0, 0, 0 );
         int baseline = _big_number_font.baseline();            // set the coordinates for the text
         int first_offset = 2;
-        _drawer->drawNumber( message, first_offset, baseline + _big_number_font.height());
+        _drawer->drawNumber( message, first_offset, baseline + _big_number_font.height() );
         // GameTimer::gameDelay( 1000 );
         // std::cout << "done sleeping." << std::endl;
     }
@@ -328,7 +330,8 @@ std::string ScoreBoard::drawPlayerScore( Player* player ) {
         player->number() == PLAYER_1_INITIALIZED ?  // type player 1 score, else type player 2 score
             std::cout << "| \033[92mPLAYER 1: //// " << serve_bar << "\033[92m " << score << " //// " << std::endl :
             std::cout << "| \033[31mPLAYER 2: //// " << serve_bar << "\033[31m " << score << " //// \033[35m" << std::endl;
-    } else {
+    }
+    else {
         int vertical_offset = player->number() == 0 ? 0 : _big_number_font.height();
         _pipeDrawer->drawNumber( serve_bar, 2, _big_number_font.baseline() + vertical_offset );
         int baseline = _big_number_font.baseline();                  // set the coordinates for the text
@@ -438,47 +441,48 @@ void ScoreBoard::setLittleDrawerFont( const std::string& font_file ) {
     Color color( 255, 255, 0 );
     Color bg_color( 0, 0, 0 );
     print( "loading little number font: " + font_file );
-    FontLoader fontLoader( font_file.c_str());
-    fontLoader.LoadFont( _little_number_font );    
+    FontLoader fontLoader( font_file.c_str() );
+    fontLoader.LoadFont( _little_number_font );
     _text_drawer = new Drawer( _canvas.get(), &_little_number_font, Drawer::BIG, color, bg_color );
     print( "little number font loaded" );
 }
 
 // namespace fs = std::filesystem;
 
-void ScoreBoard::displayAndLoadFontMenu(const std::string& fontDirectory) {
+void ScoreBoard::displayAndLoadFontMenu( const std::string& fontDirectory ) {
     // Step 1: Get the list of font files in the directory
     std::vector<std::string> fonts;
-    for (const auto& entry : std::filesystem::directory_iterator(fontDirectory)) {
-        if (entry.is_regular_file()) {
+    for ( const auto& entry : std::filesystem::directory_iterator( fontDirectory ) ) {
+        if ( entry.is_regular_file() ) {
             std::string fileName = entry.path().filename().string();
             // Check if it's a .bdf or .fon file
-            if (fileName.find(".bdf") != std::string::npos || fileName.find(".fon") != std::string::npos) {
-                fonts.push_back(fileName);
+            if ( fileName.find( ".bdf" ) != std::string::npos ); {
+                fonts.push_back( fileName );
             }
         }
     }
 
     // Step 2: Display the font options
-    if (fonts.empty()) {
+    if ( fonts.empty() ) {
         std::cout << "No fonts available in the directory." << std::endl;
         return;
     }
 
     std::cout << "Available fonts:" << std::endl;
-    for (size_t i = 0; i < fonts.size(); ++i) {
+    for ( size_t i = 0; i < fonts.size(); ++i ) {
         std::cout << i + 1 << ". " << fonts[i] << std::endl;
     }
 
     // Step 3: Get user input
     int fontChoice = 0;
-    while (true) {
+    while ( true ) {
         std::cout << "Enter the number of the font to load: ";
         std::cin >> fontChoice;
 
-        if (fontChoice > 0 && fontChoice <= static_cast<int>(fonts.size())) {
+        if ( fontChoice > 0 && fontChoice <= static_cast< int >( fonts.size() ) ) {
             break;
-        } else {
+        }
+        else {
             std::cout << "Invalid choice. Please try again." << std::endl;
         }
     }
@@ -486,8 +490,8 @@ void ScoreBoard::displayAndLoadFontMenu(const std::string& fontDirectory) {
     // Step 4: Load the selected font
     std::string selectedFont = fonts[fontChoice - 1];
     std::string fontFilePath = fontDirectory + "/" + selectedFont;
-    
-    FontLoader fontLoader(fontFilePath.c_str());
-    fontLoader.LoadFont(_little_number_font);  // Assuming _little_number_font is available
+
+    FontLoader fontLoader( fontFilePath.c_str() );
+    fontLoader.LoadFont( _little_number_font );  // Assuming _little_number_font is available
     std::cout << "Loaded font: " << selectedFont << std::endl;
 }
