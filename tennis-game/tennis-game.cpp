@@ -456,8 +456,10 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         if ( menu_selection == 10 ) {
             std::cout << "Enter the message to write: ";
             std::string message;
-            std::getline(std::cin, message);  // get input from the user
+            std::cin >> message;
+            gameObject->getScoreBoard()->clearScreen();
             gameObject->getScoreBoard()->drawText( message, 10, 10 );
+            GameTimer::gameDelay(1000);
             continue;
         }
 
