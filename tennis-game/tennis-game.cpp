@@ -457,7 +457,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             std::cout << "Enter the message to write: ";
             std::string message;
             std::getline(std::cin, message);  // get input from the user
-            gameObject->getScoreBoard()->writeMessage(message);
+            gameObject->getScoreBoard()->drawText( message, 10, 10 );
             continue;
         }
 
