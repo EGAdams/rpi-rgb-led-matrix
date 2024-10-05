@@ -393,7 +393,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         print( "entered while loop from run manual game" );
         sleep( SCORE_DELAY );
         // if remote pairing, write the words.  if not, snap out of the loop
-        while ( remotePairingScreen.inPairingMode()) {
+        while ( remotePairingScreen.inPairingMode() && false ) { // TODO: CHANGE THIS BACK!
             print( "inside remote pairing screen from run manual game.  before starting input timer..." );
             int menu_selection = inputWithTimer.getInput();
     
@@ -419,6 +419,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         std::cout << "7.) Sleep Mode Test" << std::endl;
         std::cout << "8.) Font File"       << std::endl;
         std::cout << "9.) Undo           " << std::endl;
+        std::cout << "10.) Write Message " << std::endl;
 
         if ( gameState->getCurrentAction() == SLEEP_MODE ) {
             ScoreboardBlinker blinker( gameObject->getScoreBoard() );
@@ -450,6 +451,14 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             print( "updated scoreboard." );
         } else {
             std::cin >> menu_selection;
+        }
+
+        if ( menu_selection == 10 ) {
+            std::cout << "Enter the message to write: ";
+            std::string message;
+            std::getline(std::cin, message);  // get input from the user
+            gameObject->getScoreBoard()->writeMessage(message);
+            continue;
         }
 
         if (  menu_selection == 1  ||  menu_selection == 2  ) {
