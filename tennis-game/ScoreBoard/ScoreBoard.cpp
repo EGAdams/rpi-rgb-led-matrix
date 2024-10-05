@@ -429,3 +429,7 @@ void ScoreBoard::setDrawerBackgroundColor( const Color& color ) { _drawer->setBa
 void ScoreBoard::setDrawerForegroundColor( const Color& color ) { _drawer->setForegroundColor( color ); }
 void ScoreBoard::setDrawerFont( const rgb_matrix::Font* font ) { _drawer->setFont( font ); }
 void ScoreBoard::setDrawerSize( Drawer::Size size ) { _drawer->setSize( size ); }
+
+void ScoreBoard::setLittleDrawerFont( const std::string& font_file ) { 
+    _little_number_font.LoadFont( font_file.c_str() );
+}

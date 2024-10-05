@@ -454,18 +454,24 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         }
 
         if ( menu_selection == 10 ) {
-            std::cout << "Enter the message to write: ";
+            std::cout << "Enter the font file name: ";
+            std::string font_file;
+            std::cin >> font_file;
+            gameObject->getScoreBoard()->setLittleDrawerFont( font_file );
+
+            // std::cout << "Enter the message to write: ";
             std::string message;
-            std::cin >> message;
+            // std::cin >> message;
             // add ":{current time}" to the message
+            message = "test";
             std::time_t now = std::time(nullptr);
             std::tm* timeinfo = std::localtime(&now);
             char buffer[80];
             strftime(buffer, sizeof(buffer), ":%m/%d/%Y %H:%M:%S", timeinfo);
-            message += "\n";
+            message += "\n\n";
             message += buffer;
             gameObject->getScoreBoard()->clearScreen();
-            gameObject->getScoreBoard()->drawNewText( message, 10, 20 );
+            gameObject->getScoreBoard()->drawNewText( message, 5, 20 );
             GameTimer::gameDelay( 1000 );
             continue;
         }
