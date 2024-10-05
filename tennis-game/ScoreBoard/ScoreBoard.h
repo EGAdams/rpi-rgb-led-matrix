@@ -92,7 +92,7 @@ private:
     std::unique_ptr<Drawer>      _blankPeriodDrawer;
     std::unique_ptr<SetDrawer>   _setDrawer;
     std::unique_ptr<RGBMatrix>   _canvas;
-    std::unique_ptr<Drawer>      _new_drawer;
+    Drawer                       _new_drawer;
     const char*                  _font_file;
 
     void _drawTieBreakerBar(    /* void */            );
