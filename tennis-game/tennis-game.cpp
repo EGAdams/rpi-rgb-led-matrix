@@ -457,7 +457,9 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             std::cout << "Enter the font file name: ";
             std::string font_file;
             std::cin >> font_file;
+            print( "calling set little drawer font... " );
             gameObject->getScoreBoard()->setLittleDrawerFont( font_file );
+            print( "done calling set little drawer font." );
 
             // std::cout << "Enter the message to write: ";
             std::string message;
