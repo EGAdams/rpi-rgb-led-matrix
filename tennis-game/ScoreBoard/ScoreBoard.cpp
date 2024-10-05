@@ -490,7 +490,7 @@ void ScoreBoard::displayAndLoadFontMenu( const std::string& fontDirectory ) {
     // Step 4: Load the selected font
     std::string selectedFont = fonts[fontChoice - 1];
     std::string fontFilePath = fontDirectory + "/" + selectedFont;
-
+    print( "using font loader to load path: " + fontFilePath );
     FontLoader fontLoader( fontFilePath.c_str() );
     fontLoader.LoadFont( _little_number_font );  // Assuming _little_number_font is available
     std::cout << "Loaded font: " << selectedFont << std::endl;
