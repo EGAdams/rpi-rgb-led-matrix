@@ -455,8 +455,7 @@ std::string ScoreBoard::displayAndLoadFontMenu( const std::string& fontDirectory
     for ( const auto& entry : std::filesystem::directory_iterator( fontDirectory ) ) {
         if ( entry.is_regular_file() ) {
             std::string fileName = entry.path().filename().string();
-            // Check if it's a .bdf or .fon file
-            if ( fileName.find( ".bdf" ) != std::string::npos ); {
+            if ( fileName.find( ".bdf" ) != std::string::npos ) {
                 fonts.push_back( fileName );
             }
         }
