@@ -7,8 +7,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
     if ( onRaspberryPi() == false ) {
         std::cout << "constructing scoreboard without matrix..." << std::endl;
         _setDrawer = std::make_unique<SetDrawer>( _canvas.get(), _gameState );
-    }
-    else {
+    } else {
         // const rgb_matrix::Font& defaultFont = _fontManager->getFont( "fonts/fgm_27_ee.bdf" );
         rgb_matrix::Color defaultColor = _colorManager->getColor( "WHITE" );
         _font_file = LITTLE_NUMBER_FONT;
@@ -50,9 +49,12 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         rgb_matrix::Font small_number_font;
         smallNumberFontLoader.LoadFont( small_number_font );
 
-        if ( !_little_number_font.LoadFont( LITTLE_NUMBER_FONT )) {
-            fprintf( stderr, "*** ERROR: Could not load font '%s' ***\n", LITTLE_NUMBER_FONT ); exit( 1 );
-        }        
+        if ( !_little_number_font.LoadFont( BIG_NUMBER_FONT )) {
+            fprintf( stderr, "*** ERROR: Could not load font '%s' ***\n", BIG_NUMBER_FONT ); exit( 1 );
+        }
+        // if ( !_little_number_font.LoadFont( LITTLE_NUMBER_FONT )) {
+        //     fprintf( stderr, "*** ERROR: Could not load font '%s' ***\n", LITTLE_NUMBER_FONT ); exit( 1 );
+        // }
 
         FontLoader bigNumberFontLoader( "fonts/fgm_27_ee.bdf" );                // big numbers
         rgb_matrix::Font bigNumberFont;
@@ -121,8 +123,9 @@ void ScoreBoard::drawText( const std::string& message, int x, int y ) {
 }
 
 void ScoreBoard::drawNewText( const std::string& message, int x, int y ) {
-    print( "drawing new text: " << message << " at " << x << ", " << y );
+    print( "drawing new text..." );
     _text_drawer->drawText( message, x, y );
+    print( "done drawing new text." );
 }
 
 Color ScoreBoard::_getColor( int color_constant ) {
@@ -437,7 +440,7 @@ void ScoreBoard::setLittleDrawerFont( const std::string& font_file ) {
     print( "loading little number font: " + font_file );
     _little_number_font.LoadFont( font_file.c_str());
 
-    // delete _text_drawer;
+    // delete _text_drawer;  // seg fault!
     _text_drawer = new Drawer( _canvas.get(), &_little_number_font, Drawer::BIG, color, bg_color );
     print( "little number font loaded" );
 }
