@@ -52,7 +52,8 @@ public:
     void drawSets();
     void drawBlinkSets( int player_number );
     void writeMessage( std::string message );
-    void drawText( const std::string& text, int x, int y );
+    void drawText(    const std::string& text, int x, int y );
+    void drawNewText( const std::string& text, int x, int y );
     std::string drawPlayerScore(   Player* player );
     RGBMatrix* getCanvas();
     Color _getColor( int color );
@@ -90,7 +91,8 @@ private:
     std::unique_ptr<Drawer>      _blankPeriodDrawer;
     std::unique_ptr<SetDrawer>   _setDrawer;
     std::unique_ptr<RGBMatrix>   _canvas;
-    const char*                 _font_file;
+    std::unique_ptr<Drawer>      _new_drawer;
+    const char*                  _font_file;
 
     void _drawTieBreakerBar(    /* void */            );
     void _drawMatchWinDisplay(  /* void */            );

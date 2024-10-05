@@ -80,7 +80,8 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         _playerTwoScoreDrawer = std::make_unique<Drawer>(
             _canvas.get(), &_big_number_font, Drawer::BIG, player_two_score_color, bg_color );
 
-        _drawer = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::SMALL, color, bg_color );
+        _drawer     = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::SMALL, color, bg_color );
+        _new_drawer = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::BIG, color, bg_color );
         _pipeDrawer = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::BIG, color, bg_color );
         _bluePipeDrawer = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::BIG, blue_color, bg_color );
         _redPipeDrawer = std::make_unique<Drawer>( _canvas.get(), &_big_number_font, Drawer::BIG, red_color, bg_color );
@@ -115,6 +116,10 @@ void ScoreBoard::drawText( const std::string& message, int x, int y ) {
     _drawer->drawText( message, x, y );
 }
 
+void ScoreBoard::drawNewText( const std::string& message, int x, int y ) {
+    _new_drawer->drawText( message, x, y );
+}
+
 Color ScoreBoard::_getColor( int color_constant ) {
     switch ( color_constant ) {
     case RED:    return Color( 255, 0, 0 );
@@ -138,7 +143,7 @@ void ScoreBoard::writeMessage( std::string message ) {
         Color bg_color( 0, 0, 0 );
         int baseline = _big_number_font.baseline();            // set the coordinates for the text
         int first_offset = 2;
-        _drawer->drawNumber( message, first_offset, baseline + _big_number_font.height() );
+        _drawer->drawNumber( message, first_offset, baseline + _big_number_font.height());
         // GameTimer::gameDelay( 1000 );
         // std::cout << "done sleeping." << std::endl;
     }
