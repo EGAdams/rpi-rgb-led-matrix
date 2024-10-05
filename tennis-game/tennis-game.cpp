@@ -457,9 +457,16 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             std::cout << "Enter the message to write: ";
             std::string message;
             std::cin >> message;
+            // add ":{current time}" to the message
+            std::time_t now = std::time(nullptr);
+            std::tm* timeinfo = std::localtime(&now);
+            char buffer[80];
+            strftime(buffer, sizeof(buffer), ":%m/%d/%Y %H:%M:%S", timeinfo);
+            message += " ";
+            message += buffer;
             gameObject->getScoreBoard()->clearScreen();
-            gameObject->getScoreBoard()->drawText( message, 10, 10 );
-            GameTimer::gameDelay(1000);
+            gameObject->getScoreBoard()->drawText( message, 10, 20 );
+            GameTimer::gameDelay( 1000 );
             continue;
         }
 
