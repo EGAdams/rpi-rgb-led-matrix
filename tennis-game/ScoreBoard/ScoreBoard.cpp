@@ -57,17 +57,17 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         //     fprintf( stderr, "*** ERROR: Could not load font '%s' ***\n", LITTLE_NUMBER_FONT ); exit( 1 );
         // }
 
-        FontLoader bigNumberFontLoader( "fonts/fgm_27_ee.bdf" );                // big numbers
+        FontLoader bigNumberFontLoader( "fonts/fgm_27_ee.bdf" );     // big numbers
         rgb_matrix::Font bigNumberFont;
         bigNumberFontLoader.LoadFont( bigNumberFont );
         if ( !_big_number_font.LoadFont( BIG_NUMBER_FONT )) {
             fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT ); exit( 1 );
         }
 
-        FontLoader periodFontLoader( "fonts/mspgothic_030623.bdf" );            // that period
+        FontLoader periodFontLoader( "fonts/mspgothic_030623.bdf" ); // that period
         periodFontLoader.LoadFont( _period_font );
         if ( !_period_font.LoadFont( "fonts/mspgothic_030623.bdf" )) {
-            fprintf( stderr, "*** ERROR: Couldn't load font '%s'\n", "fonts/mspgothic_030623.bdf ***" );exit( 1 );
+            fprintf( stderr, "*** ERROR: Couldn't load font '%s'\n", "fonts/mspgothic_030623.bdf ***" ); exit( 1 );
         }
         else {
             std::cout << "loaded period font." << std::endl;

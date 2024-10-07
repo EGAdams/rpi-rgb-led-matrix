@@ -30,12 +30,12 @@ void RemotePairingScreen::draw() {
         if( _scoreboard->onRaspberryPi()) {
             #define LEFT_MARGIN 8
             _scoreboard->clearScreen();
-            _scoreboard->drawNewText( "Red",  LEFT_MARGIN + 4, 17  );
+            _scoreboard->drawNewText( "Red",    LEFT_MARGIN + 4, 17  );
             _scoreboard->drawNewText( "Player", LEFT_MARGIN + 0, 34  );
             _scoreboard->drawNewText( "Press",  LEFT_MARGIN + 1, 51  );
             _scoreboard->drawNewText( "Your",   LEFT_MARGIN + 2, 68  );
             _scoreboard->drawNewText( "Remote", LEFT_MARGIN + -8, 85 );
-            _scoreboard->drawNewText( "Red",  LEFT_MARGIN + 4, 102 );
+            _scoreboard->drawNewText( "Red",    LEFT_MARGIN + 4, 102 );
             _scoreboard->drawNewText( "Button", LEFT_MARGIN + 0, 119 );
         } else {
             std::cout << "     Red Player\n";
@@ -76,11 +76,16 @@ void RemotePairingScreen::clearRedPlayerText() {
 
 void RemotePairingScreen::clearAllText() {
     std::cout << "Both players paired, starting the game...\n";
-    _scoreboard->clearScreen();
-    _scoreboard->drawNewText( "Paired", 5, 65 );
-    GameTimer::gameDelay( 2000 );
-    _scoreboard->clearScreen();
-    _scoreboard->update();
+    // check _scoreboad for null pointer
+    if (_scoreboard != nullptr) {
+        _scoreboard->clearScreen();
+        _scoreboard->drawNewText( "Paired", 5, 65 );
+        GameTimer::gameDelay( 2000 );
+        _scoreboard->clearScreen();
+        _scoreboard->update();
+    } else {
+        print( "*** ERROR: the scoreboard is null here! ***" );
+    }
 }
 
 void RemotePairingScreen::enablePPairingMode() {
