@@ -91,7 +91,7 @@ void RemotePairingScreen::clearAllText() {
     }
 }
 
-void RemotePairingScreen::enablePPairingMode() {
+void RemotePairingScreen::enablePairingMode() {
     std::cout << "Enabling pairing mode...\n";
     _green_player_paired = false;
     _red_player_paired = false;

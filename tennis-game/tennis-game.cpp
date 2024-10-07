@@ -468,8 +468,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             print( "done drawing new text." );
             GameTimer::gameDelay( 1000 );
             print( "continuing..." );
-            continue;
-            // remotePairingScreen.enablePPairingMode();
+            remotePairingScreen.enablePairingMode();
         }
 
         if (  menu_selection == 1  ||  menu_selection == 2  ) {
