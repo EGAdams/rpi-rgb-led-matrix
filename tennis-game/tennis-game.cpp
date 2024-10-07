@@ -393,10 +393,9 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         print( "entered while loop from run manual game" );
         sleep( SCORE_DELAY );
         // if remote pairing, write the words.  if not, snap out of the loop
-        while ( remotePairingScreen.inPairingMode() && false ) { // 090724
+        while ( remotePairingScreen.inPairingMode()) { // 090724
             print( "inside remote pairing screen from run manual game.  before starting input timer..." );
             int menu_selection = inputWithTimer.getInput();
-    
             if (menu_selection == 1) {
                 remotePairingScreen.greenPlayerPressed();
                 pairingBlinker.setGreenPlayerPaired(true);  // Notify blinker that Green player is paired
@@ -455,9 +454,6 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
 
         if ( menu_selection == 10 ) {
             std::string font_path = gameObject->getScoreBoard()->displayAndLoadFontMenu( "fonts" );
-            // std::cout << "Enter the font file name: ";
-            // std::string font_file;
-            // std::cin >> font_file;
             print( "calling set little drawer font... " );
             gameObject->getScoreBoard()->setLittleDrawerFont( font_path );
             print( "done calling set little drawer font." );
