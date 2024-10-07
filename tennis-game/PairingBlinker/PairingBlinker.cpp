@@ -18,10 +18,12 @@ void PairingBlinker::blinkLoop() {
     bool show_green = true;  // Start with Green instructions
     print( "starting blink loop..." );
     while ( !should_stop ) {
-        // print( "in blink loop..." );
+        print( "in blink loop..." );
         _scoreboard->clearScreen();
-        if ( green_player_paired && red_player_paired ) { break; } // If both players are paired, stop blinking
-
+        if ( green_player_paired && red_player_paired ) { 
+            print( "both players seem to be paired, break..." );
+            break;  // If both players are paired, stop blinking
+        }
         // If only the Green player is paired, show Red player instructions
         if ( green_player_paired && !red_player_paired ) { 
             print( "showing red instructions inside blink loop..." );
@@ -44,10 +46,12 @@ void PairingBlinker::blinkLoop() {
                 print( "showing red instructions..." );
                 showRedInstructions();
             }
+            print( "alternating between green and red..." );
             show_green = !show_green;  // Alternate between Green and Red
         }
         std::this_thread::sleep_for( std::chrono::seconds( 1 )); // Delay for 1 second between switching
     }
+    print( "should stop flag must be true, exiting blink loop..." );
 }
 
 void PairingBlinker::showGreenInstructions() {
