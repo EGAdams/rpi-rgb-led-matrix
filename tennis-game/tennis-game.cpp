@@ -408,7 +408,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             }
         }
         
-        pairingBlinker.stop();  // Stop blinking once both players are paired
+        // pairingBlinker.stop();  // Stop blinking once both players are paired
         std::cout << "1.) green score    " << std::endl;
         std::cout << "2.) red score      " << std::endl;
         std::cout << "3.) Demo           " << std::endl;
@@ -468,8 +468,9 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             print( "done drawing new text." );
             GameTimer::gameDelay( 1000 );
             print( "continuing..." );
-            remotePairingScreen.enablePairingMode();
             pairingBlinker.enable();
+            remotePairingScreen.enablePairingMode();
+            continue;
         }
 
         if (  menu_selection == 1  ||  menu_selection == 2  ) {
