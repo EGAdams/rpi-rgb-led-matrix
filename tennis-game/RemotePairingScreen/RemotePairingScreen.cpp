@@ -82,3 +82,9 @@ void RemotePairingScreen::clearAllText() {
     _scoreboard->clearScreen();
     _scoreboard->update();
 }
+
+void RemotePairingScreen::enablePPairingMode() {
+    std::cout << "Enabling pairing mode...\n";
+    _green_player_paired = false;
+    _red_player_paired = false;
+}
