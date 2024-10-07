@@ -393,7 +393,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         print( "entered while loop from run manual game" );
         sleep( SCORE_DELAY );
         // if remote pairing, write the words.  if not, snap out of the loop
-        while ( remotePairingScreen.inPairingMode() && false ) { // TODO: CHANGE THIS BACK!
+        while ( remotePairingScreen.inPairingMode()) {
             print( "inside remote pairing screen from run manual game.  before starting input timer..." );
             int menu_selection = inputWithTimer.getInput();
     
@@ -463,26 +463,26 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             // print( "done calling set little drawer font." );
 
             // std::cout << "Enter the message to write: ";
-            print( "setting message.... " );
-            std::string message;
-            // std::cin >> message;
-            // add ":{current time}" to the message
-            message = "test";
-            // std::time_t now = std::time(nullptr);
-            // std::tm* timeinfo = std::localtime(&now);
-            // char buffer[80];
-            // strftime(buffer, sizeof(buffer), ":%m/%d/%Y %H:%M:%S", timeinfo);
-            // message += "\n\n";
-            // print ( "adding time to message... " );
-            // message += buffer;
-            print( "clearing screen..." );
-            gameObject->getScoreBoard()->clearScreen();
-            print( "cleared screen." );
-            gameObject->getScoreBoard()->drawNewText( message, 5, 20 );
-            print( "done drawing new text." );
-            GameTimer::gameDelay( 1000 );
-            print( "continuing..." );
-            continue;
+            // print( "setting message.... " );
+            // std::string message;
+            // // std::cin >> message;
+            // // add ":{current time}" to the message
+            // // message = "test";
+            // // std::time_t now = std::time(nullptr);
+            // // std::tm* timeinfo = std::localtime(&now);
+            // // char buffer[80];
+            // // strftime(buffer, sizeof(buffer), ":%m/%d/%Y %H:%M:%S", timeinfo);
+            // // message += "\n\n";
+            // // print ( "adding time to message... " );
+            // // message += buffer;
+            // print( "clearing screen..." );
+            // gameObject->getScoreBoard()->clearScreen();
+            // print( "cleared screen." );
+            // gameObject->getScoreBoard()->drawNewText( message, 5, 20 );
+            // print( "done drawing new text." );
+            // GameTimer::gameDelay( 1000 );
+            // print( "continuing..." );
+            // continue;
         }
 
         if (  menu_selection == 1  ||  menu_selection == 2  ) {

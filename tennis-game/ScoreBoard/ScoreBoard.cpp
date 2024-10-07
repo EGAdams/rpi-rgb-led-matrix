@@ -29,7 +29,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         matrix_options.disable_hardware_pulsing = true; // --led-no-hardware-pulse
         std::ifstream brightness_file( "smart_menu/brightness.txt" );
         std::string brightness_string;
-        if ( brightness_file.is_open() ) {
+        if ( brightness_file.is_open()) {
             std::getline( brightness_file, brightness_string );
             brightness_file.close();
         }
@@ -43,15 +43,15 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         runtime_opt.daemon = 0;
         runtime_opt.do_gpio_init = 1;
         CanvasCreator canvasCreator( matrix_options, runtime_opt );
-        _canvas = std::unique_ptr<rgb_matrix::RGBMatrix>( canvasCreator.createCanvas() );
+        _canvas = std::unique_ptr<rgb_matrix::RGBMatrix>( canvasCreator.createCanvas());
 
         // start loading fonts...
         FontLoader smallNumberFontLoader( "fonts/mspgothic_042623.bdf" );       // little numbers
         rgb_matrix::Font small_number_font;
         smallNumberFontLoader.LoadFont( small_number_font );
-
-        if ( !_little_number_font.LoadFont( BIG_NUMBER_FONT ) ) {
-            fprintf( stderr, "*** ERROR: Could not load font '%s' ***\n", BIG_NUMBER_FONT ); exit( 1 );
+        # define FONT_FILE "fonts/8x13B.bdf"
+        if ( !_little_number_font.LoadFont( FONT_FILE )) { // massacre aniversary 090724
+            fprintf( stderr, "*** ERROR: Could not load font '%s' ***\n", FONT_FILE ); exit( 1 );
         }
         // if ( !_little_number_font.LoadFont( LITTLE_NUMBER_FONT )) {
         //     fprintf( stderr, "*** ERROR: Could not load font '%s' ***\n", LITTLE_NUMBER_FONT ); exit( 1 );
@@ -60,13 +60,13 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         FontLoader bigNumberFontLoader( "fonts/fgm_27_ee.bdf" );                // big numbers
         rgb_matrix::Font bigNumberFont;
         bigNumberFontLoader.LoadFont( bigNumberFont );
-        if ( !_big_number_font.LoadFont( BIG_NUMBER_FONT ) ) {
+        if ( !_big_number_font.LoadFont( BIG_NUMBER_FONT )) {
             fprintf( stderr, "Couldn't load font '%s'\n", BIG_NUMBER_FONT ); exit( 1 );
         }
 
         FontLoader periodFontLoader( "fonts/mspgothic_030623.bdf" );            // that period
         periodFontLoader.LoadFont( _period_font );
-        if ( !_period_font.LoadFont( "fonts/mspgothic_030623.bdf" ) ) {
+        if ( !_period_font.LoadFont( "fonts/mspgothic_030623.bdf" )) {
             fprintf( stderr, "*** ERROR: Couldn't load font '%s'\n", "fonts/mspgothic_030623.bdf ***" );exit( 1 );
         }
         else {
@@ -152,7 +152,7 @@ void ScoreBoard::writeMessage( std::string message ) {
         Color bg_color( 0, 0, 0 );
         int baseline = _big_number_font.baseline();            // set the coordinates for the text
         int first_offset = 2;
-        _drawer->drawNumber( message, first_offset, baseline + _big_number_font.height() );
+        _drawer->drawNumber( message, first_offset, baseline + _big_number_font.height());
         // GameTimer::gameDelay( 1000 );
         // std::cout << "done sleeping." << std::endl;
     }
@@ -241,7 +241,7 @@ void ScoreBoard::_drawTieBreakerBar() {
     if ( onRaspberryPi() == false ) {
         if ( _gameState->getTieLEDsOn() == 1 ) {
             // std::cout << reset << "==========================" << std::endl;
-            if ( _gameState->getMatchTieBreak() ) {
+            if ( _gameState->getMatchTieBreak()) {
                 std::cout << blue << "/// MATCH TIE BREAK MODE ///\n" << reset << std::endl;
             }
             else {
@@ -256,14 +256,14 @@ void ScoreBoard::_drawTieBreakerBar() {
 }
 
 void ScoreBoard::drawYellowPeriod() {
-    if ( !onRaspberryPi() ) /* return if not on Pi */ { return; }
+    if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
     int period_lr_offset = 53;
     int period_ud_offset = 129;
     _yellowPeriodDrawer->drawNumber( ".", period_lr_offset, period_ud_offset - 20 );
 }
 
 void ScoreBoard::drawGreenPeriod() {
-    if ( !onRaspberryPi() ) /* return if not on Pi */ { return; }
+    if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
     // #define PERIOD_LR_OFFSET 51
     // #define PERIOD_UD_OFFSET 92
 #define PERIOD_LR_OFFSET 51
@@ -272,21 +272,21 @@ void ScoreBoard::drawGreenPeriod() {
 }
 
 void ScoreBoard::drawRedPeriod() {
-    if ( !onRaspberryPi() ) /* return if not on Pi */ { return; }
+    if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
 #define PERIOD_LR_OFFSET 51
 #define PERIOD_UD_OFFSET 92
     _redPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
 }
 
 void ScoreBoard::drawBlankPeriod() {
-    if ( !onRaspberryPi() ) /* return if not on Pi */ { return; }
+    if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
 #define PERIOD_LR_OFFSET 51
 #define PERIOD_UD_OFFSET 92
     _blankPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
 }
 
 void ScoreBoard::blink_player_score( int player ) {  // fast blinking ball code here
-    if ( !onRaspberryPi() ) /* return if not on Pi */ { return; }
+    if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
 #define BLINK_DELAY 100
 #define BLINK_COUNT 3
 #define PERIOD_LR_OFFSET 51
@@ -315,7 +315,7 @@ void ScoreBoard::clearScreen() {
         // system( "clear" );           // execute a system `clear` command  
     }
     else {
-        if ( !hasCanvas() ) { std::cout << "*** ERROR: canvas == NULL.  exiting... ***" << std::endl; exit( 1 ); }
+        if ( !hasCanvas()) { std::cout << "*** ERROR: canvas == NULL.  exiting... ***" << std::endl; exit( 1 ); }
         Color flood_color( 0, 0, 0 ); _canvas->Fill( flood_color.r, flood_color.g, flood_color.b );
     }
 }
@@ -324,7 +324,7 @@ std::string ScoreBoard::drawPlayerScore( Player* player ) {
     std::string serve_bar_text = hasCanvas() == true ? "i" : "\033[34m|";
     std::string serve_bar = _gameState->getServe() == player->number() ? serve_bar_text : " ";
     std::string other_serve_bar = _gameState->getServe() == player->getOpponent()->number() ? serve_bar_text : " ";
-    std::string score = _translate( player->getPoints() );
+    std::string score = _translate( player->getPoints());
     if ( hasCanvas() == false ) {
         std::cout << "==========================" << std::endl;
         player->number() == PLAYER_1_INITIALIZED ?  // type player 1 score, else type player 2 score
@@ -335,8 +335,8 @@ std::string ScoreBoard::drawPlayerScore( Player* player ) {
         int vertical_offset = player->number() == 0 ? 0 : _big_number_font.height();
         _pipeDrawer->drawNumber( serve_bar, 2, _big_number_font.baseline() + vertical_offset );
         int baseline = _big_number_font.baseline();                  // set the coordinates for the text
-        int first_offset = _characterOffset( score.substr( 0, 1 ) );
-        int second_offset = ( score.length() > 1 ) ? _characterOffset( score.substr( 1, 1 ) ) : 0;
+        int first_offset = _characterOffset( score.substr( 0, 1 ));
+        int second_offset = ( score.length() > 1 ) ? _characterOffset( score.substr( 1, 1 )) : 0;
         if ( player->number() == PLAYER_1_INITIALIZED ) { // then draw text depending on player
             _playerOneScoreDrawer->drawNumber( score.substr( 0, 1 ), first_offset + 16, baseline + vertical_offset );
             if ( score.length() > 1 ) {
@@ -386,7 +386,7 @@ std::string ScoreBoard::_translate( int raw_score ) {
         case 3:               return "40";
 
         case SCORE_CASE_4:
-            if ( _gameState->getPointFlash() ) {
+            if ( _gameState->getPointFlash()) {
                 return "Ad";
             }
             else {
@@ -424,7 +424,7 @@ std::string ScoreBoard::_translate( int raw_score ) {
 bool ScoreBoard::onRaspberryPi() {
     std::ifstream file( "/proc/device-tree/model" );
     std::string line;
-    if ( file.is_open() ) {
+    if ( file.is_open()) {
         std::getline( file, line );
         file.close();
         if ( line.find( "Raspberry Pi" ) != std::string::npos ) { return true; }
@@ -452,8 +452,8 @@ void ScoreBoard::setLittleDrawerFont( const std::string& font_file ) {
 std::string ScoreBoard::displayAndLoadFontMenu( const std::string& fontDirectory ) {
     // Step 1: Get the list of font files in the directory
     std::vector<std::string> fonts;
-    for ( const auto& entry : std::filesystem::directory_iterator( fontDirectory ) ) {
-        if ( entry.is_regular_file() ) {
+    for ( const auto& entry : std::filesystem::directory_iterator( fontDirectory )) {
+        if ( entry.is_regular_file()) {
             std::string fileName = entry.path().filename().string();
             if ( fileName.find( ".bdf" ) != std::string::npos ) {
                 fonts.push_back( fileName );
@@ -462,7 +462,7 @@ std::string ScoreBoard::displayAndLoadFontMenu( const std::string& fontDirectory
     }
 
     // Step 2: Display the font options
-    if ( fonts.empty() ) {
+    if ( fonts.empty()) {
         std::cout << "No fonts available in the directory." << std::endl;
         return "*** ERROR: no fonts available in the directory. ***";
     }
@@ -478,7 +478,7 @@ std::string ScoreBoard::displayAndLoadFontMenu( const std::string& fontDirectory
         std::cout << "Enter the number of the font to load: ";
         std::cin >> fontChoice;
 
-        if ( fontChoice > 0 && fontChoice <= static_cast< int >( fonts.size() ) ) {
+        if ( fontChoice > 0 && fontChoice <= static_cast< int >( fonts.size()) ) {
             break;
         }
         else {
