@@ -98,6 +98,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         _greenPeriodDrawer = std::make_unique<Drawer>( _canvas.get(), &_period_font, Drawer::BIG, green_color, bg_color );
         _yellowPeriodDrawer = std::make_unique<Drawer>( _canvas.get(), &_period_font, Drawer::BIG, yellow_color, bg_color );
         _blankPeriodDrawer = std::make_unique<Drawer>( _canvas.get(), &_period_font, Drawer::BIG, black_color, bg_color );
+        _text_drawer = std::make_unique<Drawer>( _canvas.get(), &_little_number_font, Drawer::BIG, black_color, bg_color );
         _setDrawer = std::make_unique<SetDrawer>( _canvas.get(), _gameState );
         print( "done constructing unique pointers.  updating scoreboard..." );
     } // fi onRaspberryPi
@@ -438,13 +439,14 @@ void ScoreBoard::setDrawerFont( const rgb_matrix::Font* font ) { _drawer->setFon
 void ScoreBoard::setDrawerSize( Drawer::Size size ) { _drawer->setSize( size ); }
 
 void ScoreBoard::setLittleDrawerFont( const std::string& font_file ) {
-    Color color( 255, 255, 0 );
-    Color bg_color( 0, 0, 0 );
-    print( "loading little number font: " + font_file );
-    FontLoader fontLoader( font_file.c_str());
-    fontLoader.LoadFont( _little_number_font );
-    _text_drawer = new Drawer( _canvas.get(), &_little_number_font, Drawer::BIG, color, bg_color );
-    print( "little number font loaded" );
+    // Color color( 255, 255, 0 );
+    // Color bg_color( 0, 0, 0 );
+    // print( "loading little number font: " + font_file );
+    // FontLoader fontLoader( font_file.c_str());
+    // fontLoader.LoadFont( _little_number_font );
+    // _text_drawer = new Drawer( _canvas.get(), &_little_number_font, Drawer::BIG, color, bg_color );
+    // print( "little number font loaded" );
+    print( "set little number font disabled on october massacre. " );
 }
 
 // namespace fs = std::filesystem;
