@@ -59,27 +59,27 @@ void PairingBlinker::showGreenInstructions() {
     print( "clearing screen..." );
     _scoreboard->clearScreen();
     print( "drawing Green text..." );
-    _scoreboard->drawText( "Green", left_margin + 1, 17 );
+    _scoreboard->drawNewText( "Green", left_margin + 1, 17 );
     print( "drawing Player text..." );
-    _scoreboard->drawText( "Player", left_margin + 0, 34 );
-    _scoreboard->drawText( "Press", left_margin + 1, 51 );
-    _scoreboard->drawText( "Your", left_margin + 2, 68 );
-    _scoreboard->drawText( "Remote", left_margin + -8, 85 );
-    _scoreboard->drawText( "Green", left_margin + 1, 102 );
-    _scoreboard->drawText( "Button", left_margin + 0, 119 );
+    _scoreboard->drawNewText( "Player", left_margin + 0, 34 );
+    _scoreboard->drawNewText( "Press", left_margin + 1, 51 );
+    _scoreboard->drawNewText( "Your", left_margin + 2, 68 );
+    _scoreboard->drawNewText( "Remote", left_margin + -8, 85 );
+    _scoreboard->drawNewText( "Green", left_margin + 1, 102 );
+    _scoreboard->drawNewText( "Button", left_margin + 0, 119 );
 }
 
 void PairingBlinker::showRedInstructions() {
     if ( _scoreboard->onRaspberryPi() ) {
         int left_margin = 8;
         _scoreboard->clearScreen();
-        _scoreboard->drawText( "Red", left_margin + 4, 17 );
-        _scoreboard->drawText( "Player", left_margin + 0, 34 );
-        _scoreboard->drawText( "Press", left_margin + 1, 51 );
-        _scoreboard->drawText( "Your", left_margin + 2, 68 );
-        _scoreboard->drawText( "Remote", left_margin + -8, 85 );
-        _scoreboard->drawText( "Red", left_margin + 4, 102 );
-        _scoreboard->drawText( "Button", left_margin + 0, 119 );
+        _scoreboard->drawNewText( "Red", left_margin + 4, 17 );
+        _scoreboard->drawNewText( "Player", left_margin + 0, 34 );
+        _scoreboard->drawNewText( "Press", left_margin + 1, 51 );
+        _scoreboard->drawNewText( "Your", left_margin + 2, 68 );
+        _scoreboard->drawNewText( "Remote", left_margin + -8, 85 );
+        _scoreboard->drawNewText( "Red", left_margin + 4, 102 );
+        _scoreboard->drawNewText( "Button", left_margin + 0, 119 );
     }
 }
 
