@@ -389,7 +389,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     print( "constructing input with timer from run manual game" );
     InputWithTimer inputWithTimer( &pairingBlinker );  // Pass PairingBlinker
     print( "finished constructing input with timer from run manual game" );
-    gameObject->getScoreBoard()->setLittleDrawerFont( "fonts/7x13.bdf" );
+    gameObject->getScoreBoard()->setLittleDrawerFont( "fonts/8x13B.bdf" );
     while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { /*/// Begin Game Loop ///*/
         print( "entered while loop from run manual game" );
         sleep( SCORE_DELAY );
@@ -469,8 +469,8 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             print( "done drawing new text." );
             GameTimer::gameDelay( 1000 );
             print( "continuing..." );
-            pairingBlinker.enable();
-            remotePairingScreen.enablePairingMode();
+            // pairingBlinker.enable();
+            // remotePairingScreen.enablePairingMode();
             continue;
         }
 
