@@ -4,7 +4,7 @@
 #include <iostream>
 
 PairingBlinker::PairingBlinker( ScoreBoard* scoreBoard )
-    : _scoreboard( scoreBoard ), should_stop( false ), green_player_paired( false ), red_player_paired( false ) {
+    : _scoreboard( scoreBoard ), _should_stop( false ), green_player_paired( false ), red_player_paired( false ) {
     std::cout << "PairingBlinker constructing..." << std::endl;
     if ( _scoreboard == nullptr ) { // check for null _scoreboard
         std::cerr << "Error: _scoreboard is null in PairingBlinker constructor." << std::endl;
@@ -17,7 +17,7 @@ PairingBlinker::~PairingBlinker() { stop(); }
 void PairingBlinker::blinkLoop() {
     bool show_green = true;  // Start with Green instructions
     print( "starting blink loop..." );
-    while ( !should_stop ) {
+    while ( !_should_stop ) {
         print( "in blink loop..." );
         _scoreboard->clearScreen();
         if ( green_player_paired && red_player_paired ) { 
@@ -84,15 +84,19 @@ void PairingBlinker::showRedInstructions() {
 }
 
 void PairingBlinker::start() {
-    should_stop = false;
+    _should_stop = false;
     blink_thread = std::thread( &PairingBlinker::blinkLoop, this );
 }
 
 void PairingBlinker::stop() {
-    should_stop = true;
+    _should_stop = true;
     if ( blink_thread.joinable() ) {
         blink_thread.join();
     }
+}
+
+void PairingBlinker::enable() {
+    _should_stop = false;
 }
 
 void PairingBlinker::setGreenPlayerPaired( bool paired ) { green_player_paired = paired; }

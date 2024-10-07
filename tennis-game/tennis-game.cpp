@@ -469,6 +469,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             GameTimer::gameDelay( 1000 );
             print( "continuing..." );
             remotePairingScreen.enablePairingMode();
+            pairingBlinker.enable();
         }
 
         if (  menu_selection == 1  ||  menu_selection == 2  ) {

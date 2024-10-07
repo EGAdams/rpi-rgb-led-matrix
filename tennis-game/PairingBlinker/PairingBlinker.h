@@ -12,9 +12,9 @@ public:
     
     void start() override;
     void stop() override;
-    
     void setGreenPlayerPaired(bool paired);  // New method to track Green player status
     void setRedPlayerPaired(bool paired);    // New method to track Red player status
+    void enable();
 
 private:
     void blinkLoop();         // Alternates between Green and Red instructions
@@ -22,7 +22,7 @@ private:
     void showRedInstructions();
     
     ScoreBoard* _scoreboard;
-    bool should_stop;
+    bool        _should_stop;
     std::thread blink_thread;
 
     // New state tracking
