@@ -455,35 +455,25 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
 
         if ( menu_selection == 10 ) {
             std::string font_path = gameObject->getScoreBoard()->displayAndLoadFontMenu( "fonts" );
-            // std::cout << "Enter the font file name: ";
-            // std::string font_file;
-            // std::cin >> font_file;
-            // print( "calling set little drawer font... " );
+            std::cout << "Enter the font file name: ";
+            std::string font_file;
+            std::cin >> font_file;
+            print( "calling set little drawer font... " );
             gameObject->getScoreBoard()->setLittleDrawerFont( font_path );
-            // print( "done calling set little drawer font." );
-
-            // std::cout << "Enter the message to write: ";
-            // print( "setting message.... " );
-            // std::string message;
-            // // std::cin >> message;
-            // // add ":{current time}" to the message
-            // // message = "test";
-            // // std::time_t now = std::time(nullptr);
-            // // std::tm* timeinfo = std::localtime(&now);
-            // // char buffer[80];
-            // // strftime(buffer, sizeof(buffer), ":%m/%d/%Y %H:%M:%S", timeinfo);
-            // // message += "\n\n";
-            // // print ( "adding time to message... " );
-            // // message += buffer;
-            // print( "clearing screen..." );
-            // gameObject->getScoreBoard()->clearScreen();
-            // print( "cleared screen." );
-            // gameObject->getScoreBoard()->drawNewText( message, 5, 20 );
-            // print( "done drawing new text." );
-            // GameTimer::gameDelay( 1000 );
-            // print( "continuing..." );
-            // continue;
-            remotePairingScreen.enablePPairingMode();
+            print( "done calling set little drawer font." );
+            std::cout << "Enter the message to write: ";
+            print( "setting message.... " );
+            std::string message;
+            message = "test";
+            print( "clearing screen..." );
+            gameObject->getScoreBoard()->clearScreen();
+            print( "cleared screen." );
+            gameObject->getScoreBoard()->drawNewText( message, 5, 20 );
+            print( "done drawing new text." );
+            GameTimer::gameDelay( 1000 );
+            print( "continuing..." );
+            continue;
+            // remotePairingScreen.enablePPairingMode();
         }
 
         if (  menu_selection == 1  ||  menu_selection == 2  ) {
