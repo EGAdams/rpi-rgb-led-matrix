@@ -382,6 +382,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     sleep( 1 );
     int menu_selection = 1;
     // int remote_pairing = 1;
+    get_and_set_font( gameObject );
     std::signal( SIGINT, GameObject::_signalHandler );
     RemotePairingScreen remotePairingScreen( gameObject->getScoreBoard());
     print( "constructing pairing blinker from run manual game" );
@@ -466,23 +467,9 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         }
 
         if ( menu_selection == 10 ) {
-            std::string font_path = gameObject->getScoreBoard()->displayAndLoadFontMenu( "fonts" );
-            print( "calling set little drawer font... " );
-            gameObject->getScoreBoard()->setLittleDrawerFont( font_path );
-            print( "done calling set little drawer font." );
-            std::cout << "Enter the message to write: ";
-            print( "setting message.... " );
-            std::string message;
-            message = "test";
-            print( "clearing screen..." );
-            gameObject->getScoreBoard()->clearScreen();
-            print( "cleared screen." );
-            gameObject->getScoreBoard()->drawNewText( message, 5, 20 );
-            print( "done drawing new text." );
-            GameTimer::gameDelay( 1000 );
-            print( "continuing..." );
-            pairingBlinker.enable();
-            remotePairingScreen.enablePairingMode();
+            get_and_set_font( gameObject );
+            // pairingBlinker.enable();
+            // remotePairingScreen.enablePairingMode();
             continue;
         }
 
@@ -604,6 +591,24 @@ bool is_on_raspberry_pi() {
         if ( line.find( "Raspberry Pi" ) != std::string::npos ) { return true; }
     }
     return false;
+}
+
+void get_and_set_font( GameObject* gameObject ) {
+    std::string font_path = gameObject->getScoreBoard()->displayAndLoadFontMenu( "fonts" );
+    print( "calling set little drawer font... " );
+    gameObject->getScoreBoard()->setLittleDrawerFont( font_path );
+    print( "done calling set little drawer font." );
+    std::cout << "Enter the message to write: ";
+    print( "setting message.... " );
+    std::string message;
+    message = "test";
+    print( "clearing screen..." );
+    gameObject->getScoreBoard()->clearScreen();
+    print( "cleared screen." );
+    gameObject->getScoreBoard()->drawNewText( message, 5, 20 );
+    print( "done drawing new text." );
+    GameTimer::gameDelay( 1000 );
+    print( "continuing..." );
 }
 
 int main( int argc, char* argv[] ) {    std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );
