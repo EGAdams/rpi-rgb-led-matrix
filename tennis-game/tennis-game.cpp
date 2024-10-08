@@ -481,8 +481,8 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             print( "done drawing new text." );
             GameTimer::gameDelay( 1000 );
             print( "continuing..." );
-            // pairingBlinker.enable();
-            // remotePairingScreen.enablePairingMode();
+            pairingBlinker.enable();
+            remotePairingScreen.enablePairingMode();
             continue;
         }
 
