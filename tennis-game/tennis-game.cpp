@@ -420,6 +420,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         std::cout << "8.) Font File"       << std::endl;
         std::cout << "9.) Undo           " << std::endl;
         std::cout << "10.) Test Font     " << std::endl;
+        std::cout << "11.) Write Text    " << std::endl;
 
         if ( gameState->getCurrentAction() == SLEEP_MODE ) {
             ScoreboardBlinker blinker( gameObject->getScoreBoard() );
@@ -451,6 +452,15 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             print( "updated scoreboard." );
         } else {
             std::cin >> menu_selection;
+        }
+
+        if ( menu_selection == 11 ) {
+            std::cout << "Enter the message to write: ";
+            std::string message;
+            std::getline(std::cin, message);  // get input from the user
+            gameObject->getScoreBoard()->drawNewText( message, 5, 20 );
+            GameTimer::gameDelay( 1000 );
+            continue;
         }
 
         if ( menu_selection == 10 ) {

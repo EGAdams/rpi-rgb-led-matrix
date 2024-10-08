@@ -121,13 +121,15 @@ void ScoreBoard::setFontFile( const char* font_file_arg ) { _font_file = font_fi
 
 void ScoreBoard::drawText( const std::string& message, int x, int y ) {
     // _display->drawText( message, x, y );
+    print( "inside ScoreBoard::drawText()...  calling _drawer->drawText()..." );
     _drawer->drawText( message, x, y );
+    print( "exiting ScoreBoard::drawText()...  done calling _drawer->drawText()..." );
 }
 
 void ScoreBoard::drawNewText( const std::string& message, int x, int y ) {
-    print( "drawing new text..." );
+    print( "inside ScoreBoard::drawNewText()...  calling _text_drawer->drawText()..." );
     _text_drawer->drawText( message, x, y );
-    print( "done drawing new text." );
+    print( "exiting ScoreBoard::drawNewText()...  done calling _text_drawer->drawText()..." );
 }
 
 Color ScoreBoard::_getColor( int color_constant ) {
