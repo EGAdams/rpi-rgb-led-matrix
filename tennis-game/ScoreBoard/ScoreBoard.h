@@ -96,7 +96,7 @@ private:
     std::unique_ptr<SetDrawer>   _setDrawer;
     std::unique_ptr<RGBMatrix>   _canvas;
     std::unique_ptr<Drawer>      _new_drawer;
-    std::unique_ptr<Drawer>      _text_drawer;
+    Drawer*                      _text_drawer;
     const char*                  _font_file;
 
     void _drawTieBreakerBar(    /* void */            );

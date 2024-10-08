@@ -98,7 +98,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         _greenPeriodDrawer = std::make_unique<Drawer>( _canvas.get(), &_period_font, Drawer::BIG, green_color, bg_color );
         _yellowPeriodDrawer = std::make_unique<Drawer>( _canvas.get(), &_period_font, Drawer::BIG, yellow_color, bg_color );
         _blankPeriodDrawer = std::make_unique<Drawer>( _canvas.get(), &_period_font, Drawer::BIG, black_color, bg_color );
-        _text_drawer = std::make_unique<Drawer>( _canvas.get(), &_little_number_font, Drawer::SMALL, yellow_color, bg_color );
+        _text_drawer = new Drawer( _canvas.get(), &_little_number_font, Drawer::SMALL, yellow_color, bg_color );
         _setDrawer = std::make_unique<SetDrawer>( _canvas.get(), _gameState );
         print( "done constructing unique pointers.  updating scoreboard..." );
     } // fi onRaspberryPi
