@@ -69,7 +69,7 @@ void PairingBlinker::showGreenInstructions() {
     _scoreboard->setDrawerForegroundColor( yellow_color );
     _scoreboard->drawNewText( "Press", left_margin + 1, 51 );
     _scoreboard->drawNewText( "Your", left_margin + 2, 68 );
-    _scoreboard->drawNewText( "Remote", left_margin + -2, 85 );
+    _scoreboard->drawNewText( "Remote", left_margin + -1, 85 );
     _scoreboard->setDrawerForegroundColor( red_color );
     _scoreboard->drawNewText( "Green", left_margin + 1, 102 );
     _scoreboard->drawNewText( "Button", left_margin + 0, 119 );
@@ -88,7 +88,7 @@ void PairingBlinker::showRedInstructions() {
         _scoreboard->setDrawerForegroundColor( yellow_color );
         _scoreboard->drawNewText( "Press", left_margin + 1, 51 );
         _scoreboard->drawNewText( "Your", left_margin + 2, 68 );
-        _scoreboard->drawNewText( "Remote", left_margin + -2, 85 );
+        _scoreboard->drawNewText( "Remote", left_margin + -1, 85 );
         _scoreboard->setDrawerForegroundColor( red_color );
         _scoreboard->drawNewText( "Red", left_margin + 4, 102 );
         _scoreboard->drawNewText( "Button", left_margin + 0, 119 );

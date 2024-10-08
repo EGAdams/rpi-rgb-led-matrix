@@ -78,6 +78,8 @@ void RemotePairingScreen::clearAllText() {
     std::cout << "Both players paired, starting the game...\n";
     // check _scoreboad for null pointer
     if (_scoreboard != nullptr) {
+        Color yellow_color( 255, 255, 0 );
+        _scoreboard->setDrawerForegroundColor( yellow_color );
         print( "scoreboard is not null here.  clearing screen." );
         _scoreboard->clearScreen();
         print( "done clearing screen.  drawing new text..." );
