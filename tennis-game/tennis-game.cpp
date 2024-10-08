@@ -400,6 +400,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     sleep( 1 );
     int menu_selection = 1;
     // int remote_pairing = 1;
+    // gameObject->getScoreBoard()->setLittleDrawerFont( "fonts/8x13B.bdf" );
     get_and_set_font( gameObject );
     std::signal( SIGINT, GameObject::_signalHandler );
     RemotePairingScreen remotePairingScreen( gameObject->getScoreBoard());
@@ -408,7 +409,6 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     print( "constructing input with timer from run manual game" );
     InputWithTimer inputWithTimer( &pairingBlinker );  // Pass PairingBlinker
     print( "finished constructing input with timer from run manual game" );
-    gameObject->getScoreBoard()->setLittleDrawerFont( "fonts/8x13B.bdf" );
     while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { /*/// Begin Game Loop ///*/
         print( "entered while loop from run manual game" );
         sleep( SCORE_DELAY );
