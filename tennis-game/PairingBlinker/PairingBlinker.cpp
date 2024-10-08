@@ -58,7 +58,7 @@ void PairingBlinker::showGreenInstructions() {
     Color red_color( 255, 0, 0 );
     Color green_color( 0, 255, 0 );
     Color yellow_color( 255, 255, 0 );
-    int left_margin = 8;
+    int left_margin = 9;
     print( "clearing screen..." );
     _scoreboard->clearScreen();
     print( "drawing Green text..." );
@@ -80,7 +80,7 @@ void PairingBlinker::showRedInstructions() {
     Color green_color( 0, 255, 0 );
     Color yellow_color( 255, 255, 0 );
     if ( _scoreboard->onRaspberryPi() ) {
-        int left_margin = 8;
+        int left_margin = 9;
         _scoreboard->clearScreen();
         _scoreboard->setDrawerForegroundColor( red_color );
         _scoreboard->drawNewText( "Red", left_margin + 4, 17 );
