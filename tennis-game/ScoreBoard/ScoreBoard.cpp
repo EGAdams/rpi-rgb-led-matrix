@@ -436,7 +436,7 @@ bool ScoreBoard::onRaspberryPi() {
 }
 
 void ScoreBoard::setDrawerBackgroundColor( const Color& color ) { _drawer->setBackgroundColor( color ); }
-void ScoreBoard::setDrawerForegroundColor( const Color& color ) { _drawer->setForegroundColor( color ); }
+void ScoreBoard::setDrawerForegroundColor( const Color& color ) { _text_drawer->setForegroundColor( color ); }
 void ScoreBoard::setDrawerFont( const rgb_matrix::Font* font ) { _drawer->setFont( font ); }
 void ScoreBoard::setDrawerSize( Drawer::Size size ) { _drawer->setSize( size ); }
 

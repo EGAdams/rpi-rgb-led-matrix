@@ -55,29 +55,41 @@ void PairingBlinker::blinkLoop() {
 }
 
 void PairingBlinker::showGreenInstructions() {
+    Color red_color( 255, 0, 0 );
+    Color green_color( 0, 255, 0 );
+    Color yellow_color( 255, 255, 0 );
     int left_margin = 8;
     print( "clearing screen..." );
     _scoreboard->clearScreen();
     print( "drawing Green text..." );
+    _scoreboard->setDrawerForegroundColor( green_color );
     _scoreboard->drawNewText( "Green", left_margin + 1, 17 );
     print( "drawing Player text..." );
     _scoreboard->drawNewText( "Player", left_margin + 0, 34 );
+    _scoreboard->setDrawerForegroundColor( yellow_color );
     _scoreboard->drawNewText( "Press", left_margin + 1, 51 );
     _scoreboard->drawNewText( "Your", left_margin + 2, 68 );
     _scoreboard->drawNewText( "Remote", left_margin + -2, 85 );
+    _scoreboard->setDrawerForegroundColor( red_color );
     _scoreboard->drawNewText( "Green", left_margin + 1, 102 );
     _scoreboard->drawNewText( "Button", left_margin + 0, 119 );
 }
 
 void PairingBlinker::showRedInstructions() {
+    Color red_color( 255, 0, 0 );
+    Color green_color( 0, 255, 0 );
+    Color yellow_color( 255, 255, 0 );
     if ( _scoreboard->onRaspberryPi() ) {
         int left_margin = 8;
         _scoreboard->clearScreen();
+        _scoreboard->setDrawerForegroundColor( red_color );
         _scoreboard->drawNewText( "Red", left_margin + 4, 17 );
         _scoreboard->drawNewText( "Player", left_margin + 0, 34 );
+        _scoreboard->setDrawerForegroundColor( yellow_color );
         _scoreboard->drawNewText( "Press", left_margin + 1, 51 );
         _scoreboard->drawNewText( "Your", left_margin + 2, 68 );
         _scoreboard->drawNewText( "Remote", left_margin + -2, 85 );
+        _scoreboard->setDrawerForegroundColor( red_color );
         _scoreboard->drawNewText( "Red", left_margin + 4, 102 );
         _scoreboard->drawNewText( "Button", left_margin + 0, 119 );
     }
