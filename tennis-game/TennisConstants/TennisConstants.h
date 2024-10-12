@@ -72,7 +72,7 @@
 
 
 // #define INPUT 0 // not in windows.. ouch!!
-// #define OUTPUT 0
+// #define OUTPUT 0 
 #define LOW 0
 #define HIGH 1
 #define BLINK 2
