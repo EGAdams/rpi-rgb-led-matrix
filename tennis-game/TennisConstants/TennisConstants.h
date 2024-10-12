@@ -78,9 +78,10 @@
 #define BLINK 2
 
 #define PLAYER_TOP 30
+#define PRESS_TOP 47
 #define YOUR_TOP 60
 #define REMOTE_TOP 73
-#define MIDDLE_OFFSET 2
+#define MIDDLE_OFFSET 1
 
 
 ///////////////////////////////////////  START WINDOWS SIMULATOR //////////////////////////////////
