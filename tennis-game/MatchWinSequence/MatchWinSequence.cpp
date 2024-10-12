@@ -18,8 +18,8 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
     if ( gameLeds->getScoreBoard()->hasCanvas()) {
         gameLeds->getScoreBoard()->clearScreen();
         gameLeds->getScoreBoard()->setLittleDrawerFont( "fonts/8x13B.bdf" );
-        gameLeds->getScoreBoard()->drawNewText( "Match", 10, 66  );
-        gameLeds->getScoreBoard()->drawNewText( "Win"  , 18, 85  );
+        gameLeds->getScoreBoard()->drawNewText( "MATCH", 10, 60  );
+        gameLeds->getScoreBoard()->drawNewText( "WIN"  , 25, 75  );
         gameLeds->getScoreBoard()->drawSets();
         GameTimer::gameDelay( SHOW_MATCH_WIN_TEXT_DELAY );
     } else {
