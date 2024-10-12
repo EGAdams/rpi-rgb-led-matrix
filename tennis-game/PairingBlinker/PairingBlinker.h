@@ -19,6 +19,7 @@ public:
 private:
     void blinkLoop();         // Alternates between Green and Red instructions
     void showGreenInstructions();
+    void showPlayerPressYourRemoteText();
     void showRedInstructions();
     
     ScoreBoard* _scoreboard;

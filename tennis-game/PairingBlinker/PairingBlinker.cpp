@@ -15,7 +15,7 @@ PairingBlinker::PairingBlinker( ScoreBoard* scoreBoard )
 PairingBlinker::~PairingBlinker() { stop(); }
 
 void PairingBlinker::blinkLoop() {
-    bool show_green = true;  // Start with Green instructions
+    bool toggle_on = true;  // Start with Green instructions
     print( "starting blink loop..." );
     while ( !_should_stop ) {
         print( "in blink loop..." );
@@ -24,30 +24,48 @@ void PairingBlinker::blinkLoop() {
             print( "both players seem to be paired, break..." );
             break;  // If both players are paired, stop blinking
         }
-        // If only the Green player is paired, show Red player instructions
-        if ( green_player_paired && !red_player_paired ) { 
-            print( "showing red instructions inside blink loop..." );
-            showRedInstructions();
-        }
-
         // If only the Red player is paired, show Green player instructions
         else if ( !green_player_paired && red_player_paired ) {
-            print( "showing green instructions inside blink loop..." );
-            showGreenInstructions(); 
-        }
-
-        // If neither player is paired, alternate between Green and Red instructions
-        else if ( !green_player_paired && !red_player_paired ) {
-            if ( show_green ) {
+            if ( toggle_on ) {
                 showGreenInstructions();
                 print( "showing green instructions..." );
             }
             else {
-                print( "showing red instructions..." );
-                showRedInstructions();
+                print( "show neutral text only..." );
+                showPlayerPressYourRemoteText();
             }
-            print( "alternating between green and red..." );
-            show_green = !show_green;  // Alternate between Green and Red
+            print( "alternating between green on and green off..." );
+            toggle_on = !toggle_on;  // Alternate led on and led off
+        }
+
+        // If only the Green player is paired, show Red player instructions
+        if ( green_player_paired && !red_player_paired ) { 
+            print( "showing red instructions inside blink loop..." );
+            if ( toggle_on ) {
+                showRedInstructions();
+                print( "showing red instructions..." );
+            }
+            else {
+                print( "show neutral text only..." );
+                showPlayerPressYourRemoteText();
+            }
+            print( "alternating between red on and red off..." );
+            toggle_on = !toggle_on;  // Alternate led on and led off
+        }
+
+
+        // If neither player is paired, show Green instructions
+        else if ( !green_player_paired && !red_player_paired ) {
+            if ( toggle_on ) {
+                showGreenInstructions();
+                print( "showing green instructions..." );
+            }
+            else {
+                print( "show neutral text only..." );
+                showPlayerPressYourRemoteText();
+            }
+            print( "alternating between green on and green off..." );
+            toggle_on = !toggle_on;  // Alternate led on and led off
         }
         std::this_thread::sleep_for( std::chrono::seconds( 1 )); // Delay for 1 second between switching
     }
@@ -93,6 +111,17 @@ void PairingBlinker::showRedInstructions() {
         _scoreboard->drawNewText( "Red", left_margin + 4, 102 );
         _scoreboard->drawNewText( "Button", left_margin + 0, 119 );
     }
+}
+
+void PairingBlinker::showPlayerPressYourRemoteText() {
+    Color yellow_color( 255, 255, 0 );
+    int left_margin = 9;
+    _scoreboard->clearScreen();
+    _scoreboard->setDrawerForegroundColor( yellow_color );
+    _scoreboard->drawNewText( "Player", left_margin + 0, 34 );
+    _scoreboard->drawNewText( "Press", left_margin + 1, 51 );
+    _scoreboard->drawNewText( "Your", left_margin + 2, 68 );
+    _scoreboard->drawNewText( "Remote", left_margin + -1, 85 );
 }
 
 void PairingBlinker::start() {
