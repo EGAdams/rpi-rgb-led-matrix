@@ -453,8 +453,8 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
                 print( "reset match." );
                 gameObject->resetMatch();
                 print( "done resetting match." );
-                if ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 ) {
-                    print( "time slept: " << inputWithTimer.getTimeSlept() * 1000 << " seconds." << std::endl );
+                if ( inputWithTimer.getTimeSlept() / 1000 > MAX_SLEEP * 1000 ) {
+                    print( "time slept: " << inputWithTimer.getTimeSlept() / 1000 << " seconds." << std::endl );
                     print( "clearing History because max sleep time has been reached or exceeded." );
                     gameObject->getHistory()->clearHistory();
                     print( "done clearing history because max sleep time has been reached or exceeded." );
