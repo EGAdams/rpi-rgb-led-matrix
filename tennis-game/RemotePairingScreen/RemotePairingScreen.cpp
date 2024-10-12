@@ -79,10 +79,11 @@ void RemotePairingScreen::clearAllText() {
     // check _scoreboad for null pointer
     if (_scoreboard != nullptr) {
         Color yellow_color( 255, 255, 0 );
+        print( "setting drawer foreground to yellow... " );
         _scoreboard->setDrawerForegroundColor( yellow_color );
         print( "scoreboard is not null here.  clearing screen. " );
         _scoreboard->clearScreen();
-        print( "done clearing screen.  drawing new text..." );
+        print( "done clearing screen.  drawing new text... " );
         _scoreboard->drawNewText( "Paired", 9, 65 );
         print( "done drawing new text." );
         GameTimer::gameDelay( 3000 );
