@@ -17,6 +17,7 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
     GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
     if ( gameLeds->getScoreBoard()->hasCanvas()) {
         gameLeds->getScoreBoard()->clearScreen();
+        gameLeds->getScoreBoard()->setLittleDrawerFont( "fonts/8x13B.bdf" );
         gameLeds->getScoreBoard()->drawText( "Match", 10, 60  );
         gameLeds->getScoreBoard()->drawText( "Win"  , 18, 80  );
         gameLeds->getScoreBoard()->drawSets();
