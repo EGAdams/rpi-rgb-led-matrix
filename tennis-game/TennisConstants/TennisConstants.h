@@ -77,6 +77,9 @@
 #define HIGH 1
 #define BLINK 2
 
+#define PLAYER_TOP 30
+
+
 
 ///////////////////////////////////////  START WINDOWS SIMULATOR //////////////////////////////////
 #define SIMULATION 1
