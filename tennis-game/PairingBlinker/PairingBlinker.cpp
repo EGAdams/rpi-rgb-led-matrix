@@ -81,10 +81,10 @@ void PairingBlinker::showGreenInstructions() {
     _scoreboard->clearScreen();
     print( "drawing Green text..." );
     _scoreboard->setDrawerForegroundColor( green_color );
-    _scoreboard->drawNewText( "Green", left_margin + 1, 14 );
+    _scoreboard->drawNewText( "Green", left_margin + 1, 17 );
     print( "drawing Player text..." );
     _scoreboard->setDrawerForegroundColor( yellow_color );
-    _scoreboard->drawNewText( "Player", left_margin + 0, 31 );
+    _scoreboard->drawNewText( "Player", left_margin + 0, 34 );
     _scoreboard->drawNewText( "Press", left_margin + 1, 51 );
     _scoreboard->drawNewText( "Your", left_margin + 2, 68 );
     _scoreboard->drawNewText( "Remote", left_margin + -1, 85 );
