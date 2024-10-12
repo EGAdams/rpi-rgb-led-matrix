@@ -78,7 +78,7 @@ void PairingBlinker::showGreenInstructions() {
     Color green_color( 0, 255, 0 );
     Color yellow_color( 255, 255, 0 );
     int left_margin = 9;
-    print( "clearing screen..." );
+    print( "clearing screen... " );
     _scoreboard->clearScreen();
     print( "drawing Green text..." );
     _scoreboard->setDrawerForegroundColor( green_color );
