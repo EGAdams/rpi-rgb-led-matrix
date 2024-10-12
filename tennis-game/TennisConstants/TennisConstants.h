@@ -81,7 +81,7 @@
 #define PRESS_TOP 47
 #define YOUR_TOP 60
 #define REMOTE_TOP 73
-#define MIDDLE_OFFSET 1
+#define MIDDLE_OFFSET 2
 
 
 ///////////////////////////////////////  START WINDOWS SIMULATOR //////////////////////////////////
