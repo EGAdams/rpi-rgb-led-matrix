@@ -30,6 +30,7 @@ private:
     // New state tracking
     bool green_player_paired;
     bool red_player_paired;
+    bool _show_green = true;
 };
 
 #endif
