@@ -84,6 +84,7 @@
 #define MIDDLE_OFFSET 2
 #define GREEN_TOP 94
 #define RED_TOP 94
+#define BUTTON_TOP 109
 
 
 ///////////////////////////////////////  START WINDOWS SIMULATOR //////////////////////////////////

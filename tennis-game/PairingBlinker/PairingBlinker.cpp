@@ -92,7 +92,7 @@ void PairingBlinker::showGreenInstructions() {
     _scoreboard->setDrawerForegroundColor( green_color );
     _scoreboard->drawNewText( "Green", left_margin + 1, GREEN_TOP );
     //_scoreboard->setDrawerForegroundColor( yellow_color );
-    _scoreboard->drawNewText( "Button", left_margin + 0, 119 );
+    _scoreboard->drawNewText( "Button", left_margin + 0, BUTTON_TOP );
 
     
 }
@@ -112,9 +112,9 @@ void PairingBlinker::showRedInstructions() {
         _scoreboard->drawNewText( "Your", left_margin + 2, YOUR_TOP + MIDDLE_OFFSET );
         _scoreboard->drawNewText( "Remote", left_margin + -1, REMOTE_TOP + MIDDLE_OFFSET );
         _scoreboard->setDrawerForegroundColor( red_color );
-        _scoreboard->drawNewText( "Red", left_margin + 4, 102 );
+        _scoreboard->drawNewText( "Red", left_margin + 4, RED_TOP );
         _scoreboard->setDrawerForegroundColor( yellow_color );
-        _scoreboard->drawNewText( "Button", left_margin + 0, 119 );
+        _scoreboard->drawNewText( "Button", left_margin + 0, BUTTON_TOP );
     }
 }
 
@@ -138,11 +138,11 @@ void PairingBlinker::showPlayerPressYourRemoteText() {
     if ( _show_green ) {
         _scoreboard->setDrawerForegroundColor( green_color );
         _scoreboard->drawNewText( "Green", left_margin + 1, GREEN_TOP );
-        _scoreboard->drawNewText( "Button", left_margin + 0, 119 );
+        _scoreboard->drawNewText( "Button", left_margin + 0, BUTTON_TOP );
     } else {
         _scoreboard->setDrawerForegroundColor( red_color );
-        _scoreboard->drawNewText( "Red", left_margin + 1, 102 );
-        _scoreboard->drawNewText( "Button", left_margin + 0, 119 );
+        _scoreboard->drawNewText( "Red", left_margin + 1, RED_TOP );
+        _scoreboard->drawNewText( "Button", left_margin + 0, BUTTON_TOP );
     }
 }
 
