@@ -88,7 +88,7 @@
 
 // pairing screen vertical offsets for centering
 #define GREEN_OFFSET 4
-#define RED_OFFSET 4
+#define RED_OFFSET 9
 #define YOUR_OFFSET 7
 #define PRESS_OFFSET 4
 #define REMOTE_OFFSET 0
