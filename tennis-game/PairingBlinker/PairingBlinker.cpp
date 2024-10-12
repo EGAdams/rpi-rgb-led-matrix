@@ -137,7 +137,7 @@ void PairingBlinker::showPlayerPressYourRemoteText() {
     _scoreboard->drawNewText( "Remote", left_margin + -1, REMOTE_TOP + MIDDLE_OFFSET );
     if ( _show_green ) {
         _scoreboard->setDrawerForegroundColor( green_color );
-        _scoreboard->drawNewText( "Green", left_margin + 1, 102 );
+        _scoreboard->drawNewText( "Green", left_margin + 1, GREEN_TOP );
         _scoreboard->drawNewText( "Button", left_margin + 0, 119 );
     } else {
         _scoreboard->setDrawerForegroundColor( red_color );
