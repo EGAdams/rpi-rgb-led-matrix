@@ -85,7 +85,7 @@ void RemotePairingScreen::clearAllText() {
         print( "done clearing screen.  drawing new text..." );
         _scoreboard->drawNewText( "Paired", 9, 65 );
         print( "done drawing new text." );
-        GameTimer::gameDelay( 20000 );
+        GameTimer::gameDelay( 3000 );
         _scoreboard->clearScreen();
         _scoreboard->update();
     } else {
