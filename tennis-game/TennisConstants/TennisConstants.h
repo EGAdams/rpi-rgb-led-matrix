@@ -82,8 +82,8 @@
 #define YOUR_TOP 60
 #define REMOTE_TOP 73
 #define MIDDLE_OFFSET 2
-#define GREEN_TOP 93
-#define RED_TOP 93
+#define GREEN_TOP 94
+#define RED_TOP 94
 
 
 ///////////////////////////////////////  START WINDOWS SIMULATOR //////////////////////////////////
