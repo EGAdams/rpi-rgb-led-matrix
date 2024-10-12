@@ -24,9 +24,11 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
             gameLeds->getScoreBoard()->drawNewText( "WIN"  , 20, 75  );
             gameLeds->getScoreBoard()->drawSets();
             GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
+            print( "done match win flash delay of " << MATCH_WIN_FLASH_DELAY );
             gameLeds->getScoreBoard()->drawNewText( "     ", 13, 60  );
             gameLeds->getScoreBoard()->drawNewText( "   "  , 20, 75  );
             GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
+            print( "done match win flash delay of " << MATCH_WIN_FLASH_DELAY );
         }
     } else {
         ScoreBoard* scoreBoard = gameLeds->getScoreBoard();
