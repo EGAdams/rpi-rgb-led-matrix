@@ -72,14 +72,14 @@
 
 
 // #define INPUT 0 // not in windows.. ouch!!
-// #define OUTPUT 0 
+// #define OUTPUT 0
 #define LOW 0
 #define HIGH 1
 #define BLINK 2
 
 #define PLAYER_TOP 30
 #define YOUR_TOP 60
-#define REMOTE_TOP 66
+#define REMOTE_TOP 74
 
 
 
