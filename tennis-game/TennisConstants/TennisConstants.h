@@ -37,7 +37,7 @@
 #define UPDATE_DISPLAY_DELAY        5 // 50
 #define ALL_SETS_FLASH_DELAY        500 
 #define LOOP_MATCH_LAMP_WIN         2
-#define MATCH_WIN_BLINK_COUNT       5 // added on clermont hill
+#define MATCH_WIN_BLINK_COUNT       7 // added on clermont hill
 #define SHOW_MATCH_WIN_TEXT_DELAY   3000 // 45000 // added anna marie island monday
 #define MAX_SLEEP                   15 // in SECONDS // last day of august tarpon
 #define MIN_SLEEP                   3000 // sleep for a few seconds in case of buttons pressed.
@@ -102,7 +102,7 @@
 #define LOG_FILE_PATH          "C:\\Users\\EG\\Desktop\\2022\\june\\4th_week\\test.txt"
 #define PIN_FILE_PATH          "C:\\Users\\EG\\Desktop\\2022\\june\\2nd_week\\tennis_cpp\\pin_data\\"
 #define GAME_STATE_UPDATE_PATH "C:\\Users\\EG\\Desktop\\2022\\june\\2nd_week\\tennis_cpp\\game_state_data\\"
-#define MATCH_WIN_FLASH_DELAY  250 // 100
+#define MATCH_WIN_FLASH_DELAY  400 // 250 // 100
 #define BATTERY_TEST_DELAY      500
 #define BATTERY_TEST_FLASH_COUNT 5
 #include <iostream>
