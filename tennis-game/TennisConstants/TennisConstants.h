@@ -78,6 +78,8 @@
 #define BLINK 2
 
 #define PLAYER_TOP 30
+#define YOUR_TOP 60
+
 
 
 
