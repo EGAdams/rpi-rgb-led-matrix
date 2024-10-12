@@ -17,6 +17,7 @@ void ScoreboardBlinker::blinkLoop() {
         std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
         time_now = GameTimer::gameMillis();
         time_elapsed = (time_now - _sleep_start) / 1000;
+        print( "time_elapsed: " << time_elapsed );
         if ( time_elapsed >  MAX_SLEEP ) {
             print( "UNDO (9): Reset Game        Player1 Score (1): Reset Game  Player2 Score (2): Reset Game   slept " << time_elapsed << " seconds." );    
         }
@@ -24,6 +25,7 @@ void ScoreboardBlinker::blinkLoop() {
         std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
         time_now = GameTimer::gameMillis();
         time_elapsed = ( time_now - _sleep_start ) / 1000;
+        print( "time_elapsed: " << time_elapsed );
         if ( time_elapsed <= MAX_SLEEP ) {
             print( "UNDO (9): Enter last match  Player1 Score (1): Reset Game  Player2 Score (2): Reset Game   slept " << time_elapsed << " seconds.");    
         }
