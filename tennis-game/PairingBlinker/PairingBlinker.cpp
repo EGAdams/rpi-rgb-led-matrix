@@ -91,7 +91,6 @@ void PairingBlinker::showGreenInstructions() {
     _scoreboard->drawNewText( "Remote", left_margin + REMOTE_OFFSET, REMOTE_TOP + MIDDLE_OFFSET );
     _scoreboard->setDrawerForegroundColor( green_color );
     _scoreboard->drawNewText( "Green", left_margin + GREEN_OFFSET, GREEN_TOP );
-    //_scoreboard->setDrawerForegroundColor( yellow_color );
     _scoreboard->drawNewText( "Button", left_margin + 0, BUTTON_TOP );
 
     
@@ -113,7 +112,6 @@ void PairingBlinker::showRedInstructions() {
         _scoreboard->drawNewText( "Remote", left_margin + REMOTE_OFFSET, REMOTE_TOP + MIDDLE_OFFSET );
         _scoreboard->setDrawerForegroundColor( red_color );
         _scoreboard->drawNewText( "Red", left_margin + RED_OFFSET, RED_TOP );
-        _scoreboard->setDrawerForegroundColor( yellow_color );
         _scoreboard->drawNewText( "Button", left_margin + 0, BUTTON_TOP );
     }
 }
