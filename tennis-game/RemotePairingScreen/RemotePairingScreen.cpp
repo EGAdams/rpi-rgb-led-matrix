@@ -80,7 +80,7 @@ void RemotePairingScreen::clearAllText() {
     if (_scoreboard != nullptr) {
         Color yellow_color( 255, 255, 0 );
         _scoreboard->setDrawerForegroundColor( yellow_color );
-        print( "scoreboard is not null here.  clearing screen." );
+        print( "scoreboard is not null here.  clearing screen. " );
         _scoreboard->clearScreen();
         print( "done clearing screen.  drawing new text..." );
         _scoreboard->drawNewText( "Paired", 9, 65 );
