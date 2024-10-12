@@ -79,7 +79,7 @@
 
 #define PLAYER_TOP 30
 #define YOUR_TOP 60
-#define REMOTE_TOP 70
+#define REMOTE_TOP 66
 
 
 
