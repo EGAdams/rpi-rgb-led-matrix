@@ -107,15 +107,17 @@ void TieBreaker::run( Player* currentPlayer ) {
     }
 
     if ( currentPlayer->getPoints() == TIE_BREAK_MAX_POINTS ) {
-        _undo.snapshot( _history );
-        currentPlayer->setGames( currentPlayer->getGames() + 1 ); // increment games
-        incrementSet();
-        if ( _scoreBoard != nullptr ) {
-            _scoreBoard->update();
-        }
-        celebrate( currentPlayer ); // this is a win no matter what.
-        GameTimer::gameDelay( 3000 );
-        endTieBreak();
+        // _undo.snapshot( _history );
+        // currentPlayer->setGames( currentPlayer->getGames() + 1 ); // increment games
+        // incrementSet();
+        // if ( _scoreBoard != nullptr ) {
+        //     _scoreBoard->update();
+        // }
+        // celebrate( currentPlayer ); // this is a win no matter what.
+        // GameTimer::gameDelay( 3000 );
+        // if ( _gameState->_matchTieBreak == 1 ) {}
+        // endTieBreak();
+        _tieBreakWin( currentPlayer );
     }
     else if ( currentPlayer->getPoints() >= TIE_BREAK_WIN_BY_TWO &&
             ( currentPlayer->getPoints() - opponent->getPoints() >= 2 ) ) {

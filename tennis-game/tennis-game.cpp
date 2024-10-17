@@ -409,11 +409,13 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     print( "constructing input with timer from run manual game" );
     InputWithTimer inputWithTimer( &pairingBlinker );  // Pass PairingBlinker
     print( "finished constructing input with timer from run manual game" );
+    bool is_on_pi = gameObject->getScoreBoard()->onRaspberryPi();
+    print( "is_on_pi: " + std::to_string( is_on_pi ) );
     while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { /*/// Begin Game Loop ///*/
         print( "entered while loop from run manual game" );
         sleep( SCORE_DELAY );
         // if remote pairing, write the words.  if not, snap out of the loop
-        while ( remotePairingScreen.inPairingMode()) { // 090724
+        while ( remotePairingScreen.inPairingMode() && is_on_pi ) { // 090724
             print( "inside remote pairing screen from run manual game.  before starting input timer..." );
             int menu_selection = inputWithTimer.getInput();
             if (menu_selection == 1) {
