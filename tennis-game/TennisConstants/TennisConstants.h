@@ -102,7 +102,7 @@
 #define LOG_FILE_PATH          "C:\\Users\\EG\\Desktop\\2022\\june\\4th_week\\test.txt"
 #define PIN_FILE_PATH          "C:\\Users\\EG\\Desktop\\2022\\june\\2nd_week\\tennis_cpp\\pin_data\\"
 #define GAME_STATE_UPDATE_PATH "C:\\Users\\EG\\Desktop\\2022\\june\\2nd_week\\tennis_cpp\\game_state_data\\"
-#define MATCH_WIN_FLASH_DELAY  1000 // 250 // 100
+#define MATCH_WIN_FLASH_DELAY  10000 // 1000 // 250 // 100
 #define BATTERY_TEST_DELAY      500
 #define BATTERY_TEST_FLASH_COUNT 5
 #include <iostream>

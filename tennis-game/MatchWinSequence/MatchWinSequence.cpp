@@ -20,8 +20,9 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
         gameLeds->getScoreBoard()->setLittleDrawerFont( "fonts/8x13B.bdf" );
         print( "flash MATCH WIN... " );
         for ( int blink_count = 0; blink_count < MATCH_WIN_BLINK_COUNT; blink_count++ ) {
-            gameLeds->getScoreBoard()->drawNewText( "MATCH", 13, 60  );
-            gameLeds->getScoreBoard()->drawNewText( "WIN"  , 20, 75  );
+            gameLeds->getScoreBoard()->setLittleDrawerFont( "little_numbers.bdf" );
+            gameLeds->getScoreBoard()->drawNewText( "Match", 13, 60  );
+            gameLeds->getScoreBoard()->drawNewText( "Win"  , 20, 75  );
             gameLeds->getScoreBoard()->drawSets();
             GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
             print( "done match win flash delay of " << MATCH_WIN_FLASH_DELAY );
@@ -30,6 +31,7 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
             GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
             print( "done match win flash delay of " << MATCH_WIN_FLASH_DELAY );
         }
+        gameLeds->getScoreBoard()->setLittleDrawerFont( "fonts/8x13B.bdf" );
     } else {
         ScoreBoard* scoreBoard = gameLeds->getScoreBoard();
         for ( int blink_count = 0; blink_count < MATCH_WIN_BLINK_COUNT; blink_count++ ) {
