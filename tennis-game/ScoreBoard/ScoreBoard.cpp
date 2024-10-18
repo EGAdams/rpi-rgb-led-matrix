@@ -324,7 +324,8 @@ void ScoreBoard::clearScreen() {
 }
 
 std::string ScoreBoard::drawPlayerScore( Player* player ) {
-    std::string serve_bar_text = hasCanvas() == true ? "i" : "\033[34m|";
+    std::string serve_bar_text = hasCanvas() == true ? "I" : "\033[34m|";    // filled in "I"
+    // std::string serve_bar_text = hasCanvas() == true ? "i" : "\033[34m|"; // hollow "i"
     std::string serve_bar = _gameState->getServe() == player->number() ? serve_bar_text : " ";
     std::string other_serve_bar = _gameState->getServe() == player->getOpponent()->number() ? serve_bar_text : " ";
     std::string score = _translate( player->getPoints());
