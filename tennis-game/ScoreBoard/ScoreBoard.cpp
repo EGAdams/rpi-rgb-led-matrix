@@ -319,7 +319,6 @@ void ScoreBoard::clearScreen() {
     }
     else {
         if ( !hasCanvas()) { std::cout << "*** ERROR: canvas == NULL.  exiting... ***" << std::endl; exit( 1 ); }
-        print( "clearing screen..." );
         Color flood_color( 0, 0, 0 ); _canvas->Fill( flood_color.r, flood_color.g, flood_color.b );
     }
 }
