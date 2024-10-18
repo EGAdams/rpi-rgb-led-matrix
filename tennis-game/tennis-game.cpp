@@ -401,7 +401,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     int menu_selection = 1;
     // int remote_pairing = 1;
     gameObject->getScoreBoard()->setLittleDrawerFont( "fonts/8x13B.bdf" );
-    get_and_set_font( gameObject );
+    // get_and_set_font( gameObject );
     std::signal( SIGINT, GameObject::_signalHandler );
     RemotePairingScreen remotePairingScreen( gameObject->getScoreBoard());
     print( "constructing pairing blinker from run manual game" );
