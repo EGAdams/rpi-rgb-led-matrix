@@ -239,7 +239,7 @@ void ScoreBoard::_drawMatchWinDisplay() {
 void ScoreBoard::_drawTieBreakerBar() {
     const std::string yellow = "\033[93m";
     const std::string reset = "\033[0m";
-    const std::string bright_green = "\033[92m";  // Bright green
+    const std::string bright_green = "\033[92m";  // Bright green 
     const std::string blue = "\033[94m";  // Blue
     if ( onRaspberryPi() == false ) {
         if ( _gameState->getTieLEDsOn() == 1 ) {
@@ -319,6 +319,7 @@ void ScoreBoard::clearScreen() {
     }
     else {
         if ( !hasCanvas()) { std::cout << "*** ERROR: canvas == NULL.  exiting... ***" << std::endl; exit( 1 ); }
+        print( "clearing screen..." );
         Color flood_color( 0, 0, 0 ); _canvas->Fill( flood_color.r, flood_color.g, flood_color.b );
     }
 }
