@@ -21,7 +21,7 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
         print( "flash MATCH WIN... " );
         #define MATCH_WIN_OFFSET 12
         for ( int blink_count = 0; blink_count < MATCH_WIN_BLINK_COUNT; blink_count++ ) {
-            gameLeds->getScoreBoard()->setLittleDrawerFont( "little_numbers.bdf" );
+            gameLeds->getScoreBoard()->setLittleDrawerFont( "the_sets_numbers.bdf" );
             gameLeds->getScoreBoard()->drawNewText( "Match", 13, 60 - MATCH_WIN_OFFSET );
             gameLeds->getScoreBoard()->drawNewText( "Win"  , 20, 75 - MATCH_WIN_OFFSET );
             gameLeds->getScoreBoard()->drawSets();

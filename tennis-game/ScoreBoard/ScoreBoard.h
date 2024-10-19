@@ -28,7 +28,7 @@
 #define PLAYER_1_SCORE  1
 #define PLAYER_2_SCORE  2
 #define BIG_NUMBER_FONT    "fonts/fgm_27_ee.bdf"
-#define LITTLE_NUMBER_FONT "fonts/little_numbers.bdf"
+#define LITTLE_NUMBER_FONT "fonts/the_sets_font.bdf"
 #define RED    2
 #define GREEN  5
 #define BLUE   6
