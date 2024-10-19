@@ -94,27 +94,42 @@ std::vector<std::string> SetDrawer::splitString(const std::string& str, char del
     return tokens;
 }
 
-void SetDrawer::drawPlayerSets(const std::vector<std::string>& sets, Color color, int y) {
-    const int OFFSET_FOR_ONE = 2;       // Offset in pixels for set "1" (adjust as needed)
-    const int SET_SPACING = 10;         // Spacing between sets (adjust as needed)
-    for (size_t i = 0; i < sets.size(); ++i) {
-        const std::string& set = sets[i];
-        
-        // Calculate the starting x position for this set
-        int set_x = SMALL_BEFORE + static_cast<int>(i) * (FIXED_SET_WIDTH + SET_SPACING);
-        
-        // Determine if an offset is needed
+// Helper function to calculate the width of a string by summing character widths
+int SetDrawer::getStringWidth(const std::string& text) {
+    int totalWidth = 0;
+    for (char c : text) {
+        // Convert char to Unicode codepoint (assuming ASCII)
+        uint32_t codepoint = static_cast<uint32_t>(c);
+        int charWidth = _little_font.CharacterWidth(codepoint);
+        if (charWidth == -1) {
+            // Handle missing character by skipping or using a default width
+            // Here, we'll skip adding width for missing characters
+            continue;
+        }
+        totalWidth += charWidth;
+    }
+    return totalWidth;
+}
+
+// Helper function to draw sets for a single player
+void SetDrawer::drawPlayerSets(const std::vector<std::string>& sets, Color color, int& x, int y) {
+    for (const std::string& set : sets) {
+        // Determine offset based on the set value
         int offset = (set == "1") ? OFFSET_FOR_ONE : 0;
 
-        // Calculate the final x position within the fixed set width
-        int final_x = set_x + offset;
+        // Draw the set at the current x position plus any offset
+        drawTextOnCanvas(x + SMALL_BEFORE + offset, y, color, set);
 
-        // Draw the set text
-        drawTextOnCanvas(final_x, y, color, set);
+        // Calculate the width of the set string
+        int setWidth = getStringWidth(set);
+
+        // Advance the x position by the width of the set plus spacing
+        x += setWidth + SET_SPACING;
     }
 }
 
-void SetDrawer::drawSetsWithSpacing(const std::string& playerOneSetString, const std::string& playerTwoSetString) {
+// Main function to draw sets with spacing for both players
+void SetDrawer::drawSetsWithSpacing(std::string playerOneSetString, std::string playerTwoSetString) {
     // Split the set strings into individual sets
     std::vector<std::string> playerOneSets = splitString(playerOneSetString);
     std::vector<std::string> playerTwoSets = splitString(playerTwoSetString);
@@ -127,9 +142,13 @@ void SetDrawer::drawSetsWithSpacing(const std::string& playerOneSetString, const
     int yPlayerOne = START_ROW;
     int yPlayerTwo = START_ROW + _little_font.height() - 5; // Move to the next row
 
+    // Initialize x positions for both players
+    int xPlayerOne = 0;
+    int xPlayerTwo = 0;
+
     // Draw Player One's sets
-    drawPlayerSets(playerOneSets, playerOneColor, yPlayerOne);
+    drawPlayerSets(playerOneSets, playerOneColor, xPlayerOne, yPlayerOne);
 
     // Draw Player Two's sets
-    drawPlayerSets(playerTwoSets, playerTwoColor, yPlayerTwo);
+    drawPlayerSets(playerTwoSets, playerTwoColor, xPlayerTwo, yPlayerTwo);
 }

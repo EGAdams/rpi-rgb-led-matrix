@@ -42,7 +42,13 @@ class SetDrawer {
     // Helper function to split a string by spaces into a vector of strings
     std::vector<std::string> splitString( const std::string& str, char delimiter = ' ' );
 
-    void drawPlayerSets(const std::vector<std::string>& sets, Color color, int y);
+    int getStringWidth(const std::string& text);
+
+    void drawPlayerSets(const std::vector<std::string>& sets, Color color, int& x, int y);
+
+    void drawSetsWithSpacing(std::string playerOneSetString, std::string playerTwoSetString);
+
+    // void drawPlayerSets(const std::vector<std::string>& sets, Color color, int y);
 
     void drawSetsWithSpacing(const std::string& playerOneSetString, const std::string& playerTwoSetString);
 };
