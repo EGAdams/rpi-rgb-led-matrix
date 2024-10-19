@@ -31,7 +31,7 @@ class SetDrawer {
 
  private: 
     const int FIXED_SET_WIDTH = 20;  // Adjust as needed based on your font size
-    const int SET_SPACING = 10;      // Space between sets
+    const int SET_SPACING = 5;      // Space between sets
     const int OFFSET_FOR_ONE = 2;    // Additional offset for the digit "1"
 
     rgb_matrix::Font    _little_font;

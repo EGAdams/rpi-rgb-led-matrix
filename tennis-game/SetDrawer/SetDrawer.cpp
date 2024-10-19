@@ -72,6 +72,7 @@ std::string SetDrawer::cloaker( std::string stringToCloak, int sectionToCloak ) 
     return stringToCloak;
 }
 
+// set drawer additions...
 std::vector<std::string> SetDrawer::splitString(const std::string& str, char delimiter) {
     std::vector<std::string> tokens;
     std::stringstream ss(str);
