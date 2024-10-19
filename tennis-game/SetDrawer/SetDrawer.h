@@ -1,6 +1,8 @@
 #ifndef SET_MANAGER_H
 #define SET_MANAGER_H
 
+#include <sstream>  // Include for string stream operations
+#include <vector>
 #include <iostream>
 #include <string>
 #include "../GameState/GameState.h"
@@ -26,9 +28,12 @@ class SetDrawer {
     void drawBlinkSets( int player);
     void drawTextOnCanvas( int x, int y, const Color& color, const std::string& text );
     void blankSets();
-    void drawSetsWithSpacing( std::string playerOneSetString, std::string playerTwoSetString );
 
  private: 
+   const int FIXED_SET_WIDTH = 20;  // Adjust as needed based on your font size
+   const int SET_SPACING = 10;      // Space between sets
+   const int OFFSET_FOR_ONE = 2;    // Additional offset for the digit "1"
+
     rgb_matrix::Font    _little_font;
     RGBMatrix*          _canvas;
     GameState*          _gameState; 
@@ -37,7 +42,8 @@ class SetDrawer {
     // Helper function to split a string by spaces into a vector of strings
     std::vector<std::string> splitString( const std::string& str, char delimiter = ' ' );
 
-    // Helper function to draw sets for a player
-    void drawPlayerSets( const std::vector<std::string>& sets, Color color, int& x, int y );
+    void drawPlayerSets(const std::vector<std::string>& sets, Color color, int y);
+
+    void drawSetsWithSpacing(const std::string& playerOneSetString, const std::string& playerTwoSetString);
 };
 #endif
