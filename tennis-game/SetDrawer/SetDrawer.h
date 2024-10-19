@@ -32,5 +32,12 @@ class SetDrawer {
     rgb_matrix::Font    _little_font;
     RGBMatrix*          _canvas;
     GameState*          _gameState; 
-    SetHistoryText      _setHistoryText; };
+    SetHistoryText      _setHistoryText;
+
+    // Helper function to split a string by spaces into a vector of strings
+    std::vector<std::string> splitString( const std::string& str, char delimiter = ' ' );
+
+    // Helper function to draw sets for a player
+    void drawPlayerSets( const std::vector<std::string>& sets, Color color, int& x, int y );
+};
 #endif

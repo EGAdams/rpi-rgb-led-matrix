@@ -80,12 +80,70 @@ std::string SetDrawer::cloaker( std::string stringToCloak, int sectionToCloak ) 
     return stringToCloak;
 }
 
-void SetDrawer::drawSetsWithSpacing( std::string playerOneSetString, std::string playerTwoSetString ) {
-    int y = START_ROW; 
-    int x = 0;
-    Color thirdRowColor( 0, 255, 0 );
-    drawTextOnCanvas( x + SMALL_BEFORE, y, thirdRowColor, playerOneSetString );
-    y += _little_font.height() - 5;
-    Color fourthRowColor( 255, 0, 0 );
-    drawTextOnCanvas( x + SMALL_BEFORE, y, fourthRowColor, playerTwoSetString );
+#include <sstream>  // Include for string stream operations
+#include <vector>
+#include <string>
+
+// Assume these are defined elsewhere in your code
+// struct Color { int r, g, b; Color(int red, int green, int blue) : r(red), g(green), b(blue) {} };
+// void drawTextOnCanvas(int x, int y, Color color, const std::string& text);
+// int START_ROW;
+// int SMALL_BEFORE;
+// class Font { public: int width(const std::string& text); int height(); } _little_font;
+
+std::vector<std::string> SetDrawer::splitString(const std::string& str, char delimiter) {
+    std::vector<std::string> tokens;
+    std::stringstream ss(str);
+    std::string token;
+
+    while (std::getline(ss, token, delimiter)) {
+        if (!token.empty()) {
+            tokens.push_back(token);
+        }
+    }
+
+    return tokens;
+}
+
+void SetDrawer::drawPlayerSets(const std::vector<std::string>& sets, Color color, int& x, int y) {
+    const int OFFSET_FOR_ONE = 2;       // Offset in pixels for set "1" (adjust as needed)
+    const int SET_SPACING = 10;         // Spacing between sets (adjust as needed)
+
+    for (const std::string& set : sets) {
+        // Determine offset based on the set value
+        int offset = 0;
+        if (set == "1") {
+            offset = OFFSET_FOR_ONE;
+        }
+
+        // Draw the set at the current x position plus any offset
+        drawTextOnCanvas(x + SMALL_BEFORE + offset, y, color, set);
+
+        // Advance the x position by the width of the set plus spacing
+        // Assuming _little_font.width(set) returns the width of the set text
+        x += /* _little_font.width(set) */ offset + SET_SPACING;
+    }
+}
+
+void SetDrawer::drawSetsWithSpacing(std::string playerOneSetString, std::string playerTwoSetString) {
+    // Define initial y positions and colors
+    int yPlayerOne = START_ROW; 
+    int yPlayerTwo = START_ROW + _little_font.height() - 5; // Move to the next row
+
+    Color playerOneColor(0, 255, 0);    // Green for Player One
+    Color playerTwoColor(255, 0, 0);    // Red for Player Two
+
+    // Split the set strings into individual sets
+    std::vector<std::string> playerOneSets = splitString(playerOneSetString);
+    std::vector<std::string> playerTwoSets = splitString(playerTwoSetString);
+
+    // Initialize x positions for both players
+    int xPlayerOne = 0;
+    int xPlayerTwo = 0;
+
+    // Draw Player One's sets
+    drawPlayerSets(playerOneSets, playerOneColor, xPlayerOne, yPlayerOne);
+
+    // Draw Player Two's sets
+    drawPlayerSets(playerTwoSets, playerTwoColor, xPlayerTwo, yPlayerTwo);
 }
