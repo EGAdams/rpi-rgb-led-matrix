@@ -50,6 +50,6 @@ class SetDrawer {
 
     // void drawPlayerSets(const std::vector<std::string>& sets, Color color, int y);
 
-    void drawSetsWithSpacing(const std::string& playerOneSetString, const std::string& playerTwoSetString);
+    // void drawSetsWithSpacing(const std::string& playerOneSetString, const std::string& playerTwoSetString);
 };
 #endif
