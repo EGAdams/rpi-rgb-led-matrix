@@ -121,7 +121,7 @@ void SetDrawer::drawPlayerSets(const std::vector<std::string>& sets, Color color
 
         // Advance the x position by the width of the set plus spacing
         // Assuming _little_font.width(set) returns the width of the set text
-        x += /* _little_font.width(set) */ offset + SET_SPACING;
+        x += /* _little_font.width(set) */ SMALL_BEFORE + offset + SET_SPACING;
     }
 }
 
