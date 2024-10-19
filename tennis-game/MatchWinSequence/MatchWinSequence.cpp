@@ -27,8 +27,8 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
             gameLeds->getScoreBoard()->drawSets();
             GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
             print( "done match win flash delay of " << MATCH_WIN_FLASH_DELAY );
-            gameLeds->getScoreBoard()->drawNewText( "     ", 13, 60  );
-            gameLeds->getScoreBoard()->drawNewText( "   "  , 20, 75  );
+            gameLeds->getScoreBoard()->drawNewText( "     ", 13, 60 - MATCH_WIN_OFFSET );
+            gameLeds->getScoreBoard()->drawNewText( "   "  , 20, 75 - MATCH_WIN_OFFSET );
             GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
             print( "done match win flash delay of " << MATCH_WIN_FLASH_DELAY );
         }
