@@ -36,7 +36,6 @@ tennis-game/build
 tennis-game/Mode1ScoreTest
 examples-api-use/minimal-example
 myenv/*
-
 examples-api-use/pixel-mover
 examples-api-use/ledcat
 .aider.tags.cache.v3/*
