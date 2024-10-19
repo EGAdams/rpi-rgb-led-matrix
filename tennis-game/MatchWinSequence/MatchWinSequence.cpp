@@ -19,10 +19,11 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
         gameLeds->getScoreBoard()->clearScreen();
         gameLeds->getScoreBoard()->setLittleDrawerFont( "fonts/8x13B.bdf" );
         print( "flash MATCH WIN... " );
+        #define MATCH_WIN_OFFSET 12
         for ( int blink_count = 0; blink_count < MATCH_WIN_BLINK_COUNT; blink_count++ ) {
             gameLeds->getScoreBoard()->setLittleDrawerFont( "little_numbers.bdf" );
-            gameLeds->getScoreBoard()->drawNewText( "Match", 13, 60  );
-            gameLeds->getScoreBoard()->drawNewText( "Win"  , 20, 75  );
+            gameLeds->getScoreBoard()->drawNewText( "Match", 13, 60 - MATCH_WIN_OFFSET );
+            gameLeds->getScoreBoard()->drawNewText( "Win"  , 20, 75 - MATCH_WIN_OFFSET );
             gameLeds->getScoreBoard()->drawSets();
             GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
             print( "done match win flash delay of " << MATCH_WIN_FLASH_DELAY );
