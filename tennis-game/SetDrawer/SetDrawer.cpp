@@ -23,19 +23,15 @@ void SetDrawer::drawTextOnCanvas( int x, int y, const Color& color, const std::s
                           NULL : &background_color, text.c_str(), letter_spacing ); }
 
 void SetDrawer::drawSets() {
-    int y = START_ROW; 
-    int x = 0;
     std::string playerOneSetString = _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX );
     std::string playerTwoSetString = _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX );
-    Color thirdRowColor( 0, 255, 0 );
     if ( _canvas == NULL ) {
         std::cout << playerOneSetString << std::endl;
         std::cout << playerTwoSetString << std::endl;
     } else {
-        drawTextOnCanvas( x + SMALL_BEFORE, y, thirdRowColor, playerOneSetString );
-        y += _little_font.height() - 5;
-        Color fourthRowColor( 255, 0, 0 );
-        drawTextOnCanvas( x + SMALL_BEFORE, y, fourthRowColor, playerTwoSetString ); }}
+        drawSetsWithSpacing( playerOneSetString, playerTwoSetString );
+    }
+}
 
 void SetDrawer::blankSets() {
     int y = START_ROW; 
@@ -81,4 +77,15 @@ std::string SetDrawer::cloaker( std::string stringToCloak, int sectionToCloak ) 
     if ( sectionToCloak < 1 || sectionToCloak > 3 ) { return "Invalid section number";}
     int pos = 2 * ( sectionToCloak - 1 ); // The pos of the digit in the string is ( 2 * section number - 2 ) ( the 1st digit is at position 0 )
     stringToCloak[ pos ] = ' ';           // Replace the character at the calculated position with a space
-    return stringToCloak;}
+    return stringToCloak;
+}
+
+void SetDrawer::drawSetsWithSpacing( std::string playerOneSetString, std::string playerTwoSetString ) {
+    int y = START_ROW; 
+    int x = 0;
+    Color thirdRowColor( 0, 255, 0 );
+    drawTextOnCanvas( x + SMALL_BEFORE, y, thirdRowColor, playerOneSetString );
+    y += _little_font.height() - 5;
+    Color fourthRowColor( 255, 0, 0 );
+    drawTextOnCanvas( x + SMALL_BEFORE, y, fourthRowColor, playerTwoSetString );
+}

@@ -26,6 +26,7 @@ class SetDrawer {
     void drawBlinkSets( int player);
     void drawTextOnCanvas( int x, int y, const Color& color, const std::string& text );
     void blankSets();
+    void drawSetsWithSpacing( std::string playerOneSetString, std::string playerTwoSetString );
 
  private: 
     rgb_matrix::Font    _little_font;
