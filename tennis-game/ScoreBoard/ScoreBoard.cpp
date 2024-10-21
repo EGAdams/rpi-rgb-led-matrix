@@ -102,9 +102,9 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         _setDrawer = std::make_unique<SetDrawer>( _canvas.get(), _gameState );
         print( "done constructing unique pointers.  updating scoreboard..." );
     } // fi onRaspberryPi
-    print( "updating scoreboard..." );
-    update();
-    print( "done updating scoreboard." );
+    // print( "updating scoreboard..." );
+    // update();
+    // print( "done updating scoreboard." );
 }
 
 ScoreBoard::~ScoreBoard() {

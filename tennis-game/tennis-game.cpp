@@ -396,7 +396,7 @@ void get_and_set_font( GameObject* gameObject ) {
 
 void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset, int player ) {
     int loop_count = 0;
-    // gameObject->loopGame();
+    gameObject->loopGame();
     sleep( 1 );
     int menu_selection = 1;
     // int remote_pairing = 1;

@@ -46,14 +46,12 @@ void GameModes::gameStart() {
         // std::cout << "setting player sets... " << std::endl;
         _player1->setSets( _gameState, 0 );               // p1Sets = 0;
         _player2->setSets( _gameState, 0 );               // p2Sets = 0;
-        // std::cout << "updating points... " << std::endl;
-        _pointLeds.updatePoints();          // UpdatePoints();
-        // std::cout << "updating games... " << std::endl;
-        _gameLeds.updateGames();            // UpdateGames();
-        // std::cout << "updating sets... " << std::endl;
-        _setLeds.updateSets();              // UpdateSets();
-        _gameState->setTieBreakOnly( 0 );     // tieBreakOnly = false;
-        // std::cout << "setting started to 1... " << std::endl;
+        if ( _gameState->getStarted()) {
+            _pointLeds.updatePoints();          // UpdatePoints();
+            _gameLeds.updateGames();            // UpdateGames();
+            _setLeds.updateSets();              // UpdateSets();
+            _gameState->setTieBreakOnly( 0 );   // tieBreakOnly = false;
+        }
         _gameState->setStarted( 1 );
     } else {
         // std::cout << "Game already started. " << std::endl;
