@@ -14,7 +14,7 @@
 
 #define SMALL_BEFORE  7
 #define SMALL_BETWEEN 17
-#define START_ROW     86
+#define START_ROW     89 // 86 // 102324 move Set scores 3 rows down.
 #define LITTLE_FONT   "fonts/the_sets_font.bdf"
 
 
