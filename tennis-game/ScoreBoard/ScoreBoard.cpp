@@ -387,7 +387,7 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
             _playerTwoScoreDrawer->drawNumber( score.substr( 0, 1 ), first_offset + 16, baseline + vertical_offset  );
             _playerTwoScoreDrawer->drawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset );
         } else {
-            _playerOneScoreDrawer->drawNumber( score.substr( 0, 1 ), 38, baseline + vertical_offset  );
+            _playerTwoScoreDrawer->drawNumber( score.substr( 0, 1 ), 38, baseline + vertical_offset  );
         }
     } // return player 1 score, else type player 2 score
 }
