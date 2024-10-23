@@ -419,6 +419,7 @@ int ScoreBoard::_firstCharacterOffset( std::string character ) {
     } else if ( character == "0" ) {
         return -3;
     } else if ( character == "3" ) {
+        print( "returning -2 for character 3..." );
         return -2;
     } else if ( character == "1" ) {
         return 1;
