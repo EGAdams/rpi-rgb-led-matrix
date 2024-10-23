@@ -398,6 +398,8 @@ int ScoreBoard::_characterOffset( std::string character ) {
         return -4;
     } else if ( character == "d" ) {
         return 0;
+    } else if ( character == "5" ) {
+        return 1;
     } else { char_offset = std::stoi( character ); }
 
     switch ( char_offset ) {
@@ -416,6 +418,8 @@ int ScoreBoard::_firstCharacterOffset( std::string character ) {
         return 0;
     } else if ( character == "0" ) {
         return -3;
+    } else if ( character == "1" ) {
+        return 1;
     } else { char_offset = std::stoi( character ); }
 
     switch ( char_offset ) {
