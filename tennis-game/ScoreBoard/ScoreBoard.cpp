@@ -395,9 +395,9 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
 int ScoreBoard::_characterOffset( std::string character ) {
     int char_offset = 0;
     if ( character == "A" ) {
-        return -4;
+        return -3;
     } else if ( character == "d" ) {
-        return 0;
+        return 2;
     } else if ( character == "5" ) {
         return 1;
     } else { char_offset = std::stoi( character ); }
@@ -413,9 +413,9 @@ int ScoreBoard::_characterOffset( std::string character ) {
 int ScoreBoard::_firstCharacterOffset( std::string character ) {
     int char_offset = 0;
     if ( character == "A" ) {
-        return -4;
+        return -3;
     } else if ( character == "d" ) {
-        return 0;
+        return 2;
     } else if ( character == "0" ) {
         return -3;
     } else if ( character == "1" ) {
