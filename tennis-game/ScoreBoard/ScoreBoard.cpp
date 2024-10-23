@@ -334,12 +334,6 @@ std::string ScoreBoard::drawPlayerScore( Player* player ) {
         player->number() == PLAYER_1_INITIALIZED ?  // type player 1 score, else type player 2 score
             std::cout << "| \033[92mPLAYER 1: //// " << serve_bar << "\033[92m " << score << " //// " << std::endl :
             std::cout << "| \033[31mPLAYER 2: //// " << serve_bar << "\033[31m " << score << " //// \033[35m" << std::endl;
-            std::string returnString = "*** WARNING: return string is not set. this is not normal ***";
-            std::string player1ScoreString = "PLAYER 1: ////// " + serve_bar + " " + score + " //////";
-            std::string player2ScoreString = "PLAYER 2: ////// " + serve_bar + " " + score + " //////";
-            player->number() == PLAYER_1_INITIALIZED ?
-                returnString = player1ScoreString : returnString = player2ScoreString;
-            return returnString;
     } else {
         if ( _gameState->getTieBreak() || _gameState->getMatchTieBreak()) { _drawTieBreakScore( player ); return ""; } // 102324
         #define BIG_NUMBER_VERTICAL_OFFSET 2
@@ -361,6 +355,13 @@ std::string ScoreBoard::drawPlayerScore( Player* player ) {
             }
         } // return player 1 score, else type player 2 score
     }
+    // created a concatenated string with "PLAYER 1: ////// " + serve_bar
+    std::string returnString = "*** WARNING: return string is not set. this is not normal ***";
+    std::string player1ScoreString = "PLAYER 1: ////// " + serve_bar + " " + score + " //////";
+    std::string player2ScoreString = "PLAYER 2: ////// " + serve_bar + " " + score + " //////";
+    player->number() == PLAYER_1_INITIALIZED ?
+        returnString = player1ScoreString : returnString = player2ScoreString;
+    return returnString;
 }
 
 void ScoreBoard::_drawTieBreakScore( Player* player ) {
