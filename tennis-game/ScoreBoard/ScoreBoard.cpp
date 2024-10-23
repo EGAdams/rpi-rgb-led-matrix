@@ -334,7 +334,14 @@ std::string ScoreBoard::drawPlayerScore( Player* player ) {
         player->number() == PLAYER_1_INITIALIZED ?  // type player 1 score, else type player 2 score
             std::cout << "| \033[92mPLAYER 1: //// " << serve_bar << "\033[92m " << score << " //// " << std::endl :
             std::cout << "| \033[31mPLAYER 2: //// " << serve_bar << "\033[31m " << score << " //// \033[35m" << std::endl;
+            std::string returnString = "*** WARNING: return string is not set. this is not normal ***";
+            std::string player1ScoreString = "PLAYER 1: ////// " + serve_bar + " " + score + " //////";
+            std::string player2ScoreString = "PLAYER 2: ////// " + serve_bar + " " + score + " //////";
+            player->number() == PLAYER_1_INITIALIZED ?
+                returnString = player1ScoreString : returnString = player2ScoreString;
+            return returnString;
     } else {
+        if ( _gameState->getTieBreak() || _gameState->getMatchTieBreak()) { _drawTieBreakScore( player ); return ""; } // 102324
         #define BIG_NUMBER_VERTICAL_OFFSET 2
         int vertical_offset = player->number() == 0 ? BIG_NUMBER_VERTICAL_OFFSET : 
             _big_number_font.height() + BIG_NUMBER_VERTICAL_OFFSET;
@@ -347,38 +354,56 @@ std::string ScoreBoard::drawPlayerScore( Player* player ) {
             if ( score.length() > 1 ) {
                 _playerOneScoreDrawer->drawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset );
             }
-        }
-        else {
+        } else {
             _playerTwoScoreDrawer->drawNumber( score.substr( 0, 1 ), first_offset + 16, baseline + vertical_offset );
             if ( score.length() > 1 ) {
                 _playerTwoScoreDrawer->drawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset );
             }
         } // return player 1 score, else type player 2 score
     }
-    // created a concatenated string with "PLAYER 1: ////// " + serve_bar
-    std::string returnString = "*** WARNING: return string is not set. this is not normal ***";
-    std::string player1ScoreString = "PLAYER 1: ////// " + serve_bar + " " + score + " //////";
-    std::string player2ScoreString = "PLAYER 2: ////// " + serve_bar + " " + score + " //////";
-    player->number() == PLAYER_1_INITIALIZED ?
-        returnString = player1ScoreString : returnString = player2ScoreString;
-    return returnString;
+}
+
+void ScoreBoard::_drawTieBreakScore( Player* player ) {
+    std::string serve_bar_text = hasCanvas() == true ? "I" : "\033[34m|";    // filled in "I"
+    std::string serve_bar = _gameState->getServe() == player->getOpponent()->number() ? serve_bar_text : " ";
+    std::string score = _translate( player->getPoints());
+    #define BIG_NUMBER_VERTICAL_OFFSET 2
+    int vertical_offset = player->number() == 0 ? BIG_NUMBER_VERTICAL_OFFSET : 
+        _big_number_font.height() + BIG_NUMBER_VERTICAL_OFFSET;
+    _pipeDrawer->drawNumber( serve_bar, 2, _big_number_font.baseline() + vertical_offset );
+    int baseline = _big_number_font.baseline();                  // set the coordinates for the text
+    int first_offset = _characterOffset( score.substr( 0, 1 ));
+    int second_offset = ( score.length() > 1 ) ? _characterOffset( score.substr( 1, 1 )) : 0;
+    if ( player->number() == PLAYER_1_INITIALIZED ) { // then draw text depending on player
+        if ( score.length() > 1 ) {
+            _playerOneScoreDrawer->drawNumber( score.substr( 0, 1 ), first_offset + 16, baseline + vertical_offset  );
+            _playerOneScoreDrawer->drawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset );
+        } else {
+            _playerOneScoreDrawer->drawNumber( score.substr( 0, 1 ), 38, baseline + vertical_offset  );
+        }
+    } else {
+        if ( score.length() > 1 ) {
+            _playerTwoScoreDrawer->drawNumber( score.substr( 0, 1 ), first_offset + 16, baseline + vertical_offset  );
+            _playerTwoScoreDrawer->drawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset );
+        } else {
+            _playerOneScoreDrawer->drawNumber( score.substr( 0, 1 ), 38, baseline + vertical_offset  );
+        }
+    } // return player 1 score, else type player 2 score
 }
 
 int ScoreBoard::_characterOffset( std::string character ) {
     int char_offset = 0;
     if ( character == "A" ) {
         return -4;
-    }
-    else if ( character == "d" ) {
+    } else if ( character == "d" ) {
         return 0;
-    }
-    else { char_offset = std::stoi( character ); }
+    } else { char_offset = std::stoi( character ); }
 
     switch ( char_offset ) {
-    case 3: return -1;
-    case 4: return -4;
-    case 5: return -1;
-    default: return 0;
+        case 3: return -1;
+        case 4: return -4;
+        case 5: return -1;
+        default: return 0;
     }
 }
 

@@ -99,10 +99,11 @@ private:
     Drawer*                      _text_drawer;
     const char*                  _font_file;
 
-    void _drawTieBreakerBar(    /* void */            );
-    void _drawMatchWinDisplay(  /* void */            );
-    int  _characterOffset(   std::string character    );
-    std::string _translate(  int raw_score            );
+    void _drawTieBreakScore(    Player* player     );
+    void _drawTieBreakerBar(    /* void */         );
+    void _drawMatchWinDisplay(  /* void */         );
+    int  _characterOffset(   std::string character );
+    std::string _translate(  int raw_score         );
 };
 
 #endif
