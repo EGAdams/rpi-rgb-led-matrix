@@ -418,6 +418,8 @@ int ScoreBoard::_firstCharacterOffset( std::string character ) {
         return 2;
     } else if ( character == "0" ) {
         return -3;
+    } else if ( character == "3" ) {
+        return -2;
     } else if ( character == "1" ) {
         return 1;
     } else { char_offset = std::stoi( character ); }
