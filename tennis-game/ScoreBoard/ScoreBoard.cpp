@@ -341,7 +341,7 @@ std::string ScoreBoard::drawPlayerScore( Player* player ) {
             _big_number_font.height() + BIG_NUMBER_VERTICAL_OFFSET;
         _pipeDrawer->drawNumber( serve_bar, 2, _big_number_font.baseline() + vertical_offset );
         int baseline = _big_number_font.baseline();                  // set the coordinates for the text
-        int first_offset = _characterOffset( score.substr( 0, 1 ));
+        int first_offset = _firstCharacterOffset( score.substr( 0, 1 ));
         int second_offset = ( score.length() > 1 ) ? _characterOffset( score.substr( 1, 1 )) : 0;
         if ( player->number() == PLAYER_1_INITIALIZED ) { // then draw text depending on player
             _playerOneScoreDrawer->drawNumber( score.substr( 0, 1 ), first_offset + 16, baseline + vertical_offset );
@@ -373,7 +373,7 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
         _big_number_font.height() + BIG_NUMBER_VERTICAL_OFFSET;
     _pipeDrawer->drawNumber( serve_bar, 2, _big_number_font.baseline() + vertical_offset );
     int baseline = _big_number_font.baseline();                  // set the coordinates for the text
-    int first_offset = _characterOffset( score.substr( 0, 1 ));
+    int first_offset = _firstCharacterOffset( score.substr( 0, 1 ));
     int second_offset = ( score.length() > 1 ) ? _characterOffset( score.substr( 1, 1 )) : 0;
     if ( player->number() == PLAYER_1_INITIALIZED ) { // then draw text depending on player
         if ( score.length() > 1 ) {
@@ -393,6 +393,22 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
 }
 
 int ScoreBoard::_characterOffset( std::string character ) {
+    int char_offset = 0;
+    if ( character == "A" ) {
+        return -4;
+    } else if ( character == "d" ) {
+        return 0;
+    } else { char_offset = std::stoi( character ); }
+
+    switch ( char_offset ) {
+        case 3: return -1;
+        case 4: return -4;
+        case 5: return -1;
+        default: return 0;
+    }
+}
+
+int ScoreBoard::_firstCharacterOffset( std::string character ) {
     int char_offset = 0;
     if ( character == "A" ) {
         return -4;
