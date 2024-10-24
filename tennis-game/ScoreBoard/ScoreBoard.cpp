@@ -404,9 +404,11 @@ int ScoreBoard::_characterOffset( std::string character ) {
         return -3;
     } else if ( character == "d" ) {
         return 2;
-    } else if ( character == "5" ) {
+    } else if ( character == "4" ) {
         return 1;
-    } else { char_offset = std::stoi( character ); }
+    } else { 
+        char_offset = std::stoi( character );
+    }
 
     switch ( char_offset ) {
         case 3: return -1;
@@ -418,15 +420,15 @@ int ScoreBoard::_characterOffset( std::string character ) {
 
 int ScoreBoard::_firstCharacterOffset( std::string character ) {
     int char_offset = 0;
+    #define FIRST_ZERO_OFFSET -2
     if ( character == "A" ) {
         return -3;
     } else if ( character == "d" ) {
         return 2;
     } else if ( character == "0" ) {
-        return -3;
+        return FIRST_ZERO_OFFSET;
     } else if ( character == "3" ) {
-        print( "returning -4 for character 3..." );
-        return -4;
+        return -3;
     } else if ( character == "1" ) {
         return 1;
     } else { char_offset = std::stoi( character ); }
