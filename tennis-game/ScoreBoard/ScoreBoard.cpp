@@ -370,7 +370,7 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
     std::string score = _translate( player->getPoints());
     #define BIG_NUMBER_VERTICAL_OFFSET 2
     #define TB_X_OFFSET 26  // Tie Breaker x-axis offset
-    int tb_x_offset = score == "1" ? TB_X_OFFSET - 1 : TB_X_OFFSET;
+    int tb_x_offset = score == "1" ? TB_X_OFFSET + 1 : TB_X_OFFSET;
     if( tb_x_offset == 25 ) { print( "offset has been decremented, must be score 1." ); }
     int vertical_offset = player->number() == 0 ? BIG_NUMBER_VERTICAL_OFFSET : 
         _big_number_font.height() + BIG_NUMBER_VERTICAL_OFFSET;
