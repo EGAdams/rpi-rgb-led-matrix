@@ -369,7 +369,8 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
     std::string serve_bar = _gameState->getServe() == player->getOpponent()->number() ? serve_bar_text : " ";
     std::string score = _translate( player->getPoints());
     #define BIG_NUMBER_VERTICAL_OFFSET 2
-    #define TB_X_OFFSET 26
+    #define TB_X_OFFSET 26  // Tie Breaker x-axis offset
+    int tb_x_offset = score == "1" ? TB_X_OFFSET - 1 : TB_X_OFFSET;
     int vertical_offset = player->number() == 0 ? BIG_NUMBER_VERTICAL_OFFSET : 
         _big_number_font.height() + BIG_NUMBER_VERTICAL_OFFSET;
     _pipeDrawer->drawNumber( serve_bar, 2, _big_number_font.baseline() + vertical_offset );
@@ -378,7 +379,7 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
     int second_offset = ( score.length() > 1 ) ? _characterOffset( score.substr( 1, 1 )) : 0;
     if ( player->number() == PLAYER_1_INITIALIZED ) { // then draw text depending on player
         if ( score.length() > 1 ) {
-            _playerOneScoreDrawer->drawNumber( score.substr( 0, 1 ), first_offset + 16, baseline + vertical_offset  );
+            _playerOneScoreDrawer->drawNumber( score.substr( 0, 1 ), first_offset  + 16, baseline + vertical_offset );
             _playerOneScoreDrawer->drawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset );
         } else {
             _playerOneScoreDrawer->drawNumber( score.substr( 0, 1 ), TB_X_OFFSET, baseline + vertical_offset  );
