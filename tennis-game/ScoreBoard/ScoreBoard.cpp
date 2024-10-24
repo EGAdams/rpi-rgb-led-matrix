@@ -371,6 +371,7 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
     #define BIG_NUMBER_VERTICAL_OFFSET 2
     #define TB_X_OFFSET 26  // Tie Breaker x-axis offset
     int tb_x_offset = score == "1" ? TB_X_OFFSET - 1 : TB_X_OFFSET;
+    if( tb_x_offset == 25 ) { print( "offset has been decremented, must be score 1." ); }
     int vertical_offset = player->number() == 0 ? BIG_NUMBER_VERTICAL_OFFSET : 
         _big_number_font.height() + BIG_NUMBER_VERTICAL_OFFSET;
     _pipeDrawer->drawNumber( serve_bar, 2, _big_number_font.baseline() + vertical_offset );
@@ -382,14 +383,14 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
             _playerOneScoreDrawer->drawNumber( score.substr( 0, 1 ), first_offset  + 16, baseline + vertical_offset );
             _playerOneScoreDrawer->drawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset );
         } else {
-            _playerOneScoreDrawer->drawNumber( score.substr( 0, 1 ), TB_X_OFFSET, baseline + vertical_offset  );
+            _playerOneScoreDrawer->drawNumber( score.substr( 0, 1 ), tb_x_offset, baseline + vertical_offset  );
         }
     } else {
         if ( score.length() > 1 ) {
             _playerTwoScoreDrawer->drawNumber( score.substr( 0, 1 ), first_offset + 16, baseline + vertical_offset  );
             _playerTwoScoreDrawer->drawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset );
         } else {
-            _playerTwoScoreDrawer->drawNumber( score.substr( 0, 1 ), TB_X_OFFSET, baseline + vertical_offset  );
+            _playerTwoScoreDrawer->drawNumber( score.substr( 0, 1 ), tb_x_offset, baseline + vertical_offset  );
         }
     } // return player 1 score, else type player 2 score
 }
