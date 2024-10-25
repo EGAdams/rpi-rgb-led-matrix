@@ -132,6 +132,7 @@ void TieBreaker::_tieBreakWin( Player* currentPlayer ) {
     // _undo.snapshot( _history ); // maybe this is why we need the decrement?
     if ( _gameState->getMatchTieBreak() == true ) {      // Match Win
         // _history->decrementWinningPlayerScore( currentPlayer ); // otherwise call houston
+        currentPlayer->setGames( currentPlayer->getGames() + 1 ); // increment games
         MatchWinSequence  mws;
         mws.run( currentPlayer, _gameState, &_gameLeds, &_setLeds );
         // endTieBreak();  ...not yet

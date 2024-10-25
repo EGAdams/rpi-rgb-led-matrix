@@ -14,7 +14,6 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
         gameState->setCurrentAction( NORMAL_GAME_STATE );
         gameLeds->getScoreBoard()->update(); }
     gameState->setCurrentAction( RUNNING_MATCH_WIN_SEQUENCE ); // so scoreboard knows...
-    // GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
     if ( gameLeds->getScoreBoard()->hasCanvas()) {
         gameLeds->getScoreBoard()->clearScreen();
         gameLeds->getScoreBoard()->setLittleDrawerFont( "fonts/8x13B.bdf" );

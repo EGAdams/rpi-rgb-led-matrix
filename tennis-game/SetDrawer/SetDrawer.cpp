@@ -139,7 +139,7 @@ void SetDrawer::drawSetsWithSpacing(std::string playerOneSetString, std::string 
 
     // Split the set strings into indiv idual sets
     std::vector<std::string> playerOneSets = splitString( playerOneSetString );
-    std::vector<std::string>  playerTwoSets = splitString( playerTwoSetString ); 
+    std::vector<std::string> playerTwoSets = splitString( playerTwoSetString ); 
 
     // Define colors for players
     Color playerOneColor( 0, 255, 0 );    // Green for Player One
