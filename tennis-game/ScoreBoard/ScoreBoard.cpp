@@ -370,30 +370,47 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
     std::string score = _translate( player->getPoints());
     #define BIG_NUMBER_VERTICAL_OFFSET 2
     #define TB_X_OFFSET 26  // Tie Breaker x-axis offset
-    int tb_x_offset = score == "1" ? TB_X_OFFSET + 2 : TB_X_OFFSET;
-    tb_x_offset = score == "3" ? TB_X_OFFSET - 1 : TB_X_OFFSET;
-    tb_x_offset = score == "6" ? TB_X_OFFSET - 1 : TB_X_OFFSET;
-    tb_x_offset = score == "9" ? TB_X_OFFSET - 1 : TB_X_OFFSET;
+
+    // introduce tb_x_offset for single digit tie-breaker scores
+    int 
+    tb_x_offset = score == "1"  ? TB_X_OFFSET + 4 : TB_X_OFFSET; // from +2 on october 25
+    tb_x_offset = score == "3"  ? TB_X_OFFSET - 1 : TB_X_OFFSET;
+    tb_x_offset = score == "6"  ? TB_X_OFFSET - 1 : TB_X_OFFSET;
+    tb_x_offset = score == "9"  ? TB_X_OFFSET - 1 : TB_X_OFFSET;
+    tb_x_offset = score == "10" ? TB_X_OFFSET - 1 : TB_X_OFFSET;
+
     if( tb_x_offset == 25 ) { print( "offset has been decremented, must be score 1." ); }
     int vertical_offset = player->number() == 0 ? BIG_NUMBER_VERTICAL_OFFSET : 
         _big_number_font.height() + BIG_NUMBER_VERTICAL_OFFSET;
     _pipeDrawer->drawNumber( serve_bar, 2, _big_number_font.baseline() + vertical_offset );
     int baseline = _big_number_font.baseline();                  // set the coordinates for the text
-    int first_offset = _firstCharacterOffset( score.substr( 0, 1 ));
-    int second_offset = ( score.length() > 1 ) ? _characterOffset( score.substr( 1, 1 )) : 0;
-    if ( player->number() == PLAYER_1_INITIALIZED ) { // then draw text depending on player
+    
+    // introduce first offset for tie-break 2-digit scores
+    int
+    first_offset = _firstCharacterOffset( score.substr( 0, 1 ));
+    first_offset = score == "11" ? first_offset + 1 : first_offset;
+    first_offset = score == "12" ? first_offset - 2 : first_offset;  // move "1" 2 spaces left on october 25
+    
+    // introduce second offset for tie-break 2-digit scores
+    int 
+    second_offset  = ( score.length() > 1 ) ? _characterOffset( score.substr( 1, 1 )) : 0;
+    second_offset  = score == "10" ? second_offset - 1 : second_offset;
+    second_offset  = score == "11" ? second_offset + 1 : second_offset;
+    second_offset  = score == "12" ? second_offset - 1 : second_offset; // move "2" one space left on october 25
+
+    if ( player->number() == PLAYER_1_INITIALIZED ) {  // then draw text depending on player
         if ( score.length() > 1 ) {
             _playerOneScoreDrawer->drawNumber( score.substr( 0, 1 ), first_offset  + 16, baseline + vertical_offset );
             _playerOneScoreDrawer->drawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset );
         } else {
-            _playerOneScoreDrawer->drawNumber( score.substr( 0, 1 ), tb_x_offset, baseline + vertical_offset  );
+            _playerOneScoreDrawer->drawNumber( score.substr( 0, 1 ), tb_x_offset,        baseline + vertical_offset );
         }
     } else {
         if ( score.length() > 1 ) {
-            _playerTwoScoreDrawer->drawNumber( score.substr( 0, 1 ), first_offset + 16, baseline + vertical_offset  );
-            _playerTwoScoreDrawer->drawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset );
+            _playerTwoScoreDrawer->drawNumber( score.substr( 0, 1 ), first_offset  + 16, baseline + vertical_offset  );
+            _playerTwoScoreDrawer->drawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset  );
         } else {
-            _playerTwoScoreDrawer->drawNumber( score.substr( 0, 1 ), tb_x_offset, baseline + vertical_offset  );
+            _playerTwoScoreDrawer->drawNumber( score.substr( 0, 1 ), tb_x_offset,        baseline + vertical_offset  );
         }
     } // return player 1 score, else type player 2 score
 }

@@ -132,26 +132,26 @@ void SetDrawer::drawSetsWithSpacing(std::string playerOneSetString, std::string 
     int xStart = 0;
     int yStart = START_ROW;
     int width = _canvas->width();
-    int height = (_little_font.height() - 5) * 2; // Height of both rows
-
+    #define P2_Y_OFFSET -4
+    int height = ( _little_font.height() + P2_Y_OFFSET ) * 2; // Height of both rows
     // Clear the area
-    FillRectangle(xStart, yStart, width, height, Color(0, 0, 0));
+    FillRectangle( xStart, yStart, width, height, Color( 0, 0, 0 )); 
 
-    // Split the set strings into individual sets
-    std::vector<std::string> playerOneSets = splitString(playerOneSetString);
-    std::vector<std::string> playerTwoSets = splitString(playerTwoSetString);
+    // Split the set strings into indiv idual sets
+    std::vector<std::string> playerOneSets = splitString( playerOneSetString );
+    std::vector<std::string>  playerTwoSets = splitString( playerTwoSetString ); 
 
     // Define colors for players
-    Color playerOneColor(0, 255, 0);    // Green for Player One
-    Color playerTwoColor(255, 0, 0);    // Red for Player Two
+    Color playerOneColor( 0, 255, 0 );    // Green for Player One
+    Color playerTwoColor( 255, 0, 0 );    // Red for Player Two
 
     // Define y positions for each player
     int yPlayerOne = START_ROW;
-    int yPlayerTwo = START_ROW + _little_font.height() - 5; // Move to the next row
+    int yPlayerTwo = START_ROW + _little_font.height() + P2_Y_OFFSET; // Move to the next row
 
     // Draw Player One's sets
-    drawPlayerSets(playerOneSets, playerOneColor, yPlayerOne);
+    drawPlayerSets( playerOneSets, playerOneColor, yPlayerOne );
 
     // Draw Player Two's sets
-    drawPlayerSets(playerTwoSets, playerTwoColor, yPlayerTwo);
+    drawPlayerSets( playerTwoSets, playerTwoColor, yPlayerTwo );
 }
