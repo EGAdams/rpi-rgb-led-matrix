@@ -113,8 +113,7 @@ void GameState::setPlayer1Matches( int player1Matches ) { _player1_matches = pla
 int GameState::getPlayer2Matches() { return _player2_matches; }
 void GameState::setPlayer2Matches( int player2Matches ) { _player2_matches = player2Matches; }
 
-std::map<int, int> GameState::getPlayer1SetHistory() {
-    return _player1_set_history; }
+std::map<int, int> GameState::getPlayer1SetHistory() { return _player1_set_history; }
 void GameState::setPlayer1SetHistory( std::map<int, int> player1_set_history ) {
     _player1_set_history = player1_set_history;
 }

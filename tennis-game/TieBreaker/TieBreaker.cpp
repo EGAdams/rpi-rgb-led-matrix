@@ -82,8 +82,7 @@ void TieBreaker::run( Player* currentPlayer ) {
     }
     Player* opponent = currentPlayer->getOpponent();
     if ( opponent == nullptr ) {
-        std::cerr << "*** ERROR: Opponent is null in TieBreaker::run(). ***" << std::endl;
-        exit( 1 );
+        std::cerr << "*** ERROR: Opponent is null in TieBreaker::run(). ***" << std::endl; exit( 1 );
     }
     int serve = _getServe();
     if ( serve != PLAYER_1_SERVE && serve != PLAYER_2_SERVE ) {
@@ -94,29 +93,13 @@ void TieBreaker::run( Player* currentPlayer ) {
     if ( _scoreBoard == nullptr ) {
         std::cerr << "*** ERROR: ScoreBoard is null in TieBreaker::run(). ***" << std::endl; return;
     }
-    try {
-        _scoreBoard->update();  // player has scored and points already incremented.
-    }
+    try { _scoreBoard->update();}  // player scored, points already incremented.
     catch ( const std::exception& e ) {
-        std::cerr << "*** EXCEPTION: " << e.what() << " ***" << std::endl;
-        exit( 1 );
-    }
+        std::cerr << "*** EXCEPTION: " << e.what() << " ***" << std::endl; exit( 1 );}
     catch ( ... ) {
-        std::cerr << "*** UNKNOWN EXCEPTION in ScoreBoard update ***" << std::endl;
-        exit( 1 );
-    }
+        std::cerr << "*** UNKNOWN EXCEPTION in ScoreBoard update ***" << std::endl; exit( 1 );}
 
     if ( currentPlayer->getPoints() == TIE_BREAK_MAX_POINTS ) {
-        // _undo.snapshot( _history );
-        // currentPlayer->setGames( currentPlayer->getGames() + 1 ); // increment games
-        // incrementSet();
-        // if ( _scoreBoard != nullptr ) {
-        //     _scoreBoard->update();
-        // }
-        // celebrate( currentPlayer ); // this is a win no matter what.
-        // GameTimer::gameDelay( 3000 );
-        // if ( _gameState->_matchTieBreak == 1 ) {}
-        // endTieBreak();
         _tieBreakWin( currentPlayer );
     }
     else if ( currentPlayer->getPoints() >= TIE_BREAK_WIN_BY_TWO &&
@@ -129,22 +112,23 @@ void TieBreaker::run( Player* currentPlayer ) {
 }
 
 void TieBreaker::_tieBreakWin( Player* currentPlayer ) {
-    // _undo.snapshot( _history ); // maybe this is why we need the decrement?
-    if ( _gameState->getMatchTieBreak() == true ) {      // Match Win
-        // _history->decrementWinningPlayerScore( currentPlayer ); // otherwise call houston
-        currentPlayer->setGames( currentPlayer->getGames() + 1 ); // increment games
+    if ( _gameState->getMatchTieBreak() == true ) {               // Match Win
+        // currentPlayer->setGames( currentPlayer->getGames() + 1 ); // increment games
+        // set the current player's "6" to a "7" wherever it is in the set history
+        for ( int i = 0; i < currentPlayer->getSetHistory().size(); i++ ) {
+            if ( currentPlayer->getSetHistory()[i] == GAMES_TO_WIN_SET ) {
+                currentPlayer->setSetHistory( i, GAMES_TO_WIN_SET + 1 );
+            }
+        }
+        _scoreBoard->update();
         MatchWinSequence  mws;
         mws.run( currentPlayer, _gameState, &_gameLeds, &_setLeds );
-        // endTieBreak();  ...not yet
         _gameState->setCurrentAction( SLEEP_MODE );
-    }
-    else { // regular tie break win.
+    } else {                                                      // regular TB win
         currentPlayer->setGames( currentPlayer->getGames() + 1 ); // increment games
         incrementSet();
         endTieBreak();
-        if ( _scoreBoard != nullptr ) {
-            _scoreBoard->update();
-        }
+        if ( _scoreBoard != nullptr ) { _scoreBoard->update();}
         celebrate( currentPlayer );
         GameTimer::gameDelay( 3000 );
         std::cout << "calling end tie break Object in regular tie break win.. " << std::endl;

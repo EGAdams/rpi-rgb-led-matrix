@@ -172,11 +172,8 @@ void ScoreBoard::drawSets() {
 void ScoreBoard::drawBlinkSets( int player_number ) { _setDrawer->drawBlinkSets( player_number ); }
 
 bool ScoreBoard::hasCanvas() {
-    if ( _canvas != NULL ) {
-        return true;
-    }
-    else { /* std::cout << "*** WARNING: canvas is NULL ***" << std::endl; */ return false; }
-}
+    if ( _canvas != NULL ) { return true;
+    } else { /* std::cout << "*** WARNING: canvas is NULL ***" << std::endl; */ return false; }}
 
 void ScoreBoard::update() {
     bool tie_break = _gameState->getTieBreak();
@@ -185,11 +182,7 @@ void ScoreBoard::update() {
     clearScreen();
     drawPlayerScore( _player1 );
     drawPlayerScore( _player2 );
-    if ( hasCanvas() == false ) {
-        std::cout << "==========================" << std::endl;
-    }
-    // _setDrawer->drawSets();
-
+    if ( hasCanvas() == false ) { print( "==========================" );} // only for terminal
     bool blink = _gameState->getCurrentAction().find( "blink" ) != std::string::npos;
     if ( blink ) {
         int playerToBlink = _gameState->getCurrentAction().find( "player1" ) != std::string::npos ?
@@ -197,23 +190,14 @@ void ScoreBoard::update() {
         _setDrawer->drawBlinkSets( playerToBlink ); // checks current action ignoring playerToBlink
     }
 
-    if ( _gameState->getCurrentAction() == DRAW_BLANK_SETS ) {
-        _setDrawer->blankSets();
+    if ( _gameState->getCurrentAction() == DRAW_BLANK_SETS ) { _setDrawer->blankSets();
+    } else { _setDrawer->drawSets();}
 
-    }
-    else {
-        _setDrawer->drawSets();
-    }
+    if ( tie_break_on ) { _drawTieBreakerBar();}
 
-    if ( tie_break_on ) {
-        _drawTieBreakerBar();
-    }
     else if ( _gameState->getCurrentAction() == RUNNING_MATCH_WIN_SEQUENCE ) {
         _drawMatchWinDisplay();
-    }
-    else {
-        // std::cout << "tie break is false, not calling _drawTieBreakerBar()..." << std::endl;
-    }
+    } else { /* print( "tie break is false, not calling _drawTieBreakerBar()..."); */ }
 }
 
 void ScoreBoard::_drawMatchWinDisplay() {
@@ -225,8 +209,7 @@ void ScoreBoard::_drawMatchWinDisplay() {
         if ( _gameState->getMatchBlink() == 1 ) {
             if ( strcmp( _gameState->getCurrentAction().c_str(), RUNNING_MATCH_WIN_SEQUENCE ) == 0 ) {
                 std::cout << bright_green << "/// *** !!! MATCH WIN !!! *** ///\n" << reset << std::endl;
-            }
-            else {
+            } else {
                 std::cout << "\n" << reset << std::endl;
             }
         }
@@ -528,8 +511,6 @@ void ScoreBoard::setLittleDrawerFont( const std::string& font_file ) {
     print( "little number font loaded" );
     print( "set little number font disabled on october massacre. " );
 }
-
-// namespace fs = std::filesystem;
 
 std::string ScoreBoard::displayAndLoadFontMenu( const std::string& fontDirectory ) {
     // Step 1: Get the list of font files in the directory

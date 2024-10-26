@@ -91,24 +91,24 @@ void GameObject::resetMatch() {
     _gameState->setGameHistory( _player2->getGameHistory() );
     _gameState->setCurrentSet( 1 );                               // set back to beginning
     _gameState->setServeSwitch( 1 );
-    _player1->setPoints( 0 );           // Reset Player's points
+    _player1->setPoints( 0 );          // Reset Player's points
     _player2->setPoints( 0 );
     _player1->setGames( 0 );           // Reset Player's games
     _player2->setGames( 0 );
-    _player1->setSets( 0 );             // Reset Player's sets
+    _player1->setSets( 0 );            // Reset Player's sets
     _player2->setSets( 0 );
-    _gameState->setPlayer1Points( 0 );  // now gamestate points
+    _gameState->setPlayer1Points( 0 ); // now gamestate points
     _gameState->setPlayer2Points( 0 );
-    _gameState->setTieBreak( 0 );       // turn tie break flags off
+    _gameState->setTieBreak( 0 );      // turn tie break flags off
     _gameState->setMatchTieBreak( 0 );
-    _gameState->setServe( 0 );          // reset serve
+    _gameState->setServe( 0 );         // reset serve
     _gameState->setP1SetsMem( 0 );
     _gameState->setP2SetsMem( 0 );
     _gameState->setP1GamesMem( 0 );
     _gameState->setP2GamesMem( 0 );
     _gameState->setP1PointsMem( 0 );
     _gameState->setP2PointsMem( 0 );
-    // _pointLeds.updatePoints(); may need this for the digi
+    // _pointLeds.updatePoints(); may need this for the digi LEDs
     _scoreBoard->clearScreen();
     _scoreBoard->update();
 }
@@ -116,7 +116,6 @@ void GameObject::resetMatch() {
 PinInterface* GameObject::getPinInterface() { return _pinInterface; }
 
 ScoreBoard* GameObject::getScoreBoard() {
-    // check for null scoreboard
     if( _scoreBoard == nullptr ) {
         print( "*** ERROR: getting null scoreboard pointer from GameObject::getScoreBoard() ***" );
         return nullptr;

@@ -44,7 +44,7 @@ void Mode1Score::_resetGame() {
     _pointLeds.updatePoints();
 }
 
-void Mode1Score::updateScore( Player* currentPlayer ) {
+void Mode1Score::updateScore( Player* currentPlayer ) { // This is the router.
     _logger->setName( "updateScore" );
     if ( _gameState->getTieBreak() == 1 ) {             // Set Tie Break
         _tieBreaker.run( currentPlayer );

@@ -2,7 +2,6 @@
 
 SetDrawer::SetDrawer( RGBMatrix* canvas, GameState* gameState ) : 
     _canvas( canvas ), _gameState( gameState ), _setHistoryText( gameState ) {
-    // std::cout << "constructing SetDrawer..." << std::endl;
     if ( _canvas == NULL ) { std::cout << "canvas is NULL" << std::endl; return; }
     FontLoader smallNumberFontLoader( LITTLE_FONT );
     rgb_matrix::Font smallNumberFont;
@@ -40,7 +39,7 @@ void SetDrawer::blankSets() {
         std::cout << playerOneSetString << std::endl;
         std::cout << playerTwoSetString << std::endl;
     } else {
-        drawSetsWithSpacing(playerOneSetString, playerTwoSetString);
+        drawSetsWithSpacing( playerOneSetString, playerTwoSetString );
     }
 }
 
@@ -128,30 +127,18 @@ void SetDrawer::drawPlayerSets(const std::vector<std::string>& sets, Color color
 
 // Main function to draw sets with spacing for both players
 void SetDrawer::drawSetsWithSpacing(std::string playerOneSetString, std::string playerTwoSetString) {
-    // Define the area to be cleared
-    int xStart = 0;
-    int yStart = START_ROW;
+    int xStart = 0;      
+    int yStart = START_ROW;       // Define the area to be cleared
     int width = _canvas->width();
     #define P2_Y_OFFSET -4
-    int height = ( _little_font.height() + P2_Y_OFFSET ) * 2; // Height of both rows
-    // Clear the area
-    FillRectangle( xStart, yStart, width, height, Color( 0, 0, 0 )); 
-
-    // Split the set strings into indiv idual sets
-    std::vector<std::string> playerOneSets = splitString( playerOneSetString );
+    int height = ( _little_font.height() + P2_Y_OFFSET ) * 2;        // Height of both rows
+    FillRectangle( xStart, yStart, width, height, Color( 0, 0, 0 )); // Clear the area
+    std::vector<std::string> playerOneSets = splitString( playerOneSetString ); // split into sets
     std::vector<std::string> playerTwoSets = splitString( playerTwoSetString ); 
-
-    // Define colors for players
-    Color playerOneColor( 0, 255, 0 );    // Green for Player One
-    Color playerTwoColor( 255, 0, 0 );    // Red for Player Two
-
-    // Define y positions for each player
-    int yPlayerOne = START_ROW;
+    Color playerOneColor( 0, 255, 0 ); // Green for Player One
+    Color playerTwoColor( 255, 0, 0 ); // Red for Player Two
+    int yPlayerOne = START_ROW; // Define y positions for each player
     int yPlayerTwo = START_ROW + _little_font.height() + P2_Y_OFFSET; // Move to the next row
-
-    // Draw Player One's sets
-    drawPlayerSets( playerOneSets, playerOneColor, yPlayerOne );
-
-    // Draw Player Two's sets
-    drawPlayerSets( playerTwoSets, playerTwoColor, yPlayerTwo );
+    drawPlayerSets( playerOneSets, playerOneColor, yPlayerOne ); // Draw Player One's sets
+    drawPlayerSets( playerTwoSets, playerTwoColor, yPlayerTwo ); // Draw Player Two's sets
 }
