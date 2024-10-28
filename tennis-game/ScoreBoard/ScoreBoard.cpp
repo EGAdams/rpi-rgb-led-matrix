@@ -356,7 +356,7 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
 
     // introduce tb_x_offset for single digit tie-breaker scores
     int 
-    tb_x_offset = score == "1"  ? TB_X_OFFSET + 4 : TB_X_OFFSET; // from +2 on october 25
+    tb_x_offset = score == "1"  ? TB_X_OFFSET + 6 : TB_X_OFFSET; // from +2 on october 25
     tb_x_offset = score == "3"  ? TB_X_OFFSET - 1 : TB_X_OFFSET;
     tb_x_offset = score == "6"  ? TB_X_OFFSET - 1 : TB_X_OFFSET;
     tb_x_offset = score == "9"  ? TB_X_OFFSET - 1 : TB_X_OFFSET;
