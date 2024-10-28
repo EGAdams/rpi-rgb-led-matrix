@@ -366,14 +366,14 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
         print( "score is 3.  subtracting from the offset, tb_x_offset is "  + std::to_string( tb_x_offset ));
     } else if ( score == "4" ) {
         print( "score is 4, keeping the tie breaker offse at " << TB_X_OFFSET );
-        tb_x_offset = TB_X_OFFSET;
+        tb_x_offset = TB_X_OFFSET - 1;
      } else if ( score == "6" ) {
         print( "subtracting 1 from the tie breaker x offset" );
-        tb_x_offset = TB_X_OFFSET - 1; // from +2 on october 25
+        tb_x_offset = TB_X_OFFSET - 2; // from +2 on october 25
         print( "score is 6.  subtracting from the offset, tb_x_offset is "  + std::to_string( tb_x_offset ));
     } else if ( score == "9" ) {
         print( "subtracting 1 from the tie breaker x offset" );
-        tb_x_offset = TB_X_OFFSET - 1; // from +2 on october 25
+        tb_x_offset = TB_X_OFFSET - 2; // from +2 on october 25
         print( "score is 9.  subtracting from the offset, tb_x_offset is "  + std::to_string( tb_x_offset ));
     } else if ( score == "10" ) {
         print( "score is 10, subtracting 1 from the tie breaker x offset" );
@@ -398,7 +398,7 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
     // introduce first offset for tie-break 2-digit scores
     int
     first_offset = _firstCharacterOffset( score.substr( 0, 1 ));
-    first_offset = score == "11" ? first_offset + 1 : first_offset;
+    // first_offset = score == "11" ? first_offset + 1 : first_offset;
     first_offset = score == "12" ? first_offset - 2 : first_offset;  // move "1" 2 spaces left on october 25
     
     // introduce second offset for tie-break 2-digit scores
