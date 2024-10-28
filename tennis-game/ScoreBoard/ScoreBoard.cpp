@@ -357,8 +357,8 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
 
     int tb_x_offset = 0;
     if ( score == "1" ) {
-        print( "adding 8 to tie breaker x offset" );
-        tb_x_offset = TB_X_OFFSET + 6; // from +2 on october 25
+        print( "adding 4 to tie breaker x offset" );
+        tb_x_offset = TB_X_OFFSET + 4; // from +2 on october 25
         print( "socre is 1.  after adding the offset, tb_x_offset is "  + std::to_string( tb_x_offset ));
     } else if ( score == "3" ) {
         print( "subtracting 1 from the tie breaker x offset" );
