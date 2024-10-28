@@ -399,13 +399,16 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
     int
     first_offset = _firstCharacterOffset( score.substr( 0, 1 ));
     // first_offset = score == "11" ? first_offset + 1 : first_offset;
-    first_offset = score == "12" ? first_offset - 2 : first_offset;  // move "1" 2 spaces left on october 25
+    // first_offset = score == "12" ? first_offset - 2 : first_offset;  // move "1" 2 spaces left on october 25
     
     // introduce second offset for tie-break 2-digit scores
     int 
     second_offset  = ( score.length() > 1 ) ? _characterOffset( score.substr( 1, 1 )) : 0;
     second_offset  = score == "10" ? second_offset - 1 : second_offset;
     second_offset  = score == "11" ? second_offset + 1 : second_offset;
+    // if ( score == "12" ) {
+    //     first_offset = first_offset
+    // }
     second_offset  = score == "12" ? second_offset - 1 : second_offset; // move "2" one space left on october 25
 
     if ( player->number() == PLAYER_1_INITIALIZED ) {  // then draw text depending on player
