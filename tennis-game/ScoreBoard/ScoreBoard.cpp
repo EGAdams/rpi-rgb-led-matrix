@@ -358,34 +358,22 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
     int tb_x_offset = 0;
     if ( score == "1" ) {
         print( "adding 8 to tie breaker x offset" );
-        tb_x_offset = TB_X_OFFSET + 8; // from +2 on october 25
+        tb_x_offset = TB_X_OFFSET + 6; // from +2 on october 25
         print( "socre is 1.  after adding the offset, tb_x_offset is "  + std::to_string( tb_x_offset ));
-    } else {
-        print( "score is not 1, tb_x_offset is " + std::to_string( tb_x_offset ) );
-       tb_x_offset =TB_X_OFFSET;
-    } 
-    if ( score == "3" ) {
+    } else if ( score == "3" ) {
         print( "subtracting 1 from the tie breaker x offset" );
         tb_x_offset = TB_X_OFFSET - 1; // from +2 on october 25
         print( "score is 3.  subtracting from the offset, tb_x_offset is "  + std::to_string( tb_x_offset ));
-    } else {
-        print( "score is not 1, tb_x_offset is " + std::to_string( tb_x_offset ) );
-       tb_x_offset =TB_X_OFFSET;
-    } 
-    if ( score == "6" ) {
+    } else if ( score == "6" ) {
         print( "subtracting 1 from the tie breaker x offset" );
         tb_x_offset = TB_X_OFFSET - 1; // from +2 on october 25
         print( "score is 6.  subtracting from the offset, tb_x_offset is "  + std::to_string( tb_x_offset ));
-    } else {
-        print( "score is not 1, tb_x_offset is " + std::to_string( tb_x_offset ) );
-       tb_x_offset =TB_X_OFFSET;
-    } 
-    if ( score == "9" ) {
+    } else if ( score == "9" ) {
         print( "subtracting 1 from the tie breaker x offset" );
         tb_x_offset = TB_X_OFFSET - 1; // from +2 on october 25
         print( "score is 9.  subtracting from the offset, tb_x_offset is "  + std::to_string( tb_x_offset ));
     } else {
-        print( "score is not 1, tb_x_offset is " + std::to_string( tb_x_offset ) );
+        print( "score is not filtered, tb_x_offset is " + std::to_string( tb_x_offset ) );
        tb_x_offset =TB_X_OFFSET;
     } 
     if ( score == "10" ) {
