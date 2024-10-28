@@ -354,9 +354,15 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
     #define BIG_NUMBER_VERTICAL_OFFSET 2
     #define TB_X_OFFSET 26  // Tie Breaker x-axis offset
 
+    int tb_x_offset = 0;
+    if ( score == "1" ) {
+        print( "adding 8 to tie breaker x offset" );
+        tb_x_offset = TB_X_OFFSET + 8; // from +2 on october 25
+    } else {
+       tb_x_offset = TB_X_OFFSET;
+    } 
+
     // introduce tb_x_offset for single digit tie-breaker scores
-    int 
-    tb_x_offset = score == "1"  ? TB_X_OFFSET + 8 : TB_X_OFFSET; // from +2 on october 25
     tb_x_offset = score == "3"  ? TB_X_OFFSET - 1 : TB_X_OFFSET;
     tb_x_offset = score == "6"  ? TB_X_OFFSET - 1 : TB_X_OFFSET;
     tb_x_offset = score == "9"  ? TB_X_OFFSET - 1 : TB_X_OFFSET;
@@ -366,7 +372,7 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
     int vertical_offset = player->number() == 0 ? BIG_NUMBER_VERTICAL_OFFSET : 
         _big_number_font.height() + BIG_NUMBER_VERTICAL_OFFSET;
     _pipeDrawer->drawNumber( serve_bar, 2, _big_number_font.baseline() + vertical_offset );
-    int baseline = _big_number_font.baseline();                  // set the coordinates for the text
+    int baseline = _big_number_font.baseline();  // set the coordinates for the text
     
     // introduce first offset for tie-break 2-digit scores
     int
