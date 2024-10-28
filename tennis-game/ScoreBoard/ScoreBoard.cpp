@@ -359,6 +359,7 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
         print( "adding 8 to tie breaker x offset" );
         tb_x_offset = TB_X_OFFSET + 8; // from +2 on october 25
     } else {
+        print( "score is not 1, tb_x_offset is " + std::to_string( tb_x_offset ) );
        tb_x_offset = TB_X_OFFSET;
     } 
 
@@ -368,7 +369,6 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
     tb_x_offset = score == "9"  ? TB_X_OFFSET - 1 : TB_X_OFFSET;
     tb_x_offset = score == "10" ? TB_X_OFFSET - 1 : TB_X_OFFSET;
 
-    if( tb_x_offset == 25 ) { print( "offset has been decremented, must be score 1." ); }
     int vertical_offset = player->number() == 0 ? BIG_NUMBER_VERTICAL_OFFSET : 
         _big_number_font.height() + BIG_NUMBER_VERTICAL_OFFSET;
     _pipeDrawer->drawNumber( serve_bar, 2, _big_number_font.baseline() + vertical_offset );
