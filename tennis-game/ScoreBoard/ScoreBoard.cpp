@@ -361,7 +361,7 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
         tb_x_offset = TB_X_OFFSET + 8; // from +2 on october 25
     } else {
         print( "score is not 1, tb_x_offset is " + std::to_string( tb_x_offset ) );
-       tb_x_offset = TB_X_OFFSET;
+       tb_x_offset =TB_X_OFFSET;
     } 
 
     // introduce tb_x_offset for single digit tie-breaker scores
@@ -394,6 +394,7 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
             _playerOneScoreDrawer->drawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset );
         } else {
             _playerOneScoreDrawer->drawNumber( score.substr( 0, 1 ), tb_x_offset,        baseline + vertical_offset );
+            print( "score is: " + score + " tb_x_offset is " + std::to_string( tb_x_offset ));
         }
     } else {
         if ( score.length() > 1 ) {
@@ -401,6 +402,7 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
             _playerTwoScoreDrawer->drawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset  );
         } else {
             _playerTwoScoreDrawer->drawNumber( score.substr( 0, 1 ), tb_x_offset,        baseline + vertical_offset  );
+            print( "score is: " + score + " tb_x_offset is " + std::to_string( tb_x_offset ));
         }
     } // return player 1 score, else type player 2 score
 }
