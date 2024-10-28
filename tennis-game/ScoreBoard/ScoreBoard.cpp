@@ -351,6 +351,7 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
     std::string serve_bar_text = hasCanvas() == true ? "I" : "\033[34m|";    // filled in "I"
     std::string serve_bar = _gameState->getServe() == player->getOpponent()->number() ? serve_bar_text : " ";
     std::string score = _translate( player->getPoints());
+    print( "score[" + score + "]" );
     #define BIG_NUMBER_VERTICAL_OFFSET 2
     #define TB_X_OFFSET 26  // Tie Breaker x-axis offset
 
