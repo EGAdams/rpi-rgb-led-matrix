@@ -48,13 +48,11 @@ void Mode1Score::updateScore( Player* currentPlayer ) { // This is the router.
     _logger->setName( "updateScore" );
     if ( _gameState->getTieBreak() == 1 ) {             // Set Tie Break
         _tieBreaker.run( currentPlayer );
-    }
-    else if ( _gameState->getMatchTieBreak() == 1 ) { // Match Tie Break
+    } else if ( _gameState->getMatchTieBreak() == 1 ) { // Match Tie Break
         _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
         std::cout << "running tie breaker..." << std::endl;
         _tieBreaker.run( currentPlayer );
-    }
-    else {                                            // Regular Game
+    } else {                                            // Regular Game
         Player* otherPlayer = currentPlayer->getOpponent();
         int current_player_points = currentPlayer->getPoints();
         int other_player_points = otherPlayer->getPoints();
@@ -62,13 +60,11 @@ void Mode1Score::updateScore( Player* currentPlayer ) { // This is the router.
             if ( current_player_points == other_player_points ) {
                 currentPlayer->setPoints( 3 );
                 otherPlayer->setPoints( 3 );
-            }
-            else if ( current_player_points > 3 && ( current_player_points - other_player_points ) > 1 ) {
+            } else if ( current_player_points > 3 && ( current_player_points - other_player_points ) > 1 ) {
                 currentPlayer->setGames( currentPlayer->getGames() + 1 );
                 _undo.memory();
                 currentPlayer->number() == 0 ? playerOneGameWin() : playerTwoGameWin();  // Game Win
-            }
-            else  if ( currentPlayer->getPoints() == 4 ) {
+            } else  if ( currentPlayer->getPoints() == 4 ) {
                 _gameState->setPointFlash( 1 );       // "Ad" mode
                 _gameState->setPreviousTime( GameTimer::gameMillis() );
                 _gameState->setToggle( 0 );

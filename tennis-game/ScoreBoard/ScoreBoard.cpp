@@ -190,10 +190,12 @@ void ScoreBoard::update() {
         _setDrawer->drawBlinkSets( playerToBlink ); // checks current action ignoring playerToBlink
     }
 
-    if ( _gameState->getCurrentAction() == DRAW_BLANK_SETS ) { _setDrawer->blankSets();
+    if ( _gameState->getCurrentAction() == DRAW_BLANK_SETS ) { 
+        blankTieBreakerBar();
+        _setDrawer->blankSets();
     } else { _setDrawer->drawSets();}
 
-    if ( tie_break_on ) { _drawTieBreakerBar();}
+    if ( tie_break_on ) { drawTieBreakerBar();}
 
     else if ( _gameState->getCurrentAction() == RUNNING_MATCH_WIN_SEQUENCE ) {
         _drawMatchWinDisplay();
@@ -219,26 +221,27 @@ void ScoreBoard::_drawMatchWinDisplay() {
     }
 }
 
-void ScoreBoard::_drawTieBreakerBar() {
-    const std::string yellow = "\033[93m";
+void ScoreBoard::drawTieBreakerBar() {
     const std::string reset = "\033[0m";
-    const std::string bright_green = "\033[92m";  // Bright green 
     const std::string blue = "\033[94m";  // Blue
     if ( onRaspberryPi() == false ) {
         if ( _gameState->getTieLEDsOn() == 1 ) {
-            // std::cout << reset << "==========================" << std::endl;
             if ( _gameState->getMatchTieBreak()) {
                 std::cout << blue << "/// MATCH TIE BREAK MODE ///\n" << reset << std::endl;
             }
             else {
                 std::cout << blue << "/// TIE BREAK MODE ///\n" << reset << std::endl;
             }
-            // std::cout << reset << "==========================" << std::endl;
         }
-    }
-    else {
+    } else {
         _bluePipeDrawer->drawNumber( "I", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
     }
+}
+
+void ScoreBoard::blankTieBreakerBar() {
+    const std::string reset = "\033[0m";
+    const std::string blue = "\033[94m";
+    _bluePipeDrawer->drawNumber( " ", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
 }
 
 void ScoreBoard::drawYellowPeriod() {

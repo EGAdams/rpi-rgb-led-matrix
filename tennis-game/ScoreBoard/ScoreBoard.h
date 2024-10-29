@@ -50,6 +50,8 @@ public:
     void drawRedPeriod();
     void drawYellowPeriod();
     void drawBlankPeriod();
+    void drawTieBreakerBar(    /* void */            );
+    void blankTieBreakerBar();
     void drawGames();
     void drawSets();
     void drawBlinkSets( int player_number );
@@ -100,7 +102,6 @@ private:
     const char*                  _font_file;
 
     void _drawTieBreakScore(    Player* player        );
-    void _drawTieBreakerBar(    /* void */            );
     void _drawMatchWinDisplay(  /* void */            );
     int  _characterOffset(      std::string character );
     int  _firstCharacterOffset( std::string character );
