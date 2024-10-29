@@ -234,6 +234,7 @@ void ScoreBoard::drawTieBreakerBar() {
             }
         }
     } else {
+        print( "drawing blue pipe..." );
         _bluePipeDrawer->drawNumber( "I", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
     }
 }
