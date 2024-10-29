@@ -215,8 +215,7 @@ void ScoreBoard::_drawMatchWinDisplay() {
                 std::cout << "\n" << reset << std::endl;
             }
         }
-    }
-    else {
+    } else {
         // _bluePipeDrawer->drawNumber( "I", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
     }
 }

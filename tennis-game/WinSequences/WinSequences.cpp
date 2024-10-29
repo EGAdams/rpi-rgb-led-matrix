@@ -158,8 +158,8 @@ void Mode1WinSequences::enterMatchTieBreak() {
         _gameLeds.getScoreBoard()->update();
         GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
         _gameState->setCurrentAction( NORMAL_GAME_STATE );
-        _gameLeds.getScoreBoard()->drawTieBreakerBar();
         _gameLeds.getScoreBoard()->update();
+        _gameLeds.getScoreBoard()->drawTieBreakerBar();
     }
     tieLEDsOn();
 }
