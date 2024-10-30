@@ -241,11 +241,11 @@ void TieBreaker::blinkSetScores() {
         GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
         _gameState->setCurrentAction( DRAW_BLANK_SETS ); // set flag before update
         _gameLeds.getScoreBoard()->update();
-        //_gameLeds.getScoreBoard()->blankTieBreakerBar();
+        _gameLeds.getScoreBoard()->blankTieBreakerBar();
         GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
         _gameState->setCurrentAction( NORMAL_GAME_STATE );
         _gameLeds.getScoreBoard()->update();
-        //_gameLeds.getScoreBoard()->drawTieBreakerBar();
+        _gameLeds.getScoreBoard()->drawTieBreakerBar();
     }
 }
 
