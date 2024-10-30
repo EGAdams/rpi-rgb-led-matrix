@@ -229,20 +229,24 @@ void TieBreaker::initializeTieBreakMode() { // 103024
     //     if ( _watchTimer.watchInputDelay( TIE_BREAK_BLINK_DELAY, &_inputs, TIE_BREAK_WATCH_INTERVAL ) > 0 ) { return; }
     // }
 
-    for( int flash_count = 0; flash_count < ALL_SETS_FLASH_COUNT; flash_count++ ) {
-        GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
-        _gameState->setCurrentAction( DRAW_BLANK_SETS ); // set flag before update
-        _gameLeds.getScoreBoard()->update();
-        _gameLeds.getScoreBoard()->blankTieBreakerBar();
-        GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
-        _gameState->setCurrentAction( NORMAL_GAME_STATE );
-        _gameLeds.getScoreBoard()->update();
-        _gameLeds.getScoreBoard()->drawTieBreakerBar();
-    }
+    
     
     _gameLeds.updateGames();
     GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
     tieLEDsOn();
+}
+
+void TieBreaker::blinkSetScores() {
+    for( int flash_count = 0; flash_count < ALL_SETS_FLASH_COUNT; flash_count++ ) {
+        GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
+        _gameState->setCurrentAction( DRAW_BLANK_SETS ); // set flag before update
+        _gameLeds.getScoreBoard()->update();
+        //_gameLeds.getScoreBoard()->blankTieBreakerBar();
+        GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
+        _gameState->setCurrentAction( NORMAL_GAME_STATE );
+        _gameLeds.getScoreBoard()->update();
+        //_gameLeds.getScoreBoard()->drawTieBreakerBar();
+    }
 }
 
 void TieBreaker::setTieBreakEnable() {

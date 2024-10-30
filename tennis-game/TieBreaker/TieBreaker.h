@@ -30,6 +30,7 @@ class TieBreaker {
   void mode1SetTBButtonFunction();
   void setTieBreaker();
   void initializeTieBreakMode();
+  void blinkSetScores();
   void setTieBreakEnable();
   void endTieBreak();
   void mode1TBP1Games();
