@@ -233,7 +233,7 @@ void ScoreBoard::drawTieBreakerBar() {
             }
         }
     } else {
-        _bluePipeDrawer->drawNumber( "I", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
+        _bluePipeDrawer->drawNumber( "I", 50, 50 );// BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
     }
 }
 
@@ -385,12 +385,6 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
         print( "score is not anything in the list, tb_x_offset is " + std::to_string( tb_x_offset ) );
        tb_x_offset =TB_X_OFFSET;
     }
-
-    // introduce tb_x_offset for single digit tie-breaker scores
-    // tb_x_offset = score == "3"  ? TB_X_OFFSET - 1 : TB_X_OFFSET;
-    // tb_x_offset = score == "6"  ? TB_X_OFFSET - 1 : TB_X_OFFSET;
-    // tb_x_offset = score == "9"  ? TB_X_OFFSET - 1 : TB_X_OFFSET;
-    // tb_x_offset = score == "10" ? TB_X_OFFSET - 1 : TB_X_OFFSET;
 
     int vertical_offset = player->number() == 0 ? BIG_NUMBER_VERTICAL_OFFSET : 
         _big_number_font.height() + BIG_NUMBER_VERTICAL_OFFSET;
