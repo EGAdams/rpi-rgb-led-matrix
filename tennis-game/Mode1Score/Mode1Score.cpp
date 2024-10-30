@@ -130,8 +130,7 @@ void Mode1Score::playerGameWin( Player* player ) {
                 _resetGame();
             }
         }
-    }
-    else { // this is a regualar game win...
+    } else { // this is a regualar game win...
         if ( player->number() == PLAYER_1_INITIALIZED ) {
             _mode1WinSequences.p1GameWinSequence();
             _gameState->setPlayer1SetHistory( player->getSetHistory() );

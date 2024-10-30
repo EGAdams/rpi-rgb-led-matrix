@@ -46,11 +46,11 @@ void TieBreaker::setScoreBoards( ScoreBoard* scoreBoard ) {
 }
 
 void TieBreaker::tieLEDsOn() {
-    if ( _scoreBoard->hasCanvas()) { _scoreBoard->drawTieBreakerBar(); }
     _gameState->setTieLEDsOn( 1 );
     _pinInterface->pinDigitalWrite( P1_TIEBREAKER, HIGH );
     _pinInterface->pinDigitalWrite( P2_TIEBREAKER, HIGH );
     if (_scoreBoard != nullptr) { _scoreBoard->update();
+    if ( _scoreBoard->hasCanvas()) { _scoreBoard->drawTieBreakerBar(); }
     } else { print( "*** ERROR: _scoreBoard is NULL in TieBreaker::tieLEDsOn! ***" );}
 }
 
@@ -75,38 +75,25 @@ void TieBreaker::incrementSet() {
 // but when there is a matrix, we update the points instead.
 void TieBreaker::run( Player* currentPlayer ) {
     _undo.memory();
-    if ( currentPlayer == nullptr ) {
-        std::cerr << "*** ERROR: Current player is null in TieBreaker::run(). ***" << std::endl; exit( 1 );
-    }
+    if ( currentPlayer == nullptr ) { std::cerr << "*** ERROR: Current player is null in TieBreaker::run(). ***" << std::endl; exit( 1 );}
     Player* opponent = currentPlayer->getOpponent();
-    if ( opponent == nullptr ) {
-        std::cerr << "*** ERROR: Opponent is null in TieBreaker::run(). ***" << std::endl; exit( 1 );
-    }
+    if ( opponent == nullptr ) { std::cerr << "*** ERROR: Opponent is null in TieBreaker::run(). ***" << std::endl; exit( 1 );}
     int serve = _getServe();
     if ( serve != PLAYER_1_SERVE && serve != PLAYER_2_SERVE ) {
         std::cerr << "*** ERROR: Invalid serve value in TieBreaker::run(). ***" << std::endl;
         std::cerr << "Serve value: " << serve << std::endl; exit( 1 );
     }
     _gameState->setServe( serve ); // set the serve bar depending tie-break iteration
-    if ( _scoreBoard == nullptr ) {
-        std::cerr << "*** ERROR: ScoreBoard is null in TieBreaker::run(). ***" << std::endl; return;
-    }
+    if ( _scoreBoard == nullptr ) { std::cerr << "*** ERROR: ScoreBoard is null in TieBreaker::run(). ***" << std::endl; return;}
     try { _scoreBoard->update();}  // player scored, points already incremented.
-    catch ( const std::exception& e ) {
-        std::cerr << "*** EXCEPTION: " << e.what() << " ***" << std::endl; exit( 1 );}
-    catch ( ... ) {
-        std::cerr << "*** UNKNOWN EXCEPTION in ScoreBoard update ***" << std::endl; exit( 1 );}
+    catch ( const std::exception& e ) { std::cerr << "*** EXCEPTION: " << e.what() << " ***" << std::endl; exit( 1 );}
+    catch ( ... ) { std::cerr << "*** UNKNOWN EXCEPTION in ScoreBoard update ***" << std::endl; exit( 1 );}
 
-    if ( currentPlayer->getPoints() == TIE_BREAK_MAX_POINTS ) {
-        _tieBreakWin( currentPlayer );
-    }
+    if ( currentPlayer->getPoints() == TIE_BREAK_MAX_POINTS ) { _tieBreakWin( currentPlayer );}
     else if ( currentPlayer->getPoints() >= TIE_BREAK_WIN_BY_TWO &&
             ( currentPlayer->getPoints() - opponent->getPoints() >= 2 ) ) {
         _tieBreakWin( currentPlayer );
-    }
-    else {
-        incrementIteration();
-    } // need this to determine serve bar location
+    } else { incrementIteration();} // need this to determine serve bar location
 }
 
 void TieBreaker::_tieBreakWin( Player* currentPlayer ) {
@@ -222,7 +209,7 @@ void TieBreaker::setTieBreaker() {
     mode1SetTBButtonFunction();
 }
 
-void TieBreaker::initializeTieBreakMode() {
+void TieBreaker::initializeTieBreakMode() { // 103024
     _iteration = 1;  // this is initialized to zero before, so it could be checked as another flag
     _player1->setPoints( 0 );
     _player2->setPoints( 0 );
@@ -235,9 +222,10 @@ void TieBreaker::initializeTieBreakMode() {
     Inputs _inputs( _player1, _player2, _pinInterface, _gameState );
     WatchTimer _watchTimer;
     for ( int currentPulseCount = 0; currentPulseCount < TIE_PULSE_COUNT; currentPulseCount++ ) {
-        tieLEDsOff();
+        _gameState->setCurrentAction( DRAW_BLANK_SETS ); // set flag before update
+        tieLEDsOff(); // set tie led flag to 0 and update score board
         if ( _watchTimer.watchInputDelay( TIE_BREAK_BLINK_DELAY, &_inputs, TIE_BREAK_WATCH_INTERVAL ) > 0 ) { return; }
-        tieLEDsOn();
+        tieLEDsOn(); // draw tie breaker bar and update score board
         if ( _watchTimer.watchInputDelay( TIE_BREAK_BLINK_DELAY, &_inputs, TIE_BREAK_WATCH_INTERVAL ) > 0 ) { return; }
     }
     _gameLeds.updateGames();
