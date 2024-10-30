@@ -219,15 +219,26 @@ void TieBreaker::initializeTieBreakMode() { // 103024
     _serveLeds.serveSwitch();
     if ( _gameState->getTieLEDsOn() == 0 ) { tieLEDsOn(); }
     _gameLeds.updateGames();
-    Inputs _inputs( _player1, _player2, _pinInterface, _gameState );
-    WatchTimer _watchTimer;
-    for ( int currentPulseCount = 0; currentPulseCount < TIE_PULSE_COUNT; currentPulseCount++ ) {
+    // Inputs _inputs( _player1, _player2, _pinInterface, _gameState );
+    // WatchTimer _watchTimer;
+    // for ( int currentPulseCount = 0; currentPulseCount < TIE_PULSE_COUNT; currentPulseCount++ ) {
+    //     _gameState->setCurrentAction( DRAW_BLANK_SETS ); // set flag before update
+    //     tieLEDsOff(); // set tie led flag to 0 and update score board
+    //     if ( _watchTimer.watchInputDelay( TIE_BREAK_BLINK_DELAY, &_inputs, TIE_BREAK_WATCH_INTERVAL ) > 0 ) { return; }
+    //     tieLEDsOn(); // draw tie breaker bar and update score board
+    //     if ( _watchTimer.watchInputDelay( TIE_BREAK_BLINK_DELAY, &_inputs, TIE_BREAK_WATCH_INTERVAL ) > 0 ) { return; }
+    // }
+
+    for( int flash_count = 0; flash_count < ALL_SETS_FLASH_COUNT; flash_count++ ) {
+        GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
         _gameState->setCurrentAction( DRAW_BLANK_SETS ); // set flag before update
-        tieLEDsOff(); // set tie led flag to 0 and update score board
-        if ( _watchTimer.watchInputDelay( TIE_BREAK_BLINK_DELAY, &_inputs, TIE_BREAK_WATCH_INTERVAL ) > 0 ) { return; }
-        tieLEDsOn(); // draw tie breaker bar and update score board
-        if ( _watchTimer.watchInputDelay( TIE_BREAK_BLINK_DELAY, &_inputs, TIE_BREAK_WATCH_INTERVAL ) > 0 ) { return; }
+        _gameLeds.getScoreBoard()->update();
+        GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
+        _gameState->setCurrentAction( NORMAL_GAME_STATE );
+        _gameLeds.getScoreBoard()->update();
+        _gameLeds.getScoreBoard()->drawTieBreakerBar();
     }
+    
     _gameLeds.updateGames();
     GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
     tieLEDsOn();
