@@ -233,7 +233,6 @@ void ScoreBoard::drawTieBreakerBar() {
             }
         }
     } else {
-        print( "drawing blue pipe..." );
         _bluePipeDrawer->drawNumber( "I", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
     }
 }
@@ -376,7 +375,7 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
         print( "score is 6.  subtracting from the offset, tb_x_offset is "  + std::to_string( tb_x_offset ));
     } else if ( score == "9" ) {
         print( "subtracting 1 from the tie breaker x offset" );
-        tb_x_offset = TB_X_OFFSET - 2; // from +2 on october 25
+        tb_x_offset = TB_X_OFFSET - 1; // from +2 on october 25
         print( "score is 9.  subtracting from the offset, tb_x_offset is "  + std::to_string( tb_x_offset ));
     } else if ( score == "10" ) {
         print( "score is 10, subtracting 1 from the tie breaker x offset" );
