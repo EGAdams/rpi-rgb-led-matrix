@@ -233,6 +233,7 @@ void TieBreaker::initializeTieBreakMode() { // 103024
         GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
         _gameState->setCurrentAction( DRAW_BLANK_SETS ); // set flag before update
         _gameLeds.getScoreBoard()->update();
+        _gameLeds.getScoreBoard()->blankTieBreakerBar();
         GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
         _gameState->setCurrentAction( NORMAL_GAME_STATE );
         _gameLeds.getScoreBoard()->update();
