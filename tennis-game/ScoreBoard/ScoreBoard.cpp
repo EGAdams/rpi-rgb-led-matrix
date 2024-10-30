@@ -232,7 +232,7 @@ void ScoreBoard::drawTieBreakerBar() {
                 std::cout << blue << "/// TIE BREAK MODE ///\n" << reset << std::endl;
             }
         }
-    } else {
+    } else {                             // constants are not working here.  103024
         _bluePipeDrawer->drawNumber( "I", 54, 132 );// BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
     }
 }

@@ -46,14 +46,12 @@ void TieBreaker::setScoreBoards( ScoreBoard* scoreBoard ) {
 }
 
 void TieBreaker::tieLEDsOn() {
+    if ( _scoreBoard->hasCanvas()) { _scoreBoard->drawTieBreakerBar(); }
     _gameState->setTieLEDsOn( 1 );
     _pinInterface->pinDigitalWrite( P1_TIEBREAKER, HIGH );
     _pinInterface->pinDigitalWrite( P2_TIEBREAKER, HIGH );
-    if (_scoreBoard != nullptr) {
-        _scoreBoard->update();
-    } else {
-        print( "*** ERROR: _scoreBoard is NULL in TieBreaker::tieLEDsOn! ***" );
-    }
+    if (_scoreBoard != nullptr) { _scoreBoard->update();
+    } else { print( "*** ERROR: _scoreBoard is NULL in TieBreaker::tieLEDsOn! ***" );}
 }
 
 void TieBreaker::tieLEDsOff() {
@@ -232,9 +230,7 @@ void TieBreaker::initializeTieBreakMode() {
     _gameState->setServeSwitch( 1 );
     _gameState->setServe( 0 );
     _serveLeds.serveSwitch();
-    if ( _gameState->getTieLEDsOn() == 0 ) { 
-        tieLEDsOn(); 
-    }
+    if ( _gameState->getTieLEDsOn() == 0 ) { tieLEDsOn(); }
     _gameLeds.updateGames();
     Inputs _inputs( _player1, _player2, _pinInterface, _gameState );
     WatchTimer _watchTimer;
