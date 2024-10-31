@@ -233,7 +233,7 @@ void ScoreBoard::drawTieBreakerBar() {
             }
         }
     } else {                             // constants are not working here.  103024
-        _bluePipeDrawer->drawNumber( "I", 54, 132 );// BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
+        _bluePipeDrawer->drawNumber( "I", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET );// BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
     }
 }
 
