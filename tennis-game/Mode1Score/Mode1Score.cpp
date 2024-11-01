@@ -81,11 +81,11 @@ void Mode1Score::playerTwoScore() { updateScore( _player2 ); }
 
 
 //////////////////////////// GAME WIN SCENARIOS ///////////////////////////////
-void Mode1Score::playerGameWin( Player* player ) { // 103024
+void Mode1Score::playerGameWin( Player* player ) { // 110124
     Player* opponent = player->getOpponent();
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
     if ( player->getGames() >= GAMES_TO_WIN_SET ) { // if so, see of they are equal...
-        if ( player->getGames() == GAMES_TO_WIN_SET && opponent->getGames() == GAMES_TO_WIN_SET ) {
+        if ( player->getGames() >= GAMES_TO_WIN_SET && opponent->getGames() >= GAMES_TO_WIN_SET ) {
             _tieBreaker.blinkSetScores();
             _gameState->setTieBreak( 1 );           // they are equal, set the NORMAL tiebreak flag.
             _tieBreaker.initializeTieBreakMode();   // now initialize tie-break mode.
