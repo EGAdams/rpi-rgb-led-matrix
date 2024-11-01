@@ -72,6 +72,13 @@ std::string SetDrawer::cloaker( std::string stringToCloak, int sectionToCloak ) 
 }
 
 // set drawer additions...
+/**
+ * Splits a string into a vector of substrings using the specified delimiter.
+ *
+ * @param str The input string to be split.
+ * @param delimiter The character used to delimit the substrings.
+ * @return A vector of substrings extracted from the input string.
+ */
 std::vector<std::string> SetDrawer::splitString(const std::string& str, char delimiter) {
     std::vector<std::string> tokens;
     std::stringstream ss(str);
@@ -121,6 +128,7 @@ void SetDrawer::drawPlayerSets(const std::vector<std::string>& sets, Color color
         int x = xStart + i * setWidth;
         const std::string& set = sets[i];
         int offset = (set == "1") ? OFFSET_FOR_ONE : 0;
+        if ( set == "7" ) { offset = OFFSET_FOR_SEVEN; }
         drawTextOnCanvas(x + offset, y, color, set);
     }
 }
