@@ -240,7 +240,9 @@ void ScoreBoard::drawTieBreakerBar() {
 void ScoreBoard::blankTieBreakerBar() {
     const std::string reset = "\033[0m";
     const std::string blue = "\033[94m";
-    _bluePipeDrawer->drawNumber( " ", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
+    if( onRaspberryPi() == true ) {
+        _bluePipeDrawer->drawNumber( " ", BLUE_BAR_HORIZONTAL_OFFSET, BLUE_BAR_VERTICAL_OFFSET ); // draw pipe
+    }
 }
 
 void ScoreBoard::drawYellowPeriod() {

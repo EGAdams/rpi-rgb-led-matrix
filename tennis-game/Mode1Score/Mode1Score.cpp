@@ -99,13 +99,11 @@ void Mode1Score::playerGameWin( Player* player ) { // 110124
                     _gameState->setMatchTieBreak( 1 );
                     _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
                     _tieBreaker.setTieBreakEnable();
-                }
-                else if ( player->getSets() == SETS_TO_WIN_MATCH ) {  // match win, done playing
+                } else if ( player->getSets() == SETS_TO_WIN_MATCH ) {  // match win, done playing
                     MatchWinSequence mws;
                     mws.run( player, _gameState, &_gameLeds, &_setLeds );
                     _gameState->setCurrentAction( SLEEP_MODE );
-                }
-                else {                                              // regular set win, then reset
+                } else {                                              // regular set win, then reset
                     _gameState->setPlayer1SetHistory( player->getSetHistory() );
                     _gameState->setPlayer2SetHistory( opponent->getSetHistory() );
                     player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1SetWinSequence() : _mode1WinSequences.p2SetWinSequence();
@@ -116,15 +114,13 @@ void Mode1Score::playerGameWin( Player* player ) { // 110124
                     player->setGames( 0 );   // not sure about this but move on...
                     opponent->setGames( 0 ); // These are match win bugs!!
                 }
-            }
-            else {     // player is ahead by 1 game, but not enough to win the set.
+            } else {     // player is ahead by 1 game, but not enough to win the set.
                 player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1GameWinSequence() : _mode1WinSequences.p2GameWinSequence();
                 _gameLeds.updateGames();
                 if ( player->number() == PLAYER_1_INITIALIZED ) {
                     _gameState->setPlayer1SetHistory( player->getSetHistory() );
                     _gameState->setPlayer2SetHistory( opponent->getSetHistory() );
-                }
-                else {
+                } else {
                     _gameState->setPlayer2SetHistory( player->getSetHistory() );
                     _gameState->setPlayer1SetHistory( opponent->getSetHistory() );
                 }
@@ -136,8 +132,7 @@ void Mode1Score::playerGameWin( Player* player ) { // 110124
             _mode1WinSequences.p1GameWinSequence();
             _gameState->setPlayer1SetHistory( player->getSetHistory() );
             _gameState->setPlayer2SetHistory( opponent->getSetHistory() );
-        }
-        else {
+        } else {
             _mode1WinSequences.p2GameWinSequence();
             _gameState->setPlayer2SetHistory( player->getSetHistory() );
             _gameState->setPlayer1SetHistory( opponent->getSetHistory() );

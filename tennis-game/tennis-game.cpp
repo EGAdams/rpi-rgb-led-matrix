@@ -349,6 +349,55 @@ void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 1 );
 }
 
+void seven_six_test( GameObject* gameObject, GameState* gameState, int* loop_count ) {
+    gameObject->getScoreBoard()->clearScreen();
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+    
+    // now for player 2 to win the set...
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 2 ); 
+    playerWin( gameObject, gameState, 2 ); 
+   
+
+    // now for player 2 to win the set...
+    // playerWin( gameObject, gameState, 2 );
+    // playerWin( gameObject, gameState, 2 );
+    // playerWin( gameObject, gameState, 2 );
+    // playerWin( gameObject, gameState, 2 );
+    // playerWin( gameObject, gameState, 1 );
+    // playerWin( gameObject, gameState, 1 );
+    // playerWin( gameObject, gameState, 2 );
+    // score( gameObject, gameState, 2 );
+    // score( gameObject, gameState, 2 );
+    // score( gameObject, gameState, 2 );
+    // score( gameObject, gameState, 2 );
+
+    // now player 1 win match
+    // score( gameObject, gameState, 1 );
+    // score( gameObject, gameState, 1 );
+    // score( gameObject, gameState, 1 );
+    // score( gameObject, gameState, 1 );
+    // score( gameObject, gameState, 1 );
+    // score( gameObject, gameState, 1 );
+    // score( gameObject, gameState, 1 );
+    // score( gameObject, gameState, 1 );
+    // score( gameObject, gameState, 1 );
+    // score( gameObject, gameState, 1 );
+}
+
 
 void test_06( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen(); // Initialize the game state
@@ -431,7 +480,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         }
         
         // pairingBlinker.stop();  // Stop blinking once both players are paired
-        std::cout << "1.) green score    " << std::endl;
+        std::cout << "1.) green score             76. seven six test" << std::endl;
         std::cout << "2.) red score      " << std::endl;
         std::cout << "3.) Demo           " << std::endl;
         std::cout << "4.) Match Win Test " << std::endl;
@@ -587,6 +636,11 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         }
         else if (  menu_selection == 7  ) {
             gameState->setCurrentAction( SLEEP_MODE );
+            sleep( SCORE_DELAY );
+            continue;
+        }
+        else if (  menu_selection == 76  ) {
+            seven_six_test( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
         }
