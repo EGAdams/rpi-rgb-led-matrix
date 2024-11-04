@@ -99,6 +99,7 @@ void Mode1Score::playerGameWin( Player* player ) { // 110124
                     _gameState->setMatchTieBreak( 1 );
                     _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
                     _tieBreaker.setTieBreakEnable();
+                    _tieBreaker.incrementSet();
                 } else if ( player->getSets() == SETS_TO_WIN_MATCH ) {  // match win, done playing
                     MatchWinSequence mws;
                     mws.run( player, _gameState, &_gameLeds, &_setLeds );

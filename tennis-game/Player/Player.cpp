@@ -49,10 +49,11 @@ void Player::setSetHistory( int set, int games ) {
         exit( 1 );
     }
     _set_history[ set ] = games; 
-    number() == PLAYER_1_INITIALIZED ? 
-        _gameState->setPlayer1SetHistory( _set_history ) : _gameState->setPlayer2SetHistory( _set_history ); } 
-std::map< int, int> Player::getSetHistory() { 
-    return _set_history; }
+    number() == PLAYER_1_INITIALIZED ?                      // if this is player 1
+        _gameState->setPlayer1SetHistory( _set_history ):   // then set player 1's set  history
+        _gameState->setPlayer2SetHistory( _set_history ); } // else set player 2's set history
+
+std::map< int, int> Player::getSetHistory() { return _set_history; }
 
 void Player::setGameHistory( int game, int score ) { _game_history[ game ] = score; } 
 std::map< int, int> Player::getGameHistory() { return _game_history;}
