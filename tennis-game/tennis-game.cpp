@@ -500,7 +500,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             std::cout << "time slept: " << inputWithTimer.getTimeSlept() << std::endl;
             if (  menu_selection == 1  || 
                   menu_selection == 2  || 
-                 ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 )) {
+                 ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 )) { // and sleep time expired...
                 print( "reset match." );
                 gameObject->resetMatch();
                 print( "done resetting match." );
@@ -568,8 +568,8 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         }
         else if (  menu_selection == 9  ) {
             std::cout << "\n\n\n\n\n\n\n*** Undo ***\n" << std::endl;
-
-            gameObject->undo();
+            gameObject->undo(); // day before election day 110424
+            gameState->setCurrentAction( NORMAL_GAME_STATE );
             sleep( SCORE_DELAY );
         }
         else if (  menu_selection == 11 ) {
