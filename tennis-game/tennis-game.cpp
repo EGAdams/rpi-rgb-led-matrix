@@ -109,6 +109,20 @@ void matchWinTieBreakerTest( GameObject* gameObject, GameState* gameState ) {
     }
 }
 
+void tieBreakerSevenSixTest( GameObject* gameObject, GameState* gameState ) {
+    for ( int x = 0; x < 6; x++ ) {
+        playerWin( gameObject, gameState, 1 );
+    }
+    for ( int x = 0; x < 5; x++ ) {
+        playerWin( gameObject, gameState, 2 );
+    }
+    for ( int x = 0; x < 6; x++ ) {
+        playerWin( gameObject, gameState, 1 );
+    }
+    
+    playerWin( gameObject, gameState, 2 );
+}
+
 void matchWinTest( GameObject* gameObject, GameState* gameState ) {
     for ( int x = 0; x < 11; x++ ) {
         playerWin( gameObject, gameState, 1 );
@@ -349,53 +363,26 @@ void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     score( gameObject, gameState, 1 );
 }
 
-void seven_six_test( GameObject* gameObject, GameState* gameState, int* loop_count ) {
+void seven_six_tb_test( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen();
     playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
-    
-    // now for player 2 to win the set...
-    playerWin( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 2 ); 
-    playerWin( gameObject, gameState, 2 ); 
-   
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
 
-    // now for player 2 to win the set...
-    // playerWin( gameObject, gameState, 2 );
-    // playerWin( gameObject, gameState, 2 );
-    // playerWin( gameObject, gameState, 2 );
-    // playerWin( gameObject, gameState, 2 );
-    // playerWin( gameObject, gameState, 1 );
-    // playerWin( gameObject, gameState, 1 );
-    // playerWin( gameObject, gameState, 2 );
-    // score( gameObject, gameState, 2 );
-    // score( gameObject, gameState, 2 );
-    // score( gameObject, gameState, 2 );
-    // score( gameObject, gameState, 2 );
-
-    // now player 1 win match
-    // score( gameObject, gameState, 1 );
-    // score( gameObject, gameState, 1 );
-    // score( gameObject, gameState, 1 );
-    // score( gameObject, gameState, 1 );
-    // score( gameObject, gameState, 1 );
-    // score( gameObject, gameState, 1 );
-    // score( gameObject, gameState, 1 );
-    // score( gameObject, gameState, 1 );
-    // score( gameObject, gameState, 1 );
-    // score( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 2 ); 
+    playerWin( gameObject, gameState, 1 );
 }
 
 
@@ -480,8 +467,8 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         }
         
         // pairingBlinker.stop();  // Stop blinking once both players are paired
-        std::cout << "1.) green score             76. seven six test" << std::endl;
-        std::cout << "2.) red score      " << std::endl;
+        std::cout << "1.) green score             76. seven six Tie Breaker test" << std::endl;
+        std::cout << "2.) red score                     " << std::endl;
         std::cout << "3.) Demo           " << std::endl;
         std::cout << "4.) Match Win Test " << std::endl;
         std::cout << "5.) Test 05        " << std::endl;
@@ -640,7 +627,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             continue;
         }
         else if (  menu_selection == 76  ) {
-            seven_six_test( gameObject, gameState, &loop_count );
+            tieBreakerSevenSixTest( gameObject, gameState );
             sleep( SCORE_DELAY );
             continue;
         }
@@ -685,7 +672,7 @@ int main( int argc, char* argv[] ) {    std::unique_ptr<MonitoredObject> logger 
     ColorManager* colorManager = new ColorManager();
     bool isOnPi = is_on_raspberry_pi();
     print( "isOnPi: " << isOnPi );
-    IDisplay* display;
+    IDisplay* display = new ConsoleDisplay( colorManager );
     if ( isOnPi ) {
         std::cout << "creating display object with matrix display..." << std::endl;
     } else {

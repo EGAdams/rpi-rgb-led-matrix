@@ -81,17 +81,25 @@ void Mode1Score::playerTwoScore() { updateScore( _player2 ); }
 
 
 //////////////////////////// GAME WIN SCENARIOS ///////////////////////////////
-void Mode1Score::playerGameWin( Player* player ) { // 110124
+void Mode1Score::playerGameWin( Player* player ) {
     Player* opponent = player->getOpponent();
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
     if ( player->getGames() >= GAMES_TO_WIN_SET ) { // if so, see of they are equal...
         if ( player->getGames() >= GAMES_TO_WIN_SET && opponent->getGames() >= GAMES_TO_WIN_SET ) {
-            _tieBreaker.blinkSetScores();
-            _gameState->setTieBreak( 1 );           // they are equal, set the NORMAL tiebreak flag.
-            _tieBreaker.initializeTieBreakMode();   // now initialize tie-break mode.
+            if ( _gameState->getCurrentSet() == 2 ) {
+                _mode1WinSequences.enterMatchTieBreak();
+                    _gameState->setMatchTieBreak( 1 );
+                    _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
+                    _tieBreaker.setTieBreakEnable();
+                    _tieBreaker.incrementSet();
+            } else {
+                _tieBreaker.blinkSetScores();
+                _gameState->setTieBreak( 1 );           // they are equal, set the NORMAL tiebreak flag.
+                _tieBreaker.initializeTieBreakMode();   // now initialize tie-break mode.
+            }
         } // else this is not a regular tie break, but it may be a Match tie break.  let's see...
         if ( _gameState->getTieBreak() == 0 ) {     // if this is not a tie break game...
-            if ( ( player->getGames() - opponent->getGames() ) > 1 ) {  // player ahead by 2 games.
+            if (( player->getGames() - opponent->getGames()) > 1 ) {  // player ahead by 2 games.
                 player->setSets( _gameState, player->getSets() + 1 ); // Set win
                 _setLeds.updateSets(); // sets the tiebreak, wins the match, or just wins the set.
                 if ( player->getSets() == opponent->getSets() && player->getSets() == SETS_TO_WIN_MATCH - 1 ) {  // MATCH Tie Break
