@@ -75,11 +75,14 @@ void TieBreaker::incrementSet() {
 // but when there is a matrix, we update the points instead.
 void TieBreaker::run( Player* currentPlayer ) {
     _undo.memory();
+    // ERROR CHECKS
     if ( currentPlayer == nullptr ) { std::cerr << "*** ERROR: Current player is null in TieBreaker::run(). ***" << std::endl; exit( 1 );}
     Player* opponent = currentPlayer->getOpponent(); if ( opponent == nullptr ) { std::cerr << "*** ERROR: Opponent is null in TieBreaker::run(). ***" << std::endl; exit( 1 );}
     int serve = _getServe(); if ( serve != PLAYER_1_SERVE && serve != PLAYER_2_SERVE ) { std::cerr << "*** ERROR: Invalid serve value in TieBreaker::run(). ***" << std::endl; std::cerr << "Serve value: " << serve << std::endl; exit( 1 );}
-    _gameState->setServe( serve ); // set the serve bar depending tie-break iteration
     if ( _scoreBoard == nullptr ) { std::cerr << "*** ERROR: ScoreBoard is null in TieBreaker::run(). ***" << std::endl; return;}
+    
+    // START OF run() TIE BREAKER
+    _gameState->setServe( serve ); // set the serve bar depending tie-break iteration
     try { _scoreBoard->update();} catch ( const std::exception& e ) { std::cerr << "*** EXCEPTION: " << e.what() << " ***" << std::endl; exit( 1 );} catch ( ... ) { std::cerr << "*** UNKNOWN EXCEPTION in ScoreBoard update ***" << std::endl; exit( 1 );}
     if ( currentPlayer->getPoints() == TIE_BREAK_MAX_POINTS ) { _tieBreakWin( currentPlayer );}
     else if ( currentPlayer->getPoints() >= TIE_BREAK_WIN_BY_TWO &&
@@ -90,7 +93,9 @@ void TieBreaker::run( Player* currentPlayer ) {
 
 void TieBreaker::_tieBreakWin( Player* currentPlayer ) {
     if ( _gameState->getMatchTieBreak() == true ) {               // Match Win
-
+        // pause for 2 seconds
+        GameTimer::gameDelay( 2000 );
+        
         // increment the set
         currentPlayer->setGames( 1 ); // set games to 1 for Match Win
         if ( currentPlayer->number() == PLAYER_1_INITIALIZED ) {
