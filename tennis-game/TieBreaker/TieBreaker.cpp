@@ -110,13 +110,17 @@ void TieBreaker::_tieBreakWin( Player* currentPlayer ) {
     } else {                                                      // regular TB win
         currentPlayer->setGames( currentPlayer->getGames() + 1 ); // increment games
         
+        // update before  pause...
+        print( "*** UPDATING Before PAUSE ***" );
+        if ( _scoreBoard != nullptr ) { _scoreBoard->update();}
+        
         // pause for 2 seconds
         print( "*** PAUSING FOR 2 SECONDS ***" );
         GameTimer::gameDelay( 2000 );
+        
 
         incrementSet();
         endTieBreak();
-        if ( _scoreBoard != nullptr ) { _scoreBoard->update();}
         celebrate( currentPlayer );
         GameTimer::gameDelay( 3000 );
         std::cout << "calling end tie break Object in regular tie break win.. " << std::endl;
