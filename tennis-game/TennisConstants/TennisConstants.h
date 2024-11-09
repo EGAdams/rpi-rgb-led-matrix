@@ -37,7 +37,7 @@
 #define UPDATE_DISPLAY_DELAY        5 // 50
 #define ALL_SETS_FLASH_DELAY        800 // 1000 // 500 110924
 #define LOOP_MATCH_LAMP_WIN         2
-#define MATCH_WIN_BLINK_COUNT       5 // added on clermont hill
+#define MATCH_WIN_BLINK_COUNT       10 // 5 // added on clermont hill
 #define SHOW_MATCH_WIN_TEXT_DELAY   3000 // 45000 // added anna marie island monday
 #define MAX_SLEEP                   60 // 15 // in SECONDS // last day of august tarpon
 #define MIN_SLEEP                   3000 // sleep for a few seconds in case of buttons pressed.
