@@ -93,9 +93,7 @@ void TieBreaker::run( Player* currentPlayer ) {
 
 void TieBreaker::_tieBreakWin( Player* currentPlayer ) {
     if ( _gameState->getMatchTieBreak() == true ) {               // Match Win
-        // pause for 2 seconds
-        GameTimer::gameDelay( 2000 );
-        
+    
         // increment the set
         currentPlayer->setGames( 1 ); // set games to 1 for Match Win
         if ( currentPlayer->number() == PLAYER_1_INITIALIZED ) {
@@ -111,6 +109,11 @@ void TieBreaker::_tieBreakWin( Player* currentPlayer ) {
         _gameState->setCurrentAction( SLEEP_MODE );
     } else {                                                      // regular TB win
         currentPlayer->setGames( currentPlayer->getGames() + 1 ); // increment games
+        
+        // pause for 2 seconds
+        print( "*** PAUSING FOR 2 SECONDS ***" );
+        GameTimer::gameDelay( 2000 );
+
         incrementSet();
         endTieBreak();
         if ( _scoreBoard != nullptr ) { _scoreBoard->update();}
