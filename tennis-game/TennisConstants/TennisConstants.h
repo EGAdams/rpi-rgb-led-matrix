@@ -35,7 +35,7 @@
 #define WIN_DELAY                   5 // 50 // 1000
 #define WATCH_INTERVAL              5 // 250
 #define UPDATE_DISPLAY_DELAY        5 // 50
-#define ALL_SETS_FLASH_DELAY        500 
+#define ALL_SETS_FLASH_DELAY        1000 // 500 110924
 #define LOOP_MATCH_LAMP_WIN         2
 #define MATCH_WIN_BLINK_COUNT       5 // added on clermont hill
 #define SHOW_MATCH_WIN_TEXT_DELAY   3000 // 45000 // added anna marie island monday
