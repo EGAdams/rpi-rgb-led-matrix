@@ -75,6 +75,7 @@ void TieBreaker::incrementSet() {
 // but when there is a matrix, we update the points instead.
 void TieBreaker::run( Player* currentPlayer ) {
     _undo.memory();
+
     // ERROR CHECKS
     if ( currentPlayer == nullptr ) { std::cerr << "*** ERROR: Current player is null in TieBreaker::run(). ***" << std::endl; exit( 1 );}
     Player* opponent = currentPlayer->getOpponent(); if ( opponent == nullptr ) { std::cerr << "*** ERROR: Opponent is null in TieBreaker::run(). ***" << std::endl; exit( 1 );}
@@ -109,6 +110,16 @@ void TieBreaker::_tieBreakWin( Player* currentPlayer ) {
         _gameState->setCurrentAction( SLEEP_MODE );
     } else {                                                      // regular TB win
         currentPlayer->setGames( currentPlayer->getGames() + 1 ); // increment games
+
+        // increment the set
+        currentPlayer->setGames( 1 ); // set games to 1 for Match Win
+        if ( currentPlayer->number() == PLAYER_1_INITIALIZED ) {
+            _gameState->setPlayer1SetHistory( currentPlayer->getSetHistory());
+            _gameState->setPlayer2SetHistory( currentPlayer->getOpponent()->getSetHistory());
+        } else {
+            _gameState->setPlayer2SetHistory( currentPlayer->getSetHistory());
+            _gameState->setPlayer1SetHistory( currentPlayer->getOpponent()->getSetHistory());
+        }
         
         // update before  pause...
         print( "*** UPDATING Before PAUSE ***" );
