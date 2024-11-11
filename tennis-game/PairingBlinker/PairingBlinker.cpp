@@ -20,16 +20,15 @@ void PairingBlinker::blinkLoop() {
     print( "starting blink loop..." );
     while ( !_should_stop ) {
         print( "in blink loop..." );
-        bool toggle_on = true;  // Start with Green instructions
+        bool toggle_on                   = true;  // Start with Green instructions
         unsigned long pairing_start_time = GameTimer::gameMillis();
-
-        unsigned long current_time = GameTimer::gameMillis();
-        unsigned long elapsed_time = current_time - pairing_start_time;
+        unsigned long current_time       = GameTimer::gameMillis();
+        unsigned long elapsed_time       = current_time - pairing_start_time;
 
         // Check if timeout exceeded
         if (elapsed_time > PAIRING_TIMEOUT) {
             // Switch to "blinking ball" mode
-            print("Timeout exceeded. Switching to blinking ball mode...");
+            print( "Timeout exceeded. Switching to blinking ball mode..." );
             // _scoreboardBlinker.start();  // Assuming `_scoreboardBlinker` is an instance of `ScoreboardBlinker`
             // while (!_scoreboardBlinker.shouldStop()) {
             //     std::this_thread::sleep_for(std::chrono::milliseconds(500));
@@ -38,7 +37,10 @@ void PairingBlinker::blinkLoop() {
             // pairing_start_time = GameTimer::gameMillis();
             _should_stop = true;
             _sleep_mode  = true;
+        } else {
+            print( "timeout not exceeded, continue blinking..." );
         }
+
         _scoreboard->clearScreen();
         if ( _green_player_paired && _red_player_paired ) { 
             print( "both players seem to be paired, break..." );
