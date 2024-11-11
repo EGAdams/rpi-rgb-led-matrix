@@ -4,7 +4,7 @@
 #include <iostream>
 
 PairingBlinker::PairingBlinker( ScoreBoard* scoreBoard )
-    : _scoreboard( scoreBoard ), _should_stop( false ), green_player_paired( false ), red_player_paired( false ) {
+    : _scoreboard( scoreBoard ), _should_stop( false ), _green_player_paired( false ), _red_player_paired( false ) {
     std::cout << "PairingBlinker constructing..." << std::endl;
     if ( _scoreboard == nullptr ) { // check for null _scoreboard
         std::cerr << "Error: _scoreboard is null in PairingBlinker constructor." << std::endl;
@@ -14,18 +14,38 @@ PairingBlinker::PairingBlinker( ScoreBoard* scoreBoard )
 
 PairingBlinker::~PairingBlinker() { stop(); }
 
+const unsigned long PAIRING_TIMEOUT = 5000;
 void PairingBlinker::blinkLoop() {
     bool toggle_on = true;  // Start with Green instructions
     print( "starting blink loop..." );
     while ( !_should_stop ) {
         print( "in blink loop..." );
+        bool toggle_on = true;  // Start with Green instructions
+        unsigned long pairing_start_time = GameTimer::gameMillis();
+
+        unsigned long current_time = GameTimer::gameMillis();
+        unsigned long elapsed_time = current_time - pairing_start_time;
+
+        // Check if timeout exceeded
+        if (elapsed_time > PAIRING_TIMEOUT) {
+            // Switch to "blinking ball" mode
+            print("Timeout exceeded. Switching to blinking ball mode...");
+            // _scoreboardBlinker.start();  // Assuming `_scoreboardBlinker` is an instance of `ScoreboardBlinker`
+            // while (!_scoreboardBlinker.shouldStop()) {
+            //     std::this_thread::sleep_for(std::chrono::milliseconds(500));
+            // }
+            // // After blinking mode, reset pairing time and restart pairing instructions
+            // pairing_start_time = GameTimer::gameMillis();
+            _should_stop = true;
+            _sleep_mode  = true;
+        }
         _scoreboard->clearScreen();
-        if ( green_player_paired && red_player_paired ) { 
+        if ( _green_player_paired && _red_player_paired ) { 
             print( "both players seem to be paired, break..." );
             break;  // If both players are paired, stop blinking
         }
         // If only the Red player is paired, show Green player instructions
-        else if ( !green_player_paired && red_player_paired ) {
+        else if ( !_green_player_paired && _red_player_paired ) {
             if ( toggle_on ) {
                 showGreenInstructions();
                 print( "showing green instructions..." );
@@ -39,7 +59,7 @@ void PairingBlinker::blinkLoop() {
         }
 
         // If only the Green player is paired, show Red player instructions
-        if ( green_player_paired && !red_player_paired ) {
+        if ( _green_player_paired && !_red_player_paired ) {
             _show_green = false;
             print( "showing red instructions inside blink loop..." );
             if ( toggle_on ) {
@@ -56,7 +76,7 @@ void PairingBlinker::blinkLoop() {
 
 
         // If neither player is paired, show Green instructions
-        else if ( !green_player_paired && !red_player_paired ) {
+        else if ( !_green_player_paired && !_red_player_paired ) {
             if ( toggle_on ) {
                 showGreenInstructions();
                 print( "showing green instructions..." );
@@ -157,9 +177,9 @@ void PairingBlinker::stop() {
     }
 }
 
-void PairingBlinker::enable() {
-    _should_stop = false;
-}
-
-void PairingBlinker::setGreenPlayerPaired( bool paired ) { green_player_paired = paired; }
-void PairingBlinker::setRedPlayerPaired(   bool paired ) { red_player_paired = paired;   }
+void PairingBlinker::enable() {            _should_stop = false; }
+void PairingBlinker::sleepModeOn() {       _sleep_mode  = true;  }
+void PairingBlinker::sleepModeOff() {      _sleep_mode  = false; }
+bool PairingBlinker::awake() {     return !_sleep_mode;          }
+void PairingBlinker::setGreenPlayerPaired( bool paired ) { _green_player_paired = paired; }
+void PairingBlinker::setRedPlayerPaired(   bool paired ) { _red_player_paired = paired;   }

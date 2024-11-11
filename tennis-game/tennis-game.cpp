@@ -451,7 +451,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         print( "entered while loop from run manual game" );
         sleep( SCORE_DELAY );
         // if remote pairing, write the words.  if not, snap out of the loop
-        while ( remotePairingScreen.inPairingMode() && is_on_pi ) { // 090724
+        while ( remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake()) { // 090724
             print( "inside remote pairing screen from run manual game.  before starting input timer..." );
             int menu_selection = inputWithTimer.getInput();
             if (menu_selection == 1) {
@@ -465,6 +465,9 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
                 GameTimer::gameDelay(1000);
             }
         }
+
+        // put in sleep mode if the pairing blinker is not awake
+        if ( !pairingBlinker.awake() ) { gameState->setCurrentAction( SLEEP_MODE ); }
         
         // pairingBlinker.stop();  // Stop blinking once both players are paired
         std::cout << "1.) green score             76. seven six Tie Breaker test" << std::endl;
@@ -488,6 +491,13 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             if (  menu_selection == 1  || 
                   menu_selection == 2  || 
                  ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 )) { // and sleep time expired...
+                // if the pairing caused the sleep mode, just go back to pairing mode
+                if ( !pairingBlinker.awake() ) {
+                    print( "pairing blinker is sleeping.  going back to pairing mode..." );
+                    gameState->setCurrentAction( NORMAL_GAME_STATE );
+                    pairingBlinker.sleepModeOff();  // wake up the pairing blinker
+                    continue;
+                }
                 print( "reset match." );
                 gameObject->resetMatch();
                 print( "done resetting match." );

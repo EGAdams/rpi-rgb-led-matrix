@@ -16,6 +16,9 @@ public:
     void setGreenPlayerPaired(bool paired);  // New method to track Green player status
     void setRedPlayerPaired(bool paired);    // New method to track Red player status
     void enable();
+    void sleepModeOn();
+    void sleepModeOff();
+    bool awake();
 
 private:
     void blinkLoop();         // Alternates between Green and Red instructions
@@ -28,9 +31,10 @@ private:
     std::thread blink_thread;
 
     // New state tracking
-    bool green_player_paired;
-    bool red_player_paired;
+    bool _green_player_paired;
+    bool _red_player_paired;
     bool _show_green = true;
+    bool _sleep_mode = false;
 };
 
 #endif
