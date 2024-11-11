@@ -81,7 +81,6 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         Color green_color( 0, 255, 0 );
         Color yellow_color( 255, 255, 0 );
         Color black_color( 0, 0, 0 );
-        print( "done loading Color objects.  contructing unique pointers..." );
         _playerOneScoreDrawer = std::make_unique<Drawer>(
             _canvas.get(), &_big_number_font, Drawer::BIG, player_one_score_color, bg_color );
         _playerTwoScoreDrawer = std::make_unique<Drawer>(
@@ -102,9 +101,6 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         _setDrawer = std::make_unique<SetDrawer>( _canvas.get(), _gameState );
         print( "done constructing unique pointers.  updating scoreboard..." );
     } // fi onRaspberryPi
-    // print( "updating scoreboard..." );
-    // update();
-    // print( "done updating scoreboard." );
 }
 
 ScoreBoard::~ScoreBoard() {
@@ -112,7 +108,6 @@ ScoreBoard::~ScoreBoard() {
     if ( _canvas != NULL ) {
         std::cout << "NOT deleting _canvas..." << std::endl;
         delete _display;
-        // delete _canvas.get(); // this causes some error.  only one scoreBoard is created anyway.
     }
     else { /* std::cout << "*** WARNING: _canvas == NULL, not deleting. ***" << std::endl; */ }
 }
@@ -120,16 +115,11 @@ ScoreBoard::~ScoreBoard() {
 void ScoreBoard::setFontFile( const char* font_file_arg ) { _font_file = font_file_arg; }
 
 void ScoreBoard::drawText( const std::string& message, int x, int y ) {
-    // _display->drawText( message, x, y );
-    print( "inside ScoreBoard::drawText()...  calling _drawer->drawText()..." );
     _drawer->drawText( message, x, y );
-    print( "exiting ScoreBoard::drawText()...  done calling _drawer->drawText()..." );
 }
 
 void ScoreBoard::drawNewText( const std::string& message, int x, int y ) {
-    print( "inside ScoreBoard::drawNewText()...  calling _text_drawer->drawText()..." );
     _text_drawer->drawText( message, x, y );
-    print( "exiting ScoreBoard::drawNewText()...  done calling _text_drawer->drawText()..." );
 }
 
 Color ScoreBoard::_getColor( int color_constant ) {
@@ -156,8 +146,6 @@ void ScoreBoard::writeMessage( std::string message ) {
         int baseline = _big_number_font.baseline();            // set the coordinates for the text
         int first_offset = 2;
         _drawer->drawNumber( message, first_offset, baseline + _big_number_font.height());
-        // GameTimer::gameDelay( 1000 );
-        // std::cout << "done sleeping." << std::endl;
     }
 }
 
@@ -254,8 +242,6 @@ void ScoreBoard::drawYellowPeriod() {
 
 void ScoreBoard::drawGreenPeriod() {
     if ( !onRaspberryPi()) /* return if not on Pi */ { return; }
-    // #define PERIOD_LR_OFFSET 51
-    // #define PERIOD_UD_OFFSET 92
 #define PERIOD_LR_OFFSET 51
 #define PERIOD_UD_OFFSET 92
     _greenPeriodDrawer->drawNumber( ".", PERIOD_LR_OFFSET, PERIOD_UD_OFFSET - 20 );
@@ -395,9 +381,7 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
     // introduce first offset for tie-break 2-digit scores
     int
     first_offset = _firstCharacterOffset( score.substr( 0, 1 ));
-    // first_offset = score == "11" ? first_offset + 1 : first_offset;
-    // first_offset = score == "12" ? first_offset - 2 : first_offset;  // move "1" 2 spaces left on october 25
-    
+
     // introduce second offset for tie-break 2-digit scores
     int 
     second_offset  = ( score.length() > 1 ) ? _characterOffset( score.substr( 1, 1 )) : 0;
