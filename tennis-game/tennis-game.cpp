@@ -467,6 +467,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         }
 
         // put in sleep mode if the pairing blinker is not awake
+        print( "if pairing blinker is not awake, put in sleep mode" );
         if ( !pairingBlinker.awake() ) { gameState->setCurrentAction( SLEEP_MODE ); }
         
         // pairingBlinker.stop();  // Stop blinking once both players are paired
