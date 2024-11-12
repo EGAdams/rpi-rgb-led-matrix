@@ -4,6 +4,8 @@
 #include "../ScoreBoard/ScoreBoard.h"
 #include "../Blinker/Blinker.h"
 #include "../TennisConstants/TennisConstants.h"
+#include "../ScoreboardBlinker/ScoreboardBlinker.h"
+#include "../InputWithTimer/InputWithTimer.h"
 #include <thread>
 
 class PairingBlinker : public Blinker {

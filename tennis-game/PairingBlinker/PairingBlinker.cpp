@@ -31,14 +31,17 @@ void PairingBlinker::blinkLoop() {
         if (elapsed_time > PAIRING_TIMEOUT) {
             // Switch to "blinking ball" mode
             print( "Timeout exceeded. Switching to blinking ball mode..." );
+            ScoreboardBlinker blinker( _scoreboard );
+            InputWithTimer inputWithTimer( &blinker );
             // _scoreboardBlinker.start();  // Assuming `_scoreboardBlinker` is an instance of `ScoreboardBlinker`
+            blinker.start();
             // while (!_scoreboardBlinker.shouldStop()) {
             //     std::this_thread::sleep_for(std::chrono::milliseconds(500));
             // }
             // // After blinking mode, reset pairing time and restart pairing instructions
-            // pairing_start_time = GameTimer::gameMillis();
-            _should_stop = true;
-            _sleep_mode  = true;
+            pairing_start_time = GameTimer::gameMillis();
+            // _should_stop = true;
+            // _sleep_mode  = true;
         } else {
             print( "timeout not exceeded, continue blinking..." );
         }
