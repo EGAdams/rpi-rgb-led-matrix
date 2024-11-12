@@ -38,6 +38,7 @@ void PairingBlinker::blinkLoop() {
             print( "menu selection: " + std::to_string( menu_selection ));
             // // After blinking mode, reset pairing time and restart pairing instructions
             pairing_start_time = GameTimer::gameMillis();
+            continue;
             // _should_stop = true;
             // _sleep_mode  = true;
         } else {
