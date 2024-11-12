@@ -467,12 +467,12 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         }
 
         // put in sleep mode if the pairing blinker is not awake
-        // if ( !pairingBlinker.awake() ) { 
-        //     print( "pairing blinker is not awake, stopping it... " )
-        //     pairingBlinker.stop();
-        //     print( "pairing blinker stopped.  now putting in sleep mode..." );
-        //     gameState->setCurrentAction( SLEEP_MODE );
-        // }
+        if ( !pairingBlinker.awake() ) { 
+            print( "pairing blinker is not awake, stopping it... " )
+            pairingBlinker.stop();
+            print( "pairing blinker stopped.  now putting in sleep mode..." );
+            gameState->setCurrentAction( SLEEP_MODE );
+        }
         
         // pairingBlinker.stop();  // Stop blinking once both players are paired
         std::cout << "1.) green score             76. seven six Tie Breaker test" << std::endl;
