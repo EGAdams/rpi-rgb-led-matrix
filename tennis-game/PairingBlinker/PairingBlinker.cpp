@@ -18,10 +18,12 @@ const unsigned long PAIRING_TIMEOUT = 5000;
 void PairingBlinker::blinkLoop() {
     bool toggle_on = true;  // Start with Green instructions
     print( "starting blink loop..." );
+    unsigned long pairing_start_time = GameTimer::gameMillis();
     while ( !_should_stop ) {
         print( "in blink loop..." );
-        unsigned long pairing_start_time = GameTimer::gameMillis();
         unsigned long current_time       = GameTimer::gameMillis();
+        print( "current time: " + std::to_string( current_time ));
+
         unsigned long elapsed_time       = current_time - pairing_start_time;
 
         print( "elapsed time: " + std::to_string( elapsed_time ));
