@@ -34,10 +34,8 @@ void PairingBlinker::blinkLoop() {
             ScoreboardBlinker blinker( _scoreboard );
             InputWithTimer inputWithTimer( &blinker );
             // _scoreboardBlinker.start();  // Assuming `_scoreboardBlinker` is an instance of `ScoreboardBlinker`
-            blinker.start();
-            // while (!_scoreboardBlinker.shouldStop()) {
-            //     std::this_thread::sleep_for(std::chrono::milliseconds(500));
-            // }
+            int menu_selection = inputWithTimer.getInput();
+            print( "menu selection: " + std::to_string( menu_selection ));
             // // After blinking mode, reset pairing time and restart pairing instructions
             pairing_start_time = GameTimer::gameMillis();
             // _should_stop = true;
