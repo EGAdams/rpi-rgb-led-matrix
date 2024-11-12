@@ -24,6 +24,7 @@ void PairingBlinker::blinkLoop() {
         unsigned long current_time       = GameTimer::gameMillis();
         unsigned long elapsed_time       = current_time - pairing_start_time;
 
+        print( "elapsed time: " + std::to_string( elapsed_time ));
         // Check if timeout exceeded
         if (elapsed_time > PAIRING_TIMEOUT) {
             // Switch to "blinking ball" mode
