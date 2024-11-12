@@ -93,7 +93,7 @@ void PairingBlinker::blinkLoop() {
         }
         std::this_thread::sleep_for( std::chrono::seconds( 1 )); // Delay for 1 second between switching
     }
-    print( "should stop flag must be true, exiting blink loop..." );
+    print( "should stop flag must be true, exiting pairing blinker blink loop..." );
 }
 
 void PairingBlinker::showGreenInstructions() {
