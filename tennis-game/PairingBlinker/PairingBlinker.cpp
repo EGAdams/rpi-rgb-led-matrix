@@ -30,6 +30,7 @@ void PairingBlinker::blinkLoop() {
         // Check if timeout exceeded
         if (elapsed_time > PAIRING_TIMEOUT) {
             // Switch to "blinking ball" mode
+            this->stop();
             print( "Timeout exceeded. Switching to blinking ball mode..." );
             ScoreboardBlinker blinker( _scoreboard );
             InputWithTimer inputWithTimer( &blinker );
