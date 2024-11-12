@@ -466,7 +466,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             }
         }
 
-        // put in sleep mode if the pairing blinker is not awake
+        print( "put in sleep mode if the pairing blinker is not awake. " );
         if ( !pairingBlinker.awake() ) { 
             print( "pairing blinker is not awake, stopping it... " )
             pairingBlinker.stop();
