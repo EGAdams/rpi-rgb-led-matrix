@@ -20,7 +20,6 @@ void PairingBlinker::blinkLoop() {
     print( "starting blink loop..." );
     while ( !_should_stop ) {
         print( "in blink loop..." );
-        bool toggle_on                   = true;  // Start with Green instructions
         unsigned long pairing_start_time = GameTimer::gameMillis();
         unsigned long current_time       = GameTimer::gameMillis();
         unsigned long elapsed_time       = current_time - pairing_start_time;
@@ -51,8 +50,7 @@ void PairingBlinker::blinkLoop() {
             if ( toggle_on ) {
                 showGreenInstructions();
                 print( "showing green instructions..." );
-            }
-            else {
+            } else {
                 print( "show neutral text only..." );
                 showPlayerPressYourRemoteText();
             }
@@ -113,9 +111,7 @@ void PairingBlinker::showGreenInstructions() {
     _scoreboard->drawNewText( "Remote", left_margin + REMOTE_OFFSET, REMOTE_TOP + MIDDLE_OFFSET );
     _scoreboard->setDrawerForegroundColor( green_color );
     _scoreboard->drawNewText( "Green", left_margin + GREEN_OFFSET, GREEN_TOP );
-    _scoreboard->drawNewText( "Button", left_margin + 0, BUTTON_TOP );
-
-    
+    _scoreboard->drawNewText( "Button", left_margin + 0, BUTTON_TOP ); 
 }
 
 void PairingBlinker::showRedInstructions() {
