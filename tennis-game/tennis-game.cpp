@@ -364,8 +364,12 @@ void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
         score( gameObject, gameState, 1 );
 
         // sleep for a while...
-        print( "Sleeping for 5 seconds...\n" );
-        GameTimer::gameDelay( 5000 );
+        print( "Sleeping for 2 seconds...\n" );
+        GameTimer::gameDelay( 2000 );
+        print( "resetting match...\n" );
+        GameTimer::gameDelay( 2000 );
+        gameObject->resetMatch();
+        print( "restarting loop...\n" );
     }
 }
 
