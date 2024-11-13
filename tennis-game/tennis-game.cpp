@@ -327,40 +327,46 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
 }
 
 void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
-    gameObject->getScoreBoard()->clearScreen();
-    playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 1 );
+    while( 1 ) {
+        gameObject->getScoreBoard()->clearScreen();
+        playerWin( gameObject, gameState, 1 );
+        playerWin( gameObject, gameState, 1 );
+        playerWin( gameObject, gameState, 1 );
+        playerWin( gameObject, gameState, 1 );
+        playerWin( gameObject, gameState, 2 );
+        playerWin( gameObject, gameState, 2 );
+        playerWin( gameObject, gameState, 1 );
+        playerWin( gameObject, gameState, 1 );
 
-    // now for player 2 to win the set...
-    playerWin( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 2 );
-    score( gameObject, gameState, 2 );
-    score( gameObject, gameState, 2 );
-    score( gameObject, gameState, 2 );
-    score( gameObject, gameState, 2 );
+        // now for player 2 to win the set...
+        playerWin( gameObject, gameState, 2 );
+        playerWin( gameObject, gameState, 2 );
+        playerWin( gameObject, gameState, 2 );
+        playerWin( gameObject, gameState, 2 );
+        playerWin( gameObject, gameState, 1 );
+        playerWin( gameObject, gameState, 1 );
+        playerWin( gameObject, gameState, 2 );
+        score( gameObject, gameState, 2 );
+        score( gameObject, gameState, 2 );
+        score( gameObject, gameState, 2 );
+        score( gameObject, gameState, 2 );
 
-    // now player 1 win match
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
+        // now player 1 win match
+        score( gameObject, gameState, 1 );
+        score( gameObject, gameState, 1 );
+        score( gameObject, gameState, 1 );
+        score( gameObject, gameState, 1 );
+        score( gameObject, gameState, 1 );
+        score( gameObject, gameState, 1 );
+        score( gameObject, gameState, 1 );
+        score( gameObject, gameState, 1 );
+        score( gameObject, gameState, 1 );
+        score( gameObject, gameState, 1 );
+
+        // sleep for a while...
+        print( "Sleeping for 5 seconds...\n" );
+        GameTimer::gameDelay( 5000 );
+    }
 }
 
 void seven_six_tb_test( GameObject* gameObject, GameState* gameState, int* loop_count ) {
