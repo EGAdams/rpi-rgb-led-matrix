@@ -30,7 +30,7 @@ void PairingBlinker::blinkLoop() {
         // Check if timeout exceeded
         if ( elapsed_time > PAIRING_TIMEOUT ) {
             // Switch to "blinking ball" mode
-            print( "Timeout exceeded. Switching to blinking ball mode..." );
+            print( "Timeout exceeded. Switch to blinking ball mode in the future..." );
             // ScoreboardBlinker blinker( _scoreboard );
             // InputWithTimer inputWithTimer( &blinker );
             // _scoreboardBlinker.start();  // Assuming `_scoreboardBlinker` is an instance of `ScoreboardBlinker`
@@ -39,8 +39,8 @@ void PairingBlinker::blinkLoop() {
             // // After blinking mode, reset pairing time and restart pairing instructions
             // pairing_start_time = GameTimer::gameMillis();
             // continue;
-            _should_stop = true;
-            _sleep_mode  = true;
+            // _should_stop = true;
+            // _sleep_mode  = true;
         } else {
             print( "timeout not exceeded, continue blinking..." );
         }
