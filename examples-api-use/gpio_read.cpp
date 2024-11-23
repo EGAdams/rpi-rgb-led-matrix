@@ -46,7 +46,7 @@ int read_gpio(int gpio) {
 
 int main() {
     // GPIO pins to test
-    std::vector<int> gpio_pins = {0, 1, 28, 29, 44, 45};
+    std::vector<int> gpio_pins = {0, 1, 28, 44, 45};
 
     // Export and configure GPIO pins as inputs
     for (int gpio : gpio_pins) {
