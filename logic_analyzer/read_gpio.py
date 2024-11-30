@@ -11,7 +11,7 @@ for pin in PINS:
     GPIO.setup(pin, GPIO.IN)
 
 # Create a TCP socket to communicate with the WebSocket server
-HOST = "ws://192.168.84.39/"  # WebSocket server running locally
+HOST = "192.168.84.39"  # WebSocket server running locally
 PORT = 8080  # Port to match the WebSocket server
 
 def send_to_server(data):
