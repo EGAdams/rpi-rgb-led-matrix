@@ -4,10 +4,11 @@ import json
 import socket
 
 # Pin configuration
-DATA_PIN = 17  # Replace with your GPIO pin
+PINS = [14, 2]  # List of GPIO pins to read
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(DATA_PIN, GPIO.IN)
+for pin in PINS:
+    GPIO.setup(pin, GPIO.IN)
 
 # Create a TCP socket to communicate with the WebSocket server
 HOST = "127.0.0.1"  # WebSocket server running locally
@@ -23,8 +24,9 @@ def send_to_server(data):
 
 try:
     while True:
-        pin_state = GPIO.input(DATA_PIN)
-        send_to_server({"timestamp": time.time(), "state": pin_state})
+        pin_states = {f"pin_{pin}": GPIO.input(pin) for pin in PINS}
+        send_to_server({"timestamp": time.time(), "states": pin_states})
         time.sleep(0.1)  # Adjust the delay as needed
 except KeyboardInterrupt:
     GPIO.cleanup()
+
