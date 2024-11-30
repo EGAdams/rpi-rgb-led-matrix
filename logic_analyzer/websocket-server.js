@@ -5,7 +5,7 @@ const Gpio = require('onoff').Gpio;
 const wss = new WebSocket.Server({ port: 8080 });
 
 // Configure GPIO pins
-const pins = [new Gpio(14, 'in', 'both'), new Gpio(2, 'in', 'both')]; // Add other pins as needed
+const pins = [new Gpio(3, 'in', 'both'), new Gpio(2, 'in', 'both')]; // Add other pins as needed
 let pinStates = Array(pins.length).fill(0); // Initialize pin states
 
 // Function to read pin states
