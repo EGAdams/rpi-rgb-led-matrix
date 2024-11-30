@@ -25,8 +25,10 @@ def send_to_server(data):
 try:
     while True:
         # print the values of the pins
+        print( "\n" )
         print( "GPIO 14:: ", GPIO.input(14))
-        print( "GPIO 2: "  , GPIO.input(2))
+        print( "GPIO   2: ", GPIO.input(2))
+        print( "\n" )
 
         pin_states = {f"pin_{pin}": GPIO.input(pin) for pin in PINS}
         send_to_server({"timestamp": time.time(), "states": pin_states})
