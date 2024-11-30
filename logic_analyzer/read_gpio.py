@@ -4,7 +4,7 @@ import json
 import socket
 
 # Pin configuration
-PINS = [14, 2]  # List of GPIO pins to read
+PINS = [ 3, 2 ]  # List of GPIO pins to read
 
 GPIO.setmode(GPIO.BCM)
 for pin in PINS:
