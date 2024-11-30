@@ -26,7 +26,7 @@ try:
     while True:
         # print the values of the pins
         print( "\n" )
-        print( "GPIO 14:: ", GPIO.input(14))
+        print( "GPIO   3: ", GPIO.input(3))
         print( "GPIO   2: ", GPIO.input(2))
         print( "\n" )
 
