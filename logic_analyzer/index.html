@@ -31,6 +31,10 @@
             'rgba(255, 159, 64, 1)'    // Orange
         ];
 
+        // Define base y-levels and amplitude for each waveform
+        const baseYLevels = [0, 1.2, 2.4, 3.6, 4.8, 6.0]; // Adjusted base levels with spacing
+        const amplitude = 0.8; // Height of each waveform
+
         // Create datasets for each input
         const datasets = [];
         for (let i = 0; i < 6; i++) {
@@ -68,11 +72,11 @@
                     },
                     y: {
                         min: -0.5,
-                        max: 6.5,
+                        max: 7.0, // Increased max to accommodate the top waveform
                         ticks: {
                             stepSize: 1,
                             callback: function(value) {
-                                return value % 1 === 0 ? value : null; // Show integer ticks
+                                return null; // Hide y-axis labels if desired
                             }
                         }
                     }
@@ -92,14 +96,11 @@
             const data = JSON.parse(event.data);
             const timestamp = data.timestamp;
 
-            // Add a small gap by introducing a fractional offset
-            const spacing = 0.2; // Adjust this value to control the space between square waves
-
             // For each dataset, push the corresponding value
             for (let i = 0; i < data.values.length; i++) {
                 chart.data.datasets[i].data.push({
                     x: timestamp,   // Use the timestamp from the server
-                    y: data.values[i] + i * (1 + spacing) // Add offset and spacing
+                    y: baseYLevels[i] + data.values[i] * amplitude
                 });
             }
         };
