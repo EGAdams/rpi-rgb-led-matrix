@@ -32,6 +32,7 @@ ledcat : ledcat.o
 pixel-mover : pixel-mover.o
 panel_test : panel_test.o
 gpio_read : gpio_read.o
+read_gpio_pins: read_gpio_pins.o
 
 # All the binaries that have the same name as the object file.
 % : %.o $(RGB_LIBRARY)
