@@ -45,7 +45,7 @@ int main() {
         std::cout << "Input value: " << value << std::endl;
         std::cout << "" << std::endl;
 
-        usleep(50000); // Sleep for 50 milliseconds.
+        usleep(200000); // Sleep for 200 milliseconds.
     }
 
     return 0;
