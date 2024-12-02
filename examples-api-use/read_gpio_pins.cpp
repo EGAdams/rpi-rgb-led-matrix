@@ -37,7 +37,13 @@ int main() {
         // Assemble the bits into a 4-bit number.
         int value = (bit3 << 3) | (bit2 << 2) | (bit1 << 1) | bit0;
 
+        std::cout << "" << std::endl;
+        std::cout << "bit 0: " << bit0 << std::endl;
+        std::cout << "bit 1: " << bit1 << std::endl;
+        std::cout << "bit 2: " << bit2 << std::endl;
+        std::cout << "bit 3: " << bit3 << std::endl;
         std::cout << "Input value: " << value << std::endl;
+        std::cout << "" << std::endl;
 
         usleep(50000); // Sleep for 50 milliseconds.
     }
