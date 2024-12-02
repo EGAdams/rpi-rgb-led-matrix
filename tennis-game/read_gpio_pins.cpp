@@ -5,6 +5,7 @@
 using namespace rgb_matrix;
 
 int main() {
+    #define GPIO_BIT(b) ((uint64_t)1<<(b))
     GPIO io;
     if (!io.Init(1)) {  // Initialize GPIO with slowdown parameter set to 1.
         std::cerr << "Failed to initialize GPIO" << std::endl;
