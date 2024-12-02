@@ -4,11 +4,11 @@ import json
 import socket
 
 # Pin configuration
-PINS = [ 3, 2 ]  # List of GPIO pins to read
+PINS = [ 14, 16, 21, 26 ]  # List of GPIO pins to read
 
 GPIO.setmode(GPIO.BCM)
 for pin in PINS:
-    GPIO.setup( pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN )
+    GPIO.setup( pin, GPIO.IN, pull_up_down=GPIO.PUD_UP   )
 
 # Create a TCP socket to communicate with the WebSocket server
 HOST = "192.168.84.39"  # WebSocket server running locally
