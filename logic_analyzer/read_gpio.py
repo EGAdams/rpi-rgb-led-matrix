@@ -26,8 +26,10 @@ try:
     while True:
         # print the values of the pins
         print( "\n" )
-        print( "GPIO   3: ", GPIO.input(3))
-        print( "GPIO   2: ", GPIO.input(2))
+        print( "GPIO   14: ", GPIO.input( 14 ))
+        print( "GPIO   16: ", GPIO.input( 16 ))
+        print( "GPIO   21: ", GPIO.input( 21 ))
+        print( "GPIO   26: ", GPIO.input( 26 ))
         print( "\n" )
 
         pin_states = {f"pin_{pin}": GPIO.input(pin) for pin in PINS}
