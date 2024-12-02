@@ -1,9 +1,5 @@
 #include <iostream>
 #include <unistd.h>
-#include "../lib/gpio.h"  // Make sure this path is correct based on your setup.
-
-#include <iostream>
-#include <unistd.h>
 #include "../lib/gpio.h"  // Adjust the include path as necessary.
 
 using namespace rgb_matrix;
