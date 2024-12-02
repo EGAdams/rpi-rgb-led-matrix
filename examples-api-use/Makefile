@@ -1,7 +1,7 @@
 CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter
 CXXFLAGS=$(CFLAGS)
-OBJECTS=panel_test.o draw_random_pix.o demo-main.o minimal-example.o c-example.o text-example.o scrolling-text-example.o clock.o ledcat.o input-example.o pixel-mover.o
-BINARIES=panel_test draw_random_pix demo minimal-example c-example text-example scrolling-text-example clock ledcat input-example pixel-mover
+OBJECTS=panel_test.o draw_random_pix.o demo-main.o minimal-example.o c-example.o text-example.o scrolling-text-example.o clock.o ledcat.o input-example.o pixel-mover.o gpio_read.o
+BINARIES=panel_test draw_random_pix demo minimal-example c-example text-example scrolling-text-example clock ledcat input-example pixel-mover gpio_read
 
 # Where our library resides. It is assumed here that $(RGB_LIB_DISTRIBUTION) has a
 # compiled library in lib/
@@ -31,6 +31,7 @@ clock : clock.o
 ledcat : ledcat.o
 pixel-mover : pixel-mover.o
 panel_test : panel_test.o
+gpio_read : gpio_read.o
 
 # All the binaries that have the same name as the object file.
 % : %.o $(RGB_LIBRARY)

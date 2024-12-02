@@ -679,7 +679,8 @@ bool is_on_raspberry_pi() {
     return false;
 }
 
-int main( int argc, char* argv[] ) {    std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );
+int main( int argc, char* argv[] ) {    
+    std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );
     int manual = 0;
     if ( argc > 1 ) {
         std::string arg1 = argv[1];
