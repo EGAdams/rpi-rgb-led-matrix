@@ -3,7 +3,7 @@ import smbus
 import time
 
 # Create an SMBus instance
-bus = smbus.SMBus(1)  # Use I2C bus 1 on Raspberry Pi
+bus = smbus.SMBus( 1 )  # Use I2C bus 1 on Raspberry Pi
 
 # MCP23017 default I2C address (0x20 when A0, A1, A2 are tied to GND)
 DEVICE_ADDRESS = 0x20
