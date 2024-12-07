@@ -24,7 +24,7 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         matrix_options.rows = 64;
         matrix_options.cols = 64;
         matrix_options.chain_length = 1;
-        matrix_options.parallel = 2;
+        matrix_options.parallel = 3;
         matrix_options.show_refresh_rate = false;
         matrix_options.disable_hardware_pulsing = true; // --led-no-hardware-pulse
         std::ifstream brightness_file( "smart_menu/brightness.txt" );
