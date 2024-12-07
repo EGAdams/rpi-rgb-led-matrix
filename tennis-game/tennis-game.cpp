@@ -25,6 +25,16 @@
 #include "ScoreboardBlinker/ScoreboardBlinker.h"
 #include "ConsoleDisplay/ConsoleDisplay.h"
 
+
+// for the expander
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <unistd.h>
+#include <linux/i2c-dev.h>
+#include <sys/ioctl.h>
+#include <fcntl.h>
+
 using namespace rgb_matrix;
 #define SCORE_DELAY    0
 #define MAX_LOOP_COUNT 350
@@ -440,6 +450,38 @@ void get_and_set_font( GameObject* gameObject ) {
     print( "continuing..." );
 }
 
+
+///// Detect the expander /////
+#define MCP23017_ADDRESS 0x20  // Default I2C address when A0, A1, A2 are tied to GND
+
+// Function to detect the MCP23017
+bool detectExpander() {
+    int file;
+    const char *i2c_device = "/dev/i2c-1";
+
+    if ((file = open(i2c_device, O_RDWR)) < 0) {
+        std::cerr << "Error: Unable to open I2C device.\n";
+        return false;
+    }
+
+    if (ioctl(file, I2C_SLAVE, MCP23017_ADDRESS) < 0) {
+        std::cerr << "Error: Unable to set I2C address.\n";
+        close(file);
+        return false;
+    }
+
+    // Try reading a single byte from the MCP23017
+    if (write(file, nullptr, 0) < 0) {
+        std::cerr << "MCP23017 not detected at address 0x20.\n";
+        close(file);
+        return false;
+    }
+
+    std::cout << "MCP23017 detected at address 0x20!\n";
+    close(file);
+    return true;
+}
+
 void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset, int player ) {
     int loop_count = 0;
     gameObject->loopGame();
@@ -618,15 +660,12 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             test_03( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
-        }
-        else if (  menu_selection == 104 ) {
-            resetAll( reset );
-            std::cout << "\n\n\n\n\n\n\n*** Test 04 ***\n" << std::endl;
-            test_04( gameObject, gameState, &loop_count );
-            sleep( SCORE_DELAY );
+        } else if (menu_selection == 104) {
+            std::cout << "\n*** Running MCP23017 Expander Detection Test ***\n";
+            detectExpander();
+            sleep(SCORE_DELAY);
             continue;
-        }
-        else if (  menu_selection == 5  ) {
+        } else if (  menu_selection == 5  ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 05 ***\n" << std::endl;
             test_05( gameObject, gameState, &loop_count );
