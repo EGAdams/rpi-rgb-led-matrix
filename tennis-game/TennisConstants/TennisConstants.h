@@ -24,6 +24,7 @@
 #define SLEEP_MODE                  "sleep mode for power saving"
 #define AFTER_UPDATE_GO_SCORE       "after update player score in GameObject"
 #define IGNORE_EXTRA_SCORES         "ignoring scores after match win"
+#define AFTER_SLEEP_MODE            "after sleep mode"
 ///////////////////////////////////////////////////////////////////////////////
 
 #define TESTING                     1
@@ -34,11 +35,11 @@
 #define WIN_DELAY                   5 // 50 // 1000
 #define WATCH_INTERVAL              5 // 250
 #define UPDATE_DISPLAY_DELAY        5 // 50
-#define ALL_SETS_FLASH_DELAY        500 
+#define ALL_SETS_FLASH_DELAY        800 // 1000 // 500 110924
 #define LOOP_MATCH_LAMP_WIN         2
-#define MATCH_WIN_BLINK_COUNT       5 // added on clermont hill
+#define MATCH_WIN_BLINK_COUNT       10 // 5 // added on clermont hill
 #define SHOW_MATCH_WIN_TEXT_DELAY   3000 // 45000 // added anna marie island monday
-#define MAX_SLEEP                   10000 // last day of august tarpon
+#define MAX_SLEEP                   60 // 15 // in SECONDS // last day of august tarpon
 #define MIN_SLEEP                   3000 // sleep for a few seconds in case of buttons pressed.
 #define NUMBER_OF_GAME_LAMPS        7
 #define LOOP_GAME_LAMP_WIN          5
@@ -64,8 +65,8 @@
 #define SCORE_CASE_4                4
 #define SCORE_CASE_5                5
 #define UNDEFINED_SCORE             99
-#define BLUE_BAR_VERTICAL_OFFSET    121
-#define BLUE_BAR_HORIZONTAL_OFFSET  54
+#define BLUE_BAR_VERTICAL_OFFSET    124 // 126 // 132 // 124
+#define BLUE_BAR_HORIZONTAL_OFFSET  56 // 54
 #define RED_BAR_HORIZONTAL_OFFSET   44
 #define GREEN_BAR_HORIZONTAL_OFFSET 30
 
@@ -76,6 +77,23 @@
 #define HIGH 1
 #define BLINK 2
 
+#define PLAYER_TOP 30
+#define PRESS_TOP 47
+#define YOUR_TOP 60
+#define REMOTE_TOP 73
+#define MIDDLE_OFFSET 2
+#define GREEN_TOP 94
+#define RED_TOP 94
+#define BUTTON_TOP 107
+
+// pairing screen vertical offsets for centering
+#define GREEN_OFFSET 4
+#define RED_OFFSET 12
+#define YOUR_OFFSET 7
+#define PRESS_OFFSET 4
+#define REMOTE_OFFSET 0
+#define BUTTON_OFFSET 1
+
 
 ///////////////////////////////////////  START WINDOWS SIMULATOR //////////////////////////////////
 #define SIMULATION 1
@@ -84,7 +102,7 @@
 #define LOG_FILE_PATH          "C:\\Users\\EG\\Desktop\\2022\\june\\4th_week\\test.txt"
 #define PIN_FILE_PATH          "C:\\Users\\EG\\Desktop\\2022\\june\\2nd_week\\tennis_cpp\\pin_data\\"
 #define GAME_STATE_UPDATE_PATH "C:\\Users\\EG\\Desktop\\2022\\june\\2nd_week\\tennis_cpp\\game_state_data\\"
-#define MATCH_WIN_FLASH_DELAY  250 // 100
+#define MATCH_WIN_FLASH_DELAY  800 // 1000 // 250 // 100
 #define BATTERY_TEST_DELAY      500
 #define BATTERY_TEST_FLASH_COUNT 5
 #include <iostream>

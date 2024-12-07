@@ -6,16 +6,18 @@
 #include <regex>
 
 #include <filesystem>
-namespace fs = std::filesystem;
+// namespace fs = std::filesystem;
 
 Logger::Logger( std::string name ) : _name( name ) {
-    std::filesystem::create_directories(name); // Ensure the directory exists
-    std::string logFilePath = name + "/log.txt";
-    _log_file.open(logFilePath, std::ios::out | std::ios::app);
-    if (!_log_file.is_open()) { // Handle error
-        std::cerr << "Failed to open log file at path: " << logFilePath << std::endl;
-        std::cerr << "Current working directory: " << std::filesystem::current_path() << std::endl;
-    }}
+    // std::filesystem::create_directories(name); // Ensure the directory exists
+    // std::string logFilePath = name + "/log.txt";
+    // _log_file.open(logFilePath, std::ios::out | std::ios::app);
+    // if (!_log_file.is_open()) { // Handle error
+    //     std::cerr << "Failed to open log file at path: " << logFilePath << std::endl;
+    //     std::cerr << "Current working directory: " << std::filesystem::current_path() << std::endl;
+    // }
+    // std::cout <<  "not creating logger." << std::endl;
+}
 
 Logger::~Logger() {
     if (_log_file.is_open()) {

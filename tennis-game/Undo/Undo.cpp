@@ -70,14 +70,19 @@ void Undo::snapshot( History* history ) {
 
 void Undo::mode1Undo( History* history ) {
     GameTimer::gameDelay( 100 );
+    print( "history size: " << history->size() );
     if ( history->size() == 0 ) { return; }
     if ( _scoreBoardSet == false ) {
         std::cout << "*** ERROR: trying to call undo when _scoreBoardSet == false exiting process... *** \nMake sure to call undo->setScoreBoard before trying to use the Undo object." << std::endl;
         exit( 1 );
     } // TODO: Update Current Set 1st!
+    print( "popping history..." );
     GameState gameState = ( history->pop());
+    print( "done popping history." );
     _gameState->setPlayer1SetHistory( gameState.getPlayer1SetHistory());
+    print( "done setting player 1 histories" );
     _gameState->setPlayer2SetHistory( gameState.getPlayer2SetHistory());
+    print( "done setting player 2 histories" );
     _gameState->setCurrentSet( gameState.getCurrentSet());
     _player1->setPoints( gameState.getPlayer1Points());
     _gameState->setP1PointsMem( gameState.getP1PointsMem());
@@ -88,10 +93,12 @@ void Undo::mode1Undo( History* history ) {
     _player2->setGames( gameState.getPlayer2Games());
     _gameState->setP2GamesMem( gameState.getP2GamesMem());
     _player1->setSets( gameState.getPlayer1Sets());
+    print( "setting set histories... " );
     _player1->setSetHistory( gameState.getPlayer1SetHistory());
     _gameState->setP1SetsMem( gameState.getP1SetsMem());
     _player2->setSets( gameState.getPlayer2Sets());
     _player2->setSetHistory( gameState.getPlayer2SetHistory());
+    print( "done setting set histories" );
     _gameState->setP2SetsMem( gameState.getP2SetsMem());
     _player1->setMatches( gameState.getPlayer1Matches());
     _player2->setMatches( gameState.getPlayer2Matches());
@@ -106,11 +113,13 @@ void Undo::mode1Undo( History* history ) {
     _gameState->setToggle( gameState.getToggle());
     _gameState->setTieLEDsOn( gameState.getTieLEDsOn());
     // _gameState->setPlayerButton( gameState.getPlayerButton()); // this is breaking the undo
+    print ( "setting tie break flags..." );
     _gameState->setTieBreak( gameState.getTieBreak());
     _gameState->setMatchTieBreak( gameState.getMatchTieBreak());
     _gameState->setMatchTieBreakMem( gameState.getMatchTieBreakMem());
     _gameState->setTieBreakOnly( gameState.getTieBreakOnly());
     _gameState->setTieBreakMem( gameState.getTieBreakMem());
+    print( "done setting tie break flags" );
     if ( _gameState->getTieLEDsOn() == 1 ) { _gameState->setTieLEDsOn( 1 );  _tieLeds.turnOn(); }
     if ( _gameState->getTieLEDsOn() == 0 ) {  _tieLeds.turnOff(); _gameState->setTieLEDsOn( 0 );  }
     _logger->logUpdate( "updating leds..." );
@@ -118,4 +127,5 @@ void Undo::mode1Undo( History* history ) {
     _gameLeds.updateGames();
     _setLeds.updateSets();
     _serveLeds.updateServeLED();
+    print ( "done mode1Undo." );
 }

@@ -151,6 +151,37 @@ GPIO::GPIO() : output_bits_(0), input_bits_(0), reserved_bits_(0),
 {
 }
 
+void GPIO::setPullUpDown( gpio_bits_t pins, int pud ) {
+    // PUD options: 0 = Off, 1 = Pull-Down, 2 = Pull-Up
+    volatile uint32_t *gpio_pud = s_GPIO_registers + (0x94 / sizeof(uint32_t));      // GPPUD
+    volatile uint32_t *gpio_pudclk0 = s_GPIO_registers + (0x98 / sizeof(uint32_t));  // GPPUDCLK0
+    volatile uint32_t *gpio_pudclk1 = s_GPIO_registers + (0x9C / sizeof(uint32_t));  // GPPUDCLK1
+
+    // Set the required control signal (pull-up/down)
+    *gpio_pud = pud & 0x3;
+
+    // Wait 150 cycles (provide set-up time for the control signal)
+    for (int i = 0; i < 150; ++i) {
+        asm volatile("nop");
+    }
+
+    // Clock the control signal into the GPIO pads
+    *gpio_pudclk0 = (uint32_t)(pins & 0xFFFFFFFF);
+    *gpio_pudclk1 = (uint32_t)((pins >> 32) & 0xFFFFFFFF);
+
+    // Wait 150 cycles (provide hold time for the control signal)
+    for (int i = 0; i < 150; ++i) {
+        asm volatile("nop");
+    }
+
+    // Remove the control signal
+    *gpio_pud = 0;
+
+    // Remove the clock
+    *gpio_pudclk0 = 0;
+    *gpio_pudclk1 = 0;
+}
+
 gpio_bits_t GPIO::InitOutputs(gpio_bits_t outputs,
                               bool adafruit_pwm_transition_hack_needed) {
   if (s_GPIO_registers == NULL) {

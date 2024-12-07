@@ -6,6 +6,7 @@
 #include "../PinState/PinState.h"
 #include "../ScoreBoard/ScoreBoard.h"
 #include "../GameObject/GameObject.h"
+#include "../ConsoleDisplay/ConsoleDisplay.h"
 
 class TieBreakerTest : public ::testing::Test {
 protected:
@@ -27,7 +28,11 @@ protected:
         PinState* pin_state = new PinState(pin_map);
         _pinInterface = new PinInterface(pin_state);
         _tieBreaker = new TieBreaker(_player1, _player2, _pinInterface, _gameState, NULL);
-        _scoreBoard = new ScoreBoard(  _player1, _player2, _gameState );
+        FontManager* fontManager = new FontManager();
+        ColorManager* colorManager = new ColorManager();
+        IDisplay* display = new ConsoleDisplay( colorManager );
+        ScoreBoard* scoreBoard = new ScoreBoard( _player1, _player2, _gameState, display, fontManager, colorManager);
+        _scoreBoard = new ScoreBoard(_player1, _player2, _gameState, display, fontManager, colorManager);
     }
 
     void TearDown() override {
@@ -69,6 +74,7 @@ TEST_F(TieBreakerTest, SetUpSetTieBreakScenario) {
     }
 
     // Update and check the tie-breaker initiation
+    _tieBreaker->setScoreBoards( _scoreBoard );
     _tieBreaker->initializeTieBreakMode();
     EXPECT_EQ(_tieBreaker->getIteration(), 1);
     EXPECT_EQ(_player1->getPoints(), 0);

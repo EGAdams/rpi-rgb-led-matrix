@@ -13,6 +13,10 @@ public:
     Drawer( RGBMatrix* canvas, const rgb_matrix::Font* font, Size size, const Color& color, const Color& bg_color );
     void drawNumber( const std::string& number, int x, int y );
     void drawText(   const std::string& text,   int x, int y );
+    void setForegroundColor( const Color& color );
+    void setBackgroundColor( const Color& color );
+    void setFont( const rgb_matrix::Font* font  );
+    void setSize( Size                    size  );
 
 private:
     RGBMatrix*              _canvas;

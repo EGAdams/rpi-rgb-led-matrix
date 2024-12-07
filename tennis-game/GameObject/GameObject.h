@@ -32,7 +32,7 @@ class GameObject {
               ScoreBoard*   scoreBoard,
               WebLiquidCrystal* lcd );
 
-  GameObject( GameState* gameState );
+  GameObject( GameState* gameState, IDisplay* display );
   ~GameObject();
   void resetMatch();
   void start();
@@ -64,5 +64,6 @@ class GameObject {
   SubjectManager*   _subjectManager;
   Logger*           _logger;
   History*          _history;
-  std::map<std::string, int> _pin_map; };
+  std::map<std::string, int> _pin_map;
+  IDisplay*         _display; };
 #endif

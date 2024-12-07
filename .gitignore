@@ -36,7 +36,6 @@ tennis-game/build
 tennis-game/Mode1ScoreTest
 examples-api-use/minimal-example
 myenv/*
-
 examples-api-use/pixel-mover
 examples-api-use/ledcat
 .aider.tags.cache.v3/*
@@ -54,3 +53,4 @@ tennis-game/*/log.txt
 tennis-game/Reset/log.txt
 tennis-game/Mode1ScoreTest
 tennis-game/googletest
+tennis-game/git_revert.py

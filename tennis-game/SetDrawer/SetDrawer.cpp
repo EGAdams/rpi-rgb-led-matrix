@@ -2,7 +2,6 @@
 
 SetDrawer::SetDrawer( RGBMatrix* canvas, GameState* gameState ) : 
     _canvas( canvas ), _gameState( gameState ), _setHistoryText( gameState ) {
-    // std::cout << "constructing SetDrawer..." << std::endl;
     if ( _canvas == NULL ) { std::cout << "canvas is NULL" << std::endl; return; }
     FontLoader smallNumberFontLoader( LITTLE_FONT );
     rgb_matrix::Font smallNumberFont;
@@ -23,38 +22,28 @@ void SetDrawer::drawTextOnCanvas( int x, int y, const Color& color, const std::s
                           NULL : &background_color, text.c_str(), letter_spacing ); }
 
 void SetDrawer::drawSets() {
-    int y = START_ROW; 
-    int x = 0;
     std::string playerOneSetString = _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX );
     std::string playerTwoSetString = _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX );
-    Color thirdRowColor( 0, 255, 0 );
     if ( _canvas == NULL ) {
         std::cout << playerOneSetString << std::endl;
         std::cout << playerTwoSetString << std::endl;
     } else {
-        drawTextOnCanvas( x + SMALL_BEFORE, y, thirdRowColor, playerOneSetString );
-        y += _little_font.height() - 5;
-        Color fourthRowColor( 255, 0, 0 );
-        drawTextOnCanvas( x + SMALL_BEFORE, y, fourthRowColor, playerTwoSetString ); }}
+        drawSetsWithSpacing( playerOneSetString, playerTwoSetString );
+    }
+}
 
 void SetDrawer::blankSets() {
-    int y = START_ROW; 
-    int x = 0;
     std::string playerOneSetString = "";
     std::string playerTwoSetString = "";
-    Color thirdRowColor( 0, 255, 0 );
     if ( _canvas == NULL ) {
         std::cout << playerOneSetString << std::endl;
         std::cout << playerTwoSetString << std::endl;
     } else {
-        drawTextOnCanvas( x + SMALL_BEFORE, y, thirdRowColor, playerOneSetString );
-        y += _little_font.height() - 5;
-        Color fourthRowColor( 255, 0, 0 );
-        drawTextOnCanvas( x + SMALL_BEFORE, y, fourthRowColor, playerTwoSetString ); }}
+        drawSetsWithSpacing( playerOneSetString, playerTwoSetString );
+    }
+}
 
 void SetDrawer::drawBlinkSets( int playerToBlink ) {
-    int y = START_ROW; 
-    int x = 0;
     int set = _gameState->getCurrentSet(); // init coords and set
     std::string playerOneSetString = ""; std::string playerTwoSetString = ""; // set inside if statement
     if ( _gameState->getCurrentAction() == BOTH_PLAYER_BLINK ) {
@@ -71,14 +60,93 @@ void SetDrawer::drawBlinkSets( int playerToBlink ) {
         std::cout << playerOneSetString << std::endl;
         std::cout << playerTwoSetString << std::endl;
     } else {
-        Color thirdRowColor( 0, 255, 0 );
-        drawTextOnCanvas( x + SMALL_BEFORE, y, thirdRowColor, playerOneSetString );
-        y += _little_font.height() - 5;
-        Color fourthRowColor( 255, 0, 0 );
-        drawTextOnCanvas( x + SMALL_BEFORE, y, fourthRowColor, playerTwoSetString ); }}
+        drawSetsWithSpacing(playerOneSetString, playerTwoSetString);
+    }
+}
 
 std::string SetDrawer::cloaker( std::string stringToCloak, int sectionToCloak ) {
     if ( sectionToCloak < 1 || sectionToCloak > 3 ) { return "Invalid section number";}
     int pos = 2 * ( sectionToCloak - 1 ); // The pos of the digit in the string is ( 2 * section number - 2 ) ( the 1st digit is at position 0 )
     stringToCloak[ pos ] = ' ';           // Replace the character at the calculated position with a space
-    return stringToCloak;}
+    return stringToCloak;
+}
+
+// set drawer additions...
+/**
+ * Splits a string into a vector of substrings using the specified delimiter.
+ *
+ * @param str The input string to be split.
+ * @param delimiter The character used to delimit the substrings.
+ * @return A vector of substrings extracted from the input string.
+ */
+std::vector<std::string> SetDrawer::splitString(const std::string& str, char delimiter) {
+    std::vector<std::string> tokens;
+    std::stringstream ss(str);
+    std::string token;
+
+    while (std::getline(ss, token, delimiter)) {
+        if (!token.empty()) {
+            tokens.push_back(token);
+        }
+    }
+
+    return tokens;
+}
+
+// Helper function to calculate the width of a string by summing character widths
+int SetDrawer::getStringWidth(const std::string& text) {
+    int totalWidth = 0;
+    for (char c : text) {
+        // Convert char to Unicode codepoint (assuming ASCII)
+        uint32_t codepoint = static_cast<uint32_t>(c);
+        int charWidth = _little_font.CharacterWidth(codepoint);
+        if (charWidth == -1) {
+            // Handle missing character by skipping or using a default width
+            // Here, we'll skip adding width for missing characters
+            continue;
+        }
+        totalWidth += charWidth;
+    }
+    return totalWidth;
+}
+
+// Helper function to fill a rectangle
+void SetDrawer::FillRectangle(int x_start, int y_start, int width, int height, const Color& color) {
+    for (int x = x_start; x < x_start + width; ++x) {
+        for (int y = y_start; y < y_start + height; ++y) {
+            _canvas->SetPixel(x, y, color.r, color.g, color.b);
+        }
+    }
+}
+
+// Helper function to draw sets for a single player
+void SetDrawer::drawPlayerSets(const std::vector<std::string>& sets, Color color, int y) {
+    int xStart = SMALL_BEFORE;
+    int setWidth = FIXED_SET_WIDTH + SET_SPACING;
+
+    for (size_t i = 0; i < sets.size(); ++i) {
+        int x = xStart + i * setWidth;
+        const std::string& set = sets[i];
+        int offset = (set == "1") ? OFFSET_FOR_ONE : 0;
+        if ( set == "7" ) { offset = OFFSET_FOR_SEVEN; }
+        drawTextOnCanvas(x + offset, y, color, set);
+    }
+}
+
+// Main function to draw sets with spacing for both players
+void SetDrawer::drawSetsWithSpacing(std::string playerOneSetString, std::string playerTwoSetString) {
+    int xStart = 0;      
+    int yStart = START_ROW;       // Define the area to be cleared
+    int width = _canvas->width();
+    #define P2_Y_OFFSET -4
+    int height = ( _little_font.height() + P2_Y_OFFSET ) * 2;        // Height of both rows
+    FillRectangle( xStart, yStart, width, height, Color( 0, 0, 0 )); // Clear the area
+    std::vector<std::string> playerOneSets = splitString( playerOneSetString ); // split into sets
+    std::vector<std::string> playerTwoSets = splitString( playerTwoSetString ); 
+    Color playerOneColor( 0, 255, 0 ); // Green for Player One
+    Color playerTwoColor( 255, 0, 0 ); // Red for Player Two
+    int yPlayerOne = START_ROW; // Define y positions for each player
+    int yPlayerTwo = START_ROW + _little_font.height() + P2_Y_OFFSET; // Move to the next row
+    drawPlayerSets( playerOneSets, playerOneColor, yPlayerOne ); // Draw Player One's sets
+    drawPlayerSets( playerTwoSets, playerTwoColor, yPlayerTwo ); // Draw Player Two's sets
+}

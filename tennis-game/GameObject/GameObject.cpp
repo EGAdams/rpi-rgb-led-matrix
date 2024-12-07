@@ -3,6 +3,7 @@
 #include <chrono>
 #include <thread>
 #include <iostream>
+#include "../IDisplay/IDisplay.h"
 
 GameObject::GameObject( Player* player1,
     Player* player2,
@@ -26,29 +27,24 @@ GameObject::GameObject( Player* player1,
     _webLiquidCrystal = lcd;
 }
 
-GameObject::GameObject( GameState* gameState ) : _gameState( gameState ) {
+GameObject::GameObject( GameState* gameState, IDisplay* display ) :
+                        _gameState( gameState ), _display(display) {
     _webLiquidCrystal = new WebLiquidCrystal();
     _gameTimer = new GameTimer();
     _player1 = new Player( _gameState, PLAYER_1_INITIALIZED );
     _player2 = new Player( _gameState, PLAYER_2_INITIALIZED ); // now set each other as opponents...
     _player2->setOpponent( _player1 ); _player1->setOpponent( _player2 );
-    // std::cout << "constructing new PinState object..." << std::endl;
     _pinState = new PinState( _pin_map );
-    // std::cout << "constructing new PinInterface object..." << std::endl;
     _pinInterface = new PinInterface( _pinState );
-    // std::cout << "constructing new History object..." << std::endl;
     _history = new History();
-    // std::cout << "calling new Inputs..." << std::endl;
     _gameInputs = new Inputs( _player1, _player2, _pinInterface, _gameState );
-    // std::cout << "constructing new GameModes object..." << std::endl;
     _gameModes =  new GameModes( _player1, _player2, _pinInterface, _gameState, _history );
-    // std::cout << "constructing new ScoreBoard object..." << std::endl;
-    _scoreBoard = new ScoreBoard( _player1, _player2, _gameState );
-    // std::cout << "setting scoreBoards in gameModes..." << std::endl;
+    FontManager* fontManager = new FontManager();
+    ColorManager* colorManager = new ColorManager();
+    _scoreBoard = new ScoreBoard( _player1, _player2, gameState, display, fontManager, colorManager);
     _gameModes->setScoreBoards( _scoreBoard );
     _subjectManager = new SubjectManager();
     _logger = new Logger( "GameObject" );
-    // std::cout << "GameObject constructed." << std::endl;
 }
 
 Player* GameObject::getPlayer1() { return _player1; }
@@ -64,9 +60,7 @@ void GameObject::undo() {
 
 void GameObject::loopGame() {
     _logger->setName( "loopGame" );                   
-    // _gameInputs->readReset();
     int rotaryValue = 1; // int rotaryValue = _gameInputs->readRotary(); TODO: actually read rotary
-    /* ENTRY POINT! don't step over, step into !! */
     _gameModes->runGameMode( rotaryValue );  // <--- entry point !! --------------<<
     GameTimer::gameDelay( GAME_LOOP_DELAY );
     _subjectManager->gameStateUpdate( _gameState, _player1, _player2 );
@@ -75,6 +69,11 @@ void GameObject::loopGame() {
 GameState* GameObject::getGameState() { return _gameState; }
 
 void GameObject::playerScore( int playerNumber ) {  // sets the gamestate player button
+    if( _gameState->getCurrentAction() == AFTER_SLEEP_MODE ) { 
+        print( "clearing history because of after sleep and 1st player score... " );
+        getHistory()->clearHistory();
+        print( "done clearing history because of after sleep and 1st player score... " );
+    }
     _gameState->setCurrentAction( "Updating state after player " + std::to_string( playerNumber ) + " scored." );
     _gameState->setPlayerButton( playerNumber );
     _gameState->setCurrentAction( AFTER_UPDATE_GO_SCORE );
@@ -82,31 +81,47 @@ void GameObject::playerScore( int playerNumber ) {  // sets the gamestate player
 
 void GameObject::resetMatch() {
     GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
-    _player1->clearSetHistory();  // Clear Player's Set history
+    _player1->clearSetHistory();  // Clear Player's Set history 
     _player2->clearSetHistory();
     _player1->clearGameHistory(); // Clear Player's Game history
     _player2->clearGameHistory();
-    _gameState->setPlayer1SetHistory( _player1->getSetHistory() ); // now gamestate sets
+    _gameState->setPlayer1SetHistory( _player1->getSetHistory() ); // clear gamestate sets
     _gameState->setPlayer2SetHistory( _player2->getSetHistory() );
-    _gameState->setGameHistory( _player1->getGameHistory() );      // now gamestate games
+    _gameState->setGameHistory( _player1->getGameHistory() );      // clear gamestate games
     _gameState->setGameHistory( _player2->getGameHistory() );
     _gameState->setCurrentSet( 1 );                               // set back to beginning
     _gameState->setServeSwitch( 1 );
-    _player1->setPoints( 0 );           // Reset Player's points
+    _player1->setPoints( 0 );          // Reset Player's points
     _player2->setPoints( 0 );
-    _gameState->setPlayer1Points( 0 );  // now gamestate points
+    _player1->setGames( 0 );           // Reset Player's games
+    _player2->setGames( 0 );
+    _player1->setSets( 0 );            // Reset Player's sets
+    _player2->setSets( 0 );
+    _gameState->setPlayer1Points( 0 ); // now gamestate points
     _gameState->setPlayer2Points( 0 );
-    _gameState->setTieBreak( 0 );       // turn tie break flags off
+    _gameState->setTieBreak( 0 );      // turn tie break flags off
     _gameState->setMatchTieBreak( 0 );
-    _gameState->setServe( 0 );          // reset serve
-    // _pointLeds.updatePoints(); may need this for the digi
+    _gameState->setServe( 0 );         // reset serve
+    _gameState->setP1SetsMem( 0 );
+    _gameState->setP2SetsMem( 0 );
+    _gameState->setP1GamesMem( 0 );
+    _gameState->setP2GamesMem( 0 );
+    _gameState->setP1PointsMem( 0 );
+    _gameState->setP2PointsMem( 0 );
+    // _pointLeds.updatePoints(); may need this for the digi LEDs
     _scoreBoard->clearScreen();
     _scoreBoard->update();
 }
 
 PinInterface* GameObject::getPinInterface() { return _pinInterface; }
 
-ScoreBoard* GameObject::getScoreBoard() { return _scoreBoard; }
+ScoreBoard* GameObject::getScoreBoard() {
+    if( _scoreBoard == nullptr ) {
+        print( "*** ERROR: getting null scoreboard pointer from GameObject::getScoreBoard() ***" );
+        return nullptr;
+    }
+    return _scoreBoard; 
+}
 
 History* GameObject::getHistory() { return _history; }
 
@@ -117,8 +132,8 @@ void GameObject::start() {
     _player2->setPoints( 0 );             // p2Points = 0;
     _player1->setGames( 0 );              // p1Games = 0;
     _player2->setGames( 0 );              // p2Games = 0;
-    _player1->setSets( _gameState, 0 );               // p1Sets = 0;
-    _player2->setSets( _gameState, 0 );               // p2Sets = 0;
+    _player1->setSets( _gameState, 0 );   // p1Sets = 0;
+    _player2->setSets( _gameState, 0 );   // p2Sets = 0;
     _scoreBoard->update();
     _gameState->setTieBreakOnly( 0 );     // tieBreakOnly = false;
     _gameState->setCurrentSet( 1 );

@@ -28,6 +28,8 @@ class GPIO {
 public:
   GPIO();
 
+  void setPullUpDown( gpio_bits_t pins, int pud );
+
   // Initialize before use. Returns 'true' if successful, 'false' otherwise
   // (e.g. due to a permission problem).
   bool Init(int slowdown);

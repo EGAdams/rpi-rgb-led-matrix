@@ -20,6 +20,7 @@ class History {
     void saveGameStateToFile(const GameState& gameState, const std::string& filename);
     GameState loadGameStateFromFile(const std::string& filename);
     std::vector<std::string> getSavedGameStatesList();
+    void clearHistory();
 
  private:
     std::stack< GameState > _history;

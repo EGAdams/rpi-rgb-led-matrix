@@ -13,13 +13,17 @@
 #include <csignal>
 #include <map>
 #include "FontLoader/FontLoader.h"
-#include "TextDrawer/TextDrawer.h"
+#include "ITextDrawer/ITextDrawer.h"
 #include "Drawer/Drawer.h"
 #include "ScoreBoard/ScoreBoard.h"
 #include "GameObject/GameObject.h"
 #include "LoggerFactory/LoggerFactory.h"
 #include "InputWithTimer/InputWithTimer.h"
 #include "TennisConstants/TennisConstants.h"
+#include "RemotePairingScreen/RemotePairingScreen.h"
+#include "PairingBlinker/PairingBlinker.h"
+#include "ScoreboardBlinker/ScoreboardBlinker.h"
+#include "ConsoleDisplay/ConsoleDisplay.h"
 
 using namespace rgb_matrix;
 #define SCORE_DELAY    0
@@ -30,10 +34,10 @@ using namespace rgb_matrix;
 #define DEMO_DELAY 1
 #define BLINK_UPDATE_DELAY 1000000 // 250000 //
 #define FASTER_BLINK_UPDATE_DELAY 100000 // 750000 // 100000
-# define X__POS 6
-# define Y__POS 40
-# define X__POSITION 5
-# define Y__POSITION 80
+#define X__POS 6
+#define Y__POS 40
+#define X__POSITION 5
+#define Y__POSITION 80
 #define MAX_LOOP_COUNT 350
 #define A_SPACE        13
 #define FOUR_SPACE     14
@@ -103,8 +107,20 @@ void matchWinTieBreakerTest( GameObject* gameObject, GameState* gameState ) {
     for ( int x = 0; x < 5; x++ ) {
         playerWin( gameObject, gameState, 2 );
     }
-    // playerWin( gameObject, gameState, 1 ); 
-    // std::cout << "done with match win test." << std::endl; 
+}
+
+void tieBreakerSevenSixTest( GameObject* gameObject, GameState* gameState ) {
+    for ( int x = 0; x < 6; x++ ) {
+        playerWin( gameObject, gameState, 1 );
+    }
+    for ( int x = 0; x < 5; x++ ) {
+        playerWin( gameObject, gameState, 2 );
+    }
+    for ( int x = 0; x < 6; x++ ) {
+        playerWin( gameObject, gameState, 1 );
+    }
+    
+    playerWin( gameObject, gameState, 2 );
 }
 
 void matchWinTest( GameObject* gameObject, GameState* gameState ) {
@@ -311,40 +327,72 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
 }
 
 void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
+    while( 1 ) {
+        gameObject->getScoreBoard()->clearScreen();
+        playerWin( gameObject, gameState, 1 );
+        playerWin( gameObject, gameState, 1 );
+        playerWin( gameObject, gameState, 1 );
+        playerWin( gameObject, gameState, 1 );
+        playerWin( gameObject, gameState, 2 );
+        playerWin( gameObject, gameState, 2 );
+        playerWin( gameObject, gameState, 1 );
+        playerWin( gameObject, gameState, 1 );
+
+        // now for player 2 to win the set...
+        playerWin( gameObject, gameState, 2 );
+        playerWin( gameObject, gameState, 2 );
+        playerWin( gameObject, gameState, 2 );
+        playerWin( gameObject, gameState, 2 );
+        playerWin( gameObject, gameState, 1 );
+        playerWin( gameObject, gameState, 1 );
+        playerWin( gameObject, gameState, 2 );
+        score( gameObject, gameState, 2 );
+        score( gameObject, gameState, 2 );
+        score( gameObject, gameState, 2 );
+        score( gameObject, gameState, 2 );
+
+        // now player 1 win match
+        score( gameObject, gameState, 1 );
+        score( gameObject, gameState, 1 );
+        score( gameObject, gameState, 1 );
+        score( gameObject, gameState, 1 );
+        score( gameObject, gameState, 1 );
+        score( gameObject, gameState, 1 );
+        score( gameObject, gameState, 1 );
+        score( gameObject, gameState, 1 );
+        score( gameObject, gameState, 1 );
+        score( gameObject, gameState, 1 );
+
+        // sleep for a while...
+        print( "Sleeping for 2 seconds...\n" );
+        GameTimer::gameDelay( 2000 );
+        print( "resetting match...\n" );
+        GameTimer::gameDelay( 2000 );
+        gameObject->resetMatch();
+        print( "restarting loop...\n" );
+    }
+}
+
+void seven_six_tb_test( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getScoreBoard()->clearScreen();
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
 
-    // now for player 2 to win the set...
-    playerWin( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 2 );
-    playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 2 );
-    score( gameObject, gameState, 2 );
-    score( gameObject, gameState, 2 );
-    score( gameObject, gameState, 2 );
-    score( gameObject, gameState, 2 );
-
-    // now player 1 win match
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
-    score( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 2 );
+    playerWin( gameObject, gameState, 1 );
+    playerWin( gameObject, gameState, 2 ); 
+    playerWin( gameObject, gameState, 1 );
 }
 
 
@@ -374,120 +422,237 @@ void resetAll( Reset* reset ) {
     reset->resetScoreboard();
 }
 
+void get_and_set_font( GameObject* gameObject ) {
+    std::string font_path = gameObject->getScoreBoard()->displayAndLoadFontMenu( "fonts" );
+    print( "calling set little drawer font... " );
+    gameObject->getScoreBoard()->setLittleDrawerFont( font_path );
+    print( "done calling set little drawer font." );
+    std::cout << "Enter the message to write: ";
+    print( "setting message.... " );
+    std::string message;
+    message = "test";
+    print( "clearing screen..." );
+    gameObject->getScoreBoard()->clearScreen();
+    print( "cleared screen." );
+    gameObject->getScoreBoard()->drawNewText( message, 5, 20 );
+    print( "done drawing new text." );
+    GameTimer::gameDelay( 1000 );
+    print( "continuing..." );
+}
+
 void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset, int player ) {
     int loop_count = 0;
     gameObject->loopGame();
     sleep( 1 );
     int menu_selection = 1;
+    // int remote_pairing = 1;
+    gameObject->getScoreBoard()->setLittleDrawerFont( "fonts/8x13B.bdf" );
+    // get_and_set_font( gameObject );
     std::signal( SIGINT, GameObject::_signalHandler );
+    RemotePairingScreen remotePairingScreen( gameObject->getScoreBoard());
+    print( "constructing pairing blinker from run manual game" );
+    PairingBlinker pairingBlinker( gameObject->getScoreBoard());  // Use PairingBlinker
+    print( "constructing input with timer from run manual game" );
+    InputWithTimer inputWithTimer( &pairingBlinker );  // Pass PairingBlinker
+    print( "finished constructing input with timer from run manual game" );
+    bool is_on_pi = gameObject->getScoreBoard()->onRaspberryPi();
+    print( "is_on_pi: " + std::to_string( is_on_pi ) );
     while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { /*/// Begin Game Loop ///*/
+        print( "entered while loop from run manual game" );
         sleep( SCORE_DELAY );
-        std::cout << "1.) green score    " << std::endl;
-        std::cout << "2.) red score      " << std::endl;
+        // if remote pairing, write the words.  if not, snap out of the loop
+        while ( remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake()) { // 090724
+            print( "inside remote pairing screen from run manual game.  before starting input timer..." );
+            int menu_selection = inputWithTimer.getInput();
+            if (menu_selection == 1) {
+                remotePairingScreen.greenPlayerPressed();
+                pairingBlinker.setGreenPlayerPaired(true);  // Notify blinker that Green player is paired
+            } else if (menu_selection == 2) {
+                remotePairingScreen.redPlayerPressed();
+                pairingBlinker.setRedPlayerPaired(true);  // Notify blinker that Red player is paired
+            } else {
+                std::cout << "*** Invalid selection during remote pairing. ***\n";
+                GameTimer::gameDelay(1000);
+            }
+        }
+
+        print( "put in sleep mode if the pairing blinker is not awake. " );
+        if ( !pairingBlinker.awake() ) { 
+            print( "pairing blinker is not awake, stopping it... " )
+            pairingBlinker.stop();
+            print( "pairing blinker stopped.  now putting in sleep mode..." );
+            gameState->setCurrentAction( SLEEP_MODE );
+        }
+        
+        // pairingBlinker.stop();  // Stop blinking once both players are paired
+        std::cout << "1.) green score             76. seven six Tie Breaker test" << std::endl;
+        std::cout << "2.) red score                     " << std::endl;
         std::cout << "3.) Demo           " << std::endl;
         std::cout << "4.) Match Win Test " << std::endl;
         std::cout << "5.) Test 05        " << std::endl;
         std::cout << "6.) Match Win Tie Break Test" << std::endl;
         std::cout << "7.) Sleep Mode Test" << std::endl;
+        std::cout << "8.) Font File"       << std::endl;
         std::cout << "9.) Undo           " << std::endl;
+        std::cout << "10.) Test Font     " << std::endl;
+        std::cout << "20.) Write Text    " << std::endl;
+
         if ( gameState->getCurrentAction() == SLEEP_MODE ) {
             ScoreboardBlinker blinker( gameObject->getScoreBoard() );
             InputWithTimer inputWithTimer( &blinker );
             menu_selection = inputWithTimer.getInput();
-            gameState->setCurrentAction( NORMAL_GAME_STATE ); // stop sleep mode
+            gameState->setCurrentAction( AFTER_SLEEP_MODE ); // stop sleep mode
             std::cout << "time slept: " << inputWithTimer.getTimeSlept() << std::endl;
-            if ( menu_selection == 1 || 
-                 menu_selection == 2 || 
-                 ( inputWithTimer.getTimeSlept() > MAX_SLEEP)) {
+            if (  menu_selection == 1  || 
+                  menu_selection == 2  || 
+                 ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 )) { // and sleep time expired...
+                // if the pairing caused the sleep mode, just go back to pairing mode
+                // if ( !pairingBlinker.awake() ) {
+                //     print( "pairing blinker is sleeping.  going back to pairing mode..." );
+                //     gameState->setCurrentAction( NORMAL_GAME_STATE );
+                //     pairingBlinker.sleepModeOff();  // wake up the pairing blinker
+                //     continue;
+                // }
+                print( "reset match." );
                 gameObject->resetMatch();
+                print( "done resetting match." );
+                if ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 ) {
+                    print( "time slept: " << inputWithTimer.getTimeSlept() / 1000 << " seconds." << std::endl );
+                    print( "clearing History because max sleep time has been reached or exceeded." );
+                    gameObject->getHistory()->clearHistory();
+                    print( "done clearing history because max sleep time has been reached or exceeded." );
+                }
                 continue;
             }
+            print("setting game state current action to after sleep mode");
+            gameState->setCurrentAction( AFTER_SLEEP_MODE );
+            print( "*** Going into last Match! ***" );
+            print( "clearing screen..." );
             gameObject->getScoreBoard()->clearScreen();
+            print( "cleared screen." );
             gameObject->getScoreBoard()->update();
+            print( "updated scoreboard." );
         } else {
             std::cin >> menu_selection;
         }
 
-        if ( menu_selection == 1 || menu_selection == 2 ) {
+        if ( menu_selection == 20 ) {
+            std::cout << "Enter the message to write: ";
+            std::string message;
+            // std::getline(std::cin, message);  // get input from the user // never works
+            std::cin >> message;
+            gameObject->getScoreBoard()->clearScreen();
+            gameObject->getScoreBoard()->drawNewText( message, 5, 20 );
+            GameTimer::gameDelay( 1000 );
+            continue;
+        }
+
+        if ( menu_selection == 10 ) {
+            get_and_set_font( gameObject );
+            // pairingBlinker.enable();
+            // remotePairingScreen.enablePairingMode();
+            continue;
+        }
+
+        if (  menu_selection == 1  ||  menu_selection == 2  ) {
             gameObject->playerScore( menu_selection );  // flip the player score flag
             sleep( SCORE_DELAY );
         }
-        else if ( menu_selection == 0 ) {
+        else if (  menu_selection == 0  ) {
             std::cout << "*** Exiting... ***\n" << std::endl;
             exit( 0 );
         }
-        else if ( menu_selection == 9 ) {
-            std::cout << "\n\n\n\n\n\n\n*** Undo ***\n" << std::endl;
+        else if (menu_selection == 8) {
+            // get font file from user
+            std::string font_file;
+            std::cout << "Enter the path to the font file: ";
+            std::getline(std::cin, font_file);  // get input from the user
 
-            gameObject->undo();
+            // Check if file exists
+            std::ifstream file_check(font_file);
+            if (!file_check) {
+                std::cerr << "Warning: The specified font file does not exist.\n";
+                return;  // Continue with the program flow without setting the font file
+            }
+            
+            // If the file exists, set the font file
+            gameObject->getScoreBoard()->setFontFile(font_file.c_str());
+        }
+        else if (  menu_selection == 9  ) {
+            std::cout << "\n\n\n\n\n\n\n*** Undo ***\n" << std::endl;
+            gameObject->undo(); // day before election day 110424
+            gameState->setCurrentAction( NORMAL_GAME_STATE );
             sleep( SCORE_DELAY );
         }
-        else if ( menu_selection == 11 ) {
+        else if (  menu_selection == 11 ) {
             std::cout << "\n\n\n\n\n\n\n*** Player 1 win ***\n" << std::endl;
             playerWin( gameObject, gameState, 1 );
             sleep( SCORE_DELAY );
         }
-        else if ( menu_selection == 22 ) {
+        else if (  menu_selection == 22 ) {
             std::cout << "\n\n\n\n\n\n\n*** Player 2 win ***\n" << std::endl;
             playerWin( gameObject, gameState, 2 );
             sleep( SCORE_DELAY );
         }
-        else if ( menu_selection == 101 ) {
+        else if (  menu_selection == 101 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 01 ***\n" << std::endl;
             gameObject->getScoreBoard()->clearScreen();
-            gameObject->getScoreBoard()->drawText( "Test",
-            YELLOW, X__POS, Y__POS );
-            gameObject->getScoreBoard()->drawText( " 01 ",
-            YELLOW, X__POSITION, Y__POSITION );
+            gameObject->getScoreBoard()->drawText( "Test", X__POS, Y__POS );
+            gameObject->getScoreBoard()->drawText( " 01 ", X__POSITION, Y__POSITION );
             GameTimer::gameDelay( 4000 );
             test_01( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
         }
-        else if ( menu_selection == 3 ) {
+        else if (  menu_selection == 3  ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Demo ***\n" << std::endl;
             demo_test( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
         }
-        else if ( menu_selection == 103 ) {
+        else if (  menu_selection == 103 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 03 ***\n" << std::endl;
             test_03( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
         }
-        else if ( menu_selection == 104 ) {
+        else if (  menu_selection == 104 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 04 ***\n" << std::endl;
             test_04( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
         }
-        else if ( menu_selection == 5 ) {
+        else if (  menu_selection == 5  ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 05 ***\n" << std::endl;
             test_05( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
         }
-        else if ( menu_selection == 6 ) {
+        else if (  menu_selection == 6  ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Match Win Tie Break Test ***\n" << std::endl;
             matchWinTieBreakerTest( gameObject, gameState );
             sleep( SCORE_DELAY );
             continue;
         }
-        else if ( menu_selection == 4 ) {
+        else if (  menu_selection == 4  ) {
             matchWinTest( gameObject, gameState );
             sleep( SCORE_DELAY );
             continue;
 
         }
-        else if ( menu_selection == 7 ) {
+        else if (  menu_selection == 7  ) {
             gameState->setCurrentAction( SLEEP_MODE );
+            sleep( SCORE_DELAY );
+            continue;
+        }
+        else if (  menu_selection == 76  ) {
+            tieBreakerSevenSixTest( gameObject, gameState );
             sleep( SCORE_DELAY );
             continue;
         }
@@ -503,7 +668,18 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     } ///////// End Game Loop /////////
 }
 
-int main( int argc, char* argv[] ) {
+bool is_on_raspberry_pi() {
+    std::ifstream file( "/proc/device-tree/model" );
+    std::string line;
+    if ( file.is_open() ) {
+        std::getline( file, line );
+        file.close();
+        if ( line.find( "Raspberry Pi" ) != std::string::npos ) { return true; }
+    }
+    return false;
+}
+
+int main( int argc, char* argv[] ) {    
     std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );
     int manual = 0;
     if ( argc > 1 ) {
@@ -513,12 +689,23 @@ int main( int argc, char* argv[] ) {
             manual = 1;
         }
     }
-    manual = 1;  // yes hardcodeing  is bad but ina hurry!!
+    manual = 1;  // yes hardcodeing  is bad but ina hurry!! 
     int loop_count = 0;
     std::cout << "creating game state object..." << std::endl;
     GameState* gameState = new GameState();  // make this 1st!!! cost me 3 days
     std::cout << "creating game object..." << std::endl;
-    GameObject* gameObject = new GameObject( gameState );
+    // FontManager* fontManager = new FontManager();
+    ColorManager* colorManager = new ColorManager();
+    bool isOnPi = is_on_raspberry_pi();
+    print( "isOnPi: " << isOnPi );
+    IDisplay* display = new ConsoleDisplay( colorManager );
+    if ( isOnPi ) {
+        std::cout << "creating display object with matrix display..." << std::endl;
+    } else {
+        std::cout << "creating display object with console display..." << std::endl;
+        display = new ConsoleDisplay( colorManager );
+    }
+    GameObject* gameObject = new GameObject( gameState, display );
     std::cout << "creating reset object..." << std::endl;
     Reset* reset = new Reset( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
     if ( manual == 1 ) {
@@ -531,10 +718,8 @@ int main( int argc, char* argv[] ) {
     test_count++;
     test_count++;
     gameObject->getScoreBoard()->clearScreen(); // test 05
-    gameObject->getScoreBoard()->drawText( "Test",
-    YELLOW, X__POS, Y__POS );
-    gameObject->getScoreBoard()->drawText( " 05 ",
-    YELLOW, X__POSITION, Y__POSITION );
+    gameObject->getScoreBoard()->drawText( "Test", X__POS, Y__POS );
+    gameObject->getScoreBoard()->drawText( " 05 ", X__POSITION, Y__POSITION );
     GameTimer::gameDelay( 4000 );
     std::cout << "calling test_05()..." << std::endl;
     test_05( gameObject, gameState, &loop_count );
@@ -542,7 +727,3 @@ int main( int argc, char* argv[] ) {
     GameTimer::gameDelay( 2000 );
     test_count++;
 }
-
-
-
-

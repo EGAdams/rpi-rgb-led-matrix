@@ -3,10 +3,7 @@
 History::History() { _logger = new Logger( "History" ); }
 History::~History() { delete _logger; }
 
-void History::push( GameState state ) {
-    std::cout << " pushing game state..." << std::endl;
-    _history.push( state );
-}
+void History::push( GameState state ) { _history.push( state ); }
 
 int History::size() { return _history.size(); }
 
@@ -26,7 +23,6 @@ void History::decrementWinningPlayerScore( Player* player ) {
         gamestate.setPlayer2Points( gamestate.getPlayer2Points() - 1 );
         gamestate.setP2PointsMem( gamestate.getP2PointsMem() - 1 );
     }
-    // _history.pop(); // one more for some reason...
     _history.push( gamestate );
 }
 
@@ -57,7 +53,6 @@ GameState History::loadGameStateFromFile(const std::string& filename) {
 std::vector<std::string> History::getSavedGameStatesList() {
     std::vector<std::string> fileList;
     std::string directory = "./"; // Directory where game state files are saved
-
     DIR *dir;
     struct dirent *entry;
 
@@ -70,7 +65,9 @@ std::vector<std::string> History::getSavedGameStatesList() {
         }
         closedir(dir);
     } else {
-        // Handle error in opening directory
+        print( "*** ERROR: error opening directory ***" );
     }
     return fileList;
 }
+
+void History::clearHistory() { while ( !_history.empty()) { _history.pop(); }}

@@ -49,7 +49,9 @@ void TieBreaker::tieLEDsOn() {
     _gameState->setTieLEDsOn( 1 );
     _pinInterface->pinDigitalWrite( P1_TIEBREAKER, HIGH );
     _pinInterface->pinDigitalWrite( P2_TIEBREAKER, HIGH );
-    _scoreBoard->update();
+    if (_scoreBoard != nullptr) { _scoreBoard->update();
+    if ( _scoreBoard->hasCanvas()) { _scoreBoard->drawTieBreakerBar(); }
+    } else { print( "*** ERROR: _scoreBoard is NULL in TieBreaker::tieLEDsOn! ***" );}
 }
 
 void TieBreaker::tieLEDsOff() {
@@ -73,71 +75,63 @@ void TieBreaker::incrementSet() {
 // but when there is a matrix, we update the points instead.
 void TieBreaker::run( Player* currentPlayer ) {
     _undo.memory();
-    if ( currentPlayer == nullptr ) {
-        std::cerr << "*** ERROR: Current player is null in TieBreaker::run(). ***" << std::endl; exit( 1 );
-    }
-    Player* opponent = currentPlayer->getOpponent();
-    if ( opponent == nullptr ) {
-        std::cerr << "*** ERROR: Opponent is null in TieBreaker::run(). ***" << std::endl;
-        exit( 1 );
-    }
-    int serve = _getServe();
-    if ( serve != PLAYER_1_SERVE && serve != PLAYER_2_SERVE ) {
-        std::cerr << "*** ERROR: Invalid serve value in TieBreaker::run(). ***" << std::endl;
-        std::cerr << "Serve value: " << serve << std::endl; exit( 1 );
-    }
-    _gameState->setServe( serve ); // set the serve bar depending tie-break iteration
-    if ( _scoreBoard == nullptr ) {
-        std::cerr << "*** ERROR: ScoreBoard is null in TieBreaker::run(). ***" << std::endl; return;
-    }
-    try {
-        _scoreBoard->update();  // player has scored and points already incremented.
-    }
-    catch ( const std::exception& e ) {
-        std::cerr << "*** EXCEPTION: " << e.what() << " ***" << std::endl;
-        exit( 1 );
-    }
-    catch ( ... ) {
-        std::cerr << "*** UNKNOWN EXCEPTION in ScoreBoard update ***" << std::endl;
-        exit( 1 );
-    }
 
-    if ( currentPlayer->getPoints() == TIE_BREAK_MAX_POINTS ) {
-        _undo.snapshot( _history );
-        currentPlayer->setGames( currentPlayer->getGames() + 1 ); // increment games
-        incrementSet();
-        if ( _scoreBoard != nullptr ) {
-            _scoreBoard->update();
-        }
-        celebrate( currentPlayer ); // this is a win no matter what.
-        GameTimer::gameDelay( 3000 );
-        endTieBreak();
-    }
+    // ERROR CHECKS
+    if ( currentPlayer == nullptr ) { std::cerr << "*** ERROR: Current player is null in TieBreaker::run(). ***" << std::endl; exit( 1 );}
+    Player* opponent = currentPlayer->getOpponent(); if ( opponent == nullptr ) { std::cerr << "*** ERROR: Opponent is null in TieBreaker::run(). ***" << std::endl; exit( 1 );}
+    int serve = _getServe(); if ( serve != PLAYER_1_SERVE && serve != PLAYER_2_SERVE ) { std::cerr << "*** ERROR: Invalid serve value in TieBreaker::run(). ***" << std::endl; std::cerr << "Serve value: " << serve << std::endl; exit( 1 );}
+    if ( _scoreBoard == nullptr ) { std::cerr << "*** ERROR: ScoreBoard is null in TieBreaker::run(). ***" << std::endl; return;}
+    
+    // START OF run() TIE BREAKER
+    _gameState->setServe( serve ); // set the serve bar depending tie-break iteration
+    try { _scoreBoard->update();} catch ( const std::exception& e ) { std::cerr << "*** EXCEPTION: " << e.what() << " ***" << std::endl; exit( 1 );} catch ( ... ) { std::cerr << "*** UNKNOWN EXCEPTION in ScoreBoard update ***" << std::endl; exit( 1 );}
+    if ( currentPlayer->getPoints() == TIE_BREAK_MAX_POINTS ) { _tieBreakWin( currentPlayer );}
     else if ( currentPlayer->getPoints() >= TIE_BREAK_WIN_BY_TWO &&
             ( currentPlayer->getPoints() - opponent->getPoints() >= 2 ) ) {
         _tieBreakWin( currentPlayer );
-    }
-    else {
-        incrementIteration();
-    } // need this to determine serve bar location
+    } else { incrementIteration();} // need this to determine serve bar location
 }
 
 void TieBreaker::_tieBreakWin( Player* currentPlayer ) {
-    // _undo.snapshot( _history ); // maybe this is why we need the decrement?
-    if ( _gameState->getMatchTieBreak() == true ) {      // Match Win
-        // _history->decrementWinningPlayerScore( currentPlayer ); // otherwise call houston
+    if ( _gameState->getMatchTieBreak() == true ) {               // Match Win
+    
+        // increment the set
+        currentPlayer->setGames( 1 ); // set games to 1 for Match Win
+        if ( currentPlayer->number() == PLAYER_1_INITIALIZED ) {
+            _gameState->setPlayer1SetHistory( currentPlayer->getSetHistory());
+            _gameState->setPlayer2SetHistory( currentPlayer->getOpponent()->getSetHistory());
+        } else {
+            _gameState->setPlayer2SetHistory( currentPlayer->getSetHistory());
+            _gameState->setPlayer1SetHistory( currentPlayer->getOpponent()->getSetHistory());
+        }
+        _scoreBoard->update();
         MatchWinSequence  mws;
         mws.run( currentPlayer, _gameState, &_gameLeds, &_setLeds );
-        // endTieBreak();  ...not yet
         _gameState->setCurrentAction( SLEEP_MODE );
-    }
-    else { // regular tie break win.
+    } else {                                                      // regular TB win
         currentPlayer->setGames( currentPlayer->getGames() + 1 ); // increment games
+
+        // increment the set
+        // currentPlayer->setGames( 1 ); // set games to 1 for Match Win
+        if ( currentPlayer->number() == PLAYER_1_INITIALIZED ) {
+            _gameState->setPlayer1SetHistory( currentPlayer->getSetHistory());
+            _gameState->setPlayer2SetHistory( currentPlayer->getOpponent()->getSetHistory());
+        } else {
+            _gameState->setPlayer2SetHistory( currentPlayer->getSetHistory());
+            _gameState->setPlayer1SetHistory( currentPlayer->getOpponent()->getSetHistory());
+        }
+        
+        // update before  pause...
+        print( "*** UPDATING Before PAUSE ***" );
+        if ( _scoreBoard != nullptr ) { _scoreBoard->update();}
+        
+        // pause for 2 seconds
+        print( "*** PAUSING FOR 2 SECONDS ***" );
+        GameTimer::gameDelay( 2000 );
+        
+
         incrementSet();
         endTieBreak();
-        if ( _scoreBoard != nullptr ) {
-            _scoreBoard->update();
-        }
         celebrate( currentPlayer );
         GameTimer::gameDelay( 3000 );
         std::cout << "calling end tie break Object in regular tie break win.. " << std::endl;
@@ -233,7 +227,7 @@ void TieBreaker::setTieBreaker() {
     mode1SetTBButtonFunction();
 }
 
-void TieBreaker::initializeTieBreakMode() {
+void TieBreaker::initializeTieBreakMode() { // 103024
     _iteration = 1;  // this is initialized to zero before, so it could be checked as another flag
     _player1->setPoints( 0 );
     _player2->setPoints( 0 );
@@ -242,26 +236,35 @@ void TieBreaker::initializeTieBreakMode() {
     _gameState->setServe( 0 );
     _serveLeds.serveSwitch();
     if ( _gameState->getTieLEDsOn() == 0 ) { tieLEDsOn(); }
-    if ( _player1->getGames() != 6 ) {
-        std::cout << "*** Error: player 1 games do not equal 6 while initializing tie break mode! ***" << std::endl;
-        exit( 1 );
-    }
-    if ( _player2->getGames() != 6 ) {
-        std::cout << "*** Error: player 2 games do not equal 6 while initializing tie break mode! ***" << std::endl;
-        exit( 1 );
-    }
     _gameLeds.updateGames();
-    Inputs _inputs( _player1, _player2, _pinInterface, _gameState );
-    WatchTimer _watchTimer;
-    for ( int currentPulseCount = 0; currentPulseCount < TIE_PULSE_COUNT; currentPulseCount++ ) {
-        tieLEDsOff();
-        if ( _watchTimer.watchInputDelay( TIE_BREAK_BLINK_DELAY, &_inputs, TIE_BREAK_WATCH_INTERVAL ) > 0 ) { return; }
-        tieLEDsOn();
-        if ( _watchTimer.watchInputDelay( TIE_BREAK_BLINK_DELAY, &_inputs, TIE_BREAK_WATCH_INTERVAL ) > 0 ) { return; }
-    }
+    // Inputs _inputs( _player1, _player2, _pinInterface, _gameState );
+    // WatchTimer _watchTimer;
+    // for ( int currentPulseCount = 0; currentPulseCount < TIE_PULSE_COUNT; currentPulseCount++ ) {
+    //     _gameState->setCurrentAction( DRAW_BLANK_SETS ); // set flag before update
+    //     tieLEDsOff(); // set tie led flag to 0 and update score board
+    //     if ( _watchTimer.watchInputDelay( TIE_BREAK_BLINK_DELAY, &_inputs, TIE_BREAK_WATCH_INTERVAL ) > 0 ) { return; }
+    //     tieLEDsOn(); // draw tie breaker bar and update score board
+    //     if ( _watchTimer.watchInputDelay( TIE_BREAK_BLINK_DELAY, &_inputs, TIE_BREAK_WATCH_INTERVAL ) > 0 ) { return; }
+    // }
+
+    
+    
     _gameLeds.updateGames();
     GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
     tieLEDsOn();
+}
+
+void TieBreaker::blinkSetScores() {
+    for( int flash_count = 0; flash_count < ALL_SETS_FLASH_COUNT; flash_count++ ) {
+        GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
+        _gameState->setCurrentAction( DRAW_BLANK_SETS ); // set flag before update
+        _gameLeds.getScoreBoard()->update();
+        _gameLeds.getScoreBoard()->blankTieBreakerBar();
+        GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
+        _gameState->setCurrentAction( NORMAL_GAME_STATE );
+        _gameLeds.getScoreBoard()->update();
+        _gameLeds.getScoreBoard()->drawTieBreakerBar();
+    }
 }
 
 void TieBreaker::setTieBreakEnable() {
@@ -433,3 +436,11 @@ void TieBreaker::mode1SetTBP1Games() {
     }
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
 }
+
+// currentPlayer->setGames( currentPlayer->getGames() + 1 ); // increment games
+// set the current player's "6" to a "7" wherever it is in the set history
+// for ( int i = 0; i < currentPlayer->getSetHistory().size(); i++ ) {
+//     if ( currentPlayer->getSetHistory()[i] == GAMES_TO_WIN_SET ) {
+//         currentPlayer->setSetHistory( i, GAMES_TO_WIN_SET + 1 );
+//     }
+// }

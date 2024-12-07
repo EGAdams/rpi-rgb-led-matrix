@@ -384,7 +384,7 @@ RGBMatrix::Impl::Impl(GPIO *io, const Options &options)
   active_->Clear();
   SetGPIO(io, true);
 
-  printf( "We need to apply the mapping for the panels first. \n\n" );
+  printf( "We need to apply the mapping for the panels first. \n" );
 
   ApplyPixelMapper( multiplex_mapper );
 
@@ -392,7 +392,7 @@ RGBMatrix::Impl::Impl(GPIO *io, const Options &options)
 
   ApplyNamedPixelMappers( options.pixel_mapper_config, params_.chain_length, params_.parallel );
 
-  printf( "done with ApplyNamedPixelMappers \n\n" );
+  printf( "done with ApplyNamedPixelMappers \n" );
 }
 
 RGBMatrix::Impl::~Impl() {
@@ -576,11 +576,11 @@ bool RGBMatrix::Impl::ApplyPixelMapper(const PixelMapper *mapper) {
   int new_width, new_height;
   int translation_count = 0;
   if (!mapper->GetSizeMapping(old_width, old_height, &new_width, &new_height)) { return false; }
-  printf( "\n\nold_width: %d, old_height: %d, new_width: %d, new_height: %d\n\n", old_width, old_height, new_width, new_height );
+  printf( "old_width: %d, old_height: %d, new_width: %d, new_height: %d\n", old_width, old_height, new_width, new_height );
   PixelDesignatorMap *new_mapper = new PixelDesignatorMap( new_width, new_height, shared_pixel_mapper_->GetFillColorBits());
-  printf( "\nAfter PixelDesignatorMap \n" );
-  printf( "\n\nold_width: %d, old_height: %d, new_width: %d, new_height: %d\n\n", old_width, old_height, new_width, new_height );
-  printf( "\n\napplying the special pixel mapper: %s", mapper->GetName());
+  printf( "After PixelDesignatorMap \n" );
+  printf( "old_width: %d, old_height: %d, new_width: %d, new_height: %d\n", old_width, old_height, new_width, new_height );
+  printf( "applying the special pixel mapper: %s", mapper->GetName());
   for ( int y = 0; y < new_height; ++y ) {
     for ( int x = 0; x < new_width; ++x ) {
       int orig_x = -1, orig_y = -1;

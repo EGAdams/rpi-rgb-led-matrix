@@ -6,7 +6,6 @@
 class FontLoader {
 public:
     FontLoader(const char* fontFile);
-
     bool LoadFont(rgb_matrix::Font& font);
 
 private:
