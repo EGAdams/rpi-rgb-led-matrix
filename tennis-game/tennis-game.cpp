@@ -538,6 +538,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         std::cout << "9.) Undo           " << std::endl;
         std::cout << "10.) Test Font     " << std::endl;
         std::cout << "20.) Write Text    " << std::endl;
+        std::cout << "104.) Detect Expndr" << std::endl;
 
         if ( gameState->getCurrentAction() == SLEEP_MODE ) {
             ScoreboardBlinker blinker( gameObject->getScoreBoard() );
@@ -660,11 +661,13 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             test_03( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
+
         } else if (menu_selection == 104) {
             std::cout << "\n*** Running MCP23017 Expander Detection Test ***\n";
             detectExpander();
             sleep(SCORE_DELAY);
             continue;
+            
         } else if (  menu_selection == 5  ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 05 ***\n" << std::endl;
