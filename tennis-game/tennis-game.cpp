@@ -35,6 +35,9 @@
 #include <sys/ioctl.h>
 #include <fcntl.h>
 
+// to set the bits
+#include <bitset>
+
 using namespace rgb_matrix;
 #define SCORE_DELAY    0
 #define MAX_LOOP_COUNT 350
@@ -79,7 +82,7 @@ void score( GameObject* gameObject, GameState* gameState, int player ) {
     gameObject->loopGame();             // handle the player score flag
     if ( gameState->getCurrentAction() == SLEEP_MODE ) {
         print( "*** WARNING: may need to return early for sleep mode. *** " );
-    }    
+    }
     std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
     std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
 }
@@ -129,7 +132,7 @@ void tieBreakerSevenSixTest( GameObject* gameObject, GameState* gameState ) {
     for ( int x = 0; x < 6; x++ ) {
         playerWin( gameObject, gameState, 1 );
     }
-    
+
     playerWin( gameObject, gameState, 2 );
 }
 
@@ -337,7 +340,7 @@ void test_04( GameObject* gameObject, GameState* gameState, int* loop_count ) {
 }
 
 void test_05( GameObject* gameObject, GameState* gameState, int* loop_count ) {
-    while( 1 ) {
+    while ( 1 ) {
         gameObject->getScoreBoard()->clearScreen();
         playerWin( gameObject, gameState, 1 );
         playerWin( gameObject, gameState, 1 );
@@ -401,7 +404,7 @@ void seven_six_tb_test( GameObject* gameObject, GameState* gameState, int* loop_
     playerWin( gameObject, gameState, 1 );
     playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 1 );
-    playerWin( gameObject, gameState, 2 ); 
+    playerWin( gameObject, gameState, 2 );
     playerWin( gameObject, gameState, 1 );
 }
 
@@ -450,6 +453,36 @@ void get_and_set_font( GameObject* gameObject ) {
     print( "continuing..." );
 }
 
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
+#include <linux/i2c-dev.h>
+#include <bitset>
+
+#define MCP23017_ADDRESS 0x20  // Default I2C address when A0, A1, A2 are tied to GND
+#define I2C_DEVICE "/dev/i2c-1"
+#define GPIO_REGISTER 0x12  // GPIOA register for reading pins
+
+// Function to read bits 0 to 4 from the expander
+void readBits( int file ) {
+    uint8_t reg = GPIO_REGISTER;
+    uint8_t value;
+
+    if ( write( file, &reg, 1 ) != 1 ) {
+        std::cerr << "Error: Unable to write to I2C device.\n";
+        return;
+    }
+
+    if ( read( file, &value, 1 ) != 1 ) {
+        std::cerr << "Error: Unable to read from I2C device.\n";
+        return;
+    }
+
+    uint8_t bits = value & 0x1F;  // Mask bits 0-4
+
+    std::cout << "Binary value: " << std::bitset<5>( bits ) << "\n";
+    std::cout << "Decimal value: " << static_cast< int >( bits ) << "\n";
+}
 
 ///// Detect the expander /////
 #define MCP23017_ADDRESS 0x20  // Default I2C address when A0, A1, A2 are tied to GND
@@ -457,28 +490,28 @@ void get_and_set_font( GameObject* gameObject ) {
 // Function to detect the MCP23017
 bool detectExpander() {
     int file;
-    const char *i2c_device = "/dev/i2c-1";
+    const char* i2c_device = "/dev/i2c-1";
 
-    if ((file = open(i2c_device, O_RDWR)) < 0) {
+    if ( ( file = open( i2c_device, O_RDWR ) ) < 0 ) {
         std::cerr << "Error: Unable to open I2C device.\n";
         return false;
     }
 
-    if (ioctl(file, I2C_SLAVE, MCP23017_ADDRESS) < 0) {
+    if ( ioctl( file, I2C_SLAVE, MCP23017_ADDRESS ) < 0 ) {
         std::cerr << "Error: Unable to set I2C address.\n";
-        close(file);
+        close( file );
         return false;
     }
 
     // Try reading a single byte from the MCP23017
-    if (write(file, nullptr, 0) < 0) {
+    if ( write( file, nullptr, 0 ) < 0 ) {
         std::cerr << "MCP23017 not detected at address 0x20.\n";
-        close(file);
+        close( file );
         return false;
     }
 
     std::cout << "MCP23017 detected at address 0x20!\n";
-    close(file);
+    close( file );
     return true;
 }
 
@@ -491,9 +524,9 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     gameObject->getScoreBoard()->setLittleDrawerFont( "fonts/8x13B.bdf" );
     // get_and_set_font( gameObject );
     std::signal( SIGINT, GameObject::_signalHandler );
-    RemotePairingScreen remotePairingScreen( gameObject->getScoreBoard());
+    RemotePairingScreen remotePairingScreen( gameObject->getScoreBoard() );
     print( "constructing pairing blinker from run manual game" );
-    PairingBlinker pairingBlinker( gameObject->getScoreBoard());  // Use PairingBlinker
+    PairingBlinker pairingBlinker( gameObject->getScoreBoard() );  // Use PairingBlinker
     print( "constructing input with timer from run manual game" );
     InputWithTimer inputWithTimer( &pairingBlinker );  // Pass PairingBlinker
     print( "finished constructing input with timer from run manual game" );
@@ -503,29 +536,31 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         print( "entered while loop from run manual game" );
         sleep( SCORE_DELAY );
         // if remote pairing, write the words.  if not, snap out of the loop
-        while ( remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake()) { // 090724
+        while ( remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake() ) { // 090724
             print( "inside remote pairing screen from run manual game.  before starting input timer..." );
             int menu_selection = inputWithTimer.getInput();
-            if (menu_selection == 1) {
+            if ( menu_selection == 1 ) {
                 remotePairingScreen.greenPlayerPressed();
-                pairingBlinker.setGreenPlayerPaired(true);  // Notify blinker that Green player is paired
-            } else if (menu_selection == 2) {
+                pairingBlinker.setGreenPlayerPaired( true );  // Notify blinker that Green player is paired
+            }
+            else if ( menu_selection == 2 ) {
                 remotePairingScreen.redPlayerPressed();
-                pairingBlinker.setRedPlayerPaired(true);  // Notify blinker that Red player is paired
-            } else {
+                pairingBlinker.setRedPlayerPaired( true );  // Notify blinker that Red player is paired
+            }
+            else {
                 std::cout << "*** Invalid selection during remote pairing. ***\n";
-                GameTimer::gameDelay(1000);
+                GameTimer::gameDelay( 1000 );
             }
         }
 
         print( "put in sleep mode if the pairing blinker is not awake. " );
-        if ( !pairingBlinker.awake() ) { 
+        if ( !pairingBlinker.awake() ) {
             print( "pairing blinker is not awake, stopping it... " )
-            pairingBlinker.stop();
+                pairingBlinker.stop();
             print( "pairing blinker stopped.  now putting in sleep mode..." );
             gameState->setCurrentAction( SLEEP_MODE );
         }
-        
+
         // pairingBlinker.stop();  // Stop blinking once both players are paired
         std::cout << "1.) green score             76. seven six Tie Breaker test" << std::endl;
         std::cout << "2.) red score                     " << std::endl;
@@ -534,11 +569,12 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         std::cout << "5.) Test 05        " << std::endl;
         std::cout << "6.) Match Win Tie Break Test" << std::endl;
         std::cout << "7.) Sleep Mode Test" << std::endl;
-        std::cout << "8.) Font File"       << std::endl;
+        std::cout << "8.) Font File" << std::endl;
         std::cout << "9.) Undo           " << std::endl;
         std::cout << "10.) Test Font     " << std::endl;
         std::cout << "20.) Write Text    " << std::endl;
         std::cout << "104.) Detect Expndr" << std::endl;
+        std::cout << "105.) read bits.   " << std::endl;
 
         if ( gameState->getCurrentAction() == SLEEP_MODE ) {
             ScoreboardBlinker blinker( gameObject->getScoreBoard() );
@@ -546,9 +582,9 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             menu_selection = inputWithTimer.getInput();
             gameState->setCurrentAction( AFTER_SLEEP_MODE ); // stop sleep mode
             std::cout << "time slept: " << inputWithTimer.getTimeSlept() << std::endl;
-            if (  menu_selection == 1  || 
-                  menu_selection == 2  || 
-                 ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 )) { // and sleep time expired...
+            if ( menu_selection == 1 ||
+                  menu_selection == 2 ||
+                 ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 ) ) { // and sleep time expired...
                 // if the pairing caused the sleep mode, just go back to pairing mode
                 // if ( !pairingBlinker.awake() ) {
                 //     print( "pairing blinker is sleeping.  going back to pairing mode..." );
@@ -567,7 +603,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
                 }
                 continue;
             }
-            print("setting game state current action to after sleep mode");
+            print( "setting game state current action to after sleep mode" );
             gameState->setCurrentAction( AFTER_SLEEP_MODE );
             print( "*** Going into last Match! ***" );
             print( "clearing screen..." );
@@ -575,7 +611,8 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             print( "cleared screen." );
             gameObject->getScoreBoard()->update();
             print( "updated scoreboard." );
-        } else {
+        }
+        else {
             std::cin >> menu_selection;
         }
 
@@ -597,47 +634,47 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             continue;
         }
 
-        if (  menu_selection == 1  ||  menu_selection == 2  ) {
+        if ( menu_selection == 1 || menu_selection == 2 ) {
             gameObject->playerScore( menu_selection );  // flip the player score flag
             sleep( SCORE_DELAY );
         }
-        else if (  menu_selection == 0  ) {
+        else if ( menu_selection == 0 ) {
             std::cout << "*** Exiting... ***\n" << std::endl;
             exit( 0 );
         }
-        else if (menu_selection == 8) {
+        else if ( menu_selection == 8 ) {
             // get font file from user
             std::string font_file;
             std::cout << "Enter the path to the font file: ";
-            std::getline(std::cin, font_file);  // get input from the user
+            std::getline( std::cin, font_file );  // get input from the user
 
             // Check if file exists
-            std::ifstream file_check(font_file);
-            if (!file_check) {
+            std::ifstream file_check( font_file );
+            if ( !file_check ) {
                 std::cerr << "Warning: The specified font file does not exist.\n";
                 return;  // Continue with the program flow without setting the font file
             }
-            
+
             // If the file exists, set the font file
-            gameObject->getScoreBoard()->setFontFile(font_file.c_str());
+            gameObject->getScoreBoard()->setFontFile( font_file.c_str() );
         }
-        else if (  menu_selection == 9  ) {
+        else if ( menu_selection == 9 ) {
             std::cout << "\n\n\n\n\n\n\n*** Undo ***\n" << std::endl;
             gameObject->undo(); // day before election day 110424
             gameState->setCurrentAction( NORMAL_GAME_STATE );
             sleep( SCORE_DELAY );
         }
-        else if (  menu_selection == 11 ) {
+        else if ( menu_selection == 11 ) {
             std::cout << "\n\n\n\n\n\n\n*** Player 1 win ***\n" << std::endl;
             playerWin( gameObject, gameState, 1 );
             sleep( SCORE_DELAY );
         }
-        else if (  menu_selection == 22 ) {
+        else if ( menu_selection == 22 ) {
             std::cout << "\n\n\n\n\n\n\n*** Player 2 win ***\n" << std::endl;
             playerWin( gameObject, gameState, 2 );
             sleep( SCORE_DELAY );
         }
-        else if (  menu_selection == 101 ) {
+        else if ( menu_selection == 101 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 01 ***\n" << std::endl;
             gameObject->getScoreBoard()->clearScreen();
@@ -648,52 +685,77 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             sleep( SCORE_DELAY );
             continue;
         }
-        else if (  menu_selection == 3  ) {
+        else if ( menu_selection == 3 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Demo ***\n" << std::endl;
             demo_test( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
         }
-        else if (  menu_selection == 103 ) {
+        else if ( menu_selection == 103 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 03 ***\n" << std::endl;
             test_03( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
 
-        } else if (menu_selection == 104) {
+        }
+        else if ( menu_selection == 104 ) {
             std::cout << "\n*** Running MCP23017 Expander Detection Test ***\n";
             detectExpander();
-            sleep(SCORE_DELAY);
+            sleep( SCORE_DELAY );
             continue;
-            
-        } else if (  menu_selection == 5  ) {
+
+        }
+        else if ( menu_selection == 105 ) {
+            std::cout << "reading MCP23017 bits..." << std::endl;
+            int file = open(I2C_DEVICE, O_RDWR);
+
+        if (file < 0) {
+            std::cerr << "Error: Unable to open I2C device.\n";
+            continue;
+        }
+
+        if (ioctl(file, I2C_SLAVE, MCP23017_ADDRESS) < 0) {
+            std::cerr << "Error: Unable to set I2C address.\n";
+            close(file);
+            continue;
+        }
+
+        readBits(file);
+        close(file);
+            continue;
+
+        }
+
+        else if ( menu_selection == 5 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 05 ***\n" << std::endl;
             test_05( gameObject, gameState, &loop_count );
             sleep( SCORE_DELAY );
             continue;
         }
-        else if (  menu_selection == 6  ) {
+
+        else if ( menu_selection == 6 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Match Win Tie Break Test ***\n" << std::endl;
             matchWinTieBreakerTest( gameObject, gameState );
             sleep( SCORE_DELAY );
             continue;
         }
-        else if (  menu_selection == 4  ) {
+        
+        else if ( menu_selection == 4 ) {
             matchWinTest( gameObject, gameState );
             sleep( SCORE_DELAY );
             continue;
 
         }
-        else if (  menu_selection == 7  ) {
+        else if ( menu_selection == 7 ) {
             gameState->setCurrentAction( SLEEP_MODE );
             sleep( SCORE_DELAY );
             continue;
         }
-        else if (  menu_selection == 76  ) {
+        else if ( menu_selection == 76 ) {
             tieBreakerSevenSixTest( gameObject, gameState );
             sleep( SCORE_DELAY );
             continue;
@@ -721,7 +783,7 @@ bool is_on_raspberry_pi() {
     return false;
 }
 
-int main( int argc, char* argv[] ) {    
+int main( int argc, char* argv[] ) {
     std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );
     int manual = 0;
     if ( argc > 1 ) {
@@ -743,7 +805,8 @@ int main( int argc, char* argv[] ) {
     IDisplay* display = new ConsoleDisplay( colorManager );
     if ( isOnPi ) {
         std::cout << "creating display object with matrix display..." << std::endl;
-    } else {
+    }
+    else {
         std::cout << "creating display object with console display..." << std::endl;
         display = new ConsoleDisplay( colorManager );
     }
