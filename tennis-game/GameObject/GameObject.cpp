@@ -61,6 +61,7 @@ void GameObject::undo() {
 void GameObject::loopGame() {
     _logger->setName( "loopGame" );                   
     int rotaryValue = 1; // int rotaryValue = _gameInputs->readRotary(); TODO: actually read rotary
+    print( "calling run game mode ..." );
     _gameModes->runGameMode( rotaryValue );  // <--- entry point !! --------------<<
     GameTimer::gameDelay( GAME_LOOP_DELAY );
     _subjectManager->gameStateUpdate( _gameState, _player1, _player2 );

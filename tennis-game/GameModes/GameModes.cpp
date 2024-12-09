@@ -65,7 +65,9 @@ void GameModes::mode1() {
         _gameState->setUndo( 0 );
         _undo.mode1Undo( _history );
     }
-    _inputs.readPlayerButtons();  // digital read on player buttons.  sets playerButton if tripped.
+    // _inputs.readPlayerButtons();  // digital read on player buttons.  sets playerButton if tripped.
+    int button_read = _inputs.read_mcp23017_value();
+    print( "read button:" << button_read );
     _serveLeds.serveSwitch(); // if serveSwitch >= 2, serveSwitch = 0; and toggle serve variable
     _logger->setName( "mode1" );
     _mode1Functions.mode1ButtonFunction(); // <--------- ENTRY POINT --------------<<
