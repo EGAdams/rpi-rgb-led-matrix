@@ -863,7 +863,8 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
             gameObject->getScoreBoard()->update();
             print( "updated scoreboard." );
         } else {
-            std::cin >> selection;
+            selection = inputs->read_mcp23017_value();
+            print( "selection: " << selection );
         }
 
         if ( selection == 7 || selection == 11 ) {
