@@ -453,10 +453,7 @@ void get_and_set_font( GameObject* gameObject ) {
     print( "continuing..." );
 }
 
-#include <fcntl.h>
-#include <unistd.h>
-#include <sys/ioctl.h>
-#include <linux/i2c-dev.h>
+
 #include <bitset>
 
 #define MCP23017_ADDRESS 0x20  // Default I2C address when A0, A1, A2 are tied to GND
@@ -721,14 +718,19 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             close(file);
             continue;
         }
-
-        readBits(file);
-        close(file);
-            continue;
-
+        int is_one;
+        while ( 1 ) {
+            std::cin >> is_one;
+            if ( is_one == 1 ) {
+                break;
+            } else {
+                readBits(file);
+            }
         }
+        close(file);
+        continue;
 
-        else if ( menu_selection == 5 ) {
+        } else if ( menu_selection == 5 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 05 ***\n" << std::endl;
             test_05( gameObject, gameState, &loop_count );
@@ -743,7 +745,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             sleep( SCORE_DELAY );
             continue;
         }
-        
+
         else if ( menu_selection == 4 ) {
             matchWinTest( gameObject, gameState );
             sleep( SCORE_DELAY );
