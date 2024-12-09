@@ -787,12 +787,15 @@ bool is_on_raspberry_pi() {
 
 //// method to sit and listen to remote commands.
 void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* reset, Inputs* inputs ) {
+    print( "entered run remote listener method..." );
     int loop_count = 0;
     int selection = 0;
+    print( "calling game object loop game..." );
     gameObject->loopGame();
     sleep( 1 );
     gameObject->getScoreBoard()->setLittleDrawerFont( "fonts/8x13B.bdf" );
     std::signal( SIGINT, GameObject::_signalHandler );
+    print (" constructing remote pairing screen from inside run remote listener method... " );
     RemotePairingScreen remotePairingScreen( gameObject->getScoreBoard() );
     print( "constructing pairing blinker from run manual game" );
     PairingBlinker pairingBlinker( gameObject->getScoreBoard() );  // Use PairingBlinker
