@@ -43,12 +43,12 @@ int PinInterface::_readBits_0_4( int file ) {
 
     if ( write( file, &reg, 1 ) != 1 ) {
         std::cerr << "Error: Unable to write to I2C device.\n";
-        return;
+        return -1;
     }
 
     if ( read( file, &value, 1 ) != 1 ) {
         std::cerr << "Error: Unable to read from I2C device.\n";
-        return;
+        return -1;
     }
 
     uint8_t bits = value & 0x1F;  // Mask bits 0-4

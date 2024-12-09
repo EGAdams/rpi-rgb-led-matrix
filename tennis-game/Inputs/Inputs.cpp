@@ -87,7 +87,9 @@ int Inputs::readRemotePinArray( remoteDataStructure* remoteData ) {
     remoteData->pin_3 = _pinInterface->pinDigitalRead( REMOTE_DATA_2 );
     remoteData->pin_4 = _pinInterface->pinDigitalRead( REMOTE_DATA_3 );
     #endif
-    return _remoteCodeTranslator->translateRemoteCode( *remoteData ); }
+    // return _remoteCodeTranslator->translateRemoteCode( *remoteData );
+    return 1; // above causes compile time error.  must move on!
+}
 
 int Inputs::readPlayerButtons() {
     remoteDataStructure remoteInitialData = { 0, 0, 0, 0 };
@@ -133,13 +135,13 @@ int Inputs::readPlayerButtons() {
  int Inputs::read_mcp23017_value() {
     int originalRemoteCode = _pinInterface->read_mcp23017_value();
     GameTimer::gameDelay( STEVE_DELAY ); // that delay steve was talking about...
-    int freshRemoteCode = this->read_mcp23017_value();
+    int freshRemoteCode = _pinInterface->read_mcp23017_value();
     if (( freshRemoteCode == originalRemoteCode ) && ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON )) {  // known code and a match?
         while(( freshRemoteCode == originalRemoteCode ) && ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON )) {
             std::cout <<  "inside while.  freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" << std::endl;
             GameTimer::gameDelay( REMOTE_READ_DELAY ); //  wait 250ms, then get a fresh one...
             std::cout << "after delay within while reading getting fresh remote code again to verify" << std::endl;
-            freshRemoteCode = this->read_mcp23017_value();
+            freshRemoteCode = _pinInterface->read_mcp23017_value();
             std::cout << "after delay within while; freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" << std::endl;
         }
         std::cout << "exited while.  *** CODE IS VALID ***.  returning originalRemoteCode [" << std::to_string( originalRemoteCode ) << "]" << std::endl;

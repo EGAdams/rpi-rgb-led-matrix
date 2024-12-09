@@ -13,7 +13,6 @@
 #define REMOTE_DATA_1 24
 #define REMOTE_DATA_2 40
 #define REMOTE_DATA_3 17
-SCORE
 #define RED_REMOTE_RED_SCORE     1
 #define RED_REMOTE_GREEN_SCORE   2
 #define RED_REMOTE_UNDO          3

@@ -3,7 +3,7 @@
 #define RemoteCodeTranslator_h
 
 #include "../TennisConstants/TennisConstants.h"
-#include "PinInterface.h"
+#include "../PinInterface/PinInterface.h"
 #if defined _WIN32
 #include "TranslateConstant.h"
 #include "Logger.h"
