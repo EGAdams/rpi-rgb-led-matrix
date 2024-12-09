@@ -811,11 +811,12 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
         while ( remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake() ) { // 090724
             print( "inside remote pairing screen from run manual game.  before starting input timer..." );
             selection = inputWithTimer.getInput();
-            if ( selection == 1 ) {
+            print( "selection: " << selection );
+            if ( selection == 7 ) {
                 remotePairingScreen.greenPlayerPressed();
                 pairingBlinker.setGreenPlayerPaired( true );  // Notify blinker that Green player is paired
             }
-            else if ( selection == 2 ) {
+            else if ( selection == 11 ) {
                 remotePairingScreen.redPlayerPressed();
                 pairingBlinker.setRedPlayerPaired( true );  // Notify blinker that Red player is paired
             }
@@ -839,8 +840,8 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
             int selection = inputWithTimer.getInput();
             gameState->setCurrentAction( AFTER_SLEEP_MODE ); // stop sleep mode
             std::cout << "time slept: " << inputWithTimer.getTimeSlept() << std::endl;
-            if ( selection == 1 ||
-                  selection == 2 ||
+            if ( selection == 7 ||
+                  selection == 11 ||
                  ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 ) ) { // and sleep time expired...
                 print( "reset match." );
                 gameObject->resetMatch();
@@ -861,60 +862,19 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
             print( "cleared screen." );
             gameObject->getScoreBoard()->update();
             print( "updated scoreboard." );
-        }
-        else {
+        } else {
             std::cin >> selection;
         }
 
-        if ( selection == 1 || selection == 2 ) {
+        if ( selection == 7 || selection = 11 ) {
+            if ( selection = 7 ) {
+                selection = 1;
+            } else if ( selection = 11 ) {
+                selection = 2;
+            }
             gameObject->playerScore( selection );  // flip the player score flag
             sleep( SCORE_DELAY );
-        }
-        else if ( selection == 8 ) {
-            // get font file from user
-            std::string font_file;
-            std::cout << "Enter the path to the font file: ";
-            std::getline( std::cin, font_file );  // get input from the user
-
-            // Check if file exists
-            std::ifstream file_check( font_file );
-            if ( !file_check ) {
-                std::cerr << "Warning: The specified font file does not exist.\n";
-                return;  // Continue with the program flow without setting the font file
-            }
-
-            // If the file exists, set the font file
-            gameObject->getScoreBoard()->setFontFile( font_file.c_str() );
-        }
-        else if ( selection == 105 ) {
-            std::cout << "reading MCP23017 bits..." << std::endl;
-            int file = open( I2C_DEVICE, O_RDWR );
-
-            if ( file < 0 ) {
-                std::cerr << "Error: Unable to open I2C device.\n";
-                continue;
-            }
-
-            if ( ioctl( file, I2C_SLAVE, MCP23017_ADDRESS ) < 0 ) {
-                std::cerr << "Error: Unable to set I2C address.\n";
-                close( file );
-                continue;
-            }
-            int is_one;
-            while ( 1 ) {
-                std::cin >> is_one;
-                if ( is_one == 1 ) {
-                    break;
-                }
-                else {
-                    readBits( file );
-                }
-            }
-            close( file );
-            continue;
-
-        }
-        else {
+        } else {
             std::cout << "\n\n\n\n\n\n\n*** Invalid selection ***\n" << std::endl;
             sleep( SCORE_DELAY );
             continue;

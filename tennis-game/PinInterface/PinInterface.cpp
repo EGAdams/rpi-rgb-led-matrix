@@ -53,8 +53,8 @@ int PinInterface::_readBits_0_4( int file ) {
 
     uint8_t bits = value & 0x1F;  // Mask bits 0-4
 
-    std::cout << "Binary value: " << std::bitset<5>( bits ) << "\n";
-    std::cout << "Decimal value: " << static_cast< int >( bits ) << "\n";
+    // std::cout << "Binary value: " << std::bitset<5>( bits ) << "\n";
+    // std::cout << "Decimal value: " << static_cast< int >( bits ) << "\n";
     return static_cast< int >( bits );
 }
 
