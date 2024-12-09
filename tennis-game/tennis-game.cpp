@@ -517,15 +517,14 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     gameObject->loopGame();
     sleep( 1 );
     int menu_selection = 1;
-    // int remote_pairing = 1;
+    Inputs* inputs = new Inputs( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
     gameObject->getScoreBoard()->setLittleDrawerFont( "fonts/8x13B.bdf" );
-    // get_and_set_font( gameObject );
     std::signal( SIGINT, GameObject::_signalHandler );
     RemotePairingScreen remotePairingScreen( gameObject->getScoreBoard() );
     print( "constructing pairing blinker from run manual game" );
     PairingBlinker pairingBlinker( gameObject->getScoreBoard() );  // Use PairingBlinker
     print( "constructing input with timer from run manual game" );
-    InputWithTimer inputWithTimer( &pairingBlinker );  // Pass PairingBlinker
+    InputWithTimer inputWithTimer( &pairingBlinker, inputs );  // Pass PairingBlinker
     print( "finished constructing input with timer from run manual game" );
     bool is_on_pi = gameObject->getScoreBoard()->onRaspberryPi();
     print( "is_on_pi: " + std::to_string( is_on_pi ) );
@@ -575,7 +574,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
 
         if ( gameState->getCurrentAction() == SLEEP_MODE ) {
             ScoreboardBlinker blinker( gameObject->getScoreBoard() );
-            InputWithTimer inputWithTimer( &blinker );
+            InputWithTimer inputWithTimer( &blinker, inputs );
             menu_selection = inputWithTimer.getInput();
             gameState->setCurrentAction( AFTER_SLEEP_MODE ); // stop sleep mode
             std::cout << "time slept: " << inputWithTimer.getTimeSlept() << std::endl;
@@ -706,31 +705,32 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         }
         else if ( menu_selection == 105 ) {
             std::cout << "reading MCP23017 bits..." << std::endl;
-            int file = open(I2C_DEVICE, O_RDWR);
+            int file = open( I2C_DEVICE, O_RDWR );
 
-        if (file < 0) {
-            std::cerr << "Error: Unable to open I2C device.\n";
-            continue;
-        }
-
-        if (ioctl(file, I2C_SLAVE, MCP23017_ADDRESS) < 0) {
-            std::cerr << "Error: Unable to set I2C address.\n";
-            close(file);
-            continue;
-        }
-        int is_one;
-        while ( 1 ) {
-            std::cin >> is_one;
-            if ( is_one == 1 ) {
-                break;
-            } else {
-                readBits(file);
+            if ( file < 0 ) {
+                std::cerr << "Error: Unable to open I2C device.\n";
+                continue;
             }
-        }
-        close(file);
-        continue;
 
-        } else if ( menu_selection == 5 ) {
+            if ( ioctl( file, I2C_SLAVE, MCP23017_ADDRESS ) < 0 ) {
+                std::cerr << "Error: Unable to set I2C address.\n";
+                close( file );
+                continue;
+            }
+            int is_one;
+            while ( 1 ) {
+                std::cin >> is_one;
+                if ( is_one == 1 ) {
+                    break;
+                }
+                else {
+                    readBits( file );
+                }
+            }
+            close( file );
+            continue;
+        }
+        else if ( menu_selection == 5 ) {
             resetAll( reset );
             std::cout << "\n\n\n\n\n\n\n*** Test 05 ***\n" << std::endl;
             test_05( gameObject, gameState, &loop_count );
@@ -785,17 +785,157 @@ bool is_on_raspberry_pi() {
     return false;
 }
 
+//// method to sit and listen to remote commands.
+void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* reset, Inputs* inputs ) {
+    int loop_count = 0;
+    int selection = 0;
+    gameObject->loopGame();
+    sleep( 1 );
+    gameObject->getScoreBoard()->setLittleDrawerFont( "fonts/8x13B.bdf" );
+    std::signal( SIGINT, GameObject::_signalHandler );
+    RemotePairingScreen remotePairingScreen( gameObject->getScoreBoard() );
+    print( "constructing pairing blinker from run manual game" );
+    PairingBlinker pairingBlinker( gameObject->getScoreBoard() );  // Use PairingBlinker
+    print( "constructing input with timer from run manual game" );
+    InputWithTimer inputWithTimer( &pairingBlinker, inputs );  // Pass PairingBlinker
+    print( "finished constructing input with timer from run manual game" );
+    bool is_on_pi = gameObject->getScoreBoard()->onRaspberryPi();
+    print( "is_on_pi: " + std::to_string( is_on_pi ) );
+    while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { /*/// Begin Game Loop ///*/
+        print( "entered while loop from run manual game" );
+        sleep( SCORE_DELAY );
+        // if remote pairing, write the words.  if not, snap out of the loop
+        while ( remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake() ) { // 090724
+            print( "inside remote pairing screen from run manual game.  before starting input timer..." );
+            selection = inputWithTimer.getInput();
+            if ( selection == 1 ) {
+                remotePairingScreen.greenPlayerPressed();
+                pairingBlinker.setGreenPlayerPaired( true );  // Notify blinker that Green player is paired
+            }
+            else if ( selection == 2 ) {
+                remotePairingScreen.redPlayerPressed();
+                pairingBlinker.setRedPlayerPaired( true );  // Notify blinker that Red player is paired
+            }
+            else {
+                std::cout << "*** Invalid selection during remote pairing. ***\n";
+                GameTimer::gameDelay( 1000 );
+            }
+        }
+
+        print( "put in sleep mode if the pairing blinker is not awake. " );
+        if ( !pairingBlinker.awake() ) {
+            print( "pairing blinker is not awake, stopping it... " )
+                pairingBlinker.stop();
+            print( "pairing blinker stopped.  now putting in sleep mode..." );
+            gameState->setCurrentAction( SLEEP_MODE );
+        }
+
+        if ( gameState->getCurrentAction() == SLEEP_MODE ) {
+            ScoreboardBlinker blinker( gameObject->getScoreBoard() );
+            InputWithTimer inputWithTimer( &blinker, inputs );
+            int selection = inputWithTimer.getInput();
+            gameState->setCurrentAction( AFTER_SLEEP_MODE ); // stop sleep mode
+            std::cout << "time slept: " << inputWithTimer.getTimeSlept() << std::endl;
+            if ( selection == 1 ||
+                  selection == 2 ||
+                 ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 ) ) { // and sleep time expired...
+                print( "reset match." );
+                gameObject->resetMatch();
+                print( "done resetting match." );
+                if ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 ) {
+                    print( "time slept: " << inputWithTimer.getTimeSlept() / 1000 << " seconds." << std::endl );
+                    print( "clearing History because max sleep time has been reached or exceeded." );
+                    gameObject->getHistory()->clearHistory();
+                    print( "done clearing history because max sleep time has been reached or exceeded." );
+                }
+                continue;
+            }
+            print( "setting game state current action to after sleep mode" );
+            gameState->setCurrentAction( AFTER_SLEEP_MODE );
+            print( "*** Going into last Match! ***" );
+            print( "clearing screen..." );
+            gameObject->getScoreBoard()->clearScreen();
+            print( "cleared screen." );
+            gameObject->getScoreBoard()->update();
+            print( "updated scoreboard." );
+        }
+        else {
+            std::cin >> selection;
+        }
+
+        if ( selection == 1 || selection == 2 ) {
+            gameObject->playerScore( selection );  // flip the player score flag
+            sleep( SCORE_DELAY );
+        }
+        else if ( selection == 8 ) {
+            // get font file from user
+            std::string font_file;
+            std::cout << "Enter the path to the font file: ";
+            std::getline( std::cin, font_file );  // get input from the user
+
+            // Check if file exists
+            std::ifstream file_check( font_file );
+            if ( !file_check ) {
+                std::cerr << "Warning: The specified font file does not exist.\n";
+                return;  // Continue with the program flow without setting the font file
+            }
+
+            // If the file exists, set the font file
+            gameObject->getScoreBoard()->setFontFile( font_file.c_str() );
+        }
+        else if ( selection == 105 ) {
+            std::cout << "reading MCP23017 bits..." << std::endl;
+            int file = open( I2C_DEVICE, O_RDWR );
+
+            if ( file < 0 ) {
+                std::cerr << "Error: Unable to open I2C device.\n";
+                continue;
+            }
+
+            if ( ioctl( file, I2C_SLAVE, MCP23017_ADDRESS ) < 0 ) {
+                std::cerr << "Error: Unable to set I2C address.\n";
+                close( file );
+                continue;
+            }
+            int is_one;
+            while ( 1 ) {
+                std::cin >> is_one;
+                if ( is_one == 1 ) {
+                    break;
+                }
+                else {
+                    readBits( file );
+                }
+            }
+            close( file );
+            continue;
+
+        }
+        else {
+            std::cout << "\n\n\n\n\n\n\n*** Invalid selection ***\n" << std::endl;
+            sleep( SCORE_DELAY );
+            continue;
+        }
+        gameObject->loopGame();  // handle the player score flag
+        loop_count++;
+        std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
+        std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
+    } ///////// End Game Loop /////////
+}
+
 int main( int argc, char* argv[] ) {
     std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );
-    int manual = 0;
+    int mode = 2;           // set menu or read remote mode
     if ( argc > 1 ) {
         std::string arg1 = argv[1];
         if ( arg1 == "--manual" ) {
-            std::cout << "running manual tests..." << std::endl;
-            manual = 1;
+            std::cout << "running menu mode..." << std::endl;
+            mode = 1;
+        }
+        else {
+            std::cout << "running remote listening mode..." << std::endl;
         }
     }
-    manual = 1;  // yes hardcodeing  is bad but ina hurry!! 
     int loop_count = 0;
     std::cout << "creating game state object..." << std::endl;
     GameState* gameState = new GameState();  // make this 1st!!! cost me 3 days
@@ -815,9 +955,17 @@ int main( int argc, char* argv[] ) {
     GameObject* gameObject = new GameObject( gameState, display );
     std::cout << "creating reset object..." << std::endl;
     Reset* reset = new Reset( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
-    if ( manual == 1 ) {
+    Inputs* inputs = new Inputs( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
+    if ( mode == 1 ) {
         std::cout << "running manual game..." << std::endl;
         run_manual_game( gameObject, gameState, reset, 1 ); return 0;
+    }
+    else if ( mode == 2 ) {
+        std::cout << "running game from remote inputs..." << std::endl;
+        run_remote_listener( gameObject, gameState, reset, inputs ); return 0;
+    }
+    else {
+        std::cout << "*** ERROR: unknown mode ***" << std::endl;
     }
     int test_count = 1; ///// run tests /////
     test_count++;

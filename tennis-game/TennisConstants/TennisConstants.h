@@ -7,6 +7,28 @@
 //  Written by Chris Bean for Teensy 4.1 only
 //  re-written in C++ by EG in June 2022
 
+
+/////////////////////// REMOTE DEFINITIONS /////////////////////////////////////
+#define REMOTE_DATA_0 25
+#define REMOTE_DATA_1 24
+#define REMOTE_DATA_2 40
+#define REMOTE_DATA_3 17
+SCORE
+#define RED_REMOTE_RED_SCORE     1
+#define RED_REMOTE_GREEN_SCORE   2
+#define RED_REMOTE_UNDO          3
+#define RED_REMOTE_RESET         4
+#define GREEN_REMOTE_GREEN_SCORE 5
+#define GREEN_REMOTE_RED_SCORE   6
+#define GREEN_REMOTE_UNDO        7
+#define GREEN_REMOTE_RESET       8 // go copilot for those last 3!
+#define NO_REMOTE_BUTTONS        0
+#define UNKNOWN_REMOTE_BUTTON   99
+
+#define STEVE_DELAY            25
+#define REMOTE_READ_DELAY      25
+///////////////////////////////////////////////////////////////////////////////
+
 #define RUNNING_MATCH_TIE_BREAK     "running match tie breaker"
 #define BOTH_PLAYER_BLINK           "blink both players"
 #define PLAYER_1_BLINK              "player1 blink"

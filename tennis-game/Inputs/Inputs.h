@@ -8,6 +8,7 @@
 #include "../Inputs/Inputs.h"
 #include "../Logger/Logger.h"
 #include "../Reset/Reset.h"
+#include "../RemoteCodeTranslator/RemoteCodeTranslator.h"
 
 class Inputs {
  public:
@@ -18,8 +19,10 @@ class Inputs {
   ~Inputs();
   void readReset();
   void readUndoButton();
-  int readRotary();
-  void readPlayerButtons();
+  int  readRotary();
+  int  readRemotePinArray( remoteDataStructure* remoteData );
+  int  readPlayerButtons();
+  int  read_mcp23017_value();
 
  private:
   Player* _player1;
@@ -28,6 +31,7 @@ class Inputs {
   GameState* _gameState;
   Reset _reset;
   Logger* _logger;
+  RemoteCodeTranslator* _remoteCodeTranslator;
 };
 
 #endif

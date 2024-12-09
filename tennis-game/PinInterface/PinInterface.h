@@ -14,10 +14,12 @@ class PinInterface {
     int pinAnalogRead(int pin);
     int pinDigitalRead(int pin);
     std::map<std::string, int> getPinStateMap();
+    int read_mcp23017_value();
 
   private:
     std::map<std::string, int> _pin_map;
     PinState* _pinState;
+    int _readBits_0_4( int file );                    
 };
 
 #endif
