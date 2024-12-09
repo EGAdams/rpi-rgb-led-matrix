@@ -866,10 +866,10 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
             std::cin >> selection;
         }
 
-        if ( selection == 7 || selection = 11 ) {
-            if ( selection = 7 ) {
+        if ( selection == 7 || selection == 11 ) {
+            if ( selection == 7 ) {
                 selection = 1;
-            } else if ( selection = 11 ) {
+            } else if ( selection == 11 ) {
                 selection = 2;
             }
             gameObject->playerScore( selection );  // flip the player score flag
