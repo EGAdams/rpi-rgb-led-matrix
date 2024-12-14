@@ -54,18 +54,20 @@ void GameModes::gameStart() {
         }
         _gameState->setStarted( 1 );
     } else {
-        // std::cout << "Game already started. " << std::endl;
+        // std::cout << "Game already started. " << std::endl; 
     }}
 
-void GameModes::mode1() {
+void GameModes::mode1() { 
     print( "just inside mode1()... " );
     _gameState->setNow( GameTimer::gameMillis());
+    print( "reading undo button..." );
     _inputs.readUndoButton();
     if ( _gameState->getUndo() == 1 ) {  // undo button pressed
         _gameState->setUndo( 0 );
         _undo.mode1Undo( _history );
     }
     // _inputs.readPlayerButtons();  // digital read on player buttons.  sets playerButton if tripped.
+    print( "reading _inputs.read_mcp23017_value()..." );
     int button_read = _inputs.read_mcp23017_value();
     print( "read button:" << button_read );
     _serveLeds.serveSwitch(); // if serveSwitch >= 2, serveSwitch = 0; and toggle serve variable
