@@ -1,5 +1,5 @@
-In the following C++ code, the system listens on its GPIO pins for a remote that is connected to the system.  I want the system to listen to keyboard inputs as well.  Please modify the following code to listen for keyboard ( cin ) and remote inputs.
-```cpp
+In the following C++ code, the system listens on its GPIO pins for a remote that is connected to the system.   When any key on the keyboard is pressed, I need to be able to , so we will need to listen to keyboard inputs as well.  Please modify the following code to listen for keyboard ( << cin ) and remote inputs so that we are able to break out of the while loop when the remotes are not available. 
+cpp
 void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* reset, Inputs* inputs ) {
     print( "entered run remote listener method..." );
     int loop_count = 0;
@@ -100,5 +100,3 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
         std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
     } ///////// End Game Loop /////////
 }
-```
-Also, please remove the excessive print statements 

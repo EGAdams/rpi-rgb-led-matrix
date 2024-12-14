@@ -40,6 +40,8 @@
 
 using namespace rgb_matrix;
 #define SCORE_DELAY    0
+#define REMOTE_SPIN_DELAY 100
+#define SLEEP_AFTER_REMOTE_SCORE 200
 #define MAX_LOOP_COUNT 350
 #define A_SPACE        13
 #define FOUR_SPACE     14
@@ -827,7 +829,7 @@ void run_remote_listener(GameObject* gameObject, GameState* gameState, Reset* re
     std::thread keyboardThread(keyboardListener);
 
     while (gameState->gameRunning() && GameObject::gSignalStatus != SIGINT && !stopListening.load()) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(SCORE_DELAY));
+        std::this_thread::sleep_for(std::chrono::milliseconds( REMOTE_SPIN_DELAY ));
 
         while (remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake()) {
             selection = inputWithTimer.getInput();
@@ -867,7 +869,7 @@ void run_remote_listener(GameObject* gameObject, GameState* gameState, Reset* re
 
         if (selection == 7 || selection == 11) {
             gameObject->playerScore(selection == 7 ? 1 : 2);
-            std::this_thread::sleep_for(std::chrono::milliseconds(SCORE_DELAY));
+            std::this_thread::sleep_for(std::chrono::milliseconds( SLEEP_AFTER_REMOTE_SCORE ));
         }
 
         gameObject->loopGame();
@@ -882,7 +884,7 @@ void run_remote_listener(GameObject* gameObject, GameState* gameState, Reset* re
 
 int main( int argc, char* argv[] ) {
     std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );
-    int mode = 2;           // set menu or read remote mode
+    int mode = 1;           // set menu or read remote mode
     if ( argc > 1 ) {
         std::string arg1 = argv[1];
         if ( arg1 == "--manual" ) {
