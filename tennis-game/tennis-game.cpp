@@ -40,8 +40,6 @@
 
 using namespace rgb_matrix;
 #define SCORE_DELAY    0
-#define REMOTE_SPIN_DELAY 100
-#define SLEEP_AFTER_REMOTE_SCORE 200
 #define MAX_LOOP_COUNT 350
 #define A_SPACE        13
 #define FOUR_SPACE     14
@@ -913,11 +911,6 @@ void run_remote_listener(GameObject* gameObject, GameState* gameState, Reset* re
 // #include "PairingBlinker.h"
 // #include "ScoreboardBlinker.h"
 // #include "GameTimer.h"
-
-constexpr int REMOTE_SPIN_DELAY = 100; // Example delay
-constexpr int SLEEP_AFTER_REMOTE_SCORE = 500;
-constexpr int MAX_SLEEP = 300; // seconds
-constexpr int SCORE_DELAY = 1; // seconds
 
 // Define global stop flag
 std::atomic<bool> stopListening(false);
