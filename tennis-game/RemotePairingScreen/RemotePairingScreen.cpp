@@ -76,7 +76,7 @@ void RemotePairingScreen::clearRedPlayerText() {
 
 void RemotePairingScreen::clearAllText() {
     std::cout << "Both players paired, starting the game...\n";
-    // check _scoreboad for null pointer
+    // check _scoreboard for null pointer
     if (_scoreboard != nullptr) {
         Color yellow_color( 255, 255, 0 );
         print( "setting drawer foreground to yellow... " );

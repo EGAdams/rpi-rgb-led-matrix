@@ -583,13 +583,6 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             if ( menu_selection == 1 ||
                   menu_selection == 2 ||
                  ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 ) ) { // and sleep time expired...
-                // if the pairing caused the sleep mode, just go back to pairing mode
-                // if ( !pairingBlinker.awake() ) {
-                //     print( "pairing blinker is sleeping.  going back to pairing mode..." );
-                //     gameState->setCurrentAction( NORMAL_GAME_STATE );
-                //     pairingBlinker.sleepModeOff();  // wake up the pairing blinker
-                //     continue;
-                // }
                 print( "reset match." );
                 gameObject->resetMatch();
                 print( "done resetting match." );
@@ -902,9 +895,256 @@ void run_remote_listener(GameObject* gameObject, GameState* gameState, Reset* re
 }
 // end bot code
 
+// 121424
+// 4o mini reasoner stab at listening to the keyboard and the gpio pins at the same time.
+// libraries for this method that combines remote and keyboard listening.
+#include <queue>
+#include <chrono>
+#include <functional>
+//
+
+// Assuming necessary headers for GPIO and other components are included
+// #include "Blinker.h"
+// #include "Inputs.h"
+// #include "GameObject.h"
+// #include "GameState.h"
+// #include "Reset.h"
+// #include "RemotePairingScreen.h"
+// #include "PairingBlinker.h"
+// #include "ScoreboardBlinker.h"
+// #include "GameTimer.h"
+
+constexpr int REMOTE_SPIN_DELAY = 100; // Example delay
+constexpr int SLEEP_AFTER_REMOTE_SCORE = 500;
+constexpr int MAX_SLEEP = 300; // seconds
+constexpr int SCORE_DELAY = 1; // seconds
+
+// Define global stop flag
+std::atomic<bool> stopListening(false);
+
+// Thread-safe queue implementation
+template<typename T>
+class ThreadSafeQueue {
+private:
+    std::queue<T> queue_;
+    std::mutex mutex_;
+    std::condition_variable cond_;
+public:
+    void enqueue(const T& value) {
+        {
+            std::lock_guard<std::mutex> lock(mutex_);
+            queue_.push(value);
+        }
+        cond_.notify_one();
+    }
+
+    bool dequeue(T& result) {
+        std::unique_lock<std::mutex> lock(mutex_);
+        while (queue_.empty() && !stopListening.load()) {
+            cond_.wait(lock);
+        }
+        if (queue_.empty()) {
+            return false;
+        }
+        result = queue_.front();
+        queue_.pop();
+        return true;
+    }
+
+    void clear() {
+        std::lock_guard<std::mutex> lock(mutex_);
+        while (!queue_.empty()) queue_.pop();
+    }
+};
+
+// Input Listener Interface
+class IInputListener {
+public:
+    virtual void startListening() = 0;
+    virtual void stopListeningInput() = 0;
+    virtual ~IInputListener() {}
+};
+
+// Keyboard Listener Implementation
+class KeyboardInputListener : public IInputListener {
+private:
+    ThreadSafeQueue<int>* inputQueue_;
+    std::thread listenerThread_;
+    std::atomic<bool> listening_;
+public:
+    KeyboardInputListener(ThreadSafeQueue<int>* queue)
+        : inputQueue_(queue), listening_(false) {}
+
+    void startListening() override {
+        listening_ = true;
+        listenerThread_ = std::thread([this]() {
+            while (listening_.load() && !stopListening.load()) {
+                int input;
+                if (std::cin >> input) {
+                    inputQueue_->enqueue(input);
+                } else {
+                    // Handle EOF or invalid input
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                }
+            }
+        });
+    }
+
+    void stopListeningInput() override {
+        listening_ = false;
+        if (listenerThread_.joinable()) {
+            listenerThread_.join();
+        }
+    }
+
+    ~KeyboardInputListener() {
+        stopListeningInput();
+    }
+};
+
+// Remote Listener Implementation
+class RemoteInputListener : public IInputListener {
+private:
+    ThreadSafeQueue<int>* inputQueue_;
+    std::thread listenerThread_;
+    std::atomic<bool> listening_;
+    Inputs* inputs_;
+    Blinker* blinker_;
+public:
+    RemoteInputListener(ThreadSafeQueue<int>* queue, Blinker* blinker, Inputs* inputs)
+        : inputQueue_(queue), blinker_(blinker), inputs_(inputs), listening_(false) {}
+
+    void startListening() override {
+        listening_ = true;
+        listenerThread_ = std::thread([this]() {
+            InputWithTimer inputWithTimer(blinker_, inputs_);
+            while (listening_.load() && !stopListening.load()) {
+                int selection = inputWithTimer.getInput();
+                inputQueue_->enqueue(selection);
+                std::this_thread::sleep_for(std::chrono::milliseconds(REMOTE_SPIN_DELAY));
+            }
+        });
+    }
+
+    void stopListeningInput() override {
+        listening_ = false;
+        if (listenerThread_.joinable()) {
+            listenerThread_.join();
+        }
+    }
+
+    ~RemoteInputListener() {
+        stopListeningInput();
+    }
+};
+
+// Signal Handler
+void signalHandler(int signum) {
+    stopListening.store(true);
+}
+
+// The new run_remote_keyboard method
+void run_remote_keyboard(GameObject* gameObject, GameState* gameState, Reset* reset, Inputs* inputs) {
+    // Register signal handler
+    std::signal(SIGINT, signalHandler);
+
+    // Initialize components
+    gameObject->loopGame();
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    gameObject->getScoreBoard()->setLittleDrawerFont("fonts/8x13B.bdf");
+
+    RemotePairingScreen remotePairingScreen(gameObject->getScoreBoard());
+    PairingBlinker pairingBlinker(gameObject->getScoreBoard());
+    bool is_on_pi = gameObject->getScoreBoard()->onRaspberryPi();
+
+    // Initialize thread-safe input queue
+    ThreadSafeQueue<int> inputQueue;
+
+    // Initialize input listeners
+    KeyboardInputListener keyboardListener(&inputQueue);
+    RemoteInputListener remoteListener(&inputQueue, &pairingBlinker, inputs);
+
+    // Start listening
+    keyboardListener.startListening();
+    remoteListener.startListening();
+
+    // Main loop
+    while (gameState->gameRunning() && !stopListening.load()) {
+        // Process inputs from the queue
+        int selection = 0;
+        while (inputQueue.dequeue(selection)) {
+            // Handle the selection
+            if (remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake()) {
+                if (selection == 7) {
+                    remotePairingScreen.greenPlayerPressed();
+                    pairingBlinker.setGreenPlayerPaired(true);
+                } else if (selection == 11) {
+                    remotePairingScreen.redPlayerPressed();
+                    pairingBlinker.setRedPlayerPaired(true);
+                } else {
+                    // Handle other remote selections if necessary
+                }
+            } else if (gameState->getCurrentAction() == SLEEP_MODE) {
+                // Handle sleep mode selections
+                ScoreboardBlinker blinker(gameObject->getScoreBoard());
+                InputWithTimer sleepInput(&blinker, inputs);
+                if (selection == 7 || selection == 11 || sleepInput.getTimeSlept() > MAX_SLEEP * 1000) {
+                    gameObject->resetMatch();
+                    if (sleepInput.getTimeSlept() > MAX_SLEEP * 1000) {
+                        gameObject->getHistory()->clearHistory();
+                    }
+                    continue;
+                }
+                gameObject->getScoreBoard()->clearScreen();
+                gameObject->getScoreBoard()->update();
+            } else {
+                // Handle manual (keyboard) inputs
+                switch (selection) {
+                    case 1:
+                    case 2:
+                        gameObject->playerScore(selection);
+                        std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_AFTER_REMOTE_SCORE));
+                        break;
+                    case 20:
+                        // Handle menu selection 20
+                        std::cout << "Enter the message to write: ";
+                        {
+                            std::string message;
+                            std::cin >> message;
+                            gameObject->getScoreBoard()->clearScreen();
+                            gameObject->getScoreBoard()->drawNewText(message, 5, 20);
+                            GameTimer::gameDelay(1000);
+                        }
+                        break;
+                    // Handle other menu selections as needed
+                    default:
+                        std::cout << "*** Invalid selection ***\n" << std::endl;
+                        break;
+                }
+            }
+        }
+
+        // Additional game loop processing
+        gameObject->loopGame();
+        std::this_thread::sleep_for(std::chrono::milliseconds(REMOTE_SPIN_DELAY));
+    }
+
+    // Signal listeners to stop
+    stopListening.store(true);
+    keyboardListener.stopListeningInput();
+    remoteListener.stopListeningInput();
+
+    // Clear the input queue
+    inputQueue.clear();
+
+    // Join threads if necessary (handled in listener destructors)
+}
+
+
 int main( int argc, char* argv[] ) {
     std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );
-    int mode = 1;           // set menu or read remote mode
+    int mode = 3;           // set menu or read remote mode.. or both!
     if ( argc > 1 ) {
         std::string arg1 = argv[1];
         if ( arg1 == "--manual" ) {
@@ -942,8 +1182,10 @@ int main( int argc, char* argv[] ) {
         std::cout << "running game from remote inputs..." << std::endl;
         run_remote_listener( gameObject, gameState, reset, inputs );
         return 0;
-    }
-    else {
+    } else if ( mode == 3 ) {
+        std::cout << "running both manual and remote game..." << std::endl;
+        run_remote_keyboard( gameObject, gameState, reset, inputs );
+    } else {
         std::cout << "*** ERROR: unknown mode ***" << std::endl;
     }
     int test_count = 1; ///// run tests /////
