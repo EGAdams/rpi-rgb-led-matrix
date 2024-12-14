@@ -39,6 +39,8 @@
 #include <bitset>
 
 using namespace rgb_matrix;
+#define REMOTE_SPIN_DELAY 200
+#define SLEEP_AFTER_REMOTE_SCORE 200
 #define SCORE_DELAY    0
 #define MAX_LOOP_COUNT 350
 #define A_SPACE        13
