@@ -1041,15 +1041,18 @@ void signalHandler(int signum) {
 
 // The new run_remote_keyboard method
 void run_remote_keyboard(GameObject* gameObject, GameState* gameState, Reset* reset, Inputs* inputs) {
-    // Register signal handler
+    print( "registering signal handler..." );
     std::signal(SIGINT, signalHandler);
 
-    // Initialize components
+    print( "calling gameObject->loopGame()..." );
     gameObject->loopGame();
     std::this_thread::sleep_for(std::chrono::seconds(1));
     gameObject->getScoreBoard()->setLittleDrawerFont("fonts/8x13B.bdf");
 
+    print( "constructing remotePairingScreen..." );
     RemotePairingScreen remotePairingScreen(gameObject->getScoreBoard());
+
+    print( "constructing page blinker..." );
     PairingBlinker pairingBlinker(gameObject->getScoreBoard());
     bool is_on_pi = gameObject->getScoreBoard()->onRaspberryPi();
 
@@ -1060,12 +1063,12 @@ void run_remote_keyboard(GameObject* gameObject, GameState* gameState, Reset* re
     KeyboardInputListener keyboardListener(&inputQueue);
     RemoteInputListener remoteListener(&inputQueue, &pairingBlinker, inputs);
 
-    // Start listening
-    keyboardListener.startListening();
+    print( "starting keyboard and remote listeners..." );
+    keyboardListener.startListening(); // Start listening
     remoteListener.startListening();
 
-    // Main loop
-    while (gameState->gameRunning() && !stopListening.load()) {
+    print( "entering main loop..." );
+    while (gameState->gameRunning() && !stopListening.load()) {  // Main loop
         // Process inputs from the queue
         int selection = 0;
         while (inputQueue.dequeue(selection)) {
@@ -1120,20 +1123,17 @@ void run_remote_keyboard(GameObject* gameObject, GameState* gameState, Reset* re
             }
         }
 
-        // Additional game loop processing
+        print( "calling gameObject->loopGame()..." );
         gameObject->loopGame();
         std::this_thread::sleep_for(std::chrono::milliseconds(REMOTE_SPIN_DELAY));
     }
-
-    // Signal listeners to stop
-    stopListening.store(true);
+   
+    stopListening.store(true);              // Signal listeners to stop
     keyboardListener.stopListeningInput();
     remoteListener.stopListeningInput();
 
-    // Clear the input queue
-    inputQueue.clear();
-
-    // Join threads if necessary (handled in listener destructors)
+    inputQueue.clear();                     // Clear the input queue
+    print( "end of run remote_keyboard method. " );
 }
 
 
