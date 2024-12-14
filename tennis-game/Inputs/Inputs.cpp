@@ -108,11 +108,11 @@ int Inputs::readPlayerButtons() {
     if (( freshRemoteCode == originalRemoteCode ) && ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON )) {  // known code and a match?
         while(( freshRemoteCode == originalRemoteCode ) && ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON )) {
             #if defined _WIN32  // got a matching measurement gameDelay( x ) apart.  entering while...
-            std::cout <<  "inside while.  freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" << std::endl;
+            // std::cout <<  "inside while.  freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" << std::endl;
             #endif
             GameTimer::gameDelay( REMOTE_READ_DELAY ); //  wait 250ms, then get a fresh one...
             #if defined _WIN32
-            std::cout << "after delay within while reading getting fresh remote code again to verify" << std::endl;
+            // std::cout << "after delay within while reading getting fresh remote code again to verify" << std::endl;
             #endif
             freshRemoteCode = this->readRemotePinArray( remoteData );
             #if defined _WIN32
@@ -120,7 +120,7 @@ int Inputs::readPlayerButtons() {
                                         "[" + std::to_string( remoteData->pin_2 ) + "], " +
                                         "[" + std::to_string( remoteData->pin_3 ) + "], " +
                                         "[" + std::to_string( remoteData->pin_4 ) + "]  ", "translatedRemoteCode()" ); 
-            std::cout << "after delay within while; freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" << std::endl;
+            // std::cout << "after delay within while; freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" << std::endl;
             #endif
         }
         #if defined _WIN32
@@ -142,7 +142,7 @@ int Inputs::readPlayerButtons() {
             GameTimer::gameDelay( REMOTE_READ_DELAY ); //  wait 250ms, then get a fresh one...
             // std::cout << "after delay within while reading getting fresh remote code again to verify" << std::endl;
             freshRemoteCode = _pinInterface->read_mcp23017_value();
-            std::cout << "after delay within while; freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" << std::endl;
+            // std::cout << "after delay within while; freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" << std::endl;
         }
         std::cout << "exited while.  *** CODE IS VALID ***.  returning originalRemoteCode [" << std::to_string( originalRemoteCode ) << "]" << std::endl;
         return originalRemoteCode;
