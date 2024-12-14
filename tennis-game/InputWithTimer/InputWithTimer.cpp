@@ -7,8 +7,8 @@ InputWithTimer::InputWithTimer( Blinker* blinker, Inputs* inputs ) : _blinker( b
 }
 InputWithTimer::~InputWithTimer() {}
 
-# define REMOTE_INPUT 1
-# define MANUAL_INPUT 0
+# define REMOTE_INPUT 0
+# define MANUAL_INPUT 1
 
 int InputWithTimer::getInput() {
     unsigned long sleep_start = GameTimer::gameMillis(); // Mark start time with game timer

@@ -918,10 +918,10 @@ int main( int argc, char* argv[] ) {
     if ( mode == 1 ) {
         std::cout << "running manual game..." << std::endl;
         run_manual_game( gameObject, gameState, reset, 1 ); return 0;
-    }
-    else if ( mode == 2 ) {
+    } else if ( mode == 2 ) {
         std::cout << "running game from remote inputs..." << std::endl;
-        run_remote_listener( gameObject, gameState, reset, inputs ); return 0;
+        run_remote_listener( gameObject, gameState, reset, inputs );
+        return 0;
     }
     else {
         std::cout << "*** ERROR: unknown mode ***" << std::endl;
