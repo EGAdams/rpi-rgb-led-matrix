@@ -915,7 +915,7 @@ void run_remote_listener(GameObject* gameObject, GameState* gameState, Reset* re
 // #include "GameTimer.h"
 
 // Define global stop flag
-std::atomic<bool> stopListening(false);
+// std::atomic<bool> stopListening(false);
 
 // Thread-safe queue implementation
 template<typename T>
