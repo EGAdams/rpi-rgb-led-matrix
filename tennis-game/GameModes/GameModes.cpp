@@ -58,7 +58,7 @@ void GameModes::gameStart() {
     }}
 
 void GameModes::mode1() {
-    
+    print( "just inside mode1()... " );
     _gameState->setNow( GameTimer::gameMillis());
     _inputs.readUndoButton();
     if ( _gameState->getUndo() == 1 ) {  // undo button pressed
@@ -115,6 +115,7 @@ void GameModes::runGameMode( int rotaryPosition ) {
 
     case 1:
         gameStart();  // sets gameStart to true. resets player and score board.
+        print( "starting mode1() from case: 1 ... " );
         mode1();
         break;
 
@@ -282,6 +283,7 @@ void GameModes::runGameMode( int rotaryPosition ) {
         gameStart();
         _player1->setPoints( 5 );
         _pointLeds.updatePoints();
+        print( "calling mode1() from case 5: ..." );
         mode1(); // <----------------- ENTRY POINT -------------------<<
         break;
     }
