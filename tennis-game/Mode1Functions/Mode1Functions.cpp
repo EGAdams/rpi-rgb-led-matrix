@@ -23,12 +23,13 @@ void Mode1Functions::setScoreBoard( ScoreBoard* scoreBoard ) {
     _mode1Score.setScoreBoard( scoreBoard ); }
 
 void Mode1Functions::mode1ButtonFunction() {
-    
+    print( "just inside mode1ButtonFunction()..." );
     switch ( _gameState->getPlayerButton()) {
     case 0:
         break;
 
     case 1: // Player 1 Score
+        print( "player 1 score..." );
         _undo.snapshot( _history );
         if ( _gameState->getPointFlash() == 1 ) {
             _gameState->setPointFlash( 0 );
@@ -50,6 +51,7 @@ void Mode1Functions::mode1ButtonFunction() {
         break;
 
     case 2: // Player 2 Score
+        print( "player 2 score..." );
         _undo.snapshot( _history );
         if ( _gameState->getPointFlash() == 1 ) {
             _gameState->setPointFlash( 0 );
@@ -70,6 +72,7 @@ void Mode1Functions::mode1ButtonFunction() {
         _undo.mode1Undo( _history );
         break; 
     } // end switch ( _gameState->getPlayerButton())
+    print( "leaving mode1ButtonFunction()..." );
     _gameState->setPlayerButton( 0 );   // reset player button here!
 }
 
