@@ -138,7 +138,7 @@ int Inputs::readPlayerButtons() {
     int freshRemoteCode = _pinInterface->read_mcp23017_value();
     if (( freshRemoteCode == originalRemoteCode ) && ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON )) {  // known code and a match?
         while(( freshRemoteCode == originalRemoteCode ) && ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON )) {
-            std::cout <<  "inside while.  freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" << std::endl;
+            // std::cout <<  "inside while.  freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" << std::endl;
             GameTimer::gameDelay( REMOTE_READ_DELAY ); //  wait 250ms, then get a fresh one...
             // std::cout << "after delay within while reading getting fresh remote code again to verify" << std::endl;
             freshRemoteCode = _pinInterface->read_mcp23017_value();
