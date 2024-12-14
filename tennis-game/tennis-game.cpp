@@ -811,27 +811,66 @@ void keyboardListener() {
 }
 
 //// method to sit and listen to remote commands.
+// Add this new method to handle keyboard menu interactions
+void handleKeyboardMenu(GameObject* gameObject, GameState* gameState, Reset* reset) {
+    std::cout << "\nMenu Options:\n";
+    std::cout << "1. Reset Match\n";
+    std::cout << "2. Toggle Sleep Mode\n";
+    std::cout << "3. Change Font\n";
+    std::cout << "4. Run Demo\n";
+    std::cout << "5. Exit\n";
+    
+    int choice;
+    std::cin >> choice;
+    
+    switch(choice) {
+        case 1:
+            resetAll(reset);
+            break;
+        case 2:
+            gameState->setCurrentAction(
+                gameState->getCurrentAction() == SLEEP_MODE ? NORMAL_GAME_STATE : SLEEP_MODE
+            );
+            break;
+        case 3:
+            get_and_set_font(gameObject);
+            break;
+        case 4:
+            demo_test(gameObject, gameState, nullptr);
+            break;
+        case 5:
+            stopListening.store(true);
+            break;
+    }
+    gameObject->getScoreBoard()->update();
+}
+
 void run_remote_listener(GameObject* gameObject, GameState* gameState, Reset* reset, Inputs* inputs) {
-    int loop_count = 0;
     int selection = 0;
-
     gameObject->loopGame();
-    std::this_thread::sleep_for(std::chrono::seconds(1));
-    gameObject->getScoreBoard()->setLittleDrawerFont("fonts/8x13B.bdf");
-    std::signal(SIGINT, GameObject::_signalHandler);
-
+    
     RemotePairingScreen remotePairingScreen(gameObject->getScoreBoard());
     PairingBlinker pairingBlinker(gameObject->getScoreBoard());
     InputWithTimer inputWithTimer(&pairingBlinker, inputs);
-
+    
     bool is_on_pi = gameObject->getScoreBoard()->onRaspberryPi();
+    
+    // Create a separate thread for keyboard input
+    std::thread keyboardThread([&]() {
+        while (!stopListening.load()) {
+            if (std::cin.peek() != EOF) {
+                handleKeyboardMenu(gameObject, gameState, reset);
+            }
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        }
+    });
 
-    std::thread keyboardThread(keyboardListener);
-
+    // Main loop handling remote inputs
     while (gameState->gameRunning() && GameObject::gSignalStatus != SIGINT && !stopListening.load()) {
-        std::this_thread::sleep_for(std::chrono::milliseconds( REMOTE_SPIN_DELAY ));
+        std::this_thread::sleep_for(std::chrono::milliseconds(REMOTE_SPIN_DELAY));
 
-        while (remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake()) {
+        // Handle remote pairing
+        if (remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake()) {
             selection = inputWithTimer.getInput();
             if (selection == 7) {
                 remotePairingScreen.greenPlayerPressed();
@@ -842,38 +881,18 @@ void run_remote_listener(GameObject* gameObject, GameState* gameState, Reset* re
             }
         }
 
+        // Handle sleep mode and remote scoring
         if (!pairingBlinker.awake()) {
             pairingBlinker.stop();
             gameState->setCurrentAction(SLEEP_MODE);
         }
 
-        if (gameState->getCurrentAction() == SLEEP_MODE) {
-            ScoreboardBlinker blinker(gameObject->getScoreBoard());
-            InputWithTimer sleepInput(&blinker, inputs);
-            selection = sleepInput.getInput();
-
-            gameState->setCurrentAction(AFTER_SLEEP_MODE);
-            if (selection == 7 || selection == 11 || sleepInput.getTimeSlept() > MAX_SLEEP * 1000) {
-                gameObject->resetMatch();
-                if (sleepInput.getTimeSlept() > MAX_SLEEP * 1000) {
-                    gameObject->getHistory()->clearHistory();
-                }
-                continue;
-            }
-
-            gameObject->getScoreBoard()->clearScreen();
-            gameObject->getScoreBoard()->update();
-        } else {
-            selection = inputs->read_mcp23017_value();
-        }
-
+        selection = inputs->read_mcp23017_value();
         if (selection == 7 || selection == 11) {
             gameObject->playerScore(selection == 7 ? 1 : 2);
-            std::this_thread::sleep_for(std::chrono::milliseconds( SLEEP_AFTER_REMOTE_SCORE ));
+            std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_AFTER_REMOTE_SCORE));
+            gameObject->loopGame();
         }
-
-        gameObject->loopGame();
-        loop_count++;
     }
 
     stopListening.store(true);
@@ -881,6 +900,7 @@ void run_remote_listener(GameObject* gameObject, GameState* gameState, Reset* re
         keyboardThread.join();
     }
 }
+// end bot code
 
 int main( int argc, char* argv[] ) {
     std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );
