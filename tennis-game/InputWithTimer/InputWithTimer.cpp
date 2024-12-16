@@ -11,7 +11,7 @@ InputWithTimer::~InputWithTimer() {}
 # define MANUAL_INPUT 1
 
 int InputWithTimer::getInput() {
-    unsigned long sleep_start = GameTimer::gameMillis(); // Mark start time with game timer
+    unsigned long sleep_start = GameTimer::gameMillis(); // initialize start time with game timer
     int selection;
     bool done = false;  
     print( "starting blinker from within InputWithTimer..." );

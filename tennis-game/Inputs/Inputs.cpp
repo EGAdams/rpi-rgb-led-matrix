@@ -130,22 +130,25 @@ int Inputs::readPlayerButtons() {
     }
  }
 
- int Inputs::read_mcp23017_value() {
+// these libraries need to be included for the below to work.  
+#include <atomic>
+#include <thread>
+#include <future>
+// Updated read_mcp23017_value method to handle stable remote reading
+int Inputs::read_mcp23017_value() {
     int originalRemoteCode = _pinInterface->read_mcp23017_value();
     GameTimer::gameDelay( STEVE_DELAY ); // that delay steve was talking about...
     int freshRemoteCode = _pinInterface->read_mcp23017_value();
-    if (( freshRemoteCode == originalRemoteCode ) && ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON )) {  // known code and a match?
-        print( "entering while reading remote codes..." );
-        while(( freshRemoteCode == originalRemoteCode ) && ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON )) {
-            // std::cout <<  "inside while.  freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" << std::endl;
-            GameTimer::gameDelay( REMOTE_READ_DELAY ); //  wait 250ms, then get a fresh one...
-            // std::cout << "after delay within while reading getting fresh remote code again to verify" << std::endl;
+
+    if ((freshRemoteCode == originalRemoteCode) && (freshRemoteCode != UNKNOWN_REMOTE_BUTTON)) {
+        print("Entering while loop for remote codes...");
+        while ((freshRemoteCode == originalRemoteCode) && (freshRemoteCode != UNKNOWN_REMOTE_BUTTON)) {
+            GameTimer::gameDelay(REMOTE_READ_DELAY);
             freshRemoteCode = _pinInterface->read_mcp23017_value();
-            // std::cout << "after delay within while; freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" << std::endl;
         }
-        std::cout << "exited while.  *** CODE IS VALID ***.  returning originalRemoteCode [" << std::to_string( originalRemoteCode ) << "]" << std::endl;
+        std::cout << "Exited while. *** CODE IS VALID ***. Returning originalRemoteCode [" << originalRemoteCode << "]" << std::endl;
         return originalRemoteCode;
-    } else {                        // false alarm.  we DO NOT have a matching measurement gameDelay( x ) apart.
+    } else {
         return UNKNOWN_REMOTE_BUTTON;
     }
- }
+}
