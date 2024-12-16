@@ -145,6 +145,23 @@ int Inputs::read_mcp23017_value() {
         while ((freshRemoteCode == originalRemoteCode) && (freshRemoteCode != UNKNOWN_REMOTE_BUTTON)) {
             GameTimer::gameDelay(REMOTE_READ_DELAY);
             freshRemoteCode = _pinInterface->read_mcp23017_value();
+            int selection = 0; // Check for inputs from keyboard and remote
+            if ( inputQueue.dequeue( selection )) {
+                if ( remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake()) {
+                    if (selection == 7) {
+                        remotePairingScreen.greenPlayerPressed();
+                        pairingBlinker.setGreenPlayerPaired(true);
+                    } else if (selection == 11) {
+                        remotePairingScreen.redPlayerPressed();
+                        pairingBlinker.setRedPlayerPaired(true);
+                    } else {
+                        print("Invalid selection.");
+                    }
+                } else {
+                    print("Processing input selection: " << selection);
+                    gameObject->processSelection(selection);
+                }
+            }
         }
         std::cout << "Exited while. *** CODE IS VALID ***. Returning originalRemoteCode [" << originalRemoteCode << "]" << std::endl;
         return originalRemoteCode;

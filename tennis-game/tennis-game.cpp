@@ -882,41 +882,6 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
 #include <chrono>
 #include <functional>
 
-// Thread-safe queue implementation
-template<typename T>
-class ThreadSafeQueue {
-private:
-    std::queue<T> queue_;
-    std::mutex mutex_;
-    std::condition_variable cond_;
-public:
-    void enqueue( const T& value ) {
-        {
-            std::lock_guard<std::mutex> lock( mutex_ );
-            queue_.push( value );
-        }
-        cond_.notify_one();
-    }
-
-    bool dequeue( T& result ) {
-        std::unique_lock<std::mutex> lock( mutex_ );
-        while ( queue_.empty() && !stopListening.load() ) {
-            cond_.wait( lock );
-        }
-        if ( queue_.empty() ) {
-            return false;
-        }
-        result = queue_.front();
-        queue_.pop();
-        return true;
-    }
-
-    void clear() {
-        std::lock_guard<std::mutex> lock( mutex_ );
-        while ( !queue_.empty() ) queue_.pop();
-    }
-};
-
 // Input Listener Interface
 class IInputListener {
 public:
