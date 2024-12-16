@@ -1169,23 +1169,6 @@ void run_remote_keyboard(GameObject* gameObject, GameState* gameState, Reset* re
 // Fix for simultaneous keyboard and remote input handling // 121624
 #include <future>
 
-// Updated read_mcp23017_value method to handle continuous remote reading
-int Inputs::read_mcp23017_value_continuous() {
-    int originalRemoteCode = _pinInterface->read_mcp23017_value();
-    GameTimer::gameDelay(STEVE_DELAY); 
-    int freshRemoteCode = _pinInterface->read_mcp23017_value();
-
-    while ((freshRemoteCode == originalRemoteCode) && (freshRemoteCode != UNKNOWN_REMOTE_BUTTON)) {
-        GameTimer::gameDelay(REMOTE_READ_DELAY);
-        freshRemoteCode = _pinInterface->read_mcp23017_value();
-    }
-    if (originalRemoteCode != UNKNOWN_REMOTE_BUTTON) {
-        std::cout << "*** CODE IS VALID ***. Returning originalRemoteCode [" << originalRemoteCode << "]" << std::endl;
-        return originalRemoteCode;
-    }
-    return UNKNOWN_REMOTE_BUTTON;
-}
-
 int main( int argc, char* argv[] ) {
     std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );
     int mode = 3;           // set menu or read remote mode.. or both!
