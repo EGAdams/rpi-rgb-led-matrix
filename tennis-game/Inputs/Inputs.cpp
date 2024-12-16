@@ -17,9 +17,7 @@ Inputs::Inputs( Player* player1,
     _logger = new Logger( "Inputs" );
 }
 
-Inputs::~Inputs() {
-    // std::cout << "*** Inputs destructor called. ***" << std::endl;
-    delete _logger; }
+Inputs::~Inputs() { /* std::cout << "*** Inputs destructor called. ***" << std::endl; */ delete _logger; }
 
 void Inputs::readReset() {
     if ( _pinInterface->pinDigitalRead( RESET ) == LOW ) {

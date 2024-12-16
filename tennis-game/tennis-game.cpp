@@ -410,27 +410,6 @@ void seven_six_tb_test( GameObject* gameObject, GameState* gameState, int* loop_
     playerWin( gameObject, gameState, 1 );
 }
 
-
-void test_06( GameObject* gameObject, GameState* gameState, int* loop_count ) {
-    gameObject->getScoreBoard()->clearScreen(); // Initialize the game state
-    gameObject->getPlayer1()->setPoints( 0 );
-    gameState->setPlayer1Points( 0 );
-    gameObject->getPlayer2()->setPoints( 0 );
-    gameState->setPlayer2Points( 0 );
-    gameObject->getPlayer1()->setGames( 5 );
-    gameObject->getPlayer2()->setGames( 4 );
-    playerWin( gameObject, gameState, 1 ); // Player 1 wins the first set
-    gameObject->getPlayer1()->setPoints( 0 ); // Reset points for the next set
-    gameState->setPlayer1Points( 0 );
-    gameObject->getPlayer2()->setPoints( 0 );
-    gameState->setPlayer2Points( 0 );
-    gameObject->getPlayer1()->setGames( 5 );
-    gameObject->getPlayer2()->setGames( 4 );
-    playerWin( gameObject, gameState, 1 ); // Player 1 wins the second set and the match
-    if ( !gameState->gameRunning() ) { // Check match win condition and display the result
-    }
-}
-
 void resetAll( Reset* reset ) {
     reset->zeroPlayerValues();
     reset->zeroSetHistory();
@@ -1046,7 +1025,9 @@ void run_remote_keyboard(GameObject* gameObject, GameState* gameState, Reset* re
 
     print( "calling gameObject->loopGame()..." );
     gameObject->loopGame();
+    print( "sleeping for 1 second..." );
     std::this_thread::sleep_for(std::chrono::seconds(1));
+    print( "done sleeping after calling gameObject->loopGame()..." );
     gameObject->getScoreBoard()->setLittleDrawerFont("fonts/8x13B.bdf");
 
     print( "constructing remotePairingScreen..." );
@@ -1056,10 +1037,10 @@ void run_remote_keyboard(GameObject* gameObject, GameState* gameState, Reset* re
     PairingBlinker pairingBlinker(gameObject->getScoreBoard());
     bool is_on_pi = gameObject->getScoreBoard()->onRaspberryPi();
 
-    // Initialize thread-safe input queue
+    print( "Initialize thread-safe input queue..." );
     ThreadSafeQueue<int> inputQueue;
 
-    // Initialize input listeners
+    print( "Initialize input listeners..." );
     KeyboardInputListener keyboardListener(&inputQueue);
     RemoteInputListener remoteListener(&inputQueue, &pairingBlinker, inputs);
 
@@ -1072,7 +1053,7 @@ void run_remote_keyboard(GameObject* gameObject, GameState* gameState, Reset* re
         // Process inputs from the queue
         int selection = 0;
         while (inputQueue.dequeue(selection)) {
-            // Handle the selection
+            print( "Handle the selection." );
             if (remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake()) {
                 if (selection == 7) {
                     remotePairingScreen.greenPlayerPressed();
@@ -1081,7 +1062,7 @@ void run_remote_keyboard(GameObject* gameObject, GameState* gameState, Reset* re
                     remotePairingScreen.redPlayerPressed();
                     pairingBlinker.setRedPlayerPaired(true);
                 } else {
-                    // Handle other remote selections if necessary
+                    print( "Invalid selection." );
                 }
             } else if (gameState->getCurrentAction() == SLEEP_MODE) {
                 // Handle sleep mode selections
@@ -1097,7 +1078,7 @@ void run_remote_keyboard(GameObject* gameObject, GameState* gameState, Reset* re
                 gameObject->getScoreBoard()->clearScreen();
                 gameObject->getScoreBoard()->update();
             } else {
-                // Handle manual (keyboard) inputs
+                print( "Handle manual (keyboard) inputs" ); 
                 switch (selection) {
                     case 1:
                     case 2:
