@@ -54,6 +54,11 @@ GameObject::~GameObject() {};
 void GameObject::_signalHandler( int signal ) { GameObject::gSignalStatus = signal; }
 volatile int GameObject::gSignalStatus = 0;
 
+int GameObject::process_selection( std::string selection ) {
+    print ( "processing selection: " + selection );
+    return 0;
+}        
+
 void GameObject::undo() {
     _gameModes->undo();
 }

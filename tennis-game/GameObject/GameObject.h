@@ -34,6 +34,7 @@ class GameObject {
 
   GameObject( GameState* gameState, IDisplay* display );
   ~GameObject();
+  int process_selection( std::string selection );
   void resetMatch();
   void start();
   PinInterface* getPinInterface();
