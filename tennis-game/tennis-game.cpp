@@ -880,21 +880,6 @@ void run_remote_listener(GameObject* gameObject, GameState* gameState, Reset* re
 #include <queue>
 #include <chrono>
 #include <functional>
-//
-
-// Assuming necessary headers for GPIO and other components are included
-// #include "Blinker.h"
-// #include "Inputs.h"
-// #include "GameObject.h"
-// #include "GameState.h"
-// #include "Reset.h"
-// #include "RemotePairingScreen.h"
-// #include "PairingBlinker.h"
-// #include "ScoreboardBlinker.h"
-// #include "GameTimer.h"
-
-// Define global stop flag
-// std::atomic<bool> stopListening(false);
 
 // Thread-safe queue implementation
 template<typename T>
@@ -1019,7 +1004,7 @@ void signalHandler(int signum) {
 }
 
 // The new run_remote_keyboard method
-void run_remote_keyboard(GameObject* gameObject, GameState* gameState, Reset* reset, Inputs* inputs) {
+void run_remote_keyboard_old(GameObject* gameObject, GameState* gameState, Reset* reset, Inputs* inputs) {
     print( "registering signal handler..." );
     std::signal(SIGINT, signalHandler);
 
@@ -1117,6 +1102,89 @@ void run_remote_keyboard(GameObject* gameObject, GameState* gameState, Reset* re
     print( "end of run remote_keyboard method. " );
 }
 
+
+// Modified run_remote_keyboard method
+void run_remote_keyboard(GameObject* gameObject, GameState* gameState, Reset* reset, Inputs* inputs) {
+    print("Registering signal handler...");
+    std::signal(SIGINT, signalHandler);
+
+    print("Calling gameObject->loopGame()...");
+    gameObject->loopGame();
+    gameObject->getScoreBoard()->setLittleDrawerFont("fonts/8x13B.bdf");
+
+    print("Constructing RemotePairingScreen...");
+    RemotePairingScreen remotePairingScreen(gameObject->getScoreBoard());
+
+    print("Constructing PairingBlinker...");
+    PairingBlinker pairingBlinker(gameObject->getScoreBoard());
+    bool is_on_pi = gameObject->getScoreBoard()->onRaspberryPi();
+
+    print("Starting input listeners in threads...");
+    std::atomic<bool> stopListening{false};
+
+    ThreadSafeQueue<int> inputQueue;
+    KeyboardInputListener keyboardListener(&inputQueue);
+    RemoteInputListener remoteListener(&inputQueue, &pairingBlinker, inputs);
+
+    std::thread keyboardThread([&]() { keyboardListener.startListening(); });
+    std::thread remoteThread([&]() { remoteListener.startListening(); });
+
+    print("Entering main processing loop...");
+    while (gameState->gameRunning() && !stopListening.load()) {
+        int selection = 0;
+        while (inputQueue.dequeue(selection)) {
+            if (remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake()) {
+                if (selection == 7) {
+                    remotePairingScreen.greenPlayerPressed();
+                    pairingBlinker.setGreenPlayerPaired(true);
+                } else if (selection == 11) {
+                    remotePairingScreen.redPlayerPressed();
+                    pairingBlinker.setRedPlayerPaired(true);
+                } else {
+                    print("Invalid selection.");
+                }
+            } else if (gameState->getCurrentAction() == SLEEP_MODE) {
+                print("Handling sleep mode input...");
+                gameObject->resetMatch();
+                continue;
+            } else {
+                print("Processing input selection: " << selection);
+                gameObject->processSelection(selection);
+            }
+        }
+        gameObject->loopGame();
+        std::this_thread::sleep_for(std::chrono::milliseconds(REMOTE_SPIN_DELAY));
+    }
+
+    stopListening.store(true); // Stop listeners
+    keyboardListener.stopListeningInput();
+    remoteListener.stopListeningInput();
+    if (keyboardThread.joinable()) keyboardThread.join();
+    if (remoteThread.joinable()) remoteThread.join();
+
+    inputQueue.clear();
+    print("Exiting run_remote_keyboard method.");
+}
+
+// Fix for simultaneous keyboard and remote input handling // 121624
+#include <future>
+
+// Updated read_mcp23017_value method to handle continuous remote reading
+int Inputs::read_mcp23017_value_continuous() {
+    int originalRemoteCode = _pinInterface->read_mcp23017_value();
+    GameTimer::gameDelay(STEVE_DELAY); 
+    int freshRemoteCode = _pinInterface->read_mcp23017_value();
+
+    while ((freshRemoteCode == originalRemoteCode) && (freshRemoteCode != UNKNOWN_REMOTE_BUTTON)) {
+        GameTimer::gameDelay(REMOTE_READ_DELAY);
+        freshRemoteCode = _pinInterface->read_mcp23017_value();
+    }
+    if (originalRemoteCode != UNKNOWN_REMOTE_BUTTON) {
+        std::cout << "*** CODE IS VALID ***. Returning originalRemoteCode [" << originalRemoteCode << "]" << std::endl;
+        return originalRemoteCode;
+    }
+    return UNKNOWN_REMOTE_BUTTON;
+}
 
 int main( int argc, char* argv[] ) {
     std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );
