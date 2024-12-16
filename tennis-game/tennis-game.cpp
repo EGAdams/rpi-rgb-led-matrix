@@ -1161,7 +1161,7 @@ void run_remote_keyboard( GameObject* gameObject, GameState* gameState, Reset* r
             }
             else {
                 print( "Processing input selection: " << selection );
-                gameObject->processSelection( selection );
+                gameObject->process_selection( selection );
                 print( "Done processing input selection: " << selection );
             }
         }
