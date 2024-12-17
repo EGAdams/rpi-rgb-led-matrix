@@ -39,9 +39,9 @@ void Inputs::readUndoButton() {
 int Inputs::readRotary() {  // TODO: make this one read.
     _gameState->setRotaryPosition( 0 );  // int rotaryPosition = 0;
     int rotaryAnalogValue = _pinInterface->pinAnalogRead( ROTARY );
-    #if defined _WIN32 || defined _WIN64
-        std::cout << "rotary analog value: " << rotaryAnalogValue << std::endl;
-    #endif
+#if defined _WIN32 || defined _WIN64
+    std::cout << "rotary analog value: " << rotaryAnalogValue << std::endl;
+#endif
     if ( rotaryAnalogValue <= 100 ) { _gameState->setRotaryPosition( 1 ); }
     if ( rotaryAnalogValue >= 350 && rotaryAnalogValue <= 450 ) { _gameState->setRotaryPosition( 2 ); }
     if ( rotaryAnalogValue >= 550 && rotaryAnalogValue <= 700 ) { _gameState->setRotaryPosition( 3 ); }
@@ -74,61 +74,61 @@ int Inputs::readRotary() {  // TODO: make this one read.
  // }
 
 int Inputs::readRemotePinArray( remoteDataStructure* remoteData ) {
-    #if defined _WIN32
+#if defined _WIN32
     remoteData->pin_1 = _pinInterface->pinAnalogRead( REMOTE_DATA_0 );
     remoteData->pin_2 = _pinInterface->pinAnalogRead( REMOTE_DATA_1 );
     remoteData->pin_3 = _pinInterface->pinAnalogRead( REMOTE_DATA_2 );
     remoteData->pin_4 = _pinInterface->pinAnalogRead( REMOTE_DATA_3 );
-    #else 
+#else 
     remoteData->pin_1 = _pinInterface->pinDigitalRead( REMOTE_DATA_0 );
     remoteData->pin_2 = _pinInterface->pinDigitalRead( REMOTE_DATA_1 );
     remoteData->pin_3 = _pinInterface->pinDigitalRead( REMOTE_DATA_2 );
     remoteData->pin_4 = _pinInterface->pinDigitalRead( REMOTE_DATA_3 );
-    #endif
+#endif
     // return _remoteCodeTranslator->translateRemoteCode( *remoteData );
     return 1; // above causes compile time error.  must move on!
 }
 
 int Inputs::readPlayerButtons() {
     remoteDataStructure remoteInitialData = { 0, 0, 0, 0 };
-    remoteDataStructure *remoteData = &remoteInitialData;
+    remoteDataStructure* remoteData = &remoteInitialData;
     int originalRemoteCode = this->readRemotePinArray( remoteData );
-    #if defined _WIN32
+#if defined _WIN32
     // std::cout << "got original remote code: " << originalRemoteCode << std::endl;
-    #endif
+#endif
     GameTimer::gameDelay( STEVE_DELAY ); // that delay steve was talking about...
     int freshRemoteCode = this->readRemotePinArray( remoteData );
-    #if defined _WIN32
+#if defined _WIN32
     if ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON ) {
         std::cout << "got fresh remote code: " << std::to_string( freshRemoteCode ) << std::endl;
     }
-    #endif
-    if (( freshRemoteCode == originalRemoteCode ) && ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON )) {  // known code and a match?
-        while(( freshRemoteCode == originalRemoteCode ) && ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON )) {
-            #if defined _WIN32  // got a matching measurement gameDelay( x ) apart.  entering while...
+#endif
+    if ( ( freshRemoteCode == originalRemoteCode ) && ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON ) ) {  // known code and a match?
+        while ( ( freshRemoteCode == originalRemoteCode ) && ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON ) ) {
+#if defined _WIN32  // got a matching measurement gameDelay( x ) apart.  entering while...
             // std::cout <<  "inside while.  freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" << std::endl;
-            #endif
+#endif
             GameTimer::gameDelay( REMOTE_READ_DELAY ); //  wait 250ms, then get a fresh one...
-            #if defined _WIN32
+#if defined _WIN32
             // std::cout << "after delay within while reading getting fresh remote code again to verify" << std::endl;
-            #endif
+#endif
             freshRemoteCode = this->readRemotePinArray( remoteData );
-            #if defined _WIN32
+#if defined _WIN32
             _logger->logUpdate( " inputs [" + std::to_string( remoteData->pin_1 ) + "], " +
                                         "[" + std::to_string( remoteData->pin_2 ) + "], " +
                                         "[" + std::to_string( remoteData->pin_3 ) + "], " +
-                                        "[" + std::to_string( remoteData->pin_4 ) + "]  ", "translatedRemoteCode()" ); 
+                                        "[" + std::to_string( remoteData->pin_4 ) + "]  ", "translatedRemoteCode()" );
             // std::cout << "after delay within while; freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" << std::endl;
-            #endif
+#endif
         }
-        #if defined _WIN32
+#if defined _WIN32
         std::cout << "exited while.  *** CODE IS VALID ***.  returning originalRemoteCode [" << std::to_string( originalRemoteCode ) << "]" << std::endl;
-        #endif
+#endif
         return originalRemoteCode;
     } else { // false alarm.  we DO NOT have a matching measurement gameDelay( x ) apart.
         return UNKNOWN_REMOTE_BUTTON;
     }
- }
+}
 
 // these libraries need to be included for the below to work.  
 #include <atomic>
@@ -140,32 +140,36 @@ int Inputs::read_mcp23017_value() {
     GameTimer::gameDelay( STEVE_DELAY ); // that delay steve was talking about...
     int freshRemoteCode = _pinInterface->read_mcp23017_value();
 
-    if ((freshRemoteCode == originalRemoteCode) && (freshRemoteCode != UNKNOWN_REMOTE_BUTTON)) {
-        print("Entering while loop for remote codes...");
-        while ((freshRemoteCode == originalRemoteCode) && (freshRemoteCode != UNKNOWN_REMOTE_BUTTON)) {
-            GameTimer::gameDelay(REMOTE_READ_DELAY);
+    if ( ( freshRemoteCode == originalRemoteCode ) && ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON ) ) {
+        print( "Entering while loop for remote codes..." );
+        while ( ( freshRemoteCode == originalRemoteCode ) && ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON ) ) {
+            GameTimer::gameDelay( REMOTE_READ_DELAY );
             freshRemoteCode = _pinInterface->read_mcp23017_value();
             int selection = 0; // Check for inputs from keyboard and remote
-            if ( _inputQueue.dequeue( selection )) {
-                if ( _remotePairingScreen->inPairingMode() && _is_on_pi && _pairingBlinker->awake()) {
-                    if (selection == 7) {
+            if ( _inputQueue.dequeue( selection ) ) {
+                if ( _remotePairingScreen->inPairingMode() && _is_on_pi && _pairingBlinker->awake() ) {
+                    if ( selection == 7 ) {
                         _remotePairingScreen->greenPlayerPressed();
-                        _pairingBlinker->setGreenPlayerPaired(true);
-                    } else if (selection == 11) {
-                        _remotePairingScreen->redPlayerPressed();
-                        _pairingBlinker->setRedPlayerPaired(true);
-                    } else {
-                        print("Invalid selection.");
+                        _pairingBlinker->setGreenPlayerPaired( true );
                     }
-                } else {
-                    print("Processing input selection: " << selection);
-                    _gameObject->processSelection(selection);
+                    else if ( selection == 11 ) {
+                        _remotePairingScreen->redPlayerPressed();
+                        _pairingBlinker->setRedPlayerPaired( true );
+                    }
+                    else {
+                        print( "Invalid selection." );
+                    }
+                }
+                else {
+                    print( "Processing input selection: " << selection );
+                    _gameObject->process_selection( selection );
                 }
             }
         }
         std::cout << "Exited while. *** CODE IS VALID ***. Returning originalRemoteCode [" << originalRemoteCode << "]" << std::endl;
         return originalRemoteCode;
-    } else {
+    }
+    else {
         return UNKNOWN_REMOTE_BUTTON;
     }
 }
