@@ -16,18 +16,18 @@ private:
 
 public:
     // Constructor
-    ThreadSafeQueue() : stopListening(false) {}
+    ThreadSafeQueue() : stopListening( false ) {}
 
     // Destructor
     ~ThreadSafeQueue() { clear(); }
 
     // Disable copy and assignment
-    ThreadSafeQueue(const ThreadSafeQueue&) = delete;
-    ThreadSafeQueue& operator=(const ThreadSafeQueue&) = delete;
+    ThreadSafeQueue( const ThreadSafeQueue& ) = delete;
+    ThreadSafeQueue& operator=( const ThreadSafeQueue& ) = delete;
 
     // Methods
-    void enqueue(const T& value);
-    bool dequeue(T& result);
+    void enqueue( const T& value );
+    bool dequeue( T& result );
     void clear();
 };
 #endif
