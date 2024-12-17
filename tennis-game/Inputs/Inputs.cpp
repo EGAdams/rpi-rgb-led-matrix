@@ -169,3 +169,43 @@ int Inputs::read_mcp23017_value() {
         return UNKNOWN_REMOTE_BUTTON;
     }
 }
+
+void Inputs::setInputQueue( ThreadSafeQueue<int>* inputQueue ) {
+    _inputQueue = inputQueue;
+}
+
+ThreadSafeQueue<int>* Inputs::getInputQueue() const {
+    return _inputQueue;
+}
+
+void Inputs::setRemotePairingScreen( RemotePairingScreen* remotePairingScreen ) {
+    _remotePairingScreen = remotePairingScreen;
+}
+
+RemotePairingScreen* Inputs::getRemotePairingScreen() const {
+    return _remotePairingScreen;
+}
+
+void Inputs::setPairingBlinker( PairingBlinker* pairingBlinker ) {
+    _pairingBlinker = pairingBlinker;
+}
+
+PairingBlinker* Inputs::getPairingBlinker() const {
+    return _pairingBlinker;
+}
+
+void Inputs::setIsOnPi( bool* isOnPi ) {
+    _isOnPi = isOnPi;
+}
+
+bool* Inputs::getIsOnPi() const {
+    return _isOnPi;
+}
+
+void Inputs::setGameObject( GameObject* gameObject ) {
+    _gameObject = gameObject;
+}
+
+GameObject* Inputs::getGameObject() const {
+    return _gameObject;
+}
