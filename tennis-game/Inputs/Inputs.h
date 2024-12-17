@@ -36,8 +36,8 @@ public:
     void setPairingBlinker(PairingBlinker* pairingBlinker);
     PairingBlinker* getPairingBlinker() const;
 
-    void setIsOnPi(bool* isOnPi);
-    bool* getIsOnPi() const;
+    void set_is_on_pi(bool* isOnPi);
+    bool* get_is_on_pi() const;
 
     void setGameObject(GameObject* gameObject);
     GameObject* getGameObject() const;

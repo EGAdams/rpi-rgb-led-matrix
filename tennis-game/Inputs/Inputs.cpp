@@ -194,11 +194,11 @@ PairingBlinker* Inputs::getPairingBlinker() const {
     return _pairingBlinker;
 }
 
-void Inputs::setis_on_pi( bool* is_on_pi ) {
+void Inputs::set_is_on_pi( bool* is_on_pi ) {
     _is_on_pi = is_on_pi;
 }
 
-bool* Inputs::getis_on_pi() const {
+bool* Inputs::get_is_on_pi() const {
     return _is_on_pi;
 }
 
