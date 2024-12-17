@@ -56,7 +56,7 @@ private:
     RemotePairingScreen* _remotePairingScreen;
     PairingBlinker* _pairingBlinker;
     GameObject* _gameObject;
-    bool* _isOnPi;
+    bool* _is_on_pi;
 };
 
 #endif
