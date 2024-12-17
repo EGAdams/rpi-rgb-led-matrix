@@ -147,13 +147,13 @@ int Inputs::read_mcp23017_value() {
             freshRemoteCode = _pinInterface->read_mcp23017_value();
             int selection = 0; // Check for inputs from keyboard and remote
             if ( inputQueue.dequeue( selection )) {
-                if ( _remotePairingScreen.inPairingMode() && _is_on_pi && _pairingBlinker.awake()) {
+                if ( _remotePairingScreen->inPairingMode() && _is_on_pi && _pairingBlinker->awake()) {
                     if (selection == 7) {
-                        _remotePairingScreen.greenPlayerPressed();
-                        _pairingBlinker.setGreenPlayerPaired(true);
+                        _remotePairingScreen->greenPlayerPressed();
+                        _pairingBlinker->setGreenPlayerPaired(true);
                     } else if (selection == 11) {
-                        _remotePairingScreen.redPlayerPressed();
-                        _pairingBlinker.setRedPlayerPaired(true);
+                        _remotePairingScreen->redPlayerPressed();
+                        _pairingBlinker->setRedPlayerPaired(true);
                     } else {
                         print("Invalid selection.");
                     }
