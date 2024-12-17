@@ -146,7 +146,7 @@ int Inputs::read_mcp23017_value() {
             GameTimer::gameDelay( REMOTE_READ_DELAY );
             freshRemoteCode = _pinInterface->read_mcp23017_value();
             int selection = 0; // Check for inputs from keyboard and remote
-            if ( _inputQueue.dequeue( selection ) ) {
+            if ( _inputQueue->dequeue( selection ) ) {
                 if ( _remotePairingScreen->inPairingMode() && _is_on_pi && _pairingBlinker->awake() ) {
                     if ( selection == 7 ) {
                         _remotePairingScreen->greenPlayerPressed();
