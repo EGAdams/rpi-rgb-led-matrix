@@ -137,10 +137,16 @@ int Inputs::readPlayerButtons() {
 #include <future>
 // Updated read_mcp23017_value method to handle stable remote reading
 int Inputs::read_mcp23017_value() {
+    print( "setting originalRemoteCode..." );
     int originalRemoteCode = _pinInterface->read_mcp23017_value();
+    print( "steve delay..." );
     GameTimer::gameDelay( STEVE_DELAY ); // that delay steve was talking about...
+    print( "getting fresh remote code after steeve delay..." );
     int freshRemoteCode = _pinInterface->read_mcp23017_value();
 
+    print( "got originalRemoteCode: " + std::to_string( originalRemoteCode ) );
+    print( "got freshRemoteCode: " + std::to_string( freshRemoteCode ) );
+    print( "checking for match..." );
     if ( ( freshRemoteCode == originalRemoteCode ) && ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON ) ) {
         print( "Entering while loop for remote codes..." );
         while ( ( freshRemoteCode == originalRemoteCode ) && ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON ) ) {
