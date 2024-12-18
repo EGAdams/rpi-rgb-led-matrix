@@ -142,6 +142,8 @@ int Inputs::read_mcp23017_value() {
     if (_pinInterface == nullptr) {
         print( "Error: _pinInterface is null" );
         return -1;
+    } else {
+        print( "got _pinInterface" );
     }
     int originalRemoteCode = _pinInterface->read_mcp23017_value();
     print( "steve delay..." );
