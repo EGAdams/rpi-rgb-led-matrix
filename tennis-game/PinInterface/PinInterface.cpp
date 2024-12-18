@@ -59,20 +59,25 @@ int PinInterface::_readBits_0_4( int file ) {
 }
 
 int PinInterface::read_mcp23017_value() {
-    // std::cout << "reading MCP23017 bits..." << std::endl;
+    std::cout << "reading MCP23017 bits..." << std::endl;
     int file = open( I2C_DEVICE, O_RDWR );
 
+   std::cout << "openning i2c device..." << std::endl;
     if ( file < 0 ) {
         std::cerr << "Error: Unable to open I2C device.\n";
         return -1;
     }
 
+    std::cout << "setting i2c address..." << std::endl;
     if ( ioctl( file, I2C_SLAVE, MCP23017_ADDRESS ) < 0 ) {
         std::cerr << "Error: Unable to set I2C address.\n";
         close( file );
         return -1;
     }
+    std::cout << "reading bits..." << std::endl;
     int bits = _readBits_0_4( file );
+    std::cout << "closing i2c device..." << std::endl;
     close( file );
+    std::cout << "bits: " << bits << std::endl;
     return bits;
 }
