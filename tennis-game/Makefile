@@ -1,5 +1,5 @@
 # google test
-GTEST_DIR=/home/adamsl/rpi-rgb-led-matrix/tennis-game/googletest
+GTEST_DIR=/home/dietpi/rpi-rgb-led-matrix/tennis-game/googletest
 GTEST_INCDIR=$(GTEST_DIR)/googletest/include
 GTEST_LIBDIR=$(GTEST_DIR)/build/lib
 
@@ -13,7 +13,7 @@ CXXFLAGS=$(CFLAGS) -I$(GTEST_INCDIR) -I$(RGB_INCDIR)
 BINARIES=tennis-game Mode1ScoreTest
 
 # Change this line
-RGB_LIB_DISTRIBUTION=/home/adamsl/rpi-rgb-led-matrix
+RGB_LIB_DISTRIBUTION=/home/dietpi/rpi-rgb-led-matrix
 
 # RGB_LIB_DISTRIBUTION=~/rpi-rgb-led-matrix
 RGB_INCDIR=$(RGB_LIB_DISTRIBUTION)/include
