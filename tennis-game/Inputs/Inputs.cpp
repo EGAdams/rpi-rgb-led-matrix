@@ -138,6 +138,11 @@ int Inputs::readPlayerButtons() {
 // Updated read_mcp23017_value method to handle stable remote reading
 int Inputs::read_mcp23017_value() {
     print( "setting originalRemoteCode..." );
+    // check for null _pinInterface
+    if (_pinInterface == nullptr) {
+        print( "Error: _pinInterface is null" );
+        return -1;
+    }
     int originalRemoteCode = _pinInterface->read_mcp23017_value();
     print( "steve delay..." );
     GameTimer::gameDelay( STEVE_DELAY ); // that delay steve was talking about...
