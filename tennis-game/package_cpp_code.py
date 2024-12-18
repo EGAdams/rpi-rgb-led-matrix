@@ -66,11 +66,15 @@ factories_dir = os.path.join(project_dir, "factories")
 keyboard_scroll_dir = os.path.join(project_dir, "keyboard_scroll")
 
 # output prompt file
-output_file_path = os.path.join(base_dir, "display_fix.md")
+output_file_path = os.path.join(base_dir, "make_fix.md")
 
-path = os.path.join( base_dir, "IDisplay" )
+path = os.path.join( base_dir, "Player" )
 process_cpp_files_in_directory( path, output_file_path, False ) # create new file.  append is False
 
-path = os.path.join( base_dir, "ScoreBoard" )
-process_cpp_files_in_directory( path, output_file_path, True ) # append to file is True
-
+path = os.path.join( base_dir, "Makefile" )
+with open(path, 'r') as makefile:# read the make file and add it to the output file
+    content = makefile.read()
+    with open(output_file_path, 'a') as output_file:
+        output_file.write(f"```make\n{content}\n```\n\n")
+        
+# process_cpp_files_in_directory( path, output_file_path, True ) # append to file is True

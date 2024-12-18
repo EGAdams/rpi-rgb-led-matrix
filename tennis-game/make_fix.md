@@ -1,3 +1,122 @@
+Please help me fix a C++ make error.
+
+Here is the project structure:
+```bash
+adamsl@DESKTOP-SHDBATI:~$ tree -d -L 2 rpi-rgb-led-matrix/
+rpi-rgb-led-matrix/
+├── TieBreaker
+├── adapter
+│   ├── active-3
+│   ├── kicad-scripts
+│   ├── passive-3
+│   └── passive-rpi1
+├── bindings
+│   ├── c#
+│   └── python
+├── examples-api-use
+├── fonts
+├── img
+├── include
+├── js-project
+├── lib
+│   └── lib_docs
+├── linuxadmin
+│   └── debug_rgb_lib_missing
+├── logic_analyzer
+├── tennis-game
+│   ├── Arduino
+│   ├── BatteryTest
+│   ├── Blinker
+│   ├── CanvasCreator
+│   ├── ColorManager
+│   ├── ConsoleDisplay
+│   ├── Drawer
+│   ├── FetchRunner
+│   ├── FileReader
+│   ├── FontLoader
+│   ├── FontManager
+│   ├── GameLedTranslator
+│   ├── GameLeds
+│   ├── GameModes
+│   ├── GameObject
+│   ├── GameState
+│   ├── GameStateSerializer
+│   ├── GameTimer
+│   ├── GameWinSequence
+│   ├── History
+│   ├── IDisplay
+│   ├── ITextDrawer
+│   ├── InputWithTimer
+│   ├── Inputs
+│   ├── JsonParser
+│   ├── LogObject
+│   ├── LogObjectContainer
+│   ├── LogObjectFactory
+│   ├── Logger
+│   ├── LoggerFactory
+│   ├── MatchWinSequence
+│   ├── MatrixDisplay
+│   ├── MatrixTextDrawer
+│   ├── Mode1Functions
+│   ├── Mode1Score
+│   ├── Mode2Functions
+│   ├── Model
+│   ├── MonitorLed
+│   ├── MonitorLedClassObject
+│   ├── MonitoredObject
+│   ├── PairingBlinker
+│   ├── PinInterface
+│   ├── PinState
+│   ├── Player
+│   ├── PointLeds
+│   ├── RemoteCodeTranslator
+│   ├── RemotePairingScreen
+│   ├── Reset
+│   ├── ScoreBoard
+│   ├── ScoreboardBlinker
+│   ├── ServeLeds
+│   ├── SetDrawer
+│   ├── SetHistoryText
+│   ├── SetLeds
+│   ├── SetWin
+│   ├── SourceData
+│   ├── SubjectManager
+│   ├── TennisConstants
+│   ├── ThreadSafeQueue
+│   ├── TieBreaker
+│   ├── TieLeds
+│   ├── TranslateConstant
+│   ├── Undo
+│   ├── WatchTimer
+│   ├── WebLiquidCrystal
+│   ├── WinSequence
+│   ├── WinSequences
+│   ├── __pycache__
+│   ├── agency-swarm
+│   ├── command_runner
+│   ├── documentation
+│   ├── fonts
+│   ├── googletest
+│   ├── nlohmann
+│   ├── smart_menu
+│   ├── update_notes
+│   └── z_end_list_instruct
+├── utils
+└── z__build_tools
+
+99 directories
+adamsl@DESKTOP-SHDBATI:~$
+```
+
+Location of the Makefile:
+```bash
+adamsl@DESKTOP-SHDBATI:~$ ll rpi-rgb-led-matrix/tennis-game/Makefile
+-rw-r--r-- 1 adamsl adamsl 10128 Dec 18 14:49 rpi-rgb-led-matrix/tennis-game/Makefile
+adamsl@DESKTOP-SHDBATI:~$
+```
+
+Here is the Makefile:
+```make
 # google test
 GTEST_DIR=/home/adamsl/rpi-rgb-led-matrix/tennis-game/googletest
 GTEST_INCDIR=$(GTEST_DIR)/googletest/include
@@ -12,22 +131,13 @@ CXXFLAGS=$(CFLAGS) -I$(GTEST_INCDIR) -I$(RGB_INCDIR)
 
 BINARIES=tennis-game Mode1ScoreTest
 
-# Change this line
-RGB_LIB_DISTRIBUTION=/home/adamsl/rpi-rgb-led-matrix
-
-# RGB_LIB_DISTRIBUTION=~/rpi-rgb-led-matrix
+RGB_LIB_DISTRIBUTION=~/rpi-rgb-led-matrix
 RGB_INCDIR=$(RGB_LIB_DISTRIBUTION)/include
 RGB_LIBDIR=$(RGB_LIB_DISTRIBUTION)/lib
 RGB_LIBRARY_NAME=rgbmatrix
 RGB_LIBRARY=$(RGB_LIBDIR)/lib$(RGB_LIBRARY_NAME).a
 
-# LDFLAGS+=-L$(RGB_LIBDIR) -l$(RGB_LIBRARY_NAME) -lrt -lm -L$(GTEST_LIBDIR) $(GTEST_LIBS) -ljsoncpp -lcurl -lpthread
-# Replace the LDFLAGS line with the following, removing the -l$(RGB_LIBRARY_NAME) and using $(RGB_LIBRARY) directly:
-
-# LDFLAGS+= -L$(RGB_LIBDIR) $(RGB_LIBRARY) -lrt -lm -L$(GTEST_LIBDIR) $(GTEST_LIBS) -ljsoncpp -lcurl -lpthread
-
-# Replace the LDFLAGS line with the following, removing the -l$(RGB_LIBRARY_NAME) and using $(RGB_LIBRARY) directly:
-LDFLAGS+= -L$(RGB_LIBDIR) $(RGB_LIBRARY) -lrt -lm -L$(GTEST_LIBDIR) $(GTEST_LIBS) -ljsoncpp -lcurl -lpthread
+LDFLAGS+=-L$(RGB_LIBDIR) -l$(RGB_LIBRARY_NAME) -lrt -lm -L$(GTEST_LIBDIR) $(GTEST_LIBS) -ljsoncpp -lcurl -lpthread
 
 MAIN_OBJECTS=GameWinSequence.o SetWin.o SetHistoryText.o SetDrawer.o GameLedTranslator.o SubjectManager.o WebLiquidCrystal.o WatchTimer.o Inputs.o TieBreaker.o Mode1Score.o Mode1Functions.o ServeLeds.o Undo.o BatteryTest.o Reset.o SetLeds.o TieLeds.o Mode1WinSequences.o Mode2Functions.o MatchWinSequence.o TennisConstants.o GameLeds.o GameModes.o GameObject.o PinState.o PinInterface.o TranslateConstant.o PointLeds.o Arduino.o CanvasCreator.o FontLoader.o Drawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game.o LogObject.o LogObjectContainer.o LogObjectFactory.o MonitorLedClassObject.o MonitorLed.o JsonParser.o LoggerFactory.o Model.o MonitoredObject.o SourceData.o FetchRunner.o InputWithTimer.o ScoreboardBlinker.o RemotePairingScreen.o PairingBlinker.o FontManager.o ColorManager.o ConsoleDisplay.o RemoteCodeTranslator.o
 
@@ -35,13 +145,9 @@ TEST_OBJECTS=TieLeds.o GameLedTranslator.o GameState.o Player.o GameTimer.o Scor
 
 
 
-# all : $(BINARIES)
-all: $(RGB_LIBRARY) $(BINARIES)
+all : $(BINARIES)
 
-#$(RGB_LIBRARY): FORCE
-#	$(MAKE) -C $(RGB_LIBDIR)
-
-$(RGB_LIBRARY): 
+$(RGB_LIBRARY): FORCE
 	$(MAKE) -C $(RGB_LIBDIR)
 
 tennis-game: $(MAIN_OBJECTS)
@@ -105,10 +211,8 @@ TieBreakerTest.o: TieBreaker/TieBreakerTest.cpp
 Mode1ScoreTest.o: Mode1Score/Mode1ScoreTest.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
 
-# Update the Mode1ScoreTest target to include all necessary object files
-Mode1ScoreTest: $(MAIN_OBJECTS) $(TEST_OBJECTS)
-	$(CXX) $(CXXFLAGS) -I$(RGB_INCDIR) -I$(GTEST_INCDIR) -o $@ $^ $(LDFLAGS)
-
+Mode1ScoreTest: TieBreakerTest.o Player.o GameState.o PinInterface.o PinState.o TieBreaker.o TranslateConstant.o PointLeds.o GameLeds.o ServeLeds.o SetLeds.o Undo.o GameTimer.o SetWin.o Inputs.o WatchTimer.o ScoreBoard.o Mode1Functions.o Mode2Functions.o BatteryTest.o
+	$(CXX) $(CXXFLAGS) -I../ -I../../lib -I../../lib/gtest/include -o $@ $^ -L../../lib/gtest -lgtest -lgtest_main -pthread -lrgbmatrix -lrt -lm -ljsoncpp -lcurl
 	
 GameWinSequence.o : GameWinSequence/GameWinSequence.cpp
 	$(CXX) -I$(RGB_INCDIR) $(CXXFLAGS) -c -o $@ $<
@@ -255,3 +359,19 @@ FORCE:
 
 print-%:
 	@echo $* = $($*)
+
+```
+
+Here is the error when running `make`:
+```bash
+adamsl@DESKTOP-SHDBATI:~$ cd rpi-rgb-led-matrix/
+adamsl@DESKTOP-SHDBATI:~/rpi-rgb-led-matrix$ cd tennis-game/
+adamsl@DESKTOP-SHDBATI:~/rpi-rgb-led-matrix/tennis-game$ make
+g++ -std=c++17 GameWinSequence.o SetWin.o SetHistoryText.o SetDrawer.o GameLedTranslator.o SubjectManager.o WebLiquidCrystal.o WatchTimer.o Inputs.o TieBreaker.o Mode1Score.o Mode1Functions.o ServeLeds.o Undo.o BatteryTest.o Reset.o SetLeds.o TieLeds.o Mode1WinSequences.o Mode2Functions.o MatchWinSequence.o TennisConstants.o GameLeds.o GameModes.o GameObject.o PinState.o PinInterface.o TranslateConstant.o PointLeds.o Arduino.o CanvasCreator.o FontLoader.o Drawer.o GameTimer.o Logger.o History.o GameState.o ScoreBoard.o Player.o tennis-game.o LogObject.o LogObjectContainer.o LogObjectFactory.o MonitorLedClassObject.o MonitorLed.o JsonParser.o LoggerFactory.o Model.o MonitoredObject.o SourceData.o FetchRunner.o InputWithTimer.o ScoreboardBlinker.o RemotePairingScreen.o PairingBlinker.o FontManager.o ColorManager.o ConsoleDisplay.o RemoteCodeTranslator.o -o tennis-game -L~/rpi-rgb-led-matrix/lib -lrgbmatrix -lrt -lm -L/home/adamsl/rpi-rgb-led-matrix/tennis-game/googletest/build/lib -lgtest_main -lgtest -lpthread -ljsoncpp -lcurl -lpthread
+/usr/bin/ld: cannot find -lrgbmatrix: No such file or directory
+collect2: error: ld returned 1 exit status
+make: *** [Makefile:35: tennis-game] Error 1
+adamsl@DESKTOP-SHDBATI:~/rpi-rgb-led-matrix/tennis-game$
+```
+
+Please only show me the code that is needed to fix the error.
