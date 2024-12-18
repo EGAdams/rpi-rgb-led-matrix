@@ -4,8 +4,11 @@
 #include "../Player/Player.h"
 #include "../PinInterface/PinInterface.h"
 #include "../PointLeds/PointLeds.h"
-#include "../WatchTimer/WatchTimer.h"
-#include "../Inputs/Inputs.h"
+// #include "../Inputs/Inputs.h"
+// #include "../WatchTimer/WatchTimer.h"
+
+class WatchTimer;
+class Inputs;
 
 class BatteryTest {
  public:
@@ -19,7 +22,7 @@ private:
   PinInterface*  _pinInterface;
   PointLeds*     _pointLeds;
   Inputs*        _inputs;
-  WatchTimer     _watchTimer;
+  WatchTimer*    _watchTimer;
 
   void turnLedsOn( int ledOne, int ledTwo, int ledThree, int ledFour, int ledFive, int ledSix );
   void turnLedsOff();

@@ -1,38 +1,40 @@
 #include "GameModes.h"
 
-GameModes::~GameModes() { delete _logger; }
-GameModes::GameModes(
-    Player*       player1,
-    Player*       player2,
-    PinInterface* pinInterface,
-    GameState*    gameState,
-    History*      history )
-    : _player1( player1 ),
-    _player2( player2 ),
-    _pinInterface( pinInterface ),
-    _gameState( gameState ),
-    _history( history ),
-    _pointLeds( player1, player2, pinInterface ),
-    _gameLeds( player1, player2, pinInterface ),
-    _setLeds( player1, player2, pinInterface ),
-    _inputs( player1, player2, pinInterface, gameState ),
-    _undo( player1, player2, pinInterface, gameState ),
-    _serveLeds( pinInterface, gameState ),
-    _tieBreaker( player1, player2, pinInterface, gameState, history ),
-    _mode1Functions( player1, player2, pinInterface, gameState, history ),
-    _mode2Functions( player1, player2, pinInterface, gameState ) {
-    _logger = new Logger( "GameModes" );
+GameModes::~GameModes() {
+    delete _mode1Functions;
+    delete _tieBreaker;
+    delete _logger;
 }
-
-void GameModes::undo() { _undo.mode1Undo( _history );}
-
+GameModes::GameModes(Player* player1, 
+                     Player* player2,
+                     PinInterface* pinInterface,
+                     GameState* gameState,
+                     History* history)
+    : _player1(player1),
+      _player2(player2),
+      _pinInterface(pinInterface),
+      _gameState(gameState),
+      _history(history),
+      _pointLeds(player1, player2, pinInterface),
+      _gameLeds(player1, player2, pinInterface),
+      _setLeds(player1, player2, pinInterface),
+      _undo(player1, player2, pinInterface, gameState),
+      _mode2Functions(player1, player2, pinInterface, gameState),
+      _serveLeds( pinInterface, gameState ) {
+    _mode1Functions = new Mode1Functions(player1, player2, pinInterface, gameState, history);
+    _tieBreaker = new TieBreaker(player1, player2, pinInterface, gameState, history);
+    _logger = new Logger("GameModes");
+}
+void GameModes::undo() { 
+    _undo.mode1Undo(_history);
+}
 void GameModes::setScoreBoards( ScoreBoard* scoreBoard ) {
     _pointLeds.setScoreBoard(      scoreBoard );
     _gameLeds.setScoreBoard(       scoreBoard );
     _setLeds.setScoreBoard(        scoreBoard );
-    _mode1Functions.setScoreBoard( scoreBoard );
+    _mode1Functions->setScoreBoard( scoreBoard );
     _undo.setScoreBoard(           scoreBoard ); 
-    _tieBreaker.setScoreBoards(    scoreBoard ); }
+    _tieBreaker->setScoreBoards(    scoreBoard ); }
 
 void GameModes::gameStart() {
     // std::cout << "inside gameStart() checking if gameStarted = zero or not..." << std::endl;
@@ -61,22 +63,22 @@ void GameModes::mode1() {
     print( "just inside mode1()... " );
     _gameState->setNow( GameTimer::gameMillis());
     print( "reading undo button..." );
-    _inputs.readUndoButton();
+    _inputs->readUndoButton();
     if ( _gameState->getUndo() == 1 ) {  // undo button pressed
         _gameState->setUndo( 0 );
         _undo.mode1Undo( _history );
     }
     // _inputs.readPlayerButtons();  // digital read on player buttons.  sets playerButton if tripped.
     print( "reading _inputs.read_mcp23017_value()..." );
-    int button_read = _inputs.read_mcp23017_value();
+    int button_read = _inputs->read_mcp23017_value();
     print( "read button:" << button_read );
     _serveLeds.serveSwitch(); // if serveSwitch >= 2, serveSwitch = 0; and toggle serve variable
     _logger->setName( "mode1" );
-    _mode1Functions.mode1ButtonFunction(); // <--------- ENTRY POINT --------------<<
+    _mode1Functions->mode1ButtonFunction(); // <--------- ENTRY POINT --------------<<
     if ( _gameState->getCurrentAction() == SLEEP_MODE ) {
         print( "not running point flash because sleep mode has been detected..." );
     } else {
-        _mode1Functions.pointFlash();
+        _mode1Functions->pointFlash();
     }
 }
 
@@ -84,7 +86,7 @@ void GameModes::mode2() {
     _gameState->setNow( GameTimer::gameMillis() );
     if ( _gameState->getTieBreakOnly() == 0 ) {
         _gameState->setTieBreak( 1 );
-        _tieBreaker.initializeTieBreakMode();
+        _tieBreaker->initializeTieBreakMode();
         _gameState->setTieBreakOnly( 1 );
     }
     mode1(); }
@@ -93,7 +95,7 @@ void GameModes::mode4() {
     _gameState->setNow( GameTimer::gameMillis() );
     if ( _gameState->getTieBreakOnly() == 0 ) {
         _gameState->setTieBreak( 1 );
-        _tieBreaker.initializeTieBreakMode();
+        _tieBreaker->initializeTieBreakMode();
         _gameState->setTieBreakOnly( 1 );
     }
     mode1(); }
@@ -110,7 +112,7 @@ void GameModes::noCode() {
 
 void GameModes::runGameMode( int rotaryPosition ) {
     WatchTimer *watchTimer = new WatchTimer();
-    BatteryTest batteryTest( _player1, _player2, _pinInterface, &_pointLeds, &_inputs );
+    BatteryTest batteryTest( _player1, _player2, _pinInterface, &_pointLeds, _inputs );
     switch ( rotaryPosition ) {
     case 0:
         break;
@@ -131,135 +133,135 @@ void GameModes::runGameMode( int rotaryPosition ) {
         _player1->setPoints( 100 );
         _player2->setPoints( 100 );
         _pointLeds.updatePoints();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player1->setPoints( 0 );
         _pointLeds.updatePoints();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player1->setPoints( 1 );
         _pointLeds.updatePoints();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player1->setPoints( 2 );
         _pointLeds.updatePoints();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player1->setPoints( 3 );
         _pointLeds.updatePoints();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player1->setPoints( 4 );
         _pointLeds.updatePoints();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player1->setPoints( 100 );
         _pointLeds.updatePoints();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
 
         _player2->setPoints( 0 );
         _pointLeds.updatePoints();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player2->setPoints( 1 );
         _pointLeds.updatePoints();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player2->setPoints( 2 );
         _pointLeds.updatePoints();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player2->setPoints( 3 );
         _pointLeds.updatePoints();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player2->setPoints( 4 );
         _pointLeds.updatePoints();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player2->setPoints( 100 );
         _pointLeds.updatePoints();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         // std::cout << "setting serve to 1..." << std::endl;
         _gameState->setServe( 1 );
         _serveLeds.updateServeLED();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
 
         // std::cout << "setting serve to 0..." << std::endl;
         _gameState->setServe( 0 );
         _serveLeds.updateServeLED();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
 
         _pinInterface->pinDigitalWrite( P1_SERVE, LOW);
         _pinInterface->pinDigitalWrite( P2_SERVE, LOW);
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
 
         _player1->setSets( _gameState, 1 );
         _setLeds.updateSets();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player1->setSets( _gameState, 2 );
         _setLeds.updateSets();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player1->setSets( _gameState, 0 );
         _setLeds.updateSets();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player2->setSets( _gameState, 1 );
         _setLeds.updateSets();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player2->setSets( _gameState, 2 );
         _setLeds.updateSets();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player2->setSets( _gameState, 0 );
         _setLeds.updateSets();
         _player1->setGames( 99 );
         _player2->setGames( 99 );
         _gameLeds.updateGames();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player1->setGames( 0 );
         _gameLeds.updateGames();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player1->setGames( 1 );
         _gameLeds.updateGames();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player1->setGames( 2 );
         _gameLeds.updateGames();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player1->setGames( 3 );
         _gameLeds.updateGames();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player1->setGames( 4 );
         _gameLeds.updateGames();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player1->setGames( 5 );
         _gameLeds.updateGames();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player1->setGames( 6 );
         _gameLeds.updateGames();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player1->setGames( 99 );
         _gameLeds.updateGames();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player2->setGames( 99 );
         _gameLeds.updateGames();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player2->setGames( 0 );
         _gameLeds.updateGames();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player2->setGames( 1 );
         _gameLeds.updateGames();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player2->setGames( 2 );
         _gameLeds.updateGames();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player2->setGames( 3 );
         _gameLeds.updateGames();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player2->setGames( 4 );
         _gameLeds.updateGames();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player2->setGames( 5 );
         _gameLeds.updateGames();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player2->setGames( 6 );
         _gameLeds.updateGames();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _player2->setGames( 99 );
         _gameLeds.updateGames();
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _pinInterface->pinDigitalWrite( P1_TIEBREAKER, HIGH );
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _pinInterface->pinDigitalWrite( P1_TIEBREAKER, LOW );
         _pinInterface->pinDigitalWrite( P2_TIEBREAKER, HIGH );
-        if ( watchTimer->watchInputDelay( TEST_DELAY, &_inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( watchTimer->watchInputDelay( TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; }
         _pinInterface->pinDigitalWrite( P2_TIEBREAKER, LOW);
         break;
 
@@ -271,7 +273,7 @@ void GameModes::runGameMode( int rotaryPosition ) {
         _gameState->setNow( GameTimer::gameMillis() );
         if ( _gameState->getTieBreakOnly() == 0 ) {
             _gameState->setTieBreak( 1 );
-            _tieBreaker.initializeTieBreakMode();
+            _tieBreaker->initializeTieBreakMode();
             _gameState->setTieBreakOnly( 1 );
         }
         mode1();

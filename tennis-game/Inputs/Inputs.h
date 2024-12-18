@@ -1,12 +1,13 @@
 #ifndef Inputs_h
 #define Inputs_h
 
+class GameObject;       // Add this forward declaration
+class PairingBlinker;   // Add forward declaration
 #include "../Arduino/Arduino.h"
 #include "../GameObject/GameObject.h"
 #include "../GameState/GameState.h"
 #include "../GameTimer/GameTimer.h"
 #include "../PinInterface/PinInterface.h"
-#include "../Inputs/Inputs.h"
 #include "../Logger/Logger.h"
 #include "../Reset/Reset.h"
 #include "../RemoteCodeTranslator/RemoteCodeTranslator.h"
@@ -36,27 +37,27 @@ public:
     void setPairingBlinker(PairingBlinker* pairingBlinker);
     PairingBlinker* getPairingBlinker() const;
 
-    void set_is_on_pi(bool* isOnPi);
+    void set_is_on_pi( bool* _is_on_pi );
     bool* get_is_on_pi() const;
 
     void setGameObject(GameObject* gameObject);
     GameObject* getGameObject() const;
 
 private:
-    Player* _player1;
-    Player* _player2;
-    PinInterface* _pinInterface;
-    GameState* _gameState;
-    Reset _reset;
-    Logger* _logger;
-    RemoteCodeTranslator* _remoteCodeTranslator;
+    Player*                 _player1;
+    Player*                 _player2;
+    PinInterface*           _pinInterface;
+    GameState*              _gameState;
+    Reset                   _reset;
+    Logger*                 _logger;
+    RemoteCodeTranslator*   _remoteCodeTranslator;
 
     // New members for input handling
-    ThreadSafeQueue<int>* _inputQueue;
-    RemotePairingScreen* _remotePairingScreen;
-    PairingBlinker* _pairingBlinker;
-    GameObject* _gameObject;
-    bool* _is_on_pi;
+    ThreadSafeQueue<int>*   _inputQueue;
+    RemotePairingScreen*    _remotePairingScreen;
+    PairingBlinker*         _pairingBlinker;
+    GameObject*             _gameObject;
+    bool*                   _is_on_pi;
 };
 
 #endif

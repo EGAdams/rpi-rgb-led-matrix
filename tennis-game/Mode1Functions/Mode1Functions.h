@@ -1,5 +1,7 @@
 #ifndef MODE_1_FUNCTIONS_h
 #define MODE_1_FUNCTIONS_h
+ 
+class Mode1Score;
 
 #include "../Arduino/Arduino.h"
 #include "../TennisConstants/TennisConstants.h"
@@ -33,7 +35,7 @@ class Mode1Functions {
     History*   _history;
     Undo       _undo;
     PointLeds  _pointLeds;
-    Mode1Score _mode1Score;
+    Mode1Score* _mode1Score;
     ServeLeds  _serveLeds;
     ScoreBoard* _scoreBoard;
     Logger*    _logger;

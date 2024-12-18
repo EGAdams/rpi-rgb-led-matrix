@@ -1,37 +1,43 @@
 #include "BatteryTest.h"
+#include "../WatchTimer/WatchTimer.h"  // Add this include
 
 BatteryTest::BatteryTest( Player* player1, Player* player2, PinInterface* pinInterface,  PointLeds* pointLeds, Inputs* inputs ):
     _player1( player1 ),
     _player2( player2 ),
     _pinInterface( pinInterface ),
     _pointLeds( pointLeds ),
-    _inputs( inputs ) {}
-BatteryTest::~BatteryTest() {}
+    _inputs( inputs ) {
+        _watchTimer = new WatchTimer();
+    }
+
+BatteryTest::~BatteryTest() {
+    delete _watchTimer;
+}
 
 void BatteryTest::execute() {
     while ( 1 ) {
         turnLedsOn( P1_POINTS_LED1, P1_POINTS_LED2, P1_POINTS_LED3, P1_POINTS_LED4, P2_POINTS_LED2, P2_POINTS_LED3 );
-        if ( _watchTimer.watchInputDelay( BATTERY_TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( _watchTimer->watchInputDelay( BATTERY_TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; };
         turnLedsOff();
         if ( flashLeds( P1_POINTS_LED1, P1_POINTS_LED2, P1_POINTS_LED3, P1_POINTS_LED4, P2_POINTS_LED2, P2_POINTS_LED3 ) > 0 ) { return; };
 
         turnLedsOn( P2_POINTS_LED1, P2_POINTS_LED4, P1_SERVE, P2_SERVE, P1_GAMES_LED0, P2_GAMES_LED0 );
-        if ( _watchTimer.watchInputDelay( BATTERY_TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( _watchTimer->watchInputDelay( BATTERY_TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; };
         turnLedsOff();
         if ( flashLeds(  P2_POINTS_LED1, P2_POINTS_LED4, P1_SERVE, P2_SERVE, P1_GAMES_LED0, P2_GAMES_LED0 ) > 0 ) { return; };
 
         turnLedsOn( P1_GAMES_LED1, P2_GAMES_LED1, P1_GAMES_LED2, P2_GAMES_LED2, P1_GAMES_LED3, P2_GAMES_LED3 );
-        if ( _watchTimer.watchInputDelay( BATTERY_TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( _watchTimer->watchInputDelay( BATTERY_TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; };
         turnLedsOff();
         if ( flashLeds( P1_GAMES_LED1, P2_GAMES_LED1, P1_GAMES_LED2, P2_GAMES_LED2, P1_GAMES_LED3, P2_GAMES_LED3 ) > 0 ) { return; };
 
         turnLedsOn( P1_GAMES_LED4, P2_GAMES_LED4, P1_GAMES_LED5, P2_GAMES_LED5, P1_GAMES_LED6, P2_GAMES_LED6 );
-        if ( _watchTimer.watchInputDelay( BATTERY_TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( _watchTimer->watchInputDelay( BATTERY_TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; };
         turnLedsOff();
         if ( flashLeds( P1_GAMES_LED4, P2_GAMES_LED4, P1_GAMES_LED5, P2_GAMES_LED5, P1_GAMES_LED6, P2_GAMES_LED6 ) > 0 ) { return; };
 
         turnLedsOn( P1_TIEBREAKER, P2_TIEBREAKER, P1_SETS_LED1, P2_SETS_LED1, P1_SETS_LED2, P2_SETS_LED2 );
-        if ( _watchTimer.watchInputDelay( BATTERY_TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; };
+        if ( _watchTimer->watchInputDelay( BATTERY_TEST_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return; };
         turnLedsOff();
         if ( flashLeds( P1_TIEBREAKER, P2_TIEBREAKER, P1_SETS_LED1, P2_SETS_LED1, P1_SETS_LED2, P2_SETS_LED2 ) > 0 ) { return; };
         }
@@ -49,9 +55,9 @@ void BatteryTest::turnLedsOn( int ledOne, int ledTwo, int ledThree, int ledFour,
 int BatteryTest::flashLeds( int ledOne, int ledTwo, int ledThree, int ledFour, int ledFive, int ledSix ) {
     for ( int i = 0; i < BATTERY_TEST_FLASH_COUNT + 1; i++ ) {
         turnLedsOff();
-        if ( _watchTimer.watchInputDelay( BATTERY_TEST_BLINK_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return 1; }
+        if ( _watchTimer->watchInputDelay( BATTERY_TEST_BLINK_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return 1; }
         turnLedsOn( ledOne, ledTwo, ledThree, ledFour, ledFive, ledSix );
-        if ( _watchTimer.watchInputDelay( BATTERY_TEST_BLINK_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return 1; }}
+        if ( _watchTimer->watchInputDelay( BATTERY_TEST_BLINK_DELAY, _inputs, WATCH_INTERVAL ) > 0 ) { return 1; }}
     turnLedsOff();
     return 0; }
 

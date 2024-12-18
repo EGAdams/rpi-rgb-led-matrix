@@ -11,7 +11,7 @@ Mode1Functions::Mode1Functions( Player* player1,
     _history( history ),
     _undo( player1, player2, pinInterface, gameState ),
     _pointLeds( player1, player2, pinInterface ),
-    _mode1Score( player1, player2, pinInterface, gameState, history ),
+    _mode1Score(new Mode1Score(player1, player2, pinInterface, gameState, history)),
     _serveLeds( pinInterface, gameState ) {
         _logger = new Logger( "Mode1Functions" );}
 
@@ -20,7 +20,7 @@ Mode1Functions::~Mode1Functions() {}
 void Mode1Functions::setScoreBoard( ScoreBoard* scoreBoard ) {
     _scoreBoard = scoreBoard;
     _pointLeds.setScoreBoard( scoreBoard );
-    _mode1Score.setScoreBoard( scoreBoard ); }
+    _mode1Score->setScoreBoard( scoreBoard ); }
 
 void Mode1Functions::mode1ButtonFunction() {
     print( "just inside mode1ButtonFunction()..." );
@@ -42,7 +42,7 @@ void Mode1Functions::mode1ButtonFunction() {
         _player1->setPoints( _player1->getPoints() + 1 );
         _gameState->setPlayer1Points( _player1->getPoints());
         _undo.memory(); //
-        _mode1Score.playerOneScore();
+        _mode1Score->playerOneScore();
         break;
 
     case 3: // UNDO button pressed
@@ -64,7 +64,7 @@ void Mode1Functions::mode1ButtonFunction() {
         _player2->setPoints( _player2->getPoints() + 1 );
         _gameState->setPlayer2Points( _player2->getPoints());
         _undo.memory();
-        _mode1Score.playerTwoScore();
+        _mode1Score->playerTwoScore();
         break;
 
     case 4:

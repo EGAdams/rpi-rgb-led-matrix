@@ -1,5 +1,6 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
+class GameModes; // Add this forward declaration before the GameObject class
 #include "../Arduino/Arduino.h"
 #include "../GameModes/GameModes.h"
 #include "../GameState/GameState.h"

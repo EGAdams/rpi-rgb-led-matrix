@@ -1,8 +1,10 @@
 #ifndef WatchTimer_H
 #define WatchTimer_H
 #include "../TennisConstants/TennisConstants.h"
-#include "../Inputs/Inputs.h"
 #include "../GameTimer/GameTimer.h"
+// #include "../Inputs/Inputs.h"
+
+class Inputs;
 
 class WatchTimer {
  public:

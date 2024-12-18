@@ -1,8 +1,9 @@
 #include "WatchTimer.h"
+#include "../Inputs/Inputs.h"
 
 WatchTimer::WatchTimer() {}
 WatchTimer::~WatchTimer() {}
-
+class Inputs;
 int WatchTimer::watchInputDelay( int delay, Inputs* input, int watchInterval  ) {
     int initialRotaryValue = input->readRotary();
     int totalDelay = 0;

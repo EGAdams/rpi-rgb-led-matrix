@@ -2,6 +2,7 @@
 #include "../Arduino/Arduino.h"
 #include "../TennisConstants/TennisConstants.h"
 #include "../RemoteCodeTranslator/RemoteCodeTranslator.h"
+#include "../GameObject/GameObject.h"
 #include <string>
 #include <iostream>
 

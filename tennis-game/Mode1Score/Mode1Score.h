@@ -18,6 +18,8 @@
 #include <iostream>
 #include "../../tennis-game/googletest/googletest/include/gtest/gtest.h"
 
+class TieBreaker;
+
 class Mode1Score {
  public:
     Mode1Score( Player* player1,
@@ -46,7 +48,7 @@ class Mode1Score {
     Player* _player2;
     GameState* _gameState;
     History* _history;
-    TieBreaker _tieBreaker;
+    TieBreaker* _tieBreaker;
     PointLeds _pointLeds;
     GameLeds _gameLeds;
     SetLeds _setLeds;

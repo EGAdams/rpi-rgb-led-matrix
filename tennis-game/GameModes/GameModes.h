@@ -1,11 +1,10 @@
 #ifndef GAME_MODES_h
 #define GAME_MODES_h
+class Mode1Functions; // Add this line at the top of the file
 #include "../Arduino/Arduino.h"
 #include "../GameLeds/GameLeds.h"
 #include "../GameState/GameState.h"
 #include "../GameTimer/GameTimer.h"
-#include "../Inputs/Inputs.h"
-// #include "IniReader.h"
 #include "../Logger/Logger.h"
 #include "../Mode1Functions/Mode1Functions.h"
 #include "../TieBreaker/TieBreaker.h"
@@ -16,10 +15,12 @@
 #include "../ServeLeds/ServeLeds.h"
 #include "../SetLeds/SetLeds.h"
 #include "../Undo/Undo.h"
+#include "../Inputs/Inputs.h"
 #include "../WatchTimer/WatchTimer.h"
 #include "../BatteryTest/BatteryTest.h"
 
 class History;
+class TieBreaker;
 
 #if defined _WIN32 || defined _WIN64
     #include <iostream>
@@ -51,13 +52,12 @@ class GameModes {
   PointLeds _pointLeds;
   GameLeds _gameLeds;
   SetLeds _setLeds;
-  Inputs _inputs;
+  Inputs* _inputs;
   Undo _undo;
   ServeLeds _serveLeds;
-  TieBreaker _tieBreaker;
-  Mode1Functions _mode1Functions;
+  TieBreaker* _tieBreaker;
+  Mode1Functions* _mode1Functions;
   Mode2Functions _mode2Functions;
-  //   IniReader _iniReader;
   Logger* _logger;
 };
 
