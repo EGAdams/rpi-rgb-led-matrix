@@ -139,16 +139,19 @@ int Inputs::readPlayerButtons() {
 int Inputs::read_mcp23017_value() {
     print( "setting originalRemoteCode..." );
     // check for null _pinInterface
+    print ( "checking !_pinInterface..." );
     if ( !_pinInterface ) {
         print( "Error: _pinInterface is null" );
         return -1;
     }
+    print( "checking _ppinInterface == nullptr ..." );
     if ( _pinInterface == nullptr ) {
         print( "Error: _pinInterface is null" );
         return -1;
     } else {
         print( "got _pinInterface" );
     }
+    print( "getting originalRemoteCode..." );
     int originalRemoteCode = _pinInterface->read_mcp23017_value();
     print( "steve delay..." );
     GameTimer::gameDelay( STEVE_DELAY ); // that delay steve was talking about...
