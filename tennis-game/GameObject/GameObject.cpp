@@ -37,7 +37,15 @@ GameObject::GameObject( GameState* gameState, IDisplay* display ) :
     _pinState = new PinState( _pin_map );
     _pinInterface = new PinInterface( _pinState );
     _history = new History();
+    print( "checking pin interface before constructing _gameInputs..." );
+    if( _pinInterface == nullptr ) {
+        print("_pinInterface is null" );
+        exit( 1 );
+    } else {
+        print("_pinInterface is not null" );
+    }
     _gameInputs = new Inputs( _player1, _player2, _pinInterface, _gameState );
+    print( "gameInputs constrructed" );
     _gameModes =  new GameModes( _player1, _player2, _pinInterface, _gameState, _history );
     FontManager* fontManager = new FontManager();
     ColorManager* colorManager = new ColorManager();

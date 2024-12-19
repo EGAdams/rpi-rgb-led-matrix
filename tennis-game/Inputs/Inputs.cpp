@@ -33,6 +33,7 @@ Inputs::Inputs( Player* player1,
 }
 
 Inputs::~Inputs() { /* std::cout << "*** Inputs destructor called. ***" << std::endl; */ delete _logger; }
+
 PinInterface* Inputs::get_pin_interface() {
     print( "checking private pin interface argument value inside get_pin_interface()..." );
     if( _pinInterface == nullptr ) {
