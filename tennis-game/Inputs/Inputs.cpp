@@ -139,7 +139,11 @@ int Inputs::readPlayerButtons() {
 int Inputs::read_mcp23017_value() {
     print( "setting originalRemoteCode..." );
     // check for null _pinInterface
-    if (_pinInterface == nullptr) {
+    if ( !_pinInterface ) {
+        print( "Error: _pinInterface is null" );
+        return -1;
+    }
+    if ( _pinInterface == nullptr ) {
         print( "Error: _pinInterface is null" );
         return -1;
     } else {
