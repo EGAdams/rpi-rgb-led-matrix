@@ -24,6 +24,19 @@ GameModes::GameModes(Player* player1,
     _mode1Functions = new Mode1Functions(player1, player2, pinInterface, gameState, history);
     _tieBreaker = new TieBreaker(player1, player2, pinInterface, gameState, history);
     _logger = new Logger("GameModes");
+    print( "checking for null pointers inside GameModes constructor..." );
+    if ( !_pinInterface ) {
+        print( "PinInterface is null" );
+    exit( 1 );
+    } else {
+        print( "PinInterface is not null" );
+    }
+    if ( _pinInterface == nullptr ) {
+        print( "printInerface is null" );
+    exit( 1 );
+    } else {
+        print( "printInerface is not null" );
+    }
 }
 void GameModes::undo() { 
     _undo.mode1Undo(_history);
