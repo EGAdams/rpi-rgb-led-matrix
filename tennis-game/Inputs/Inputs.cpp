@@ -20,7 +20,16 @@ Inputs::Inputs( Player* player1,
 
 Inputs::~Inputs() { /* std::cout << "*** Inputs destructor called. ***" << std::endl; */ delete _logger; }
 PinInterface* Inputs::get_pin_interface() { return _pinInterface; }
-void Inputs::set_pin_interface( PinInterface* pinInterface ) { _pinInterface = pinInterface; }
+void Inputs::set_pin_interface( PinInterface* pinInterface ) { 
+    print( "checking private pin interface value inside Inputs before setting..." );
+    if( _pinInterface == nullptr ) {
+        print( "_pinInterface is null" );
+        exit( 1 );
+    } else {
+        print( "_pinInterface is not null" );
+    }
+    _pinInterface = pinInterface;
+}
 
 void Inputs::readReset() {
     if ( _pinInterface->pinDigitalRead( RESET ) == LOW ) {
