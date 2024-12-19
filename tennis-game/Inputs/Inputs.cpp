@@ -20,6 +20,10 @@ Inputs::Inputs( Player* player1,
 
 Inputs::~Inputs() { /* std::cout << "*** Inputs destructor called. ***" << std::endl; */ delete _logger; }
 
+PinInterface* Inputs::get_pin_interface() {
+    return _pinInterface;
+}
+
 void Inputs::readReset() {
     if ( _pinInterface->pinDigitalRead( RESET ) == LOW ) {
         if ( SIMULATION == 0 ) { while ( _pinInterface->pinDigitalRead( RESET ) == LOW ) { GameTimer::gameDelay( 25 ); }}  // Wait for the button to be released

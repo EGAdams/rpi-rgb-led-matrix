@@ -81,6 +81,17 @@ void GameModes::mode1() {
         _gameState->setUndo( 0 );
         _undo.mode1Undo( _history );
     }
+
+    print( "checking pin interface on_inputs inside mode1()..." );
+    PinInterface* test_pointer = _inputs->get_pin_interface();
+    if( test_pointer == nullptr ) {
+        print( "test_pointer is null" );
+        exit( 1 );
+    } else {
+        print( "test_pointer is not null" );
+
+    }
+
     // _inputs.readPlayerButtons();  // digital read on player buttons.  sets playerButton if tripped.
     print( "reading _inputs.read_mcp23017_value()..." );
     int button_read = _inputs->read_mcp23017_value();

@@ -43,6 +43,8 @@ public:
     void setGameObject(GameObject* gameObject);
     GameObject* getGameObject() const;
 
+    PinInterface* get_pin_interface();
+
 private:
     Player*                 _player1;
     Player*                 _player2;
