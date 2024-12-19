@@ -44,6 +44,7 @@ public:
     GameObject* getGameObject() const;
 
     PinInterface* get_pin_interface();
+    void set_pin_interface( PinInterface* pinInterface );
 
 private:
     Player*                 _player1;
