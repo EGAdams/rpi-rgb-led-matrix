@@ -34,6 +34,20 @@ Inputs::Inputs( Player* player1,
 
 Inputs::~Inputs() { /* std::cout << "*** Inputs destructor called. ***" << std::endl; */ delete _logger; }
 PinInterface* Inputs::get_pin_interface() {
+    print( "checking private pin interface argument value inside get_pin_interface()..." );
+    if( _pinInterface == nullptr ) {
+        print( "_pinInterface is null" );
+        exit( 1 );
+    } else {
+        print( "_pinInterface is not null" );
+    }
+    print( "checking private pin interface value inside get_pin_interface()..." );
+    if( !_pinInterface ) {
+        print( "!_pinInterface" );
+        exit( 1 );
+    } else {
+        print( "_pinInterface is seems ok.." );
+    }
     print( "returning private pin interface value inside Inputs..." );
     return _pinInterface;
 }
