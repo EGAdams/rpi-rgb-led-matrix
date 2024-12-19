@@ -1149,7 +1149,7 @@ void run_remote_keyboard( GameObject* gameObject, GameState* gameState, Reset* r
 
 int main( int argc, char* argv[] ) {
     std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );
-    int mode = 3;           // set menu or read remote mode.. or both!
+    int mode = 2;           // set menu or read remote mode.. or both!
     if ( argc > 1 ) {
         std::string arg1 = argv[1];
         if ( arg1 == "--manual" ) {
