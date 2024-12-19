@@ -45,6 +45,14 @@ GameObject::GameObject( GameState* gameState, IDisplay* display ) :
     _gameModes->setScoreBoards( _scoreBoard );
     _subjectManager = new SubjectManager();
     _logger = new Logger( "GameObject" );
+    print( "checking pin interface inside GameObject constructor..." );
+    PinInterface* test_pointer = _gameInputs->get_pin_interface();
+    if( test_pointer == nullptr ) {
+        print( "test_pointer is null" );
+        exit( 1 );
+    } else {
+        print( "test_pointer is not null" );
+    }
 }
 
 Player* GameObject::getPlayer1() { return _player1; }

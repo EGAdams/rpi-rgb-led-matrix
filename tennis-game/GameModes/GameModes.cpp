@@ -26,16 +26,16 @@ GameModes::GameModes(Player* player1,
     _logger = new Logger("GameModes");
     print( "checking for null pointers inside GameModes constructor..." );
     if ( !_pinInterface ) {
-        print( "PinInterface is null" );
+        print( "_pinInterface is null" );
     exit( 1 );
     } else {
-        print( "PinInterface is not null" );
+        print( "_pinInterface is not null" );
     }
     if ( _pinInterface == nullptr ) {
-        print( "printInerface is null" );
+        print( "pinInterface is nullptr" );
     exit( 1 );
     } else {
-        print( "printInerface is not null" );
+        print( "pinInterface is not nullptr" );
     }
 }
 void GameModes::undo() { 
