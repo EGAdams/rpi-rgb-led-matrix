@@ -78,6 +78,7 @@ void GameModes::mode1() {
     
     print( "checking pin interface inside mode1()..." );
     PinInterface* test_pointer = _inputs->get_pin_interface();
+    print( "got test_pointer from _inputs inside mode1()..." );
     if( test_pointer == nullptr ) {
         print( "test_pointer is null" );
         exit( 1 );
