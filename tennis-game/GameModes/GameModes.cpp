@@ -82,6 +82,14 @@ void GameModes::mode1() {
         _undo.mode1Undo( _history );
     }
 
+    print( "checking private pin interface value inside mode1()..." );
+    if( _pinInterface == nullptr ) {
+        print( "_pinInterface is null" );
+        exit( 1 );
+    } else {
+        print( "_pinInterface is not null" );
+    }
+
     print( "setting pin interface in mode1()..." );
     _inputs->set_pin_interface( _pinInterface );
 
