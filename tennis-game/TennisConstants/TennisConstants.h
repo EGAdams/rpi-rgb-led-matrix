@@ -2,7 +2,8 @@
 #define TennisConstants_h
 
 #include "../Arduino/Arduino.h"
-#define print( x ) std::cout << x << std::endl;
+// #define print( x ) std::cout << x << std::endl;
+#define print(x) std::cout << __FILE__ << ":" << __LINE__ << " [" << __FUNCTION__ << "] " << x << std::endl;
 
 //  Written by Chris Bean for Teensy 4.1 only
 //  re-written in C++ by EG in June 2022
