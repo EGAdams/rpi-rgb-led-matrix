@@ -75,6 +75,19 @@ void GameModes::gameStart() {
 void GameModes::mode1() { 
     print( "just inside mode1()... " );
     _gameState->setNow( GameTimer::gameMillis());
+    
+    print( "checking pin interface inside mode1()..." );
+    PinInterface* test_pointer = _inputs->get_pin_interface();
+    if( test_pointer == nullptr ) {
+        print( "test_pointer is null" );
+        exit( 1 );
+    } else {
+        print( "test_pointer is not null" );
+    }
+
+    print( "setting pin interface in mode1()..." );
+    _inputs->set_pin_interface( _pinInterface );
+
     print( "reading undo button..." );
     _inputs->readUndoButton();
     if ( _gameState->getUndo() == 1 ) {  // undo button pressed
@@ -90,17 +103,6 @@ void GameModes::mode1() {
         print( "_pinInterface is not null" );
     }
 
-    print( "setting pin interface in mode1()..." );
-    _inputs->set_pin_interface( _pinInterface );
-
-    print( "checking pin interface inside mode1()..." );
-    PinInterface* test_pointer = _inputs->get_pin_interface();
-    if( test_pointer == nullptr ) {
-        print( "test_pointer is null" );
-        exit( 1 );
-    } else {
-        print( "test_pointer is not null" );
-    }
 
     // _inputs.readPlayerButtons();  // digital read on player buttons.  sets playerButton if tripped.
     print( "reading _inputs.read_mcp23017_value()..." );
