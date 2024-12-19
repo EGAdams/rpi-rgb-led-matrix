@@ -35,7 +35,34 @@ GameObject::GameObject( GameState* gameState, IDisplay* display ) :
     _player2 = new Player( _gameState, PLAYER_2_INITIALIZED ); // now set each other as opponents...
     _player2->setOpponent( _player1 ); _player1->setOpponent( _player2 );
     _pinState = new PinState( _pin_map );
+    print( "_pinState created checking for null..." );
+    if ( _pinState == NULL ) {
+        print( "ERROR: _pinState is NULL" );
+        exit( 1 );
+    } else {
+        print( "_pinState created successfully" );
+    }
+    if ( !_pinState ) {
+        print( "ERROR: _pinState is NULL" );
+        exit( 1 );
+    } else {
+        print( "_pinState created successfully" );
+    }
+    print( "creating pinInterface from _pinState..." );
     _pinInterface = new PinInterface( _pinState );
+    // check for null pin interface
+    if ( _pinInterface == NULL ) {
+        print( "ERROR: _pinInterface is NULL" );
+        exit( 1 );
+    } else {
+        print( "_pinInterface created successfully" );
+    }
+    if ( !_pinInterface ) {
+        print( "ERROR: _pinInterface is NULL" );
+        exit( 1 );
+    } else {
+        print( "_pinInterface created successfully" );
+    }
     _history = new History();
     _gameInputs = new Inputs( _player1, _player2, _pinInterface, _gameState );
     _gameModes =  new GameModes( _player1, _player2, _pinInterface, _gameState, _history );
