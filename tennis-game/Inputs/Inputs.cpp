@@ -16,6 +16,20 @@ Inputs::Inputs( Player* player1,
     _gameState( gameState ),
     _reset( player1, player2, pinInterface, gameState ) {
     _logger = new Logger( "Inputs" );
+    print( "checking private pin interface argument value inside Inputs constructor..." );
+    if( pinInterface == nullptr ) {
+        print( "pinInterface is null" );
+        exit( 1 );
+    } else {
+        print( "pinInterface is not null" );
+    }
+    print( "checking private pin interface value inside Inputs constructor..." );
+    if( _pinInterface == nullptr ) {
+        print( "_pinInterface is null" );
+        exit( 1 );
+    } else {
+        print( "_pinInterface is not null" );
+    }
 }
 
 Inputs::~Inputs() { /* std::cout << "*** Inputs destructor called. ***" << std::endl; */ delete _logger; }
