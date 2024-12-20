@@ -1,3 +1,3 @@
 #!/bin/bash
-cd /home/dietpi/rpi-rgb-led-matrix/tennis_game/
+cd /home/dietpi/rpi-rgb-led-matrix/tennis-game/
 sudo ./tennis-game
