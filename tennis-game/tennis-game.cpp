@@ -920,13 +920,15 @@ int main( int argc, char* argv[] ) {
     std::cout << "creating reset object..." << std::endl;
     Reset* reset = new Reset( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
     Inputs* inputs = new Inputs( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
+    mode = 1;
     if ( mode == 1 ) {
         std::cout << "running manual game..." << std::endl;
         run_manual_game( gameObject, gameState, reset, 1 ); return 0;
     }
     else if ( mode == 2 ) {
         std::cout << "running game from remote inputs..." << std::endl;
-        run_remote_listener( gameObject, gameState, reset, inputs ); return 0;
+        run_remote_listener( gameObject, gameState, reset, inputs );
+        return 0;
     }
     else {
         std::cout << "*** ERROR: unknown mode ***" << std::endl;
