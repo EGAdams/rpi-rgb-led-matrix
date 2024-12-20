@@ -18,9 +18,11 @@ int InputWithTimer::getInput() {
     _blinker->start();
     print( "getting input from within InputWithTimer..." );
     if ( REMOTE_INPUT == 1 ) {  
-        while ( !done ) {                           // remote mode
+        while ( !done ) {    
+            print( "REMOTE_INPUT == 1" );            // remote mode
             selection = _inputs->read_mcp23017_value();
             std::cout << "read selection from inputs: " << selection << std::endl;
+            std::cin >> selection; 
             if ( selection == 7 || selection == 11 ) {
                 std::cout << "selection: " << selection << " triggered the done flag, exiting while loop..." << std::endl;
                 done = true;

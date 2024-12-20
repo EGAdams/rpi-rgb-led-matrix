@@ -805,7 +805,7 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
     bool is_on_pi = gameObject->getScoreBoard()->onRaspberryPi();
     print( "is_on_pi: " + std::to_string( is_on_pi ) );
     while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { /*/// Begin Game Loop ///*/
-        print( "entered while loop from run manual game" );
+        print( "entered while loop from run remote listener..." );
         sleep( SCORE_DELAY );
         // if remote pairing, write the words.  if not, snap out of the loop
         while ( remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake() ) { // 090724
