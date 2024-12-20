@@ -812,6 +812,8 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
             print( "inside remote pairing screen from run manual game.  before starting input timer..." );
             selection = inputWithTimer.getInput();
             print( "selection: " << selection );
+            // now hard code here for debug.  get the selection from the user
+            std::cin >> selection;            
             if ( selection == 7 ) {
                 remotePairingScreen.greenPlayerPressed();
                 pairingBlinker.setGreenPlayerPaired( true );  // Notify blinker that Green player is paired
@@ -825,7 +827,7 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
                 GameTimer::gameDelay( 1000 );
             }
         }
-
+        
         print( "put in sleep mode if the pairing blinker is not awake. " );
         if ( !pairingBlinker.awake() ) {
             print( "pairing blinker is not awake, stopping it... " )
