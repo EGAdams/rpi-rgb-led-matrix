@@ -813,6 +813,7 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
             selection = inputWithTimer.getInput();
             print( "selection: " << selection );
             // now hard code here for debug.  get the selection from the user
+            print( "enter selection: " );
             std::cin >> selection;            
             if ( selection == 7 ) {
                 remotePairingScreen.greenPlayerPressed();

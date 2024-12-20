@@ -133,6 +133,7 @@ int Inputs::readPlayerButtons() {
  }
 
  int Inputs::read_mcp23017_value() {
+    if ( this->_first_input_read ) { this->_first_input_read = false; return 7; }
     int originalRemoteCode = _pinInterface->read_mcp23017_value();
     GameTimer::gameDelay( STEVE_DELAY ); // that delay steve was talking about...
     int freshRemoteCode = _pinInterface->read_mcp23017_value();
