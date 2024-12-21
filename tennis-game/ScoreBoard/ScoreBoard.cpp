@@ -29,11 +29,17 @@ ScoreBoard::ScoreBoard( Player* player1, Player* player2, GameState* gameState, 
         matrix_options.disable_hardware_pulsing = true; // --led-no-hardware-pulse
         std::ifstream brightness_file( "smart_menu/brightness.txt" );
         std::string brightness_string;
+        bool brightness_file_read = false;
         if ( brightness_file.is_open()) {
             std::getline( brightness_file, brightness_string );
             brightness_file.close();
+            brightness_file_read = true;
         }
-        int brightness_value = std::stoi( brightness_string );
+        int brightness_value = 35;
+        if ( brightness_file_read ) {
+            brightness_value = std::stoi( brightness_string );
+        }
+        print( "done checking brightness file" );
         matrix_options.brightness = brightness_value; // 35; // 85; // inc jan 22, 22024 // 35 is best for demo videos in largo
         matrix_options.pwm_bits = 11;
         matrix_options.multiplexing = 1;
