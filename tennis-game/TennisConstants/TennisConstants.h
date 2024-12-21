@@ -2,7 +2,24 @@
 #define TennisConstants_h
 
 #include "../Arduino/Arduino.h"
-#define print( x ) std::cout << x << std::endl;
+#include <iostream>
+#include <iomanip>
+#include <chrono>
+#include <ctime>
+
+#define print(x) \
+    do { \
+        auto now = std::chrono::system_clock::now(); \
+        auto in_time_t = std::chrono::system_clock::to_time_t(now); \
+        std::tm buf; \
+        localtime_r(&in_time_t, &buf); \
+        std::cout << "[" << std::put_time(&buf, "%Y-%m-%d %H:%M:%S") << "] " \
+                  << "[" << __FILE__ << "] " \
+                  << "[" << __FUNCTION__ << "] " \
+                  << "[Line: " << __LINE__ << "] " \
+                  << x << std::endl; \
+    } while (0)
+
 
 //  Written by Chris Bean for Teensy 4.1 only
 //  re-written in C++ by EG in June 2022
