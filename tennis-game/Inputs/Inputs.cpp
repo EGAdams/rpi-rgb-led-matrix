@@ -145,8 +145,8 @@ int Inputs::readPlayerButtons() {
             freshRemoteCode = _pinInterface->read_mcp23017_value();
             std::cout << "after delay within while; freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" << std::endl;
         }
-        std::cout << "exited while.  *** CODE IS VALID ***.  returning originalRemoteCode [" << std::to_string( originalRemoteCode ) << "]" << std::endl;
-        return originalRemoteCode;
+        std::cout << "exited while.  *** CODE IS VALID ***.  returning freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" << std::endl;
+        return freshRemoteCode;
     } else {        // false alarm.  we DO NOT have a matching measurement gameDelay( x ) apart.
         return UNKNOWN_REMOTE_BUTTON;
     }
