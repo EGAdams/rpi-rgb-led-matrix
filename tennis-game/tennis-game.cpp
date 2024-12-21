@@ -551,7 +551,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
 
         print( "put in sleep mode if the pairing blinker is not awake. " );
         if ( !pairingBlinker.awake() ) {
-            print( "pairing blinker is not awake, stopping it... " )
+            print( "pairing blinker is not awake, stopping it... " );
                 pairingBlinker.stop();
             print( "pairing blinker stopped.  now putting in sleep mode..." );
             gameState->setCurrentAction( SLEEP_MODE );
@@ -828,7 +828,7 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
 
         print( "put in sleep mode if the pairing blinker is not awake. " );
         if ( !pairingBlinker.awake() ) {
-            print( "pairing blinker is not awake, stopping it... " )
+            print( "pairing blinker is not awake, stopping it... " );
                 pairingBlinker.stop();
             print( "pairing blinker stopped.  now putting in sleep mode..." );
             gameState->setCurrentAction( SLEEP_MODE );
