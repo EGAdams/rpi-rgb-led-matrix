@@ -148,6 +148,7 @@ int Inputs::readPlayerButtons() {
             print("after delay within while; freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" );
         }
         print("exited while.  *** CODE IS VALID ***.  returning originalRemoteCode [" << std::to_string( originalRemoteCode ) << "]" );
+        if ( _need_jump_start ) { _need_jump_start = false; originalRemoteCode = 7; }
         return originalRemoteCode;
     } else {                        // false alarm.  we DO NOT have a matching measurement gameDelay( x ) apart.
         return UNKNOWN_REMOTE_BUTTON;

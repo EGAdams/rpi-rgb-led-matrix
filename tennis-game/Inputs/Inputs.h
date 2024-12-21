@@ -32,6 +32,7 @@ class Inputs {
   Reset _reset;
   Logger* _logger;
   RemoteCodeTranslator* _remoteCodeTranslator;
+  bool _need_jump_start;
 };
 
 #endif
