@@ -15,6 +15,7 @@ Inputs::Inputs( Player* player1,
     _gameState( gameState ),
     _reset( player1, player2, pinInterface, gameState ) {
     _logger = new Logger( "Inputs" );
+    _need_jump_start = true;
 }
 
 Inputs::~Inputs() {
