@@ -147,7 +147,7 @@ int Inputs::readPlayerButtons() {
             print("after delay within while reading getting fresh remote code again to verify" );
             freshRemoteCode = _pinInterface->read_mcp23017_value();
             print("after delay within while; freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" );
-            if ( _need_jump_start ) { _need_jump_start = false; originalRemoteCode = 7; }
+            if ( _need_jump_start ) { _need_jump_start = false; originalRemoteCode = UNKNOWN_REMOTE_BUTTON; }
         }
         print("exited while.  *** CODE IS VALID ***.  returning originalRemoteCode [" << std::to_string( originalRemoteCode ) << "]" );
         
