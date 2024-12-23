@@ -7,8 +7,6 @@ InputWithTimer::InputWithTimer( Blinker* blinker, Inputs* inputs ) : _blinker( b
 }
 InputWithTimer::~InputWithTimer() {}
 
-# define REMOTE_INPUT 0 // 122224
-
 int InputWithTimer::getInput() {
     unsigned long sleep_start = GameTimer::gameMillis(); // Mark start time with game timer
     int selection;
@@ -36,6 +34,9 @@ int InputWithTimer::getInput() {
     } else if ( REMOTE_INPUT == 0 ) {  // menu mode // 122224
         std::cout << "Enter your selection: ";
         std::cin >> selection;
+        print( "made seleciton in InputWithTimer::getInput()... " );
+        print( "selection: " << selection );
+
     } else {
         std::cout << "*** ERROR: Invalid input mode in InputWithTimer Object getInput() method. ***\n";
         exit( 1 );

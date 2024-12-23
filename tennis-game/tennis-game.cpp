@@ -809,14 +809,20 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
     bool is_on_pi = gameObject->getScoreBoard()->onRaspberryPi();
     print( "is_on_pi: " + std::to_string( is_on_pi ));
     while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { /*/// Begin Game Loop ///*/
+        print( "*** entered /*/// Begin Game Loop ///*/ ***" );
         print( "entered while loop from run manual game" );
         sleep( SCORE_DELAY );
         // if remote pairing, write the words.  if not, snap out of the loop
         while ( remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake()) { // 090724
             print( "inside remote pairing screen from run manual game.  before starting input timer..." );
-            std::cin >> selection;  
-            // selection = inputWithTimer.getInput();
-            print( "selection: " << selection );
+            std::cin >> selection;
+            if ( REMOTE_INPUT == 1 ) {
+                selection = inputWithTimer.getInput();
+            } else {
+                print( "*** inside remote listener getting remote selection ***" );
+                print( "selection: " << selection );
+
+            }
             if ( selection == GREEN_REMOTE_GREEN_SCORE ) {
                 remotePairingScreen.greenPlayerPressed();
                 pairingBlinker.setGreenPlayerPaired( true );  // Notify blinker that Green player is paired
@@ -869,6 +875,9 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
             print( "updated scoreboard." );
         } else {
             std::cin >> selection;
+            print( "*** selection made in /*/// Begin Game Loop ///*/ ***" );
+            print( "selection: " << selection );
+
             // bool done = false;
             // while ( !done ) {                           // remote mode
             //     selection = inputs->read_mcp23017_value();
@@ -911,6 +920,7 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
         loop_count++;
         std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
         std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
+        print( "end /*/// Begin Game Loop ///*/ ***" );
     } ///////// End Game Loop /////////
 }
 

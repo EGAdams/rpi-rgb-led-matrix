@@ -26,6 +26,8 @@
 
 
 /////////////////////// REMOTE DEFINITIONS /////////////////////////////////////
+# define REMOTE_INPUT 0 // 122224
+
 #define REMOTE_DATA_0 25
 #define REMOTE_DATA_1 24
 #define REMOTE_DATA_2 40
