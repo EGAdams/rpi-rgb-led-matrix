@@ -161,9 +161,9 @@ int Inputs::readPlayerButtons() {
                     _need_jump_start = false;
                 } else {
                     print( "game is not started.  we may need a jump start here." );
-                _   need_jump_start = false;
+                    _need_jump_start = false;
                     // originalRemoteCode = UNKNOWN_REMOTE_BUTTON; 
-                }
+                } 
             }
         }
         print("exited while.  *** CODE IS VALID ***.  returning originalRemoteCode [" << std::to_string( originalRemoteCode ) << "]" );
