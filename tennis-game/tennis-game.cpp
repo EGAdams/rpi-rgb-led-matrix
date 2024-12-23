@@ -875,25 +875,27 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
             gameObject->getScoreBoard()->update();
             print( "updated scoreboard." );
         } else {
-            std::cin >> selection;
-            print( "*** selection made in /*/// Begin Game Loop ///*/ ***" );
-            print( "selection: " << selection );
-
-            bool done = false;
-            while ( !done ) {                           // remote mode
-                selection = inputs->read_mcp23017_value();
-                std::cout << "read selection from inputs: " << selection << std::endl;
-                if ( selection == GREEN_REMOTE_GREEN_SCORE || 
-                     selection == GREEN_REMOTE_RED_SCORE   ||
-                     selection == RED_REMOTE_GREEN_SCORE   ||
-                     selection == RED_REMOTE_RED_SCORE ) {
-                    
-                    std::cout << "selection: " << selection << " triggered the done flag, exiting while loop..." << std::endl;
-                    done = true;
-                } else { 
-                    // delay 250ms
-                    std::cout << "sleeping 250ms..." << std::endl; 
-                    GameTimer::gameDelay( 250 );
+            if ( REMOTE_INPUT == 0 ) {
+                std::cin >> selection;
+                print( "*** selection made in /*/// Begin Game Loop ///*/ ***" );
+                print( "selection: " << selection );
+            } else {
+                bool done = false;
+                while ( !done ) {                           // remote mode
+                    selection = inputs->read_mcp23017_value();
+                    std::cout << "read selection from inputs: " << selection << std::endl;
+                    if ( selection == GREEN_REMOTE_GREEN_SCORE || 
+                        selection == GREEN_REMOTE_RED_SCORE   ||
+                        selection == RED_REMOTE_GREEN_SCORE   ||
+                        selection == RED_REMOTE_RED_SCORE ) {
+                        
+                        std::cout << "selection: " << selection << " triggered the done flag, exiting while loop..." << std::endl;
+                        done = true;
+                    } else { 
+                        // delay 250ms
+                        std::cout << "sleeping 250ms..." << std::endl; 
+                        GameTimer::gameDelay( 250 );
+                    }
                 }
             }
         }
