@@ -153,12 +153,21 @@ int Inputs::readPlayerButtons() {
             if ( freshRemoteCode != 15 ) {
                 print( "after delay within while; freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" );
             }
-            if ( _need_jump_start ) { _need_jump_start = false; originalRemoteCode = UNKNOWN_REMOTE_BUTTON; }
+            // below code may be needed for the power cycle
+            if ( _need_jump_start ) {
+                print ( "need_jump_start is true.  checking if game is started... " );
+                if ( _gameState->getStarted() ) {
+                    print( "game is started.  resetting need_jump_start to false.  no jump start needed." );
+                    _need_jump_start = false;
+                } else {
+                    print( "game is not started.  we may need a jump start here." );
+                _   need_jump_start = false;
+                    // originalRemoteCode = UNKNOWN_REMOTE_BUTTON; 
+                }
+            }
         }
         print("exited while.  *** CODE IS VALID ***.  returning originalRemoteCode [" << std::to_string( originalRemoteCode ) << "]" );
-        
         return originalRemoteCode;
     } else {                        // false alarm.  we DO NOT have a matching measurement gameDelay( x ) apart.
-        return UNKNOWN_REMOTE_BUTTON;
     }
  }
