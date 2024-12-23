@@ -704,7 +704,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
 
         }
         else if ( menu_selection == 105 ) {
-            std::cout << "reading MCP23017 bits..." << std::endl;
+            // std::cout << "reading MCP23017 bits..." << std::endl;
             int file = open( I2C_DEVICE, O_RDWR );
 
             if ( file < 0 ) {
