@@ -533,7 +533,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         sleep( SCORE_DELAY );
         // if remote pairing, write the words.  if not, snap out of the loop
         while ( remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake()) { // 090724
-            print( "inside remote pairing screen from run manual game.  before starting input timer..." );
+            print( "inside remote pairing screen from run manual game.  before starting input timer..." ); // 122224
             int menu_selection = inputWithTimer.getInput();
             if ( menu_selection == 1 ) {
                 remotePairingScreen.greenPlayerPressed();

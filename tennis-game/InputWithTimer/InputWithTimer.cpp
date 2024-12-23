@@ -7,8 +7,7 @@ InputWithTimer::InputWithTimer( Blinker* blinker, Inputs* inputs ) : _blinker( b
 }
 InputWithTimer::~InputWithTimer() {}
 
-# define REMOTE_INPUT 1
-# define MANUAL_INPUT 0
+# define REMOTE_INPUT 0 // 122224
 
 int InputWithTimer::getInput() {
     unsigned long sleep_start = GameTimer::gameMillis(); // Mark start time with game timer
@@ -17,7 +16,7 @@ int InputWithTimer::getInput() {
     print( "starting blinker from within InputWithTimer..." );
     _blinker->start();
     print( "getting input from within InputWithTimer..." );
-    if ( REMOTE_INPUT == 1 ) {  
+    if ( REMOTE_INPUT == 1 ) {  // 122224
         while ( !done ) {                           // remote mode
             selection = _inputs->read_mcp23017_value();
             std::cout << "read selection from inputs: " << selection << std::endl;
@@ -33,7 +32,7 @@ int InputWithTimer::getInput() {
                 GameTimer::gameDelay( 250 );
             }
         }
-    } else if ( MANUAL_INPUT == 1 ) {               // menu mode
+    } else if ( REMOTE_INPUT == 0 ) {  // menu mode // 122224
         std::cout << "Enter your selection: ";
         std::cin >> selection;
     } else {
