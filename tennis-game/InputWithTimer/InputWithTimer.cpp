@@ -21,7 +21,10 @@ int InputWithTimer::getInput() {
         while ( !done ) {                           // remote mode
             selection = _inputs->read_mcp23017_value();
             std::cout << "read selection from inputs: " << selection << std::endl;
-            if ( selection == 7 || selection == 11 ) {
+            if ( selection == GREEN_REMOTE_GREEN_SCORE  || 
+                 selection == GREEN_REMOTE_RED_SCORE    ||
+                 selection == RED_REMOTE_GREEN_SCORE    ||
+                 selection == RED_REMOTE_RED_SCORE ) {
                 std::cout << "selection: " << selection << " triggered the done flag, exiting while loop..." << std::endl;
                 done = true;
             } else { 
