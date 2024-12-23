@@ -888,14 +888,16 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
              selection == RED_REMOTE_RED_SCORE ) {
             // if remote pairing, write the words.  if not, snap out of the loop
             if ( selection == GREEN_REMOTE_GREEN_SCORE || selection == RED_REMOTE_GREEN_SCORE ) {
+                print( "*** \n\n\nGreen player scored ***\n\n\n" );
                 selection = 1; // Player 1 ( GREEN ) score
             } else if ( selection == GREEN_REMOTE_RED_SCORE || selection == RED_REMOTE_RED_SCORE ) {
+                print( "\n\n\n*** Red player scored ***\n\n\n" );
                 selection = 2; // Player 2 ( RED ) score
             }
             gameObject->playerScore( selection );  // flip the player score flag
             sleep( SCORE_DELAY );
         } else {
-            std::cout << "\n\n\n\n\n\n\n*** Invalid selection ***\n" << std::endl;
+            std::cout << "\n\n\n*** Invalid selection ***\n\n\n" << std::endl;
             sleep( SCORE_DELAY );
             continue;
         }
