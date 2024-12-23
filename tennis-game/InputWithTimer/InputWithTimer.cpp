@@ -18,6 +18,7 @@ int InputWithTimer::getInput() {
     print( "getting input from within InputWithTimer..." );
     if ( REMOTE_INPUT == 1 ) {  // 122224
         while ( !done ) {                           // remote mode
+            print( "*** reading selection from inputs... ***" ); // 122224
             selection = _inputs->read_mcp23017_value();
             std::cout << "read selection from inputs: " << selection << std::endl;
             if ( selection == GREEN_REMOTE_GREEN_SCORE  || 
