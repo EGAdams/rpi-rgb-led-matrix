@@ -30,14 +30,14 @@
 #define REMOTE_DATA_1 24
 #define REMOTE_DATA_2 40
 #define REMOTE_DATA_3 17
-#define RED_REMOTE_RED_SCORE     1
-#define RED_REMOTE_GREEN_SCORE   2
-#define RED_REMOTE_UNDO          3
-#define RED_REMOTE_RESET         4
-#define GREEN_REMOTE_GREEN_SCORE 5
-#define GREEN_REMOTE_RED_SCORE   6
-#define GREEN_REMOTE_UNDO        7
-#define GREEN_REMOTE_RESET       8 // go copilot for those last 3!
+#define RED_REMOTE_RED_SCORE     6
+#define RED_REMOTE_GREEN_SCORE   10
+#define RED_REMOTE_UNDO          99
+#define RED_REMOTE_RESET         99
+#define GREEN_REMOTE_GREEN_SCORE 7
+#define GREEN_REMOTE_RED_SCORE   11
+#define GREEN_REMOTE_UNDO        99
+#define GREEN_REMOTE_RESET       99
 #define NO_REMOTE_BUTTONS        0
 #define UNKNOWN_REMOTE_BUTTON   99
 

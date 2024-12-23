@@ -425,7 +425,7 @@ void test_06( GameObject* gameObject, GameState* gameState, int* loop_count ) {
     gameObject->getPlayer1()->setGames( 5 );
     gameObject->getPlayer2()->setGames( 4 );
     playerWin( gameObject, gameState, 1 ); // Player 1 wins the second set and the match
-    if ( !gameState->gameRunning() ) { // Check match win condition and display the result
+    if ( !gameState->gameRunning()) { // Check match win condition and display the result
     }
 }
 
@@ -489,7 +489,7 @@ bool detectExpander() {
     int file;
     const char* i2c_device = "/dev/i2c-1";
 
-    if ( ( file = open( i2c_device, O_RDWR ) ) < 0 ) {
+    if ( ( file = open( i2c_device, O_RDWR )) < 0 ) {
         std::cerr << "Error: Unable to open I2C device.\n";
         return false;
     }
@@ -520,19 +520,19 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     Inputs* inputs = new Inputs( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
     gameObject->getScoreBoard()->setLittleDrawerFont( "fonts/8x13B.bdf" );
     std::signal( SIGINT, GameObject::_signalHandler );
-    RemotePairingScreen remotePairingScreen( gameObject->getScoreBoard() );
+    RemotePairingScreen remotePairingScreen( gameObject->getScoreBoard());
     print( "constructing pairing blinker from run manual game" );
-    PairingBlinker pairingBlinker( gameObject->getScoreBoard() );  // Use PairingBlinker
+    PairingBlinker pairingBlinker( gameObject->getScoreBoard());  // Use PairingBlinker
     print( "constructing input with timer from run manual game" );
     InputWithTimer inputWithTimer( &pairingBlinker, inputs );  // Pass PairingBlinker
     print( "finished constructing input with timer from run manual game" );
     bool is_on_pi = gameObject->getScoreBoard()->onRaspberryPi();
-    print( "is_on_pi: " + std::to_string( is_on_pi ) );
+    print( "is_on_pi: " + std::to_string( is_on_pi ));
     while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { /*/// Begin Game Loop ///*/
         print( "entered while loop from run manual game" );
         sleep( SCORE_DELAY );
         // if remote pairing, write the words.  if not, snap out of the loop
-        while ( remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake() ) { // 090724
+        while ( remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake()) { // 090724
             print( "inside remote pairing screen from run manual game.  before starting input timer..." );
             int menu_selection = inputWithTimer.getInput();
             if ( menu_selection == 1 ) {
@@ -550,7 +550,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         }
 
         print( "put in sleep mode if the pairing blinker is not awake. " );
-        if ( !pairingBlinker.awake() ) {
+        if ( !pairingBlinker.awake()) {
             print( "pairing blinker is not awake, stopping it... " );
                 pairingBlinker.stop();
             print( "pairing blinker stopped.  now putting in sleep mode..." );
@@ -573,16 +573,16 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         std::cout << "105.) read bits.   " << std::endl;
 
         if ( gameState->getCurrentAction() == SLEEP_MODE ) {
-            ScoreboardBlinker blinker( gameObject->getScoreBoard() );
+            ScoreboardBlinker blinker( gameObject->getScoreBoard());
             InputWithTimer inputWithTimer( &blinker, inputs );
             menu_selection = inputWithTimer.getInput();
             gameState->setCurrentAction( AFTER_SLEEP_MODE ); // stop sleep mode
             std::cout << "time slept: " << inputWithTimer.getTimeSlept() << std::endl;
             if ( menu_selection == 1 ||
                   menu_selection == 2 ||
-                 ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 ) ) { // and sleep time expired...
+                 ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 )) { // and sleep time expired...
                 // if the pairing caused the sleep mode, just go back to pairing mode
-                // if ( !pairingBlinker.awake() ) {
+                // if ( !pairingBlinker.awake()) {
                 //     print( "pairing blinker is sleeping.  going back to pairing mode..." );
                 //     gameState->setCurrentAction( NORMAL_GAME_STATE );
                 //     pairingBlinker.sleepModeOff();  // wake up the pairing blinker
@@ -652,7 +652,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             }
 
             // If the file exists, set the font file
-            gameObject->getScoreBoard()->setFontFile( font_file.c_str() );
+            gameObject->getScoreBoard()->setFontFile( font_file.c_str());
         }
         else if ( menu_selection == 9 ) {
             std::cout << "\n\n\n\n\n\n\n*** Undo ***\n" << std::endl;
@@ -777,7 +777,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
 bool is_on_raspberry_pi() {
     std::ifstream file( "/proc/device-tree/model" );
     std::string line;
-    if ( file.is_open() ) {
+    if ( file.is_open()) {
         std::getline( file, line );
         file.close();
         if ( line.find( "Raspberry Pi" ) != std::string::npos ) { return true; }
@@ -796,27 +796,27 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
     gameObject->getScoreBoard()->setLittleDrawerFont( "fonts/8x13B.bdf" );
     std::signal( SIGINT, GameObject::_signalHandler );
     print (" constructing remote pairing screen from inside run remote listener method... " );
-    RemotePairingScreen remotePairingScreen( gameObject->getScoreBoard() );
+    RemotePairingScreen remotePairingScreen( gameObject->getScoreBoard());
     print( "constructing pairing blinker from run manual game" );
-    PairingBlinker pairingBlinker( gameObject->getScoreBoard() );  // Use PairingBlinker
+    PairingBlinker pairingBlinker( gameObject->getScoreBoard());  // Use PairingBlinker
     print( "constructing input with timer from run manual game" );
     InputWithTimer inputWithTimer( &pairingBlinker, inputs );  // Pass PairingBlinker
     print( "finished constructing input with timer from run manual game" );
     bool is_on_pi = gameObject->getScoreBoard()->onRaspberryPi();
-    print( "is_on_pi: " + std::to_string( is_on_pi ) );
+    print( "is_on_pi: " + std::to_string( is_on_pi ));
     while ( gameState->gameRunning() && GameObject::gSignalStatus != SIGINT ) { /*/// Begin Game Loop ///*/
         print( "entered while loop from run manual game" );
         sleep( SCORE_DELAY );
         // if remote pairing, write the words.  if not, snap out of the loop
-        while ( remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake() ) { // 090724
+        while ( remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake()) { // 090724
             print( "inside remote pairing screen from run manual game.  before starting input timer..." );
             selection = inputWithTimer.getInput();
             print( "selection: " << selection );
-            if ( selection == 7 ) {
+            if ( selection == GREEN_REMOTE_GREEN_SCORE ) {
                 remotePairingScreen.greenPlayerPressed();
                 pairingBlinker.setGreenPlayerPaired( true );  // Notify blinker that Green player is paired
             }
-            else if ( selection == 11 ) {
+            else if ( selection == RED_REMOTE_RED_SCORE ) {
                 remotePairingScreen.redPlayerPressed();
                 pairingBlinker.setRedPlayerPaired( true );  // Notify blinker that Red player is paired
             }
@@ -827,7 +827,7 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
         }
 
         print( "put in sleep mode if the pairing blinker is not awake. " );
-        if ( !pairingBlinker.awake() ) {
+        if ( !pairingBlinker.awake()) {
             print( "pairing blinker is not awake, stopping it... " );
                 pairingBlinker.stop();
             print( "pairing blinker stopped.  now putting in sleep mode..." );
@@ -835,14 +835,14 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
         }
 
         if ( gameState->getCurrentAction() == SLEEP_MODE ) {
-            ScoreboardBlinker blinker( gameObject->getScoreBoard() );
+            ScoreboardBlinker blinker( gameObject->getScoreBoard());
             InputWithTimer inputWithTimer( &blinker, inputs );
             int selection = inputWithTimer.getInput();
             gameState->setCurrentAction( AFTER_SLEEP_MODE ); // stop sleep mode
             std::cout << "time slept: " << inputWithTimer.getTimeSlept() << std::endl;
-            if ( selection == 7 ||
-                  selection == 11 ||
-                 ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 ) ) { // and sleep time expired...
+            if ( selection == GREEN_REMOTE_GREEN_SCORE ||
+                  selection == GREEN_REMOTE_RED_SCORE ||
+                 ( inputWithTimer.getTimeSlept() > MAX_SLEEP * 1000 )) { // and sleep time expired...
                 print( "reset match." );
                 gameObject->resetMatch();
                 print( "done resetting match." );
@@ -868,7 +868,10 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
             while ( !done ) {                           // remote mode
                 selection = inputs->read_mcp23017_value();
                 std::cout << "read selection from inputs: " << selection << std::endl;
-                if ( selection == 7 || selection == 11 ) {
+                if ( selection == GREEN_REMOTE_GREEN_SCORE || 
+                     selection == GREEN_REMOTE_RED_SCORE   ||
+                     selection == RED_REMOTE_GREEN_SCORE   ||
+                     selection == RED_REMOTE_RED_SCORE ) {
                     std::cout << "selection: " << selection << " triggered the done flag, exiting while loop..." << std::endl;
                     done = true;
                 } else { 
@@ -879,11 +882,15 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
             }
         }
 
-        if ( selection == 7 || selection == 11 ) {
-            if ( selection == 7 ) {
-                selection = 1;
-            } else if ( selection == 11 ) {
-                selection = 2;
+        if ( selection == GREEN_REMOTE_GREEN_SCORE || 
+             selection == GREEN_REMOTE_RED_SCORE   ||
+             selection == RED_REMOTE_GREEN_SCORE   ||
+             selection == RED_REMOTE_RED_SCORE ) {
+            // if remote pairing, write the words.  if not, snap out of the loop
+            if ( selection == GREEN_REMOTE_GREEN_SCORE || selection == RED_REMOTE_GREEN_SCORE ) {
+                selection = 1; // Player 1 ( GREEN ) score
+            } else if ( selection == GREEN_REMOTE_RED_SCORE || selection == RED_REMOTE_RED_SCORE ) {
+                selection = 2; // Player 2 ( RED ) score
             }
             gameObject->playerScore( selection );  // flip the player score flag
             sleep( SCORE_DELAY );
