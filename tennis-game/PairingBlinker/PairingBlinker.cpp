@@ -23,9 +23,7 @@ void PairingBlinker::blinkLoop() {
         print( "in blink loop..." );
         unsigned long current_time       = GameTimer::gameMillis();
         print( "current time: " + std::to_string( current_time ));
-
         unsigned long elapsed_time       = current_time - pairing_start_time;
-
         print( "elapsed time: " + std::to_string( elapsed_time ));
         // Check if timeout exceeded
         if ( elapsed_time > PAIRING_TIMEOUT ) {
@@ -44,6 +42,11 @@ void PairingBlinker::blinkLoop() {
         } else {
             print( "timeout not exceeded, continue blinking..." );
         }
+
+        // break out of here for debugging
+        _green_player_paired = true;
+        _red_player_paired = true;
+        // TODO: Put this back in to turn pairing back on.
 
         _scoreboard->clearScreen();
         if ( _green_player_paired && _red_player_paired ) { 

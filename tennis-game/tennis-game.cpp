@@ -810,7 +810,8 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
         // if remote pairing, write the words.  if not, snap out of the loop
         while ( remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake()) { // 090724
             print( "inside remote pairing screen from run manual game.  before starting input timer..." );
-            selection = inputWithTimer.getInput();
+            std::cin >> selection;  
+            // selection = inputWithTimer.getInput();
             print( "selection: " << selection );
             if ( selection == GREEN_REMOTE_GREEN_SCORE ) {
                 remotePairingScreen.greenPlayerPressed();
@@ -863,23 +864,23 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
             gameObject->getScoreBoard()->update();
             print( "updated scoreboard." );
         } else {
-            // std::cin >> selection;
-            bool done = false;
-            while ( !done ) {                           // remote mode
-                selection = inputs->read_mcp23017_value();
-                std::cout << "read selection from inputs: " << selection << std::endl;
-                if ( selection == GREEN_REMOTE_GREEN_SCORE || 
-                     selection == GREEN_REMOTE_RED_SCORE   ||
-                     selection == RED_REMOTE_GREEN_SCORE   ||
-                     selection == RED_REMOTE_RED_SCORE ) {
-                    std::cout << "selection: " << selection << " triggered the done flag, exiting while loop..." << std::endl;
-                    done = true;
-                } else { 
-                    // delay 250ms
-                    std::cout << "sleeping 250ms..." << std::endl; 
-                    GameTimer::gameDelay( 250 );
-                }
-            }
+            std::cin >> selection;
+            // bool done = false;
+            // while ( !done ) {                           // remote mode
+            //     selection = inputs->read_mcp23017_value();
+            //     std::cout << "read selection from inputs: " << selection << std::endl;
+            //     if ( selection == GREEN_REMOTE_GREEN_SCORE || 
+            //          selection == GREEN_REMOTE_RED_SCORE   ||
+            //          selection == RED_REMOTE_GREEN_SCORE   ||
+            //          selection == RED_REMOTE_RED_SCORE ) {
+            //         std::cout << "selection: " << selection << " triggered the done flag, exiting while loop..." << std::endl;
+            //         done = true;
+            //     } else { 
+            //         // delay 250ms
+            //         std::cout << "sleeping 250ms..." << std::endl; 
+            //         GameTimer::gameDelay( 250 );
+            //     }
+            // }
         }
 
         if ( selection == GREEN_REMOTE_GREEN_SCORE || 
@@ -887,6 +888,7 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
              selection == RED_REMOTE_GREEN_SCORE   ||
              selection == RED_REMOTE_RED_SCORE ) {
             // if remote pairing, write the words.  if not, snap out of the loop
+
             if ( selection == GREEN_REMOTE_GREEN_SCORE || selection == RED_REMOTE_GREEN_SCORE ) {
                 print( "*** \n\n\nGreen player scored ***\n\n\n" );
                 selection = 1; // Player 1 ( GREEN ) score
