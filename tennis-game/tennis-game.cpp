@@ -815,10 +815,11 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
         // if remote pairing, write the words.  if not, snap out of the loop
         while ( remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake()) { // 090724
             print( "inside remote pairing screen from run manual game.  before starting input timer..." );
-            std::cin >> selection;
+            
             if ( REMOTE_INPUT == 1 ) {
                 selection = inputWithTimer.getInput();
             } else {
+                std::cin >> selection;
                 print( "*** inside remote listener getting remote selection ***" );
                 print( "selection: " << selection );
 
@@ -878,24 +879,25 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
             print( "*** selection made in /*/// Begin Game Loop ///*/ ***" );
             print( "selection: " << selection );
 
-            // bool done = false;
-            // while ( !done ) {                           // remote mode
-            //     selection = inputs->read_mcp23017_value();
-            //     std::cout << "read selection from inputs: " << selection << std::endl;
-            //     if ( selection == GREEN_REMOTE_GREEN_SCORE || 
-            //          selection == GREEN_REMOTE_RED_SCORE   ||
-            //          selection == RED_REMOTE_GREEN_SCORE   ||
-            //          selection == RED_REMOTE_RED_SCORE ) {
-            //         std::cout << "selection: " << selection << " triggered the done flag, exiting while loop..." << std::endl;
-            //         done = true;
-            //     } else { 
-            //         // delay 250ms
-            //         std::cout << "sleeping 250ms..." << std::endl; 
-            //         GameTimer::gameDelay( 250 );
-            //     }
-            // }
+            bool done = false;
+            while ( !done ) {                           // remote mode
+                selection = inputs->read_mcp23017_value();
+                std::cout << "read selection from inputs: " << selection << std::endl;
+                if ( selection == GREEN_REMOTE_GREEN_SCORE || 
+                     selection == GREEN_REMOTE_RED_SCORE   ||
+                     selection == RED_REMOTE_GREEN_SCORE   ||
+                     selection == RED_REMOTE_RED_SCORE ) {
+                    
+                    std::cout << "selection: " << selection << " triggered the done flag, exiting while loop..." << std::endl;
+                    done = true;
+                } else { 
+                    // delay 250ms
+                    std::cout << "sleeping 250ms..." << std::endl; 
+                    GameTimer::gameDelay( 250 );
+                }
+            }
         }
-
+        print( "setting player button to selection: " << selection << " before calling loopGame()..." );
         if ( selection == GREEN_REMOTE_GREEN_SCORE || 
              selection == GREEN_REMOTE_RED_SCORE   ||
              selection == RED_REMOTE_GREEN_SCORE   ||
@@ -904,18 +906,18 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
 
             if ( selection == GREEN_REMOTE_GREEN_SCORE || selection == RED_REMOTE_GREEN_SCORE ) {
                 print( "*** \n\n\nGreen player scored ***\n\n\n" );
-                selection = 1; // Player 1 ( GREEN ) score
+                selection = 1; // Player 1 ( GREEN ) score // // flip the player score flag
             } else if ( selection == GREEN_REMOTE_RED_SCORE || selection == RED_REMOTE_RED_SCORE ) {
                 print( "\n\n\n*** Red player scored ***\n\n\n" );
-                selection = 2; // Player 2 ( RED ) score
-            }
-            gameObject->playerScore( selection );  // flip the player score flag
+                selection = 2; // Player 2 ( RED ) score // // flip the player score flag
+            } 
             sleep( SCORE_DELAY );
         } else {
             std::cout << "\n\n\n*** Invalid selection ***\n\n\n" << std::endl;
             sleep( SCORE_DELAY );
             continue;
         }
+        gameObject->playerScore( selection );  // flip the player score flag
         gameObject->loopGame();  // handle the player score flag
         loop_count++;
         std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();

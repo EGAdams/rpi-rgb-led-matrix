@@ -67,12 +67,12 @@ void GameModes::mode1() {
     }
     // _inputs.readPlayerButtons();  // digital read on player buttons.  sets playerButton if tripped.
     // int button_read = _inputs.read_mcp23017_value();
-    print( "*** MANUAL MODE.  Please press the keyboard for buttons. ***" );
-    int button_read = 0;
-    std::cin >> button_read;
+    // print( "*** MANUAL MODE.  Please press the keyboard for buttons. ***" );
+    // int button_read = 0;
+    // std::cin >> button_read;
     // 122224
     
-    print( "read button:" << button_read );
+    // print( "read button:" << button_read );
     _serveLeds.serveSwitch(); // if serveSwitch >= 2, serveSwitch = 0; and toggle serve variable
     _logger->setName( "mode1" );
     _mode1Functions.mode1ButtonFunction(); // <--------- ENTRY POINT --------------<<
