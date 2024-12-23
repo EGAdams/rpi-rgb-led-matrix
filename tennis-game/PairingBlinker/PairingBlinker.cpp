@@ -44,8 +44,8 @@ void PairingBlinker::blinkLoop() {
         }
 
         // break out of here for debugging
-        _green_player_paired = true;
-        _red_player_paired = true;
+        // _green_player_paired = true;
+        // _red_player_paired = true;
         // TODO: Put this back in to turn pairing back on.
 
         _scoreboard->clearScreen();
