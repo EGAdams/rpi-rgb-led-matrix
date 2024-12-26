@@ -7,18 +7,18 @@
 #include <chrono>
 #include <ctime>
 
-#define print(x) \
+#define print( x ) \
     do { \
         auto now = std::chrono::system_clock::now(); \
-        auto in_time_t = std::chrono::system_clock::to_time_t(now); \
+        auto in_time_t = std::chrono::system_clock::to_time_t( now ); \
         std::tm buf; \
-        localtime_r(&in_time_t, &buf); \
-        std::cout << "[" << std::put_time(&buf, "%Y-%m-%d %H:%M:%S") << "] " \
+        localtime_r( &in_time_t, &buf ); \
+        std::cout << "[" << std::put_time( &buf, "%Y-%m-%d %H:%M:%S" ) << "] " \
                   << "[" << __FILE__ << "] " \
                   << "[" << __FUNCTION__ << "] " \
                   << "[Line: " << __LINE__ << "] " \
                   << x << std::endl; \
-    } while (0)
+    } while ( 0 )
 
 
 //  Written by Chris Bean for Teensy 4.1 only
@@ -34,11 +34,11 @@
 #define REMOTE_DATA_3 17
 #define RED_REMOTE_RED_SCORE     6
 #define RED_REMOTE_GREEN_SCORE   10
-#define RED_REMOTE_UNDO          99
+#define RED_REMOTE_UNDO          2
 #define RED_REMOTE_RESET         99
 #define GREEN_REMOTE_GREEN_SCORE 7
 #define GREEN_REMOTE_RED_SCORE   11
-#define GREEN_REMOTE_UNDO        99
+#define GREEN_REMOTE_UNDO        3
 #define GREEN_REMOTE_RESET       99
 #define NO_REMOTE_BUTTONS        0
 #define UNKNOWN_REMOTE_BUTTON   99

@@ -912,14 +912,17 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
             } else if ( selection == GREEN_REMOTE_RED_SCORE || selection == RED_REMOTE_RED_SCORE ) {
                 print( "\n\n\n*** Red player scored ***\n\n\n" );
                 selection = 2; // Player 2 ( RED ) score // // flip the player score flag
-            } 
-            sleep( SCORE_DELAY );
+            }
+            gameObject->playerScore( selection );  // flip the player score flag
+        } else if ( selection == GREEN_REMOTE_UNDO || selection == RED_REMOTE_UNDO ) {
+                print( "\n\n\n*** Undo ***\n\n\n" );
+                gameObject->undo();
         } else {
             std::cout << "\n\n\n*** Invalid selection ***\n\n\n" << std::endl;
             sleep( SCORE_DELAY );
             continue;
         }
-        gameObject->playerScore( selection );  // flip the player score flag
+        sleep( SCORE_DELAY );
         gameObject->loopGame();  // handle the player score flag
         loop_count++;
         std::map<int, int> _player1_set_history = gameState->getPlayer1SetHistory();
