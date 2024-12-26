@@ -887,8 +887,9 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
                     if ( selection == GREEN_REMOTE_GREEN_SCORE || 
                         selection == GREEN_REMOTE_RED_SCORE   ||
                         selection == RED_REMOTE_GREEN_SCORE   ||
-                        selection == RED_REMOTE_RED_SCORE ) {
-                        
+                        selection == RED_REMOTE_RED_SCORE     ||
+                        selection == GREEN_REMOTE_UNDO        ||
+                        selection == RED_REMOTE_UNDO ) {
                         std::cout << "selection: " << selection << " triggered the done flag, exiting while loop..." << std::endl;
                         done = true;
                     } else { 
