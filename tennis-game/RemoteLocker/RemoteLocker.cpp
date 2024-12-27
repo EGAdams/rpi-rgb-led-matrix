@@ -8,6 +8,7 @@ bool RemoteLocker::playerNotServing( int button ) {
 
     print( "green serve: "  + std::to_string( green_serve ));
     print( "button: "       + std::to_string( button      ));
+    print( "serveSwitch: "  + std::to_string( _gameState->getServeSwitch() ));
 
     switch ( button ) {
     case RED_REMOTE_RED_SCORE:   
