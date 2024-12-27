@@ -135,27 +135,27 @@ int Inputs::readPlayerButtons() {
 
  int Inputs::read_mcp23017_value() {
     int originalRemoteCode = _pinInterface->read_mcp23017_value();
-    print( "originalRemoteCode [" + std::to_string( originalRemoteCode ) + "]" );
+    // print( "originalRemoteCode [" + std::to_string( originalRemoteCode ) + "]" );
     GameTimer::gameDelay( STEVE_DELAY ); // that delay steve was talking about...
     int freshRemoteCode = _pinInterface->read_mcp23017_value();
-    print( "freshRemoteCode after steve delay [" + std::to_string( freshRemoteCode ) + "]" );
+    // print( "freshRemoteCode after steve delay [" + std::to_string( freshRemoteCode ) + "]" );
     if (( freshRemoteCode == originalRemoteCode ) && ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON )) {  // known code and a match?
         while(( freshRemoteCode == originalRemoteCode ) && ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON )) {
             if ( freshRemoteCode != 15 ) {
-                print( "inside while.  originalRemoteCode [" << std::to_string( originalRemoteCode ) << "]" );
-                print( "inside while.  freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" );
+                // print( "inside while.  originalRemoteCode [" << std::to_string( originalRemoteCode ) << "]" );
+                // print( "inside while.  freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" );
             }    
             GameTimer::gameDelay( REMOTE_READ_DELAY ); //  wait 250ms, then get a fresh one...
             if ( freshRemoteCode != 15 ) {
-                print("after delay within while reading getting fresh remote code again to verify" );
+                // print("after delay within while reading getting fresh remote code again to verify" );
             } 
             freshRemoteCode = _pinInterface->read_mcp23017_value();
             if ( freshRemoteCode != 15 ) {
-                print( "after delay within while; freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" );
+                // print( "after delay within while; freshRemoteCode [" << std::to_string( freshRemoteCode ) << "]" );
             }
             if ( _need_jump_start ) { _need_jump_start = false; originalRemoteCode = UNKNOWN_REMOTE_BUTTON; }
         }
-        print("exited while.  *** CODE IS VALID ***.  returning originalRemoteCode [" << std::to_string( originalRemoteCode ) << "]" );
+        // print("exited while.  *** CODE IS VALID ***.  returning originalRemoteCode [" << std::to_string( originalRemoteCode ) << "]" );
         return originalRemoteCode;
     } else {                        // false alarm.  we DO NOT have a matching measurement gameDelay( x ) apart.
         return UNKNOWN_REMOTE_BUTTON;
