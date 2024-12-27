@@ -6,9 +6,10 @@ RemoteLocker::~RemoteLocker(){}
 bool RemoteLocker::playerNotServing( int button ) {
     bool green_serve = _gameState->getServe() == 0 ? false : true;
 
-    print( "green serve: "  + std::to_string( green_serve ));
-    print( "button: "       + std::to_string( button      ));
-    print( "serveSwitch: "  + std::to_string( _gameState->getServeSwitch() ));
+    print( "gameState->getServe(): "    + std::to_string( _gameState->getServe()));
+    print( "green serve: "              + std::to_string( green_serve ));
+    print( "button: "                   + std::to_string( button      ));
+    print( "serveSwitch: "              + std::to_string( _gameState->getServeSwitch()));
 
     switch ( button ) {
     case RED_REMOTE_RED_SCORE:   
