@@ -26,7 +26,7 @@
 
 
 /////////////////////// REMOTE DEFINITIONS /////////////////////////////////////
-# define REMOTE_INPUT 0 // 122224
+# define REMOTE_INPUT 1 // Change from Remote in put or keyboard input for debug
 
 #define REMOTE_DATA_0 25
 #define REMOTE_DATA_1 24
