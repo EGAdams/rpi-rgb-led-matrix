@@ -791,6 +791,7 @@ bool is_on_raspberry_pi() {
 
 //// method to sit and listen to remote commands.
 void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* reset, Inputs* inputs ) {
+    RemoteLocker remoteLocker( gameState );
     print( "entered run remote listener method..." );
     int loop_count = 0;
     int selection = 0;
@@ -900,6 +901,9 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
                 }
             }
         }
+        int serve_flag = 0;
+        serve_flag = remoteLocker.playerNotServing( selection );
+        print( "*** serve_flag: " << serve_flag << " ***");
         print( "setting player button to selection: " << selection << " before calling loopGame()..." );
         if ( selection == GREEN_REMOTE_GREEN_SCORE || 
              selection == GREEN_REMOTE_RED_SCORE   ||

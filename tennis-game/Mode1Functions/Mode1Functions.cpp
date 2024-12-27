@@ -32,10 +32,10 @@ void Mode1Functions::mode1ButtonFunction() {
         break;
 
     case 1: // Player 1 Score
-        if ( _remoteLocker->playerNotServing( button )) { 
-            print( "*** WARNING: player " << button << " not serving. *** " );
-            return;
-        }
+        // if ( _remoteLocker->playerNotServing( button )) { 
+        //     print( "*** WARNING: player " << button << " not serving. *** " );
+        //     return;
+        // }
         _undo.snapshot( _history );
         if ( _gameState->getPointFlash() == 1 ) {
             _gameState->setPointFlash( 0 );
@@ -52,19 +52,19 @@ void Mode1Functions::mode1ButtonFunction() {
         break;
 
     case 3: // UNDO button pressed
-        if ( _remoteLocker->playerNotServing( button )) { 
-            print( "*** WARNING: player " << button << " not serving. *** " );
-            return;
-        }
+        // if ( _remoteLocker->playerNotServing( button )) { 
+        //     print( "*** WARNING: player " << button << " not serving. *** " );
+        //     return;
+        // }
         GameTimer::gameDelay( _gameState->getButtonDelay());
         _undo.mode1Undo( _history );  // Mode1Undo();
         break;
 
     case 2: // Player 2 Score
-        if ( _remoteLocker->playerNotServing( button )) { 
-            print( "*** WARNING: player " << button << " not serving. *** " );
-            return;
-        }
+        // if ( _remoteLocker->playerNotServing( button )) { 
+        //     print( "*** WARNING: player " << button << " not serving. *** " );
+        //     return;
+        // }
         _undo.snapshot( _history );
         if ( _gameState->getPointFlash() == 1 ) {
             _gameState->setPointFlash( 0 );
