@@ -24,6 +24,7 @@
 #include "PairingBlinker/PairingBlinker.h"
 #include "ScoreboardBlinker/ScoreboardBlinker.h"
 #include "ConsoleDisplay/ConsoleDisplay.h"
+#include "RemoteLocker/RemoteLocker.h"
 
 
 // for the expander
