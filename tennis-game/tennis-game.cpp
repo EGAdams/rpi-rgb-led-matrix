@@ -907,7 +907,7 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
         print( "*** serve_flag: " << serve_flag << " ***");
         if ( serve_flag ) {
             print( "*** Warning: player not serving! ***" );
-            return;
+            continue;
         }
         print( "setting player button to selection: " << selection << " before calling loopGame()..." );
         if ( selection == GREEN_REMOTE_GREEN_SCORE || 
