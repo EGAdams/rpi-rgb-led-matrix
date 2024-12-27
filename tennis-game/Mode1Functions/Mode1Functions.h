@@ -10,6 +10,7 @@
 #include "../PinInterface/PinInterface.h"
 #include "../Undo/Undo.h"
 #include "../Logger/Logger.h"
+#include "../RemoteLocker/RemoteLocker.h"
 
 class History;
 
@@ -27,16 +28,17 @@ class Mode1Functions {
     void setScoreBoard( ScoreBoard* scoreBoard );
 
  private:
-    Player*    _player1;
-    Player*    _player2;
-    GameState* _gameState;
-    History*   _history;
-    Undo       _undo;
-    PointLeds  _pointLeds;
-    Mode1Score _mode1Score;
-    ServeLeds  _serveLeds;
-    ScoreBoard* _scoreBoard;
-    Logger*    _logger;
+    Player*       _player1;
+    Player*       _player2;
+    GameState*    _gameState;
+    History*      _history;
+    Undo          _undo;
+    PointLeds     _pointLeds;
+    Mode1Score    _mode1Score;
+    ServeLeds     _serveLeds;
+    ScoreBoard*   _scoreBoard;
+    Logger*       _logger;
+    RemoteLocker* _remoteLocker;
 };
 
 #endif

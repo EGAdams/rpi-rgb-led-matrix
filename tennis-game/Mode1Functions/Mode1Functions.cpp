@@ -13,18 +13,21 @@ Mode1Functions::Mode1Functions( Player* player1,
     _pointLeds( player1, player2, pinInterface ),
     _mode1Score( player1, player2, pinInterface, gameState, history ),
     _serveLeds( pinInterface, gameState ) {
-        _logger = new Logger( "Mode1Functions" );}
+        _logger         = new Logger( "Mode1Functions" );
+        _remoteLocker   = new RemoteLocker( gameState );
+    }
 
 Mode1Functions::~Mode1Functions() {}
 
 void Mode1Functions::setScoreBoard( ScoreBoard* scoreBoard ) {
     _scoreBoard = scoreBoard;
-    _pointLeds.setScoreBoard( scoreBoard );
-    _mode1Score.setScoreBoard( scoreBoard ); }
+    _pointLeds.setScoreBoard(   scoreBoard  );
+    _mode1Score.setScoreBoard(  scoreBoard  ); }
 
 void Mode1Functions::mode1ButtonFunction() {
-    
-    switch ( _gameState->getPlayerButton()) {
+    int button = _gameState->getPlayerButton();
+    switch ( button ) {
+    if ( _remoteLocker->playerNotServing( button )) return;
     case 0:
         break;
 
