@@ -13,10 +13,10 @@
         auto in_time_t = std::chrono::system_clock::to_time_t( now ); \
         std::tm buf; \
         localtime_r( &in_time_t, &buf ); \
-        std::cout << "[" << std::put_time( &buf, "%Y-%m-%d %H:%M:%S" ) << "] " \
+        std::cout << "[" << std::put_time( &buf, "%H:%M:%S" ) << "] " \
                   << "[" << __FILE__ << "] " \
-                  << "[" << __FUNCTION__ << "] " \
-                  << "[Line: " << __LINE__ << "] " \
+                  << "[: " << __LINE__ << "] " \
+                  << "[" << __FUNCTION__ << "()] " \
                   << x << std::endl; \
     } while ( 0 )
 
@@ -26,7 +26,7 @@
 
 
 /////////////////////// REMOTE DEFINITIONS /////////////////////////////////////
-# define REMOTE_INPUT 1 // Change from Remote in put or keyboard input for debug
+# define REMOTE_INPUT 0 // Change from Remote in put or keyboard input for debug
 
 #define REMOTE_DATA_0 25
 #define REMOTE_DATA_1 24

@@ -176,7 +176,7 @@ void ScoreBoard::update() {
     clearScreen();
     drawPlayerScore( _player1 );
     drawPlayerScore( _player2 );
-    if ( hasCanvas() == false ) { print( "==========================" );} // only for terminal
+    if ( hasCanvas() == false ) { std::cout << "==========================" << std::endl; } // only for terminal
     bool blink = _gameState->getCurrentAction().find( "blink" ) != std::string::npos;
     if ( blink ) {
         int playerToBlink = _gameState->getCurrentAction().find( "player1" ) != std::string::npos ?

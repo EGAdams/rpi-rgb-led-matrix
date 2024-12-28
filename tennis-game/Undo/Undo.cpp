@@ -127,5 +127,4 @@ void Undo::mode1Undo( History* history ) {
     _gameLeds.updateGames();
     _setLeds.updateSets();
     _serveLeds.updateServeLED();
-    print ( "done mode1Undo." );
 }
