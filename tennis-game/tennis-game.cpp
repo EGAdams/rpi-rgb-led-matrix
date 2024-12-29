@@ -941,11 +941,9 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
     } ///////// End Game Loop /////////
 }
 
-# define MANUAL_GAME_INPUTS 1
-# define USE_REMOTE_INPUTS  2
 int main( int argc, char* argv[] ) {
     std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );
-    int mode = MANUAL_GAME_INPUTS;           // set menu or read remote mode
+    int mode = 0; // used to compile the --manual option.  not used as of 122924
     if ( argc > 1 ) {
         std::string arg1 = argv[1];
         if ( arg1 == "--manual" ) {
@@ -977,11 +975,11 @@ int main( int argc, char* argv[] ) {
     Reset* reset = new Reset( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
     Inputs* inputs = new Inputs( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
 
-    if ( mode == MANUAL_GAME_INPUTS ) {
+    if ( REMOTE_INPUT == 0 ) {
         std::cout << "running manual game..." << std::endl;
         run_manual_game( gameObject, gameState, reset, 1 ); return 0;
     }
-    else if ( mode == USE_REMOTE_INPUTS ) {
+    else if ( REMOTE_INPUT == 1 ) {
         std::cout << "running game from remote inputs..." << std::endl;
         run_remote_listener( gameObject, gameState, reset, inputs ); return 0;
     }
