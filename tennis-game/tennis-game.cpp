@@ -943,12 +943,12 @@ void run_remote_listener( GameObject* gameObject, GameState* gameState, Reset* r
 
 int main( int argc, char* argv[] ) {
     std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );
-    int mode = 0; // used to compile the --manual option.  not used as of 122924
+    // int mode = 0; // used to compile the --manual option.  not used as of 122924
     if ( argc > 1 ) {
         std::string arg1 = argv[1];
         if ( arg1 == "--manual" ) {
             std::cout << "running menu mode..." << std::endl;
-            mode = 1;
+            // mode = 1;
         }
         else {
             std::cout << "running remote listening mode..." << std::endl;
