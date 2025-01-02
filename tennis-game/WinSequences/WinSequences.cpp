@@ -117,7 +117,7 @@ void Mode1WinSequences::p1TBGameWinSequence() {
                 _player1->setSets( _gameState, 0 );
                 _setLeds.updateSets();
                 GameTimer::gameDelay( _gameState->getFlashDelay());
-                _player1->setSets(    _gameState, _gameState->getP1SetsMem());
+                _player1->setSets( _gameState, _gameState->getP1SetsMem());
                 _setLeds.updateSets();
                 GameTimer::gameDelay( _gameState->getFlashDelay());}}
     tieLEDsOff();

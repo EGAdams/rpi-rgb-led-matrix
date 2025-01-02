@@ -66,7 +66,7 @@ void Mode1Score::updateScore( Player* currentPlayer ) { // This is the router.
                 currentPlayer->number() == 0 ? playerOneGameWin() : playerTwoGameWin();  // Game Win
             } else  if ( currentPlayer->getPoints() == 4 ) {
                 _gameState->setPointFlash( 1 );       // "Ad" mode
-                _gameState->setPreviousTime( GameTimer::gameMillis() );
+                _gameState->setPreviousTime( GameTimer::gameMillis());
                 _gameState->setToggle( 0 );
             }
         }
@@ -113,12 +113,12 @@ void Mode1Score::playerGameWin( Player* player ) {
                     mws.run( player, _gameState, &_gameLeds, &_setLeds );
                     _gameState->setCurrentAction( SLEEP_MODE );
                 } else {                                              // regular set win, then reset
-                    _gameState->setPlayer1SetHistory( player->getSetHistory() );
-                    _gameState->setPlayer2SetHistory( opponent->getSetHistory() );
+                    _gameState->setPlayer1SetHistory( player->getSetHistory());
+                    _gameState->setPlayer2SetHistory( opponent->getSetHistory());
                     player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1SetWinSequence() : _mode1WinSequences.p2SetWinSequence();
                     _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
                     _setLeds.updateSets();
-                    GameTimer::gameDelay( _gameState->getWinDelay() );
+                    GameTimer::gameDelay( _gameState->getWinDelay());
                     _resetGame();
                     player->setGames( 0 );   // not sure about this but move on...
                     opponent->setGames( 0 ); // These are match win bugs!!
@@ -127,11 +127,11 @@ void Mode1Score::playerGameWin( Player* player ) {
                 player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1GameWinSequence() : _mode1WinSequences.p2GameWinSequence();
                 _gameLeds.updateGames();
                 if ( player->number() == PLAYER_1_INITIALIZED ) {
-                    _gameState->setPlayer1SetHistory( player->getSetHistory() );
-                    _gameState->setPlayer2SetHistory( opponent->getSetHistory() );
+                    _gameState->setPlayer1SetHistory( player->getSetHistory());
+                    _gameState->setPlayer2SetHistory( opponent->getSetHistory());
                 } else {
-                    _gameState->setPlayer2SetHistory( player->getSetHistory() );
-                    _gameState->setPlayer1SetHistory( opponent->getSetHistory() );
+                    _gameState->setPlayer2SetHistory( player->getSetHistory());
+                    _gameState->setPlayer1SetHistory( opponent->getSetHistory());
                 }
                 _resetGame();
             }
@@ -139,12 +139,12 @@ void Mode1Score::playerGameWin( Player* player ) {
     } else { // this is a regualar game win...
         if ( player->number() == PLAYER_1_INITIALIZED ) {
             _mode1WinSequences.p1GameWinSequence();
-            _gameState->setPlayer1SetHistory( player->getSetHistory() );
-            _gameState->setPlayer2SetHistory( opponent->getSetHistory() );
+            _gameState->setPlayer1SetHistory( player->getSetHistory());
+            _gameState->setPlayer2SetHistory( opponent->getSetHistory());
         } else {
             _mode1WinSequences.p2GameWinSequence();
-            _gameState->setPlayer2SetHistory( player->getSetHistory() );
-            _gameState->setPlayer1SetHistory( opponent->getSetHistory() );
+            _gameState->setPlayer2SetHistory( player->getSetHistory());
+            _gameState->setPlayer1SetHistory( opponent->getSetHistory());
         }
         _gameLeds.updateGames();
         _resetGame();
@@ -161,7 +161,7 @@ void Mode1Score::mode1TBP1Games() {
     if ( _player1->getGames() == 15 ) {
         _player1->setSets( _gameState, _player1->getSets() + 1 );
 
-        if ( _player2->getSets() == _player1->getSets() ) {
+        if ( _player2->getSets() == _player1->getSets()) {
             _tieBreaker.endTieBreak();
             _mode1WinSequences.enterMatchTieBreak();
             _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
@@ -170,18 +170,18 @@ void Mode1Score::mode1TBP1Games() {
             _tieBreaker.setTieBreakEnable();
         }
         else {
-            _player1->setGames( _player1->getGames() );
-            _gameState->setPlayer1SetHistory( _player1->getSetHistory() );
-            _gameState->setPlayer2SetHistory( _player2->getSetHistory() );
+            _player1->setGames( _player1->getGames());
+            _gameState->setPlayer1SetHistory( _player1->getSetHistory());
+            _gameState->setPlayer2SetHistory( _player2->getSetHistory());
             _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
             _mode1WinSequences.p1SetWinSequence();
             _tieBreaker.endTieBreak();
         }
     }
     if ( _player1->getGames() >= 10 &&
-        ( _player1->getGames() - _player2->getGames() ) > 1 ) {
+        ( _player1->getGames() - _player2->getGames()) > 1 ) {
         _player1->setSets( _gameState, _player1->getSets() + 1 );
-        if ( _player2->getSets() == _player1->getSets() ) {
+        if ( _player2->getSets() == _player1->getSets()) {
             _tieBreaker.endTieBreak();
             _mode1WinSequences.enterMatchTieBreak();
             _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
@@ -190,9 +190,9 @@ void Mode1Score::mode1TBP1Games() {
             _tieBreaker.setTieBreakEnable();
         }
         else {
-            _player1->setGames( _player1->getGames() );
-            _gameState->setPlayer1SetHistory( _player1->getSetHistory() );
-            _gameState->setPlayer2SetHistory( _player2->getSetHistory() );
+            _player1->setGames( _player1->getGames());
+            _gameState->setPlayer1SetHistory( _player1->getSetHistory());
+            _gameState->setPlayer2SetHistory( _player2->getSetHistory());
             _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
             _mode1WinSequences.p1SetWinSequence();
             _tieBreaker.endTieBreak();
@@ -221,7 +221,7 @@ void Mode1Score::mode1TBP2Games() {
     GameTimer::gameDelay( UPDATE_DISPLAY_DELAY );
     if ( _player2->getGames() == 15 ) {
         _player2->setSets( _gameState, _player2->getSets() + 1 );
-        if ( _player2->getSets() == _player1->getSets() ) {
+        if ( _player2->getSets() == _player1->getSets()) {
             _tieBreaker.endTieBreak();
             _mode1WinSequences.enterMatchTieBreak();
             _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
@@ -230,18 +230,18 @@ void Mode1Score::mode1TBP2Games() {
             _tieBreaker.setTieBreakEnable();
         }
         else {
-            _player1->setGames( _player1->getGames() );
-            _gameState->setPlayer1SetHistory( _player1->getSetHistory() );
-            _gameState->setPlayer2SetHistory( _player2->getSetHistory() );
+            _player1->setGames( _player1->getGames());
+            _gameState->setPlayer1SetHistory( _player1->getSetHistory());
+            _gameState->setPlayer2SetHistory( _player2->getSetHistory());
             _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
             _mode1WinSequences.p2SetWinSequence();
             _tieBreaker.endTieBreak();
         }
     }
     if ( _player2->getGames() >= 10 &&
-        ( _player2->getGames() - _player1->getGames() ) > 1 ) {
+        ( _player2->getGames() - _player1->getGames()) > 1 ) {
         _player2->setSets( _gameState, _player2->getSets() + 1 );
-        if ( _player2->getSets() == _player1->getSets() ) {
+        if ( _player2->getSets() == _player1->getSets()) {
             _tieBreaker.endTieBreak();
             _mode1WinSequences.enterMatchTieBreak();
             _gameState->setCurrentAction( RUNNING_MATCH_TIE_BREAK );
@@ -250,9 +250,9 @@ void Mode1Score::mode1TBP2Games() {
             _tieBreaker.setTieBreakEnable();
         }
         else {
-            _player1->setGames( _player1->getGames() );
-            _gameState->setPlayer1SetHistory( _player1->getSetHistory() );  // set set history, set++
-            _gameState->setPlayer2SetHistory( _player2->getSetHistory() );
+            _player1->setGames( _player1->getGames());
+            _gameState->setPlayer1SetHistory( _player1->getSetHistory());  // set set history, set++
+            _gameState->setPlayer2SetHistory( _player2->getSetHistory());
             _gameState->setCurrentSet( _gameState->getCurrentSet() + 1 );
             _mode1WinSequences.p2SetWinSequence();
             _tieBreaker.endTieBreak();

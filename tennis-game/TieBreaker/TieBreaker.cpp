@@ -112,7 +112,7 @@ void TieBreaker::_tieBreakWin( Player* currentPlayer ) {
         currentPlayer->setGames( currentPlayer->getGames() + 1 ); // increment games
 
         // increment the set
-        // currentPlayer->setGames( 1 ); // set games to 1 for Match Win
+        currentPlayer->setSets( currentPlayer->getSets() + 1 ); // increment sets
         if ( currentPlayer->number() == PLAYER_1_INITIALIZED ) {
             _gameState->setPlayer1SetHistory( currentPlayer->getSetHistory());
             _gameState->setPlayer2SetHistory( currentPlayer->getOpponent()->getSetHistory());
