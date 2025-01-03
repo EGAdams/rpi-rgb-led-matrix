@@ -153,6 +153,9 @@ void SetDrawer::drawSetsWithSpacing(std::string playerOneSetString, std::string 
     Color playerTwoColor( 255, 0, 0 ); // Red for Player Two
     int yPlayerOne = START_ROW; // Define y positions for each player
     int yPlayerTwo = START_ROW + _little_font.height() + P2_Y_OFFSET; // Move to the next row
+    print( "drawing player one sets..." );
     drawPlayerSets( playerOneSets, playerOneColor, yPlayerOne ); // Draw Player One's sets
+    print( "drawing player two sets..." );
     drawPlayerSets( playerTwoSets, playerTwoColor, yPlayerTwo ); // Draw Player Two's sets
+    print( "done drawing sets with spacing... \n\n\n" );
 }
