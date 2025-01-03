@@ -347,35 +347,35 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
     std::string serve_bar_text = hasCanvas() == true ? "I" : "\033[34m|";    // filled in "I"
     std::string serve_bar = _gameState->getServe() == player->getOpponent()->number() ? serve_bar_text : " ";
     std::string score = _translate( player->getPoints());
-    print( "score[" + score + "]" );
+    // print( "score[" + score + "]" );
     #define BIG_NUMBER_VERTICAL_OFFSET 2
     #define TB_X_OFFSET 26  // Tie Breaker x-axis offset
 
     int tb_x_offset = 0;
     if ( score == "1" ) {
-        print( "adding 4 to tie breaker x offset" );
+        // print( "adding 4 to tie breaker x offset" );
         tb_x_offset = TB_X_OFFSET + 1; // from +2 on october 25
-        print( "score is 1.  after adding the offset, tb_x_offset is "  + std::to_string( tb_x_offset ));
+        // print( "score is 1.  after adding the offset, tb_x_offset is "  + std::to_string( tb_x_offset ));
     } else if ( score == "3" ) {
-        print( "subtracting 1 from the tie breaker x offset" );
+        // print( "subtracting 1 from the tie breaker x offset" );
         tb_x_offset = TB_X_OFFSET - 1; // from +2 on october 25
-        print( "score is 3.  subtracting from the offset, tb_x_offset is "  + std::to_string( tb_x_offset ));
+        // print( "score is 3.  subtracting from the offset, tb_x_offset is "  + std::to_string( tb_x_offset ));
     } else if ( score == "4" ) {
-        print( "score is 4, keeping the tie breaker offse at " << TB_X_OFFSET );
+        // print( "score is 4, keeping the tie breaker offse at " << TB_X_OFFSET );
         tb_x_offset = TB_X_OFFSET - 1;
      } else if ( score == "6" ) {
-        print( "subtracting 1 from the tie breaker x offset" );
+        // print( "subtracting 1 from the tie breaker x offset" );
         tb_x_offset = TB_X_OFFSET - 1; // from -2 on Nov 1 // from +2 on october 25
-        print( "score is 6.  subtracting from the offset, tb_x_offset is "  + std::to_string( tb_x_offset ));
+        // print( "score is 6.  subtracting from the offset, tb_x_offset is "  + std::to_string( tb_x_offset ));
     } else if ( score == "9" ) {
         tb_x_offset = TB_X_OFFSET;
-        print( "score is 9.  subtracting from the offset, tb_x_offset is "  + std::to_string( tb_x_offset ));
+        // print( "score is 9.  subtracting from the offset, tb_x_offset is "  + std::to_string( tb_x_offset ));
     } else if ( score == "10" ) {
-        print( "score is 10, subtracting 1 from the tie breaker x offset" );
+        // print( "score is 10, subtracting 1 from the tie breaker x offset" );
         tb_x_offset = TB_X_OFFSET - 1; // from +2 on october 25
-        print( "score is 10.  subtracting from the offset, tb_x_offset is "  + std::to_string( tb_x_offset ));
+        // print( "score is 10.  subtracting from the offset, tb_x_offset is "  + std::to_string( tb_x_offset ));
     } else {
-        print( "score is not anything in the list, tb_x_offset is " + std::to_string( tb_x_offset ) );
+        // print( "score is not anything in the list, tb_x_offset is " + std::to_string( tb_x_offset ) );
        tb_x_offset =TB_X_OFFSET;
     }
 
@@ -404,7 +404,7 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
             _playerOneScoreDrawer->drawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset );
         } else {
             _playerOneScoreDrawer->drawNumber( score.substr( 0, 1 ), tb_x_offset,        baseline + vertical_offset );
-            print( "score is: " + score + " tb_x_offset is " + std::to_string( tb_x_offset ));
+            // print( "score is: " + score + " tb_x_offset is " + std::to_string( tb_x_offset ));
         }
     } else {
         if ( score.length() > 1 ) {
@@ -412,7 +412,7 @@ void ScoreBoard::_drawTieBreakScore( Player* player ) {
             _playerTwoScoreDrawer->drawNumber( score.substr( 1, 1 ), second_offset + 38, baseline + vertical_offset  );
         } else {
             _playerTwoScoreDrawer->drawNumber( score.substr( 0, 1 ), tb_x_offset,        baseline + vertical_offset  );
-            print( "score is: " + score + " tb_x_offset is " + std::to_string( tb_x_offset ));
+            // print( "score is: " + score + " tb_x_offset is " + std::to_string( tb_x_offset ));
         }
     } // return player 1 score, else type player 2 score
 }
