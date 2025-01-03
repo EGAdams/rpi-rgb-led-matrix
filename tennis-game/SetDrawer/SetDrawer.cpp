@@ -53,7 +53,9 @@ void SetDrawer::drawBlinkSets( int playerToBlink ) {
         playerOneSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX ), set );
         playerTwoSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX ), set );
     } else if ( playerToBlink == PLAYER_1_INITIALIZED ) { // Blink player 1
+        
         playerOneSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX ), set );
+        print( "player one set string after cloaker: [" << playerOneSetString << "]" );
         playerTwoSetString = _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX );
     } else {                                       // Blink player 2
         playerOneSetString = _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX );
@@ -127,7 +129,9 @@ void SetDrawer::drawPlayerSets(const std::vector<std::string>& sets, Color color
     int xStart = SMALL_BEFORE;
     int setWidth = FIXED_SET_WIDTH + SET_SPACING;
     print( "before for loop in drawPlayerSets sets.size(): " << sets.size() );
-    for (size_t i = 0; i < sets.size(); ++i) {
+    print( "current set: " << _gameState->getCurrentSet());
+    // for (size_t i = 0; i < sets.size(); ++i) {
+    for (size_t i = 0; i < _gameState->getCurrentSet(); ++i) {
         int x = xStart + i * setWidth;
         const std::string& set = sets[i];
         print( "drawing set: [" << set << "]" );
