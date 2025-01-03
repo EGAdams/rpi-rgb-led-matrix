@@ -48,6 +48,7 @@ void SetDrawer::drawBlinkSets( int playerToBlink ) {
     print( "drawing blink sets..." );
     int set = _gameState->getCurrentSet(); // init coords and set
     std::string playerOneSetString = ""; std::string playerTwoSetString = ""; // set inside if statement
+    print( "current aciton: " << _gameState->getCurrentAction());
     if ( _gameState->getCurrentAction() == BOTH_PLAYER_BLINK ) {
         playerOneSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX ), set );
         playerTwoSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX ), set );
