@@ -344,8 +344,17 @@ std::string ScoreBoard::drawPlayerScore( Player* player ) {
 }
 
 void ScoreBoard::_drawTieBreakScore( Player* player ) {
+    // std::string serve_bar = _gameState->getServe() == player->number() ? serve_bar_text : " ";
+    // std::string other_serve_bar = _gameState->getServe() == player->getOpponent()->number() ? serve_bar_text : " ";
     std::string serve_bar_text = hasCanvas() == true ? "I" : "\033[34m|";    // filled in "I"
-    std::string serve_bar = _gameState->getServe() == player->getOpponent()->number() ? serve_bar_text : " ";
+    std::string serve_bar;
+    // if ( _gameState->getServe() == player->getOpponent()->number()) {
+    if ( _gameState->getServe() == player->number()) {
+        serve_bar = serve_bar_text;
+    } else {
+        serve_bar = " ";
+    }
+
     std::string score = _translate( player->getPoints());
     // print( "score[" + score + "]" );
     #define BIG_NUMBER_VERTICAL_OFFSET 2
