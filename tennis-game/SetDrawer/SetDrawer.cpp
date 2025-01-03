@@ -127,8 +127,6 @@ void SetDrawer::drawPlayerSets(const std::vector<std::string>& sets, Color color
     int setWidth = FIXED_SET_WIDTH + SET_SPACING;
     print( "before for loop in drawPlayerSets sets.size(): " << sets.size() );
     print( "sets[0]: " << sets[0] );
-    print( "sets[1]: " << sets[1] );
-    print( "sets[2]: " << sets[2] );
     for (size_t i = 0; i < sets.size(); ++i) {
         int x = xStart + i * setWidth;
         const std::string& set = sets[i];
