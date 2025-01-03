@@ -15,6 +15,7 @@ SetDrawer::~SetDrawer() {
 }
 
 void SetDrawer::drawTextOnCanvas( int x, int y, const Color& color, const std::string& text ) {
+    print( "drawing text on canvas: " << text << " at x: " << x << " y: " << y << std::endl );
     Color background_color( 0, 0, 0 );
     int letter_spacing = 0;
     rgb_matrix::Font* outline_font = NULL;
