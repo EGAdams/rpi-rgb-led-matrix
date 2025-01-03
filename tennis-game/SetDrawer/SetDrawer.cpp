@@ -136,6 +136,9 @@ void SetDrawer::drawPlayerSets(const std::vector<std::string>& sets, Color color
 
 // Main function to draw sets with spacing for both players
 void SetDrawer::drawSetsWithSpacing(std::string playerOneSetString, std::string playerTwoSetString) {
+    print( "drawing sets with spacing..." );
+    print( "playerOneSetString: " + playerOneSetString );
+    print( "playerTwoSetString: " + playerTwoSetString );
     int xStart = 0;      
     int yStart = START_ROW;       // Define the area to be cleared
     int width = _canvas->width();
