@@ -129,6 +129,7 @@ void SetDrawer::drawPlayerSets(const std::vector<std::string>& sets, Color color
     for (size_t i = 0; i < sets.size(); ++i) {
         int x = xStart + i * setWidth;
         const std::string& set = sets[i];
+        print( "drawing set: [" << set << "]" );
         int offset = (set == "1") ? OFFSET_FOR_ONE : 0;
         if ( set == "7" ) { offset = OFFSET_FOR_SEVEN; }
         drawTextOnCanvas(x + offset, y, color, set);
