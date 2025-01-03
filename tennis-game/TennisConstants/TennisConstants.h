@@ -68,13 +68,13 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #define TESTING                     1
-#define GAME_FLASH_DELAY            50 // 200
-#define SET_WIN_FLASH_DELAY         5 // 200
-#define FLASH_DELAY                 5 // 250 // 1000
-#define BUTTON_DELAY                5 // 50 // 300
-#define WIN_DELAY                   5 // 50 // 1000
-#define WATCH_INTERVAL              5 // 250
-#define UPDATE_DISPLAY_DELAY        5 // 50
+#define GAME_FLASH_DELAY            200 // 50 // 200
+#define SET_WIN_FLASH_DELAY         200 // 5 // 200
+#define FLASH_DELAY                 250 // 5 // 250 // 1000
+#define BUTTON_DELAY                50 // 5 // 50 // 300
+#define WIN_DELAY                   50 // 5 // 50 // 1000
+#define WATCH_INTERVAL              100 // 5 // 250
+#define UPDATE_DISPLAY_DELAY        50 // 5 // 50
 #define ALL_SETS_FLASH_DELAY        800 // 1000 // 500 110924
 #define LOOP_MATCH_LAMP_WIN         2
 #define MATCH_WIN_BLINK_COUNT       10 // 5 // added on clermont hill
@@ -92,7 +92,7 @@
 #define TIE_BREAK_WATCH_INTERVAL    50
 #define BATTERY_TEST_BLINK_DELAY    1000
 #define GAMES_TO_WIN_SET            6
-#define SET_WIN_DELAY               500 // 3000
+#define SET_WIN_DELAY               3000 // 500 // 3000
 #define PLAYER_1_INITIALIZED        0
 #define PLAYER_2_INITIALIZED        1
 #define SET_HISTORY_COLUMN_1        1
