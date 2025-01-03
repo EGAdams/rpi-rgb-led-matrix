@@ -178,16 +178,22 @@ void ScoreBoard::update() {
     drawPlayerScore( _player2 );
     if ( hasCanvas() == false ) { std::cout << "==========================" << std::endl; } // only for terminal
     bool blink = _gameState->getCurrentAction().find( "blink" ) != std::string::npos;
+    print ( "blink: " + std::to_string( blink ));
     if ( blink ) {
         int playerToBlink = _gameState->getCurrentAction().find( "player1" ) != std::string::npos ?
             PLAYER_1_INITIALIZED : PLAYER_2_INITIALIZED;
+        print( "playerToBlink: " + std::to_string( playerToBlink ));
         _setDrawer->drawBlinkSets( playerToBlink ); // checks current action ignoring playerToBlink
     }
 
     if ( _gameState->getCurrentAction() == DRAW_BLANK_SETS ) { 
+        print( "drawing blank sets..." );
         blankTieBreakerBar();
         _setDrawer->blankSets();
-    } else { _setDrawer->drawSets();}
+    } else {
+        print( "not drawing blank sets..." );
+        _setDrawer->drawSets();
+    }
 
     if ( tie_break_on ) { drawTieBreakerBar();}
 

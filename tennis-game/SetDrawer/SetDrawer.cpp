@@ -44,6 +44,7 @@ void SetDrawer::blankSets() {
 }
 
 void SetDrawer::drawBlinkSets( int playerToBlink ) {
+    print( "drawing blink sets..." );
     int set = _gameState->getCurrentSet(); // init coords and set
     std::string playerOneSetString = ""; std::string playerTwoSetString = ""; // set inside if statement
     if ( _gameState->getCurrentAction() == BOTH_PLAYER_BLINK ) {
