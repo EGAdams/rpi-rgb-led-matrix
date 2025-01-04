@@ -58,7 +58,6 @@ void SetDrawer::drawBlinkSets( int playerToBlink ) {
         playerOneSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX ), set );
         playerTwoSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX ), set );
     } else if ( playerToBlink == PLAYER_1_INITIALIZED ) { // Blink player 1
-        
         playerOneSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX ), set );
         print( "player one set string after cloaker: [" << playerOneSetString << "]" );
         playerTwoSetString = _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX );
@@ -67,6 +66,7 @@ void SetDrawer::drawBlinkSets( int playerToBlink ) {
         playerTwoSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX ), set ); }
     
     if ( _canvas == NULL ) {
+        blankSets();
         std::cout << playerOneSetString << std::endl;
         std::cout << playerTwoSetString << std::endl;
     } else {
@@ -170,7 +170,6 @@ void SetDrawer::drawSetsWithSpacing(std::string playerOneSetString, std::string 
     Color playerTwoColor( 255, 0, 0 ); // Red for Player Two
     int yPlayerOne = START_ROW; // Define y positions for each player
     int yPlayerTwo = START_ROW + _little_font.height() + P2_Y_OFFSET; // Move to the next row
-    blankSets();
     print( "drawing player one sets..." );
     drawPlayerSets( playerOneSets, playerOneColor, yPlayerOne ); // Draw Player One's sets
     print( "drawing player two sets..." );
