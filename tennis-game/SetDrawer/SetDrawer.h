@@ -11,6 +11,7 @@
 #include "../FontLoader/FontLoader.h"
 #include "../SetHistoryText/SetHistoryText.h"
 #include "../TennisConstants/TennisConstants.h"
+#include "../GameTimer/GameTimer.h"
 
 #define SMALL_BEFORE  7
 #define SMALL_BETWEEN 17

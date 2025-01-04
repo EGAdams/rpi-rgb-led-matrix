@@ -66,10 +66,11 @@ void SetDrawer::drawBlinkSets( int playerToBlink ) {
         playerTwoSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX ), set ); }
     
     if ( _canvas == NULL ) {
-        blankSets();
         std::cout << playerOneSetString << std::endl;
         std::cout << playerTwoSetString << std::endl;
     } else {
+        blankSets();
+        GameTimer::gameDelay( 1000 );
         drawSetsWithSpacing(playerOneSetString, playerTwoSetString);
     }
 }
