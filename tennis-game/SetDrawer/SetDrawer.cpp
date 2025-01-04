@@ -69,25 +69,18 @@ void SetDrawer::drawBlinkSets( int playerToBlink ) {
         std::cout << playerOneSetString << std::endl;
         std::cout << playerTwoSetString << std::endl;
     } else {
-        GameTimer::gameDelay( 750 );
-        drawSetsWithSpacing( playerOneSetString, playerTwoSetString );
+        drawSetsWithSpacing(playerOneSetString, playerTwoSetString);
     }
 }
 
-std::string SetDrawer::cloaker(std::string stringToCloak, int sectionToCloak) {
-    if (sectionToCloak < 1 || sectionToCloak > 3 || stringToCloak.empty()) {
-        return stringToCloak; // Return the original string if invalid input
-    }
-
-    // The pos of the digit in the string is ( 2 * section number - 2 ) ( the 1st digit is at position 0 )
-    int pos = 2 * (sectionToCloak - 1); // Calculate position based on section number
-    if (pos < stringToCloak.size()) {
-        stringToCloak[pos] = ' '; // Underscore is " " in the little font file.. i tried, still shows "^"
-    }
-    
-    return stringToCloak; // Return the modified string 
+std::string SetDrawer::cloaker( std::string stringToCloak, int sectionToCloak ) {
+    if ( sectionToCloak < 1 || sectionToCloak > 3 ) { return "Invalid section number";}
+    int pos = 2 * ( sectionToCloak - 1 ); // The pos of the digit in the string is ( 2 * section number - 2 ) ( the 1st digit is at position 0 )
+    stringToCloak[ pos ] = ' ';           // Replace the character at the calculated position with a space
+    return stringToCloak;
 }
 
+// set drawer additions...
 /**
  * Splits a string into a vector of substrings using the specified delimiter.
  *
