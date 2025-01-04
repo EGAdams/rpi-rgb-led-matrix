@@ -69,8 +69,9 @@ void SetDrawer::drawBlinkSets( int playerToBlink ) {
         std::cout << playerOneSetString << std::endl;
         std::cout << playerTwoSetString << std::endl;
     } else {
-        GameTimer::gameDelay( 1000 );
         drawSetsWithSpacing(playerOneSetString, playerTwoSetString);
+        print( """*** Game Delay: 1000 ms ***""" );
+        GameTimer::gameDelay( 1000 );
     }
 }
 
