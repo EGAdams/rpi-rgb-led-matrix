@@ -73,12 +73,20 @@ void SetDrawer::drawBlinkSets( int playerToBlink ) {
     }
 }
 
-std::string SetDrawer::cloaker( std::string stringToCloak, int sectionToCloak ) {
-    if ( sectionToCloak < 1 || sectionToCloak > 3 ) { return "Invalid section number";}
-    int pos = 2 * ( sectionToCloak - 1 ); // The pos of the digit in the string is ( 2 * section number - 2 ) ( the 1st digit is at position 0 )
-    stringToCloak[ pos ] = ' ';           // Replace the character at the calculated position with a space
-    return stringToCloak;
+std::string SetDrawer::cloaker(std::string stringToCloak, int sectionToCloak) {
+    if (sectionToCloak < 1 || sectionToCloak > 3 || stringToCloak.empty()) {
+        return stringToCloak; // Return the original string if invalid input
+    }
+
+    // The pos of the digit in the string is ( 2 * section number - 2 ) ( the 1st digit is at position 0 )
+    int pos = 2 * (sectionToCloak - 1); // Calculate position based on section number
+    if (pos < stringToCloak.size()) {
+        stringToCloak[pos] = ' '; // Replace the character at the calculated position with a space
+    }
+    
+    return stringToCloak; // Return the modified string
 }
+
 
 /**
  * Splits a string into a vector of substrings using the specified delimiter.
