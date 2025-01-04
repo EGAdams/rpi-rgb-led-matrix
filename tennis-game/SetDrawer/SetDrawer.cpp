@@ -82,7 +82,7 @@ std::string SetDrawer::cloaker(std::string stringToCloak, int sectionToCloak) {
     // The pos of the digit in the string is ( 2 * section number - 2 ) ( the 1st digit is at position 0 )
     int pos = 2 * (sectionToCloak - 1); // Calculate position based on section number
     if (pos < stringToCloak.size()) {
-        stringToCloak[pos] = '_'; // Underscore is " " in the little font file
+        stringToCloak[pos] = '^'; // Underscore is " " in the little font file
     }
     
     return stringToCloak; // Return the modified string 
