@@ -130,9 +130,9 @@ void TieBreaker::_tieBreakWin( Player* currentPlayer ) {
         GameTimer::gameDelay( 2000 );
         
 
-        endTieBreak();
         celebrate( currentPlayer );
         incrementSet();
+        endTieBreak();
         GameTimer::gameDelay( 3000 );
         std::cout << "calling end tie break Object in regular tie break win.. " << std::endl;
     }
