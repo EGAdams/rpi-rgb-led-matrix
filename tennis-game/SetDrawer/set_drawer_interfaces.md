@@ -1,8 +1,7 @@
-/* Redirect TMPDIR so that a full /tmp doesn't cause make to crash. */
-// mkdir -p ~/tmp
-// export TMPDIR=~/tmp
-// make
+# https://chatgpt.com/share/67796017-ab3c-8006-96f3-186c87f0ae12
 
+There is a certain programming principle  called "Programming to an Interface, not an Implementation".  Please scrutinize the following code making sure that it is following this principle.  Create as many new Interfaces as needed to make the code follow this principle.
+```cpp
 #include "SetDrawer.h"
 
 SetDrawer::SetDrawer( RGBMatrix* canvas, GameState* gameState ) : 
@@ -169,3 +168,4 @@ void SetDrawer::drawSetsWithSpacing(std::string playerOneSetString, std::string 
     drawPlayerSets( playerTwoSets, playerTwoColor, yPlayerTwo ); // Draw Player Two's sets
     print( "done drawing sets with spacing... \n\n\n" );
 }
+```
