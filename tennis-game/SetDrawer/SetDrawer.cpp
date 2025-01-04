@@ -82,7 +82,7 @@ std::string SetDrawer::cloaker(std::string stringToCloak, int sectionToCloak) {
     // The pos of the digit in the string is ( 2 * section number - 2 ) ( the 1st digit is at position 0 )
     int pos = 2 * (sectionToCloak - 1); // Calculate position based on section number
     if (pos < stringToCloak.size()) {
-        stringToCloak[pos] = '^'; // Underscore is " " in the little font file
+        stringToCloak[pos] = '^'; // Underscore is " " in the little font file.. i tried, still shows "^"
     }
     
     return stringToCloak; // Return the modified string 
@@ -170,6 +170,7 @@ void SetDrawer::drawSetsWithSpacing(std::string playerOneSetString, std::string 
     Color playerTwoColor( 255, 0, 0 ); // Red for Player Two
     int yPlayerOne = START_ROW; // Define y positions for each player
     int yPlayerTwo = START_ROW + _little_font.height() + P2_Y_OFFSET; // Move to the next row
+    blankSets();
     print( "drawing player one sets..." );
     drawPlayerSets( playerOneSets, playerOneColor, yPlayerOne ); // Draw Player One's sets
     print( "drawing player two sets..." );
