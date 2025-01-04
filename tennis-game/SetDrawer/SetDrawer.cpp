@@ -130,8 +130,9 @@ void SetDrawer::drawPlayerSets(const std::vector<std::string>& sets, Color color
     int setWidth = FIXED_SET_WIDTH + SET_SPACING;
     print( "before for loop in drawPlayerSets sets.size(): " << sets.size() );
     print( "current set: " << _gameState->getCurrentSet());
+    print( "sets.size(): " << sets.size() );
     // for (size_t i = 0; i < sets.size(); ++i) {
-    for (size_t i = 0; i < _gameState->getCurrentSet(); ++i) {
+    for (size_t i = 0; i < sets.size(); ++i) {
         int x = xStart + i * setWidth;
         const std::string& set = sets[i];
         print( "drawing set: [" << set << "]" );
