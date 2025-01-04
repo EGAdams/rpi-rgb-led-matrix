@@ -69,9 +69,8 @@ void SetDrawer::drawBlinkSets( int playerToBlink ) {
         std::cout << playerOneSetString << std::endl;
         std::cout << playerTwoSetString << std::endl;
     } else {
-        blankSets();
-        GameTimer::gameDelay( 1000 );
-        drawSetsWithSpacing(playerOneSetString, playerTwoSetString);
+        GameTimer::gameDelay( 750 );
+        drawSetsWithSpacing( playerOneSetString, playerTwoSetString );
     }
 }
 
@@ -83,7 +82,7 @@ std::string SetDrawer::cloaker(std::string stringToCloak, int sectionToCloak) {
     // The pos of the digit in the string is ( 2 * section number - 2 ) ( the 1st digit is at position 0 )
     int pos = 2 * (sectionToCloak - 1); // Calculate position based on section number
     if (pos < stringToCloak.size()) {
-        stringToCloak[pos] = '^'; // Underscore is " " in the little font file.. i tried, still shows "^"
+        stringToCloak[pos] = ' '; // Underscore is " " in the little font file.. i tried, still shows "^"
     }
     
     return stringToCloak; // Return the modified string 
