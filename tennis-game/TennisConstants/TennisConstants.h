@@ -69,7 +69,7 @@
 
 #define TESTING                     1
 #define GAME_FLASH_DELAY            200 // 50 // 200
-#define SET_WIN_FLASH_DELAY         200 // 5 // 200
+#define SET_WIN_FLASH_DELAY         400 // 5 // 200
 #define FLASH_DELAY                 250 // 5 // 250 // 1000
 #define BUTTON_DELAY                50 // 5 // 50 // 300
 #define WIN_DELAY                   50 // 5 // 50 // 1000
