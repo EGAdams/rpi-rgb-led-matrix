@@ -84,7 +84,7 @@ std::string SetDrawer::cloaker(std::string stringToCloak, int sectionToCloak) {
         stringToCloak[pos] = '_'; // Use an underscore as a placeholder for blinking
     }
     
-    return stringToCloak; // Return the modified string
+    return stringToCloak; // Return the modified string 
 }
 
 
