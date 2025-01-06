@@ -70,8 +70,8 @@ void SetDrawer::drawBlinkSets( int playerToBlink ) {
         std::cout << playerTwoSetString << std::endl;
     } else {
         drawSetsWithSpacing(playerOneSetString, playerTwoSetString);
-        
-        GameTimer::gameDelay( SET_WIN_FLASH_DELAY );
+        // print( "NOT sleeping " << SET_WIN_FLASH_DELAY << " milliseconds..." );
+        // GameTimer::gameDelay( SET_WIN_FLASH_DELAY );
     }
 }
 
