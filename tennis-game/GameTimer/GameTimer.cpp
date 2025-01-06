@@ -5,6 +5,7 @@ GameTimer::~GameTimer(){}
 
 void GameTimer::gameDelay( int milliseconds ) {
     // return; // TODO: REMOVE THIS HARD CODE!
+    print( " *** Game Delay: << " << milliseconds << " *** " );
     std::this_thread::sleep_for( std::chrono::milliseconds( milliseconds )); 
 }
 

@@ -20,7 +20,7 @@ SetDrawer::~SetDrawer() {
 }
 
 void SetDrawer::drawTextOnCanvas( int x, int y, const Color& color, const std::string& text ) {
-    print( "drawing text on canvas: " << text << " at x: " << x << " y: " << y << std::endl );
+    // print( "drawing text on canvas: " << text << " at x: " << x << " y: " << y << std::endl );
     Color background_color( 0, 0, 0 );
     int letter_spacing = 0;
     rgb_matrix::Font* outline_font = NULL;
@@ -50,16 +50,16 @@ void SetDrawer::blankSets() {
 }
 
 void SetDrawer::drawBlinkSets( int playerToBlink ) {
-    print( "drawing blink sets..." );
+    // print( "drawing blink sets..." );
     int set = _gameState->getCurrentSet(); // init coords and set
     std::string playerOneSetString = ""; std::string playerTwoSetString = ""; // set inside if statement
-    print( "current aciton: " << _gameState->getCurrentAction());
+    // print( "current aciton: " << _gameState->getCurrentAction());
     if ( _gameState->getCurrentAction() == BOTH_PLAYER_BLINK ) {
         playerOneSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX ), set );
         playerTwoSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX ), set );
     } else if ( playerToBlink == PLAYER_1_INITIALIZED ) { // Blink player 1
         playerOneSetString = cloaker( _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX ), set );
-        print( "player one set string after cloaker: [" << playerOneSetString << "]" );
+        // print( "player one set string after cloaker: [" << playerOneSetString << "]" );
         playerTwoSetString = _setHistoryText.getSetHistoryText( PLAYER_TWO_SET_INDEX );
     } else {                                       // Blink player 2
         playerOneSetString = _setHistoryText.getSetHistoryText( PLAYER_ONE_SET_INDEX );
@@ -70,7 +70,7 @@ void SetDrawer::drawBlinkSets( int playerToBlink ) {
         std::cout << playerTwoSetString << std::endl;
     } else {
         drawSetsWithSpacing(playerOneSetString, playerTwoSetString);
-        print( """*** Game Delay: 1000 ms ***""" );
+        
         GameTimer::gameDelay( SET_WIN_FLASH_DELAY );
     }
 }
@@ -134,14 +134,14 @@ void SetDrawer::FillRectangle(int x_start, int y_start, int width, int height, c
 void SetDrawer::drawPlayerSets(const std::vector<std::string>& sets, Color color, int y) {
     int xStart = SMALL_BEFORE;
     int setWidth = FIXED_SET_WIDTH + SET_SPACING;
-    print( "before for loop in drawPlayerSets sets.size(): " << sets.size() );
-    print( "current set: " << _gameState->getCurrentSet());
-    print( "sets.size(): " << sets.size() );
+    // print( "before for loop in drawPlayerSets sets.size(): " << sets.size() );
+    // print( "current set: " << _gameState->getCurrentSet());
+    // print( "sets.size(): " << sets.size() );
     // for (size_t i = 0; i < sets.size(); ++i) {
     for (size_t i = 0; i < sets.size(); ++i) {
         int x = xStart + i * setWidth;
         const std::string& set = sets[i];
-        print( "drawing set: [" << set << "]" );
+        // print( "drawing set: [" << set << "]" );
         int offset = (set == "1") ? OFFSET_FOR_ONE : 0;
         if ( set == "7" ) { offset = OFFSET_FOR_SEVEN; }
         drawTextOnCanvas(x + offset, y, color, set);
@@ -150,9 +150,9 @@ void SetDrawer::drawPlayerSets(const std::vector<std::string>& sets, Color color
 
 // Main function to draw sets with spacing for both players
 void SetDrawer::drawSetsWithSpacing(std::string playerOneSetString, std::string playerTwoSetString) {
-    print( "drawing sets with spacing..." );
-    print( "playerOneSetString: " + playerOneSetString );
-    print( "playerTwoSetString: " + playerTwoSetString );
+    // print( "drawing sets with spacing..." );
+    // print( "playerOneSetString: " + playerOneSetString );
+    // print( "playerTwoSetString: " + playerTwoSetString );
     int xStart = 0;      
     int yStart = START_ROW;       // Define the area to be cleared
     int width = _canvas->width();
@@ -165,9 +165,9 @@ void SetDrawer::drawSetsWithSpacing(std::string playerOneSetString, std::string 
     Color playerTwoColor( 255, 0, 0 ); // Red for Player Two
     int yPlayerOne = START_ROW; // Define y positions for each player
     int yPlayerTwo = START_ROW + _little_font.height() + P2_Y_OFFSET; // Move to the next row
-    print( "drawing player one sets..." );
+    // print( "drawing player one sets..." );
     drawPlayerSets( playerOneSets, playerOneColor, yPlayerOne ); // Draw Player One's sets
-    print( "drawing player two sets..." );
+    // print( "drawing player two sets..." );
     drawPlayerSets( playerTwoSets, playerTwoColor, yPlayerTwo ); // Draw Player Two's sets
-    print( "done drawing sets with spacing... \n\n\n" );
+    // print( "done drawing sets with spacing... \n\n\n" );
 }
