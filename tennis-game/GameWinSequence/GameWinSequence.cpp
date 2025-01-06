@@ -8,6 +8,8 @@ void GameWinSequence::run( Player* player, GameState* gameState,
     if ( scoreBoard->onRaspberryPi() == false ) { return; }
     print( "not returning out of GameWinSequence::run() because on Raspberry Pi" );
     if ( scoreBoard->hasCanvas()) {
+        print ( "*** scoreboard has canvas, NOT entering blink sequence loop... ***" );
+        return; /* TODO: REMOVE THIS HARD CODE! */
         print ( "scoreboard has canvas, entering blink sequence loop..." );
         for ( int blink_sequence_count = 0; blink_sequence_count < LOOP_GAME_LAMP_WIN; blink_sequence_count++ ) {
             player->number() == PLAYER_1_INITIALIZED ? gameState->setCurrentAction( "player1 blink" ) 
