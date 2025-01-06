@@ -71,7 +71,7 @@ void SetDrawer::drawBlinkSets( int playerToBlink ) {
     } else {
         drawSetsWithSpacing(playerOneSetString, playerTwoSetString);
         
-        GameTimer::gameDelay( SET_WIN_FLASH_DELAY );
+        // GameTimer::gameDelay( SET_WIN_FLASH_DELAY );
     }
 }
 
