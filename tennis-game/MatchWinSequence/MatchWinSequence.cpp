@@ -7,9 +7,11 @@ MatchWinSequence::~MatchWinSequence() {}
 void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* gameLeds, SetLeds* setLeds ) {
     std::cout << "//////////////////////// MatchWinSequence::run() ////////////////////////" << std::endl;
     for( int flash_count = 0; flash_count < ALL_SETS_FLASH_COUNT; flash_count++ ) {
+        print( "All sets flash delay in MatchWinSequence run()... " << ALL_SETS_FLASH_DELAY );
         GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
         gameState->setCurrentAction( DRAW_BLANK_SETS ); // set flag before update
         gameLeds->getScoreBoard()->update();
+        print( "All sets flash delay in MatchWinSequence run()... " << ALL_SETS_FLASH_DELAY );
         GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
         gameState->setCurrentAction( NORMAL_GAME_STATE );
         gameLeds->getScoreBoard()->update(); }

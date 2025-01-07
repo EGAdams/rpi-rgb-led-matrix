@@ -153,9 +153,11 @@ void Mode1WinSequences::enterMatchTieBreak() {
     _undo.memory();
     _gameLeds.getScoreBoard()->update();
     for( int flash_count = 0; flash_count < ALL_SETS_FLASH_COUNT; flash_count++ ) {
+        print( "All sets flash delay in enter match tie break: " << ALL_SETS_FLASH_DELAY );
         GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
         _gameState->setCurrentAction( DRAW_BLANK_SETS ); // set flag before update
         _gameLeds.getScoreBoard()->update();
+        print( "All sets flash delay in enter match tie break: " << ALL_SETS_FLASH_DELAY );
         GameTimer::gameDelay( ALL_SETS_FLASH_DELAY );
         _gameState->setCurrentAction( NORMAL_GAME_STATE );
         _gameLeds.getScoreBoard()->update();
