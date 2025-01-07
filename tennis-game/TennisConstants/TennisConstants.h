@@ -69,13 +69,13 @@
 
 #define TESTING                     1
 #define GAME_FLASH_DELAY            50 // 500 // 200 // 50 // 200
-#define SET_WIN_FLASH_DELAY         750 // 1000 // 600 // 5 // 200
+#define SET_WIN_FLASH_DELAY         500 // 750 // 1000 // 600 // 5 // 200 010725
 #define FLASH_DELAY                 250 // 5 // 250 // 1000
 #define BUTTON_DELAY                50 // 5 // 50 // 300
 #define WIN_DELAY                   50 // 5 // 50 // 1000
 #define WATCH_INTERVAL              100 // 5 // 250
 #define UPDATE_DISPLAY_DELAY        50 // 5 // 50
-#define ALL_SETS_FLASH_DELAY        750 // 1000 // 500 110924
+#define ALL_SETS_FLASH_DELAY        500 // 750 // 1000 // 500 110924 010725
 #define LOOP_MATCH_LAMP_WIN         2
 #define MATCH_WIN_BLINK_COUNT       10 // 5 // added on clermont hill
 #define SHOW_MATCH_WIN_TEXT_DELAY   3000 // 45000 // added anna marie island monday
