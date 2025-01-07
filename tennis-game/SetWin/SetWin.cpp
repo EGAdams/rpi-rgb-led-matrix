@@ -9,9 +9,11 @@ void SetWin::execute( Player* player, ScoreBoard* scoreBoard ) {
      for ( int blink_sequence_count = 0; blink_sequence_count < LOOP_GAME_LAMP_WIN; blink_sequence_count++ ) {
             _gameState->setCurrentAction( BOTH_PLAYER_BLINK );
             scoreBoard->update();
+            print( "set win flash delay in SetWin::execute() " << SET_WIN_FLASH_DELAY );
             GameTimer::gameDelay( SET_WIN_FLASH_DELAY );  /*** wait ***/
             _gameState->setCurrentAction( "normal operation" );
-            scoreBoard->update(); 
+            scoreBoard->update();
+            print( "set win flash delay in SetWin::execute() " << SET_WIN_FLASH_DELAY ); 
             GameTimer::gameDelay( SET_WIN_FLASH_DELAY );  /*** wait ***/ }
     std::cout << "*** inside WinSequences class.  p1GameWinSequence() ***" << std::endl;
     _undo->memory();
