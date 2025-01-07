@@ -126,8 +126,8 @@ void TieBreaker::_tieBreakWin( Player* currentPlayer ) {
         if ( _scoreBoard != nullptr ) { _scoreBoard->update();}
         
         // pause for 2 seconds
-        print( "*** PAUSING FOR 2 SECONDS ***" );
-        GameTimer::gameDelay( 2000 );
+        print( "*** PAUSING FOR 1 SECOND ***" );
+        GameTimer::gameDelay( 1000 );
         
 
         celebrate( currentPlayer );
