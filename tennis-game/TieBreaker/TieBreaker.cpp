@@ -127,7 +127,7 @@ void TieBreaker::_tieBreakWin( Player* currentPlayer ) {
         
         // pause for 2 seconds
         print( "*** PAUSING FOR 1 SECOND ***" );
-        GameTimer::gameDelay( 1000 );
+        GameTimer::gameDelay( PAUSE_BEFORE_TIE_BREAK_WIN );
         
 
         celebrate( currentPlayer );

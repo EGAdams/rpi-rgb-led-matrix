@@ -90,6 +90,7 @@
 #define TIE_BREAK_MAX_POINTS        13
 #define TIE_BREAK_BLINK_DELAY       250 // 750
 #define TIE_BREAK_WATCH_INTERVAL    50
+#define PAUSE_BEFORE_TIE_BREAK_WIN  1000
 #define BATTERY_TEST_BLINK_DELAY    1000
 #define GAMES_TO_WIN_SET            6
 #define SET_WIN_DELAY               3000 // 500 // 3000
