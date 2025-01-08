@@ -85,7 +85,9 @@ void Mode1Score::playerGameWin( Player* player ) {
     Player* opponent = player->getOpponent();
     _gameState->setServeSwitch( _gameState->getServeSwitch() + 1 );
     if ( player->getGames() >= GAMES_TO_WIN_SET ) { // if so, see of they are equal...
+        print( "player 1 games is equal to or greater than games to win set" );
         if ( player->getGames() >= GAMES_TO_WIN_SET && opponent->getGames() >= GAMES_TO_WIN_SET ) {
+            print( "both players have games equal to or greater than games to win set" );
             if ( _gameState->getCurrentSet() == 2 ) {
                 _mode1WinSequences.enterMatchTieBreak();
                     _gameState->setMatchTieBreak( 1 );
@@ -130,6 +132,7 @@ void Mode1Score::playerGameWin( Player* player ) {
                     opponent->setGames( 0 ); // These are match win bugs!!
                 }
             } else {     // player is ahead by 1 game, but not enough to win the set.
+                print( "player is ahead by 1 game, but not enough to win the set." );
                 player->number() == PLAYER_1_INITIALIZED ? _mode1WinSequences.p1GameWinSequence() : _mode1WinSequences.p2GameWinSequence();
                 _gameLeds.updateGames();
                 if ( player->number() == PLAYER_1_INITIALIZED ) {

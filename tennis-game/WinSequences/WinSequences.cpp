@@ -1,7 +1,7 @@
 #include "WinSequences.h"
 
 Mode1WinSequences::~Mode1WinSequences() {
-    // // // std::cout << "*** Mode1WinSequences destructor called. ***" << std::endl;
+    // print( "*** Mode1WinSequences destructor called. ***" );
     delete _setWin; }
 
 Mode1WinSequences::Mode1WinSequences( Player* player1, Player* player2, PinInterface* pinInterface,
@@ -23,14 +23,14 @@ void Mode1WinSequences::setScoreBoards( ScoreBoard* scoreBoard ) {
     _scoreBoard =             scoreBoard; } // set mine too!
 
 void Mode1WinSequences::p1GameWinSequence() {
-    // // std::cout << "//////////////////////// p1GameWinSequence() ////////////////////////" << std::endl;
+    print( "//////////////////////// p1GameWinSequence() ////////////////////////" );
     GameWinSequence gameWinSequence;
     gameWinSequence.run( _player1, _gameState, &_gameLeds, _scoreBoard, _player1->getGames());
-    // // std::cout << "*** inside WinSequences class.  p1GameWinSequence() ***" << std::endl;
+    print( "*** inside WinSequences class.  p1GameWinSequence() ***" );
     _undo.memory();
-    // // std::cout << "*** delaying game after p1GameWinSequence()... ***" << std::endl;
+    print( "*** delaying game after p1GameWinSequence()... ***" );
     GameTimer::gameDelay( GAME_FLASH_DELAY );
-    // // std::cout << "*** done delaying game after p1GameWinSequence()  setting points to zero... ***" << std::endl;
+    print( "*** done delaying game after p1GameWinSequence()  setting points to zero... ***" );
     _player1->setPoints( 0 );
     _player2->setPoints( 0 );
     _gameState->setPlayer1Points( 0 );
@@ -45,11 +45,11 @@ void Mode1WinSequences::p1GameWinSequence() {
 }
 
 void Mode1WinSequences::p1SetWinSequence() {
-    // // std::cout << "*** executing _setWin->execute for player one... ***" << std::endl;
+    print( "*** executing _setWin->execute for player one... ***" );
     _setWin->execute( _player1, _scoreBoard ); }
 
 void Mode1WinSequences::playerOneMatchWin() {
-    // // std::cout << "//////////////////////// playerOneMatchWin() ////////////////////////" << std::endl;
+    print( "//////////////////////// playerOneMatchWin() ////////////////////////" );
     _undo.memory();
     _pointLeds.updateTBPoints();
     MatchWinSequence matchWinSequence; matchWinSequence.run( _player1, _gameState, &_gameLeds, &_setLeds );
@@ -80,22 +80,22 @@ void Mode1WinSequences::playerTwoMatchWin() {
 
 void Mode1WinSequences::p2GameWinSequence() {
     GameWinSequence gameWinSequence;
-    // std::cout << "calling game win sequence run from p2GameWinSequence... " << std::endl;
+    // std::cout << "calling game win sequence run from p2GameWinSequence... " );
     gameWinSequence.run( _player2, _gameState, &_gameLeds, _scoreBoard, _player2->getGames());
-    // std::cout << "calling undo.memory() from inside p2GameWinSequence... " << std::endl;
+    // std::cout << "calling undo.memory() from inside p2GameWinSequence... " );
     _undo.memory();
-    // std::cout << "calling gameDelay from inside p2GameWinSequence... " << std::endl;
+    // std::cout << "calling gameDelay from inside p2GameWinSequence... " );
     GameTimer::gameDelay( GAME_FLASH_DELAY );
-    // std::cout << "calling setPoints to zero for player1 from inside p2GameWinSequence... " << std::endl;
+    // std::cout << "calling setPoints to zero for player1 from inside p2GameWinSequence... " );
     _player1->setPoints( 0 );
-    // std::cout << "calling setPoints to zero for player2 from inside p2GameWinSequence... " << std::endl;
+    // std::cout << "calling setPoints to zero for player2 from inside p2GameWinSequence... " );
     _player2->setPoints( 0 );
-    // std::cout << "calling setPlayer1Points to zero for player1 from inside p2GameWinSequence... " << std::endl;
+    // std::cout << "calling setPlayer1Points to zero for player1 from inside p2GameWinSequence... " );
     _gameState->setPlayer1Points( 0 );
-    // std::cout << "calling setPlayer2Points to zero for player2 from inside p2GameWinSequence... " << std::endl;
+    // std::cout << "calling setPlayer2Points to zero for player2 from inside p2GameWinSequence... " );
     _gameState->setPlayer2Points( 0 );
 
-    // std::cout << "calling gameState->setServe from inside p2GameWinSequence... " << std::endl;
+    // std::cout << "calling gameState->setServe from inside p2GameWinSequence... " );
     // Switch the server at the end of a game
     if (_gameState->getServe() == PLAYER_ONE_SERVE) {
         _gameState->setServe(PLAYER_TWO_SERVE);
