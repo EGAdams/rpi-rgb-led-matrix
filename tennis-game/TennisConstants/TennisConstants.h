@@ -86,7 +86,7 @@
 #define TIE_PULSE_COUNT             5
 #define SET_WIN_PULSE_COUNT         5
 #define ALL_SETS_FLASH_COUNT        5
-#define TIE_BREAK_WIN_BY_TWO        10
+#define TIE_BREAK_WIN_BY_TWO        7
 #define TIE_BREAK_MAX_POINTS        13
 #define TIE_BREAK_BLINK_DELAY       250 // 750
 #define TIE_BREAK_WATCH_INTERVAL    50
