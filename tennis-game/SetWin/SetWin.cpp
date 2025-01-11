@@ -6,7 +6,7 @@ SetWin::~SetWin() {}
 
 void SetWin::execute( Player* player, ScoreBoard* scoreBoard ) {
     std::cout << "//////////////////////// SetWin::execute() ////////////////////////" << std::endl;
-     for ( int blink_sequence_count = 0; blink_sequence_count < LOOP_GAME_LAMP_WIN; blink_sequence_count++ ) {
+     for ( int blink_sequence_count = 0; blink_sequence_count < SET_WIN_LOOP; blink_sequence_count++ ) {
             _gameState->setCurrentAction( BOTH_PLAYER_BLINK );
             scoreBoard->update();
             print( "set win flash delay in SetWin::execute() " << SET_WIN_FLASH_DELAY );

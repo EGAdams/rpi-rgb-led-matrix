@@ -83,6 +83,7 @@
 #define MIN_SLEEP                   3000 // sleep for a few seconds in case of buttons pressed.
 #define NUMBER_OF_GAME_LAMPS        7
 #define LOOP_GAME_LAMP_WIN          5
+#define SET_WIN_LOOP                3
 #define GAME_WIN_SEQUENCE_LOOP_COUNT 3
 #define TIE_PULSE_COUNT             5
 #define SET_WIN_PULSE_COUNT         5
