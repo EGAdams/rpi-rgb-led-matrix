@@ -16,6 +16,5 @@ void WinSequence::run( Player* player, GameState* gameState, GameLeds* gameLeds,
         }
         player->setGames( games_in_memory );
         gameLeds->updateGames();
-
     } // end LOOP_GAME_LAMP_WIN loop
 }

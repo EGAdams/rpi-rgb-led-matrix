@@ -86,7 +86,7 @@
 #define GAME_WIN_SEQUENCE_LOOP_COUNT 3
 #define TIE_PULSE_COUNT             5
 #define SET_WIN_PULSE_COUNT         5
-#define ALL_SETS_FLASH_COUNT        5
+#define ALL_SETS_FLASH_COUNT        3 // 5 j11_53 1108
 #define TIE_BREAK_WIN_BY_TWO        7
 #define TIE_BREAK_MAX_POINTS        13
 #define TIE_BREAK_BLINK_DELAY       250 // 750
