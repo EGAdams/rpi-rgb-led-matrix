@@ -5,7 +5,9 @@ GameWinSequence::~GameWinSequence() {}
 
 void GameWinSequence::run( Player* player, GameState* gameState, 
                            GameLeds* gameLeds, ScoreBoard* scoreBoard, int games_in_memory ) {
-    if ( scoreBoard->onRaspberryPi() == false ) { return; }
+    // if ( scoreBoard->onRaspberryPi() == false ) { return; }
+    std::string current_action = gameState->getCurrentAction();
+    if ( !scoreBoard->onRaspberryPi() && current_action != RUNNING_MATCH_TIE_BREAK ) {
     print( "not returning out of GameWinSequence::run() because on Raspberry Pi" );
     if ( scoreBoard->hasCanvas()) {
         print ( "scoreboard has canvas, entering blink sequence loop..." );
