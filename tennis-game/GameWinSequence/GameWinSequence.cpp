@@ -9,7 +9,7 @@ void GameWinSequence::run( Player* player, GameState* gameState,
     print( "not returning out of GameWinSequence::run() because on Raspberry Pi" );
     if ( scoreBoard->hasCanvas()) {
         print ( "scoreboard has canvas, entering blink sequence loop..." );
-        for ( int blink_sequence_count = 0; blink_sequence_count < LOOP_GAME_LAMP_WIN; blink_sequence_count++ ) {
+        for ( int blink_sequence_count = 0; blink_sequence_count < GAME_WIN_SEQUENCE_LOOP_COUNT; blink_sequence_count++ ) {
             player->number() == PLAYER_1_INITIALIZED ? gameState->setCurrentAction( "player1 blink" ) 
                                 : gameState->setCurrentAction( "player2 blink" );
             print( "updating scoreboard..." );
@@ -22,7 +22,7 @@ void GameWinSequence::run( Player* player, GameState* gameState,
             GameTimer::gameDelay( GAME_FLASH_DELAY );  /*** wait ***/ }
     } else {
         print ( "scoreboard does not have canvas, how did we ever get here?" );
-        for ( int blink_sequence_count = 0; blink_sequence_count < LOOP_GAME_LAMP_WIN; blink_sequence_count++ ) {  
+        for ( int blink_sequence_count = 0; blink_sequence_count < GAME_WIN_SEQUENCE_LOOP_COUNT; blink_sequence_count++ ) {  
             player->setGames( 5 );                    // set game count so game LEDs will turn off
             gameLeds->updateGames();                                // actually turn game LEDs off
             print( "sleeping " << GAME_FLASH_DELAY << " milliseconds..." );

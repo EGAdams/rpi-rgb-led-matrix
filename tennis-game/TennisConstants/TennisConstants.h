@@ -26,7 +26,7 @@
 
 
 /////////////////////// REMOTE DEFINITIONS /////////////////////////////////////
-# define REMOTE_INPUT 1 // Change from Remote in put or keyboard input for debug
+# define REMOTE_INPUT 0 // Change from Remote in put or keyboard input for debug
 
 #define REMOTE_DATA_0 25
 #define REMOTE_DATA_1 24
@@ -83,6 +83,7 @@
 #define MIN_SLEEP                   3000 // sleep for a few seconds in case of buttons pressed.
 #define NUMBER_OF_GAME_LAMPS        7
 #define LOOP_GAME_LAMP_WIN          5
+#define GAME_WIN_SEQUENCE_LOOP_COUNT 3
 #define TIE_PULSE_COUNT             5
 #define SET_WIN_PULSE_COUNT         5
 #define ALL_SETS_FLASH_COUNT        5

@@ -1,9 +1,6 @@
 #include "WinSequence.h"
 #include <iostream>
 
-/* TODO: seriously consider changing the filename to match the class name.
-already cost us .5 hour */
-
 WinSequence::WinSequence()  {}
 WinSequence::~WinSequence() {}
 
