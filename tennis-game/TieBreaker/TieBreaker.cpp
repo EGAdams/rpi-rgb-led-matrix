@@ -278,7 +278,8 @@ void TieBreaker::setTieBreakEnable() {
     _serveLeds.serveSwitch();
     Inputs _inputs( _player1, _player2, _pinInterface, _gameState );
     WatchTimer _watchTimer;
-    if ( !_scoreBoard->onRaspberryPi()) {
+    std::string current_action = _gameState->getCurrentAction();
+    if ( !_scoreBoard->onRaspberryPi() && current_action != RUNNING_MATCH_TIE_BREAK ) {
         for ( int currentPulseCount = 0; currentPulseCount < TIE_PULSE_COUNT; currentPulseCount++ ) {
             tieLEDsOff();
             if ( _watchTimer.watchInputDelay( TIE_BREAK_BLINK_DELAY, &_inputs, TIE_BREAK_WATCH_INTERVAL ) > 0 ) { return; }
