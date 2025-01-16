@@ -710,30 +710,6 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         }
         else if ( menu_selection == 105 ) {
             std::cout << "NOT reading MCP23017 bits..." << std::endl;
-            // int file = open( I2C_DEVICE, O_RDWR );
-
-            // if ( file < 0 ) {
-            //     std::cerr << "Error: Unable to open I2C device.\n";
-            //     continue;
-            // }
-
-            // if ( ioctl( file, I2C_SLAVE, MCP23017_ADDRESS ) < 0 ) {
-            //     std::cerr << "Error: Unable to set I2C address.\n";
-            //     close( file );
-            //     continue;
-            // }
-            // int is_one;
-            // while ( 1 ) {
-            //     std::cin >> is_one;
-            //     if ( is_one == 1 ) {
-            //         break;
-            //     }
-            //     else {
-            //         readBits( file );
-            //     }
-            // }
-            // close( file );
-            // continue;
         }
         else if ( menu_selection == 5 ) {
             resetAll( reset );

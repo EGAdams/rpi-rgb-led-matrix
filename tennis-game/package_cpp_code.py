@@ -1,7 +1,51 @@
 #
 # last day of september in this nice largo library upstairs
 #
-import os
+import os, re
+
+import re
+
+def extract_and_write_method(input_file, method_name, output_file):
+    """
+    Read a C++ file, extract a specific method, and write it to an output file with code fences.
+
+    :param input_file: The path to the input C++ file
+    :param method_name: The name of the method to extract
+    :param output_file: The file to write the extracted method with code fences
+    """
+    try:
+        with open(input_file, 'r') as f:
+            file_content = f.read()
+
+        # Updated regular expression to match the method definition with parameters and body
+        method_pattern = re.compile(
+            rf"void\s+{re.escape(method_name)}\s*\(.*?\)\s*\{{.*?\n\}}", re.DOTALL
+        )
+
+        match = method_pattern.search(file_content)
+        if match:
+            method_body = match.group(0)
+            with open(output_file, 'w') as f:
+                f.write("```cpp\n")
+                f.write(method_body)
+                f.write("\n```\n")
+            print(f"Method '{method_name}' successfully extracted to {output_file}.")
+        else:
+            print(f"Method '{method_name}' not found in the provided content.")
+    except FileNotFoundError:
+        print(f"File '{input_file}' not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+# Example usage
+input_cpp_file = "tennis-game.cpp"  # Path to the input C++ file
+extract_and_write_method(input_cpp_file, "run_remote_listener", "run_remote_listener.cpp")
+
+
+# Example usage
+input_cpp_file = "tennis-game.cpp"  # Path to the input C++ file
+extract_and_write_method(input_cpp_file, "run_remote_listener", "run_remote_listener.cpp")
+
 
 def extract_cpp_class_or_struct(content):
     """
@@ -58,19 +102,12 @@ def process_cpp_files_in_directory(input_dir, output_file_path, append_mode_arg=
 
 # Path setup
 base_dir = "/home/adamsl/rpi-rgb-led-matrix/tennis-game"
-project_dir = os.path.join(base_dir, "Airport_Project")
-view_controllers_dir = os.path.join(project_dir, "view_controllers")
-custom_views_dir = os.path.join(project_dir, "custom_views")
-table_view_cell_dir = os.path.join(project_dir, "custom_views/table_view_cell")
-factories_dir = os.path.join(project_dir, "factories")
-keyboard_scroll_dir = os.path.join(project_dir, "keyboard_scroll")
 
 # output prompt file
-output_file_path = os.path.join(base_dir, "display_fix.md")
+output_file_path = os.path.join(base_dir, "packaged_code.md")
 
-path = os.path.join( base_dir, "IDisplay" )
-process_cpp_files_in_directory( path, output_file_path, False ) # create new file.  append is False
+path = os.path.join( base_dir, "tennis-game.cpp" )
+extract_and_write_method( path, "run_remote_listener", output_file_path )
 
-path = os.path.join( base_dir, "ScoreBoard" )
-process_cpp_files_in_directory( path, output_file_path, True ) # append to file is True
-
+path = os.path.join( base_dir, "RemotePairingScreen/RemotePairingScreen.cpp" )
+process_cpp_file( path, output_file_path, True )
