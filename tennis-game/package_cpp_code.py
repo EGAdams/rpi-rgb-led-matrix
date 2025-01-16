@@ -100,7 +100,7 @@ def process_cpp_files_in_directory(input_dir, output_file_path, append_mode_arg=
             process_cpp_file(full_path, output_file_path, append_mode_arg )
 
 
-# Path setup
+# Path setup 
 base_dir = "/home/adamsl/rpi-rgb-led-matrix/tennis-game"
 
 # output prompt file
