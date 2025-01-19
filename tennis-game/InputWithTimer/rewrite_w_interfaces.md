@@ -1,3 +1,5 @@
+Here is the original InputWithTimer.cpp file.  It may have bugs in it, I don't know.  I am trying to debug the whole system and breaking the code up into Interfaces as we have been doing is helping my thought process.  So please analyze the following code and rewrite this one too, just like you did with the last one.  Use any interfaces that we have already created.  Create more if you need to.  Write your solution all into one file including a main so that I can g++ it and run it.  Put it all in one code block so that I can do this without making mistakes.  Here is the code:
+```cpp
 #include "InputWithTimer.h"
 #include <iostream>
 #include "../TennisConstants/TennisConstants.h"
@@ -15,29 +17,19 @@ int InputWithTimer::getInput() {
     _blinker->start();
     print( "getting input from within InputWithTimer..." );
     if ( REMOTE_INPUT == 1 ) {  // 122224
-        // if the selection is never one of the valid remote inputs, then we will never exit the while loop! // 011925
-        /*
-         * there is no timer here, the agent says.  in the future we will take out this comment and ask
-         * a new employee a question about this dillemma.  we will ask them to explain why this is a bad
-         * design because it locks up the system. meaning,  so how do we fix this?
-         * 
-         * the timer that would allow us to break out of this while loop is not in the scope of
-         * this while loop! we need either to make a timer in here, or pass in a timer object to this
-         * function.  
-        */
         while ( !done ) {                           // remote mode
             print( "*** reading selection from inputs... ***" ); // 122224
-            selection = _inputs->read_mcp23017_value();  // this actually does have a while. // 011925
-            std::cout << "read selection from inputs: " << selection << std::endl; // but it
-            if ( selection == GREEN_REMOTE_GREEN_SCORE  ||                         // isnt as bad as this
-                 selection == GREEN_REMOTE_RED_SCORE    ||                         // one because it always returns a value // 011925
+            selection = _inputs->read_mcp23017_value();
+            std::cout << "read selection from inputs: " << selection << std::endl;
+            if ( selection == GREEN_REMOTE_GREEN_SCORE  || 
+                 selection == GREEN_REMOTE_RED_SCORE    ||
                  selection == RED_REMOTE_GREEN_SCORE    ||
                  selection == RED_REMOTE_RED_SCORE ) {
                 std::cout << "selection: " << selection << " triggered the done flag, exiting while loop..." << std::endl;
                 done = true;
             } else { 
                 // delay 250ms
-                std::cout << "sleeping 250ms..." << std::endl; // so we end up reading this over and over // 011925
+                std::cout << "sleeping 250ms..." << std::endl; 
                 GameTimer::gameDelay( 250 );
             }
         }
@@ -60,4 +52,4 @@ int InputWithTimer::getInput() {
 unsigned long InputWithTimer::getTimeSlept() {
     return _time_slept;
 }
-
+```

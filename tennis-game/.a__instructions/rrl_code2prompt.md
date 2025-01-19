@@ -1,21 +1,8 @@
-/************************************************************
- *  Example Refactoring to "Program to Interfaces" in C++
- *
- *  NOTE:
- *  - This single code block shows how you might refactor
- *    everything so that usage of concrete classes is hidden
- *    behind interfaces. In real practice, you would split
- *    these out into separate header/implementation files.
- *  - The run_remote_listener() function at the bottom
- *    retains the same structure and spacing as the original
- *    code. It just uses interface pointers instead of
- *    concrete class instances directly.
- *  - Where functionality was unclear or not shown, minimal
- *    "stub" implementations are given so that you can see
- *    how each interface might be implemented in principle.
- *    You can expand these stubs as needed.
- ************************************************************/
-
+# Persona
+You are an AI debugger who is trying to fully describe a program, in order for another AI program to reconstruct every file, data structure, function and functionality.
+  
+# Source Code To Describe
+```cpp
 #include <iostream>
 #include <string>
 #include <map>
@@ -436,7 +423,6 @@ void run_remote_listener( IGameObject* gameObject, IGameState* gameState, IReset
                 print( "calling inputWithTimer->getInput()..." );
                 selection = inputWithTimer->getInput();
             } else {
-                print( "Inside pairing mode.  enter 1 for Green pair and 2 for Red pair" );
                 std::cin >> selection;
                 print( "*** inside remote listener getting remote selection ***" );
                 print( "selection: " + std::to_string( selection ));
@@ -583,3 +569,8 @@ int main() {
 
     return 0;
 }
+
+```
+
+# Your Task
+Describe the program in markdown using specific language that will help another AI program reconstruct the given program in as high fidelity as possible.

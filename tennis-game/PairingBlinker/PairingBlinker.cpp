@@ -108,8 +108,9 @@ void PairingBlinker::showGreenInstructions() {
     int left_margin = 9;
     print( "clearing screen... " );
     _scoreboard->clearScreen();
-    print( "drawing Green text..." );
+    print( "setting drawer foreground color to green..." );
     _scoreboard->setDrawerForegroundColor( green_color );
+    print( "drawing Green text..." );
     _scoreboard->drawNewText( "Green", left_margin + GREEN_OFFSET, 17 );
     print( "drawing Player text..." );
     _scoreboard->drawNewText( "Player", left_margin + 0, PLAYER_TOP );

@@ -1,0 +1,1158 @@
+dietpi@DietPi:~$ sudo journalctl -b --no-pager
+-- Journal begins at Sat 2025-01-18 17:57:58 GMT, ends at Sat 2025-01-18 18:10:16 GMT. --
+Jan 18 17:57:58 DietPi kernel: Booting Linux on physical CPU 0x0
+Jan 18 17:57:58 DietPi kernel: Linux version 6.1.21-v7+ (dom@buildbot) (arm-linux-gnueabihf-gcc-8 (Ubuntu/Linaro 8.4.0-3ubuntu1) 8.4.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #1642 SMP Mon Apr  3 17:20:52 BST 2023
+Jan 18 17:57:58 DietPi kernel: CPU: ARMv7 Processor [410fd034] revision 4 (ARMv7), cr=10c5383d
+Jan 18 17:57:58 DietPi kernel: CPU: div instructions available: patching division code
+Jan 18 17:57:58 DietPi kernel: CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
+Jan 18 17:57:58 DietPi kernel: OF: fdt: Machine model: Raspberry Pi Zero 2 W Rev 1.0
+Jan 18 17:57:58 DietPi kernel: random: crng init done
+Jan 18 17:57:58 DietPi kernel: Memory policy: Data cache writealloc
+Jan 18 17:57:58 DietPi kernel: Reserved memory: created CMA memory pool at 0x1ac00000, size 64 MiB
+Jan 18 17:57:58 DietPi kernel: OF: reserved mem: initialized node linux,cma, compatible id shared-dma-pool
+Jan 18 17:57:58 DietPi kernel: Zone ranges:
+Jan 18 17:57:58 DietPi kernel:   DMA      [mem 0x0000000000000000-0x000000001effffff]
+Jan 18 17:57:58 DietPi kernel:   Normal   empty
+Jan 18 17:57:58 DietPi kernel: Movable zone start for each node
+Jan 18 17:57:58 DietPi kernel: Early memory node ranges
+Jan 18 17:57:58 DietPi kernel:   node   0: [mem 0x0000000000000000-0x000000001effffff]
+Jan 18 17:57:58 DietPi kernel: Initmem setup node 0 [mem 0x0000000000000000-0x000000001effffff]
+Jan 18 17:57:58 DietPi kernel: percpu: Embedded 17 pages/cpu s36884 r8192 d24556 u69632
+Jan 18 17:57:58 DietPi kernel: pcpu-alloc: s36884 r8192 d24556 u69632 alloc=17*4096
+Jan 18 17:57:58 DietPi kernel: pcpu-alloc: [0] 0 [0] 1 [0] 2 [0] 3
+Jan 18 17:57:58 DietPi kernel: Built 1 zonelists, mobility grouping on.  Total pages: 125860
+Jan 18 17:57:58 DietPi kernel: Kernel command line: coherent_pool=1M 8250.nr_uarts=0 snd_bcm2835.enable_headphones=0 snd_bcm2835.enable_hdmi=0 bcm2708_fb.fbwidth=1920 bcm2708_fb.fbheight=1080 bcm2708_fb.fbdepth=16 bcm2708_fb.fbswap=1 smsc95xx.macaddr=B8:27:EB:A6:79:B2 vc_mem.mem_base=0x1fa00000 vc_mem.mem_size=0x20000000  root=PARTUUID=737a2b38-02 rootfstype=ext4 rootwait fsck.repair=yes net.ifnames=0 logo.nologo console=tty1 loglevel=7 systemd.log_level=debug systemd.log_target=console
+Jan 18 17:57:58 DietPi kernel: Dentry cache hash table entries: 65536 (order: 6, 262144 bytes, linear)
+Jan 18 17:57:58 DietPi kernel: Inode-cache hash table entries: 32768 (order: 5, 131072 bytes, linear)
+Jan 18 17:57:58 DietPi kernel: mem auto-init: stack:off, heap alloc:off, heap free:off
+Jan 18 17:57:58 DietPi kernel: Memory: 419528K/507904K available (10240K kernel code, 1452K rwdata, 2900K rodata, 1024K init, 613K bss, 22840K reserved, 65536K cma-reserved)
+Jan 18 17:57:58 DietPi kernel: SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=4, Nodes=1
+Jan 18 17:57:58 DietPi kernel: ftrace: allocating 34800 entries in 103 pages
+Jan 18 17:57:58 DietPi kernel: ftrace: allocated 102 pages with 4 groups
+Jan 18 17:57:58 DietPi kernel: trace event string verifier disabled
+Jan 18 17:57:58 DietPi kernel: rcu: Hierarchical RCU implementation.
+Jan 18 17:57:58 DietPi kernel:         Rude variant of Tasks RCU enabled.
+Jan 18 17:57:58 DietPi kernel:         Tracing variant of Tasks RCU enabled.
+Jan 18 17:57:58 DietPi kernel: rcu: RCU calculated value of scheduler-enlistment delay is 10 jiffies.
+Jan 18 17:57:58 DietPi kernel: NR_IRQS: 16, nr_irqs: 16, preallocated irqs: 16
+Jan 18 17:57:58 DietPi kernel: rcu: srcu_init: Setting srcu_struct sizes based on contention.
+Jan 18 17:57:58 DietPi kernel: arch_timer: cp15 timer(s) running at 19.20MHz (phys).
+Jan 18 17:57:58 DietPi kernel: clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0x46d987e47, max_idle_ns: 440795202767 ns
+Jan 18 17:57:58 DietPi kernel: sched_clock: 56 bits at 19MHz, resolution 52ns, wraps every 4398046511078ns
+Jan 18 17:57:58 DietPi kernel: Switching to timer-based delay loop, resolution 52ns
+Jan 18 17:57:58 DietPi kernel: Console: colour dummy device 80x30
+Jan 18 17:57:58 DietPi kernel: printk: console [tty1] enabled
+Jan 18 17:57:58 DietPi kernel: Calibrating delay loop (skipped), value calculated using timer frequency.. 38.40 BogoMIPS (lpj=192000)
+Jan 18 17:57:58 DietPi kernel: pid_max: default: 32768 minimum: 301
+Jan 18 17:57:58 DietPi kernel: LSM: Security Framework initializing
+Jan 18 17:57:58 DietPi kernel: Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+Jan 18 17:57:58 DietPi kernel: Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+Jan 18 17:57:58 DietPi kernel: cgroup: Disabling memory control group subsystem
+Jan 18 17:57:58 DietPi kernel: CPU: Testing write buffer coherency: ok
+Jan 18 17:57:58 DietPi kernel: CPU0: thread -1, cpu 0, socket 0, mpidr 80000000
+Jan 18 17:57:58 DietPi kernel: cblist_init_generic: Setting adjustable number of callback queues.
+Jan 18 17:57:58 DietPi kernel: cblist_init_generic: Setting shift to 2 and lim to 1.
+Jan 18 17:57:58 DietPi kernel: cblist_init_generic: Setting shift to 2 and lim to 1.
+Jan 18 17:57:58 DietPi kernel: Setting up static identity map for 0x100000 - 0x10003c
+Jan 18 17:57:58 DietPi kernel: rcu: Hierarchical SRCU implementation.
+Jan 18 17:57:58 DietPi kernel: rcu:         Max phase no-delay instances is 1000.
+Jan 18 17:57:58 DietPi kernel: smp: Bringing up secondary CPUs ...
+Jan 18 17:57:58 DietPi kernel: CPU1: thread -1, cpu 1, socket 0, mpidr 80000001
+Jan 18 17:57:58 DietPi kernel: CPU2: thread -1, cpu 2, socket 0, mpidr 80000002
+Jan 18 17:57:58 DietPi kernel: CPU3: thread -1, cpu 3, socket 0, mpidr 80000003
+Jan 18 17:57:58 DietPi kernel: smp: Brought up 1 node, 4 CPUs
+Jan 18 17:57:58 DietPi kernel: SMP: Total of 4 processors activated (153.60 BogoMIPS).
+Jan 18 17:57:58 DietPi kernel: CPU: All CPU(s) started in HYP mode.
+Jan 18 17:57:58 DietPi kernel: CPU: Virtualization extensions available.
+Jan 18 17:57:58 DietPi kernel: devtmpfs: initialized
+Jan 18 17:57:58 DietPi kernel: VFP support v0.3: implementor 41 architecture 3 part 40 variant 3 rev 4
+Jan 18 17:57:58 DietPi kernel: clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+Jan 18 17:57:58 DietPi kernel: futex hash table entries: 1024 (order: 4, 65536 bytes, linear)
+Jan 18 17:57:58 DietPi kernel: pinctrl core: initialized pinctrl subsystem
+Jan 18 17:57:58 DietPi kernel: NET: Registered PF_NETLINK/PF_ROUTE protocol family
+Jan 18 17:57:58 DietPi kernel: DMA: preallocated 1024 KiB pool for atomic coherent allocations
+Jan 18 17:57:58 DietPi kernel: audit: initializing netlink subsys (disabled)
+Jan 18 17:57:58 DietPi kernel: audit: type=2000 audit(0.020:1): state=initialized audit_enabled=0 res=1
+Jan 18 17:57:58 DietPi kernel: thermal_sys: Registered thermal governor 'step_wise'
+Jan 18 17:57:58 DietPi kernel: hw-breakpoint: found 5 (+1 reserved) breakpoint and 4 watchpoint registers.
+Jan 18 17:57:58 DietPi kernel: hw-breakpoint: maximum watchpoint size is 8 bytes.
+Jan 18 17:57:58 DietPi kernel: Serial: AMBA PL011 UART driver
+Jan 18 17:57:58 DietPi kernel: bcm2835-mbox 3f00b880.mailbox: mailbox enabled
+Jan 18 17:57:58 DietPi kernel: raspberrypi-firmware soc:firmware: Attached to firmware from 2023-03-17T10:53:00, variant start_cd
+Jan 18 17:57:58 DietPi kernel: raspberrypi-firmware soc:firmware: Firmware hash is 82f3750a65fadae9a38077e3c2e217ad158c8d54
+Jan 18 17:57:58 DietPi kernel: kprobes: kprobe jump-optimization is enabled. All kprobes are optimized if possible.
+Jan 18 17:57:58 DietPi kernel: bcm2835-dma 3f007000.dma: DMA legacy API manager, dmachans=0x1
+Jan 18 17:57:58 DietPi kernel: SCSI subsystem initialized
+Jan 18 17:57:58 DietPi kernel: usbcore: registered new interface driver usbfs
+Jan 18 17:57:58 DietPi kernel: usbcore: registered new interface driver hub
+Jan 18 17:57:58 DietPi kernel: usbcore: registered new device driver usb
+Jan 18 17:57:58 DietPi kernel: usb_phy_generic phy: supply vcc not found, using dummy regulator
+Jan 18 17:57:58 DietPi kernel: usb_phy_generic phy: dummy supplies not allowed for exclusive requests
+Jan 18 17:57:58 DietPi kernel: pps_core: LinuxPPS API ver. 1 registered
+Jan 18 17:57:58 DietPi kernel: pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+Jan 18 17:57:58 DietPi kernel: PTP clock support registered
+Jan 18 17:57:58 DietPi kernel: clocksource: Switched to clocksource arch_sys_counter
+Jan 18 17:57:58 DietPi kernel: VFS: Disk quotas dquot_6.6.0
+Jan 18 17:57:58 DietPi kernel: VFS: Dquot-cache hash table entries: 1024 (order 0, 4096 bytes)
+Jan 18 17:57:58 DietPi kernel: FS-Cache: Loaded
+Jan 18 17:57:58 DietPi kernel: CacheFiles: Loaded
+Jan 18 17:57:58 DietPi kernel: NET: Registered PF_INET protocol family
+Jan 18 17:57:58 DietPi kernel: IP idents hash table entries: 8192 (order: 4, 65536 bytes, linear)
+Jan 18 17:57:58 DietPi kernel: tcp_listen_portaddr_hash hash table entries: 512 (order: 0, 4096 bytes, linear)
+Jan 18 17:57:58 DietPi kernel: Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+Jan 18 17:57:58 DietPi kernel: TCP established hash table entries: 4096 (order: 2, 16384 bytes, linear)
+Jan 18 17:57:58 DietPi kernel: TCP bind hash table entries: 4096 (order: 4, 65536 bytes, linear)
+Jan 18 17:57:58 DietPi kernel: TCP: Hash tables configured (established 4096 bind 4096)
+Jan 18 17:57:58 DietPi kernel: UDP hash table entries: 256 (order: 1, 8192 bytes, linear)
+Jan 18 17:57:58 DietPi kernel: UDP-Lite hash table entries: 256 (order: 1, 8192 bytes, linear)
+Jan 18 17:57:58 DietPi kernel: NET: Registered PF_UNIX/PF_LOCAL protocol family
+Jan 18 17:57:58 DietPi kernel: RPC: Registered named UNIX socket transport module.
+Jan 18 17:57:58 DietPi kernel: RPC: Registered udp transport module.
+Jan 18 17:57:58 DietPi kernel: RPC: Registered tcp transport module.
+Jan 18 17:57:58 DietPi kernel: RPC: Registered tcp NFSv4.1 backchannel transport module.
+Jan 18 17:57:58 DietPi kernel: hw perfevents: enabled with armv7_cortex_a7 PMU driver, 7 counters available
+Jan 18 17:57:58 DietPi kernel: Initialise system trusted keyrings
+Jan 18 17:57:58 DietPi kernel: workingset: timestamp_bits=14 max_order=17 bucket_order=3
+Jan 18 17:57:58 DietPi kernel: zbud: loaded
+Jan 18 17:57:58 DietPi kernel: NFS: Registering the id_resolver key type
+Jan 18 17:57:58 DietPi kernel: Key type id_resolver registered
+Jan 18 17:57:58 DietPi kernel: Key type id_legacy registered
+Jan 18 17:57:58 DietPi kernel: nfs4filelayout_init: NFSv4 File Layout Driver Registering...
+Jan 18 17:57:58 DietPi kernel: nfs4flexfilelayout_init: NFSv4 Flexfile Layout Driver Registering...
+Jan 18 17:57:58 DietPi kernel: Key type asymmetric registered
+Jan 18 17:57:58 DietPi kernel: Asymmetric key parser 'x509' registered
+Jan 18 17:57:58 DietPi kernel: Block layer SCSI generic (bsg) driver version 0.4 loaded (major 247)
+Jan 18 17:57:58 DietPi kernel: io scheduler mq-deadline registered
+Jan 18 17:57:58 DietPi kernel: io scheduler kyber registered
+Jan 18 17:57:58 DietPi kernel: bcm2708_fb soc:fb: FB found 1 display(s)
+Jan 18 17:57:58 DietPi kernel: Console: switching to colour frame buffer device 240x67
+Jan 18 17:57:58 DietPi kernel: bcm2708_fb soc:fb: Registered framebuffer for display 0, size 1920x1080
+Jan 18 17:57:58 DietPi kernel: bcm2835-rng 3f104000.rng: hwrng registered
+Jan 18 17:57:58 DietPi kernel: vc-mem: phys_addr:0x00000000 mem_base=0x1fa00000 mem_size:0x20000000(512 MiB)
+Jan 18 17:57:58 DietPi kernel: gpiomem-bcm2835 3f200000.gpiomem: Initialised: Registers at 0x3f200000
+Jan 18 17:57:58 DietPi kernel: brd: module loaded
+Jan 18 17:57:58 DietPi kernel: loop: module loaded
+Jan 18 17:57:58 DietPi kernel: Loading iSCSI transport class v2.0-870.
+Jan 18 17:57:58 DietPi kernel: usbcore: registered new interface driver lan78xx
+Jan 18 17:57:58 DietPi kernel: usbcore: registered new interface driver smsc95xx
+Jan 18 17:57:58 DietPi kernel: dwc_otg: version 3.00a 10-AUG-2012 (platform bus)
+Jan 18 17:57:58 DietPi kernel: Core Release: 2.80a
+Jan 18 17:57:58 DietPi kernel: Setting default values for core params
+Jan 18 17:57:58 DietPi kernel: Finished setting default values for core params
+Jan 18 17:57:58 DietPi kernel: Using Buffer DMA mode
+Jan 18 17:57:58 DietPi kernel: Periodic Transfer Interrupt Enhancement - disabled
+Jan 18 17:57:58 DietPi kernel: Multiprocessor Interrupt Enhancement - disabled
+Jan 18 17:57:58 DietPi kernel: OTG VER PARAM: 0, OTG VER FLAG: 0
+Jan 18 17:57:58 DietPi kernel: Dedicated Tx FIFOs mode
+Jan 18 17:57:58 DietPi kernel:
+Jan 18 17:57:58 DietPi kernel: WARN::dwc_otg_hcd_init:1074: FIQ DMA bounce buffers: virt = 9ad14000 dma = 0xdad14000 len=9024
+Jan 18 17:57:58 DietPi kernel: FIQ FSM acceleration enabled for :
+                               Non-periodic Split Transactions
+                               Periodic Split Transactions
+                               High-Speed Isochronous Endpoints
+                               Interrupt/Control Split Transaction hack enabled
+Jan 18 17:57:58 DietPi kernel: dwc_otg: Microframe scheduler enabled
+Jan 18 17:57:58 DietPi kernel:
+Jan 18 17:57:58 DietPi kernel: WARN::hcd_init_fiq:457: FIQ on core 1
+Jan 18 17:57:58 DietPi kernel:
+Jan 18 17:57:58 DietPi kernel: WARN::hcd_init_fiq:458: FIQ ASM at 807c4360 length 36
+Jan 18 17:57:58 DietPi kernel:
+Jan 18 17:57:58 DietPi kernel: WARN::hcd_init_fiq:497: MPHI regs_base at 9f810000
+Jan 18 17:57:58 DietPi kernel: dwc_otg 3f980000.usb: DWC OTG Controller
+Jan 18 17:57:58 DietPi kernel: dwc_otg 3f980000.usb: new USB bus registered, assigned bus number 1
+Jan 18 17:57:58 DietPi kernel: dwc_otg 3f980000.usb: irq 89, io mem 0x00000000
+Jan 18 17:57:58 DietPi kernel: Init: Port Power? op_state=1
+Jan 18 17:57:58 DietPi kernel: Init: Power Port (0)
+Jan 18 17:57:58 DietPi kernel: usb usb1: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 6.01
+Jan 18 17:57:58 DietPi kernel: usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Jan 18 17:57:58 DietPi kernel: usb usb1: Product: DWC OTG Controller
+Jan 18 17:57:58 DietPi kernel: usb usb1: Manufacturer: Linux 6.1.21-v7+ dwc_otg_hcd
+Jan 18 17:57:58 DietPi kernel: usb usb1: SerialNumber: 3f980000.usb
+Jan 18 17:57:58 DietPi kernel: hub 1-0:1.0: USB hub found
+Jan 18 17:57:58 DietPi kernel: hub 1-0:1.0: 1 port detected
+Jan 18 17:57:58 DietPi kernel: dwc_otg: FIQ enabled
+Jan 18 17:57:58 DietPi kernel: dwc_otg: NAK holdoff enabled
+Jan 18 17:57:58 DietPi kernel: dwc_otg: FIQ split-transaction FSM enabled
+Jan 18 17:57:58 DietPi kernel: Module dwc_common_port init
+Jan 18 17:57:58 DietPi kernel: usbcore: registered new interface driver usb-storage
+Jan 18 17:57:58 DietPi kernel: mousedev: PS/2 mouse device common for all mice
+Jan 18 17:57:58 DietPi kernel: sdhci: Secure Digital Host Controller Interface driver
+Jan 18 17:57:58 DietPi kernel: sdhci: Copyright(c) Pierre Ossman
+Jan 18 17:57:58 DietPi kernel: sdhci-pltfm: SDHCI platform and OF driver helper
+Jan 18 17:57:58 DietPi kernel: ledtrig-cpu: registered to indicate activity on CPUs
+Jan 18 17:57:58 DietPi kernel: hid: raw HID events driver (C) Jiri Kosina
+Jan 18 17:57:58 DietPi kernel: usbcore: registered new interface driver usbhid
+Jan 18 17:57:58 DietPi kernel: usbhid: USB HID core driver
+Jan 18 17:57:58 DietPi kernel: bcm2835_vchiq 3f00b840.mailbox: there is not valid maps for state default
+Jan 18 17:57:58 DietPi kernel: Initializing XFRM netlink socket
+Jan 18 17:57:58 DietPi kernel: NET: Registered PF_PACKET protocol family
+Jan 18 17:57:58 DietPi kernel: Key type dns_resolver registered
+Jan 18 17:57:58 DietPi kernel: Registering SWP/SWPB emulation handler
+Jan 18 17:57:58 DietPi kernel: registered taskstats version 1
+Jan 18 17:57:58 DietPi kernel: Loading compiled-in X.509 certificates
+Jan 18 17:57:58 DietPi kernel: Key type .fscrypt registered
+Jan 18 17:57:58 DietPi kernel: Key type fscrypt-provisioning registered
+Jan 18 17:57:58 DietPi kernel: uart-pl011 3f201000.serial: cts_event_workaround enabled
+Jan 18 17:57:58 DietPi kernel: 3f201000.serial: ttyAMA0 at MMIO 0x3f201000 (irq = 114, base_baud = 0) is a PL011 rev2
+Jan 18 17:57:58 DietPi kernel: bcm2835-wdt bcm2835-wdt: Broadcom BCM2835 watchdog timer
+Jan 18 17:57:58 DietPi kernel: bcm2835-power bcm2835-power: Broadcom BCM2835 power domains driver
+Jan 18 17:57:58 DietPi kernel: mmc-bcm2835 3f300000.mmcnr: mmc_debug:0 mmc_debug2:0
+Jan 18 17:57:58 DietPi kernel: mmc-bcm2835 3f300000.mmcnr: DMA channel allocated
+Jan 18 17:57:58 DietPi kernel: sdhost: log_buf @ 1abbff25 (dad13000)
+Jan 18 17:57:58 DietPi kernel: mmc0: sdhost-bcm2835 loaded - DMA enabled (>1)
+Jan 18 17:57:58 DietPi kernel: of_cfs_init
+Jan 18 17:57:58 DietPi kernel: of_cfs_init: OK
+Jan 18 17:57:58 DietPi kernel: Waiting for root device PARTUUID=737a2b38-02...
+Jan 18 17:57:58 DietPi kernel: mmc0: host does not support reading read-only switch, assuming write-enable
+Jan 18 17:57:58 DietPi kernel: mmc0: new high speed SDHC card at address 5048
+Jan 18 17:57:58 DietPi kernel: mmcblk0: mmc0:5048 SD32G 29.7 GiB
+Jan 18 17:57:58 DietPi kernel:  mmcblk0: p1 p2
+Jan 18 17:57:58 DietPi kernel: mmcblk0: mmc0:5048 SD32G 29.7 GiB (quirks 0x00004000)
+Jan 18 17:57:58 DietPi kernel: EXT4-fs (mmcblk0p2): INFO: recovery required on readonly filesystem
+Jan 18 17:57:58 DietPi kernel: EXT4-fs (mmcblk0p2): write access will be enabled during recovery
+Jan 18 17:57:58 DietPi kernel: mmc1: new high speed SDIO card at address 0001
+Jan 18 17:57:58 DietPi kernel: EXT4-fs (mmcblk0p2): recovery complete
+Jan 18 17:57:58 DietPi kernel: EXT4-fs (mmcblk0p2): mounted filesystem with ordered data mode. Quota mode: none.
+Jan 18 17:57:58 DietPi kernel: VFS: Mounted root (ext4 filesystem) readonly on device 179:2.
+Jan 18 17:57:58 DietPi kernel: devtmpfs: mounted
+Jan 18 17:57:58 DietPi kernel: Freeing unused kernel image (initmem) memory: 1024K
+Jan 18 17:57:58 DietPi kernel: Run /sbin/init as init process
+Jan 18 17:57:58 DietPi kernel:   with arguments:
+Jan 18 17:57:58 DietPi kernel:     /sbin/init
+Jan 18 17:57:58 DietPi kernel:   with environment:
+Jan 18 17:57:58 DietPi kernel:     HOME=/
+Jan 18 17:57:58 DietPi kernel:     TERM=linux
+Jan 18 17:57:58 DietPi systemd[1]: System time before build time, advancing clock.
+Jan 18 17:57:58 DietPi kernel: NET: Registered PF_INET6 protocol family
+Jan 18 17:57:58 DietPi kernel: Segment Routing with IPv6
+Jan 18 17:57:58 DietPi kernel: In-situ OAM (IOAM) with IPv6
+Jan 18 17:57:58 DietPi kernel: fuse: init (API version 7.37)
+Jan 18 17:57:58 DietPi kernel: i2c_dev: i2c /dev entries driver
+Jan 18 17:57:58 DietPi systemd-journald[133]: Journal started
+Jan 18 17:57:58 DietPi systemd-journald[133]: Runtime Journal (/run/log/journal/0888ac9ea2d841a19a394fb80ca4ee78) is 1.1M, max 9.4M, 8.3M free.
+Jan 18 17:57:58 DietPi fake-hwclock[121]: Sat Jan 18 17:57:58 UTC 2025
+Jan 18 17:57:58 DietPi systemd-fsck[130]: Successfully forked off '(fsck)' as PID 131.
+Jan 18 17:57:58 DietPi systemd-fsck[132]: e2fsck 1.46.2 (28-Feb-2021)
+Jan 18 17:57:58 DietPi systemd-fsck[132]: /dev/mmcblk0p2: clean, 73556/1933920 files, 1396815/7760896 blocks
+Jan 18 17:57:58 DietPi systemd-modules-load[134]: apply: /etc/modules-load.d/modules.conf
+Jan 18 17:57:58 DietPi systemd-modules-load[134]: Loading module: i2c-bcm2708
+Jan 18 17:57:58 DietPi systemd-modules-load[134]: Inserted module 'i2c_bcm2708'
+Jan 18 17:57:58 DietPi systemd-modules-load[134]: Loading module: i2c-dev
+Jan 18 17:57:58 DietPi systemd-modules-load[134]: Inserted module 'i2c_dev'
+Jan 18 17:57:58 DietPi systemd-fsck[130]: fsck succeeded.
+Jan 18 17:57:59 DietPi systemd-fsckd[208]: New fsck client connected: fd 5
+Jan 18 17:57:59 DietPi systemd-fsckd[208]: Fsck client fd 5 disconnected
+Jan 18 17:57:59 DietPi systemd-remount-fs[209]: Remounting /...
+Jan 18 17:57:59 DietPi systemd-remount-fs[209]: Successfully forked off '(remount)' as PID 210.
+Jan 18 17:57:59 DietPi systemd-sysctl[211]: Parsing /etc/sysctl.d/97-dietpi.conf
+Jan 18 17:57:59 DietPi systemd-sysctl[211]: Parsing /etc/sysctl.d/99-sysctl.conf
+Jan 18 17:57:59 DietPi systemd-sysctl[211]: Parsing /usr/lib/sysctl.d/protect-links.conf
+Jan 18 17:57:59 DietPi systemd-sysctl[211]: Setting 'vm/swappiness' to '1'.
+Jan 18 17:57:59 DietPi systemd-sysctl[211]: Setting 'net/ipv4/ping_group_range' to '0 2147483647'.
+Jan 18 17:57:59 DietPi systemd-sysctl[211]: Setting 'kernel/printk' to '4 4 1 7'.
+Jan 18 17:57:59 DietPi systemd-sysctl[211]: Setting 'fs/protected_fifos' to '1'.
+Jan 18 17:57:59 DietPi systemd-sysctl[211]: Setting 'fs/protected_hardlinks' to '1'.
+Jan 18 17:57:59 DietPi systemd-sysctl[211]: Setting 'fs/protected_regular' to '2'.
+Jan 18 17:57:59 DietPi systemd-sysctl[211]: Setting 'fs/protected_symlinks' to '1'.
+Jan 18 17:57:59 DietPi kernel: EXT4-fs (mmcblk0p2): re-mounted. Quota mode: none.
+Jan 18 17:57:59 DietPi kernel: Adding 1611772k swap on /var/swap.  Priority:-2 extents:4 across:1890300k SSFS
+Jan 18 17:58:00 DietPi systemd-random-seed[215]: $SYSTEMD_RANDOM_SEED_CREDIT is not set, not crediting entropy.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: SELinux enabled state cached to: disabled
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Reading config file "/usr/lib/sysusers.d/basic.conf"…
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Reading config file "/usr/lib/sysusers.d/dbus.conf"…
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Reading config file "/usr/lib/sysusers.d/systemd.conf"…
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group adm already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group tty already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group disk already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group man already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group kmem already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group dialout already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group fax already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group voice already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group cdrom already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group floppy already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group tape already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group sudo already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group audio already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group dip already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group operator already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group src already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group shadow already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group utmp already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group video already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group sasl already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group plugdev already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group staff already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group games already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group users already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group nogroup already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group systemd-journal already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group root already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User root already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group daemon already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User daemon already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group bin already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User bin already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group sys already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User sys already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User sync already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group games already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User games already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group man already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User man already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group lp already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User lp already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group mail already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User mail already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group news already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User news already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group uucp already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User uucp already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group proxy already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User proxy already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group www-data already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User www-data already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group backup already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User backup already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group list already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User list already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group irc already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User irc already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group gnats already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User gnats already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User nobody already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group messagebus already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User messagebus already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group systemd-network already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User systemd-network already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group systemd-resolve already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User systemd-resolve already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group systemd-timesync already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User systemd-timesync already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: Group systemd-coredump already exists.
+Jan 18 17:58:00 DietPi systemd-sysusers[216]: User systemd-coredump already exists.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Looking for configuration files in (higher priority first):
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]:         /etc/tmpfiles.d
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]:         /run/tmpfiles.d
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]:         /usr/local/lib/tmpfiles.d
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]:         /usr/lib/tmpfiles.d
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]:         /lib/tmpfiles.d
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: SELinux enabled state cached to: disabled
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Reading config file "/usr/lib/tmpfiles.d/dbus.conf"…
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/lib/dbus" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/lib/dbus/machine-id" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Reading config file "/usr/lib/tmpfiles.d/debian.conf"…
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/shm" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/sendsigs.omit.d" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/etc/mtab" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Reading config file "/etc/tmpfiles.d/dietpi.conf"…
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/dietpi" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Reading config file "/usr/lib/tmpfiles.d/home.conf"…
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/home" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/srv" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Reading config file "/usr/lib/tmpfiles.d/journal-nocow.conf"…
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/log/journal" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/log/journal/remote" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Reading config file "/usr/lib/tmpfiles.d/legacy.conf"…
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/lock" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/lock/subsys" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/forcefsck" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/fastboot" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/forcequotacheck" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Reading config file "/usr/lib/tmpfiles.d/passwd.conf"…
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/etc/gshadow.lock" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/etc/shadow.lock" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/etc/passwd.lock" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/etc/group.lock" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/etc/subuid.lock" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/etc/subgid.lock" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Reading config file "/usr/lib/tmpfiles.d/static-nodes-permissions.conf"…
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/dev/snd/seq" matches include prefix "/dev".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/dev/snd/timer" matches include prefix "/dev".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/dev/loop-control" matches include prefix "/dev".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/dev/net/tun" matches include prefix "/dev".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/dev/fuse" matches include prefix "/dev".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/dev/kvm" matches include prefix "/dev".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Reading config file "/run/tmpfiles.d/static-nodes.conf"…
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/dev/fuse" matches include prefix "/dev".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/dev/cuse" matches include prefix "/dev".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/dev/btrfs-control" matches include prefix "/dev".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/dev/net" matches include prefix "/dev".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/dev/net/tun" matches include prefix "/dev".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/dev/ppp" matches include prefix "/dev".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/dev/uinput" matches include prefix "/dev".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/dev/mapper" matches include prefix "/dev".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/dev/mapper/control" matches include prefix "/dev".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/dev/uhid" matches include prefix "/dev".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/dev/vhci" matches include prefix "/dev".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/dev/snd" matches include prefix "/dev".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/dev/snd/timer" matches include prefix "/dev".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/dev/snd" matches include prefix "/dev".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/dev/snd/seq" matches include prefix "/dev".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/dev/rfkill" matches include prefix "/dev".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Reading config file "/usr/lib/tmpfiles.d/sudo.conf"…
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/sudo" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/sudo/ts" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Reading config file "/usr/lib/tmpfiles.d/systemd-nologin.conf"…
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/nologin" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Reading config file "/usr/lib/tmpfiles.d/systemd-pstore.conf"…
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/lib/systemd/pstore" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Reading config file "/usr/lib/tmpfiles.d/systemd-tmp.conf"…
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/tmp/systemd-private-a3ad00fc63314aa4970bdfb74e186a97-*" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/tmp/systemd-private-a3ad00fc63314aa4970bdfb74e186a97-*/tmp" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/tmp/systemd-private-a3ad00fc63314aa4970bdfb74e186a97-*" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/tmp/systemd-private-a3ad00fc63314aa4970bdfb74e186a97-*/tmp" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/tmp/systemd-private-*" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/tmp/systemd-private-*" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/lib/systemd/coredump/.#core*.a3ad00fc63314aa4970bdfb74e186a97*" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/lib/systemd/coredump/.#*" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Reading config file "/usr/lib/tmpfiles.d/systemd.conf"…
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/user" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/utmp" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/systemd/ask-password" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/systemd/seats" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/systemd/sessions" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/systemd/users" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/systemd/machines" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/systemd/shutdown" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/systemd/netif" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/systemd/netif/links" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/systemd/netif/leases" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/systemd/netif/lldp" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/log" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/log/journal" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/log/journal/0888ac9ea2d841a19a394fb80ca4ee78" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/log/journal" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/log/journal/0888ac9ea2d841a19a394fb80ca4ee78" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/run/log/journal/0888ac9ea2d841a19a394fb80ca4ee78/*.journal*" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/log/journal" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78/system.journal" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/log/journal" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78/system.journal" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/lib/systemd" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/lib/systemd/coredump" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/lib/private" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/log/private" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/cache/private" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Reading config file "/usr/lib/tmpfiles.d/tmp.conf"…
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/tmp" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Reading config file "/usr/lib/tmpfiles.d/var.conf"…
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/run" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/log" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/log/wtmp" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/log/btmp" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/log/lastlog" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/cache" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/lib" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/var/spool" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Reading config file "/usr/lib/tmpfiles.d/x11.conf"…
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/tmp/.X11-unix" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/tmp/.ICE-unix" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/tmp/.XIM-unix" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/tmp/.font-unix" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/tmp/.Test-unix" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Entry "/tmp/.X[0-9]*-lock" does not match any include prefix, skipping.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Running create action for entry c /dev/fuse
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Found existing char device node "/dev/fuse" 1:128.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: "/dev/fuse" matches mode 600 already.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Failed to determine whether '/dev/cuse' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Running create action for entry c /dev/cuse
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Created char device node "/dev/cuse" 1:128.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: "/dev/cuse" matches mode 600 already.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Failed to determine whether '/dev/btrfs-control' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Running create action for entry c /dev/btrfs-control
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Created char device node "/dev/btrfs-control" 1:128.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: "/dev/btrfs-control" matches mode 600 already.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Failed to determine whether '/dev/net' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Running create action for entry d /dev/net
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Created directory "/dev/net".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: "/dev/net" matches mode 755 already.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Failed to determine whether '/dev/net/tun' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Running create action for entry c /dev/net/tun
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Created char device node "/dev/net/tun" 1:128.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: "/dev/net/tun" matches mode 600 already.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Failed to determine whether '/dev/ppp' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Running create action for entry c /dev/ppp
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Created char device node "/dev/ppp" 1:128.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: "/dev/ppp" matches mode 600 already.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Failed to determine whether '/dev/uinput' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Running create action for entry c /dev/uinput
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Created char device node "/dev/uinput" 1:128.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: "/dev/uinput" matches mode 600 already.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Failed to determine whether '/dev/mapper' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Running create action for entry d /dev/mapper
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Created directory "/dev/mapper".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: "/dev/mapper" matches mode 755 already.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Failed to determine whether '/dev/mapper/control' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Running create action for entry c /dev/mapper/control
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Created char device node "/dev/mapper/control" 1:128.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: "/dev/mapper/control" matches mode 600 already.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Failed to determine whether '/dev/uhid' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Running create action for entry c /dev/uhid
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Created char device node "/dev/uhid" 1:128.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: "/dev/uhid" matches mode 600 already.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Failed to determine whether '/dev/vhci' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Running create action for entry c /dev/vhci
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Created char device node "/dev/vhci" 1:128.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: "/dev/vhci" matches mode 600 already.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Failed to determine whether '/dev/snd' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Running create action for entry d /dev/snd
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Created directory "/dev/snd".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: "/dev/snd" matches mode 755 already.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Running create action for entry d /dev/snd
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Found existing directory "/dev/snd".
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: "/dev/snd" matches mode 755 already.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Failed to determine whether '/dev/snd/timer' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Running create action for entry c /dev/snd/timer
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Created char device node "/dev/snd/timer" 1:128.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: "/dev/snd/timer" matches mode 600 already.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Failed to determine whether '/dev/snd/seq' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Running create action for entry c /dev/snd/seq
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Created char device node "/dev/snd/seq" 1:128.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: "/dev/snd/seq" matches mode 600 already.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Failed to determine whether '/dev/rfkill' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Running create action for entry c /dev/rfkill
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Created char device node "/dev/rfkill" 1:128.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: "/dev/rfkill" matches mode 600 already.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Running create action for entry z /dev/snd/seq
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: "/dev/snd/seq" matches temporary mode 600 already.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Changing "/dev/snd/seq" to owner 4294967295:29
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Changing "/dev/snd/seq" to mode 660.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Running create action for entry z /dev/snd/timer
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: "/dev/snd/timer" matches temporary mode 600 already.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Changing "/dev/snd/timer" to owner 4294967295:29
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Changing "/dev/snd/timer" to mode 660.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Running create action for entry z /dev/loop-control
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: "/dev/loop-control" matches temporary mode 600 already.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Changing "/dev/loop-control" to owner 4294967295:6
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Changing "/dev/loop-control" to mode 660.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Running create action for entry z /dev/net/tun
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Changing "/dev/net/tun" to mode 666.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Running create action for entry z /dev/fuse
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Changing "/dev/fuse" to mode 666.
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Failed to determine whether '/dev/kvm' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:00 DietPi systemd-tmpfiles[217]: Running create action for entry z /dev/kvm
+Jan 18 17:58:00 DietPi systemd-udevd[220]: Network interface NamePolicy= disabled on kernel command line, ignoring.
+Jan 18 17:58:00 DietPi systemd-journald[133]: Runtime Journal (/run/log/journal/0888ac9ea2d841a19a394fb80ca4ee78) is 1.1M, max 9.4M, 8.3M free.
+Jan 18 17:58:01 DietPi kernel: snd_bcm2835: module is from the staging directory, the quality is unknown, you have been warned.
+Jan 18 17:58:01 DietPi kernel: cfg80211: Loading compiled-in X.509 certificates for regulatory database
+Jan 18 17:58:01 DietPi kernel: cfg80211: Loaded X.509 cert 'sforshee: 00b28ddf47aef9cea7'
+Jan 18 17:58:01 DietPi kernel: brcmfmac: F1 signature read @0x18000000=0x1541a9a6
+Jan 18 17:58:01 DietPi kernel: brcmfmac: brcmf_fw_alloc_request: using brcm/brcmfmac43436s-sdio for chip BCM43430/1
+Jan 18 17:58:01 DietPi kernel: usbcore: registered new interface driver brcmfmac
+Jan 18 17:58:01 DietPi kernel: brcmfmac mmc1:0001:1: Direct firmware load for brcm/brcmfmac43436s-sdio.clm_blob failed with error -2
+Jan 18 17:58:01 DietPi kernel: brcmfmac: brcmf_c_process_clm_blob: no clm_blob available (err=-2), device may have limited channels available
+Jan 18 17:58:01 DietPi kernel: brcmfmac: brcmf_c_preinit_dcmds: Firmware: BCM43430/1 wl0: Jun 14 2023 07:27:45 version 7.45.96.s1 (gf031a129) FWID 01-70bd2af7 es7
+Jan 18 17:58:01 DietPi systemd-udevd[226]: Using default interface naming scheme 'v247'.
+Jan 18 17:58:01 DietPi systemd-fsck[302]: Successfully forked off '(fsck)' as PID 303.
+Jan 18 17:58:01 DietPi systemd-fsckd[208]: New fsck client connected: fd 5
+Jan 18 17:58:02 DietPi systemd-rfkill[305]: A new rfkill device has been added with index 0 and type wlan.
+Jan 18 17:58:02 DietPi systemd-rfkill[305]: rfkill0: Operating on rfkill device 'phy0'.
+Jan 18 17:58:02 DietPi systemd-rfkill[305]: Loaded state '0' from /var/lib/systemd/rfkill/platform-3f300000.mmcnr:wlan.
+Jan 18 17:58:02 DietPi systemd-fsck[304]: fsck.fat 4.2 (2021-01-31)
+Jan 18 17:58:02 DietPi systemd-fsck[304]: There are differences between boot sector and its backup.
+Jan 18 17:58:02 DietPi systemd-fsck[304]: This is mostly harmless. Differences: (offset:original/backup)
+Jan 18 17:58:02 DietPi systemd-fsck[304]:   65:01/00
+Jan 18 17:58:02 DietPi systemd-fsck[304]:   Not automatically fixing this.
+Jan 18 17:58:02 DietPi systemd-fsck[304]: Dirty bit is set. Fs was not properly unmounted and some data may be corrupt.
+Jan 18 17:58:02 DietPi systemd-fsck[304]:  Automatically removing dirty bit.
+Jan 18 17:58:02 DietPi systemd-fsck[304]: *** Filesystem was changed ***
+Jan 18 17:58:02 DietPi systemd-fsck[304]: Writing changes.
+Jan 18 17:58:02 DietPi systemd-fsck[304]: /dev/mmcblk0p1: 388 files, 105930/258077 clusters
+Jan 18 17:58:02 DietPi systemd-fsck[302]: fsck failed with exit status 1.
+Jan 18 17:58:02 DietPi systemd-fsckd[208]: Fsck client fd 5 disconnected
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Looking for configuration files in (higher priority first):
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]:         /etc/tmpfiles.d
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]:         /run/tmpfiles.d
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]:         /usr/local/lib/tmpfiles.d
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]:         /usr/lib/tmpfiles.d
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]:         /lib/tmpfiles.d
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: SELinux enabled state cached to: disabled
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Reading config file "/usr/lib/tmpfiles.d/dbus.conf"…
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Reading config file "/usr/lib/tmpfiles.d/debian.conf"…
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Reading config file "/etc/tmpfiles.d/dietpi.conf"…
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Reading config file "/usr/lib/tmpfiles.d/home.conf"…
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Reading config file "/usr/lib/tmpfiles.d/journal-nocow.conf"…
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Reading config file "/usr/lib/tmpfiles.d/legacy.conf"…
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Reading config file "/usr/lib/tmpfiles.d/passwd.conf"…
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Reading config file "/usr/lib/tmpfiles.d/static-nodes-permissions.conf"…
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Entry "/dev/snd/seq" matches exclude prefix "/dev", skipping.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Entry "/dev/snd/timer" matches exclude prefix "/dev", skipping.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Entry "/dev/loop-control" matches exclude prefix "/dev", skipping.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Entry "/dev/net/tun" matches exclude prefix "/dev", skipping.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Entry "/dev/fuse" matches exclude prefix "/dev", skipping.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Entry "/dev/kvm" matches exclude prefix "/dev", skipping.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Reading config file "/run/tmpfiles.d/static-nodes.conf"…
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Entry "/dev/fuse" matches exclude prefix "/dev", skipping.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Entry "/dev/cuse" matches exclude prefix "/dev", skipping.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Entry "/dev/btrfs-control" matches exclude prefix "/dev", skipping.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Entry "/dev/net" matches exclude prefix "/dev", skipping.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Entry "/dev/net/tun" matches exclude prefix "/dev", skipping.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Entry "/dev/ppp" matches exclude prefix "/dev", skipping.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Entry "/dev/uinput" matches exclude prefix "/dev", skipping.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Entry "/dev/mapper" matches exclude prefix "/dev", skipping.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Entry "/dev/mapper/control" matches exclude prefix "/dev", skipping.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Entry "/dev/uhid" matches exclude prefix "/dev", skipping.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Entry "/dev/vhci" matches exclude prefix "/dev", skipping.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Entry "/dev/snd" matches exclude prefix "/dev", skipping.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Entry "/dev/snd/timer" matches exclude prefix "/dev", skipping.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Entry "/dev/snd" matches exclude prefix "/dev", skipping.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Entry "/dev/snd/seq" matches exclude prefix "/dev", skipping.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Entry "/dev/rfkill" matches exclude prefix "/dev", skipping.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Reading config file "/usr/lib/tmpfiles.d/sudo.conf"…
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Reading config file "/usr/lib/tmpfiles.d/systemd-nologin.conf"…
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Reading config file "/usr/lib/tmpfiles.d/systemd-pstore.conf"…
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Reading config file "/usr/lib/tmpfiles.d/systemd-tmp.conf"…
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Reading config file "/usr/lib/tmpfiles.d/systemd.conf"…
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Reading config file "/usr/lib/tmpfiles.d/tmp.conf"…
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Reading config file "/usr/lib/tmpfiles.d/var.conf"…
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Reading config file "/usr/lib/tmpfiles.d/x11.conf"…
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry L /var/lib/dbus/machine-id
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /var/lib/dbus
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/shm' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry L /run/shm
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/sendsigs.omit.d' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /run/sendsigs.omit.d
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry L /etc/mtab
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/dietpi' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /run/dietpi
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry Q /home
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry q /srv
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry L /var/lock
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/lock/subsys' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /run/lock/subsys
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/sudo/ts' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry D /run/sudo/ts
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: rm -rf "/run/sudo/ts"
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/sudo' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /run/sudo
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/nologin' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry F /run/nologin
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /var/lib/systemd/pstore
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/user' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /run/user
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/utmp' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry F /run/utmp
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /run/systemd/ask-password
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/systemd/seats' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /run/systemd/seats
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/systemd/sessions' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /run/systemd/sessions
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/systemd/users' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /run/systemd/users
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/systemd/machines' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /run/systemd/machines
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/systemd/shutdown' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /run/systemd/shutdown
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/systemd/netif/links' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /run/systemd/netif/links
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/systemd/netif/leases' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /run/systemd/netif/leases
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/systemd/netif/lldp' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /run/systemd/netif/lldp
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/systemd/netif' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /run/systemd/netif
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/log/journal/0888ac9ea2d841a19a394fb80ca4ee78/*.journal*' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry a /run/log/journal/0888ac9ea2d841a19a394fb80ca4ee78/*.journal*
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry Z /run/log/journal/0888ac9ea2d841a19a394fb80ca4ee78
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry a /run/log/journal/0888ac9ea2d841a19a394fb80ca4ee78
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry a /run/log/journal
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry z /run/log/journal
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /run/log
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/lib/systemd/coredump/.#*' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry r /var/lib/systemd/coredump/.#*
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/lib/systemd/coredump/.#core*.a3ad00fc63314aa4970bdfb74e186a97*' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry x /var/lib/systemd/coredump/.#core*.a3ad00fc63314aa4970bdfb74e186a97*
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /var/lib/systemd/coredump
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /var/lib/systemd
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /var/lib/private
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/private' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /var/log/private
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /var/cache/private
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/tmp/.font-unix' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry D /tmp/.font-unix
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: rm -rf "/tmp/.font-unix"
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/tmp/.ICE-unix' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry D /tmp/.ICE-unix
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: rm -rf "/tmp/.ICE-unix"
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/tmp/.X[0-9]*-lock' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry r /tmp/.X[0-9]*-lock
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/tmp/.Test-unix' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry D /tmp/.Test-unix
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: rm -rf "/tmp/.Test-unix"
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/tmp/systemd-private-a3ad00fc63314aa4970bdfb74e186a97-*/tmp' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry X /tmp/systemd-private-a3ad00fc63314aa4970bdfb74e186a97-*/tmp
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/tmp/systemd-private-a3ad00fc63314aa4970bdfb74e186a97-*' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry x /tmp/systemd-private-a3ad00fc63314aa4970bdfb74e186a97-*
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/tmp/.XIM-unix' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry D /tmp/.XIM-unix
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: rm -rf "/tmp/.XIM-unix"
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/tmp/systemd-private-*' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry R /tmp/systemd-private-*
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/tmp/.X11-unix' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry D /tmp/.X11-unix
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: rm -rf "/tmp/.X11-unix"
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry D /tmp
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: rm -rf "/tmp"
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/tmp/systemd-private-a3ad00fc63314aa4970bdfb74e186a97-*/tmp' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry X /var/tmp/systemd-private-a3ad00fc63314aa4970bdfb74e186a97-*/tmp
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/tmp/systemd-private-a3ad00fc63314aa4970bdfb74e186a97-*' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry x /var/tmp/systemd-private-a3ad00fc63314aa4970bdfb74e186a97-*
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/lastlog' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry f /var/log/lastlog
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/btmp' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry f /var/log/btmp
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/journal/remote' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry h /var/log/journal/remote
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78/system.journal' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry a /var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78/system.journal
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78/system.journal' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry z /var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78/system.journal
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry a /var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry h /var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry z /var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/journal' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry a /var/log/journal
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/journal' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry h /var/log/journal
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/journal' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry z /var/log/journal
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/wtmp' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry f /var/log/wtmp
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /var/log
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /var/spool
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry L /var/run
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/tmp/systemd-private-*' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry R /var/tmp/systemd-private-*
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /var/cache
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry d /var/lib
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry q /var
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/forcefsck' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry r /forcefsck
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/fastboot' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry r /fastboot
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/forcequotacheck' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry r /forcequotacheck
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/etc/gshadow.lock' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry r /etc/gshadow.lock
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/etc/shadow.lock' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry r /etc/shadow.lock
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/etc/passwd.lock' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry r /etc/passwd.lock
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/etc/group.lock' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry r /etc/group.lock
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/etc/subuid.lock' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry r /etc/subuid.lock
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/etc/subgid.lock' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running remove action for entry r /etc/subgid.lock
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry q /var
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Found existing directory "/var".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/var" matches mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /var/lib
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Found existing directory "/var/lib".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/var/lib" matches mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /var/lib/dbus
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Found existing directory "/var/lib/dbus".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/var/lib/dbus" matches mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry L /var/lib/dbus/machine-id
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/var/lib/dbus/machine-id" is not a symlink or does not point to the correct path.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/shm' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry L /run/shm
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Created symlink "/run/shm".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/sendsigs.omit.d' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /run/sendsigs.omit.d
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Created directory "/run/sendsigs.omit.d".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/sendsigs.omit.d" matches mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry L /etc/mtab
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Found existing symlink "/etc/mtab".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/dietpi' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /run/dietpi
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Created directory "/run/dietpi".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/dietpi" matches mode 777 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry Q /home
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Found existing directory "/home".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/home" matches mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry q /srv
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Found existing directory "/srv".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/srv" matches mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry L /var/lock
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/var/lock" is not a symlink or does not point to the correct path.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/lock/subsys' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /run/lock/subsys
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Created directory "/run/lock/subsys".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/lock/subsys" matches mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/sudo' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /run/sudo
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Created directory "/run/sudo".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/sudo" matches mode 711 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/sudo/ts' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry D /run/sudo/ts
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Created directory "/run/sudo/ts".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/sudo/ts" matches mode 700 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/nologin' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry F /run/nologin
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/nologin" has been created.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Writing to "/run/nologin".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/nologin" matches mode 644 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /var/lib/systemd
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Found existing directory "/var/lib/systemd".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/var/lib/systemd" matches mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /var/lib/systemd/pstore
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Found existing directory "/var/lib/systemd/pstore".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/var/lib/systemd/pstore" matches mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/user' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /run/user
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Created directory "/run/user".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/user" matches mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/utmp' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry F /run/utmp
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/utmp" has been created.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/utmp" matches temporary mode 664 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/run/utmp" to owner 0:43
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/run/utmp" to mode 664.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /run/systemd/ask-password
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Found existing directory "/run/systemd/ask-password".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/systemd/ask-password" matches mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/systemd/seats' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /run/systemd/seats
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Created directory "/run/systemd/seats".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/systemd/seats" matches mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/systemd/sessions' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /run/systemd/sessions
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Created directory "/run/systemd/sessions".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/systemd/sessions" matches mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/systemd/users' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /run/systemd/users
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Created directory "/run/systemd/users".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/systemd/users" matches mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/systemd/machines' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /run/systemd/machines
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Created directory "/run/systemd/machines".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/systemd/machines" matches mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/systemd/shutdown' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /run/systemd/shutdown
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Created directory "/run/systemd/shutdown".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/systemd/shutdown" matches mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/systemd/netif' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /run/systemd/netif
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Created directory "/run/systemd/netif".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/systemd/netif" matches temporary mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/run/systemd/netif" to owner 100:102
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/run/systemd/netif" to mode 755.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/systemd/netif/links' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /run/systemd/netif/links
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Created directory "/run/systemd/netif/links".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/systemd/netif/links" matches temporary mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/run/systemd/netif/links" to owner 100:102
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/run/systemd/netif/links" to mode 755.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/systemd/netif/leases' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /run/systemd/netif/leases
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Created directory "/run/systemd/netif/leases".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/systemd/netif/leases" matches temporary mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/run/systemd/netif/leases" to owner 100:102
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/run/systemd/netif/leases" to mode 755.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/systemd/netif/lldp' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /run/systemd/netif/lldp
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Created directory "/run/systemd/netif/lldp".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/systemd/netif/lldp" matches temporary mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/run/systemd/netif/lldp" to owner 100:102
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/run/systemd/netif/lldp" to mode 755.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /run/log
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Found existing directory "/run/log".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/log" matches mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /var/lib/systemd/coredump
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Found existing directory "/var/lib/systemd/coredump".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/var/lib/systemd/coredump" matches mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /var/lib/private
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Found existing directory "/var/lib/private".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/var/lib/private" matches mode 700 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /var/log
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Found existing directory "/var/log".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/var/log" to mode 755.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/private' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /var/log/private
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Created directory "/var/log/private".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/var/log/private" matches mode 700 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /var/cache
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Found existing directory "/var/cache".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/var/cache" matches mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /var/cache/private
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Found existing directory "/var/cache/private".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/var/cache/private" matches mode 700 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry D /tmp
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Found existing directory "/tmp".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/tmp" matches mode 1777 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry L /var/run
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/var/run" is not a symlink or does not point to the correct path.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/wtmp' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry f /var/log/wtmp
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/var/log/wtmp" has been created.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/var/log/wtmp" matches temporary mode 664 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/var/log/wtmp" to owner 0:43
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/var/log/wtmp" to mode 664.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/btmp' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry f /var/log/btmp
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/var/log/btmp" has been created.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/var/log/btmp" matches temporary mode 660 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/var/log/btmp" to owner 0:43
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/var/log/btmp" to mode 660.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/lastlog' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry f /var/log/lastlog
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/var/log/lastlog" has been created.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/var/log/lastlog" matches temporary mode 664 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/var/log/lastlog" to owner 0:43
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/var/log/lastlog" to mode 664.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry d /var/spool
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Found existing directory "/var/spool".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/var/spool" matches mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/tmp/.X11-unix' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry D /tmp/.X11-unix
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Created directory "/tmp/.X11-unix".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/tmp/.X11-unix" matches mode 1777 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/tmp/.ICE-unix' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry D /tmp/.ICE-unix
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Created directory "/tmp/.ICE-unix".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/tmp/.ICE-unix" matches mode 1777 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/tmp/.XIM-unix' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry D /tmp/.XIM-unix
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Created directory "/tmp/.XIM-unix".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/tmp/.XIM-unix" matches mode 1777 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/tmp/.font-unix' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry D /tmp/.font-unix
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Created directory "/tmp/.font-unix".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/tmp/.font-unix" matches mode 1777 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/tmp/.Test-unix' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry D /tmp/.Test-unix
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Created directory "/tmp/.Test-unix".
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/tmp/.Test-unix" matches mode 1777 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/journal' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry a /var/log/journal
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/journal' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry h /var/log/journal
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/journal' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry z /var/log/journal
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry a /var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry h /var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry z /var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/journal/remote' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry h /var/log/journal/remote
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/forcefsck' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry r /forcefsck
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/fastboot' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry r /fastboot
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/forcequotacheck' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry r /forcequotacheck
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/etc/gshadow.lock' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry r /etc/gshadow.lock
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/etc/shadow.lock' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry r /etc/shadow.lock
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/etc/passwd.lock' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry r /etc/passwd.lock
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/etc/group.lock' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry r /etc/group.lock
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/etc/subuid.lock' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry r /etc/subuid.lock
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/etc/subgid.lock' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry r /etc/subgid.lock
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/tmp/systemd-private-a3ad00fc63314aa4970bdfb74e186a97-*' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry x /tmp/systemd-private-a3ad00fc63314aa4970bdfb74e186a97-*
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/tmp/systemd-private-a3ad00fc63314aa4970bdfb74e186a97-*/tmp' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry X /tmp/systemd-private-a3ad00fc63314aa4970bdfb74e186a97-*/tmp
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/tmp/systemd-private-a3ad00fc63314aa4970bdfb74e186a97-*' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry x /var/tmp/systemd-private-a3ad00fc63314aa4970bdfb74e186a97-*
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/tmp/systemd-private-a3ad00fc63314aa4970bdfb74e186a97-*/tmp' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry X /var/tmp/systemd-private-a3ad00fc63314aa4970bdfb74e186a97-*/tmp
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/tmp/systemd-private-*' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry R /tmp/systemd-private-*
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/tmp/systemd-private-*' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry R /var/tmp/systemd-private-*
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/lib/systemd/coredump/.#core*.a3ad00fc63314aa4970bdfb74e186a97*' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry x /var/lib/systemd/coredump/.#core*.a3ad00fc63314aa4970bdfb74e186a97*
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/lib/systemd/coredump/.#*' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry r /var/lib/systemd/coredump/.#*
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry a /run/log/journal
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Setting access ACL u::rwx,g::r-x,g:adm:r-x,m::r-x,o::r-x on /run/log/journal.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Setting default ACL u::rwx,g::r-x,g:adm:r-x,m::r-x,o::r-x on /run/log/journal.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry z /run/log/journal
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/log/journal" matches temporary mode 755 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/run/log/journal" to owner 0:101
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/run/log/journal" to mode 2755.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry Z /run/log/journal/0888ac9ea2d841a19a394fb80ca4ee78
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/log/journal/0888ac9ea2d841a19a394fb80ca4ee78" matches temporary mode 750 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/run/log/journal/0888ac9ea2d841a19a394fb80ca4ee78" to owner 0:101
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/run/log/journal/0888ac9ea2d841a19a394fb80ca4ee78" to mode 2750.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: "/run/log/journal/0888ac9ea2d841a19a394fb80ca4ee78/system.journal" matches temporary mode 640 already.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/run/log/journal/0888ac9ea2d841a19a394fb80ca4ee78/system.journal" to owner 0:101
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Changing "/run/log/journal/0888ac9ea2d841a19a394fb80ca4ee78/system.journal" to mode 640.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry a /run/log/journal/0888ac9ea2d841a19a394fb80ca4ee78
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Setting access ACL u::rwx,g::r-x,g:adm:r-x,m::r-x,o::--- on /run/log/journal/0888ac9ea2d841a19a394fb80ca4ee78.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Setting default ACL u::rwx,g::r-x,g:adm:r-x,m::r-x,o::--- on /run/log/journal/0888ac9ea2d841a19a394fb80ca4ee78.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/run/log/journal/0888ac9ea2d841a19a394fb80ca4ee78/*.journal*' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry a /run/log/journal/0888ac9ea2d841a19a394fb80ca4ee78/*.journal*
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Setting access ACL u::rw-,g::r--,g:adm:r--,m::r--,o::--- on /run/log/journal/0888ac9ea2d841a19a394fb80ca4ee78/system.journal.
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78/system.journal' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry a /var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78/system.journal
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78/system.journal' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry z /var/log/journal/0888ac9ea2d841a19a394fb80ca4ee78/system.journal
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Failed to determine whether '/tmp/.X[0-9]*-lock' is below autofs, ignoring: No such file or directory
+Jan 18 17:58:03 DietPi systemd-tmpfiles[312]: Running create action for entry r /tmp/.X[0-9]*-lock
+Jan 18 17:58:03 DietPi sudo[313]:   dietpi : PWD=/home/dietpi/rpi-rgb-led-matrix/tennis-game ; USER=root ; COMMAND=/home/dietpi/rpi-rgb-led-matrix/tennis-game/tennis-game
+Jan 18 17:58:03 DietPi sudo[313]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Jan 18 17:58:03 DietPi systemd-update-utmp[316]: Bus n/a: changing state UNSET → OPENING
+Jan 18 17:58:03 DietPi systemd-update-utmp[316]: sd-bus: starting bus by connecting to /run/systemd/private...
+Jan 18 17:58:03 DietPi systemd-update-utmp[316]: Bus n/a: changing state OPENING → AUTHENTICATING
+Jan 18 17:58:03 DietPi systemd-update-utmp[316]: Bus n/a: changing state AUTHENTICATING → RUNNING
+Jan 18 17:58:03 DietPi systemd-update-utmp[316]: Sent message type=method_call sender=n/a destination=org.freedesktop.systemd1 path=/org/freedesktop/systemd1 interface=org.freedesktop.DBus.Properties member=Get cookie=1 reply_cookie=0 signature=ss error-name=n/a error-message=n/a
+Jan 18 17:58:03 DietPi systemd-update-utmp[316]: Got message type=method_return sender=org.freedesktop.systemd1 destination=n/a path=n/a interface=n/a member=n/a cookie=1 reply_cookie=1 signature=v error-name=n/a error-message=n/a
+Jan 18 17:58:03 DietPi systemd-update-utmp[316]: Not writing wtmp: No such file or directory
+Jan 18 17:58:03 DietPi systemd-update-utmp[316]: Bus n/a: changing state RUNNING → CLOSED
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: System clock time unset or jumped backwards, restoring from recorded timestamp: Sat 2025-01-18 17:58:56 GMT
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Failed to get link NTP servers: No data available
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Bus bus-api-timesync: changing state UNSET → OPENING
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: sd-bus: starting bus bus-api-timesync by connecting to /run/dbus/system_bus_socket...
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Added inotify watch for /run on bus bus-api-timesync: 2
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Added inotify watch for /run/dbus on bus bus-api-timesync: -1
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: sd-bus: starting bus bus-api-timesync by connecting to /run/dbus/system_bus_socket...
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Bus bus-api-timesync: changing state OPENING → WATCH_BIND
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Registering bus object implementation for path=/org/freedesktop/LogControl1 iface=org.freedesktop.LogControl1
+Jan 18 17:58:56 DietPi startup.sh[314]: *** SourceData constructor called. ***
+Jan 18 17:58:56 DietPi startup.sh[314]: url:
+Jan 18 17:58:56 DietPi startup.sh[314]: creating game state object...
+Jan 18 17:58:56 DietPi startup.sh[314]: creating game object...
+Jan 18 17:58:56 DietPi startup.sh[314]: [17:58:56] [tennis-game.cpp] [: 940] [main()] isOnPi: 1
+Jan 18 17:58:56 DietPi startup.sh[314]: creating display object with matrix display...
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Added new server 0.debian.pool.ntp.org.
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Added new server 1.debian.pool.ntp.org.
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Added new server 2.debian.pool.ntp.org.
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Added new server 3.debian.pool.ntp.org.
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Added new server 0.debian.pool.ntp.org.
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Added new server 1.debian.pool.ntp.org.
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Added new server 2.debian.pool.ntp.org.
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Added new server 3.debian.pool.ntp.org.
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: systemd-timesyncd running as pid 315
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Selected server 0.debian.pool.ntp.org.
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Resolving 0.debian.pool.ntp.org...
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Failed to resolve 0.debian.pool.ntp.org: Temporary failure in name resolution
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Selected server 1.debian.pool.ntp.org.
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Resolving 1.debian.pool.ntp.org...
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Failed to resolve 1.debian.pool.ntp.org: Temporary failure in name resolution
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Selected server 2.debian.pool.ntp.org.
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Resolving 2.debian.pool.ntp.org...
+Jan 18 17:58:56 DietPi startup.sh[314]: setting up matrix...
+Jan 18 17:58:56 DietPi startup.sh[314]: [17:58:56] [ScoreBoard/ScoreBoard.cpp] [: 42] [ScoreBoard()] done checking brightness file
+Jan 18 17:58:56 DietPi startup.sh[314]: hardware_mapping : regular
+Jan 18 17:58:56 DietPi startup.sh[314]: rows : 64
+Jan 18 17:58:56 DietPi startup.sh[314]: cols : 64
+Jan 18 17:58:56 DietPi startup.sh[314]: chain_length : 1
+Jan 18 17:58:56 DietPi startup.sh[314]: parallel : 2
+Jan 18 17:58:56 DietPi startup.sh[314]: pwm_bits : 11
+Jan 18 17:58:56 DietPi startup.sh[314]: pwm_lsb_nanoseconds : 130
+Jan 18 17:58:56 DietPi startup.sh[314]: pwm_dither_bits : 0
+Jan 18 17:58:56 DietPi startup.sh[314]: brightness : 15
+Jan 18 17:58:56 DietPi startup.sh[314]: scan_mode : 0
+Jan 18 17:58:56 DietPi startup.sh[314]: row_address_type : 0
+Jan 18 17:58:56 DietPi startup.sh[314]: multiplexing : 1
+Jan 18 17:58:56 DietPi startup.sh[314]: disable_hardware_pulsing : true
+Jan 18 17:58:56 DietPi startup.sh[314]: show_refresh_rate : false
+Jan 18 17:58:56 DietPi startup.sh[314]: inverse_colors : false
+Jan 18 17:58:56 DietPi startup.sh[314]: led_rgb_sequence : RGB
+Jan 18 17:58:56 DietPi startup.sh[314]: pixel_mapper_config : Rotate:180;264-Mapper
+Jan 18 17:58:56 DietPi startup.sh[314]: panel_type : (null)
+Jan 18 17:58:56 DietPi startup.sh[314]: limit_refresh_rate_hz : 0
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Failed to resolve 2.debian.pool.ntp.org: Temporary failure in name resolution
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Selected server 3.debian.pool.ntp.org.
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Resolving 3.debian.pool.ntp.org...
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Failed to resolve 3.debian.pool.ntp.org: Temporary failure in name resolution
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Selected server 0.debian.pool.ntp.org.
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Resolving 0.debian.pool.ntp.org...
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Failed to resolve 0.debian.pool.ntp.org: Temporary failure in name resolution
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Selected server 1.debian.pool.ntp.org.
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Resolving 1.debian.pool.ntp.org...
+Jan 18 17:58:56 DietPi startup.sh[314]: Suggestion: to slightly improve display update, add
+Jan 18 17:58:56 DietPi startup.sh[314]:         isolcpus=3
+Jan 18 17:58:56 DietPi startup.sh[314]: at the end of /boot/cmdline.txt and reboot (see README.md)
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Failed to resolve 1.debian.pool.ntp.org: Temporary failure in name resolution
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Selected server 2.debian.pool.ntp.org.
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Resolving 2.debian.pool.ntp.org...
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Failed to resolve 2.debian.pool.ntp.org: Temporary failure in name resolution
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Selected server 3.debian.pool.ntp.org.
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Resolving 3.debian.pool.ntp.org...
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Failed to resolve 3.debian.pool.ntp.org: Temporary failure in name resolution
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Selected server 0.debian.pool.ntp.org.
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Resolving 0.debian.pool.ntp.org...
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Failed to resolve 0.debian.pool.ntp.org: Temporary failure in name resolution
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Selected server 1.debian.pool.ntp.org.
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Resolving 1.debian.pool.ntp.org...
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Failed to resolve 1.debian.pool.ntp.org: Temporary failure in name resolution
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Delaying attempts to contact servers.
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Got inotify event on bus bus-api-timesync.
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: sd-bus: starting bus bus-api-timesync by connecting to /run/dbus/system_bus_socket...
+Jan 18 17:58:56 DietPi systemd-timesyncd[315]: Bus bus-api-timesync: changing state WATCH_BIND → AUTHENTICATING
+Jan 18 17:58:56 DietPi startup.sh[314]: After modifications:  rows: 32  cols: 128
+Jan 18 17:58:56 DietPi startup.sh[314]: leaving EditColsRows() panel_rows: 64  panel_cols: 64
+Jan 18 17:58:56 DietPi startup.sh[314]: calling InitHardwareMapping( regular )
+Jan 18 17:58:56 DietPi startup.sh[314]: We need to apply the mapping for the panels first.
+Jan 18 17:58:56 DietPi startup.sh[314]: inside GetSizeMapping() matrix_width: 128  matrix_height: 64
+Jan 18 17:58:56 DietPi startup.sh[314]: After altering: visible_width: 64  visible_height: 128
+Jan 18 17:58:56 DietPi startup.sh[314]: old_width: 128, old_height: 64, new_width: 64, new_height: 128
+Jan 18 17:58:56 DietPi startup.sh[314]: After PixelDesignatorMap
+Jan 18 17:58:56 DietPi startup.sh[314]: old_width: 128, old_height: 64, new_width: 64, new_height: 128
+Jan 18 17:58:56 DietPi startup.sh[314]: applying the special pixel mapper: Stripe/// translation_count: 8192
+Jan 18 17:58:56 DietPi startup.sh[314]: ...followed by higher level mappers that might arrange panels.
+Jan 18 17:58:56 DietPi startup.sh[314]: Applying pixel mappers: 'Rotate:180;264-Mapper'
+Jan 18 17:58:56 DietPi startup.sh[314]: Applying mapper 'Rotate'
+Jan 18 17:58:56 DietPi startup.sh[314]: 264 Mapper constructed.
+Jan 18 17:58:56 DietPi startup.sh[314]: OneSixtyFourMapper constructed
+Jan 18 17:58:56 DietPi startup.sh[314]: old_width: 64, old_height: 128, new_width: 64, new_height: 128
+Jan 18 17:58:56 DietPi startup.sh[314]: After PixelDesignatorMap
+Jan 18 17:58:56 DietPi startup.sh[314]: old_width: 64, old_height: 128, new_width: 64, new_height: 128
+Jan 18 17:58:56 DietPi startup.sh[314]: applying the special pixel mapper: Rotate/// translation_count: 8192
+Jan 18 17:58:56 DietPi startup.sh[314]: Applying mapper '264-Mapper'
+Jan 18 17:58:56 DietPi startup.sh[314]: matrix width: 64  matrix height: 128
+Jan 18 17:58:56 DietPi startup.sh[314]: visible width: 64  visible height: 128
+Jan 18 17:58:56 DietPi startup.sh[314]: old_width: 64, old_height: 128, new_width: 64, new_height: 128
+Jan 18 17:58:56 DietPi startup.sh[314]: After PixelDesignatorMap
+Jan 18 17:58:56 DietPi startup.sh[314]: old_width: 64, old_height: 128, new_width: 64, new_height: 128
+Jan 18 17:58:56 DietPi startup.sh[314]: applying the special pixel mapper: 264-Mapper/// translation_count: 8192
+Jan 18 17:58:56 DietPi startup.sh[314]: done with ApplyNamedPixelMappers
+Jan 18 17:58:56 DietPi startup.sh[314]: loaded period font.
+Jan 18 17:58:56 DietPi startup.sh[314]: [17:58:56] [ScoreBoard/ScoreBoard.cpp] [: 109] [ScoreBoard()] done constructing unique pointers.  updating scoreboard...
+Jan 18 17:58:56 DietPi startup.sh[314]: creating reset object...
+Jan 18 17:58:56 DietPi startup.sh[314]: running game from remote inputs...
+Jan 18 17:58:56 DietPi startup.sh[314]: [17:58:56] [tennis-game.cpp] [: 772] [run_remote_listener()] entered run remote listener method...
+Jan 18 17:58:56 DietPi startup.sh[314]: [17:58:56] [tennis-game.cpp] [: 775] [run_remote_listener()] calling game object loop game...
+Jan 18 17:58:56 DietPi cron[319]: (CRON) INFO (pidfile fd = 3)
+Jan 18 17:58:56 DietPi cron[319]: (CRON) INFO (Running @reboot jobs)
+Jan 18 17:58:57 DietPi CRON[321]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jan 18 17:58:57 DietPi CRON[322]: (root) CMD (/home/dietpi/rpi-rgb-matrix/tennis-game/startup.sh)
+Jan 18 17:58:57 DietPi CRON[321]: (CRON) info (No MTA installed, discarding output)
+Jan 18 17:58:57 DietPi CRON[321]: pam_unix(cron:session): session closed for user root
+Jan 18 17:58:57 DietPi systemd-timesyncd[315]: Bus bus-api-timesync: changing state AUTHENTICATING → HELLO
+Jan 18 17:58:57 DietPi systemd-timesyncd[315]: Sent message type=method_call sender=n/a destination=org.freedesktop.DBus path=/org/freedesktop/DBus interface=org.freedesktop.DBus member=Hello cookie=1 reply_cookie=0 signature=n/a error-name=n/a error-message=n/a
+Jan 18 17:58:57 DietPi systemd-timesyncd[315]: Sent message type=method_call sender=n/a destination=org.freedesktop.DBus path=/org/freedesktop/DBus interface=org.freedesktop.DBus member=RequestName cookie=2 reply_cookie=0 signature=su error-name=n/a error-message=n/a
+Jan 18 17:58:57 DietPi systemd-timesyncd[315]: Got message type=method_return sender=org.freedesktop.DBus destination=:1.0 path=n/a interface=n/a member=n/a cookie=1 reply_cookie=1 signature=s error-name=n/a error-message=n/a
+Jan 18 17:58:57 DietPi systemd-timesyncd[315]: Bus bus-api-timesync: changing state HELLO → RUNNING
+Jan 18 17:58:57 DietPi systemd-timesyncd[315]: Got message type=signal sender=org.freedesktop.DBus.Local destination=n/a path=/org/freedesktop/DBus/Local interface=org.freedesktop.DBus.Local member=Connected cookie=4294967295 reply_cookie=0 signature=n/a error-name=n/a error-message=n/a
+Jan 18 17:58:57 DietPi systemd-timesyncd[315]: Got message type=signal sender=org.freedesktop.DBus destination=:1.0 path=/org/freedesktop/DBus interface=org.freedesktop.DBus member=NameAcquired cookie=2 reply_cookie=0 signature=s error-name=n/a error-message=n/a
+Jan 18 17:58:57 DietPi systemd-timesyncd[315]: Got message type=signal sender=org.freedesktop.DBus destination=:1.0 path=/org/freedesktop/DBus interface=org.freedesktop.DBus member=NameAcquired cookie=3 reply_cookie=0 signature=s error-name=n/a error-message=n/a
+Jan 18 17:58:57 DietPi systemd-timesyncd[315]: Got message type=method_return sender=org.freedesktop.DBus destination=:1.0 path=n/a interface=n/a member=n/a cookie=4 reply_cookie=2 signature=u error-name=n/a error-message=n/a
+Jan 18 17:58:57 DietPi systemd-timesyncd[315]: Successfully acquired requested service name.
+Jan 18 17:58:57 DietPi dropbear[334]: Failed loading /etc/dropbear/dropbear_dss_host_key
+Jan 18 17:58:57 DietPi dropbear[335]: Running in background
+Jan 18 17:58:57 DietPi dropbear[325]: Starting Dropbear SSH server: dropbear.
+Jan 18 17:58:57 DietPi startup.sh[314]: [17:58:57] [ScoreBoard/ScoreBoard.cpp] [: 542] [setLittleDrawerFont()] loading little number font: fonts/8x13B.bdf
+Jan 18 17:58:57 DietPi DietPi-PreBoot[345]:  DietPi-CPU_set
+Jan 18 17:58:57 DietPi DietPi-PreBoot[345]: ─────────────────────────────────────────────────────
+Jan 18 17:58:57 DietPi DietPi-PreBoot[345]:  Mode: Applying CPU governor settings: schedutil
+Jan 18 17:58:57 DietPi DietPi-PreBoot[345]: [  OK  ] DietPi-CPU_set | Applied CPU governor settings: schedutil
+Jan 18 17:58:58 DietPi startup.sh[314]: [17:58:57] [ScoreBoard/ScoreBoard.cpp] [: 546] [setLittleDrawerFont()] little number font loaded

@@ -126,7 +126,11 @@ void ScoreBoard::drawText( const std::string& message, int x, int y ) {
 }
 
 void ScoreBoard::drawNewText( const std::string& message, int x, int y ) {
-    _text_drawer->drawText( message, x, y );
+    if ( onRaspberryPi() == false ) {
+        print( message );
+    } else {
+        _text_drawer->drawText( message, x, y );    
+    }
 }
 
 Color ScoreBoard::_getColor( int color_constant ) {

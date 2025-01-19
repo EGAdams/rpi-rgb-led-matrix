@@ -26,6 +26,54 @@
             ]
         },
         {
+            "name": "keyboard_input_test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/tennis-game/keyboard_input_test_jan_19",
+            "args": [ "" ],
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "jan_19_full_prompt",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/tennis-game/jan_19_full_prompt",
+            "args": [ "" ],
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
             "name": "tie_breaker_test",
             "type": "cppdbg",
             "request": "launch",

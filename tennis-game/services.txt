@@ -1,0 +1,15 @@
+[Unit]
+Description=Run HUB-75 Matrix Startup Script
+DefaultDependencies=no
+Before=network.target
+After=local-fs.target
+
+[Service]
+Type=simple
+ExecStart=/home/dietpi/rpi-rgb-led-matrix/tennis-game/startup.sh
+Restart=always
+User=dietpi
+
+[Install]
+WantedBy=basic.target
+
