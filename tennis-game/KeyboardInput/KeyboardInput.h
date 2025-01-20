@@ -1,66 +1,62 @@
-#include <iostream>
-#include <thread>
+#ifndef KEYBOARD_INPUT_H
+#define KEYBOARD_INPUT_H
+
 #include <chrono>
-#include <limits>
-#include <stdexcept>
-#include <csignal>
-#include <atomic>
-#include "../IInput/IInput.h"
-class KeyboardInput : public IInput {
+#include "IInputWithTimer.h"
+
+/**
+ * @brief A class for handling non-blocking keyboard input with timeout functionality.
+ * 
+ * KeyboardInput allows for polling keyboard input while enforcing a timeout period. 
+ * It includes methods to get elapsed time during the polling process.
+ */
+class KeyboardInput : public IInputWithTimer {
 public:
     /**
-     * @brief Gets keyboard input with timeout functionality
-     *
-     * This method reads user keyboard input in a non-blocking way with timeout handling.
-     * It continuously polls for input until either valid input is received or the timeout period expires.
-     *
-     * Operation Flow:
-     * 1. Starts a timer to track the timeout period
-     * 2. Enters a polling loop that:
-     *    - Checks if input is available using cin.rdbuf()->in_avail()
-     *    - If input exists, reads and validates it
-     *    - If no input, checks if timeout has occurred
-     *    - Sleeps briefly between checks to prevent CPU overuse
-     *
-     * Input Validation:
-     * - Checks for valid integer input
-     * - Validates input against allowed values (1, 2, or 9)
-     * - Handles and clears invalid input
-     *
-     * Timeout Handling:
-     * - Uses chronological timing to enforce timeout
-     * - Returns KEYBOARD_TIMEOUT_VALUE (-1) if timeout occurs
-     * - Default timeout is 4000ms (4 seconds), configurable via setTimeout()
-     *
-     * @return int Valid input value (1, 2, or 9) or KEYBOARD_TIMEOUT_VALUE (-1) on timeout
-     *
-     * Example Usage:
-     * @code
-     * KeyboardInput input;
-     * input.setTimeout(5000);  // Set 5 second timeout
-     * int result = input.getInput();
-     * if (result == KEYBOARD_TIMEOUT_VALUE) {
-     *     // Handle timeout
-     * } else {
-     *     // Process valid input
-     * }
-     * @endcode
+     * @brief Constructor for KeyboardInput.
+     * @param milliseconds The timeout duration in milliseconds (default is 4000).
      */
-    int getInput() override;
+    explicit KeyboardInput(unsigned long milliseconds = 4000);
 
-    KeyboardInput( unsigned long milliseconds = 4000 ) : _timeout_ms( milliseconds ) {}
+    /**
+     * @brief Destructor for KeyboardInput.
+     */
     ~KeyboardInput();
 
     /**
-     * @brief Sets the timeout duration for keyboard input
-     *
-     * @param milliseconds The timeout duration in milliseconds (default is 10000)
+     * @brief Gets keyboard input with timeout functionality.
+     * 
+     * Continuously polls for keyboard input until valid input is received or timeout occurs.
+     * Valid input values are 1, 2, or 9. Returns a timeout value if no input is received.
+     * 
+     * @return int The valid input value or a timeout value (-1).
      */
-    void setTimeout( unsigned long milliseconds ) { _timeout_ms = milliseconds; }
+    int getInput() override;
+
+    /**
+     * @brief Sets the timeout duration for keyboard input.
+     * @param milliseconds The timeout duration in milliseconds (default is 4000).
+     */
+    void setTimeout(unsigned long milliseconds);
+
+    /**
+     * @brief Retrieves the elapsed time since input polling started.
+     * @return int The elapsed time in milliseconds.
+     */
+    int getTimeSlept() const;
 
 private:
-    bool validateInput( int selection );
+    /**
+     * @brief Validates the user input against allowed values.
+     * @param selection The input value to validate.
+     * @return bool True if the input is valid, false otherwise.
+     */
+    bool validateInput(int selection);
 
 private:
-    unsigned long _timeout_ms = 4000; // Default 10 second timeout
+    unsigned long _timeout_ms; ///< Timeout duration in milliseconds.
+    std::chrono::steady_clock::time_point _startTime; ///< Start time for input polling.
+    int _elapsedTimeMs; ///< Elapsed time in milliseconds.
 };
+
+#endif // KEYBOARD_INPUT_H
