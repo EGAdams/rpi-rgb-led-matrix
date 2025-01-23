@@ -89,6 +89,7 @@ private:
 
 #include <fcntl.h>
 #include <termios.h>
+#include "KeyboardInput.h"
 
 int KeyboardInput::getInput() {
     using namespace std::chrono;

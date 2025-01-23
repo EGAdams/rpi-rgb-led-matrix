@@ -2,26 +2,18 @@
 #define KEYBOARD_INPUT_H
 
 #include <chrono>
-#include "IInputWithTimer.h"
+#include "../IInputWithTimer/IInputWithTimer.h"
 
 /**
  * @brief A class for handling non-blocking keyboard input with timeout functionality.
  * 
- * KeyboardInput allows for polling keyboard input while enforcing a timeout period. 
+ * KeyboardInputWithTimer allows for polling keyboard input while enforcing a timeout period. 
  * It includes methods to get elapsed time during the polling process.
  */
-class KeyboardInput : public IInputWithTimer {
+class KeyboardInputWithTimer : public IInputWithTimer {
 public:
-    /**
-     * @brief Constructor for KeyboardInput.
-     * @param milliseconds The timeout duration in milliseconds (default is 4000).
-     */
-    explicit KeyboardInput(unsigned long milliseconds = 4000);
-
-    /**
-     * @brief Destructor for KeyboardInput.
-     */
-    ~KeyboardInput();
+    KeyboardInputWithTimer( Blinker* blinker, unsigned long timeout = 4000 );
+    ~KeyboardInputWithTimer();
 
     /**
      * @brief Gets keyboard input with timeout functionality.
@@ -35,15 +27,9 @@ public:
 
     /**
      * @brief Sets the timeout duration for keyboard input.
-     * @param milliseconds The timeout duration in milliseconds (default is 4000).
+     * @param timeout The timeout duration in miliseconds (default is 4000).
      */
-    void setTimeout(unsigned long milliseconds);
-
-    /**
-     * @brief Retrieves the elapsed time since input polling started.
-     * @return int The elapsed time in milliseconds.
-     */
-    int getTimeSlept() const;
+   
 
 private:
     /**
@@ -51,12 +37,11 @@ private:
      * @param selection The input value to validate.
      * @return bool True if the input is valid, false otherwise.
      */
-    bool validateInput(int selection);
-
-private:
-    unsigned long _timeout_ms; ///< Timeout duration in milliseconds.
+    bool validateInput(int selection) const;
     std::chrono::steady_clock::time_point _startTime; ///< Start time for input polling.
-    int _elapsedTimeMs; ///< Elapsed time in milliseconds.
+    long _elapsedTimeMs; ///< Elapsed time in timeout.
+    void _restoreTerminal( const struct termios& oldt, int old_flags );
+    int _configureTerminal( struct termios& oldt );
 };
 
 #endif // KEYBOARD_INPUT_H

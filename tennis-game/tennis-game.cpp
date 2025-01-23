@@ -26,8 +26,8 @@
 #include "ConsoleDisplay/ConsoleDisplay.h"
 #include "RemoteLocker/RemoteLocker.h"
 #include "PinState/PinState.h"
-#include "KeyboardInput/KeyboardInput.h"
-#include "IInput/IInput.h"
+#include "KeyboardInputWithTimer/KeyboardInputWithTimer.h"
+#include "IInputWithTimer/IInputWithTimer.h"
 
 
 // for the expander
@@ -536,7 +536,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         // print( "entered while loop from run manual game" );
         sleep( SCORE_DELAY );
         // if remote pairing, write the words.  if not, snap out of the loop
-        while ( remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake()) { // 090724
+        while ( remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake()) {  // 090724
             print( "inside remote pairing screen from run manual game.  before starting input timer..." ); // 122224
             
             print ( "SYSTEM IS RUNNING IN MANUAL MODE.  Please enter 1 for green and 2 for red." );
@@ -846,7 +846,7 @@ static volatile std::sig_atomic_t gSignalStatus = 0;
  *  Now uses only interface pointers and does not directly
  *  construct or call concrete implementations in-line.
  *==========================================================*/
-void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset* /*reset*/, IInputs* inputs )
+void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset* /*reset*/, IInputWithTimer* inputWithTimer )
 {
     GameState* gameState = gameStatearg;
     RemoteLocker* remoteLocker = new RemoteLocker( gameState );
@@ -868,12 +868,8 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
     // Program to the IRemotePairingScreen interface
     RemotePairingScreen* remotePairingScreen = new RemotePairingScreen( scoreboard );
 
-    print( "constructing pairing blinker from run manual game" );
+    print( "constructing pairing blinker from run remote listener method... " );
     PairingBlinker* pairingBlinker = new PairingBlinker( scoreboard );
-
-    print( "constructing input with timer from run manual game" );
-    IInputWithTimer* inputWithTimer = new InputWithTimer( pairingBlinker, inputs );
-    print( "finished constructing input with timer from run manual game" );
 
     bool is_on_pi = scoreboard->onRaspberryPi();
     print( "is_on_pi: " + std::to_string( is_on_pi ));
@@ -884,24 +880,15 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
         // if remote pairing, write the words.  if not, snap out of the loop
         while ( remotePairingScreen->inPairingMode() && /* is_on_pi && */ pairingBlinker->awake() ) {
             print( "inside remote pairing screen from run manual game.  before starting input timer..." );
-
-            if ( REMOTE_INPUT == 1 ) {
-                selection = inputWithTimer->getInput();
-            } else {
-                std::cin >> selection;
-                print( "*** inside remote listener getting remote selection ***" );
-                print( "selection: " + std::to_string( selection ) );
-            }
+            selection = pairingInputWithTimer->getInput();
 
             if ( selection == GREEN_REMOTE_GREEN_SCORE ) {
                 remotePairingScreen->greenPlayerPressed();
                 pairingBlinker->setGreenPlayerPaired( true );
-            }
-            else if ( selection == RED_REMOTE_RED_SCORE ) {
+            } else if ( selection == RED_REMOTE_RED_SCORE ) {
                 remotePairingScreen->redPlayerPressed();
                 pairingBlinker->setRedPlayerPaired( true );
-            }
-            else {
+            } else {
                 std::cout << "*** Invalid selection during remote pairing. ***\n";
                 GameTimer::gameDelay( 1000 );
             }
@@ -915,22 +902,23 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
         }
 
         if ( gameState->getCurrentAction() == SLEEP_MODE ) {
-            // Program to the IScoreboardBlinker interface
             ScoreboardBlinker* blinker = new ScoreboardBlinker( scoreboard );
-            inputs->getInput();
+            inputWithTimer->getInput();
 
             gameState->setCurrentAction( AFTER_SLEEP_MODE );
-            std::cout << "time slept: " << inputWithTimer2->getTimeSlept() << std::endl;
+
+            std::cout << "time slept: " << inputWithTimer->getTimeSlept() << std::endl;
 
             if ( selection == GREEN_REMOTE_GREEN_SCORE ||
                  selection == GREEN_REMOTE_RED_SCORE   ||
-                 ( inputWithTimer2->getTimeSlept() > MAX_SLEEP * 1000 ) )
+
+                 ( inputWithTimer->getTimeSlept() > MAX_SLEEP * 1000 ) )
             {
                 print( "reset match." );
                 gameObject->resetMatch();
                 print( "done resetting match." );
-                if ( inputWithTimer2->getTimeSlept() > MAX_SLEEP * 1000 ) {
-                    print( "time slept: " + std::to_string( inputWithTimer2->getTimeSlept() / 1000 ) + " seconds." );
+                if ( inputWithTimer->getTimeSlept() > MAX_SLEEP * 1000 ) {
+                    print( "time slept: " + std::to_string( inputWithTimer->getTimeSlept() / 1000 ) + " seconds." );
                     print( "clearing History because max sleep time has been reached or exceeded." );
                     gameObject->getHistory()->clearHistory();
                     print( "done clearing history because max sleep time has been reached or exceeded." );
@@ -945,30 +933,29 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
             print( "cleared screen." );
             scoreboard->update();
             print( "updated scoreboard." );
-        }
-        else {
+        } else {                        // else NOT in SLEEP_MODE
             if ( REMOTE_INPUT == 0 ) {
                 std::cin >> selection;
                 print( "selection: " + std::to_string( selection ) );
             } else {
-                bool done = false;
-                while ( !done ) {
-                    selection = inputs->read_mcp23017_value();
-                    std::cout << "read selection from inputs: " << selection << std::endl;
-                    if ( selection == GREEN_REMOTE_GREEN_SCORE ||
-                         selection == GREEN_REMOTE_RED_SCORE   ||
-                         selection == RED_REMOTE_GREEN_SCORE   ||
-                         selection == RED_REMOTE_RED_SCORE     ||
-                         selection == GREEN_REMOTE_UNDO        ||
-                         selection == RED_REMOTE_UNDO )
-                    {
-                        std::cout << "selection: " << selection << " triggered the done flag, exiting while loop..." << std::endl;
-                        done = true;
-                    } else {
-                        std::cout << "sleeping 250ms..." << std::endl;
-                        GameTimer::gameDelay( 250 );
-                    }
-                }
+                // bool done = false;
+                // while ( !done ) {
+                //     selection = inputs->read_mcp23017_value();
+                //     std::cout << "read selection from inputs: " << selection << std::endl;
+                //     if ( selection == GREEN_REMOTE_GREEN_SCORE ||
+                //          selection == GREEN_REMOTE_RED_SCORE   ||
+                //          selection == RED_REMOTE_GREEN_SCORE   ||
+                //          selection == RED_REMOTE_RED_SCORE     ||
+                //          selection == GREEN_REMOTE_UNDO        ||
+                //          selection == RED_REMOTE_UNDO )
+                //     {
+                //         std::cout << "selection: " << selection << " triggered the done flag, exiting while loop..." << std::endl;
+                //         done = true;
+                //     } else {
+                //         std::cout << "sleeping 250ms..." << std::endl;
+                //         GameTimer::gameDelay( 250 );
+                //     }
+                // }
             }
         }
 
@@ -1015,7 +1002,6 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
     } ///////// End Game Loop /////////
 }
 
-
 int main( int argc, char* argv[] ) {
     std::unique_ptr<MonitoredObject> logger = LoggerFactory::createLogger( "TestLogger" );
     // int mode = 0; // used to compile the --manual option.  not used as of 122924
@@ -1029,7 +1015,6 @@ int main( int argc, char* argv[] ) {
             std::cout << "running remote listening mode..." << std::endl;
         }
     }
-    int loop_count = 0;
     std::cout << "creating game state object..." << std::endl;
     GameState* gameState = new GameState();  // make this 1st!!! cost me 3 days
     std::cout << "creating game object..." << std::endl;
@@ -1049,13 +1034,12 @@ int main( int argc, char* argv[] ) {
     std::cout << "creating reset object..." << std::endl;
     Reset* reset = new Reset( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
     
-    Inputs* inputs;
     if ( isOnPi ) {     // Is on pi..
         // inputs = new RemoteInputs( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
     } else {            // Is NOT on pi..  PC likely
         PinState* pinState = new PinState( gameObject->getPinInterface()->getPinStateMap());
-        PinInterface* mockPinInterface = new PinInterface( pinState );
-        inputs = new KeyboardInput( gameObject->getPlayer1(), gameObject->getPlayer2(), mockPinInterface, gameState );
+        PinInterface* pinInterface = new PinInterface( pinState );
+        keyboardInputWithTimer = new KeyboardInputWithTimer( 4000 ) 
     }
 
     if ( REMOTE_INPUT == 0 ) {
@@ -1064,7 +1048,7 @@ int main( int argc, char* argv[] ) {
     }
     else if ( REMOTE_INPUT == 1 ) {
         std::cout << "running game from remote inputs..." << std::endl;
-        run_remote_listener( gameObject, gameState, reset, inputs ); return 0;
+        run_remote_listener( gameObject, gameState, reset, keyboardInputWithTimer ); return 0;
     }
     else {
         std::cout << "*** ERROR: unknown mode ***" << std::endl;

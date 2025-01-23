@@ -10,7 +10,7 @@
 #include <termios.h>
 
 /****************************************************
- * Interfaces for KeyboardInput
+ * Interfaces for KeyboardInputWithTimer
  ****************************************************/
 class IInput {
 public:
@@ -19,7 +19,7 @@ public:
 };
 
 /****************************************************
- * KeyboardInput Class Implementation
+ * KeyboardInputWithTimer Class Implementation
  * Time the waiting for keyboard input for the purpose
  * of a timeout simulation in the case of using
  * the remote inputs.
@@ -27,7 +27,7 @@ public:
  * in the case of the remote inputs, we time the waiting
  * for remote input.
  ****************************************************/
-class KeyboardInput : public IInput {
+class KeyboardInputWithTimer : public IInput {
 public:
     int getInput() override;
     void setTimeout( unsigned long milliseconds ) { _timeout_ms = milliseconds; }
@@ -42,7 +42,7 @@ private:
 
 #define KEYBOARD_TIMEOUT_VALUE -1
 
-int KeyboardInput::getInput() {
+int KeyboardInputWithTimer::getInput() {
     using namespace std::chrono;
 
     struct termios oldt, newt;
@@ -178,7 +178,7 @@ public:
 #define REMOTE_INPUT 0
 
 int main() {
-    KeyboardInput keyboardInput;
+    KeyboardInputWithTimer keyboardInput;
     keyboardInput.setTimeout( 4000 );
 
     IPairingBlinker* pairingBlinker = new IPairingBlinker();

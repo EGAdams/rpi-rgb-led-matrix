@@ -76,7 +76,7 @@ int InputWithTimer::getInput() {
 #include "IInput.h"
 #include <iostream>
 
-class KeyboardInput : public IInput {
+class KeyboardInputWithTimer : public IInput {
 public:
     /**
      * @brief Gets user input from keyboard with validation and timeout handling
