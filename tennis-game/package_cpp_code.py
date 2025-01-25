@@ -112,7 +112,7 @@ extract_and_write_method( path, "run_remote_listener", output_file_path )
 path = os.path.join( base_dir, "RemotePairingScreen/RemotePairingScreen.cpp" )
 process_cpp_file( path, output_file_path, True )
 
-path = os.path.join( base_dir, "KeyboardInputWithTimerWithTimerWithTimerWithTimer/KeyboardInput.cpp" )
+path = os.path.join( base_dir, "KeyboardInputWithTimer/KeyboardInputWithTimer.cpp" )
 process_cpp_file( path, output_file_path, True )
 
 path = os.path.join( base_dir, "Blinker/Blinker.h" )

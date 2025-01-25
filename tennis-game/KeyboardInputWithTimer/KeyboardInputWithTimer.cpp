@@ -7,7 +7,6 @@
 #include <unistd.h>
 #include "../Blinker/Blinker.h"
 #include "../KeyboardInputWithTimer/KeyboardInputWithTimer.h"
-#include "KeyboardInputWithTimer.h"
 #include "../TennisConstants/TennisConstants.h"
 
 KeyboardInputWithTimer::KeyboardInputWithTimer( Blinker* blinker, unsigned long timeout_ms )
@@ -15,8 +14,10 @@ KeyboardInputWithTimer::KeyboardInputWithTimer( Blinker* blinker, unsigned long 
 }  // initialize elapsedTimeMs to 0
 
 KeyboardInputWithTimer::~KeyboardInputWithTimer() {
-    print( "\n\n*** keyboard destructing without restoring the keyboard. *** \n\n" );
-    // _restoreTerminal( oldt, old_flags );
+    print( "\n\n*** Restoring terminal state. *** \n\n" );
+    struct termios oldt;
+    tcgetattr( 0, &oldt );
+    _restoreTerminal( oldt, fcntl( 0, F_GETFL, 0 ) );
 }
 
 bool KeyboardInputWithTimer::validateInput( int selection ) const {
@@ -60,6 +61,7 @@ int KeyboardInputWithTimer::getInput() {
                 print( "\n\n\n\n*** Timeout ***" );
                 print( "Keyboard input timed out after " << _timeout_ms / 1000 << " seconds. 012525" );
                 print( "\n\n\n\n" );
+                _restoreTerminal( oldt, old_flags );
                 return _elapsedTimeMs;
             }
 
@@ -70,6 +72,7 @@ int KeyboardInputWithTimer::getInput() {
                         selection = std::stoi( inputBuffer );
                         if ( validateInput( selection ) ) {
                             print( "Valid input received: " << selection );
+                            _restoreTerminal( oldt, old_flags );
                             return selection;
                         }
                         else {
@@ -96,3 +99,19 @@ int KeyboardInputWithTimer::getInput() {
     _restoreTerminal( oldt, old_flags );
     return -1;
 }
+
+// int KeyboardInputWithTimer::getInputAfterPairing() {
+//     print( "\nSwitching to std::cin for input...\n" );
+//     int selection = 0;
+//     while ( true ) {
+//         print( "Enter a valid selection (6, 7, 9): " );
+//         std::cin >> selection;
+//         if ( validateInput( selection ) ) {
+//             print( "Valid input received: " << selection );
+//             return selection;
+//         }
+//         else {
+//             print( "Invalid selection. Please try again." );
+//         }
+//     }
+// }

@@ -978,6 +978,11 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
         }
         
         selection = gameInput->getInput();
+        if ( selection == 0 ) {
+            print( "\n\nselection: " + std::to_string( selection ) + " ***\n\n" );
+            print( "*** Invalid selection! ***  continuing..." );
+            continue;
+        }
 
         print( "setting player button to selection: " + std::to_string( selection ) + " before calling loopGame()..." );
         if ( selection == GREEN_REMOTE_GREEN_SCORE ||
