@@ -7,10 +7,12 @@ class BlankBlinker : public Blinker {
 public:
     void start() override {
         // No operation
+        print( "Blank Blinker started." );
     }
 
     void stop() override {
         // No operation
+        print( "Blank Blinker stopped." );
     }
 };
 

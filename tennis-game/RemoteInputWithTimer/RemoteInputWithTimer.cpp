@@ -10,6 +10,11 @@
 
 RemoteInputWithTimer::RemoteInputWithTimer( Blinker* blinker, Inputs* inputs, unsigned long timeout_ms )
     : IInputWithTimer( blinker, timeout_ms ), _inputs( inputs ) { // Call the correct base class constructor and initialize _inputs
+    print( "RemoteInputWithTimer constructor called, checking blinker... " );
+    if ( _blinker == nullptr ) {
+        print( "*** ERROR: Blinker is null, exiting... ***" );
+        exit( 1 );
+    }
     std::cout << "RemoteInputWithTimer constructor called" << std::endl; }
 
 RemoteInputWithTimer::~RemoteInputWithTimer() {}
