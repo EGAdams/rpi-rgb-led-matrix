@@ -14,6 +14,8 @@ RemoteInputWithTimer::RemoteInputWithTimer( Blinker* blinker, Inputs* inputs, un
     if ( _blinker == nullptr ) {
         print( "*** ERROR: Blinker is null, exiting... ***" );
         exit( 1 );
+    } else {
+        print( "*** Blinker is not null, continuing... ***" );
     }
     std::cout << "RemoteInputWithTimer constructor called" << std::endl; }
 
@@ -27,6 +29,12 @@ int RemoteInputWithTimer::getInput() {
     int selection;
     bool done = false;
     print( "starting blinker from within RemoteInputWithTimer..." );
+    if ( _blinker == nullptr ) {
+        print( "*** ERROR: Blinker is null, exiting... ***" );
+        exit( 1 );
+    } else {
+        print( "*** Blinker is not null, continuing... ***" );
+    }
     _blinker->start();
     print( "getting input from within RemoteInputWithTimer..." );
     if ( REMOTE_INPUT == 1 ) {  // 122224
