@@ -1,4 +1,3 @@
-The following C++ selection varialble is zero here: ```cpp selection = gameInput->getInput(); ```  In the following C++ code when the run_remote_listener() method is called, I press "6" and then "7" to get the system out of Pairing Mode.  Then in the regular game mode, I press "6" or "7" to trigger a player score.  Please analyze the following C++ code to figure out how this game works:
 ```cpp
 void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset* reset ) {
     int KEYBOARD_TIMEOUT = 10000;
@@ -162,113 +161,67 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
 }
 ```
 ```cpp
+RemoteInputWithTimer::RemoteInputWithTimer( Blinker* blinker, Inputs* inputs, unsigned long timeout_ms )
+    : IInputWithTimer( blinker, timeout_ms ), _inputs( inputs ) { // Call the correct base class constructor and initialize _inputs
+    std::cout << "RemoteInputWithTimer constructor called" << std::endl; }
 
-RemotePairingScreen::RemotePairingScreen( ScoreBoard* scoreboard ) 
-    : _green_player_paired( false ), _red_player_paired( false ), _scoreboard( scoreboard ) {
-void RemotePairingScreen::draw() {
-    if (!_green_player_paired) {
-        if ( _scoreboard->onRaspberryPi()) {
-```
+RemoteInputWithTimer::~RemoteInputWithTimer() {}
 
-```cpp
-
-#include <iostream>
-#include <string>
-#include <chrono>
-#include <thread>
-#include <termios.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include "../Blinker/Blinker.h"
-#include "../KeyboardInputWithTimer/KeyboardInputWithTimer.h"
-#include "KeyboardInputWithTimer.h"
-#include "../TennisConstants/TennisConstants.h"
-
-KeyboardInputWithTimer::KeyboardInputWithTimer( Blinker* blinker, unsigned long timeout_ms )
-    : IInputWithTimer( blinker, timeout_ms ), _elapsedTimeMs( 0 ) {
-}  // initialize elapsedTimeMs to 0
-
-KeyboardInputWithTimer::~KeyboardInputWithTimer() {
-    print( "\n\n*** keyboard destructing without restoring the keyboard. *** \n\n" );
-    // _restoreTerminal( oldt, old_flags );
-}
-
-bool KeyboardInputWithTimer::validateInput( int selection ) const {
-    return selection == 6 || selection == 7 || selection == 9;
-}
-
-int KeyboardInputWithTimer::_configureTerminal( struct termios& oldt ) {
-    struct termios newt = oldt;
-    newt.c_lflag &= ~( ICANON | ECHO ); // Disable canonical mode and echo
-    tcsetattr( 0, TCSANOW, &newt );
-
-    int old_flags = fcntl( 0, F_GETFL, 0 );
-    fcntl( 0, F_SETFL, old_flags | O_NONBLOCK );
-    return old_flags;
-}
-
-void KeyboardInputWithTimer::_restoreTerminal( const struct termios& oldt, int old_flags ) {
-    tcsetattr( 0, TCSANOW, &oldt );
-    fcntl( 0, F_SETFL, old_flags );
-}
-
-
-int KeyboardInputWithTimer::getInput() {
+int RemoteInputWithTimer::getInput() {
     using namespace std::chrono;
-
-    struct termios oldt;
-    tcgetattr( 0, &oldt );
-    int old_flags = _configureTerminal( oldt );
-
-    _startTime = steady_clock::now();
-    _elapsedTimeMs = 0;
-    int selection = 0;
-    std::string inputBuffer;
-
-    try {
-        while ( true ) {
+    auto startTime = steady_clock::now();
+    unsigned long elapsedTimeMs = 0;
+    unsigned long sleep_start = GameTimer::gameMillis(); // Mark start time with game timer
+    int selection;
+    bool done = false;
+    print( "starting blinker from within RemoteInputWithTimer..." );
+    _blinker->start();
+    print( "getting input from within RemoteInputWithTimer..." );
+    if ( REMOTE_INPUT == 1 ) {  // 122224
+        /*// if the selection is never one of the valid remote inputs, then we will never exit the while loop! // 011925
+         * there is no timer here, the agent says.  in the future we will take out this comment and ask a new employee a question about this dillemma.  we will ask them to explain why this is a bad design because it locks up the system. meaning,  so how do we fix this?
+         * the timer that would allow us to break out of this while loop is not in the scope of this while loop! we need either to make a timer in here, or pass in a timer object to this function.  */
+         // TODO: add an outside timer that will break out of this while loop.
+        while ( !done ) {
             auto now = steady_clock::now();
-            _elapsedTimeMs = duration_cast< milliseconds >( now - _startTime ).count();
+            elapsedTimeMs = duration_cast< milliseconds >( now - startTime ).count();
 
-            if ( _elapsedTimeMs >= _timeout_ms ) {
-                print( "\n\n\n\n*** Timeout ***" );
-                print( "Keyboard input timed out after " << _timeout_ms / 1000 << " seconds. 012525" );
-                print( "\n\n\n\n" );
-                return _elapsedTimeMs;
+            if ( elapsedTimeMs >= _timeout_ms ) {
+                std::cout << "Keyboard input timed out after " << _timeout_ms / 1000 << " seconds." << std::endl;
+                return _timeout_ms; // <--<< this is where we break out of the loop!  the other input with timer is missing this.
             }
-
-            char ch;
-            while ( read( 0, &ch, 1 ) > 0 ) {
-                if ( ch == '\n' ) {
-                    try {
-                        selection = std::stoi( inputBuffer );
-                        if ( validateInput( selection ) ) {
-                            print( "Valid input received: " << selection );
-                            return selection;
-                        }
-                        else {
-                            print( "Invalid selection. Please enter 6, 7, or 9." );
-                            inputBuffer.clear();
-                        }
-                    }
-                    catch ( const std::invalid_argument& ) {
-                        print( "Invalid input. Please enter a number." );
-                        inputBuffer.clear();
-                    }
-                }
-                else {
-                    inputBuffer += ch;
-                }
+            print( "*** reading selection from inputs... ***" ); // 122224
+            selection = _inputs->read_mcp23017_value();  // this actually does have a while. // 011925
+            std::cout << "read selection from inputs: " << selection << std::endl; // but it
+            if ( selection == GREEN_REMOTE_GREEN_SCORE ||                         // isnt as bad as this
+                 selection == GREEN_REMOTE_RED_SCORE ||                         // one because it always returns a value
+                 selection == RED_REMOTE_GREEN_SCORE ||                         // 011925
+                 selection == RED_REMOTE_RED_SCORE ) {
+                std::cout << "selection: " << selection << " triggered the done flag, exiting while loop..." << std::endl;
+                done = true;
             }
-            std::this_thread::sleep_for( milliseconds( 50 ) ); // Reduce CPU usage
+            else {
+                // delay 250ms
+                std::cout << "sleeping 250ms..." << std::endl; // so we end up reading this over and over // 011925
+                GameTimer::gameDelay( 250 );
+            }
         }
     }
-    catch ( ... ) {
-        _restoreTerminal( oldt, old_flags );
-        throw;
+    else if ( REMOTE_INPUT == 0 ) {  // menu mode // 122224
+        std::cout << "Enter your selection: ";
+        std::cin >> selection;
+        print( "made seleciton in RemoteInputWithTimer::getInput()... " );
+        print( "selection: " << selection );
+
     }
-    _restoreTerminal( oldt, old_flags );
-    return -1;
+    else {
+        std::cout << "*** ERROR: Invalid input mode in RemoteInputWithTimer Object getInput() method. ***\n";
+        exit( 1 );
+    }
+    _blinker->stop();
+    unsigned long sleep_end = GameTimer::gameMillis(); // Mark end time with game timer
+    _time_slept = sleep_end - sleep_start;
+    return selection;
 }
 ```
 
@@ -282,5 +235,48 @@ public:
 }
 ```
 
-The Standard Input is altered in the KeyboardWithInputTimer class, but I don't thik that it is ever set back to the original state.  Please rewrite the KeyboardWithInputTimer class so that this code does what it is supposed to do and uses std::cin to get the input after exiting the Pairing Mode.
+```cpp
+class BlankBlinker : public Blinker {
+public:
+    void start() override {
+        // No operation
+        print( "Blank Blinker started." );
+    }
 
+    void stop() override {
+        // No operation
+        print( "Blank Blinker stopped." );
+    }
+}
+```
+
+Here is the output:
+```bash
+[22:36:26] [tennis-game.cpp] [: 1050] [main()] creating reset object...
+[22:36:26] [tennis-game.cpp] [: 1058] [main()] running game from remote inputs...
+[22:36:26] [tennis-game.cpp] [: 871] [run_remote_listener()] entered run remote listener method...
+[22:36:26] [tennis-game.cpp] [: 874] [run_remote_listener()] calling game object loop game...
+[22:36:27] [ScoreBoard/ScoreBoard.cpp] [: 546] [setLittleDrawerFont()] loading little number font: fonts/8x13B.bdf
+[22:36:28] [ScoreBoard/ScoreBoard.cpp] [: 550] [setLittleDrawerFont()] little number font loaded
+[22:36:28] [ScoreBoard/ScoreBoard.cpp] [: 551] [setLittleDrawerFont()] set little number font disabled on october massacre.
+[22:36:28] [tennis-game.cpp] [: 885] [run_remote_listener()]  constructing blinkers...
+PairingBlinker constructing...
+[22:36:28] [tennis-game.cpp] [: 896] [run_remote_listener()] is_on_pi: 1
+[22:36:28] [RemoteInputWithTimer/RemoteInputWithTimer.cpp] [: 13] [RemoteInputWithTimer()] RemoteInputWithTimer constructor called, checking blinker...
+[22:36:28] [RemoteInputWithTimer/RemoteInputWithTimer.cpp] [: 18] [RemoteInputWithTimer()] *** Blinker is not null, continuing... ***
+RemoteInputWithTimer constructor called
+[22:36:28] [RemoteInputWithTimer/RemoteInputWithTimer.cpp] [: 13] [RemoteInputWithTimer()] RemoteInputWithTimer constructor called, checking blinker...
+[22:36:28] [RemoteInputWithTimer/RemoteInputWithTimer.cpp] [: 18] [RemoteInputWithTimer()] *** Blinker is not null, continuing... ***
+RemoteInputWithTimer constructor called
+[22:36:28] [RemoteInputWithTimer/RemoteInputWithTimer.cpp] [: 13] [RemoteInputWithTimer()] RemoteInputWithTimer constructor called, checking blinker...
+[22:36:28] [RemoteInputWithTimer/RemoteInputWithTimer.cpp] [: 18] [RemoteInputWithTimer()] *** Blinker is not null, continuing... ***
+RemoteInputWithTimer constructor called
+[22:36:28] [RemoteGameInput/RemoteGameInput.cpp] [: 4] [RemoteGameInput()] constructing remote game input...
+[22:36:28] [tennis-game.cpp] [: 913] [run_remote_listener()] inside remote pairing screen from run manual game.  before starting input timer...
+[22:36:28] [RemoteInputWithTimer/RemoteInputWithTimer.cpp] [: 31] [getInput()] starting blinker from within RemoteInputWithTimer...
+[22:36:28] [RemoteInputWithTimer/RemoteInputWithTimer.cpp] [: 36] [getInput()] *** Blinker is not null, continuing... ***
+Segmentation fault
+dietpi@DietPi:~/rpi-rgb-led-matrix/tennis-game$
+```
+
+Please help me debug this Segmentation Fault.

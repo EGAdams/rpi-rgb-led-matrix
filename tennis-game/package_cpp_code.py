@@ -109,11 +109,18 @@ output_file_path = os.path.join(base_dir, "packaged_code.md")
 path = os.path.join( base_dir, "tennis-game.cpp" )
 extract_and_write_method( path, "run_remote_listener", output_file_path )
 
-path = os.path.join( base_dir, "RemotePairingScreen/RemotePairingScreen.cpp" )
-process_cpp_file( path, output_file_path, True )
+# path = os.path.join( base_dir, "RemotePairingScreen/RemotePairingScreen.cpp" )
+# process_cpp_file( path, output_file_path, True )
 
-path = os.path.join( base_dir, "KeyboardInputWithTimer/KeyboardInputWithTimer.cpp" )
+# path = os.path.join( base_dir, "KeyboardInputWithTimer/KeyboardInputWithTimer.cpp" )
+# process_cpp_file( path, output_file_path, True )
+
+
+path = os.path.join( base_dir, "RemoteInputWithTimer/RemoteInputWithTimer.cpp" )
 process_cpp_file( path, output_file_path, True )
 
 path = os.path.join( base_dir, "Blinker/Blinker.h" )
+process_cpp_file( path, output_file_path, True )
+
+path = os.path.join( base_dir, "BlankBlinker/BlankBlinker.h" )
 process_cpp_file( path, output_file_path, True )

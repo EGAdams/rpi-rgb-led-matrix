@@ -893,6 +893,12 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
     unsigned long sleeping_timer  = 4000;
 
     bool is_on_pi = scoreboard->onRaspberryPi();
+    // checking pairing blinker for null state
+    if ( pairingBlinker == nullptr ) {
+        print( "*** ERROR: pairingBlinker is null! ***" );
+    } else {
+        print( "*** pairingBlinker is not null, continuing... ***" );
+    }
     print( "is_on_pi: " + std::to_string( is_on_pi ));
     if ( is_on_pi ) {
         pairingInputWithTimer       = new RemoteInputWithTimer( pairingBlinker, inputs, pairing_timer   );
