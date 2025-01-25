@@ -451,7 +451,7 @@ void run_remote_listener( IGameObject* gameObject, IGameState* gameState, IReset
                 pairingBlinker->setRedPlayerPaired( true );
             }
             else {
-                std::cout << "*** Invalid selection during remote pairing. ***\n";
+                std::cout << "*** Invalid selection during remote pairing. *** 012525\n";
                 GameTimer::gameDelay( 1000 );
             }
         }

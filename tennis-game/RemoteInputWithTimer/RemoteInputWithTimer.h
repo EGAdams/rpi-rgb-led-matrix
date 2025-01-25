@@ -8,15 +8,13 @@
 
 class RemoteInputWithTimer : public IInputWithTimer {
 private:
-    Blinker*        _blinker;
-    Inputs*         _inputs;
+    Blinker*    _blinker;
+    Inputs*     _inputs;
 
 public:
     RemoteInputWithTimer( Blinker* blinker, Inputs* inputs, unsigned long timeout_ms = 4000 );
     ~RemoteInputWithTimer();
-
-    int getInput();
-    unsigned long getTimeSlept();
+    int getInput() override;
 };
 
 #endif // REMOTE_INPUT_WITH_TIMER_H
