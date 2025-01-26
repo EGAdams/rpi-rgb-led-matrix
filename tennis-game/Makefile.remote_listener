@@ -1,73 +1,89 @@
 # Compiler and flags
-CXX = g++
+CXX      = g++
 CXXFLAGS = -std=c++17 -Wall -O3 -g -I../include
-LDFLAGS = -L../lib -lrgbmatrix -lrt -lm -lpthread
+
+# Linker flags:
+#   -L../lib        : tells the linker to look in ../lib for libraries
+#   -lrgbmatrix     : link against the rpi-rgb-led-matrix library
+#   -ljsoncpp       : link against the JSON library
+#   -lrt -lm -lpthread : usual system libraries (realtime, math, pthreads)
+LDFLAGS  = -L../lib -lrgbmatrix -ljsoncpp -lrt -lm -lpthread
 
 # Target executable
 TARGET = run_remote_listener
 
 # Source files
+# Add any missing .cpp files for GameWinSequence, LogObjectFactory, MonitorLed, etc.
+# If these classes are actually inside existing .cpp files, you don't need to add them separately.
 SOURCES = \
-run_remote_listener.cpp \
-BatteryTest/BatteryTest.cpp \
-BlankBlinker/BlankBlinker.cpp \
-CanvasCreator/CanvasCreator.cpp \
-ColorManager/ColorManager.cpp \
-ConsoleDisplay/ConsoleDisplay.cpp \
-Drawer/Drawer.cpp \
-FontLoader/FontLoader.cpp \
-GameLedTranslator/GameLedTranslator.cpp \
-GameLeds/GameLeds.cpp \
-GameModes/GameModes.cpp \
-GameObject/GameObject.cpp \
-GameState/GameState.cpp \
-GameTimer/GameTimer.cpp \
-History/History.cpp \
-IInputWithTimer/IInputWithTimer.cpp \
-Inputs/Inputs.cpp \
-KeyboardGameInput/KeyboardGameInput.cpp \
-KeyboardInputWithTimer/KeyboardInputWithTimer.cpp \
-Logger/Logger.cpp \
-LoggerFactory/LoggerFactory.cpp \
-MatchWinSequence/MatchWinSequence.cpp \
-Mode1Functions/Mode1Functions.cpp \
-Mode1Score/Mode1Score.cpp \
-Mode2Functions/Mode2Functions.cpp \
-MonitoredObject/MonitoredObject.cpp \
-PairingBlinker/PairingBlinker.cpp \
-PinInterface/PinInterface.cpp \
-PinState/PinState.cpp \
-Player/Player.cpp \
-PointLeds/PointLeds.cpp \
-RemoteGameInput/RemoteGameInput.cpp \
-RemoteInputWithTimer/RemoteInputWithTimer.cpp \
-RemoteLocker/RemoteLocker.cpp \
-RemotePairingScreen/RemotePairingScreen.cpp \
-Reset/Reset.cpp \
-ScoreBoard/ScoreBoard.cpp \
-ScoreboardBlinker/ScoreboardBlinker.cpp \
-ServeLeds/ServeLeds.cpp \
-SetDrawer/SetDrawer.cpp \
-SetHistoryText/SetHistoryText.cpp \
-SetLeds/SetLeds.cpp \
-SetWin/SetWin.cpp \
-SubjectManager/SubjectManager.cpp \
-TieBreaker/TieBreaker.cpp \
-TieLeds/TieLeds.cpp \
-TranslateConstant/TranslateConstant.cpp \
-Undo/Undo.cpp \
-WatchTimer/WatchTimer.cpp \
-WebLiquidCrystal/WebLiquidCrystal.cpp \
-WinSequences/WinSequences.cpp
+  run_remote_listener.cpp \
+  BatteryTest/BatteryTest.cpp \
+  BlankBlinker/BlankBlinker.cpp \
+  CanvasCreator/CanvasCreator.cpp \
+  ColorManager/ColorManager.cpp \
+  ConsoleDisplay/ConsoleDisplay.cpp \
+  Drawer/Drawer.cpp \
+  FetchRunner/FetchRunner.cpp \
+  FontLoader/FontLoader.cpp \
+  GameLedTranslator/GameLedTranslator.cpp \
+  GameLeds/GameLeds.cpp \
+  GameModes/GameModes.cpp \
+  GameObject/GameObject.cpp \
+  GameState/GameState.cpp \
+  GameTimer/GameTimer.cpp \
+  History/History.cpp \
+  IInputWithTimer/IInputWithTimer.cpp \
+  Inputs/Inputs.cpp \
+  KeyboardGameInput/KeyboardGameInput.cpp \
+  KeyboardInputWithTimer/KeyboardInputWithTimer.cpp \
+  LogObject/LogObject.cpp \
+  Logger/Logger.cpp \
+  LoggerFactory/LoggerFactory.cpp \
+  MatchWinSequence/MatchWinSequence.cpp \
+  Mode1Functions/Mode1Functions.cpp \
+  Mode1Score/Mode1Score.cpp \
+  Mode2Functions/Mode2Functions.cpp \
+  MonitorLedClassObject/MonitorLedClassObject.cpp \
+  MonitoredObject/MonitoredObject.cpp \
+  PairingBlinker/PairingBlinker.cpp \
+  PinInterface/PinInterface.cpp \
+  PinState/PinState.cpp \
+  Player/Player.cpp \
+  PointLeds/PointLeds.cpp \
+  RemoteGameInput/RemoteGameInput.cpp \
+  RemoteInputWithTimer/RemoteInputWithTimer.cpp \
+  RemoteLocker/RemoteLocker.cpp \
+  RemotePairingScreen/RemotePairingScreen.cpp \
+  Reset/Reset.cpp \
+  ScoreBoard/ScoreBoard.cpp \
+  ScoreboardBlinker/ScoreboardBlinker.cpp \
+  ServeLeds/ServeLeds.cpp \
+  SetDrawer/SetDrawer.cpp \
+  SetHistoryText/SetHistoryText.cpp \
+  SetLeds/SetLeds.cpp \
+  SetWin/SetWin.cpp \
+  SubjectManager/SubjectManager.cpp \
+  TieBreaker/TieBreaker.cpp \
+  TieLeds/TieLeds.cpp \
+  TranslateConstant/TranslateConstant.cpp \
+  Undo/Undo.cpp \
+  WatchTimer/WatchTimer.cpp \
+  WebLiquidCrystal/WebLiquidCrystal.cpp \
+  WinSequences/WinSequences.cpp \
+  LogObjectFactory/LogObjectFactory.cpp \
+  MonitorLed/MonitorLed.cpp \
+  Model/Model.cpp \
+  SourceData/SourceData.cpp \
+  GameWinSequence/GameWinSequence.cpp
 
 # Object files
 OBJECTS = $(SOURCES:.cpp=.o)
 
-# Build target
+# Default rule to build the target
 $(TARGET): $(OBJECTS)
-	$(CXX) $(OBJECTS) $(LDFLAGS) -o $(TARGET)
+	$(CXX) $(CXXFLAGS) $(OBJECTS) $(LDFLAGS) -o $(TARGET)
 
 # Clean target
+.PHONY: clean
 clean:
 	rm -f $(TARGET) $(OBJECTS)
-
