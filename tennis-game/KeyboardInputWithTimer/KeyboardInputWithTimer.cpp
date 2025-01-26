@@ -21,7 +21,10 @@ KeyboardInputWithTimer::~KeyboardInputWithTimer() {
 }
 
 bool KeyboardInputWithTimer::validateInput( int selection ) const {
-    return selection == 6 || selection == 7 || selection == 9;
+    return  selection == GREEN_REMOTE_GREEN_SCORE ||
+            selection == GREEN_REMOTE_RED_SCORE   ||
+            selection == RED_REMOTE_GREEN_SCORE   ||
+            selection == RED_REMOTE_RED_SCORE;
 }
 
 int KeyboardInputWithTimer::_configureTerminal( struct termios& oldt ) {
@@ -74,9 +77,16 @@ int KeyboardInputWithTimer::getInput() {
                             print( "Valid input received: " << selection );
                             _restoreTerminal( oldt, old_flags );
                             return selection;
-                        }
-                        else {
-                            print( "Invalid selection. Please enter 6, 7, or 9." );
+                        } else {
+                            print( "------------" );
+                            print( "GREEN REMOTE: " );
+                            print( "   green remote green score: " <<  GREEN_REMOTE_GREEN_SCORE );
+                            print( "or green remote, red score: " << GREEN_REMOTE_RED_SCORE );
+                            print( " ------------ \n");
+                            print( "RED REMOTE: " );
+                            print( "or red remote, green score: " << RED_REMOTE_GREEN_SCORE );
+                            print( "or red remote, red score: " << RED_REMOTE_RED_SCORE );
+                            print( " ------------ \n");
                             inputBuffer.clear();
                         }
                     }

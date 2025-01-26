@@ -858,7 +858,7 @@ static volatile std::sig_atomic_t gSignalStatus = 0;
  *  construct or call concrete implementations in-line.
  *==========================================================*/
 void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset* reset ) {
-    int KEYBOARD_TIMEOUT = 10000;
+    int KEYBOARD_TIMEOUT = 120000;
     GameState* gameState = gameStatearg;
     RemoteLocker*       remoteLocker = new RemoteLocker( gameState );
     IInputWithTimer*    pairingInputWithTimer;
@@ -915,6 +915,8 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
         std::this_thread::sleep_for( std::chrono::seconds( SCORE_DELAY ));
 
         // if remote pairing, write the words.  if not, snap out of the loop
+        print( "in pairing mode? " + std::to_string( remotePairingScreen->inPairingMode()));
+        print( "pairingBlinker->awake(): " + std::to_string( pairingBlinker->awake()));
         while ( remotePairingScreen->inPairingMode() && pairingBlinker->awake() ) {
             print( "inside remote pairing screen from run manual game.  before starting input timer..." );
             selection = pairingInputWithTimer->getInput();
@@ -963,12 +965,14 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
             scoreboard->update();
             print( "updated scoreboard." );
         }                       // else NOT in SLEEP_MODE
-        
-        // we still need to set the time for a no score mode
-        if ( no_score ) {   // monitor the input if no score has been made yet.
-                selection = noBlinkInputWithTimer->getInput();
-                print( "selection: " + std::to_string( selection ));
 
+        // we still need to set the time for a no score mode
+        if ( no_score ) {   // if there is no score, we need to time the input for the Zero score timeout.
+            selection = noBlinkInputWithTimer->getInput();
+            print( "selection: " + std::to_string( selection ));
+
+            /* CHECK FOR TIMEOUT */
+            // if timed out, selection is the timeout value, not a valid game input.  the timeout value is no where near a valid game input.    
             if ( selection > 1000 ) {                       // this is a Zero score timeout
                 print( "*** Zero ScoreTimeout!  going to sleep mode... ***" );
                 gameState->setCurrentAction( SLEEP_MODE );  // set to sleep mode and go to the beginning
@@ -976,18 +980,23 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
             }
         }
 
+        if ( no_score ) { 
+            print( "setting no_score to false..." ); no_score = false; // no need for the zero score timer anymore
+        } else {
+            selection = gameInput->getInput();  // this is either cin << or a remote call, both block until input is made
+        }                                       // there are no timers in regular game play at the time of this writing
+                                                // January 25, 2025  mass deportation began.  it was very cold in FL last night.
+        if ( selection == 0 ) {  // not sure if we need this here, but it won't hurt for now - 012525
+            print( "\n\nselection: " + std::to_string( selection ) + " ***\n\n" );
+            print( "*** Invalid selection! ***  continuing..." );
+            continue;
+        }
+
         int serve_flag = remoteLocker->playerNotServing( selection );
         print( "*** serve_flag: " + std::to_string( serve_flag ) + " ***" );
         if ( serve_flag ) {
             print( "*** Warning: player not serving! ***" );
-            continue;
-        }
-        
-        selection = gameInput->getInput();
-        if ( selection == 0 ) {
-            print( "\n\nselection: " + std::to_string( selection ) + " ***\n\n" );
-            print( "*** Invalid selection! ***  continuing..." );
-            continue;
+            continue;  // do not want to kill the no score flag quite yet
         }
 
         print( "setting player button to selection: " + std::to_string( selection ) + " before calling loopGame()..." );
@@ -996,7 +1005,7 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
              selection == RED_REMOTE_GREEN_SCORE   ||
              selection == RED_REMOTE_RED_SCORE ) {
             if ( selection == GREEN_REMOTE_GREEN_SCORE || selection == RED_REMOTE_GREEN_SCORE ) {
-                print( "*** \n\n\nGreen player scored ***\n\n\n" );
+                print( "*** \n\n\nGreen player scored ***\n\n\n" ); 
                 selection = 1; // represent GREEN
             } else if ( selection == GREEN_REMOTE_RED_SCORE || selection == RED_REMOTE_RED_SCORE ) {
                 print( "\n\n\n*** Red player scored ***\n\n\n" );
@@ -1010,6 +1019,15 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
         }
         else {
             print( "\n\n\n*** Invalid selection ***\n\n\n" );
+            print( "------------" );
+            print( "GREEN REMOTE: " );
+            print( "   green remote green score: " <<  GREEN_REMOTE_GREEN_SCORE );
+            print( "or green remote, red score: " << GREEN_REMOTE_RED_SCORE );
+            print( " ------------ \n");
+            print( "RED REMOTE: " );
+            print( "or red remote, green score: " << RED_REMOTE_GREEN_SCORE );
+            print( "or red remote, red score: " << RED_REMOTE_RED_SCORE );
+            print( " ------------ \n");
             std::this_thread::sleep_for( std::chrono::seconds( SCORE_DELAY ));
             continue;
         }
