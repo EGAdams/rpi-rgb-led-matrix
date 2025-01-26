@@ -26,6 +26,30 @@
             ]
         },
         {
+            "name": "tennis-game",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/tennis-game/run_remote_listener.cpp",
+            "args": [ "" ],
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
             "name": "keyboard_input_test",
             "type": "cppdbg",
             "request": "launch",
