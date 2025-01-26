@@ -496,3 +496,10 @@ adamsl@DESKTOP-SHDBATI:~/rpi-rgb-led-matrix/tennis-game$
 ```
 
 Rewrite the Makefile to fix this problem.
+
+# my link
+https://chatgpt.com/c/6795a85b-199c-8006-ac6b-cc7dfc02d26a?model=gpt-4o
+
+
+# shared link
+https://chatgpt.com/share/6795af87-b468-8006-9db1-0da68ddc0228
