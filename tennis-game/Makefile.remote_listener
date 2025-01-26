@@ -1,0 +1,68 @@
+# Compiler and flags
+CXX = g++
+CXXFLAGS = -std=c++17 -Wall -O3 -g -I../include
+LDFLAGS = -L../lib -lrgbmatrix -lrt -lm -lpthread
+
+# Target executable
+TARGET = run_remote_listener
+
+# Source files
+SOURCES = \
+run_remote_listener.cpp \
+FontLoader/FontLoader.cpp \
+Drawer/Drawer.cpp \
+ScoreBoard/ScoreBoard.cpp \
+GameObject/GameObject.cpp \
+LoggerFactory/LoggerFactory.cpp \
+RemotePairingScreen/RemotePairingScreen.cpp \
+PairingBlinker/PairingBlinker.cpp \
+ScoreboardBlinker/ScoreboardBlinker.cpp \
+ConsoleDisplay/ConsoleDisplay.cpp \
+RemoteLocker/RemoteLocker.cpp \
+KeyboardInputWithTimer/KeyboardInputWithTimer.cpp \
+RemoteInputWithTimer/RemoteInputWithTimer.cpp \
+BlankBlinker/BlankBlinker.cpp \
+RemoteGameInput/RemoteGameInput.cpp \
+KeyboardGameInput/KeyboardGameInput.cpp \
+GameState/GameState.cpp \
+Inputs/Inputs.cpp \
+GameTimer/GameTimer.cpp \
+History/History.cpp \
+Reset/Reset.cpp \
+SetDrawer/SetDrawer.cpp \
+Player/Player.cpp \
+PinInterface/PinInterface.cpp \
+PinState/PinState.cpp \
+WebLiquidCrystal/WebLiquidCrystal.cpp \
+Logger/Logger.cpp \
+GameModes/GameModes.cpp \
+SubjectManager/SubjectManager.cpp \
+Undo/Undo.cpp \
+CanvasCreator/CanvasCreator.cpp \
+ColorManager/ColorManager.cpp \
+SetHistoryText/SetHistoryText.cpp \
+TranslateConstant/TranslateConstant.cpp \
+TieLeds/TieLeds.cpp \
+BatteryTest/BatteryTest.cpp \
+PointLeds/PointLeds.cpp \
+GameLeds/GameLeds.cpp \
+SetLeds/SetLeds.cpp \
+ServeLeds/ServeLeds.cpp \
+WatchTimer/WatchTimer.cpp \
+Mode1Functions/Mode1Functions.cpp \
+Mode2Functions/Mode2Functions.cpp \
+TieBreaker/TieBreaker.cpp \
+Mode1Score/Mode1Score.cpp \
+GameLedTranslator/GameLedTranslator.cpp
+
+# Object files
+OBJECTS = $(SOURCES:.cpp=.o)
+
+# Build target
+$(TARGET): $(OBJECTS)
+	$(CXX) $(OBJECTS) $(LDFLAGS) -o $(TARGET)
+
+# Clean target
+clean:
+	rm -f $(TARGET) $(OBJECTS)
+
