@@ -7,7 +7,8 @@ GTEST_LIBDIR=$(GTEST_DIR)/build/lib
 GTEST_LIBS=-lgtest_main -lgtest -lpthread
 
 CXX=g++ -std=c++17
-CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter
+# use -O3 for production.  we are using -O0 for debugging
+CFLAGS=-Wall -O0 -g -Wextra -Wno-unused-parameter
 CXXFLAGS=$(CFLAGS) -I$(GTEST_INCDIR) -I$(RGB_INCDIR)
 
 BINARIES=tennis-game Mode1ScoreTest
