@@ -9,7 +9,7 @@
 #include "../TennisConstants/TennisConstants.h"
 
 RemoteInputWithTimer::RemoteInputWithTimer( Blinker* blinker, Inputs* inputs, unsigned long timeout_ms )
-    : IInputWithTimer( blinker, timeout_ms ), _inputs( inputs ) { // Call the correct base class constructor and initialize _inputs
+    : IInputWithTimer( blinker, timeout_ms ), _inputs( inputs ) {
     std::cout << "RemoteInputWithTimer constructor called" << std::endl; }
 
 RemoteInputWithTimer::~RemoteInputWithTimer() {}
@@ -40,28 +40,24 @@ int RemoteInputWithTimer::getInput() {
             print( "*** reading selection from inputs... ***" ); // 122224
             selection = _inputs->read_mcp23017_value();  // this actually does have a while. // 011925
             std::cout << "read selection from inputs: " << selection << std::endl; // but it
-            if ( selection == GREEN_REMOTE_GREEN_SCORE ||                         // isnt as bad as this
-                 selection == GREEN_REMOTE_RED_SCORE ||                         // one because it always returns a value
-                 selection == RED_REMOTE_GREEN_SCORE ||                         // 011925
+            if ( selection == GREEN_REMOTE_GREEN_SCORE ||                          // isnt as bad as this
+                 selection == GREEN_REMOTE_RED_SCORE   ||                          // one because it always returns a value
+                 selection == RED_REMOTE_GREEN_SCORE   ||                          // 011925
                  selection == RED_REMOTE_RED_SCORE ) {
                 std::cout << "selection: " << selection << " triggered the done flag, exiting while loop..." << std::endl;
                 done = true;
-            }
-            else {
+            } else {
                 // delay 250ms
                 std::cout << "sleeping 250ms..." << std::endl; // so we end up reading this over and over // 011925
                 GameTimer::gameDelay( 250 );
             }
         }
-    }
-    else if ( REMOTE_INPUT == 0 ) {  // menu mode // 122224
+    } else if ( REMOTE_INPUT == 0 ) {  // menu mode // 122224
         std::cout << "Enter your selection: ";
         std::cin >> selection;
         print( "made seleciton in RemoteInputWithTimer::getInput()... " );
         print( "selection: " << selection );
-
-    }
-    else {
+    } else {
         std::cout << "*** ERROR: Invalid input mode in RemoteInputWithTimer Object getInput() method. ***\n";
         exit( 1 );
     }
