@@ -884,10 +884,9 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
 
     print ( " constructing blinkers... " );
     RemotePairingScreen*    remotePairingScreen = new RemotePairingScreen( scoreboard );
-    // PairingBlinker*         pairingBlinker      = new PairingBlinker( scoreboard );
+    PairingBlinker*         pairingBlinker      = new PairingBlinker( scoreboard );
     BlankBlinker*           blankBlinker        = new BlankBlinker();
     ScoreboardBlinker*      sleepingBlinker     = new ScoreboardBlinker( scoreboard );
-    std::shared_ptr<PairingBlinker> pairingBlinker = std::make_shared<PairingBlinker>(scoreboard);
 
     unsigned long pairing_timer   = 4000;
     unsigned long no_blink_timer  = 4000;
@@ -902,14 +901,12 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
     }
     print( "is_on_pi: " + std::to_string( is_on_pi ));
     if ( is_on_pi ) {
-        pairingInputWithTimer = new RemoteInputWithTimer(pairingBlinker.get(), inputs, pairing_timer);
-        // pairingInputWithTimer       = new RemoteInputWithTimer( pairingBlinker, inputs, pairing_timer   );
+        pairingInputWithTimer       = new RemoteInputWithTimer( pairingBlinker, inputs, pairing_timer   );
         noBlinkInputWithTimer       = new RemoteInputWithTimer( blankBlinker, inputs,   no_blink_timer  );
         sleepingInputWithTimer      = new RemoteInputWithTimer( sleepingBlinker, inputs, sleeping_timer );
         gameInput                   = new RemoteGameInput( inputs );
     } else {
-        pairingInputWithTimer = new RemoteInputWithTimer(pairingBlinker.get(), inputs, pairing_timer);
-        // pairingInputWithTimer       = new KeyboardInputWithTimer( pairingBlinker, KEYBOARD_TIMEOUT      );
+        pairingInputWithTimer       = new KeyboardInputWithTimer( pairingBlinker, KEYBOARD_TIMEOUT      );
         noBlinkInputWithTimer       = new KeyboardInputWithTimer( blankBlinker, KEYBOARD_TIMEOUT        );
         sleepingInputWithTimer      = new KeyboardInputWithTimer( sleepingBlinker, KEYBOARD_TIMEOUT     );
         gameInput                   = new KeyboardGameInput(                         );     
