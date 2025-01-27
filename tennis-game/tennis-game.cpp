@@ -887,7 +887,7 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
     // PairingBlinker*         pairingBlinker      = new PairingBlinker( scoreboard );
     BlankBlinker*           blankBlinker        = new BlankBlinker();
     ScoreboardBlinker*      sleepingBlinker     = new ScoreboardBlinker( scoreboard );
-    std::shared_ptr<Blinker> pairingBlinker = std::make_shared<PairingBlinker>(scoreboard);
+    std::shared_ptr<PairingBlinker> pairingBlinker = std::make_shared<PairingBlinker>(scoreboard);
 
     unsigned long pairing_timer   = 4000;
     unsigned long no_blink_timer  = 4000;
