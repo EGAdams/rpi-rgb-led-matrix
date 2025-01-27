@@ -917,10 +917,6 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
         // if remote pairing, write the words.  if not, snap out of the loop
         print( "in pairing mode? " + std::to_string( remotePairingScreen->inPairingMode()));
         print( "pairingBlinker->awake(): " + std::to_string( pairingBlinker->awake()));
-        print( "starting pairing blinker for test ..." );
-        pairingBlinker->start();
-        print( "stopping pairing blinker for test ..." );
-        pairingBlinker->stop();
         while ( remotePairingScreen->inPairingMode() && pairingBlinker->awake()) {
             print( "inside remote pairing screen from run remote listener.  before starting input timer..." );
             selection = pairingInputWithTimer->getInput();

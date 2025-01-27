@@ -10,7 +10,15 @@ protected:
     unsigned long _time_slept;  // Time slept in milliseconds
 
     IInputWithTimer(Blinker* blinker, unsigned long timeout_ms)
-        : _blinker(blinker), _timeout_ms(timeout_ms), _time_slept(0) {}
+        : _blinker(blinker), _timeout_ms(timeout_ms), _time_slept(0) {
+            print( "IInputWithTimer constructor called" );
+            // check if blinker is null
+            if (blinker == nullptr) {
+                print( "*** ERROR: blinker is null! ***" );
+            } else {
+                print( "*** blinker is not null, continuing... ***" );
+            }
+        }
 
 public:
     virtual ~IInputWithTimer() = default;
