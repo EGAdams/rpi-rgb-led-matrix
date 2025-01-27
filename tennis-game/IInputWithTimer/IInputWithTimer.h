@@ -1,6 +1,6 @@
 #ifndef I_INPUT_WITH_TIMER_H
 #define I_INPUT_WITH_TIMER_H
-
+#include "../TennisConstants/TennisConstants.h"
 #include "../Blinker/Blinker.h"
 
 class IInputWithTimer {
