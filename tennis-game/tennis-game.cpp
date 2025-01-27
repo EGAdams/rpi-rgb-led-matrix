@@ -599,7 +599,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             }
             menu_selection = inputWithTimer->getInput();
             gameState->setCurrentAction( AFTER_SLEEP_MODE ); // stop sleep mode
-            print( "time slept: " << inputWithTimer->getTimeSlept() );
+            print( "time slept: " << inputWithTimer->getTimeSlept());
             if ( menu_selection == 1 || menu_selection == 2 ) { // or sleep time expired...
                 // if the pairing caused the sleep mode, just go back to pairing mode
                 // if ( !pairingBlinker.awake()) {
@@ -917,8 +917,12 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
         // if remote pairing, write the words.  if not, snap out of the loop
         print( "in pairing mode? " + std::to_string( remotePairingScreen->inPairingMode()));
         print( "pairingBlinker->awake(): " + std::to_string( pairingBlinker->awake()));
-        while ( remotePairingScreen->inPairingMode() && pairingBlinker->awake() ) {
-            print( "inside remote pairing screen from run manual game.  before starting input timer..." );
+        print( "starting pairing blinker for test ..." );
+        pairingBlinker->start();
+        print( "stopping pairing blinker for test ..." );
+        pairingBlinker->stop();
+        while ( remotePairingScreen->inPairingMode() && pairingBlinker->awake()) {
+            print( "inside remote pairing screen from run remote listener.  before starting input timer..." );
             selection = pairingInputWithTimer->getInput();
             if ( selection == GREEN_REMOTE_GREEN_SCORE ) {
                 remotePairingScreen->greenPlayerPressed();
@@ -932,7 +936,7 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
             }
         }
 
-        if ( !pairingBlinker->awake() ) {
+        if ( !pairingBlinker->awake()) {
             print( "pairing blinker is not awake, stopping it... " );
             pairingBlinker->stop();
             print( "pairing blinker stopped.  now putting in sleep mode..." );
@@ -942,7 +946,7 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
         if ( gameState->getCurrentAction() == SLEEP_MODE ) {
             sleepingInputWithTimer->getInput();                 // blocks here for so many seconds
             gameState->setCurrentAction( AFTER_SLEEP_MODE );
-            print( "time slept: " << sleepingInputWithTimer->getTimeSlept() );
+            print( "time slept: " << sleepingInputWithTimer->getTimeSlept());
 
             if ( selection == GREEN_REMOTE_GREEN_SCORE || selection == GREEN_REMOTE_RED_SCORE ) {
                 print( "reset match." );
