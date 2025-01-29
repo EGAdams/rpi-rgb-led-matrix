@@ -55,11 +55,11 @@ void PairingBlinker::blinkLoop() {
         // If only the Red player is paired, show Green player instructions
         else if ( !_green_player_paired && _red_player_paired ) {
             if ( toggle_on ) {
-                showGreenInstructions();
+                // showGreenInstructions();
                 print( "showing green instructions..." );
             } else {
                 print( "show neutral text only..." );
-                showPlayerPressYourRemoteText();
+                // showPlayerPressYourRemoteText();
             }
             print( "alternating between green on and green off..." );
             toggle_on = !toggle_on;  // Alternate led on and led off
@@ -70,12 +70,12 @@ void PairingBlinker::blinkLoop() {
             _show_green = false;
             print( "showing red instructions inside blink loop..." );
             if ( toggle_on ) {
-                showRedInstructions();
+                // showRedInstructions();
                 print( "showing red instructions..." );
             }
             else {
-                print( "show neutral text only..." );
-                showPlayerPressYourRemoteText();
+                // print( "show neutral text only..." );
+                // showPlayerPressYourRemoteText();
             }
             print( "alternating between red on and red off..." );
             toggle_on = !toggle_on;  // Alternate led on and led off
@@ -85,12 +85,12 @@ void PairingBlinker::blinkLoop() {
         // If neither player is paired, show Green instructions
         else if ( !_green_player_paired && !_red_player_paired ) {
             if ( toggle_on ) {
-                showGreenInstructions();
+                // showGreenInstructions();
                 print( "showing green instructions..." );
             }
             else {
                 print( "show neutral text only..." );
-                showPlayerPressYourRemoteText();
+                // showPlayerPressYourRemoteText();
             }
             print( "alternating between green on and green off..." );
             toggle_on = !toggle_on;  // Alternate led on and led off

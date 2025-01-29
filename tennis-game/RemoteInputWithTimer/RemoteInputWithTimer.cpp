@@ -22,7 +22,7 @@ int RemoteInputWithTimer::getInput() {
     int selection;
     bool done = false;
     print( "starting blinker from within RemoteInputWithTimer..." );
-    // _blinker->start();
+    _blinker->start();
     print( "getting input from within RemoteInputWithTimer..." );
     if ( REMOTE_INPUT == 1 ) {  // 122224
         /*// if the selection is never one of the valid remote inputs, then we will never exit the while loop! // 011925
