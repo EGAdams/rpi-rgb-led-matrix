@@ -21,9 +21,9 @@ int RemoteInputWithTimer::getInput() {
     unsigned long sleep_start = GameTimer::gameMillis(); // Mark start time with game timer
     int selection;
     bool done = false;
-    print( "starting blinker from within RemoteInputWithTimer..." );
+    // print( "starting blinker from within RemoteInputWithTimer..." );
     _blinker->start();
-    print( "getting input from within RemoteInputWithTimer..." );
+    // print( "getting input from within RemoteInputWithTimer..." );
     if ( REMOTE_INPUT == 1 ) {  // 122224
         /*// if the selection is never one of the valid remote inputs, then we will never exit the while loop! // 011925
          * there is no timer here, the agent says.  in the future we will take out this comment and ask a new employee a question about this dillemma.  we will ask them to explain why this is a bad design because it locks up the system. meaning,  so how do we fix this?
@@ -37,7 +37,7 @@ int RemoteInputWithTimer::getInput() {
                 std::cout << "Keyboard input timed out after " << _timeout_ms / 1000 << " seconds." << std::endl;
                 return _timeout_ms; // <--<< this is where we break out of the loop!  the other input with timer is missing this.
             }
-            print( "*** reading selection from inputs... ***" ); // 122224
+            // print( "*** reading selection from inputs... ***" ); // 122224
             selection = _inputs->read_mcp23017_value();  // this actually does have a while. // 011925
             std::cout << "read selection from inputs: " << selection << std::endl; // but it
             if ( selection == GREEN_REMOTE_GREEN_SCORE ||                          // isnt as bad as this
@@ -55,8 +55,8 @@ int RemoteInputWithTimer::getInput() {
     } else if ( REMOTE_INPUT == 0 ) {  // menu mode // 122224
         std::cout << "Enter your selection: ";
         std::cin >> selection;
-        print( "made seleciton in RemoteInputWithTimer::getInput()... " );
-        print( "selection: " << selection );
+        // print( "made seleciton in RemoteInputWithTimer::getInput()... " );
+        // print( "selection: " << selection );
     } else {
         std::cout << "*** ERROR: Invalid input mode in RemoteInputWithTimer Object getInput() method. ***\n";
         exit( 1 );
