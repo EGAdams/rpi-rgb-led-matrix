@@ -6,7 +6,7 @@ GTEST_LIBDIR=$(GTEST_DIR)/build/lib
 #-lgtest_main -lgtest -lpthread <-- this is the order that works
 GTEST_LIBS=-lgtest_main -lgtest -lpthread
 
-CXX=g++ -std=c++17
+CXX = g++ -std=c++17 -pthread
 # use -O3 for production.  we are using -O0 for debugging
 CFLAGS=-Wall -O0 -g -Wextra -Wno-unused-parameter
 CXXFLAGS=$(CFLAGS) -I$(GTEST_INCDIR) -I$(RGB_INCDIR)
