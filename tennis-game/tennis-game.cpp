@@ -1088,3 +1088,14 @@ int main( int argc, char* argv[] ) {
 }
 
 // skoolyaad - Alone  // mix this with marvin G.
+//
+/* dietpi@DietPi:~/rpi-rgb-led-matrix/tennis-game$ git fetch --all
+dietpi@DietPi:~/rpi-rgb-led-matrix/tennis-game$ git reset --hard origin/master
+HEAD is now at 6c6af8b change remote input to 1
+dietpi@DietPi:~/rpi-rgb-led-matrix/tennis-game$ git clean -fdx
+git branch --set-upstream-to=origin/master master
+git pull
+
+git checkout masster  // if above gets us lost
+
+*/
