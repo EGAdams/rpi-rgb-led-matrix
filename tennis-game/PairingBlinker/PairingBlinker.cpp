@@ -178,10 +178,10 @@ void PairingBlinker::showPlayerPressYourRemoteText() {
 }
 
 void PairingBlinker::start() {
-    print( "starting blink thread..." );
+    // print( "starting blink thread..." );
     _should_stop = false;
     blink_thread = std::thread( &PairingBlinker::blinkLoop, this );
-    print( "blink thread started..." );
+    // print( "blink thread started..." );
 }
 
 void PairingBlinker::stop() {
