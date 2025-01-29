@@ -122,5 +122,10 @@ process_cpp_file( path, output_file_path, True )
 path = os.path.join( base_dir, "Blinker/Blinker.h" )
 process_cpp_file( path, output_file_path, True )
 
-path = os.path.join( base_dir, "BlankBlinker/BlankBlinker.h" )
+path = os.path.join( base_dir, "PairingBlinker/ParingBlinker.h" )
 process_cpp_file( path, output_file_path, True )
+
+path = os.path.join( base_dir, "IInputWithTimer/IInputWithTimer.h" )
+process_cpp_file( path, output_file_path, True )
+
+

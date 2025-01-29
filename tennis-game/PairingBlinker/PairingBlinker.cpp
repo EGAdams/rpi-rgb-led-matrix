@@ -43,10 +43,9 @@ void PairingBlinker::blinkLoop() {
             print( "timeout not exceeded, continue blinking..." );
         }
 
-        // break out of here for debugging
-        // _green_player_paired = true;
-        // _red_player_paired = true;
-        // TODO: Put this back in to turn pairing back on.
+        if ( !_scoreboard ) {
+            std::cerr << "*** ERROR: _scoreboard is null inside PairingBlinker::blinkLoop()! ***" << std::endl;
+        } // return; // or break, just so we exit the blink loop safely
 
         _scoreboard->clearScreen();
         if ( _green_player_paired && _red_player_paired ) { 
