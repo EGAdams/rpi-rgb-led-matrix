@@ -43,7 +43,7 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
     IGameInput*         gameInput;
 
     Inputs* inputs      = new Inputs( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
-    bool keyboard_off   = false;
+    bool keyboard_off   = true; // set this to true to use the remotes.
     bool no_score       = true;
     int loop_count      = 0;
     int selection       = 0;
@@ -76,7 +76,7 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
         print( "*** pairingBlinker is not null, continuing... ***" );
     }
     print( "is_on_pi: " + std::to_string( is_on_pi ));
-    if ( is_on_pi && keyboard_off ) {
+    if ( is_on_pi && keyboard_off ) {            // to use the keyboard, switch keyboard_off to false
         pairingInputWithTimer       = new RemoteInputWithTimer( pairingBlinker, inputs, pairing_timer   );
         noBlinkInputWithTimer       = new RemoteInputWithTimer( blankBlinker, inputs,   no_blink_timer  );
         sleepingInputWithTimer      = new RemoteInputWithTimer( sleepingBlinker, inputs, sleeping_timer );
