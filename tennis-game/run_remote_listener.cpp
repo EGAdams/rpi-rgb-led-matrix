@@ -42,11 +42,11 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
     IInputWithTimer*    sleepingInputWithTimer;
     IGameInput*         gameInput;
 
-    Inputs*             inputs = new Inputs( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
-    bool no_score = true;
-    print( "entered run remote listener method..." );
-    int loop_count = 0;
-    int selection = 0;
+    Inputs* inputs      = new Inputs( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
+    bool keyboard_off   = false;
+    bool no_score       = true;
+    int loop_count      = 0;
+    int selection       = 0;
     print( "calling game object loop game..." );
     gameObject->loopGame();
     std::this_thread::sleep_for( std::chrono::seconds( 1 ));
@@ -76,7 +76,7 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
         print( "*** pairingBlinker is not null, continuing... ***" );
     }
     print( "is_on_pi: " + std::to_string( is_on_pi ));
-    if ( is_on_pi ) {
+    if ( is_on_pi && keyboard_off ) {
         pairingInputWithTimer       = new RemoteInputWithTimer( pairingBlinker, inputs, pairing_timer   );
         noBlinkInputWithTimer       = new RemoteInputWithTimer( blankBlinker, inputs,   no_blink_timer  );
         sleepingInputWithTimer      = new RemoteInputWithTimer( sleepingBlinker, inputs, sleeping_timer );
