@@ -860,7 +860,7 @@ static volatile std::sig_atomic_t gSignalStatus = 0;
  *  construct or call concrete implementations in-line.
  *==========================================================*/
 void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset* reset ) {
-    int KEYBOARD_TIMEOUT = 120000;
+    int KEYBOARD_TIMEOUT = 10000;
     GameState* gameState = gameStatearg;
     RemoteLocker*       remoteLocker = new RemoteLocker( gameState );
     IInputWithTimer*    pairingInputWithTimer;
