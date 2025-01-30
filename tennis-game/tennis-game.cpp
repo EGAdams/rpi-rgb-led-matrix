@@ -533,7 +533,9 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
     std::signal( SIGINT, GameObject::_signalHandler );
     RemotePairingScreen remotePairingScreen( gameObject->getScoreBoard());
     print( "constructing pairing blinker from run manual game" );
-    PairingBlinker pairingBlinker( gameObject->getScoreBoard());  // Use PairingBlinker
+    // PairingBlinker pairingBlinker( gameObject->getScoreBoard());  // Use PairingBlinker
+    BlankBlinker pairingBlinker();
+
     print( "finished constructing input with timer from run manual game" );
     bool is_on_pi = gameObject->getScoreBoard()->onRaspberryPi();
     print( "is_on_pi: " + std::to_string( is_on_pi ));
@@ -546,7 +548,7 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         // print( "entered while loop from run manual game" );
         sleep( SCORE_DELAY );
         // if remote pairing, write the words.  if not, snap out of the loop
-        while ( remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake()) {  // 090724
+        while ( /* remotePairingScreen.inPairingMode() && is_on_pi && pairingBlinker.awake() */ true) {  // 090724
             print( "inside remote pairing screen from run manual game.  before starting input timer..." ); // 122224
             
             print ( "SYSTEM IS RUNNING IN MANUAL MODE.  Please enter 1 for green and 2 for red." );
@@ -554,12 +556,12 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
             // int menu_selection = inputWithTimer->getInput(); // 12224
             
             if ( menu_selection == 1 ) {
-                remotePairingScreen.greenPlayerPressed();
-                pairingBlinker.setGreenPlayerPaired( true );  // Notify blinker that Green player is paired
+                //remotePairingScreen.greenPlayerPressed();
+                //pairingBlinker.setGreenPlayerPaired( true );  // Notify blinker that Green player is paired
             }
             else if ( menu_selection == 2 ) {
-                remotePairingScreen.redPlayerPressed();
-                pairingBlinker.setRedPlayerPaired( true );  // Notify blinker that Red player is paired
+                //remotePairingScreen.redPlayerPressed();
+                //pairingBlinker.setRedPlayerPaired( true );  // Notify blinker that Red player is paired
             }
             else {
                 print( "*** Invalid selection during remote pairing. ***\n" );
@@ -568,12 +570,12 @@ void run_manual_game( GameObject* gameObject, GameState* gameState, Reset* reset
         }
 
         // print( "put in sleep mode if the pairing blinker is not awake. " );
-        if ( !pairingBlinker.awake()) {
-            print( "pairing blinker is not awake, stopping it... " );
-                pairingBlinker.stop();
-            print( "pairing blinker stopped.  now putting in sleep mode..." );
-            gameState->setCurrentAction( SLEEP_MODE );
-        }
+        // if ( !pairingBlinker.awake()) {
+        //     print( "pairing blinker is not awake, stopping it... " );
+        //         pairingBlinker.stop();
+        //     print( "pairing blinker stopped.  now putting in sleep mode..." );
+        //     gameState->setCurrentAction( SLEEP_MODE );
+        //}
 
         // pairingBlinker.stop();  // Stop blinking once both players are paired
         print( "1.) green score             76. seven six Tie Breaker test" );
@@ -884,7 +886,7 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
 
     print ( " constructing blinkers... " );
     RemotePairingScreen*    remotePairingScreen = new RemotePairingScreen( scoreboard );
-    PairingBlinker*         pairingBlinker      = new PairingBlinker( scoreboard );
+    BlankBlinker*           pairingBlinker      = new BlankBlinker(); // PairingBlinker( scoreboard );
     BlankBlinker*           blankBlinker        = new BlankBlinker();
     ScoreboardBlinker*      sleepingBlinker     = new ScoreboardBlinker( scoreboard );
 
@@ -916,28 +918,28 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
 
         // if remote pairing, write the words.  if not, snap out of the loop
         print( "in pairing mode? " + std::to_string( remotePairingScreen->inPairingMode()));
-        print( "pairingBlinker->awake(): " + std::to_string( pairingBlinker->awake()));
-        while ( remotePairingScreen->inPairingMode() && pairingBlinker->awake()) {
+        // print( "pairingBlinker->awake(): " + std::to_string( pairingBlinker->awake()));
+        while ( /* remotePairingScreen->inPairingMode() && pairingBlinker->awake() */ true ) {
             print( "inside remote pairing screen from run remote listener.  before starting input timer..." );
             selection = pairingInputWithTimer->getInput();
             if ( selection == GREEN_REMOTE_GREEN_SCORE ) {
-                remotePairingScreen->greenPlayerPressed();
-                pairingBlinker->setGreenPlayerPaired( true );
+                //remotePairingScreen->greenPlayerPressed();
+                //pairingBlinker->setGreenPlayerPaired( true );
             } else if ( selection == RED_REMOTE_RED_SCORE ) {
-                remotePairingScreen->redPlayerPressed();
-                pairingBlinker->setRedPlayerPaired( true );
+                //remotePairingScreen->redPlayerPressed();
+                //pairingBlinker->setRedPlayerPaired( true );
             } else {
-                print( "*** Invalid selection during pairing. *** 012525\n\n\n" );
+                //print( "*** Invalid selection during pairing. *** 012525\n\n\n" );
                 GameTimer::gameDelay( 1000 );
             }
         }
 
-        if ( !pairingBlinker->awake()) {
-            print( "pairing blinker is not awake, stopping it... " );
-            pairingBlinker->stop();
-            print( "pairing blinker stopped.  now putting in sleep mode..." );
-            gameState->setCurrentAction( SLEEP_MODE );
-        }
+        // if ( !pairingBlinker->awake()) {
+        //     print( "pairing blinker is not awake, stopping it... " );
+        //     pairingBlinker->stop();
+        //     print( "pairing blinker stopped.  now putting in sleep mode..." );
+        //     gameState->setCurrentAction( SLEEP_MODE );
+        // }
 
         if ( gameState->getCurrentAction() == SLEEP_MODE ) {
             sleepingInputWithTimer->getInput();                 // blocks here for so many seconds

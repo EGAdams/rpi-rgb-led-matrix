@@ -26,10 +26,10 @@
             ]
         },
         {
-            "name": "tennis-game",
+            "name": "remote-tennis-game",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/tennis-game/run_remote_listener.cpp",
+            "program": "${workspaceFolder}/tennis-game/run_remote_listener",
             "args": [ "" ],
             "cwd": "${fileDirname}",
             "environment": [],

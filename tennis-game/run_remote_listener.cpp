@@ -1,4 +1,38 @@
-```cpp
+#include "GameObject/GameObject.h"
+#include "GameState/GameState.h"
+#include "Reset/Reset.h"
+#include "RemoteLocker/RemoteLocker.h"
+#include "Inputs/Inputs.h"
+#include "IInputWithTimer/IInputWithTimer.h"
+#include "RemoteInputWithTimer/RemoteInputWithTimer.h"
+#include "KeyboardInputWithTimer/KeyboardInputWithTimer.h"
+#include "BlankBlinker/BlankBlinker.h"
+#include "IGameInput/IGameInput.h"
+#include "RemotePairingScreen/RemotePairingScreen.h"
+#include "PairingBlinker/PairingBlinker.h"
+#include "ScoreboardBlinker/ScoreboardBlinker.h"
+#include "RemoteGameInput/RemoteGameInput.h"
+#include "KeyboardGameInput/KeyboardGameInput.h"
+#include <csignal>
+
+#define SCORE_DELAY 0
+
+/*==========================================================
+ *  Global signal variable to mimic the code's usage
+ *==========================================================*/
+static volatile std::sig_atomic_t gSignalStatus = 0;
+
+bool is_on_raspberry_pi() {
+    std::ifstream file( "/proc/device-tree/model" );
+    std::string line;
+    if ( file.is_open()) {
+        std::getline( file, line );
+        file.close();
+        if ( line.find( "Raspberry Pi" ) != std::string::npos ) { return true; }
+    }
+    return false;
+}
+
 void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset* reset ) {
     int KEYBOARD_TIMEOUT = 120000;
     GameState* gameState = gameStatearg;
@@ -183,4 +217,36 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
         std::map<int, int> _player2_set_history = gameState->getPlayer2SetHistory();
     } ///////// End Game Loop /////////
 }
-```
+
+// ... (your existing code, including run_remote_listener) - meta.ai
+
+int main() {
+    print( "creating game state object..." );
+    GameState* gameState = new GameState();  // make this 1st!!! cost me 3 days
+    print( "creating game object..." );
+    // FontManager* fontManager = new FontManager();
+    ColorManager* colorManager = new ColorManager();
+    bool isOnPi = is_on_raspberry_pi();
+    print( "isOnPi: " << isOnPi );
+    IDisplay* display = new ConsoleDisplay( colorManager );
+    if ( isOnPi ) {
+        print( "creating display object with matrix display..." );
+    }
+    else {
+        print( "creating display object with console display..." );
+        display = new ConsoleDisplay( colorManager );
+    }
+    GameObject* gameObject = new GameObject( gameState, display );
+    print( "creating reset object..." );
+    Reset* reset = new Reset( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
+    run_remote_listener( gameObject, gameState, reset ); return 0;
+
+    // Clean up memory
+    delete gameObject;
+    delete gameState;
+    delete reset;
+    delete display;
+    delete colorManager;
+
+    return 0;
+}
