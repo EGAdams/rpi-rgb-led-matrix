@@ -1,8 +1,6 @@
 # Compiler and flags
 CXX      = g++
 CXXFLAGS = -std=c++17 -Wall -O3 -g -I../include
-# CXXFLAGS = -std=c++17 -Wall -O0 -g -I../include
-
 
 # Linker flags:
 #   -L../lib        : tells the linker to look in ../lib for libraries
