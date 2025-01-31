@@ -132,7 +132,7 @@ When the power to the system is turned on, the system begins in in Pairing Mode.
    - If Sleep Mode lasts over 10 seconds, any input transitions the system to Regular Game Play, but game history is cleared, and Undo cannot revert to the pre-Match state.
 
 # My Thoughts
-I think we may be able to use the Strategy Pattern to handle the different game states.  Since you are an expert in using Design Patterns, you should be able to think of other patterns that we could use. 
+I think we may be able to use the Strategy Pattern to handle the different game states.  Since you are an expert in using Design Patterns, you should be able to think of other patterns that we could use as well to make the codebase cleaner and more maintainable.
 
 # C++ Source code for the Interfaces used in this system
 ```cpp

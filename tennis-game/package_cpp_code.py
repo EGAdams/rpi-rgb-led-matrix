@@ -3,8 +3,6 @@
 #
 import os, re
 
-import re
-
 def extract_and_write_method(input_file, method_name, output_file):
     """
     Read a C++ file, extract a specific method, and write it to an output file with code fences.
@@ -38,13 +36,8 @@ def extract_and_write_method(input_file, method_name, output_file):
         print(f"An error occurred: {e}")
 
 # Example usage
-input_cpp_file = "tennis-game.cpp"  # Path to the input C++ file
-extract_and_write_method(input_cpp_file, "run_remote_listener", "run_remote_listener.cpp")
-
-
-# Example usage
-input_cpp_file = "tennis-game.cpp"  # Path to the input C++ file
-extract_and_write_method(input_cpp_file, "run_remote_listener", "run_remote_listener.cpp")
+# input_cpp_file = "tennis-game.cpp"  # Path to the input C++ file
+# extract_and_write_method(input_cpp_file, "run_remote_listener", "run_remote_listener.cpp")
 
 
 def extract_cpp_class_or_struct(content):
@@ -106,15 +99,8 @@ base_dir = "/home/adamsl/rpi-rgb-led-matrix/tennis-game"
 # output prompt file
 output_file_path = os.path.join(base_dir, "packaged_code.md")
 
-path = os.path.join( base_dir, "tennis-game.cpp" )
-extract_and_write_method( path, "run_remote_listener", output_file_path )
-
-# path = os.path.join( base_dir, "RemotePairingScreen/RemotePairingScreen.cpp" )
-# process_cpp_file( path, output_file_path, True )
-
-# path = os.path.join( base_dir, "KeyboardInputWithTimer/KeyboardInputWithTimer.cpp" )
-# process_cpp_file( path, output_file_path, True )
-
+path = os.path.join( base_dir, "run_remote_listener.cpp" )
+process_cpp_file( path, output_file_path, False )
 
 path = os.path.join( base_dir, "RemoteInputWithTimer/RemoteInputWithTimer.cpp" )
 process_cpp_file( path, output_file_path, True )
@@ -122,10 +108,11 @@ process_cpp_file( path, output_file_path, True )
 path = os.path.join( base_dir, "Blinker/Blinker.h" )
 process_cpp_file( path, output_file_path, True )
 
-path = os.path.join( base_dir, "PairingBlinker/ParingBlinker.h" )
+path = os.path.join( base_dir, "BlankBlinker/BlankBlinker.h" )
+process_cpp_file( path, output_file_path, True )
+
+path = os.path.join( base_dir, "PairingBlinker/PairingBlinker.cpp" )
 process_cpp_file( path, output_file_path, True )
 
 path = os.path.join( base_dir, "IInputWithTimer/IInputWithTimer.h" )
 process_cpp_file( path, output_file_path, True )
-
-

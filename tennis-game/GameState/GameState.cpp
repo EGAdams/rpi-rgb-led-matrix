@@ -29,6 +29,8 @@ GameState::GameState() {
     _player1_sets    = 0; _player2_sets    = 0;
     _player1_matches = 0; _player2_matches = 0; }
 
+int GameState::getState() { return _state; }
+void GameState::setState(int state) { _state = state; }
 int GameState::gameRunning() { return _gameRunning; }
 void GameState::stopGameRunning() { _gameRunning = 0; }
 void GameState::setCurrentSet( int current_set ) { _current_set = current_set; }

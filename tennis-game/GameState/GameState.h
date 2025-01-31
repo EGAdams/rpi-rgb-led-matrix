@@ -9,6 +9,8 @@ class GameState {
 public:
     GameState();
     ~GameState() ;
+    int getState() ;
+    void setState(int state) ;
     void setMatchBlinkOn();
     void setMatchBlinkOff();
     int  getMatchBlink();
@@ -106,6 +108,7 @@ public:
 
 
 private:
+    int _state;
     int _match_blink_on;
     int _current_set;
     int _player1_points;

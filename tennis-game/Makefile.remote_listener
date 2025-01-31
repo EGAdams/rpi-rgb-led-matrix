@@ -74,7 +74,13 @@ SOURCES = \
   MonitorLed/MonitorLed.cpp \
   Model/Model.cpp \
   SourceData/SourceData.cpp \
-  GameWinSequence/GameWinSequence.cpp
+  GameWinSequence/GameWinSequence.cpp \
+  RemoteListenerContext/RemoteListenerContext.cpp \
+  IRemoteListenerState/IRemoteListenerState.cpp \
+  PairingModeState/PairingModeState.cpp \
+  SleepModeState/SleepModeState.cpp \
+  RegularGamePlayBeforeScoreState/RegularGamePlayBeforeScoreState.cpp \
+  RegularGamePlayAfterScoreState/RegularGamePlayAfterScoreState.cpp
 
 # Object files
 OBJECTS = $(SOURCES:.cpp=.o)
