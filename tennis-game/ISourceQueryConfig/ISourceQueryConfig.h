@@ -9,4 +9,4 @@ struct ISourceQueryConfig {
     std::string object_data;    // Replace this with the actual C++ type
 };
 
-#endif // ISOURCE_QUERY_CONFIG_H
+#endif // ISOURCE_QUERY_CONFIG_H 

@@ -20,4 +20,4 @@ public:
         IQueryResultProcessor* thisObject, 
         const std::string& queryResultToBeProcessed ) = 0; };
 
-#endif // IQUERY_RESULT_PROCESSOR_H 
+#endif // IQUERY_RESULT_PROCESSOR_H  

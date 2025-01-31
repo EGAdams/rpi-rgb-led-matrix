@@ -24,4 +24,4 @@ private:
     std::string prepareRequestBody(const std::string& apiArgsType, const std::string& body);
 };
 
-#endif // FETCHRUNNER_H
+#endif // FETCHRUNNER_H 

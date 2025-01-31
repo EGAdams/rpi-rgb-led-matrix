@@ -1,6 +1,11 @@
 # Compiler and flags
 CXX      = g++
-CXXFLAGS = -std=c++17 -Wall -O3 -g -I../include
+
+# for optimization 
+# CXXFLAGS = -std=c++17 -Wall -O3 -g -I../include
+
+# for debugging
+CXXFLAGS = -std=c++17 -Wall -O0 -g -I../include
 
 # Linker flags:
 #   -L../lib        : tells the linker to look in ../lib for libraries
@@ -31,10 +36,10 @@ SOURCES = \
   GameWinSequence/GameWinSequence.cpp \
   History/History.cpp \
   IInputWithTimer/IInputWithTimer.cpp \
-  IQueryResultProcessor/IQueryResultProcessor.h \
+  # IQueryResultProcessor/IQueryResultProcessor.h \
   IRemoteListenerState/IRemoteListenerState.cpp \
-  ISourceDataConfig/ISourceDataConfig.h \
-  ISourceQueryConfig/ISourceQueryConfig.h \
+  # ISourceDataConfig/ISourceDataConfig.h \
+  # ISourceQueryConfig/ISourceQueryConfig.h \
   Inputs/Inputs.cpp \
   KeyboardGameInput/KeyboardGameInput.cpp \
   KeyboardInputWithTimer/KeyboardInputWithTimer.cpp \
@@ -95,3 +100,4 @@ $(TARGET): $(OBJECTS)
 .PHONY: clean
 clean:
 	rm -f $(TARGET) $(OBJECTS)
+	rm -f *~  # Remove only temporary backup files, not headers!
