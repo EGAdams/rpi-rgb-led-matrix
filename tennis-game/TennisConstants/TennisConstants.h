@@ -24,6 +24,14 @@
 //  Written by Chris Bean for Teensy 4.1 only
 //  re-written in C++ by EG in June 2022
 
+//////////////////////// STATE MACHINE CONSTANTS //////////////////////////////
+// Some additional constants for game states. 
+#define PAIRING_MODE_STATE             1
+#define SLEEP_MODE_STATE               2
+#define AFTER_SLEEP_MODE_STATE         3  // e.g. "wake up" mode
+#define REGULAR_PLAY_NO_SCORE_STATE    4
+#define REGULAR_PLAY_AFTER_SCORE_STATE 5
+///////////////////////////////////////////////////////////////////////////////
 
 /////////////////////// REMOTE DEFINITIONS /////////////////////////////////////
 # define REMOTE_INPUT 1 // Change from Remote in put or keyboard input for debug
@@ -67,6 +75,7 @@
 #define AFTER_SLEEP_MODE            "after sleep mode"
 ///////////////////////////////////////////////////////////////////////////////
 
+#define SCORE_DELAY_IN_SECONDS      1
 #define TESTING                     1
 #define GAME_FLASH_DELAY            500 // 500 // 200 // 50 // 200 // 010725
 #define SET_WIN_FLASH_DELAY         500 // 750 // 1000 // 600 // 5 // 200 010725

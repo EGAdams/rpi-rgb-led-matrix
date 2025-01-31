@@ -164,6 +164,11 @@ void PairingBlinker::stop() {
     }
 }
 
+bool PairingBlinker::areBothPlayersPaired() { 
+    bool both_paired = ( _green_player_paired && _red_player_paired );
+    return both_paired;
+}
+
 void PairingBlinker::enable() {            _should_stop = false; }
 void PairingBlinker::sleepModeOn() {       _sleep_mode  = true;  }
 void PairingBlinker::sleepModeOff() {      _sleep_mode  = false; }

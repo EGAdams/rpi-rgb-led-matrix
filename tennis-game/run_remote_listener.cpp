@@ -73,13 +73,6 @@
 // External global for receiving Ctrl-C signals, etc.
 extern volatile std::sig_atomic_t gSignalStatus;
 
-// Some additional constants for game states. 
-static const int PAIRING_MODE_STATE             = 1;
-static const int SLEEP_MODE_STATE               = 2;
-static const int AFTER_SLEEP_MODE_STATE         = 3;   // e.g. "wake up" mode
-static const int REGULAR_PLAY_NO_SCORE_STATE    = 4; 
-static const int REGULAR_PLAY_AFTER_SCORE_STATE = 5; 
-
 #include <csignal>
 #include "GameObject/GameObject.h"
 #include "GameState/GameState.h"
@@ -99,11 +92,6 @@ static const int REGULAR_PLAY_AFTER_SCORE_STATE = 5;
 #include "StateMachine/StateMachine.h"
 
 #define SCORE_DELAY 0
-
-/*==========================================================
- *  Global signal variable to mimic the code's usage
- *==========================================================*/
-static volatile std::sig_atomic_t gSignalStatus = 0;
 
 bool is_on_raspberry_pi() {
     std::ifstream file( "/proc/device-tree/model" );

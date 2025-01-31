@@ -1,44 +1,64 @@
-#include <thread>
-#include <chrono>
+#include "StateMachine.h"
 #include <iostream>
-#include "../StateMachine/StateMachine.h"
-#include "../GameState/GameState.h"
-#include "../TennisConstants/TennisConstants.h" // Assuming this contains SCORE_DELAY, PAIRING_MODE, etc.
+#include <chrono>
+#include <thread>
+#include <csignal>  // Required for handling Ctrl+C (SIGINT)
+
+// Global variable for tracking SIGINT (Ctrl+C) interrupts
+volatile std::sig_atomic_t gSignalStatus = 0;
+
+/**
+ * @brief Signal handler for SIGINT (Ctrl+C).
+ * @param signal The received signal.
+ */
+void signalHandler(int signal) {
+    if (signal == SIGINT) {
+        gSignalStatus = 1;  // Set flag to indicate exit request
+        std::cout << "\n[StateMachine] SIGINT received! Shutting down gracefully...\n";
+    }
+}
 
 /**
  * @brief Constructs the StateMachine and initializes the starting state.
  * @param context Reference to the RemoteListenerContext.
  */
-StateMachine::StateMachine( RemoteListenerContext& context )
-    : _context( context ) {
-    setState( PAIRING_MODE ); // Start in Pairing Mode
+StateMachine::StateMachine(RemoteListenerContext& context)
+    : _context(context), _currentStateId(PAIRING_MODE_STATE) {
+    
+    // Register signal handler for SIGINT
+    std::signal(SIGINT, signalHandler);
+    
+    setState(PAIRING_MODE_STATE); // Start in Pairing Mode
 }
 
 /**
  * @brief Runs the state machine loop, processing input and transitioning states.
  */
 void StateMachine::run() {
-    while ( _context.gameState->gameRunning() && gSignalStatus != SIGINT ) {
-        std::this_thread::sleep_for( std::chrono::seconds( SCORE_DELAY ) );
+    while (_context.getGameState()->gameRunning() && gSignalStatus != 1) {
+        std::this_thread::sleep_for(std::chrono::seconds( _state_machine_delay ));
 
         // Execute the logic for the current state
-        _currentState->handleInput( _context );
+        _currentState->handleInput(_context);
 
-        // Check for state transition
-        int nextState = _context.gameState->getCurrentAction();
-        if ( nextState != _currentStateId ) {
-            setState( nextState );
+        // Transition to a new state if necessary
+        int nextState = _context.getGameState()->getState();
+        if (nextState != _currentStateId) {
+            setState(nextState);
         }
     }
+    std::cout << "[StateMachine] Exiting state machine loop.\n";
 }
 
 /**
  * @brief Transitions the state machine to a new state.
  * @param newState The new state identifier.
  */
-void StateMachine::setState( int newState ) {
-    _currentStateId = newState;                 // set to  SLEEP_MODE, 
-    _currentState = createState( newState );    // PAIRING_MODE, etc.
+void StateMachine::setState(int newState) {
+    _currentStateId = newState;
+    _currentState = createState(newState);
+
+    std::cout << "[StateMachine] Transitioned to state: " << newState << std::endl;
 }
 
 /**
@@ -46,19 +66,22 @@ void StateMachine::setState( int newState ) {
  * @param currentAction The action representing the current state.
  * @return A unique pointer to the corresponding state object.
  */
-std::unique_ptr<IRemoteListenerState> StateMachine::createState( int currentAction ) {
-    switch ( currentAction ) {
-    case PAIRING_MODE:
-        return std::make_unique<PairingModeState>();
-    case SLEEP_MODE:
-        return std::make_unique<SleepModeState>();
-    case REGULAR_PLAY_NO_SCORE:
-        return std::make_unique<RegularGamePlayBeforeScoreState>();
-    case REGULAR_PLAY_AFTER_SCORE:
-    case AFTER_SLEEP_MODE: // Treat "After Sleep" similar to "After Score"
-        return std::make_unique<RegularGamePlayAfterScoreState>();
-    default:
-        std::cerr << "*** WARNING: Unknown state, defaulting to RegularGamePlayAfterScore ***" << std::endl;
-        return std::make_unique<RegularGamePlayAfterScoreState>();
+std::unique_ptr<IRemoteListenerState> StateMachine::createState(int currentAction) {
+    switch (currentAction) {
+        case PAIRING_MODE_STATE:
+            return std::make_unique<PairingModeState>();
+        case SLEEP_MODE_STATE:
+            return std::make_unique<SleepModeState>();
+        case REGULAR_PLAY_NO_SCORE_STATE:
+            return std::make_unique<RegularGamePlayBeforeScoreState>();
+        case REGULAR_PLAY_AFTER_SCORE_STATE:
+        case AFTER_SLEEP_MODE_STATE: // Treat "After Sleep" as "After Score"
+            return std::make_unique<RegularGamePlayAfterScoreState>();
+        default:
+            std::cerr << "[StateMachine] WARNING: Unknown state (" 
+                      << currentAction 
+                      << "), defaulting to REGULAR_PLAY_AFTER_SCORE_STATE."
+                      << std::endl;
+            return std::make_unique<RegularGamePlayAfterScoreState>();
     }
 }

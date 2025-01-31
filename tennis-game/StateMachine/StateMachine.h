@@ -1,13 +1,16 @@
 #ifndef STATE_MACHINE_H
 #define STATE_MACHINE_H
 
+#include <thread>
+#include <chrono>
+#include <iostream>
 #include <memory>
 #include "IRemoteListenerState.h"
-#include "RemoteListenerContext.h"
 #include "PairingModeState.h"
-#include "SleepModeState.h"
-#include "RegularGamePlayBeforeScoreState.h"
-#include "RegularGamePlayAfterScoreState.h"
+#include "../SleepModeState/SleepModeState.h"
+#include "../RegularGamePlayBeforeScoreState/RegularGamePlayBeforeScoreState.h"
+#include "../GameState/GameState.h"
+#include "../TennisConstants/TennisConstants.h" // Assuming this contains SCORE_DELAY, PAIRING_MODE, etc.
 
 /**
  * @class StateMachine
@@ -35,6 +38,7 @@ private:
   RemoteListenerContext& _context;
   std::unique_ptr<IRemoteListenerState> _currentState;
   int _currentStateId;
+  int _state_machine_delay = 1;
 
   /**
    * @brief Sets the current state based on the game state.

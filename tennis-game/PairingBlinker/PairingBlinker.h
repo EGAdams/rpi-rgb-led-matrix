@@ -21,6 +21,7 @@ public:
     void sleepModeOn();
     void sleepModeOff();
     bool awake();
+    bool areBothPlayersPaired();
 
 private:
     void blinkLoop();         // Alternates between Green and Red instructions
