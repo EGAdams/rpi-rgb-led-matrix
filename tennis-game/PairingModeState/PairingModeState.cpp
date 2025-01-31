@@ -16,6 +16,23 @@ void PairingModeState::handleInput(RemoteListenerContext &context) {
 
     print("=== [STATE: PairingMode] ===");
 
+    // **Null Safety Checks**
+    if (!context.getRemotePairingScreen()) {
+        print("*** ERROR: remotePairingScreen is NULL! ***");
+        context.unlock();
+        return;
+    }
+    if (!context.getPairingBlinker()) {
+        print("*** ERROR: pairingBlinker is NULL! ***");
+        context.unlock();
+        return;
+    }
+    if (!context.getPairingInputWithTimer()) {
+        print("*** ERROR: pairingInputWithTimer is NULL! ***");
+        context.unlock();
+        return;
+    }
+
     // Ensure we are in pairing mode and the blinker is active
     while (context.getRemotePairingScreen()->inPairingMode() && 
            context.getPairingBlinker()->awake()) 
