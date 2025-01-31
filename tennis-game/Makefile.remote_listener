@@ -36,10 +36,7 @@ SOURCES = \
   GameWinSequence/GameWinSequence.cpp \
   History/History.cpp \
   IInputWithTimer/IInputWithTimer.cpp \
-  # IQueryResultProcessor/IQueryResultProcessor.h \
   IRemoteListenerState/IRemoteListenerState.cpp \
-  # ISourceDataConfig/ISourceDataConfig.h \
-  # ISourceQueryConfig/ISourceQueryConfig.h \
   Inputs/Inputs.cpp \
   KeyboardGameInput/KeyboardGameInput.cpp \
   KeyboardInputWithTimer/KeyboardInputWithTimer.cpp \
@@ -101,3 +98,7 @@ $(TARGET): $(OBJECTS)
 clean:
 	rm -f $(TARGET) $(OBJECTS)
 	rm -f *~  # Remove only temporary backup files, not headers!
+
+  # ISourceDataConfig/ISourceDataConfig.h \
+  # ISourceQueryConfig/ISourceQueryConfig.h \
+  # IQueryResultProcessor/IQueryResultProcessor.h \
