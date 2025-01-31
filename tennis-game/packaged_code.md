@@ -1,21 +1,11 @@
-Please take a loot at the following output from the make command:
+Please take a loot at the following partial output from the make command:
 ## The make error
 ```bash
-adamsl@DESKTOP-SHDBATI:~/rpi-rgb-led-matrix/tennis-game$ make -f Makefile.remote_listener -k 2>&1 | tee /dev/tty | grep -c "error" | awk '{print "*** Make Error Count: " $1 " ***"}'cl
-g++ -std=c++17 -Wall -O3 -g -I../include BatteryTest/BatteryTest.o BlankBlinker/BlankBlinker.o CanvasCreator/CanvasCreator.o ColorManager/ColorManager.o ConsoleDisplay/ConsoleDisplay.o Drawer/Drawer.o FetchRunner/FetchRunner.o FontLoader/FontLoader.o GameLedTranslator/GameLedTranslator.o GameLeds/GameLeds.o GameModes/GameModes.o GameObject/GameObject.o GameState/GameState.o GameTimer/GameTimer.o GameWinSequence/GameWinSequence.o History/History.o IInputWithTimer/IInputWithTimer.o IRemoteListenerState/IRemoteListenerState.o Inputs/Inputs.o KeyboardGameInput/KeyboardGameInput.o KeyboardInputWithTimer/KeyboardInputWithTimer.o LogObject/LogObject.o LogObjectFactory/LogObjectFactory.o Logger/Logger.o LoggerFactory/LoggerFactory.o MatchWinSequence/MatchWinSequence.o Mode1Functions/Mode1Functions.o Mode1Score/Mode1Score.o Mode2Functions/Mode2Functions.o Model/Model.o MonitorLed/MonitorLed.o MonitorLedClassObject/MonitorLedClassObject.o MonitoredObject/MonitoredObject.o PairingBlinker/PairingBlinker.o PairingModeState/PairingModeState.o PinInterface/PinInterface.o PinState/PinState.o Player/Player.o PointLeds/PointLeds.o RegularGamePlayAfterScoreState/RegularGamePlayAfterScoreState.o RegularGamePlayBeforeScoreState/RegularGamePlayBeforeScoreState.o RemoteGameInput/RemoteGameInput.o RemoteInputWithTimer/RemoteInputWithTimer.o RemoteListenerContext/RemoteListenerContext.o RemoteLocker/RemoteLocker.o RemotePairingScreen/RemotePairingScreen.o Reset/Reset.o ScoreBoard/ScoreBoard.o ScoreboardBlinker/ScoreboardBlinker.o ServeLeds/ServeLeds.o SetDrawer/SetDrawer.o SetHistoryText/SetHistoryText.o SetLeds/SetLeds.o SetWin/SetWin.o SleepModeState/SleepModeState.o StateMachine/StateMachine.o SubjectManager/SubjectManager.o TieBreaker/TieBreaker.o TieLeds/TieLeds.o TranslateConstant/TranslateConstant.o Undo/Undo.o WatchTimer/WatchTimer.o WebLiquidCrystal/WebLiquidCrystal.o WinSequences/WinSequences.o run_remote_listener.o -L../lib -lrgbmatrix -ljsoncpp -lcurl -lrt -lm -lpthread -o run_remote_listener
-/usr/bin/ld: MonitoredObject/MonitoredObject.o: in function `MonitoredObject::initializeModel(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)':
-/home/adamsl/rpi-rgb-led-matrix/tennis-game/MonitoredObject/MonitoredObject.cpp:12: undefined reference to `SourceData::SourceData(ISourceDataConfig const&)'
-/usr/bin/ld: Model/Model.o: in function `Model::selectObject(ISourceQueryConfig const&, IQueryResultProcessor*)':
-/home/adamsl/rpi-rgb-led-matrix/tennis-game/Model/Model.cpp:4: undefined reference to `SourceData::selectObject(ISourceQueryConfig const&, IQueryResultProcessor*)'
-/usr/bin/ld: Model/Model.o: in function `Model::selectAllObjects(IQueryResultProcessor*)':
-/home/adamsl/rpi-rgb-led-matrix/tennis-game/Model/Model.cpp:8: undefined reference to `SourceData::selectAllObjects(IQueryResultProcessor*)'
-/usr/bin/ld: Model/Model.o: in function `Model::insertObject(ISourceQueryConfig const&, IQueryResultProcessor*)':
-/home/adamsl/rpi-rgb-led-matrix/tennis-game/Model/Model.cpp:12: undefined reference to `SourceData::insertObject(ISourceQueryConfig const&, IQueryResultProcessor*)'
-/usr/bin/ld: Model/Model.o: in function `Model::updateObject(ISourceQueryConfig const&, IQueryResultProcessor*)':
-/home/adamsl/rpi-rgb-led-matrix/tennis-game/Model/Model.cpp:16: undefined reference to `SourceData::updateObject(ISourceQueryConfig const&, IQueryResultProcessor*)'
-collect2: error: ld returned 1 exit status
-make: *** [Makefile.remote_listener:88: run_remote_listener] Error 1
-*** Make Error Count: 1 ***
+...
+make: *** No rule to make target 'IQueryResultProcessor/IQueryResultProcessor.h', needed by 'run_remote_listener'.
+make: *** No rule to make target 'ISourceDataConfig/ISourceDataConfig.h', needed by 'run_remote_listener'.
+make: *** No rule to make target 'ISourceQueryConfig/ISourceQueryConfig.h', needed by 'run_remote_listener'.
+...
 adamsl@DESKTOP-SHDBATI:~/rpi-rgb-led-matrix/tennis-game$
 ```
 Here are the source files that I think are causing the problem.
