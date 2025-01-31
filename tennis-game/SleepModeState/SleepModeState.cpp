@@ -9,12 +9,12 @@ void SleepModeState::handleInput(RemoteListenerContext &context) {
     print("=== [STATE: SleepMode] ===");
 
     // Block for input from sleepingInputWithTimer
-    int selection = context.sleepingInputWithTimer->getInput();
+    int selection = context.getSleepingInputWithTimer()->getInput();
 
     // Transition to AFTER_SLEEP_MODE
     context.gameState->setCurrentAction(AFTER_SLEEP_MODE);
 
-    print("Time slept: " + std::to_string(context.sleepingInputWithTimer->getTimeSlept()));
+    print("Time slept: " + std::to_string(context.getSleepingInputWithTimer()->getTimeSlept()));
 
     // Check if the user pressed a valid score button during sleep
     if (selection == GREEN_REMOTE_GREEN_SCORE || selection == GREEN_REMOTE_RED_SCORE) {
@@ -23,7 +23,7 @@ void SleepModeState::handleInput(RemoteListenerContext &context) {
         print("Match reset complete.");
 
         // If sleep time exceeded MAX_SLEEP, clear game history
-        if (context.sleepingInputWithTimer->getTimeSlept() > MAX_SLEEP * 1000) {
+        if (context.getSleepingInputWithTimer()->getTimeSlept() > MAX_SLEEP * 1000) {
             print("Max sleep time exceeded. Clearing game history...");
             context.gameObject->getHistory()->clearHistory();
             print("Game history cleared.");

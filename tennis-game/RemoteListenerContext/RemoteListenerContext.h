@@ -1,13 +1,13 @@
 /************************************************************
  * RemoteListenerContext.h
  *
- * This class provides a shared context for all game states.
- * It contains references to the game state, game object,
- * scoreboard, blinkers, input handlers, and other resources
- * needed for processing game logic.
+ * Shared context for managing game states in a thread-safe
+ * manner. This context holds references to essential game
+ * objects, input handlers, and visual elements required
+ * for different states within the State Machine.
  *
- * This allows different game states to access and modify
- * shared resources while maintaining thread safety.
+ * The context ensures synchronized access to shared resources
+ * through explicit locking methods.
  ************************************************************/
 
 #ifndef REMOTE_LISTENER_CONTEXT_H
@@ -24,9 +24,11 @@
 #include "PairingBlinker.h"
 #include "BlankBlinker.h"
 #include "ScoreboardBlinker.h"
+#include "ScoreBoard.h"  // Assuming ScoreBoard is a class not included in the original
 
 class RemoteListenerContext {
 public:
+    // Constructor to initialize shared resources
     RemoteListenerContext(GameObject* gameObj,
                           GameState* gameSt,
                           Reset* resetPtr,
@@ -41,30 +43,30 @@ public:
                           ScoreboardBlinker* sleepingBlinker,
                           bool& noScoreFlag);
 
-    // Getters for shared resources
-    GameObject* getGameObject();
-    GameState* getGameState();
-    Reset* getReset();
-    RemoteLocker* getRemoteLocker();
-    IInputWithTimer* getPairingInputWithTimer();
-    IInputWithTimer* getNoBlinkInputWithTimer();
-    IInputWithTimer* getSleepingInputWithTimer();
-    IGameInput* getGameInput();
-    RemotePairingScreen* getRemotePairingScreen();
-    ScoreBoard* getScoreboard();
-    PairingBlinker* getPairingBlinker();
-    BlankBlinker* getBlankBlinker();
-    ScoreboardBlinker* getSleepingBlinker();
-    bool& getNoScoreFlag();
+    // Accessor Methods for Shared Resources
+    GameObject* getGameObject() const;
+    GameState* getGameState() const;
+    Reset* getReset() const;
+    RemoteLocker* getRemoteLocker() const;
+    IInputWithTimer* getPairingInputWithTimer() const;
+    IInputWithTimer* getNoBlinkInputWithTimer() const;
+    IInputWithTimer* getSleepingInputWithTimer() const;
+    IGameInput* getGameInput() const;
+    RemotePairingScreen* getRemotePairingScreen() const;
+    ScoreBoard* getScoreboard() const;
+    PairingBlinker* getPairingBlinker() const;
+    BlankBlinker* getBlankBlinker() const;
+    ScoreboardBlinker* getSleepingBlinker() const;
+    bool& getNoScoreFlag() const;
 
-    // Thread safety: Lock and unlock the context
+    // Thread Safety Controls
     void lock();
     void unlock();
 
 private:
-    std::mutex mtx;  // Mutex for thread safety
+    mutable std::mutex mtx;  // Mutex for thread-safe access
 
-    // References to shared resources
+    // Shared Game Resources
     GameObject* gameObject;
     GameState* gameState;
     Reset* reset;
@@ -78,9 +80,9 @@ private:
     PairingBlinker* pairingBlinkerObj;
     BlankBlinker* blankBlinkerObj;
     ScoreboardBlinker* sleepingBlinkerObj;
-    bool& no_score;  // Reference to the "no_score" flag
+
+    // Reference to the no_score flag
+    bool& no_score;
 };
 
 #endif // REMOTE_LISTENER_CONTEXT_H
-
-
