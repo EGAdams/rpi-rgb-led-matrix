@@ -80,6 +80,7 @@ static const int AFTER_SLEEP_MODE_STATE         = 3;   // e.g. "wake up" mode
 static const int REGULAR_PLAY_NO_SCORE_STATE    = 4; 
 static const int REGULAR_PLAY_AFTER_SCORE_STATE = 5; 
 
+#include <csignal>
 #include "GameObject/GameObject.h"
 #include "GameState/GameState.h"
 #include "Reset/Reset.h"
@@ -95,7 +96,7 @@ static const int REGULAR_PLAY_AFTER_SCORE_STATE = 5;
 #include "ScoreboardBlinker/ScoreboardBlinker.h"
 #include "RemoteGameInput/RemoteGameInput.h"
 #include "KeyboardGameInput/KeyboardGameInput.h"
-#include <csignal>
+#include "StateMachine/StateMachine.h"
 
 #define SCORE_DELAY 0
 
@@ -123,92 +124,54 @@ bool is_on_raspberry_pi() {
  * conditions, it delegates to the appropriate State object
  * each iteration.
  ***************************************************************/
-void run_remote_listener( GameObject* gameObject, GameState* gameStateArg, Reset* reset )
-{
-    // Setup some constants
-    const int KEYBOARD_TIMEOUT = 5000;
+void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset* reset ) {
+    // Initialization (same as before)
+    const int KEYBOARD_TIMEOUT = 120000;
+    GameState* gameState = gameStatearg;
+    RemoteLocker*       remoteLocker = new RemoteLocker( gameState );
 
-    // Basic initialization
-    GameState*    gameState     = gameStateArg;
-    RemoteLocker* remoteLocker  = new RemoteLocker( gameState );
-
-    // We need the four input readers
-    IInputWithTimer* pairingInputWithTimer  = nullptr;
-    IInputWithTimer* noBlinkInputWithTimer  = nullptr;
-    IInputWithTimer* sleepingInputWithTimer = nullptr;
-    IGameInput*      gameInput              = nullptr;
-
-    bool no_score     = true;
-    Inputs* inputs    = new Inputs( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
-    bool keyboard_off = false; // set to true to use the remotes
-
-    // Some initial calls
-    print( "calling game object loop game..." );
-    gameObject->loopGame();
-    print( "sleeping for 1 second..." );
-    std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
-
-    // Program to the scoreboard interface
-    auto scoreboard = gameObject->getScoreBoard();
+    // Create input handlers and blinkers (same as before)
+    bool no_score = true;
+    Inputs* inputs      = new Inputs( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
+    bool keyboard_off   = true;
+    auto scoreboard     = gameObject->getScoreBoard();
     scoreboard->setLittleDrawerFont( "fonts/8x13B.bdf" );
-    std::signal( SIGINT, GameObject::_signalHandler );
 
-    // Set up the screens/blinkers
-    print( "constructing blinkers..." );
-    RemotePairingScreen* remotePairingScreen = new RemotePairingScreen( scoreboard );
-    PairingBlinker*      pairingBlinker      = new PairingBlinker( scoreboard );
-    BlankBlinker*        blankBlinker        = new BlankBlinker();
-    ScoreboardBlinker*   sleepingBlinker     = new ScoreboardBlinker( scoreboard );
+    // Set up blinkers
+    RemotePairingScreen*    remotePairingScreen = new RemotePairingScreen( scoreboard );
+    PairingBlinker*         pairingBlinker      = new PairingBlinker( scoreboard );
+    BlankBlinker*           blankBlinker        = new BlankBlinker();
+    ScoreboardBlinker*      sleepingBlinker     = new ScoreboardBlinker( scoreboard );
 
-    // Timeouts
-    unsigned long pairing_timeout  = 4000;
-    unsigned long no_blink_timeout = 4000;
-    unsigned long sleeping_timeout = 4000;
+    // Determine input type (same as before)
+    IInputWithTimer*    pairingInputWithTimer  = nullptr;
+    IInputWithTimer*    noBlinkInputWithTimer  = nullptr;
+    IInputWithTimer*    sleepingInputWithTimer = nullptr;
+    IGameInput*         gameInput              = nullptr;
 
-    bool is_on_pi = scoreboard->onRaspberryPi();
-    print( "is_on_pi: " + std::to_string( is_on_pi ) );
-
-    // Decide whether to use keyboard-based or remote-based input
-    if ( is_on_pi && keyboard_off ) {
-        pairingInputWithTimer  = new RemoteInputWithTimer( pairingBlinker,  inputs, pairing_timeout  );
-        noBlinkInputWithTimer  = new RemoteInputWithTimer( blankBlinker,    inputs, no_blink_timeout );
-        sleepingInputWithTimer = new RemoteInputWithTimer( sleepingBlinker, inputs, sleeping_timeout );
-        gameInput              = new RemoteGameInput(                       inputs                   );
+    if ( scoreboard->onRaspberryPi() && keyboard_off ) {
+        pairingInputWithTimer       = new RemoteInputWithTimer( pairingBlinker, inputs, 4000 );
+        noBlinkInputWithTimer       = new RemoteInputWithTimer( blankBlinker,   inputs, 4000 );
+        sleepingInputWithTimer      = new RemoteInputWithTimer( sleepingBlinker,inputs, 4000 );
+        gameInput                   = new RemoteGameInput(      inputs         );
     } else {
-        pairingInputWithTimer  = new KeyboardInputWithTimer( pairingBlinker,  KEYBOARD_TIMEOUT       );
-        noBlinkInputWithTimer  = new KeyboardInputWithTimer( blankBlinker,    KEYBOARD_TIMEOUT       );
-        sleepingInputWithTimer = new KeyboardInputWithTimer( sleepingBlinker, KEYBOARD_TIMEOUT       );
-        gameInput = new KeyboardGameInput();
+        pairingInputWithTimer       = new KeyboardInputWithTimer( pairingBlinker, KEYBOARD_TIMEOUT );
+        noBlinkInputWithTimer       = new KeyboardInputWithTimer( blankBlinker,   KEYBOARD_TIMEOUT );
+        sleepingInputWithTimer      = new KeyboardInputWithTimer( sleepingBlinker,KEYBOARD_TIMEOUT );
+        gameInput                   = new KeyboardGameInput();
     }
 
-    // Build our context for the states
-    InputListenerContext context( gameObject,
-                                  gameState,
-                                  reset,
-                                  remoteLocker,
-                                  pairingInputWithTimer,
-                                  noBlinkInputWithTimer,
-                                  sleepingInputWithTimer,
-                                  gameInput,
-                                  remotePairingScreen,
-                                  pairingBlinker,
-                                  blankBlinker,
-                                  sleepingBlinker,
-                                  no_score );
+    // Create the state context
+    RemoteListenerContext context( gameObject, gameState, reset, remoteLocker, 
+                                   pairingInputWithTimer, noBlinkInputWithTimer,
+                                   sleepingInputWithTimer, gameInput, remotePairingScreen, 
+                                   pairingBlinker, blankBlinker, sleepingBlinker, no_score );
 
-    
-    while ( gameState->gameRunning() && gSignalStatus != SIGINT ) {         // Main loop
-        std::this_thread::sleep_for( std::chrono::seconds( SCORE_DELAY ) ); // sleep for some reason.
-        int currentState = gameState->getState();                           // check the current state
-        if ( currentState == 0 ) {                                          // If we haven't explicitly  
-            currentState = PAIRING_MODE_STATE;                              // set a state yet,                
-            gameState->setState( PAIRING_MODE_STATE );                      // we default to pairing.
-        }
-        std::unique_ptr<IInputListenerState> state = createState( currentState ); // Create the appropriate state and handle input
-        state->handleInput( context );
-    }
+    // Initialize and run the StateMachine
+    StateMachine stateMachine( context );
+    stateMachine.run();
 
-    // Cleanup (some items are allocated inside this function)
+    // Cleanup
     delete remoteLocker;
     delete pairingInputWithTimer;
     delete noBlinkInputWithTimer;
@@ -219,5 +182,6 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStateArg, Reset
     delete pairingBlinker;
     delete blankBlinker;
     delete sleepingBlinker;
-    print( "Exiting run_remote_listener()..." );
 }
+
+
