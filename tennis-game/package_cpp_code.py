@@ -99,20 +99,35 @@ base_dir = "/home/adamsl/rpi-rgb-led-matrix/tennis-game"
 # output prompt file
 output_file_path = os.path.join(base_dir, "packaged_code.md")
 
-path = os.path.join( base_dir, "run_remote_listener.cpp" )
+# path = os.path.join( base_dir, "run_remote_listener.cpp" )
+# process_cpp_file( path, output_file_path, False )
+
+# path = os.path.join( base_dir, "RemoteInputWithTimer/RemoteInputWithTimer.cpp" )
+# process_cpp_file( path, output_file_path, True )
+
+# path = os.path.join( base_dir, "Blinker/Blinker.h" )
+# process_cpp_file( path, output_file_path, True )
+
+# path = os.path.join( base_dir, "BlankBlinker/BlankBlinker.h" )
+# process_cpp_file( path, output_file_path, True )
+
+# path = os.path.join( base_dir, "PairingBlinker/PairingBlinker.cpp" )
+# process_cpp_file( path, output_file_path, True )
+
+# path = os.path.join( base_dir, "IInputWithTimer/IInputWithTimer.h" )
+# process_cpp_file( path, output_file_path, True )
+
+path = os.path.join( base_dir, "MonitoredObject/MonitoredObject.cpp" )
 process_cpp_file( path, output_file_path, False )
 
-path = os.path.join( base_dir, "RemoteInputWithTimer/RemoteInputWithTimer.cpp" )
+path = os.path.join( base_dir, "SourceData/SourceData.h" )
 process_cpp_file( path, output_file_path, True )
 
-path = os.path.join( base_dir, "Blinker/Blinker.h" )
+path = os.path.join( base_dir, "SourceData/SourceData.cpp" )
 process_cpp_file( path, output_file_path, True )
 
-path = os.path.join( base_dir, "BlankBlinker/BlankBlinker.h" )
+path = os.path.join( base_dir, "Model/Model.h" )
 process_cpp_file( path, output_file_path, True )
 
-path = os.path.join( base_dir, "PairingBlinker/PairingBlinker.cpp" )
-process_cpp_file( path, output_file_path, True )
-
-path = os.path.join( base_dir, "IInputWithTimer/IInputWithTimer.h" )
+path = os.path.join( base_dir, "Model/Model.cpp" )
 process_cpp_file( path, output_file_path, True )
