@@ -12,11 +12,8 @@ LDFLAGS = -L../lib -lrgbmatrix -ljsoncpp -lcurl -lrt -lm -lpthread
 # Target executable
 TARGET = run_remote_listener
 
-# Source files
-# Add any missing .cpp files for GameWinSequence, LogObjectFactory, MonitorLed, etc.
-# If these classes are actually inside existing .cpp files, you don't need to add them separately.
+# Source files (ALPHABETIZED)
 SOURCES = \
-  run_remote_listener.cpp \
   BatteryTest/BatteryTest.cpp \
   BlankBlinker/BlankBlinker.cpp \
   CanvasCreator/CanvasCreator.cpp \
@@ -31,27 +28,36 @@ SOURCES = \
   GameObject/GameObject.cpp \
   GameState/GameState.cpp \
   GameTimer/GameTimer.cpp \
+  GameWinSequence/GameWinSequence.cpp \
   History/History.cpp \
   IInputWithTimer/IInputWithTimer.cpp \
+  IRemoteListenerState/IRemoteListenerState.cpp \
   Inputs/Inputs.cpp \
   KeyboardGameInput/KeyboardGameInput.cpp \
   KeyboardInputWithTimer/KeyboardInputWithTimer.cpp \
   LogObject/LogObject.cpp \
+  LogObjectFactory/LogObjectFactory.cpp \
   Logger/Logger.cpp \
   LoggerFactory/LoggerFactory.cpp \
   MatchWinSequence/MatchWinSequence.cpp \
   Mode1Functions/Mode1Functions.cpp \
   Mode1Score/Mode1Score.cpp \
   Mode2Functions/Mode2Functions.cpp \
+  Model/Model.cpp \
+  MonitorLed/MonitorLed.cpp \
   MonitorLedClassObject/MonitorLedClassObject.cpp \
   MonitoredObject/MonitoredObject.cpp \
   PairingBlinker/PairingBlinker.cpp \
+  PairingModeState/PairingModeState.cpp \
   PinInterface/PinInterface.cpp \
   PinState/PinState.cpp \
   Player/Player.cpp \
   PointLeds/PointLeds.cpp \
+  RegularGamePlayAfterScoreState/RegularGamePlayAfterScoreState.cpp \
+  RegularGamePlayBeforeScoreState/RegularGamePlayBeforeScoreState.cpp \
   RemoteGameInput/RemoteGameInput.cpp \
   RemoteInputWithTimer/RemoteInputWithTimer.cpp \
+  RemoteListenerContext/RemoteListenerContext.cpp \
   RemoteLocker/RemoteLocker.cpp \
   RemotePairingScreen/RemotePairingScreen.cpp \
   Reset/Reset.cpp \
@@ -62,6 +68,8 @@ SOURCES = \
   SetHistoryText/SetHistoryText.cpp \
   SetLeds/SetLeds.cpp \
   SetWin/SetWin.cpp \
+  SleepModeState/SleepModeState.cpp \
+  StateMachine/StateMachine.cpp \
   SubjectManager/SubjectManager.cpp \
   TieBreaker/TieBreaker.cpp \
   TieLeds/TieLeds.cpp \
@@ -70,17 +78,7 @@ SOURCES = \
   WatchTimer/WatchTimer.cpp \
   WebLiquidCrystal/WebLiquidCrystal.cpp \
   WinSequences/WinSequences.cpp \
-  LogObjectFactory/LogObjectFactory.cpp \
-  MonitorLed/MonitorLed.cpp \
-  Model/Model.cpp \
-  SourceData/SourceData.cpp \
-  GameWinSequence/GameWinSequence.cpp \
-  RemoteListenerContext/RemoteListenerContext.cpp \
-  IRemoteListenerState/IRemoteListenerState.cpp \
-  PairingModeState/PairingModeState.cpp \
-  SleepModeState/SleepModeState.cpp \
-  RegularGamePlayBeforeScoreState/RegularGamePlayBeforeScoreState.cpp \
-  RegularGamePlayAfterScoreState/RegularGamePlayAfterScoreState.cpp
+  run_remote_listener.cpp  # <-- Make sure this is last and contains `main()`
 
 # Object files
 OBJECTS = $(SOURCES:.cpp=.o)

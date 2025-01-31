@@ -1,34 +1,36 @@
-/************************************************************
- * RemoteListenerContext.h
- *
- * Shared context for managing game states in a thread-safe
- * manner. This context holds references to essential game
- * objects, input handlers, and visual elements required
- * for different states within the State Machine.
- *
- * The context ensures synchronized access to shared resources
- * through explicit locking methods.
- ************************************************************/
-
 #ifndef REMOTE_LISTENER_CONTEXT_H
 #define REMOTE_LISTENER_CONTEXT_H
 
 #include <mutex>
-#include "GameState.h"
-#include "GameObject.h"
-#include "Reset.h"
-#include "RemoteLocker.h"
-#include "IInputWithTimer.h"
-#include "IGameInput.h"
-#include "RemotePairingScreen.h"
-#include "PairingBlinker.h"
-#include "BlankBlinker.h"
-#include "ScoreboardBlinker.h"
-#include "ScoreBoard.h"  // Assuming ScoreBoard is a class not included in the original
+#include <memory>
+#include "../GameState/GameState.h"
+#include "../GameObject/GameObject.h"
+#include "../Reset/Reset.h"
+#include "../RemoteLocker/RemoteLocker.h"
+#include "../IInputWithTimer/IInputWithTimer.h"
+#include "../IGameInput/IGameInput.h"
+#include "../RemotePairingScreen/RemotePairingScreen.h"
+#include "../PairingBlinker/PairingBlinker.h"
+#include "../BlankBlinker/BlankBlinker.h"
+#include "../ScoreboardBlinker/ScoreboardBlinker.h"
+#include "../ScoreBoard/ScoreBoard.h"
 
+/************************************************************
+ * RemoteListenerContext
+ *
+ * This class provides a **shared context** for all game states
+ * within the **State Machine**. It manages shared resources
+ * like game objects, input handlers, and scoreboard elements.
+ *
+ * **Key Features**
+ * - **Thread-Safe**: Uses explicit `lock()` and `unlock()` methods.
+ * - **Encapsulated Access**: Provides getters for all shared resources.
+ * - **Centralized State Management**: Holds references to the game state
+ *   and relevant inputs required by different states.
+ ************************************************************/
 class RemoteListenerContext {
 public:
-    // Constructor to initialize shared resources
+    // Constructor initializes shared resources
     RemoteListenerContext(GameObject* gameObj,
                           GameState* gameSt,
                           Reset* resetPtr,
@@ -43,7 +45,7 @@ public:
                           ScoreboardBlinker* sleepingBlinker,
                           bool& noScoreFlag);
 
-    // Accessor Methods for Shared Resources
+    // **Accessors for Shared Resources**
     GameObject* getGameObject() const;
     GameState* getGameState() const;
     Reset* getReset() const;
@@ -59,12 +61,12 @@ public:
     ScoreboardBlinker* getSleepingBlinker() const;
     bool& getNoScoreFlag() const;
 
-    // Thread Safety Controls
+    // **Thread Safety Controls**
     void lock();
     void unlock();
 
 private:
-    mutable std::mutex mtx;  // Mutex for thread-safe access
+    mutable std::mutex mtx;  // Mutex for thread safety
 
     // Shared Game Resources
     GameObject* gameObject;
@@ -86,3 +88,4 @@ private:
 };
 
 #endif // REMOTE_LISTENER_CONTEXT_H
+

@@ -2,8 +2,8 @@
 #define PAIRING_MODE_STATE_H
 
 #include <mutex>
-#include "IRemoteListenerState.h"
-#include "RemoteListenerContext.h"
+#include "../IRemoteListenerState/IRemoteListenerState.h"
+#include "../RemoteListenerContext/RemoteListenerContext.h"
 
 /***************************************************************
  * PairingModeState

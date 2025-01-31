@@ -3,6 +3,7 @@
 
 class IGameInput {
 public:
+    virtual ~IGameInput() = default;
     virtual int getInput() = 0;
 };
 

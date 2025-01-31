@@ -1,13 +1,14 @@
-/************************************************************
- * RemoteListenerContext.cpp
- *
- * Implements the RemoteListenerContext class, which provides
- * access to shared resources required by game states.
- ************************************************************/
-
 #include "RemoteListenerContext.h"
 
-// Constructor
+/************************************************************
+ * RemoteListenerContext Implementation
+ *
+ * This file provides the implementation of the **RemoteListenerContext**
+ * class, which serves as the **shared state container** for different
+ * game states within the **State Machine**.
+ ************************************************************/
+
+// **Constructor**
 RemoteListenerContext::RemoteListenerContext(GameObject* gameObj,
                                              GameState* gameSt,
                                              Reset* resetPtr,
@@ -37,22 +38,22 @@ RemoteListenerContext::RemoteListenerContext(GameObject* gameObj,
     scoreboard = gameObject->getScoreBoard();
 }
 
-// Getters
-GameObject* RemoteListenerContext::getGameObject() { return gameObject; }
-GameState* RemoteListenerContext::getGameState() { return gameState; }
-Reset* RemoteListenerContext::getReset() { return reset; }
-RemoteLocker* RemoteListenerContext::getRemoteLocker() { return remoteLocker; }
-IInputWithTimer* RemoteListenerContext::getPairingInputWithTimer() { return pairingInputWithTimer; }
-IInputWithTimer* RemoteListenerContext::getNoBlinkInputWithTimer() { return noBlinkInputWithTimer; }
-IInputWithTimer* RemoteListenerContext::getSleepingInputWithTimer() { return sleepingInputWithTimer; }
-IGameInput* RemoteListenerContext::getGameInput() { return gameInput; }
-RemotePairingScreen* RemoteListenerContext::getRemotePairingScreen() { return remotePairingScreen; }
-ScoreBoard* RemoteListenerContext::getScoreboard() { return scoreboard; }
-PairingBlinker* RemoteListenerContext::getPairingBlinker() { return pairingBlinkerObj; }
-BlankBlinker* RemoteListenerContext::getBlankBlinker() { return blankBlinkerObj; }
-ScoreboardBlinker* RemoteListenerContext::getSleepingBlinker() { return sleepingBlinkerObj; }
-bool& RemoteListenerContext::getNoScoreFlag() { return no_score; }
+// **Accessors (Getters)**
+GameObject* RemoteListenerContext::getGameObject() const { return gameObject; }
+GameState* RemoteListenerContext::getGameState() const { return gameState; }
+Reset* RemoteListenerContext::getReset() const { return reset; }
+RemoteLocker* RemoteListenerContext::getRemoteLocker() const { return remoteLocker; }
+IInputWithTimer* RemoteListenerContext::getPairingInputWithTimer() const { return pairingInputWithTimer; }
+IInputWithTimer* RemoteListenerContext::getNoBlinkInputWithTimer() const { return noBlinkInputWithTimer; }
+IInputWithTimer* RemoteListenerContext::getSleepingInputWithTimer() const { return sleepingInputWithTimer; }
+IGameInput* RemoteListenerContext::getGameInput() const { return gameInput; }
+RemotePairingScreen* RemoteListenerContext::getRemotePairingScreen() const { return remotePairingScreen; }
+ScoreBoard* RemoteListenerContext::getScoreboard() const { return scoreboard; }
+PairingBlinker* RemoteListenerContext::getPairingBlinker() const { return pairingBlinkerObj; }
+BlankBlinker* RemoteListenerContext::getBlankBlinker() const { return blankBlinkerObj; }
+ScoreboardBlinker* RemoteListenerContext::getSleepingBlinker() const { return sleepingBlinkerObj; }
+bool& RemoteListenerContext::getNoScoreFlag() const { return no_score; }
 
-// Thread safety
+// **Thread Safety Controls**
 void RemoteListenerContext::lock() { mtx.lock(); }
 void RemoteListenerContext::unlock() { mtx.unlock(); }

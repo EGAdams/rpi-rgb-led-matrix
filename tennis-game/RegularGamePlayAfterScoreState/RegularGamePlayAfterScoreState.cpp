@@ -1,7 +1,4 @@
 #include "RegularGamePlayAfterScoreState.h"
-#include <iostream>
-#include <thread>
-#include <chrono>
 
 void RegularGamePlayAfterScoreState::handleInput(RemoteListenerContext &context) {
     context.lock();  // Ensure thread safety

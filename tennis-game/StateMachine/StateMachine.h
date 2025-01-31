@@ -5,10 +5,11 @@
 #include <chrono>
 #include <iostream>
 #include <memory>
-#include "IRemoteListenerState.h"
-#include "PairingModeState.h"
+#include "../IRemoteListenerState/IRemoteListenerState.h"
+#include "../PairingModeState/PairingModeState.h"
 #include "../SleepModeState/SleepModeState.h"
 #include "../RegularGamePlayBeforeScoreState/RegularGamePlayBeforeScoreState.h"
+#include "../RegularGamePlayAfterScoreState/RegularGamePlayAfterScoreState.h"
 #include "../GameState/GameState.h"
 #include "../TennisConstants/TennisConstants.h" // Assuming this contains SCORE_DELAY, PAIRING_MODE, etc.
 

@@ -1,7 +1,4 @@
 #include "SleepModeState.h"
-#include "../RemoteListenerContext/RemoteListenerContext.h"
-#include "GameTimer.h"
-#include <iostream>
 
 void SleepModeState::handleInput(RemoteListenerContext &context) {
     context.lock();  // Ensure thread safety

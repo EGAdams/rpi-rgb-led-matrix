@@ -3,11 +3,12 @@
 
 #include <memory>
 #include <mutex>
-#include "IRemoteListenerState.h"
-#include "RemoteListenerContext.h"
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include "../IRemoteListenerState/IRemoteListenerState.h"
+#include "../RemoteListenerContext/RemoteListenerContext.h"
+#include "../GameTimer/GameTimer.h"
 
 class SleepModeState : public IRemoteListenerState {
 public:

@@ -39,7 +39,7 @@ private:
      */
     bool validateInput(int selection) const;
     std::chrono::steady_clock::time_point _startTime; ///< Start time for input polling.
-    long _elapsedTimeMs; ///< Elapsed time in timeout.
+    unsigned long _elapsedTimeMs; ///< Elapsed time in timeout.
     void _restoreTerminal( const struct termios& oldt, int old_flags );
     int _configureTerminal( struct termios& oldt );
 };

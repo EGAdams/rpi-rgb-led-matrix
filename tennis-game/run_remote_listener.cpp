@@ -53,23 +53,6 @@
 #include <mutex>
 #include <memory>
 
-// ---------------------------------------------------------
-// Forward declarations of existing classes/interfaces
-// ---------------------------------------------------------
-// class GameState;
-// class GameObject;
-// class Reset;
-// class Inputs;
-// class RemoteLocker;
-// class IInputWithTimer;
-// class IGameInput;
-// class Blinker;
-// class ScoreBoard;
-// class PairingBlinker;
-// class BlankBlinker;
-// class ScoreboardBlinker;
-// class RemotePairingScreen;
-
 // External global for receiving Ctrl-C signals, etc.
 extern volatile std::sig_atomic_t gSignalStatus;
 
@@ -172,4 +155,47 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
     delete sleepingBlinker;
 }
 
+/***************************************************************
+ * main()
+ *
+ * Entry point for the program. Initializes the game system
+ * and starts the run_remote_listener function.
+ ***************************************************************/
+int main() {
+    std::cout << "Initializing Tennis Game System..." << std::endl;
+
+    // Register signal handler for graceful shutdown
+    std::signal(SIGINT, GameObject::_signalHandler);
+
+    // Create core game objects
+    GameState* gameState = new GameState();
+    ColorManager* colorManager = new ColorManager();
+
+    // Determine display type (Raspberry Pi or Console)
+    bool isOnPi = is_on_raspberry_pi();
+    IDisplay* display = static_cast<IDisplay*>(new ConsoleDisplay(colorManager));
+
+    GameObject* gameObject = new GameObject(gameState, display);
+    Reset* reset = new Reset(
+        gameObject->getPlayer1(), 
+        gameObject->getPlayer2(), 
+        gameObject->getPinInterface(), 
+        gameState
+    );
+
+    std::cout << "Game System Initialized. Starting Remote Listener..." << std::endl;
+
+    // Run the remote listener using state-driven logic
+    run_remote_listener(gameObject, gameState, reset);
+
+    // Cleanup dynamically allocated memory
+    delete gameObject;
+    delete gameState;
+    delete reset;
+    delete display;
+    delete colorManager;
+
+    std::cout << "Shutting down Tennis Game System." << std::endl;
+    return 0;
+}
 
