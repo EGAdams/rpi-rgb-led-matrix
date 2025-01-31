@@ -31,7 +31,10 @@ SOURCES = \
   GameWinSequence/GameWinSequence.cpp \
   History/History.cpp \
   IInputWithTimer/IInputWithTimer.cpp \
+  IQueryResultProcessor/IQueryResultProcessor.h \
   IRemoteListenerState/IRemoteListenerState.cpp \
+  ISourceDataConfig/ISourceDataConfig.h \
+  ISourceQueryConfig/ISourceQueryConfig.h \
   Inputs/Inputs.cpp \
   KeyboardGameInput/KeyboardGameInput.cpp \
   KeyboardInputWithTimer/KeyboardInputWithTimer.cpp \
@@ -69,6 +72,7 @@ SOURCES = \
   SetLeds/SetLeds.cpp \
   SetWin/SetWin.cpp \
   SleepModeState/SleepModeState.cpp \
+  SourceData/SourceData.cpp \
   StateMachine/StateMachine.cpp \
   SubjectManager/SubjectManager.cpp \
   TieBreaker/TieBreaker.cpp \
