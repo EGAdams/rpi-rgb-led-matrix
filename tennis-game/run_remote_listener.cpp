@@ -121,11 +121,17 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
     IGameInput*         gameInput              = nullptr;
 
     if ( scoreboard->onRaspberryPi() && keyboard_off ) {
+        if (!pairingBlinker) {
+            print("*** ERROR: pairingBlinker is NULL before creating RemoteInputWithTimer! ***");
+        }
         pairingInputWithTimer       = new RemoteInputWithTimer( pairingBlinker, inputs, 4000 );
         noBlinkInputWithTimer       = new RemoteInputWithTimer( blankBlinker,   inputs, 4000 );
         sleepingInputWithTimer      = new RemoteInputWithTimer( sleepingBlinker,inputs, 4000 );
         gameInput                   = new RemoteGameInput(      inputs         );
     } else {
+        if (!pairingBlinker) {
+            print("*** ERROR: pairingBlinker is NULL before creating KeyboardInputWithTimer! ***");
+        }
         pairingInputWithTimer       = new KeyboardInputWithTimer( pairingBlinker, KEYBOARD_TIMEOUT );
         noBlinkInputWithTimer       = new KeyboardInputWithTimer( blankBlinker,   KEYBOARD_TIMEOUT );
         sleepingInputWithTimer      = new KeyboardInputWithTimer( sleepingBlinker,KEYBOARD_TIMEOUT );

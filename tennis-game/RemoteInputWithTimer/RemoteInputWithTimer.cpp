@@ -10,7 +10,15 @@
 
 RemoteInputWithTimer::RemoteInputWithTimer( Blinker* blinker, Inputs* inputs, unsigned long timeout_ms )
     : IInputWithTimer( blinker, timeout_ms ), _inputs( inputs ) {
-    std::cout << "RemoteInputWithTimer constructor called" << std::endl; }
+
+    std::cout << "RemoteInputWithTimer constructor called" << std::endl; 
+    
+    if (!blinker) {
+        print("*** ERROR: RemoteInputWithTimer received a NULL blinker! ***");
+    } else {
+        print("*** RemoteInputWithTimer initialized with valid blinker. ***");
+    }
+}
 
 RemoteInputWithTimer::~RemoteInputWithTimer() {}
 
@@ -21,9 +29,14 @@ int RemoteInputWithTimer::getInput() {
     unsigned long sleep_start = GameTimer::gameMillis(); // Mark start time with game timer
     int selection;
     bool done = false;
-    // print( "starting blinker from within RemoteInputWithTimer..." );
+    if (!_blinker) {
+        print("*** ERROR: _blinker is NULL in RemoteInputWithTimer::getInput() ***");
+        return -1; // Return error value instead of crashing
+    }
+
+    print("*** RemoteInputWithTimer::getInput() - Calling _blinker->start() ***");
     _blinker->start();
-    // print( "getting input from within RemoteInputWithTimer..." );
+    print( "getting input from within RemoteInputWithTimer..." );
     if ( REMOTE_INPUT == 1 ) {  // 122224
         /*// if the selection is never one of the valid remote inputs, then we will never exit the while loop! // 011925
          * there is no timer here, the agent says.  in the future we will take out this comment and ask a new employee a question about this dillemma.  we will ask them to explain why this is a bad design because it locks up the system. meaning,  so how do we fix this?
