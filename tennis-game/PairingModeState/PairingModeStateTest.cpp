@@ -128,7 +128,7 @@ class PairingModeStateTest : public ::testing::Test {
 
         bool noScoreFlag = true;
         context = std::make_unique<RemoteListenerContext>(
-            gameObject, gameState, reset, remoteLocker, 
+            scoreboard, gameObject, gameState, reset, remoteLocker, 
             pairingPtr, noBlinkPtr, sleepingPtr, gameInputPtr, 
             remotePairingScreen.get(), pairingBlinker, blankBlinker, 
             sleepingBlinker, noScoreFlag

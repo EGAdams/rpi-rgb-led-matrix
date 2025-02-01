@@ -77,7 +77,6 @@ private:
     RemotePairingScreen* remotePairingScreen;
     ScoreBoard* scoreboard;
     bool& no_score;
-
     std::shared_ptr<PairingBlinker> pairingBlinker;  // NEW: Store pairingBlinker
 
     // Mutex for thread safety

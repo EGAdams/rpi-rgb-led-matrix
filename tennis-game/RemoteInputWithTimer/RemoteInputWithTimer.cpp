@@ -49,8 +49,6 @@ int RemoteInputWithTimer::getInput() {
 
     print("*** RemoteInputWithTimer::getInput() - Calling _blinker->start() ***");
     _blinker->start();  // This was causing the segmentation fault before
-
-    return 0; // Placeholder return value
     print( "getting input from within RemoteInputWithTimer..." );
     if ( REMOTE_INPUT == 1 ) {  // 122224
         /*// if the selection is never one of the valid remote inputs, then we will never exit the while loop! // 011925

@@ -156,7 +156,6 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
     delete gameInput;
     delete inputs;
     delete remotePairingScreen;
-
 }
 /***************************************************************
  * main()
