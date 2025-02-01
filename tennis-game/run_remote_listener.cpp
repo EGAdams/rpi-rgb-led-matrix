@@ -96,12 +96,9 @@ bool is_on_raspberry_pi() {
  * each iteration.
  ***************************************************************/
 void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset* reset ) {
-    // Initialization (same as before)
-    const int KEYBOARD_TIMEOUT = 120000;
+    const int INPUT_TIMEOUT = 5000; // <---------- set universal timeout here ---------<<
     GameState* gameState = gameStatearg;
     RemoteLocker*       remoteLocker = new RemoteLocker( gameState );
-
-    // Create input handlers and blinkers (same as before)
     bool no_score       = true;
     Inputs* inputs      = new Inputs( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
     bool keyboard_off   = false;
@@ -109,7 +106,7 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
     scoreboard->setLittleDrawerFont( "fonts/8x13B.bdf" );
     RemotePairingScreen*               remotePairingScreen = new RemotePairingScreen( scoreboard );
     
-    // Set up blinkers
+    // set up blinkers
     std::shared_ptr<PairingBlinker>    pairingBlinker   = std::make_shared<PairingBlinker>(    scoreboard );
     std::shared_ptr<ScoreboardBlinker> sleepingBlinker  = std::make_shared<ScoreboardBlinker>( scoreboard );
     std::shared_ptr<BlankBlinker>      blankBlinker     = std::make_shared<BlankBlinker>();
@@ -120,35 +117,38 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
     IInputWithTimer*    sleepingInputWithTimer = nullptr;
     IGameInput*         gameInput              = nullptr;
 
+    gameObject->loopGame(); // call loop game to initialize sets
+
+    // create the input handlers depending on the machine type
     if ( scoreboard->onRaspberryPi() && keyboard_off ) {
         if (!pairingBlinker) {
             print("*** ERROR: pairingBlinker is NULL before creating RemoteInputWithTimer! ***");
         }
-        pairingInputWithTimer       = new RemoteInputWithTimer( pairingBlinker, inputs, 4000 );
-        noBlinkInputWithTimer       = new RemoteInputWithTimer( blankBlinker,   inputs, 4000 );
-        sleepingInputWithTimer      = new RemoteInputWithTimer( sleepingBlinker,inputs, 4000 );
+        pairingInputWithTimer       = new RemoteInputWithTimer( pairingBlinker, inputs, INPUT_TIMEOUT );
+        noBlinkInputWithTimer       = new RemoteInputWithTimer( blankBlinker,   inputs, INPUT_TIMEOUT );
+        sleepingInputWithTimer      = new RemoteInputWithTimer( sleepingBlinker,inputs, INPUT_TIMEOUT );
         gameInput                   = new RemoteGameInput(      inputs         );
     } else {
         if (!pairingBlinker) {
             print("*** ERROR: pairingBlinker is NULL before creating KeyInputWithTimer! ***");
         }
-        pairingInputWithTimer       = new KeyboardInputWithTimer( pairingBlinker.get(), KEYBOARD_TIMEOUT );
-        noBlinkInputWithTimer       = new KeyboardInputWithTimer( blankBlinker.get(),   KEYBOARD_TIMEOUT );
-        sleepingInputWithTimer      = new KeyboardInputWithTimer( sleepingBlinker.get(),KEYBOARD_TIMEOUT );
+        pairingInputWithTimer       = new KeyboardInputWithTimer( pairingBlinker.get(), INPUT_TIMEOUT );
+        noBlinkInputWithTimer       = new KeyboardInputWithTimer( blankBlinker.get(),   INPUT_TIMEOUT );
+        sleepingInputWithTimer      = new KeyboardInputWithTimer( sleepingBlinker.get(),INPUT_TIMEOUT );
         gameInput                   = new KeyboardGameInput();
     }
 
-    // Create the state context
+    // create the state context
     RemoteListenerContext context( scoreboard, gameObject, gameState, reset, remoteLocker, 
                                    pairingInputWithTimer, noBlinkInputWithTimer,
                                    sleepingInputWithTimer, gameInput, remotePairingScreen, 
                                    pairingBlinker, blankBlinker, sleepingBlinker, no_score );
 
-    // Initialize and run the StateMachine
+    // initialize and run the StateMachine
     StateMachine stateMachine( context );
     stateMachine.run();
 
-    // Cleanup
+    // cleanup
     delete remoteLocker;
     delete pairingInputWithTimer;
     delete noBlinkInputWithTimer;
