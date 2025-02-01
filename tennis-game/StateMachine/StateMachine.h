@@ -39,7 +39,7 @@ private:
   RemoteListenerContext& _context;
   std::unique_ptr<IRemoteListenerState> _currentState;
   int _currentStateId;
-  int _state_machine_delay = 1;
+  int _state_machine_delay = 500; // while loop delay in milliseconds
 
   /**
    * @brief Sets the current state based on the game state.

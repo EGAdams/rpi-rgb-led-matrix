@@ -11,62 +11,61 @@
  * - If a valid input is received, marks the corresponding player as paired.
  * - If both players are paired or pairing times out, transitions to sleep mode.
  ***************************************************************/
-void PairingModeState::handleInput(RemoteListenerContext &context) {
+void PairingModeState::handleInput( RemoteListenerContext& context ) {
     context.lock();  // Ensure thread safety
 
-    print("=== [STATE: PairingMode] ===");
+    print( "=== [STATE: PairingMode] ===" );
 
     // **Null Safety Checks**
-    if (!context.getRemotePairingScreen()) {
-        print("*** ERROR: remotePairingScreen is NULL! ***");
+    if ( !context.getRemotePairingScreen()) {
+        print( "*** ERROR: remotePairingScreen is NULL! ***" );
         context.unlock();
         return;
     }
-    if (!context.getPairingBlinker()) {
-        print("*** ERROR: pairingBlinker is NULL! ***");
+
+    if ( !context.getPairingBlinker()) {
+        print( "*** ERROR: pairingBlinker is NULL! ***" );
         context.unlock();
         return;
-    }
-    if (!context.getPairingInputWithTimer()) {
-        print("*** ERROR: pairingInputWithTimer is NULL! ***");
+    } 
+    
+    if ( !context.getPairingInputWithTimer()) {
+        print( "*** ERROR: pairingInputWithTimer is NULL! ***" );
         context.unlock();
         return;
     }
 
     // Ensure we are in pairing mode and the blinker is active
-    while (context.getRemotePairingScreen()->inPairingMode() && 
-           context.getPairingBlinker()->awake()) 
-    {
-        print("Waiting for pairing input...");
-
+    while ( context.getRemotePairingScreen()->inPairingMode() && context.getPairingBlinker()->awake()) {
+        print( "Waiting for pairing input..." );
         int selection = context.getPairingInputWithTimer()->getInput();
 
-        if (selection == GREEN_REMOTE_GREEN_SCORE) {
+        if ( selection == GREEN_REMOTE_GREEN_SCORE ) {
             context.getRemotePairingScreen()->greenPlayerPressed();
-            context.getPairingBlinker()->setGreenPlayerPaired(true);
-            print("Green player paired.");
-        } else if (selection == RED_REMOTE_RED_SCORE) {
+            context.getPairingBlinker()->setGreenPlayerPaired( true );
+            print( "Green player paired." );
+        } else if ( selection == RED_REMOTE_RED_SCORE ) {
             context.getRemotePairingScreen()->redPlayerPressed();
-            context.getPairingBlinker()->setRedPlayerPaired(true);
-            print("Red player paired.");
+            context.getPairingBlinker()->setRedPlayerPaired( true );
+            print( "Red player paired." );
         } else {
-            print("*** Invalid selection during pairing. ***");
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+            print( "*** Invalid selection during pairing. ***" );
+            std::this_thread::sleep_for( std::chrono::milliseconds( 500 ));
         }
 
         // If both players are paired, exit the loop
-        if (context.getPairingBlinker()->areBothPlayersPaired()) {
-            print("Both players paired, exiting pairing mode.");
+        if ( context.getPairingBlinker()->areBothPlayersPaired()) {
+            print( "Both players paired, exiting pairing mode." );
             break;
         }
     }
 
     // If pairing is complete or timeout occurs, transition to sleep mode
-    if (!context.getPairingBlinker()->awake()) {
-        print("Pairing blinker is not awake, stopping pairing mode...");
+    if ( !context.getPairingBlinker()->awake()) {
+        print( "Pairing blinker is not awake, stopping pairing mode..." );
         context.getPairingBlinker()->stop();
-        print("Transitioning to sleep mode...");
-        context.getGameState()->setCurrentAction(SLEEP_MODE);
+        print( "Transitioning to sleep mode..." );
+        context.getGameState()->setCurrentAction( SLEEP_MODE );
     }
 
     context.unlock();  // Unlock before exiting

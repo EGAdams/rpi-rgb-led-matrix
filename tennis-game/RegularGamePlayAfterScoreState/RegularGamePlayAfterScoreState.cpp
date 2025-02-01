@@ -4,7 +4,9 @@ void RegularGamePlayAfterScoreState::handleInput(RemoteListenerContext &context)
     context.lock();  // Ensure thread safety
 
     print("=== [STATE: RegularGamePlayAfterScore] ===");
+    print( "*** updating scoreboard ***" );
     context.getScoreboard()->update();
+    print( "*** done updating scoreboard ***" );
 
     // Block on the gameInput (no timers here)
     int selection = context.getGameInput()->getInput();
