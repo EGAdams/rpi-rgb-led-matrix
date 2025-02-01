@@ -7,7 +7,7 @@
 /***************************************************************
  * PairingModeState::handleInput()
  *
- * - Listens for player remote inputs to pair players.
+ * - Listens for player inputs to pair players.
  * - If a valid input is received, marks the corresponding player as paired.
  * - If both players are paired or pairing times out, transitions to sleep mode.
  ***************************************************************/
@@ -37,7 +37,7 @@ void PairingModeState::handleInput(RemoteListenerContext &context) {
     while (context.getRemotePairingScreen()->inPairingMode() && 
            context.getPairingBlinker()->awake()) 
     {
-        print("Waiting for remote pairing input...");
+        print("Waiting for pairing input...");
 
         int selection = context.getPairingInputWithTimer()->getInput();
 

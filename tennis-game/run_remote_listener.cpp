@@ -102,19 +102,19 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
     RemoteLocker*       remoteLocker = new RemoteLocker( gameState );
 
     // Create input handlers and blinkers (same as before)
-    bool no_score = true;
+    bool no_score       = true;
     Inputs* inputs      = new Inputs( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
-    bool keyboard_off   = true;
+    bool keyboard_off   = false;
     auto scoreboard     = gameObject->getScoreBoard();
     scoreboard->setLittleDrawerFont( "fonts/8x13B.bdf" );
-
+    RemotePairingScreen*               remotePairingScreen = new RemotePairingScreen( scoreboard );
+    
     // Set up blinkers
-    RemotePairingScreen*    remotePairingScreen = new RemotePairingScreen( scoreboard );
-    std::shared_ptr<PairingBlinker> pairingBlinker = std::make_shared<PairingBlinker>(scoreboard);
-    std::shared_ptr<BlankBlinker> blankBlinker = std::make_shared<BlankBlinker>();
-    std::shared_ptr<ScoreboardBlinker> sleepingBlinker = std::make_shared<ScoreboardBlinker>(scoreboard);
+    std::shared_ptr<PairingBlinker>    pairingBlinker   = std::make_shared<PairingBlinker>(    scoreboard );
+    std::shared_ptr<ScoreboardBlinker> sleepingBlinker  = std::make_shared<ScoreboardBlinker>( scoreboard );
+    std::shared_ptr<BlankBlinker>      blankBlinker     = std::make_shared<BlankBlinker>();
 
-    // Determine input type (same as before)
+    // declare the input handlers
     IInputWithTimer*    pairingInputWithTimer  = nullptr;
     IInputWithTimer*    noBlinkInputWithTimer  = nullptr;
     IInputWithTimer*    sleepingInputWithTimer = nullptr;
