@@ -9,11 +9,11 @@
 #include "RemoteInputWithTimer.h"
 #include "../TennisConstants/TennisConstants.h"
 
-RemoteInputWithTimer::RemoteInputWithTimer(std::shared_ptr<Blinker> blinker, Inputs* inputs, unsigned long timeout_ms)
-    : IInputWithTimer(blinker.get(), timeout_ms), _blinker(std::move(blinker)), _inputs(inputs) {
+RemoteInputWithTimer::RemoteInputWithTimer(Blinker* blinker, Inputs* inputs, unsigned long timeout_ms)
+    : IInputWithTimer(blinker, timeout_ms), _blinker(blinker), _inputs(inputs) {
     
     std::cout << "DEBUG: RemoteInputWithTimer constructor called with blinker = " 
-          << blinker.get() << " and inputs = " << inputs << std::endl;
+          << blinker << " and inputs = " << inputs << std::endl;
 
 
     std::cout << "DEBUG: RemoteInputWithTimer constructor called, this = " << this << std::endl;
@@ -22,7 +22,7 @@ RemoteInputWithTimer::RemoteInputWithTimer(std::shared_ptr<Blinker> blinker, Inp
         print("*** ERROR: RemoteInputWithTimer received a NULL blinker! ***");
     } else {
         print("*** RemoteInputWithTimer initialized with valid blinker at address: " +
-              std::to_string(reinterpret_cast<uintptr_t>(_blinker.get())) + " ***");
+              std::to_string(reinterpret_cast<uintptr_t>( _blinker )) + " ***");
     }
 }
 
@@ -44,7 +44,7 @@ int RemoteInputWithTimer::getInput() {
         print("*** ERROR: _blinker is NULL in RemoteInputWithTimer::getInput() ***");
         return -1; // Return error instead of crashing
     }
-    print("*** _blinker address: " + std::to_string(reinterpret_cast<uintptr_t>(_blinker.get())) + " ***");
+    // print("*** _blinker address: " + std::to_string(reinterpret_cast<uintptr_t>(_blinker.get())) + " ***");
     print("*** RemoteInputWithTimer::getInput() - calling _blinker->start() ***");
     _blinker->start();  // This was causing the segmentation fault before
     print( "getting input from within RemoteInputWithTimer..." );

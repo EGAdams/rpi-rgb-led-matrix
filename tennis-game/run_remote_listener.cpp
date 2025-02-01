@@ -96,7 +96,7 @@ bool is_on_raspberry_pi() {
  * each iteration.
  ***************************************************************/
 void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset* reset ) {
-    const int INPUT_TIMEOUT = 120000; // <---------- set universal timeout here ---------<<
+    const int INPUT_TIMEOUT = 60000; // <---------- set universal timeout here ---------<<
     GameState* gameState = gameStatearg;
     RemoteLocker*       remoteLocker = new RemoteLocker( gameState );
     bool no_score       = true;
@@ -124,9 +124,9 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
         if (!pairingBlinker) {
             print("*** ERROR: pairingBlinker is NULL before creating RemoteInputWithTimer! ***");
         }
-        pairingInputWithTimer       = new RemoteInputWithTimer( pairingBlinker, inputs, INPUT_TIMEOUT );
-        noBlinkInputWithTimer       = new RemoteInputWithTimer( blankBlinker,   inputs, INPUT_TIMEOUT );
-        sleepingInputWithTimer      = new RemoteInputWithTimer( sleepingBlinker,inputs, INPUT_TIMEOUT );
+        pairingInputWithTimer       = new RemoteInputWithTimer( pairingBlinker.get(), inputs, INPUT_TIMEOUT );
+        noBlinkInputWithTimer       = new RemoteInputWithTimer( blankBlinker.get(),   inputs, INPUT_TIMEOUT );
+        sleepingInputWithTimer      = new RemoteInputWithTimer( sleepingBlinker.get(),inputs, INPUT_TIMEOUT );
         gameInput                   = new RemoteGameInput(      inputs         );
     } else {
         if (!pairingBlinker) {

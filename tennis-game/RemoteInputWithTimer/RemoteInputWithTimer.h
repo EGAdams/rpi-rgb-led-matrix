@@ -10,11 +10,11 @@
 
 class RemoteInputWithTimer : public IInputWithTimer {
 private:
-    std::shared_ptr<Blinker> _blinker;  // Use shared_ptr to prevent dangling pointers
+     Blinker* _blinker;  // Use shared_ptr to prevent dangling pointers
     Inputs* _inputs;                    // Assuming Inputs* is managed externally
 
 public:
-    RemoteInputWithTimer(std::shared_ptr<Blinker> blinker, Inputs* inputs, unsigned long timeout_ms = 4000);
+    RemoteInputWithTimer( Blinker* blinker, Inputs* inputs, unsigned long timeout_ms = 4000 );
     ~RemoteInputWithTimer() override;
 
     int getInput() override;
