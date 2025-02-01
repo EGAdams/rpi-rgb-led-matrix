@@ -2,7 +2,8 @@
 #include <iostream>
 
 // Constructor
-RemoteListenerContext::RemoteListenerContext(GameObject* gameObj,
+RemoteListenerContext::RemoteListenerContext(ScoreBoard* scoreboard_arg,
+                                             GameObject* gameObj,
                                              GameState* gameSt,
                                              Reset* resetPtr,
                                              RemoteLocker* rLocker,
@@ -24,10 +25,10 @@ RemoteListenerContext::RemoteListenerContext(GameObject* gameObj,
       sleepingInputWithTimer(sleepingTimer),
       gameInput(gameIn),
       remotePairingScreen(pairingScreen),
-      scoreboard(nullptr), // Initialize this if necessary
+      pairingBlinker(pairingBlinker),
+      scoreboard(scoreboard_arg),
       no_score(noScoreFlag) {
-    // Constructor implementation
-    std::cout << "RemoteListenerContext constructor called" << std::endl;
+    print( "DEBUG: RemoteListenerContext constructor called" );
 }
 
 // Accessors (Getters)
@@ -73,6 +74,10 @@ ScoreBoard* RemoteListenerContext::getScoreboard() const {
 
 bool& RemoteListenerContext::getNoScoreFlag() const {
     return no_score;
+}
+
+std::shared_ptr<PairingBlinker> RemoteListenerContext::getPairingBlinker() const {
+    return pairingBlinker;
 }
 
 // Thread Safety Controls

@@ -11,8 +11,12 @@
 
 RemoteInputWithTimer::RemoteInputWithTimer(std::shared_ptr<Blinker> blinker, Inputs* inputs, unsigned long timeout_ms)
     : IInputWithTimer(blinker.get(), timeout_ms), _blinker(std::move(blinker)), _inputs(inputs) {
+    
+    std::cout << "DEBUG: RemoteInputWithTimer constructor called with blinker = " 
+          << blinker.get() << " and inputs = " << inputs << std::endl;
 
-    std::cout << "RemoteInputWithTimer constructor called" << std::endl;
+
+    std::cout << "DEBUG: RemoteInputWithTimer constructor called, this = " << this << std::endl;
 
     if (!_blinker) {
         print("*** ERROR: RemoteInputWithTimer received a NULL blinker! ***");

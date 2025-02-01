@@ -31,7 +31,8 @@
 class RemoteListenerContext {
 public:
     // Constructor initializes shared resources
-    RemoteListenerContext(GameObject* gameObj,
+    RemoteListenerContext(ScoreBoard* scoreboard,
+                          GameObject* gameObj,
                           GameState* gameSt,
                           Reset* resetPtr,
                           RemoteLocker* rLocker,
@@ -58,6 +59,8 @@ public:
     ScoreBoard* getScoreboard() const;
     bool& getNoScoreFlag() const;
 
+    std::shared_ptr<PairingBlinker> getPairingBlinker() const;  // NEW getter for pairingBlinker
+
     // **Thread Safety Controls**
     void lock();
     void unlock();
@@ -74,6 +77,8 @@ private:
     RemotePairingScreen* remotePairingScreen;
     ScoreBoard* scoreboard;
     bool& no_score;
+
+    std::shared_ptr<PairingBlinker> pairingBlinker;  // NEW: Store pairingBlinker
 
     // Mutex for thread safety
     std::mutex mtx;
