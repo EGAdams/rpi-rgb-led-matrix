@@ -44,10 +44,8 @@ int RemoteInputWithTimer::getInput() {
         print("*** ERROR: _blinker is NULL in RemoteInputWithTimer::getInput() ***");
         return -1; // Return error instead of crashing
     }
-
     print("*** _blinker address: " + std::to_string(reinterpret_cast<uintptr_t>(_blinker.get())) + " ***");
-
-    print("*** RemoteInputWithTimer::getInput() - Calling _blinker->start() ***");
+    print("*** RemoteInputWithTimer::getInput() - calling _blinker->start() ***");
     _blinker->start();  // This was causing the segmentation fault before
     print( "getting input from within RemoteInputWithTimer..." );
     if ( REMOTE_INPUT == 1 ) {  // 122224
