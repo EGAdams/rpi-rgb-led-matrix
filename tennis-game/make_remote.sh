@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# clear the screen for a fresh debugging start
+clear;
+
 # Run make and capture output
 output=$(make -f Makefile.remote_listener -k 2>&1)
 

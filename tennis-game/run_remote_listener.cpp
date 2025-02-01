@@ -110,9 +110,12 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
 
     // Set up blinkers
     RemotePairingScreen*    remotePairingScreen = new RemotePairingScreen( scoreboard );
-    PairingBlinker*         pairingBlinker      = new PairingBlinker( scoreboard );
-    BlankBlinker*           blankBlinker        = new BlankBlinker();
-    ScoreboardBlinker*      sleepingBlinker     = new ScoreboardBlinker( scoreboard );
+    // PairingBlinker*         pairingBlinker      = new PairingBlinker( scoreboard );
+    // BlankBlinker*           blankBlinker        = new BlankBlinker();
+    // ScoreboardBlinker*      sleepingBlinker     = new ScoreboardBlinker( scoreboard );
+    std::shared_ptr<PairingBlinker> pairingBlinker = std::make_shared<PairingBlinker>(scoreboard);
+    std::shared_ptr<BlankBlinker> blankBlinker = std::make_shared<BlankBlinker>();
+    std::shared_ptr<ScoreboardBlinker> sleepingBlinker = std::make_shared<ScoreboardBlinker>(scoreboard);
 
     // Determine input type (same as before)
     IInputWithTimer*    pairingInputWithTimer  = nullptr;
@@ -130,12 +133,12 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
         gameInput                   = new RemoteGameInput(      inputs         );
     } else {
         if (!pairingBlinker) {
-            print("*** ERROR: pairingBlinker is NULL before creating KeyboardInputWithTimer! ***");
+            print("*** ERROR: pairingBlinker is NULL before creating KeyInputWithTimer! ***");
         }
-        pairingInputWithTimer       = new KeyboardInputWithTimer( pairingBlinker, KEYBOARD_TIMEOUT );
-        noBlinkInputWithTimer       = new KeyboardInputWithTimer( blankBlinker,   KEYBOARD_TIMEOUT );
-        sleepingInputWithTimer      = new KeyboardInputWithTimer( sleepingBlinker,KEYBOARD_TIMEOUT );
-        gameInput                   = new KeyboardGameInput();
+        // pairingInputWithTimer       = new KeyboardInputWithTimer( pairingBlinker, KEYBOARD_TIMEOUT );
+        // noBlinkInputWithTimer       = new KeyboardInputWithTimer( blankBlinker,   KEYBOARD_TIMEOUT );
+        // sleepingInputWithTimer      = new KeyboardInputWithTimer( sleepingBlinker,KEYBOARD_TIMEOUT );
+        // gameInput                   = new KeyboardGameInput();
     }
 
     // Create the state context
@@ -156,9 +159,6 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
     delete gameInput;
     delete inputs;
     delete remotePairingScreen;
-    delete pairingBlinker;
-    delete blankBlinker;
-    delete sleepingBlinker;
 }
 
 /***************************************************************

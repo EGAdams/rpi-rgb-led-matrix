@@ -5,22 +5,27 @@
 #include <termios.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <memory>
 #include "RemoteInputWithTimer.h"
 #include "../TennisConstants/TennisConstants.h"
 
-RemoteInputWithTimer::RemoteInputWithTimer( Blinker* blinker, Inputs* inputs, unsigned long timeout_ms )
-    : IInputWithTimer( blinker, timeout_ms ), _inputs( inputs ) {
+RemoteInputWithTimer::RemoteInputWithTimer(std::shared_ptr<Blinker> blinker, Inputs* inputs, unsigned long timeout_ms)
+    : IInputWithTimer(blinker.get(), timeout_ms), _blinker(std::move(blinker)), _inputs(inputs) {
 
-    std::cout << "RemoteInputWithTimer constructor called" << std::endl; 
-    
-    if (!blinker) {
+    std::cout << "RemoteInputWithTimer constructor called" << std::endl;
+
+    if (!_blinker) {
         print("*** ERROR: RemoteInputWithTimer received a NULL blinker! ***");
     } else {
-        print("*** RemoteInputWithTimer initialized with valid blinker. ***");
+        print("*** RemoteInputWithTimer initialized with valid blinker at address: " +
+              std::to_string(reinterpret_cast<uintptr_t>(_blinker.get())) + " ***");
     }
 }
 
-RemoteInputWithTimer::~RemoteInputWithTimer() {}
+// Destructor definition (only once)
+RemoteInputWithTimer::~RemoteInputWithTimer() {
+    print("*** RemoteInputWithTimer destructor called ***");
+}
 
 int RemoteInputWithTimer::getInput() {
     using namespace std::chrono;
@@ -29,13 +34,19 @@ int RemoteInputWithTimer::getInput() {
     unsigned long sleep_start = GameTimer::gameMillis(); // Mark start time with game timer
     int selection;
     bool done = false;
+    print("*** RemoteInputWithTimer::getInput() - Checking _blinker before start() ***");
+
     if (!_blinker) {
         print("*** ERROR: _blinker is NULL in RemoteInputWithTimer::getInput() ***");
-        return -1; // Return error value instead of crashing
+        return -1; // Return error instead of crashing
     }
 
+    print("*** _blinker address: " + std::to_string(reinterpret_cast<uintptr_t>(_blinker.get())) + " ***");
+
     print("*** RemoteInputWithTimer::getInput() - Calling _blinker->start() ***");
-    _blinker->start();
+    _blinker->start();  // This was causing the segmentation fault before
+
+    return 0; // Placeholder return value
     print( "getting input from within RemoteInputWithTimer..." );
     if ( REMOTE_INPUT == 1 ) {  // 122224
         /*// if the selection is never one of the valid remote inputs, then we will never exit the while loop! // 011925

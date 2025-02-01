@@ -40,9 +40,9 @@ public:
                           IInputWithTimer* sleepingTimer,
                           IGameInput* gameIn,
                           RemotePairingScreen* pairingScreen,
-                          PairingBlinker* pairingBlinker,
-                          BlankBlinker* blankBlinker,
-                          ScoreboardBlinker* sleepingBlinker,
+                          std::shared_ptr<PairingBlinker> pairingBlinker,
+                          std::shared_ptr<BlankBlinker> blankBlinker,
+                          std::shared_ptr<ScoreboardBlinker> sleepingBlinker,
                           bool& noScoreFlag);
 
     // **Accessors for Shared Resources**
@@ -56,9 +56,6 @@ public:
     IGameInput* getGameInput() const;
     RemotePairingScreen* getRemotePairingScreen() const;
     ScoreBoard* getScoreboard() const;
-    PairingBlinker* getPairingBlinker() const;
-    BlankBlinker* getBlankBlinker() const;
-    ScoreboardBlinker* getSleepingBlinker() const;
     bool& getNoScoreFlag() const;
 
     // **Thread Safety Controls**
@@ -66,9 +63,6 @@ public:
     void unlock();
 
 private:
-    mutable std::mutex mtx;  // Mutex for thread safety
-
-    // Shared Game Resources
     GameObject* gameObject;
     GameState* gameState;
     Reset* reset;
@@ -79,13 +73,10 @@ private:
     IGameInput* gameInput;
     RemotePairingScreen* remotePairingScreen;
     ScoreBoard* scoreboard;
-    PairingBlinker* pairingBlinkerObj;
-    BlankBlinker* blankBlinkerObj;
-    ScoreboardBlinker* sleepingBlinkerObj;
-
-    // Reference to the no_score flag
     bool& no_score;
+
+    // Mutex for thread safety
+    std::mutex mtx;
 };
 
-#endif // REMOTE_LISTENER_CONTEXT_H
-
+#endif // REMOTELISTENERCONTEXT_H

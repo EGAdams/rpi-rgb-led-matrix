@@ -45,13 +45,11 @@ void PairingModeState::handleInput(RemoteListenerContext &context) {
             context.getRemotePairingScreen()->greenPlayerPressed();
             context.getPairingBlinker()->setGreenPlayerPaired(true);
             print("Green player paired.");
-        } 
-        else if (selection == RED_REMOTE_RED_SCORE) {
+        } else if (selection == RED_REMOTE_RED_SCORE) {
             context.getRemotePairingScreen()->redPlayerPressed();
             context.getPairingBlinker()->setRedPlayerPaired(true);
             print("Red player paired.");
-        } 
-        else {
+        } else {
             print("*** Invalid selection during pairing. ***");
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         }
