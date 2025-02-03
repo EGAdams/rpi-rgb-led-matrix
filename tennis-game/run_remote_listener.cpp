@@ -96,7 +96,7 @@ bool is_on_raspberry_pi() {
  * each iteration.
  ***************************************************************/
 void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset* reset ) {
-    const int INPUT_TIMEOUT = 60000; // <---------- set universal timeout here ---------<<
+    const int INPUT_TIMEOUT = 5000; // <---------- set universal timeout here ---------<<
     GameState* gameState = gameStatearg;
     RemoteLocker*       remoteLocker = new RemoteLocker( gameState );
     bool no_score       = true;

@@ -1,8 +1,4 @@
 #include "PairingModeState.h"
-#include "../RemoteListenerContext/RemoteListenerContext.h"
-#include <thread>
-#include <chrono>
-#include <iostream>
 
 /***************************************************************
  * PairingModeState::handleInput()
@@ -48,6 +44,12 @@ void PairingModeState::handleInput( RemoteListenerContext& context ) {
             context.getRemotePairingScreen()->redPlayerPressed();
             context.getPairingBlinker()->setRedPlayerPaired( true );
             print( "Red player paired." );
+        } else if ( selection == NO_SCORE_TIMEOUT ) {
+            print( "Pairing timeout. Transitioning to sleep mode..." );
+            context.getGameState()->setCurrentAction( SLEEP_MODE );
+            context.getGameState()->setState( SLEEP_MODE_STATE );
+            context.unlock();
+            return;
         } else {
             print( "*** Invalid selection during pairing. ***" );
             std::this_thread::sleep_for( std::chrono::milliseconds( 500 ));

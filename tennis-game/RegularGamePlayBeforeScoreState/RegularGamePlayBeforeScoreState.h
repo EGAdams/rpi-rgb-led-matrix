@@ -1,6 +1,7 @@
 #ifndef REGULAR_GAME_PLAY_BEFORE_SCORE_STATE_H
 #define REGULAR_GAME_PLAY_BEFORE_SCORE_STATE_H
 
+#include "../TennisConstants/TennisConstants.h"
 #include "../IRemoteListenerState/IRemoteListenerState.h"
 #include "../RemoteListenerContext/RemoteListenerContext.h"
 #include <mutex>

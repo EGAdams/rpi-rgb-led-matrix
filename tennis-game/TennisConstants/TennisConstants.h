@@ -24,6 +24,10 @@
 //  Written by Chris Bean for Teensy 4.1 only
 //  re-written in C++ by EG in June 2022
 
+///////////////////////// TIMEOUT CONSTANTS ///////////////////////////////////
+#define NO_SCORE_TIMEOUT 99
+///////////////////////////////////////////////////////////////////////////////
+
 //////////////////////// STATE MACHINE CONSTANTS //////////////////////////////
 // Some additional constants for game states. 
 #define PAIRING_MODE_STATE             1
@@ -75,7 +79,7 @@
 #define AFTER_SLEEP_MODE            "after sleep mode"
 ///////////////////////////////////////////////////////////////////////////////
 
-#define SCORE_DELAY_IN_SECONDS      1
+#define SCORE_DELAY_IN_MILLISECONDS 100
 #define TESTING                     1
 #define GAME_FLASH_DELAY            500 // 500 // 200 // 50 // 200 // 010725
 #define SET_WIN_FLASH_DELAY         500 // 750 // 1000 // 600 // 5 // 200 010725
