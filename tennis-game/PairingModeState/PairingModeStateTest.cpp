@@ -40,7 +40,6 @@ class PairingModeStateTest : public ::testing::Test {
         std::unique_ptr<RemotePairingScreen> remotePairingScreen;
         std::unique_ptr<RemoteListenerContext> context;
         std::unique_ptr<PairingModeState> pairingModeState;
-
         
     void SetUp() override {
         std::cout << "DEBUG: Entering SetUp()" << std::endl;
