@@ -25,7 +25,9 @@
 //  re-written in C++ by EG in June 2022
 
 ///////////////////////// TIMEOUT CONSTANTS ///////////////////////////////////
-#define NO_SCORE_TIMEOUT 99
+#define INPUT_TIMEOUT 99
+#define SLEEP_INPUT_TIMEOUT 5000
+#define SLEEP_FOREVER 100000000000
 ///////////////////////////////////////////////////////////////////////////////
 
 //////////////////////// STATE MACHINE CONSTANTS //////////////////////////////
@@ -92,7 +94,7 @@
 #define LOOP_MATCH_LAMP_WIN         2
 #define MATCH_WIN_BLINK_COUNT       10 // 5 // added on clermont hill
 #define SHOW_MATCH_WIN_TEXT_DELAY   3000 // 45000 // added anna marie island monday
-#define MAX_SLEEP                   4 // 120 // 60 // 15 // in SECONDS // last day of august tarpon
+#define MAX_SLEEP                   5 // 120 // 60 // 15 // in SECONDS // last day of august tarpon
 #define MIN_SLEEP                   3000 // sleep for a few seconds in case of buttons pressed.
 #define NUMBER_OF_GAME_LAMPS        7
 #define LOOP_GAME_LAMP_WIN          5

@@ -36,14 +36,9 @@ StateMachine::StateMachine( RemoteListenerContext& context )
  */
 void StateMachine::run() {
     while ( _context.getGameState()->gameRunning() && gSignalStatus != 1 ) {
-        // sleep for 500 milliseconds
-        std::this_thread::sleep_for( std::chrono::milliseconds( _state_machine_delay ) );
-
-        // Execute the logic for the current state
-        _currentState->handleInput( _context );
-
-        // Transition to a new state if necessary
-        int nextState = _context.getGameState()->getState();
+        std::this_thread::sleep_for( std::chrono::milliseconds( _state_machine_delay ) ); // sleep for 500 milliseconds
+        _currentState->handleInput( _context );                 // Execute the logic for the current state
+        int nextState = _context.getGameState()->getState();    // Transition to a new state if necessary
         if ( nextState != _currentStateId ) {
             setState( nextState );
         }

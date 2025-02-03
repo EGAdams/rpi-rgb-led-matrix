@@ -11,7 +11,7 @@ void RegularGamePlayAfterScoreState::handleInput( RemoteListenerContext& context
     // Block on the gameInput (no timers here)
     int selection = context.getGameInput()->getInput();
     if ( selection == 0 ) {
-        print( "*** Invalid selection (0)! ***" );
+        print( "*** Invalid selection ( 0 )! ***" );
         context.unlock();
         return;
     }

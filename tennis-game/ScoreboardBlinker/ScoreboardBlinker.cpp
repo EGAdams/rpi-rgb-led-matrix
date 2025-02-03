@@ -38,8 +38,7 @@ void ScoreboardBlinker::blinkTennisBall( bool show ) {
     if ( show ) {
         // std::cout << "drawing yellow period... " << std::endl;
         _scoreboard->drawYellowPeriod();
-    }
-    else {
+    } else {
         _scoreboard->clearScreen();
     }
 }

@@ -44,7 +44,7 @@ void PairingModeState::handleInput( RemoteListenerContext& context ) {
             context.getRemotePairingScreen()->redPlayerPressed();
             context.getPairingBlinker()->setRedPlayerPaired( true );
             print( "Red player paired." );
-        } else if ( selection == NO_SCORE_TIMEOUT ) {
+        } else if ( selection == INPUT_TIMEOUT ) {
             print( "Pairing timeout. Transitioning to sleep mode..." );
             context.getGameState()->setCurrentAction( SLEEP_MODE );
             context.getGameState()->setState( SLEEP_MODE_STATE );

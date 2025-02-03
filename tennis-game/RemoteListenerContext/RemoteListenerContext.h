@@ -66,6 +66,7 @@ public:
     void unlock();
 
 private:
+    ScoreBoard* scoreboard;
     GameObject* gameObject;
     GameState* gameState;
     Reset* reset;
@@ -75,7 +76,6 @@ private:
     IInputWithTimer* sleepingInputWithTimer;
     IGameInput* gameInput;
     RemotePairingScreen* remotePairingScreen;
-    ScoreBoard* scoreboard;
     bool& no_score;
     std::shared_ptr<PairingBlinker> pairingBlinker;  // NEW: Store pairingBlinker
 

@@ -1,3 +1,6 @@
+/*
+ * Zero score timeout state
+ */
 #include "RegularGamePlayBeforeScoreState.h"
 
 void RegularGamePlayBeforeScoreState::handleInput( RemoteListenerContext& context ) {
@@ -9,7 +12,7 @@ void RegularGamePlayBeforeScoreState::handleInput( RemoteListenerContext& contex
     int selection = context.getNoBlinkInputWithTimer()->getInput();
     print( "Selection from noBlinkInputWithTimer: " + std::to_string( selection ) );
 
-    if ( selection == NO_SCORE_TIMEOUT ) {
+    if ( selection == INPUT_TIMEOUT ) {
         print( "*** Zero Score Timeout! Going to sleep mode... ***" );
         context.getGameState()->setCurrentAction( SLEEP_MODE );
         context.getGameState()->setState( SLEEP_MODE_STATE );

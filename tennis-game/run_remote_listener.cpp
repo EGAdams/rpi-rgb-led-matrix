@@ -33,7 +33,7 @@
  * NOTE: This code block focuses ONLY on rewriting the
  * run_remote_listener.cpp logic. It references classes
  * and methods you already have (such as GameObject, IInputWithTimer,
- * Blinker, etc.) but does not redefine them here. 
+ * Blinker, etc.) but does not redefine them here.
  * For any new interfaces introduced (e.g. IInputListenerState),
  * we put them at the top of this file for illustration.
  *
@@ -53,7 +53,7 @@
 #include <mutex>
 #include <memory>
 
-// External global for receiving Ctrl-C signals, etc.
+ // External global for receiving Ctrl-C signals, etc.
 extern volatile std::sig_atomic_t gSignalStatus;
 
 #include <csignal>
@@ -96,52 +96,52 @@ bool is_on_raspberry_pi() {
  * each iteration.
  ***************************************************************/
 void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset* reset ) {
-    const int INPUT_TIMEOUT = 5000; // <---------- set universal timeout here ---------<<
+    const int MAIN_INPUT_TIMEOUT = 5000; // <---------- set universal timeout here ---------<<
     GameState* gameState = gameStatearg;
-    RemoteLocker*       remoteLocker = new RemoteLocker( gameState );
-    bool no_score       = true;
-    Inputs* inputs      = new Inputs( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
-    bool keyboard_off   = false;     // <---------- toggle the keyboard off here ---------<<
-    auto scoreboard     = gameObject->getScoreBoard();
+    RemoteLocker* remoteLocker = new RemoteLocker( gameState );
+    bool no_score = true;
+    Inputs* inputs = new Inputs( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
+    bool keyboard_off = false;     // <---------- toggle the keyboard off here ---------<<
+    auto scoreboard = gameObject->getScoreBoard();
     scoreboard->setLittleDrawerFont( "fonts/8x13B.bdf" );
-    RemotePairingScreen*               remotePairingScreen = new RemotePairingScreen( scoreboard );
-    
+    RemotePairingScreen* remotePairingScreen = new RemotePairingScreen( scoreboard );
+
     // set up blinkers
-    std::shared_ptr<PairingBlinker>    pairingBlinker   = std::make_shared<PairingBlinker>(    scoreboard );
-    std::shared_ptr<ScoreboardBlinker> sleepingBlinker  = std::make_shared<ScoreboardBlinker>( scoreboard );
-    std::shared_ptr<BlankBlinker>      blankBlinker     = std::make_shared<BlankBlinker>();
+    std::shared_ptr<PairingBlinker>    pairingBlinker = std::make_shared<PairingBlinker>( scoreboard );
+    std::shared_ptr<ScoreboardBlinker> sleepingBlinker = std::make_shared<ScoreboardBlinker>( scoreboard );
+    std::shared_ptr<BlankBlinker>      blankBlinker = std::make_shared<BlankBlinker>();
 
     // declare the input handlers
-    IInputWithTimer*    pairingInputWithTimer  = nullptr;
-    IInputWithTimer*    noBlinkInputWithTimer  = nullptr;
-    IInputWithTimer*    sleepingInputWithTimer = nullptr;
-    IGameInput*         gameInput              = nullptr;
+    IInputWithTimer* pairingInputWithTimer = nullptr;
+    IInputWithTimer* noBlinkInputWithTimer = nullptr;
+    IInputWithTimer* sleepingInputWithTimer = nullptr;
+    IGameInput* gameInput = nullptr;
 
     gameObject->loopGame(); // call loop game to initialize sets
 
     // create the input handlers depending on the machine type
     if ( scoreboard->onRaspberryPi() && keyboard_off ) {
-        if (!pairingBlinker) {
-            print("*** ERROR: pairingBlinker is NULL before creating RemoteInputWithTimer! ***");
+        if ( !pairingBlinker ) {
+            print( "*** ERROR: pairingBlinker is NULL before creating RemoteInputWithTimer! ***" );
         }
-        pairingInputWithTimer       = new RemoteInputWithTimer( pairingBlinker.get(), inputs, INPUT_TIMEOUT );
-        noBlinkInputWithTimer       = new RemoteInputWithTimer( blankBlinker.get(),   inputs, INPUT_TIMEOUT );
-        sleepingInputWithTimer      = new RemoteInputWithTimer( sleepingBlinker.get(),inputs, INPUT_TIMEOUT );
-        gameInput                   = new RemoteGameInput(      inputs         );
+        pairingInputWithTimer = new RemoteInputWithTimer( pairingBlinker.get(), inputs, MAIN_INPUT_TIMEOUT );
+        noBlinkInputWithTimer = new RemoteInputWithTimer( blankBlinker.get(), inputs, MAIN_INPUT_TIMEOUT );
+        sleepingInputWithTimer = new RemoteInputWithTimer( sleepingBlinker.get(), inputs, SLEEP_FOREVER );
+        gameInput = new RemoteGameInput( inputs );
     } else {
-        if (!pairingBlinker) {
-            print("*** ERROR: pairingBlinker is NULL before creating KeyInputWithTimer! ***");
+        if ( !pairingBlinker ) {
+            print( "*** ERROR: pairingBlinker is NULL before creating KeyInputWithTimer! ***" );
         }
-        pairingInputWithTimer       = new KeyboardInputWithTimer( pairingBlinker.get(), INPUT_TIMEOUT );
-        noBlinkInputWithTimer       = new KeyboardInputWithTimer( blankBlinker.get(),   INPUT_TIMEOUT );
-        sleepingInputWithTimer      = new KeyboardInputWithTimer( sleepingBlinker.get(),INPUT_TIMEOUT );
-        gameInput                   = new KeyboardGameInput();
+        pairingInputWithTimer = new KeyboardInputWithTimer( pairingBlinker.get(), MAIN_INPUT_TIMEOUT );
+        noBlinkInputWithTimer = new KeyboardInputWithTimer( blankBlinker.get(), MAIN_INPUT_TIMEOUT );
+        sleepingInputWithTimer = new KeyboardInputWithTimer( sleepingBlinker.get(), SLEEP_FOREVER );
+        gameInput = new KeyboardGameInput();
     }
 
     // create the state context
-    RemoteListenerContext context( scoreboard, gameObject, gameState, reset, remoteLocker, 
+    RemoteListenerContext context( scoreboard, gameObject, gameState, reset, remoteLocker,
                                    pairingInputWithTimer, noBlinkInputWithTimer,
-                                   sleepingInputWithTimer, gameInput, remotePairingScreen, 
+                                   sleepingInputWithTimer, gameInput, remotePairingScreen,
                                    pairingBlinker, blankBlinker, sleepingBlinker, no_score );
 
     // initialize and run the StateMachine
@@ -160,23 +160,23 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
 
 int main() {
     std::cout << "Initializing Tennis Game System..." << std::endl;
-    std::signal(SIGINT, GameObject::_signalHandler); // Register signal handler for graceful shutdown
+    std::signal( SIGINT, GameObject::_signalHandler ); // Register signal handler for graceful shutdown
 
     // Create core game objects
-    GameState*    gameState    = new GameState();
+    GameState* gameState = new GameState();
     ColorManager* colorManager = new ColorManager();
-    IDisplay*     display      = static_cast<IDisplay*>(new ConsoleDisplay(colorManager));
+    IDisplay* display = static_cast< IDisplay* >( new ConsoleDisplay( colorManager ) );
 
-    GameObject* gameObject = new GameObject(gameState, display);
+    GameObject* gameObject = new GameObject( gameState, display );
     Reset* reset = new Reset(
-        gameObject->getPlayer1(), 
-        gameObject->getPlayer2(), 
-        gameObject->getPinInterface(), 
+        gameObject->getPlayer1(),
+        gameObject->getPlayer2(),
+        gameObject->getPinInterface(),
         gameState
     );
 
     std::cout << "Game System Initialized. Starting Remote Listener..." << std::endl;
-    run_remote_listener(gameObject, gameState, reset);
+    run_remote_listener( gameObject, gameState, reset );
 
     // Cleanup dynamically allocated memory
     delete gameObject;
