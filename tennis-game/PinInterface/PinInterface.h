@@ -1,6 +1,7 @@
 #ifndef PININTERFACE_H
 #define PININTERFACE_H
 
+#include "../TennisConstants/TennisConstants.h"
 #include "../PinState/PinState.h"
 #include "../Arduino/Arduino.h"
 #include <map>

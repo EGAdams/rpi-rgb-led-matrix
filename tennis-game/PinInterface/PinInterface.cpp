@@ -38,6 +38,7 @@ std::map<std::string, int> PinInterface::getPinStateMap() { return _pin_map; }
 
 // Function to read bits 0 to 4 from the expander
 int PinInterface::_readBits_0_4( int file ) {
+    print( "inside _readBits_0_4" );
     uint8_t reg = GPIO_REGISTER;
     uint8_t value;
 
@@ -53,13 +54,14 @@ int PinInterface::_readBits_0_4( int file ) {
 
     uint8_t bits = value & 0x1F;  // Mask bits 0-4
 
-    // std::cout << "Binary value: " << std::bitset<5>( bits ) << "\n";
-    // std::cout << "Decimal value: " << static_cast< int >( bits ) << "\n";
+    print( "Binary value: " << std::bitset<5>( bits ) );
+    print( "Decimal value: " << static_cast< int >( bits ) );
+    print( "returning bits to the PinInterface read_mcp23017_value method..." );
     return static_cast< int >( bits );
 }
 
 int PinInterface::read_mcp23017_value() {
-    // std::cout << "reading MCP23017 bits..." << std::endl;
+    print( "reading MCP23017 bits..." );
     int file = open( I2C_DEVICE, O_RDWR );
 
     if ( file < 0 ) {
@@ -72,6 +74,7 @@ int PinInterface::read_mcp23017_value() {
         close( file );
         return -1;
     }
+    print( "calling _readBits_0_4 to read MCP23017 bits 0 to 4..." );
     int bits = _readBits_0_4( file );
     close( file );
     return bits;

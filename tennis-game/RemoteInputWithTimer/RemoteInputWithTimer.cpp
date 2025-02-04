@@ -61,7 +61,7 @@ int RemoteInputWithTimer::getInput() {
                 std::cout << "Keyboard input timed out after " << _timeout_ms / 1000 << " seconds." << std::endl;
                 return _timeout_ms; // <--<< this is where we break out of the loop!  the other input with timer is missing this.
             }
-            // print( "*** reading selection from inputs... ***" ); // 122224
+            print( "*** reading selection from inputs... ***" ); // 122224
             selection = _inputs->read_mcp23017_value();  // this actually does have a while. // 011925
             std::cout << "read selection from inputs: " << selection << std::endl; // but it
             if ( selection == GREEN_REMOTE_GREEN_SCORE ||                          // isnt as bad as this
