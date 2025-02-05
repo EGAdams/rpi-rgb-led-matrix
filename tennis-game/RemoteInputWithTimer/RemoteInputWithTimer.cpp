@@ -12,11 +12,11 @@
 RemoteInputWithTimer::RemoteInputWithTimer(Blinker* blinker, Inputs* inputs, unsigned long timeout_ms)
     : IInputWithTimer(blinker, timeout_ms), _blinker(blinker), _inputs(inputs) {
     
-    std::cout << "DEBUG: RemoteInputWithTimer constructor called with blinker = " 
-          << blinker << " and inputs = " << inputs << std::endl;
+    print( "DEBUG: RemoteInputWithTimer constructor called with blinker = " 
+          << blinker << " and inputs = " << inputs );
 
 
-    std::cout << "DEBUG: RemoteInputWithTimer constructor called, this = " << this << std::endl;
+    print( "DEBUG: RemoteInputWithTimer constructor called, this = " << this );
 
     if (!_blinker) {
         print("*** ERROR: RemoteInputWithTimer received a NULL blinker! ***");
@@ -58,31 +58,31 @@ int RemoteInputWithTimer::getInput() {
             elapsedTimeMs = duration_cast< milliseconds >( now - startTime ).count();
 
             if ( elapsedTimeMs >= _timeout_ms ) {
-                std::cout << "Keyboard input timed out after " << _timeout_ms / 1000 << " seconds." << std::endl;
+                print( "Keyboard input timed out after " << _timeout_ms / 1000 << " seconds." );
                 return _timeout_ms; // <--<< this is where we break out of the loop!  the other input with timer is missing this.
             }
             print( "*** reading selection from inputs... ***" ); // 122224
             selection = _inputs->read_mcp23017_value();  // this actually does have a while. // 011925
-            std::cout << "read selection from inputs: " << selection << std::endl; // but it
+            print( "read selection from inputs: " << selection ); // but it
             if ( selection == GREEN_REMOTE_GREEN_SCORE ||                          // isnt as bad as this
                  selection == GREEN_REMOTE_RED_SCORE   ||                          // one because it always returns a value
                  selection == RED_REMOTE_GREEN_SCORE   ||                          // 011925
                  selection == RED_REMOTE_RED_SCORE ) {
-                std::cout << "selection: " << selection << " triggered the done flag, exiting while loop..." << std::endl;
+                print( "selection: " << selection << " triggered the done flag, exiting while loop..." );
                 done = true;
             } else {
                 // delay 250ms
-                std::cout << "sleeping 250ms..." << std::endl; // so we end up reading this over and over // 011925
+                print( "sleeping 250ms..." ); // so we end up reading this over and over // 011925
                 GameTimer::gameDelay( 250 );
             }
         }
     } else if ( REMOTE_INPUT == 0 ) {  // menu mode // 122224
-        std::cout << "Enter your selection: ";
+        print( "Enter your selection: " );
         std::cin >> selection;
         // print( "made seleciton in RemoteInputWithTimer::getInput()... " );
         // print( "selection: " << selection );
     } else {
-        std::cout << "*** ERROR: Invalid input mode in RemoteInputWithTimer Object getInput() method. ***\n";
+        print( "*** ERROR: Invalid input mode in RemoteInputWithTimer Object getInput() method. ***\n" );
         exit( 1 );
     }
     _blinker->stop();
