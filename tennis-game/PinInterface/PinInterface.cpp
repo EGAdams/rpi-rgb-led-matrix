@@ -1,17 +1,4 @@
 #include "PinInterface.h"
-#include <string>
-
-// for the expander
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <unistd.h>
-#include <linux/i2c-dev.h>
-#include <sys/ioctl.h>
-#include <fcntl.h>
-
-// to set the bits
-#include <bitset>
 
 #define MCP23017_ADDRESS 0x20  // Default I2C address when A0, A1, A2 are tied to GND
 #define I2C_DEVICE "/dev/i2c-1"
@@ -53,13 +40,13 @@ int PinInterface::_readBits_0_4( int file ) {
 
     uint8_t bits = value & 0x1F;  // Mask bits 0-4
 
-    // std::cout << "Binary value: " << std::bitset<5>( bits ) << "\n";
-    // std::cout << "Decimal value: " << static_cast< int >( bits ) << "\n";
+    print( "Binary value: " << std::bitset<5>( bits ));
+    print( "Decimal value: " << static_cast< int >( bits ));
     return static_cast< int >( bits );
 }
 
 int PinInterface::read_mcp23017_value() {
-    // std::cout << "reading MCP23017 bits..." << std::endl;
+    print( "reading MCP23017 bits..." );
     int file = open( I2C_DEVICE, O_RDWR );
 
     if ( file < 0 ) {
@@ -74,5 +61,6 @@ int PinInterface::read_mcp23017_value() {
     }
     int bits = _readBits_0_4( file );
     close( file );
+    print( "returning bits from read_mcp23017_value(): " << bits );
     return bits;
 }

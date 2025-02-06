@@ -73,9 +73,9 @@ int RemoteInputWithTimer::getInput() {
                 std::cout << "selection: " << selection << " triggered the done flag, exiting while loop..." << std::endl;
                 done = true;
             } else {
-                // delay 250ms
+                // delay 250ms 
                 std::cout << "sleeping 250ms..." << std::endl; // so we end up reading this over and over // 011925
-                GameTimer::gameDelay( 250 );
+                GameTimer::gameDelay( 250 ); // !!! CHECK THIS!!! this may be 
             }
         }
     } else if ( REMOTE_INPUT == 0 ) {  // menu mode // 122224

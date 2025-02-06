@@ -66,7 +66,7 @@ void RegularGamePlayBeforeScoreState::handleSelectionAndUpdate(RemoteListenerCon
     }
 
     // Let the GameObject handle updates
-    std::this_thread::sleep_for(std::chrono::seconds(SCORE_DELAY_IN_SECONDS));
+    std::this_thread::sleep_for( std::chrono::milliseconds( SCORE_DELAY_IN_MILLISECONDS ));
     context.getGameObject()->loopGame();
 }
 

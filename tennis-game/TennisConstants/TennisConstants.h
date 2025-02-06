@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <chrono>
 #include <ctime>
+#include <thread>
 
 #define print( x ) \
     do { \
@@ -17,6 +18,7 @@
                   << "[" << __FILE__ << "] " \
                   << "[: " << __LINE__ << "] " \
                   << "[" << __FUNCTION__ << "()] " \
+                  << "[ Thread ID: " << std::this_thread::get_id() << " ] " \
                   << x << std::endl; \
     } while ( 0 )
 
@@ -75,7 +77,7 @@
 #define AFTER_SLEEP_MODE            "after sleep mode"
 ///////////////////////////////////////////////////////////////////////////////
 
-#define SCORE_DELAY_IN_SECONDS      1
+#define SCORE_DELAY_IN_MILLISECONDS 100
 #define TESTING                     1
 #define GAME_FLASH_DELAY            500 // 500 // 200 // 50 // 200 // 010725
 #define SET_WIN_FLASH_DELAY         500 // 750 // 1000 // 600 // 5 // 200 010725

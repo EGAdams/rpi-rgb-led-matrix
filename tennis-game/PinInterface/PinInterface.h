@@ -3,7 +3,21 @@
 
 #include "../PinState/PinState.h"
 #include "../Arduino/Arduino.h"
+#include "../TennisConstants/TennisConstants.h"
 #include <map>
+#include <string>
+
+// for the expander
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <unistd.h>
+#include <linux/i2c-dev.h>
+#include <sys/ioctl.h>
+#include <fcntl.h>
+
+// to set the bits
+#include <bitset>
 
 class PinInterface {
   public:
