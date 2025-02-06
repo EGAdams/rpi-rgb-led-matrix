@@ -1,17 +1,4 @@
 #include "PinInterface.h"
-#include <string>
-
-// for the expander
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <unistd.h>
-#include <linux/i2c-dev.h>
-#include <sys/ioctl.h>
-#include <fcntl.h>
-
-// to set the bits
-#include <bitset>
 
 #define MCP23017_ADDRESS 0x20  // Default I2C address when A0, A1, A2 are tied to GND
 #define I2C_DEVICE "/dev/i2c-1"
@@ -77,6 +64,6 @@ int PinInterface::read_mcp23017_value() {
     print( "calling _readBits_0_4 to read MCP23017 bits 0 to 4..." );
     int bits = _readBits_0_4( file );
     close( file );
-    print( "returning bits: " + std::to_string( bits ));
+    print( "returning bits from read_mcp23017_value(): " << std::to_string( bits ));
     return bits;
 }

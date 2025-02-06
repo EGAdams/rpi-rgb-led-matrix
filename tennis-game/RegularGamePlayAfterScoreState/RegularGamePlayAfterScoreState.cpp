@@ -10,8 +10,9 @@ void RegularGamePlayAfterScoreState::handleInput( RemoteListenerContext& context
 
     // Block on the gameInput (no timers here)
     int selection = context.getGameInput()->getInput();
+    print( "Selection from gameInput: " + std::to_string( selection ) );
     if ( selection == 0 ) {
-        print( "*** Invalid selection ( 0 )! ***" );
+        print( "*** Invalid selection (0)! ***" );
         context.unlock();
         return;
     }
@@ -48,7 +49,6 @@ void RegularGamePlayAfterScoreState::handleInput( RemoteListenerContext& context
 
     std::this_thread::sleep_for( std::chrono::milliseconds( SCORE_DELAY_IN_MILLISECONDS ));
     context.getGameObject()->loopGame();
-
     context.unlock();
 }
 
