@@ -149,7 +149,7 @@ int Inputs::readPlayerButtons() {
         }
         print("exited while.  *** CODE IS VALID ***.  returning originalRemoteCode [" << std::to_string( originalRemoteCode ) << "]" );
         return originalRemoteCode;
-    } else {                        // false alarm.  we DO NOT have a matching measurement gameDelay( x ) apart.
+    } else {                       // false alarm.  we DO NOT have a matching measurement gameDelay( x ) apart.
         return UNKNOWN_REMOTE_BUTTON;
     }
  }
