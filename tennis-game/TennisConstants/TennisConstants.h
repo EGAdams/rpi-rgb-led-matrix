@@ -57,7 +57,7 @@
 #define GREEN_REMOTE_UNDO        3
 #define GREEN_REMOTE_RESET       99
 #define NO_REMOTE_BUTTONS        0
-#define UNKNOWN_REMOTE_BUTTON   99
+#define UNKNOWN_REMOTE_BUTTON   15
 
 #define STEVE_DELAY            25
 #define REMOTE_READ_DELAY      25
