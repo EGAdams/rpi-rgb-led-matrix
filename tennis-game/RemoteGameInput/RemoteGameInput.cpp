@@ -9,8 +9,8 @@ RemoteGameInput::~RemoteGameInput() {
 }
 
 int RemoteGameInput::getInput() {
-    print( "getting input from inside remote game input..." );
+    print( "\n\n*** Getting input from inside remote game input... ***\n\n" );
     int input_read_from_ic = _inputs->read_mcp23017_value();
-    print( "input_read_from_ic = " + std::to_string( input_read_from_ic ) );
+    print( "*** returing input_read_from_ic = " << std::to_string( input_read_from_ic ) << " ***\n\n" );
     return input_read_from_ic;
 }
