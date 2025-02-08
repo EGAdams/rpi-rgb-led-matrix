@@ -60,7 +60,7 @@
 #define UNKNOWN_REMOTE_BUTTON   15
 
 #define STEVE_DELAY            25
-#define REMOTE_READ_DELAY      30 // double the delay between reads
+#define REMOTE_READ_DELAY      25
 ///////////////////////////////////////////////////////////////////////////////
 
 #define RUNNING_MATCH_TIE_BREAK     "running match tie breaker"

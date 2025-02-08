@@ -135,17 +135,17 @@ int Inputs::readPlayerButtons() {
 
  int Inputs::read_mcp23017_value() {
     int originalRemoteCode = _pinInterface->read_mcp23017_value();
-    print( "\n*** originalRemoteCode [" + std::to_string( originalRemoteCode ) + "] ***\n" );
     if ( originalRemoteCode == UNKNOWN_REMOTE_BUTTON ) { return originalRemoteCode; }
+    print( "\n*** possibly valid RemoteCode [" + std::to_string( originalRemoteCode ) + "] ***\n" );
     GameTimer::gameDelay( STEVE_DELAY ); // that delay steve was talking about...
     print( "getting another remote code after STEVE_DELAY to verify" );
     int freshRemoteCode = _pinInterface->read_mcp23017_value();
     print( "*** freshRemoteCode after steve delay [" + std::to_string( freshRemoteCode ) + "] ***\n\n" );
     if (( freshRemoteCode == originalRemoteCode ) && ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON )) {  // known code and a match?
-        print(  "*** got a match.  entering while(( freshRemoteCode == originalRemoteCode ) && ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON )) ***\n" );
+        // print(  "*** got a match.  entering while(( freshRemoteCode == originalRemoteCode ) && ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON )) ***\n" );
         while(( freshRemoteCode == originalRemoteCode ) && ( freshRemoteCode != UNKNOWN_REMOTE_BUTTON )) {
             print( "waiting " << REMOTE_READ_DELAY << "ms to detect button release..." );
-            GameTimer::gameDelay( REMOTE_READ_DELAY ); //  wait 250ms, then get a fresh one...
+            GameTimer::gameDelay( REMOTE_READ_DELAY ); //  wait remote read delay, then get a fresh one...
             freshRemoteCode = _pinInterface->read_mcp23017_value();
             if ( _need_jump_start ) { _need_jump_start = false; originalRemoteCode = UNKNOWN_REMOTE_BUTTON; }
         }

@@ -58,25 +58,25 @@ int RemoteInputWithTimer::getInput() {
             elapsedTimeMs = duration_cast< milliseconds >( now - startTime ).count();
 
             if ( elapsedTimeMs >= _timeout_ms ) {
-                print( "Keyboard input timed out after " << _timeout_ms / 1000 << " seconds." );
+                print( "******** Keyboard input timed out after " << _timeout_ms / 1000 << " seconds. ********" );
                 return _timeout_ms; // <--<< this is where we break out of the loop!  the other input with timer is missing this.
             }
             print( "*** reading selection from inputs... ***" ); // 122224
             selection = _inputs->read_mcp23017_value();  // this actually does have a while. // 011925
             print( "read selection from inputs: " << selection ); // but it
-            if ( selection == GREEN_REMOTE_GREEN_SCORE ||                          // isnt as bad as this
-                 selection == GREEN_REMOTE_RED_SCORE   ||                          // one because it always returns a value
-                 selection == RED_REMOTE_GREEN_SCORE   ||                          // 011925
+            if ( selection == GREEN_REMOTE_GREEN_SCORE ||         // isnt as bad as this
+                 selection == GREEN_REMOTE_RED_SCORE   ||         // one because it always returns a value
+                 selection == RED_REMOTE_GREEN_SCORE   ||         // 011925
                  selection == RED_REMOTE_RED_SCORE ) {
                 print( "selection: " << selection << " triggered the done flag, exiting while loop..." );
                 done = true;
             } else {
-                int delay = 10; // ms
-                print( "sleeping " << delay << "ms..." ); // so we end up reading this over and over // 011925
+                int delay = 5; // ms
+                print( "sleeping " << delay << "ms..." );
                 GameTimer::gameDelay( delay );
             }
         }
-    } else if ( REMOTE_INPUT == 0 ) {  // menu mode // 122224
+    } else if ( REMOTE_INPUT == 0 ) {
         print( "Enter your selection: " );
         std::cin >> selection;
         // print( "made seleciton in RemoteInputWithTimer::getInput()... " );
