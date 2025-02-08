@@ -59,6 +59,8 @@ int RemoteInputWithTimer::getInput() {
 
             if ( elapsedTimeMs >= _timeout_ms ) {
                 print( "******** Input timed out after " << _timeout_ms / 1000 << " seconds. ********" );
+                print( "stopping the blinker!" );
+                _blinker->stop();
                 return INPUT_TIMEOUT_CODE; // <--<< this is where we break out of the loop!
             }
             print( "*** reading selection from inputs... ***" );
