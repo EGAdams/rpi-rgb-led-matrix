@@ -8,6 +8,8 @@ void SleepModeState::handleInput( RemoteListenerContext& context ) {
     int selection = context.getSleepingInputWithTimer()->getInput(); // Block for input from sleepingInputWithTimer    
     if ( selection == GREEN_REMOTE_GREEN_SCORE ||   // Check if the user pressed a valid score button during sleep
          selection == GREEN_REMOTE_RED_SCORE   ||
+         selection == RED_REMOTE_GREEN_SCORE   ||
+         selection == RED_REMOTE_RED_SCORE     ||
          selection == RED_REMOTE_UNDO          ||
          selection == GREEN_REMOTE_UNDO ) {
         print( "Time slept: " + std::to_string( context.getSleepingInputWithTimer()->getTimeSlept()));
@@ -39,8 +41,13 @@ void SleepModeState::handleInput( RemoteListenerContext& context ) {
         context.unlock();  // Unlock before returning
         return;
     }
-    print( "*** Waking up from Sleep Mode ***" );
-    context.getGameState()->setCurrentAction( AFTER_SLEEP_MODE );
-    context.getGameState()->setState( REGULAR_PLAY_NO_SCORE_STATE );
+    print( "*** Warning: Waking up from Sleep Mode with unknown input! ***" );
+    context.getGameState()->setCurrentAction( AFTER_SLEEP_MODE );           // Transition to AFTER_SLEEP_MODE
+    if ( context.getGameState()->getState() == NO_SCORE_SLEEP_STATE ) {     
+        context.getGameState()->setState( REGULAR_PLAY_NO_SCORE_STATE );    // Wake up in the beginning of the game
+    } else if ( context.getGameState()->getState() == PAIRING_SLEEP_MODE_STATE ) {
+        context.getGameState()->setState( PAIRING_MODE_STATE );             // Wake up in pairing mode
+    }
+    context.unlock();  // Unlock before returning
     context.unlock();                                                  // Unlock after finishing
 }
