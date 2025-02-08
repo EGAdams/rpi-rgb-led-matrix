@@ -5,13 +5,10 @@
 
 void RegularGamePlayBeforeScoreState::handleInput( RemoteListenerContext& context ) {
     context.lock();  // Ensure thread safety
-
     print( "================================================" );
     print( "=== [STATE: RegularGamePlayBeforeScoreState] ===" );
     print( "================================================\n\n\n" );
-
-    // Use noBlinkInputWithTimer to detect inactivity
-    int selection = context.getNoBlinkInputWithTimer()->getInput();
+    int selection = context.getNoBlinkInputWithTimer()->getInput(); // Use noBlinkInputWithTimer to detect inactivity
     print( "Selection from noBlinkInputWithTimer: " + std::to_string( selection ) );
 
     if ( selection == INPUT_TIMEOUT_CODE ) {
@@ -22,17 +19,11 @@ void RegularGamePlayBeforeScoreState::handleInput( RemoteListenerContext& contex
         return;
     }
 
-    // We've received a valid input, so the "no score" condition is no longer valid
-    bool& no_score_flag = context.getNoScoreFlag();
-    no_score_flag = false;
-
-    // Handle the selection and update game state accordingly
-    handleSelectionAndUpdate( context, selection );
-
-    // After a valid score input, transition to REGULAR_PLAY_AFTER_SCORE
-    context.getGameState()->setState( REGULAR_PLAY_AFTER_SCORE_STATE );
-
-    context.unlock();
+    bool& no_score_flag = context.getNoScoreFlag(); // We've received a valid input, so the 
+    no_score_flag = false;                          // "no score" condition is no longer valid
+    handleSelectionAndUpdate( context, selection ); // Handle the selection and update game state accordingly
+    context.getGameState()->setState( REGULAR_PLAY_AFTER_SCORE_STATE ); // After a valid score input,
+    context.unlock();                                                   // transition to REGULAR_PLAY_AFTER_SCORE
 }
 
 void RegularGamePlayBeforeScoreState::handleSelectionAndUpdate( RemoteListenerContext& context, int selection ) {
