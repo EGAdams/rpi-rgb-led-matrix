@@ -6,13 +6,15 @@
 void RegularGamePlayBeforeScoreState::handleInput( RemoteListenerContext& context ) {
     context.lock();  // Ensure thread safety
 
-    print( "=== [STATE: RegularGamePlayBeforeScore] ===" );
+    print( "\n================================================" );
+    print(   "=== [STATE: RegularGamePlayBeforeScoreState] ===" );
+    print(   "================================================\n" );
 
     // Use noBlinkInputWithTimer to detect inactivity
     int selection = context.getNoBlinkInputWithTimer()->getInput();
     print( "Selection from noBlinkInputWithTimer: " + std::to_string( selection ) );
 
-    if ( selection == INPUT_TIMEOUT ) {
+    if ( selection == INPUT_TIMEOUT_CODE ) {
         print( "*** Zero Score Timeout! Going to sleep mode... ***" );
         context.getGameState()->setCurrentAction( SLEEP_MODE );
         context.getGameState()->setState( SLEEP_MODE_STATE );

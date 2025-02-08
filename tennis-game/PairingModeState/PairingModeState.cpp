@@ -10,8 +10,8 @@
 void PairingModeState::handleInput( RemoteListenerContext& context ) {
     context.lock();  // Ensure thread safety
     print( "\n============================" );
-    print( "=== [STATE: PairingMode] ===" );
-    print( "============================\n" );
+    print(   "=== [STATE: PairingMode] ===" );
+    print(   "============================\n" );
 
     // **Null Safety Checks**
     if ( !context.getRemotePairingScreen()) {
@@ -70,6 +70,7 @@ void PairingModeState::handleInput( RemoteListenerContext& context ) {
         context.getPairingBlinker()->stop();
         print( "Transitioning to sleep mode..." );
         context.getGameState()->setCurrentAction( SLEEP_MODE );
+        context.getGameState()->setState( SLEEP_MODE_STATE );
     }
 
     context.unlock();  // Unlock before exiting
