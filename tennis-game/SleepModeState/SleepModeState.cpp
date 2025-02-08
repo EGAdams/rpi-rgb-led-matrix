@@ -22,16 +22,18 @@ void SleepModeState::handleInput( RemoteListenerContext& context ) {
                 print( "Game history cleared." );
             }
         }
-        print( "Clearing scoreboard screen..." ); // clean off bouncing ball
+        print( "Clearing scoreboard screen..." );                       // clean off bouncing ball
         context.getScoreboard()->clearScreen();
         print( "Screen cleared." );
         context.getScoreboard()->update();
         print( "Scoreboard updated." );
-        context.getGameState()->setCurrentAction( AFTER_SLEEP_MODE ); // Transition to AFTER_SLEEP_MODE
+        context.getGameState()->setCurrentAction( AFTER_SLEEP_MODE );   // Transition to AFTER_SLEEP_MODE
         context.getGameState()->setState( REGULAR_PLAY_NO_SCORE_STATE);
         context.unlock();  // Unlock before returning
         return;
     }
-    print( "*** Waking up from Sleep Mode, resuming last match ***" );
-    context.unlock();                           // Unlock after finishing
+    print( "*** Waking up from Sleep Mode ***" );
+    context.getGameState()->setCurrentAction( AFTER_SLEEP_MODE );
+    context.getGameState()->setState( REGULAR_PLAY_NO_SCORE_STATE );
+    context.unlock();                                                  // Unlock after finishing
 }

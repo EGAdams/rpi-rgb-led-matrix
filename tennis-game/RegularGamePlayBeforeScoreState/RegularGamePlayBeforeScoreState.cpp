@@ -6,9 +6,9 @@
 void RegularGamePlayBeforeScoreState::handleInput( RemoteListenerContext& context ) {
     context.lock();  // Ensure thread safety
 
-    print( "\n================================================" );
-    print(   "=== [STATE: RegularGamePlayBeforeScoreState] ===" );
-    print(   "================================================\n" );
+    print( "================================================" );
+    print( "=== [STATE: RegularGamePlayBeforeScoreState] ===" );
+    print( "================================================\n\n\n" );
 
     // Use noBlinkInputWithTimer to detect inactivity
     int selection = context.getNoBlinkInputWithTimer()->getInput();

@@ -4,9 +4,9 @@ void RegularGamePlayAfterScoreState::handleInput( RemoteListenerContext& context
     context.lock();  // Ensure thread safety
     // we have talked about implementing a timer here, but we don't have a timer yet
 
-    print( "\n===============================================" );
-    print(   "=== [STATE: RegularGamePlayAfterScoreState] ===" );
-    print(   "===============================================\n" );
+    print( "===============================================" );
+    print( "=== [STATE: RegularGamePlayAfterScoreState] ===" );
+    print( "===============================================\n\n\n" );
     print( "*** updating scoreboard ***" );
     context.getScoreboard()->update();
     print( "*** done updating scoreboard ***" );
