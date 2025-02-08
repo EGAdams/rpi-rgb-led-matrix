@@ -35,7 +35,6 @@ void SleepModeState::handleInput( RemoteListenerContext& context ) {
         } else if ( context.getGameState()->getState() == PAIRING_SLEEP_MODE_STATE ) {
             context.getGameState()->setState( PAIRING_MODE_STATE );             // Wake up in pairing mode
         }
-        context.getGameState()->setState( REGULAR_PLAY_NO_SCORE_STATE);
         context.unlock();  // Unlock before returning
         return;
     }
