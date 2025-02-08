@@ -9,9 +9,9 @@
  ***************************************************************/
 void PairingModeState::handleInput( RemoteListenerContext& context ) {
     context.lock();  // Ensure thread safety
-    print( "\n============================" );
-    print(   "=== [STATE: PairingMode] ===" );
-    print(   "============================\n" );
+    print( "============================" );
+    print( "=== [STATE: PairingMode] ===" );
+    print( "============================\n" );
 
     // **Null Safety Checks**
     if ( !context.getRemotePairingScreen()) {

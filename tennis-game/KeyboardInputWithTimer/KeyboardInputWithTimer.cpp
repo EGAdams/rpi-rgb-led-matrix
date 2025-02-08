@@ -65,7 +65,7 @@ int KeyboardInputWithTimer::getInput() {
                 print( "Keyboard input timed out after " << _timeout_ms / 1000 << " seconds. 012525" );
                 print( "\n\n\n\n" );
                 _restoreTerminal( oldt, old_flags );
-                return INPUT_TIMEOUT;
+                return INPUT_TIMEOUT_CODE;
             }
 
             char ch;

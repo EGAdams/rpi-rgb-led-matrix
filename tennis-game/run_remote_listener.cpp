@@ -124,8 +124,8 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
         if ( !pairingBlinker ) {
             print( "*** ERROR: pairingBlinker is NULL before creating RemoteInputWithTimer! ***" );
         }
-        pairingInputWithTimer = new RemoteInputWithTimer( pairingBlinker.get(), inputs, MAIN_INPUT_TIMEOUT );
-        noBlinkInputWithTimer = new RemoteInputWithTimer( blankBlinker.get(), inputs, MAIN_INPUT_TIMEOUT );
+        pairingInputWithTimer  = new RemoteInputWithTimer( pairingBlinker.get(), inputs, MAIN_INPUT_TIMEOUT );
+        noBlinkInputWithTimer  = new RemoteInputWithTimer( blankBlinker.get(), inputs, MAIN_INPUT_TIMEOUT );
         sleepingInputWithTimer = new RemoteInputWithTimer( sleepingBlinker.get(), inputs, SLEEP_FOREVER );
         gameInput = new RemoteGameInput( inputs );
     } else {
