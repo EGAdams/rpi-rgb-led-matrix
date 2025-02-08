@@ -43,7 +43,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 /////////////////////// REMOTE DEFINITIONS /////////////////////////////////////
-# define REMOTE_INPUT 0 // Change from Remote input or keyboard input for remote input debug
+# define REMOTE_INPUT 1 // Change from Remote input or keyboard input for remote input debug
 
 #define REMOTE_DATA_0 25
 #define REMOTE_DATA_1 24
