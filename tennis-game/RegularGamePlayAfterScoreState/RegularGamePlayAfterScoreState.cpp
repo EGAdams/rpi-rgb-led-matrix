@@ -44,7 +44,7 @@ void RegularGamePlayAfterScoreState::handleInput( RemoteListenerContext& context
         context.getGameObject()->undo();
     } else {
         print( "*** Invalid selection ***" );
-        showHelp();
+        // showHelp();
     }
 
     std::this_thread::sleep_for( std::chrono::milliseconds( SCORE_DELAY_IN_MILLISECONDS ));
