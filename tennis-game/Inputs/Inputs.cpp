@@ -136,6 +136,7 @@ int Inputs::readPlayerButtons() {
  int Inputs::read_mcp23017_value() {
     int originalRemoteCode = _pinInterface->read_mcp23017_value();
     print( "\n*** originalRemoteCode [" + std::to_string( originalRemoteCode ) + "] ***\n" );
+    if ( originalRemoteCode == UNKNOWN_REMOTE_BUTTON ) { return originalRemoteCode; }
     GameTimer::gameDelay( STEVE_DELAY ); // that delay steve was talking about...
     print( "getting another remote code after STEVE_DELAY to verify" );
     int freshRemoteCode = _pinInterface->read_mcp23017_value();
