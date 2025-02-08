@@ -9,8 +9,9 @@
  ***************************************************************/
 void PairingModeState::handleInput( RemoteListenerContext& context ) {
     context.lock();  // Ensure thread safety
-
+    print( "\n============================" );
     print( "=== [STATE: PairingMode] ===" );
+    print( "============================\n" );
 
     // **Null Safety Checks**
     if ( !context.getRemotePairingScreen()) {
@@ -34,8 +35,8 @@ void PairingModeState::handleInput( RemoteListenerContext& context ) {
     // Ensure we are in pairing mode and the blinker is active
     while ( context.getRemotePairingScreen()->inPairingMode() && context.getPairingBlinker()->awake()) {
         print( "Waiting for pairing input..." );
-        int selection = context.getPairingInputWithTimer()->getInput();
-
+        int selection = context.getPairingInputWithTimer()->getInput(); // the one with the pairing blinker
+        
         if ( selection == GREEN_REMOTE_GREEN_SCORE ) {
             context.getRemotePairingScreen()->greenPlayerPressed();
             context.getPairingBlinker()->setGreenPlayerPaired( true );
@@ -44,7 +45,7 @@ void PairingModeState::handleInput( RemoteListenerContext& context ) {
             context.getRemotePairingScreen()->redPlayerPressed();
             context.getPairingBlinker()->setRedPlayerPaired( true );
             print( "Red player paired." );
-        } else if ( selection == INPUT_TIMEOUT ) {
+        } else if ( selection == INPUT_TIMEOUT_CODE ) {
             print( "Pairing timeout. Transitioning to sleep mode..." );
             context.getGameState()->setCurrentAction( SLEEP_MODE );
             context.getGameState()->setState( SLEEP_MODE_STATE );

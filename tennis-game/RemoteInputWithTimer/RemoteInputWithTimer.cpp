@@ -48,7 +48,7 @@ int RemoteInputWithTimer::getInput() {
     print("*** RemoteInputWithTimer::getInput() - calling _blinker->start() ***");
     _blinker->start();  // This was causing the segmentation fault before
     print( "getting input from within RemoteInputWithTimer..." );
-    if ( REMOTE_INPUT == 1 ) {  // 122224
+    if ( REMOTE_INPUT == 1 ) { 
         /*// if the selection is never one of the valid remote inputs, then we will never exit the while loop! // 011925
          * there is no timer here, the agent says.  in the future we will take out this comment and ask a new employee a question about this dillemma.  we will ask them to explain why this is a bad design because it locks up the system. meaning,  so how do we fix this?
          * the timer that would allow us to break out of this while loop is not in the scope of this while loop! we need either to make a timer in here, or pass in a timer object to this function.  */
@@ -58,15 +58,15 @@ int RemoteInputWithTimer::getInput() {
             elapsedTimeMs = duration_cast< milliseconds >( now - startTime ).count();
 
             if ( elapsedTimeMs >= _timeout_ms ) {
-                print( "******** Keyboard input timed out after " << _timeout_ms / 1000 << " seconds. ********" );
-                return _timeout_ms; // <--<< this is where we break out of the loop!  the other input with timer is missing this.
+                print( "******** Input timed out after " << _timeout_ms / 1000 << " seconds. ********" );
+                return INPUT_TIMEOUT_CODE; // <--<< this is where we break out of the loop!
             }
-            print( "*** reading selection from inputs... ***" ); // 122224
-            selection = _inputs->read_mcp23017_value();  // this actually does have a while. // 011925
-            print( "read selection from inputs: " << selection ); // but it
-            if ( selection == GREEN_REMOTE_GREEN_SCORE ||         // isnt as bad as this
-                 selection == GREEN_REMOTE_RED_SCORE   ||         // one because it always returns a value
-                 selection == RED_REMOTE_GREEN_SCORE   ||         // 011925
+            print( "*** reading selection from inputs... ***" );
+            selection = _inputs->read_mcp23017_value();             // this actually does have a while. // 011925
+            print( "read selection from inputs: " << selection );   // but it
+            if ( selection == GREEN_REMOTE_GREEN_SCORE ||           // isnt as bad as this
+                 selection == GREEN_REMOTE_RED_SCORE   ||           // one because it always returns a value
+                 selection == RED_REMOTE_GREEN_SCORE   ||           // 011925
                  selection == RED_REMOTE_RED_SCORE ) {
                 print( "selection: " << selection << " triggered the done flag, exiting while loop..." );
                 done = true;

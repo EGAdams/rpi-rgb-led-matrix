@@ -27,7 +27,7 @@
 //  re-written in C++ by EG in June 2022
 
 ///////////////////////// TIMEOUT CONSTANTS ///////////////////////////////////
-#define INPUT_TIMEOUT 99
+#define INPUT_TIMEOUT_CODE 99
 #define SLEEP_INPUT_TIMEOUT 5000
 #define SLEEP_FOREVER 100000000000
 ///////////////////////////////////////////////////////////////////////////////
