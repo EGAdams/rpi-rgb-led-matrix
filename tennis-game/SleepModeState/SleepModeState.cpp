@@ -15,20 +15,21 @@ void SleepModeState::handleInput( RemoteListenerContext& context ) {
             print( "Undoing last action..." );
             context.getGameObject()->undo();
         } else {                                // must have it a score button, reset match...
-            print( "Resetting match..." );
-            context.getGameObject()->resetMatch();
-            print( "Match reset complete." );
-            if ( context.getSleepingInputWithTimer()->getTimeSlept() > SLEEP_INPUT_TIMEOUT * 1000 ) { // If sleep time exceeded
-                print( "Max sleep time exceeded. Clearing game history..." );                         // SLEEP_INPUT_TIMEOUT, clear game history  
-                context.getGameObject()->getHistory()->clearHistory();
-                print( "Game history cleared." );
-            }
+            print( "not doing anything here except clearing off the bouncing ball and setting the state..." );
+            // print( "Resetting match..." );
+            // context.getGameObject()->resetMatch();
+            // print( "Match reset complete." );
+            // if ( context.getSleepingInputWithTimer()->getTimeSlept() > SLEEP_INPUT_TIMEOUT * 1000 ) { // If sleep time exceeded
+            //     print( "Max sleep time exceeded. Clearing game history..." );                         // SLEEP_INPUT_TIMEOUT, clear game history  
+            //     context.getGameObject()->getHistory()->clearHistory();
+            //     print( "Game history cleared." );
+            // }
         }
         print( "Clearing scoreboard screen..." );                       // clean off bouncing ball
         context.getScoreboard()->clearScreen();
         print( "Screen cleared." );
-        context.getScoreboard()->update();
-        print( "Scoreboard updated." );
+        // context.getScoreboard()->update();                           // Shows Zeros!
+        // print( "Scoreboard updated." );
         context.getGameState()->setCurrentAction( AFTER_SLEEP_MODE );           // Transition to AFTER_SLEEP_MODE
         if ( context.getGameState()->getState() == NO_SCORE_SLEEP_STATE ) {     
             context.getGameState()->setState( REGULAR_PLAY_NO_SCORE_STATE );    // Wake up in the beginning of the game
