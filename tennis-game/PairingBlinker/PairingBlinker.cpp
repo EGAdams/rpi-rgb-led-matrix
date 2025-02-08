@@ -17,18 +17,18 @@ PairingBlinker::~PairingBlinker() { stop(); }
 const unsigned long PAIRING_TIMEOUT = 5000;
 void PairingBlinker::blinkLoop() {
     bool toggle_on = true;  // Start with Green instructions
-    print( "starting blink loop..." );
+    // print( "starting blink loop..." );
     unsigned long pairing_start_time = GameTimer::gameMillis();
     while ( !_should_stop ) {
-        print( "in blink loop..." );
+        // print( "in blink loop..." );
         unsigned long current_time       = GameTimer::gameMillis();
-        print( "current time: " + std::to_string( current_time ));
+        // print( "current time: " + std::to_string( current_time ));
         unsigned long elapsed_time       = current_time - pairing_start_time;
-        print( "elapsed time: " + std::to_string( elapsed_time ));
+        // print( "elapsed time: " + std::to_string( elapsed_time ));
         // Check if timeout exceeded
         if ( elapsed_time > PAIRING_TIMEOUT ) {
-            print( "Timeout exceeded. Switch to blinking ball mode in the future..." );
-            print( "timeout not exceeded, continue blinking..." );
+            // print( "Timeout exceeded. Switch to blinking ball mode in the future..." );
+            // print( "timeout not exceeded, continue blinking..." );
         }
 
         if ( !_scoreboard ) {
@@ -37,47 +37,47 @@ void PairingBlinker::blinkLoop() {
 
         _scoreboard->clearScreen();
         if ( _green_player_paired && _red_player_paired ) { 
-            print( "both players seem to be paired, break..." );
+            // print( "both players seem to be paired, break..." );
             break;  // If both players are paired, stop blinking
         } else if ( !_green_player_paired && _red_player_paired ) { // If only the Red player is paired, show Green player instructions
             if ( toggle_on ) {
                 showGreenInstructions();
-                print( "showing green instructions..." );
+                // print( "showing green instructions..." );
             } else {
-                print( "show neutral text only..." );
+                // print( "show neutral text only..." );
                 showPlayerPressYourRemoteText();
             }
-            print( "alternating between green on and green off..." );
+            // print( "alternating between green on and green off..." );
             toggle_on = !toggle_on;  // Alternate led on and led off
         }
         if ( _green_player_paired && !_red_player_paired ) { // If only the Green player is paired, show Red player instructions
             _show_green = false;
-            print( "showing red instructions inside blink loop..." );
+            // print( "showing red instructions inside blink loop..." );
             if ( toggle_on ) {
                 showRedInstructions();
-                print( "showing red instructions..." );
+                // print( "showing red instructions..." );
             }
             else {
-                print( "show neutral text only..." );
+                // print( "show neutral text only..." );
                 showPlayerPressYourRemoteText();
             }
-            print( "alternating between red on and red off..." );
+            // print( "alternating between red on and red off..." );
             toggle_on = !toggle_on;  // Alternate led on and led off
         } else if ( !_green_player_paired && !_red_player_paired ) { // If neither player is paired, show Green instructions
             if ( toggle_on ) {
                 showGreenInstructions();
-                print( "showing green instructions..." );
+                // print( "showing green instructions..." );
             }
             else {
-                print( "show neutral text only..." );
+                // print( "show neutral text only..." );
                 showPlayerPressYourRemoteText();
             }
-            print( "alternating between green on and green off..." );
+            // print( "alternating between green on and green off..." );
             toggle_on = !toggle_on;  // Alternate led on and led off
         }
         std::this_thread::sleep_for( std::chrono::seconds( 1 )); // Delay for 1 second between switching
     }
-    print( "should stop flag must be true, exiting pairing blinker blink loop..." );
+    // print( "should stop flag must be true, exiting pairing blinker blink loop..." );
 }
 
 void PairingBlinker::showGreenInstructions() {
@@ -85,13 +85,13 @@ void PairingBlinker::showGreenInstructions() {
     Color green_color( 0, 255, 0 );
     Color yellow_color( 255, 255, 0 );
     int left_margin = 9;
-    print( "clearing screen... " );
+    // print( "clearing screen... " );
     _scoreboard->clearScreen();
-    print( "setting drawer foreground color to green..." );
+    // print( "setting drawer foreground color to green..." );
     _scoreboard->setDrawerForegroundColor( green_color );
-    print( "drawing Green text..." );
+    // print( "drawing Green text..." );
     _scoreboard->drawNewText( "Green", left_margin + GREEN_OFFSET, 17 );
-    print( "drawing Player text..." );
+    // print( "drawing Player text..." );
     _scoreboard->drawNewText( "Player", left_margin + 0, PLAYER_TOP );
     _scoreboard->setDrawerForegroundColor( yellow_color );
     _scoreboard->drawNewText( "Press", left_margin + PRESS_OFFSET, PRESS_TOP + MIDDLE_OFFSET );
