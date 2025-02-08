@@ -2,7 +2,9 @@
 
 void SleepModeState::handleInput( RemoteListenerContext& context ) {
     context.lock();                             // Lock to keep thread safety
+    print( "==========================" );
     print( "=== [STATE: SleepMode] ===" );
+    print( "==========================\n\n\n" );
     int selection = context.getSleepingInputWithTimer()->getInput(); // Block for input from sleepingInputWithTimer    
     if ( selection == GREEN_REMOTE_GREEN_SCORE ||   // Check if the user pressed a valid score button during sleep
          selection == GREEN_REMOTE_RED_SCORE   ||
