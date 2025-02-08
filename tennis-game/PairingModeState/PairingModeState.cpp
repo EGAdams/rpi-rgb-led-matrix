@@ -48,7 +48,7 @@ void PairingModeState::handleInput( RemoteListenerContext& context ) {
         } else if ( selection == INPUT_TIMEOUT_CODE ) {
             print( "Pairing timeout. Transitioning to sleep mode..." );
             context.getGameState()->setCurrentAction( SLEEP_MODE );
-            context.getGameState()->setState( SLEEP_MODE_STATE );
+            context.getGameState()->setState( PAIRING_SLEEP_MODE_STATE );
             context.unlock();
             return;
         } else {
@@ -70,7 +70,7 @@ void PairingModeState::handleInput( RemoteListenerContext& context ) {
         context.getPairingBlinker()->stop();
         print( "Transitioning to sleep mode..." );
         context.getGameState()->setCurrentAction( SLEEP_MODE );
-        context.getGameState()->setState( SLEEP_MODE_STATE );
+        context.getGameState()->setState( PAIRING_SLEEP_MODE_STATE );
     }
 
     context.unlock();  // Unlock before exiting

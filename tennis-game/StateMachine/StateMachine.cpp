@@ -59,22 +59,22 @@ void StateMachine::setState( int newState ) {
 
 /**
  * @brief Creates the appropriate state object based on the game action.
- * @param currentAction The action representing the current state.
+ * @param currentState The state representing the current state of the game.
  * @return A unique pointer to the corresponding state object.
  */
-std::unique_ptr<IRemoteListenerState> StateMachine::createState( int currentAction ) {
-    switch ( currentAction ) {
+std::unique_ptr<IRemoteListenerState> StateMachine::createState( int currentState ) {
+    switch ( currentState ) {
     case PAIRING_MODE_STATE:
         return std::make_unique<PairingModeState>();
-    case SLEEP_MODE_STATE:
+    case PAIRING_SLEEP_MODE_STATE:
+    case NO_SCORE_SLEEP_STATE:
         return std::make_unique<SleepModeState>();
     case REGULAR_PLAY_NO_SCORE_STATE:
         return std::make_unique<RegularGamePlayBeforeScoreState>();
     case REGULAR_PLAY_AFTER_SCORE_STATE:
-    case AFTER_SLEEP_MODE_STATE: // Treat "After Sleep" as "After Score"
         return std::make_unique<RegularGamePlayAfterScoreState>();
     default:
-        std::cout << "[StateMachine] WARNING: Unknown state (" << currentAction 
+        std::cout << "[StateMachine] WARNING: Unknown state (" << currentState 
         << "), defaulting to REGULAR_PLAY_AFTER_SCORE_STATE." << std::endl;
         return std::make_unique<RegularGamePlayAfterScoreState>();
     }

@@ -29,7 +29,12 @@ void SleepModeState::handleInput( RemoteListenerContext& context ) {
         print( "Screen cleared." );
         context.getScoreboard()->update();
         print( "Scoreboard updated." );
-        context.getGameState()->setCurrentAction( AFTER_SLEEP_MODE );   // Transition to AFTER_SLEEP_MODE
+        context.getGameState()->setCurrentAction( AFTER_SLEEP_MODE );           // Transition to AFTER_SLEEP_MODE
+        if ( context.getGameState()->getState() == NO_SCORE_SLEEP_STATE ) {     
+            context.getGameState()->setState( REGULAR_PLAY_NO_SCORE_STATE );    // Wake up in the beginning of the game
+        } else if ( context.getGameState()->getState() == PAIRING_SLEEP_MODE_STATE ) {
+            context.getGameState()->setState( PAIRING_MODE_STATE );             // Wake up in pairing mode
+        }
         context.getGameState()->setState( REGULAR_PLAY_NO_SCORE_STATE);
         context.unlock();  // Unlock before returning
         return;

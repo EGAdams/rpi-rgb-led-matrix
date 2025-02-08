@@ -14,7 +14,7 @@ void RegularGamePlayBeforeScoreState::handleInput( RemoteListenerContext& contex
     if ( selection == INPUT_TIMEOUT_CODE ) {
         print( "*** Zero Score Timeout! Going to sleep mode... ***" );
         context.getGameState()->setCurrentAction( SLEEP_MODE );
-        context.getGameState()->setState( SLEEP_MODE_STATE );
+        context.getGameState()->setState( NO_SCORE_SLEEP_STATE );
         context.unlock();
         return;
     }

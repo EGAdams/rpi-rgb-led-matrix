@@ -35,10 +35,11 @@
 //////////////////////// STATE MACHINE CONSTANTS //////////////////////////////
 // Some additional constants for game states. 
 #define PAIRING_MODE_STATE             1
-#define SLEEP_MODE_STATE               2
-#define AFTER_SLEEP_MODE_STATE         3  // e.g. "wake up" mode
-#define REGULAR_PLAY_NO_SCORE_STATE    4
-#define REGULAR_PLAY_AFTER_SCORE_STATE 5
+#define PAIRING_SLEEP_MODE_STATE       2  // Sleep mode after pairing timeout
+#define REGULAR_PLAY_NO_SCORE_STATE    3
+#define NO_SCORE_SLEEP_STATE           4  // Sleep mode after no score timeout
+#define REGULAR_PLAY_AFTER_SCORE_STATE 5 
+#define END_MATCH_SLEEP_STATE          6
 ///////////////////////////////////////////////////////////////////////////////
 
 /////////////////////// REMOTE DEFINITIONS /////////////////////////////////////
