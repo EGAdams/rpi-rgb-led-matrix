@@ -48,7 +48,7 @@ int PinInterface::_readBits_0_4( int file ) {
 }
 
 int PinInterface::read_mcp23017_value() {
-    print( "reading MCP23017 bits..." );
+    // print( "reading MCP23017 bits..." );
     int file = open( I2C_DEVICE, O_RDWR );
 
     if ( file < 0 ) {
