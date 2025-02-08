@@ -8,6 +8,7 @@ void RegularGamePlayBeforeScoreState::handleInput( RemoteListenerContext& contex
     print( "================================================" );
     print( "=== [STATE: RegularGamePlayBeforeScoreState] ===" );
     print( "================================================\n\n\n" );
+    context.getScoreboard()->update();
     int selection = context.getNoBlinkInputWithTimer()->getInput(); // Use noBlinkInputWithTimer to detect inactivity
     print( "Selection from noBlinkInputWithTimer: " + std::to_string( selection ) );
 
