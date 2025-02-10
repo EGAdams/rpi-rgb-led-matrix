@@ -22,7 +22,9 @@ Mode1Functions::~Mode1Functions() {}
 void Mode1Functions::setScoreBoard( ScoreBoard* scoreBoard ) {
     _scoreBoard = scoreBoard;
     _pointLeds.setScoreBoard(   scoreBoard  );
-    _mode1Score.setScoreBoard(  scoreBoard  ); }
+    _mode1Score.setScoreBoard(  scoreBoard  ); 
+    _undo.setScoreBoard(        scoreBoard  );
+}
 
 void Mode1Functions::mode1ButtonFunction() {
     int button = _gameState->getPlayerButton();
