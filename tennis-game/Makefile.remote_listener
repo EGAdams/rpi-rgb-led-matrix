@@ -22,6 +22,7 @@ TARGET = run_remote_listener
 
 # Source files (ALPHABETIZED)
 SOURCES = \
+  AfterMatchWinState/AfterMatchWinState.cpp \
   BatteryTest/BatteryTest.cpp \
   BlankBlinker/BlankBlinker.cpp \
   CanvasCreator/CanvasCreator.cpp \
