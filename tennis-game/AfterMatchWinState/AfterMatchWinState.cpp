@@ -13,7 +13,7 @@ void AfterMatchWinState::handleInput( RemoteListenerContext& context ) {
     print( "Selection from noBlinkInputWithTimer: " + std::to_string( selection ) );
 
     if ( selection == INPUT_TIMEOUT_CODE ) {
-        print( "*** Zero Score Timeout! Going to sleep mode... ***" );
+        print( "*** After Match Win Timeout! Going to sleep mode... ***" );
         context.getGameState()->setCurrentAction( SLEEP_MODE    );
         context.getGameState()->setState( NO_SCORE_SLEEP_STATE  );
         context.unlock();
@@ -22,10 +22,11 @@ void AfterMatchWinState::handleInput( RemoteListenerContext& context ) {
 
     bool& no_score_flag = context.getNoScoreFlag(); // We've received a valid input, so the 
     no_score_flag = false;                          // "no score" condition is no longer valid
-    // maybe not h
+    // maybe not handle any selection here, just update the game state to regular play possibly for an undo since
+    // the match was already won
     // handleSelectionAndUpdate( context, selection ); // Handle the selection and update game state accordingly
     context.getGameState()->setState( REGULAR_PLAY_NO_SCORE_STATE ); // After a valid score input,
-    context.unlock();                                                   // transition to REGULAR_PLAY_AFTER_SCORE
+    context.unlock();                                                // transition to REGULAR_PLAY_NO_SCORE_STATE
 }
 
 void AfterMatchWinState::handleSelectionAndUpdate( RemoteListenerContext& context, int selection ) {
@@ -41,9 +42,8 @@ void AfterMatchWinState::handleSelectionAndUpdate( RemoteListenerContext& contex
         print( "*** Warning: player not serving! ***" );
         return;
     }
-
-    // If a valid scoring button is pressed
-    if ( selection == GREEN_REMOTE_GREEN_SCORE  ||
+   
+    if ( selection == GREEN_REMOTE_GREEN_SCORE  || // If a valid button is pressed
          selection == GREEN_REMOTE_RED_SCORE    ||
          selection == RED_REMOTE_GREEN_SCORE    ||
          selection == RED_REMOTE_RED_SCORE      ||

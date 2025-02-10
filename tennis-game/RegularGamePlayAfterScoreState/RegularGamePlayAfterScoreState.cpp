@@ -46,6 +46,9 @@ void RegularGamePlayAfterScoreState::handleInput( RemoteListenerContext& context
         context.getGameObject()->playerScore( selection );
     } else if ( selection == GREEN_REMOTE_UNDO || selection == RED_REMOTE_UNDO ) {
         print( "*** Undo ***" );
+        print( "*** setting the scoreboard in the Undo from the game object that is pointing to it now..." );
+        context.getGameObject()->getGameModes()->getUndo().setScoreBoard( context.getScoreboard());
+        print( "*** done setting the scoreboard in the Undo from the game object that is pointing to it now..." );
         context.getGameObject()->undo();
     } else {
         print( "*** Invalid selection ***" );
