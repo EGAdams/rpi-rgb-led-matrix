@@ -42,7 +42,9 @@ GameObject::GameObject( GameState* gameState, IDisplay* display ) :
     FontManager* fontManager = new FontManager();
     ColorManager* colorManager = new ColorManager();
     _scoreBoard = new ScoreBoard( _player1, _player2, gameState, display, fontManager, colorManager);
+    print( "*** using _gameModes->setScoreBoards( _scoreBoard ) in GameObject constructor ***" );
     _gameModes->setScoreBoards( _scoreBoard );
+    print( "*** done using _gameModes->setScoreBoards( _scoreBoard ) in GameObject constructor ***" );
     _subjectManager = new SubjectManager();
     _logger = new Logger( "GameObject" );
 }

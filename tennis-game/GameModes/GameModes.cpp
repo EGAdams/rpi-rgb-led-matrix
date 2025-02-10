@@ -33,7 +33,9 @@ void GameModes::setScoreBoards( ScoreBoard* scoreBoard ) {
     _gameLeds.setScoreBoard(       scoreBoard );
     _setLeds.setScoreBoard(        scoreBoard );
     _mode1Functions.setScoreBoard( scoreBoard );
+    print( "*** setting scoreboard for Undo in GameModes***" );
     _undo.setScoreBoard(           scoreBoard ); 
+    print( "*** done setting scoreboard for Undo in GameModes***" );
     _tieBreaker.setScoreBoards(    scoreBoard ); }
 
 void GameModes::gameStart() {

@@ -15,12 +15,12 @@ Undo::~Undo(){
     delete _logger; };
 
 void Undo::setScoreBoard( ScoreBoard* scoreBoard ) {
-    // _scoreBoard = scoreBoard;
     _pointLeds.setScoreBoard(          scoreBoard );
     _gameLeds.setScoreBoard(           scoreBoard );
-    // _mode1WinSequences.setScoreBoards( scoreBoard );
     _setLeds.setScoreBoard(            scoreBoard );
+    print( "*** setting _scoreBoardSet to true from inside Undo::setScoreBoard() ***" );
     _scoreBoardSet = true;
+    print( "*** done setting _scoreBoardSet to true from inside Undo::setScoreBoard() ***" );
 }
 
 void Undo::memory() {

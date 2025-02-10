@@ -9,7 +9,7 @@
 #include <chrono>
 #include <iostream>
 
-class RegularGamePlayBeforeScoreState : public IRemoteListenerState {
+class AfterMatchWinState : public IRemoteListenerState {
 public:
     void handleInput(RemoteListenerContext &context) override;
 
