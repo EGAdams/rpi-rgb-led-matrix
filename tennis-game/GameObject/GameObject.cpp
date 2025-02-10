@@ -44,7 +44,9 @@ GameObject::GameObject( GameState* gameState, IDisplay* display ) :
     _scoreBoard = new ScoreBoard( _player1, _player2, gameState, display, fontManager, colorManager);
     print( "*** using _gameModes->setScoreBoards( _scoreBoard ) in GameObject constructor ***" );
     _gameModes->setScoreBoards( _scoreBoard );
-    print( "*** done using _gameModes->setScoreBoards( _scoreBoard ) in GameObject constructor ***" );
+    print( "*** after that using gameModes->getUndo().setScoreBoard( _scoreBoard ) in GameObject constructor ***" );
+    _gameModes->getUndo().setScoreBoard( _scoreBoard );
+    print( "*** done setting scoreboards in GameObject constructor ***" );
     _subjectManager = new SubjectManager();
     _logger = new Logger( "GameObject" );
 }

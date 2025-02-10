@@ -36,6 +36,7 @@ void RegularGamePlayBeforeScoreState::handleSelectionAndUpdate( RemoteListenerCo
     // Check if the correct player is serving
     int serve_flag = context.getRemoteLocker()->playerNotServing( selection );
     print( "*** serve_flag: " + std::to_string( serve_flag ) + " ***" );
+    print( "*** before checking score flag in RegularGamePlayBeforeScoreState ***" );
     if ( serve_flag ) {
         print( "*** Warning: player not serving! ***" );
         return;
@@ -59,7 +60,9 @@ void RegularGamePlayBeforeScoreState::handleSelectionAndUpdate( RemoteListenerCo
         print( "after setting player score in game object." );
     } else if ( selection == GREEN_REMOTE_UNDO || selection == RED_REMOTE_UNDO ) {
         print( "*** Undo ***" );
+        print( "before calling undo in RegularGamePlayBeforeScoreState" );
         context.getGameObject()->undo();
+        print( "after calling undo in RegularGamePlayBeforeScoreState" );
     } else {
         print( "*** Invalid selection ***" );
         showHelp();

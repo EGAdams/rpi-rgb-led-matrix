@@ -23,6 +23,7 @@ void RegularGamePlayAfterScoreState::handleInput( RemoteListenerContext& context
     // Check if the correct server is pressed
     int serve_flag = context.getRemoteLocker()->playerNotServing( selection );
     print( "*** serve_flag: " + std::to_string( serve_flag ) + " ***" );
+    print( "*** before serve flag check in RegularGamePlayAfterScoreState ***" );
     if ( serve_flag ) {
         print( "*** Warning: player not serving! ***" );
         context.unlock();
@@ -46,9 +47,9 @@ void RegularGamePlayAfterScoreState::handleInput( RemoteListenerContext& context
         context.getGameObject()->playerScore( selection );
     } else if ( selection == GREEN_REMOTE_UNDO || selection == RED_REMOTE_UNDO ) {
         print( "*** Undo ***" );
-        print( "*** setting the scoreboard in the Undo from the game object that is pointing to it now..." );
+        print( "*** setting the scoreboard in the Undo from the game object that is pointing to it now... ***" );
         context.getGameObject()->getGameModes()->getUndo().setScoreBoard( context.getScoreboard());
-        print( "*** done setting the scoreboard in the Undo from the game object that is pointing to it now..." );
+        print( "*** done setting the scoreboard in the Undo from the game object that is pointing to it now... ***" );
         context.getGameObject()->undo();
     } else {
         print( "*** Invalid selection ***" );
