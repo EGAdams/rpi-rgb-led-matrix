@@ -33,7 +33,9 @@ void RegularGamePlayAfterScoreState::handleInput( RemoteListenerContext& context
     if ( selection == GREEN_REMOTE_GREEN_SCORE  ||
          selection == GREEN_REMOTE_RED_SCORE    ||
          selection == RED_REMOTE_GREEN_SCORE    ||
-         selection == RED_REMOTE_RED_SCORE ) {
+         selection == RED_REMOTE_RED_SCORE      ||
+         selection == RED_REMOTE_UNDO           ||
+         selection == GREEN_REMOTE_UNDO ) {
         if ( selection == GREEN_REMOTE_GREEN_SCORE || selection == RED_REMOTE_GREEN_SCORE ) {
             print( "*** Green player scored ***" );
             selection = 1; // represent GREEN

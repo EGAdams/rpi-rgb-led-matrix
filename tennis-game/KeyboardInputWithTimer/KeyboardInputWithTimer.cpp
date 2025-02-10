@@ -24,7 +24,9 @@ bool KeyboardInputWithTimer::validateInput( int selection ) const {
     return  selection == GREEN_REMOTE_GREEN_SCORE ||
             selection == GREEN_REMOTE_RED_SCORE   ||
             selection == RED_REMOTE_GREEN_SCORE   ||
-            selection == RED_REMOTE_RED_SCORE;
+            selection == RED_REMOTE_RED_SCORE     ||
+            selection == RED_REMOTE_UNDO          ||
+            selection == GREEN_REMOTE_UNDO;
 }
 
 int KeyboardInputWithTimer::_configureTerminal( struct termios& oldt ) {

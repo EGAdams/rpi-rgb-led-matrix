@@ -19,13 +19,11 @@ void PairingModeState::handleInput( RemoteListenerContext& context ) {
         context.unlock();
         return;
     }
-
     if ( !context.getPairingBlinker()) {
         print( "*** ERROR: pairingBlinker is NULL! ***" );
         context.unlock();
         return;
     } 
-    
     if ( !context.getPairingInputWithTimer()) {
         print( "*** ERROR: pairingInputWithTimer is NULL! ***" );
         context.unlock();
@@ -36,7 +34,6 @@ void PairingModeState::handleInput( RemoteListenerContext& context ) {
     while ( context.getRemotePairingScreen()->inPairingMode() && context.getPairingBlinker()->awake()) {
         print( "Waiting for pairing input..." );
         int selection = context.getPairingInputWithTimer()->getInput(); // the one with the pairing blinker
-        
         if ( selection == GREEN_REMOTE_GREEN_SCORE ) {
             context.getRemotePairingScreen()->greenPlayerPressed();
             context.getPairingBlinker()->setGreenPlayerPaired( true );
@@ -55,23 +52,18 @@ void PairingModeState::handleInput( RemoteListenerContext& context ) {
             print( "*** Invalid selection during pairing. ***" );
             std::this_thread::sleep_for( std::chrono::milliseconds( 500 ));
         }
-
-        // If both players are paired, exit the loop
-        if ( context.getPairingBlinker()->areBothPlayersPaired()) {
+        if ( context.getPairingBlinker()->areBothPlayersPaired()) { // If both players are paired, exit the loop
             print( "Both players paired, exiting pairing mode." );
             context.getGameState()->setState( REGULAR_PLAY_NO_SCORE_STATE );
             break;
         }
     }
-
-    // If pairing is complete or timeout occurs, transition to sleep mode
-    if ( !context.getPairingBlinker()->awake()) {
-        print( "Pairing blinker is not awake, stopping pairing mode..." );
+    if ( !context.getPairingBlinker()->awake()) {                           // If pairing is complete or timeout 
+        print( "Pairing blinker is not awake, stopping pairing mode..." );  // occurs, transition to sleep mode
         context.getPairingBlinker()->stop();
         print( "Transitioning to sleep mode..." );
         context.getGameState()->setCurrentAction( SLEEP_MODE );
         context.getGameState()->setState( PAIRING_SLEEP_MODE_STATE );
     }
-
-    context.unlock();  // Unlock before exiting
+    context.unlock(); // Unlock before exiting
 }
