@@ -41,6 +41,7 @@ class GameModes {
   void noCode();
   void runGameMode(int rotaryPosition);
   void setScoreBoards( ScoreBoard* scoreBoard );
+  Undo getUndo();
 
  private:
   Player* _player1;

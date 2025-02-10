@@ -26,6 +26,8 @@ GameModes::GameModes(
 
 void GameModes::undo() { _undo.mode1Undo( _history );}
 
+Undo GameModes::getUndo() { return _undo; }
+
 void GameModes::setScoreBoards( ScoreBoard* scoreBoard ) {
     _pointLeds.setScoreBoard(      scoreBoard );
     _gameLeds.setScoreBoard(       scoreBoard );
