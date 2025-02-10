@@ -49,6 +49,7 @@ class GameObject {
   Undo* createUndo();
   History* getHistory();
   void undo();
+  GameModes* getGameModes();
 
  private:
   Player*           _player1;

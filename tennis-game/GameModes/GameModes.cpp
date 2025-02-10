@@ -60,7 +60,6 @@ void GameModes::gameStart() {
     }}
 
 void GameModes::mode1() {
-    
     _gameState->setNow( GameTimer::gameMillis());
     _inputs.readUndoButton();
     if ( _gameState->getUndo() == 1 ) {  // undo button pressed

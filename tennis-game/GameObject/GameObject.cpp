@@ -47,8 +47,9 @@ GameObject::GameObject( GameState* gameState, IDisplay* display ) :
     _logger = new Logger( "GameObject" );
 }
 
-Player* GameObject::getPlayer1() { return _player1; }
-Player* GameObject::getPlayer2() { return _player2; }
+Player*     GameObject::getPlayer1() {      return _player1;    }
+Player*     GameObject::getPlayer2() {      return _player2;    }
+GameModes*  GameObject::getGameModes() {    return _gameModes;  }
 
 GameObject::~GameObject() {};
 void GameObject::_signalHandler( int signal ) { GameObject::gSignalStatus = signal; }

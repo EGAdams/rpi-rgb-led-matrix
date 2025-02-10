@@ -104,6 +104,7 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
     bool keyboard_off = true;     // <---------- toggle the keyboard off here ---------<<
     auto scoreboard = gameObject->getScoreBoard();
     scoreboard->setLittleDrawerFont( "fonts/8x13B.bdf" );
+    gameObject->getGameModes()->getUndo().setScoreBoard( scoreboard );
     RemotePairingScreen* remotePairingScreen = new RemotePairingScreen( scoreboard );
 
     // set up blinkers
