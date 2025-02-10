@@ -1,7 +1,7 @@
 
 /************************************************************
  * run_remote_listener.cpp
- *
+ * 
  * Demonstration of using a State Pattern to manage the
  * "beginning game states" for a tennis scoring system.
  *
