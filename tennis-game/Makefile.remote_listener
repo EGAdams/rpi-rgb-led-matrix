@@ -93,6 +93,10 @@ SOURCES = \
 # Object files
 OBJECTS = $(SOURCES:.cpp=.o)
 
+# Pattern rule to compile .cpp to .o
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
 # Default rule to build the target
 $(TARGET): $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $(OBJECTS) $(LDFLAGS) -o $(TARGET)
