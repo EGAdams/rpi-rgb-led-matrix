@@ -23,4 +23,4 @@ if files_to_restore:
     for file in files_to_restore:
         print(f" - {file}")
 else:
-    print("No modified or deleted files to restore.")'
+    print("No modified or deleted files to restore.")
