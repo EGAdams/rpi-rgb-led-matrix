@@ -7,6 +7,7 @@
 #include <chrono>
 #include <ctime>
 #include <thread>
+#include <cstring>  // Required for strrchr
 
 #define print( x ) \
     do { \
@@ -14,8 +15,10 @@
         auto in_time_t = std::chrono::system_clock::to_time_t( now ); \
         std::tm buf; \
         localtime_r( &in_time_t, &buf ); \
+        const char* file = strrchr(__FILE__, '/'); \
+        file = file ? file + 1 : __FILE__; \
         std::cout << "[" << std::put_time( &buf, "%H:%M:%S" ) << "] " \
-                  << "[" << __FILE__ << "] " \
+                  << "[" << file << "] " \
                   << "[: " << __LINE__ << "] " \
                   << "[" << __FUNCTION__ << "()] " \
                   << "[ Thread ID: " << std::this_thread::get_id() << " ] " \

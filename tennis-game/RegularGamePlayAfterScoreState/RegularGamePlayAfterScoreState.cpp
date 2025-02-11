@@ -4,25 +4,28 @@ void RegularGamePlayAfterScoreState::handleInput( RemoteListenerContext& context
     context.lock();  // Ensure thread safety
     // we have talked about implementing a timer here, but we don't have a timer yet
 
-    print( "===============================================" );
-    print( "=== [STATE: RegularGamePlayAfterScoreState] ===" );
-    print( "===============================================\n\n\n" );
-    print( "*** updating scoreboard ***" );
+    // print( "===============================================" );
+    // print( "=== [STATE: RegularGamePlayAfterScoreState] ===" );
+    // print( "===============================================\n\n\n" );
+    // print( "*** updating scoreboard ***" );
     context.getScoreboard()->update();
-    print( "*** done updating scoreboard ***" );
+    // print( "*** done updating scoreboard ***" );
 
     // Block on the gameInput (no timers here)
     int selection = context.getGameInput()->getInput();
-    print( "Selection from gameInput: " + std::to_string( selection ) );
+    if ( selection != 15 ) {
+        print( "Selection from gameInput: " + std::to_string( selection ));
+    }
+    
     if ( selection == 0 ) {
-        print( "*** Invalid selection (0)! ***" );
+        // print( "*** Invalid selection (0)! ***" );
         context.unlock();
         return;
     }
 
     // Check if the correct server is pressed
     int serve_flag = context.getRemoteLocker()->playerNotServing( selection );
-    print( "*** serve_flag: " + std::to_string( serve_flag ) + " ***" );
+    // print( "*** serve_flag: " + std::to_string( serve_flag ) + " ***" );
     if ( serve_flag ) {
         print( "*** Warning: player not serving! ***" );
         context.unlock();
@@ -35,19 +38,24 @@ void RegularGamePlayAfterScoreState::handleInput( RemoteListenerContext& context
          selection == RED_REMOTE_GREEN_SCORE    ||
          selection == RED_REMOTE_RED_SCORE ) {
         if ( selection == GREEN_REMOTE_GREEN_SCORE || selection == RED_REMOTE_GREEN_SCORE ) {
+            print( "***************************" );
             print( "*** Green player scored ***" );
+            print( "***************************\n\n\n" );
             selection = 1; // represent GREEN
         } else if ( selection == GREEN_REMOTE_RED_SCORE || selection == RED_REMOTE_RED_SCORE ) {
+            print( "*************************" );
             print( "*** Red player scored ***" );
+            print( "*************************\n\n\n" );
             selection = 2; // represent RED
         }
         context.getGameObject()->playerScore( selection );
     } else if ( selection == GREEN_REMOTE_UNDO || selection == RED_REMOTE_UNDO ) {
+        print( "************" );
         print( "*** Undo ***" );
-        selection = 3; // Don't try to UNDO here!  cost me a day of my life.  021025
-        context.getGameState()->setPlayerButton( selection );  // dont forget this! 021025
+        print( "************\n\n\n" );
+        context.getGameObject()->undo();
     } else {
-        print( "*** Invalid selection ***" );
+        // print( "*** Invalid selection ***" );
         // showHelp();
     }
 
