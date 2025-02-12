@@ -64,6 +64,6 @@ int PinInterface::read_mcp23017_value() {
     // print( "calling _readBits_0_4 to read MCP23017 bits 0 to 4..." );
     int bits = _readBits_0_4( file );
     close( file );
-    print( "returning bits from read_mcp23017_value(): " << std::to_string( bits ));
+    // print( "returning bits from read_mcp23017_value(): " << std::to_string( bits ));
     return bits;
 }
