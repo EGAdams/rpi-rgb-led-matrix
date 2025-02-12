@@ -45,6 +45,7 @@ class GameObject {
   void setScoreBoard( ScoreBoard* scoreBoard );
   Player* getPlayer1();
   Player* getPlayer2();
+  GameModes* getGameModes();
   GameState* getGameState();
   Undo* createUndo();
   History* getHistory();
