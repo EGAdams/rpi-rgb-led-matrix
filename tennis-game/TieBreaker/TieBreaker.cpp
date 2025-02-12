@@ -107,7 +107,7 @@ void TieBreaker::_tieBreakWin( Player* currentPlayer ) {
         _scoreBoard->update();
         MatchWinSequence  mws;
         mws.run( currentPlayer, _gameState, &_gameLeds, &_setLeds );
-        _gameState->setCurrentAction( SLEEP_MODE );
+        // _gameState->setCurrentAction( SLEEP_MODE ); // changing state in mws instead 021225
     } else {                                                      // regular TB win
         currentPlayer->setGames( currentPlayer->getGames() + 1 ); // increment games
 

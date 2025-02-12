@@ -113,7 +113,7 @@ void Mode1Score::playerGameWin( Player* player ) {
                 } else if ( player->getSets() == SETS_TO_WIN_MATCH ) {  // match win, done playing
                     MatchWinSequence mws;
                     mws.run( player, _gameState, &_gameLeds, &_setLeds );
-                    _gameState->setCurrentAction( SLEEP_MODE );
+                    // _gameState->setCurrentAction( SLEEP_MODE );
                 } else {
                     if ( player->number() == PLAYER_1_INITIALIZED ) {                 // regular set win, then reset
                         _gameState->setPlayer1SetHistory( player->getSetHistory());

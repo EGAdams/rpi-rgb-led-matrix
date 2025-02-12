@@ -46,5 +46,5 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
             GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
         }}
     gameLeds->getScoreBoard()->clearScreen();
-    std::cout << "match win sequence is done." << std::endl;
-}
+    std::cout << "match win sequence is done.  switching to after match win state..." << std::endl;
+    gameState->setState( AFTER_MATCH_WIN_STATE );
