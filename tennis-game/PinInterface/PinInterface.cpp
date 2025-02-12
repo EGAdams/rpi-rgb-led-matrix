@@ -44,7 +44,7 @@ int PinInterface::_readBits_0_4( int file ) {
     // print( "Binary value: " << std::bitset<5>( bits ));
     // print( "Decimal value: " << static_cast< int >( bits ));
     // print( "returning bits " << static_cast< int >( bits ) << " to the PinInterface read_mcp23017_value method..." );
-    // return static_cast< int >( bits );
+    return static_cast< int >( bits );
 }
 
 int PinInterface::read_mcp23017_value() {
@@ -64,6 +64,6 @@ int PinInterface::read_mcp23017_value() {
     // print( "calling _readBits_0_4 to read MCP23017 bits 0 to 4..." );
     int bits = _readBits_0_4( file );
     close( file );
-    // print( "returning bits from read_mcp23017_value(): " << std::to_string( bits ));
+    print( "returning bits from read_mcp23017_value(): " << std::to_string( bits ));
     return bits;
 }
