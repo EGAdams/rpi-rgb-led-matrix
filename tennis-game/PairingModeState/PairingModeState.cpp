@@ -58,9 +58,9 @@ void PairingModeState::handleInput( RemoteListenerContext& context ) {
 
         // If both players are paired, exit the loop
         if ( context.getPairingBlinker()->areBothPlayersPaired()) {
-            print( "DEBUG MODE: Both players paired, NOT exiting pairing mode." );
-            // context.getGameState()->setState( REGULAR_PLAY_NO_SCORE_STATE );
-            // break;
+            print( "Both players paired, exiting pairing mode." );
+            context.getGameState()->setState( REGULAR_PLAY_NO_SCORE_STATE );
+            break;
         }
     }
 
