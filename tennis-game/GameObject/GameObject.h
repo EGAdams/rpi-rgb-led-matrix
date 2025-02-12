@@ -18,7 +18,7 @@
 #include "../Logger/Logger.h"
 #include <map>
 
-#define GAME_LOOP_DELAY 1 // 5 // 100
+#define GAME_LOOP_DELAY 5 // 100
 class GameObject {
  public:
   GameObject( Player*       player1,
