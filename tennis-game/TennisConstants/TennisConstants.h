@@ -87,7 +87,7 @@
 #define AFTER_SLEEP_MODE            "after sleep mode"
 ///////////////////////////////////////////////////////////////////////////////
 
-#define SCORE_DELAY_IN_MILLISECONDS 100
+#define SCORE_DELAY_IN_MILLISECONDS 1
 #define TESTING                     1
 #define GAME_FLASH_DELAY            500 // 500 // 200 // 50 // 200 // 010725
 #define SET_WIN_FLASH_DELAY         500 // 750 // 1000 // 600 // 5 // 200 010725
