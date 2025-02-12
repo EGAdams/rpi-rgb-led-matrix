@@ -26,14 +26,11 @@ GameModes::GameModes(
 
 void GameModes::undo() { _undo.mode1Undo( _history );}
 
-Undo GameModes::getUndo() { return _undo; }
-
 void GameModes::setScoreBoards( ScoreBoard* scoreBoard ) {
     _pointLeds.setScoreBoard(      scoreBoard );
     _gameLeds.setScoreBoard(       scoreBoard );
     _setLeds.setScoreBoard(        scoreBoard );
     _mode1Functions.setScoreBoard( scoreBoard );
-    print( "*** setting scoreboard for Undo in GameModes***" );
     _undo.setScoreBoard(           scoreBoard ); 
     _tieBreaker.setScoreBoards(    scoreBoard ); }
 
@@ -61,6 +58,7 @@ void GameModes::gameStart() {
     }}
 
 void GameModes::mode1() {
+    
     _gameState->setNow( GameTimer::gameMillis());
     _inputs.readUndoButton();
     if ( _gameState->getUndo() == 1 ) {  // undo button pressed
