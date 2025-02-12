@@ -11,8 +11,7 @@ void RegularGamePlayAfterScoreState::handleInput( RemoteListenerContext& context
     context.getScoreboard()->update();
     // print( "*** done updating scoreboard ***" );
 
-    // Block on the gameInput (no timers here)
-    int selection = context.getGameInput()->getInput();
+    int selection = context.getGameInput()->getInput(); // Block on the gameInput (no timers here)
     if ( selection != 15 ) {
         print( "Selection from gameInput: " + std::to_string( selection ));
     }

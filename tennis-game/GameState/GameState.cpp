@@ -16,7 +16,7 @@ GameState::GameState() {
     _undo = 0;
     _freezePlayerButton = 0;
     _winDelay           = 500;
-    _buttonDelay        = 150;
+    _buttonDelay        = 1; // 150; 021225
     _flashDelay         = 250;
     _gameWinPulseCount = 4;
     _tieBreakMem     = 0;

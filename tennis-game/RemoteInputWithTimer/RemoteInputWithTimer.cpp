@@ -74,7 +74,7 @@ int RemoteInputWithTimer::getInput() {
                 done = true;
             } else {
                 int delay = 3; // ms
-                // print( "sleeping " << delay << "ms..." );
+                print( "sleeping " << delay << "ms..." );
                 GameTimer::gameDelay( delay );
             }
         }
