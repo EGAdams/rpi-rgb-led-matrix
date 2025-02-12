@@ -43,6 +43,7 @@
 #define NO_SCORE_SLEEP_STATE           4  // Sleep mode after no score timeout
 #define REGULAR_PLAY_AFTER_SCORE_STATE 5 
 #define END_MATCH_SLEEP_STATE          6
+#define AFTER_MATCH_WIN_STATE          7
 ///////////////////////////////////////////////////////////////////////////////
 
 /////////////////////// REMOTE DEFINITIONS /////////////////////////////////////

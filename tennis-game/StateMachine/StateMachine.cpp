@@ -75,6 +75,9 @@ std::unique_ptr<IRemoteListenerState> StateMachine::createState( int currentStat
         return std::make_unique<RegularGamePlayBeforeScoreState>();
     case REGULAR_PLAY_AFTER_SCORE_STATE:
         return std::make_unique<RegularGamePlayAfterScoreState>();
+    case AFTER_MATCH_WIN_STATE:
+        print( "*** Entering AFTER_MATCH_WIN_STATE ***" );
+        return std::make_unique<AfterMatchWinState>();
     default:
         std::cout << "[StateMachine] WARNING: Unknown state (" << currentState 
         << "), defaulting to REGULAR_PLAY_AFTER_SCORE_STATE." << std::endl;
