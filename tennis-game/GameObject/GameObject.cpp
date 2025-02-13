@@ -64,7 +64,7 @@ void GameObject::loopGame() {
     _logger->setName( "loopGame" );                   
     int rotaryValue = 1; // int rotaryValue = _gameInputs->readRotary(); TODO: actually read rotary
     _gameModes->runGameMode( rotaryValue );  // <--- entry point !! --------------<<
-    GameTimer::gameDelay( GAME_LOOP_DELAY );
+    GameTimer::gameDelay( GAME_LOOP_DELAY ); // TODO:  WARNING, this could be causing issues with the remote input timing. 021325
     _subjectManager->gameStateUpdate( _gameState, _player1, _player2 );
 }
 

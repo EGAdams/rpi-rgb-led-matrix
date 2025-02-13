@@ -44,8 +44,13 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
             gameState->setMatchBlinkOff(); 
             scoreBoard->update();
             GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
-        }}
+        }
+    }
     gameLeds->getScoreBoard()->clearScreen();
     std::cout << "match win sequence is done.  switching to after match win state..." << std::endl;
+    gameLeds->getScoreBoard()->setLittleDrawerFont( "the_sets_numbers.bdf" );
+    gameLeds->getScoreBoard()->drawNewText( "Match", 13, 60 - MATCH_WIN_OFFSET );
+    gameLeds->getScoreBoard()->drawNewText( "Win"  , 20, 75 - MATCH_WIN_OFFSET );
+    gameLeds->getScoreBoard()->drawSets();
     gameState->setState( AFTER_MATCH_WIN_STATE );
-    }    
+}    
