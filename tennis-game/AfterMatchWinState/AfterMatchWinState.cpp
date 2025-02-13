@@ -8,16 +8,15 @@ void AfterMatchWinState::handleInput( RemoteListenerContext& context ) {
     print( "===================================" );
     print( "=== [STATE: AfterMatchWinState] ===" );
     print( "===================================\n\n\n" );
-    // context.getScoreboard()->update(); // no! not here! 021325
     int selection = context.getNoBlinkInputWithTimer()->getInput(); // Use noBlinkInputWithTimer to detect inactivity
     print( "Selection from noBlinkInputWithTimer: " + std::to_string( selection ));
 
     if ( selection == INPUT_TIMEOUT_CODE ) {
         print( "*** After Match Win Timeout! Going to sleep mode... ***" );
-        // context.getGameObject()->resetMatch();
+        context.getGameObject()->resetMatch();
         print( "done resetting match." );
         print( "clearing History because max sleep time has been reached or exceeded." );
-        // context.getGameObject()->getHistory()->clearHistory();
+        context.getGameObject()->getHistory()->clearHistory();
         print( "done clearing history because max sleep time has been reached or exceeded." );
         print( "setting action to SLEEP_MODE and state to NO_SCORE_SLEEP_STATE..." );
         context.getGameState()->setCurrentAction(   SLEEP_MODE           );
