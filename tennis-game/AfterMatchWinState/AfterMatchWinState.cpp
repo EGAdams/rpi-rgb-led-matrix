@@ -4,7 +4,7 @@
 #include "AfterMatchWinState.h"
 
 void AfterMatchWinState::handleInput( RemoteListenerContext& context ) {
-    context.lock();  // Ensure thread safety
+    context.lock();  // <--------------------------- lock the context --------------------------<<
     print( "===================================" );
     print( "=== [STATE: AfterMatchWinState] ===" );
     print( "===================================\n\n\n" );
@@ -14,13 +14,14 @@ void AfterMatchWinState::handleInput( RemoteListenerContext& context ) {
 
     if ( selection == INPUT_TIMEOUT_CODE ) {
         print( "*** After Match Win Timeout! Going to sleep mode... ***" );
-        context.getGameState()->setCurrentAction(   SLEEP_MODE           );
-        context.getGameState()->setState(           NO_SCORE_SLEEP_STATE );
         context.getGameObject()->resetMatch();
         print( "done resetting match." );
         print( "clearing History because max sleep time has been reached or exceeded." );
         context.getGameObject()->getHistory()->clearHistory();
         print( "done clearing history because max sleep time has been reached or exceeded." );
+        print( "setting action to SLEEP_MODE and state to NO_SCORE_SLEEP_STATE..." );
+        context.getGameState()->setCurrentAction(   SLEEP_MODE           );
+        context.getGameState()->setState(           NO_SCORE_SLEEP_STATE );
         context.unlock();
         return;
     } else if ( selection == GREEN_REMOTE_GREEN_SCORE   ||
@@ -33,6 +34,7 @@ void AfterMatchWinState::handleInput( RemoteListenerContext& context ) {
         context.getScoreboard()->update();
         print( "setting state to REGULAR_PLAY_NO_SCORE_STATE..." );
         context.getGameState()->setState( REGULAR_PLAY_NO_SCORE_STATE );
+        print( "unlocking context and returning..." );
         context.unlock();
         return;
     } else if ( selection == GREEN_REMOTE_RED_SCORE || selection == RED_REMOTE_RED_SCORE ) {
@@ -57,7 +59,7 @@ void AfterMatchWinState::handleInput( RemoteListenerContext& context ) {
         print( "updating scoreboard..." );
         context.getScoreboard()->update();
         print( "setting state to REGULAR_PLAY_NO_SCORE_STATE..." );
-        context.getGameState()->setState( REGULAR_PLAY_NO_SCORE_STATE );
+        context.getGameState()->setState( NO_SCORE_SLEEP_STATE );
         context.unlock();
    }                                            
 }

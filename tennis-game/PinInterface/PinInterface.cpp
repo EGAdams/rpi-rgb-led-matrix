@@ -43,7 +43,7 @@ int PinInterface::_readBits_0_4( int file ) {
 
     // print( "Decimal value: " << static_cast< int >( bits ));
     if ( static_cast< int >( bits ) != 15 ) {
-        print( "Binary value: " << std::bitset<5>( bits ));
+        // print( "Binary value: " << std::bitset<5>( bits ));
     }
     // print( "returning bits " << static_cast< int >( bits ) << " to the PinInterface read_mcp23017_value method..." );
     return static_cast< int >( bits );
