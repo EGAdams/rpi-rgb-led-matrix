@@ -69,11 +69,13 @@ int RemoteInputWithTimer::getInput() {
             if ( selection == GREEN_REMOTE_GREEN_SCORE ||           // isnt as bad as this
                  selection == GREEN_REMOTE_RED_SCORE   ||           // one because it always returns a value
                  selection == RED_REMOTE_GREEN_SCORE   ||           // 011925
-                 selection == RED_REMOTE_RED_SCORE ) {
+                 selection == RED_REMOTE_RED_SCORE     ||
+                 selection == GREEN_REMOTE_UNDO        ||
+                 selection == RED_REMOTE_UNDO ) {
                 // print( "selection: " << selection << " triggered the done flag, exiting while loop..." );
                 done = true;
             } else {
-                int delay = 3; // ms
+                int delay = 3; // ms                             // TODO: check this one for power use
                 // print( "sleeping " << delay << "ms..." ); 
                 GameTimer::gameDelay( delay );
             }
