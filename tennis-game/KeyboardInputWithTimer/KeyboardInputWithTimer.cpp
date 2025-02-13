@@ -21,12 +21,12 @@ KeyboardInputWithTimer::~KeyboardInputWithTimer() {
 }
 
 bool KeyboardInputWithTimer::validateInput( int selection ) const {
-    return  selection == GREEN_REMOTE_GREEN_SCORE ||
-            selection == GREEN_REMOTE_RED_SCORE   ||
-            selection == RED_REMOTE_GREEN_SCORE   ||
-            selection == RED_REMOTE_RED_SCORE     ||
-            selection == RED_REMOTE_UNDO          ||
-            selection == GREEN_REMOTE_UNDO;
+    return  selection == GREEN_REMOTE_GREEN_SCORE   ||
+            selection == GREEN_REMOTE_RED_SCORE     ||
+            selection == RED_REMOTE_GREEN_SCORE     ||
+            selection == RED_REMOTE_RED_SCORE       ||
+            selection == GREEN_REMOTE_UNDO          ||
+            selection == RED_REMOTE_UNDO;
 }
 
 int KeyboardInputWithTimer::_configureTerminal( struct termios& oldt ) {
@@ -111,19 +111,3 @@ int KeyboardInputWithTimer::getInput() {
     _restoreTerminal( oldt, old_flags );
     return -1;
 }
-
-// int KeyboardInputWithTimer::getInputAfterPairing() {
-//     print( "\nSwitching to std::cin for input...\n" );
-//     int selection = 0;
-//     while ( true ) {
-//         print( "Enter a valid selection (6, 7, 9): " );
-//         std::cin >> selection;
-//         if ( validateInput( selection ) ) {
-//             print( "Valid input received: " << selection );
-//             return selection;
-//         }
-//         else {
-//             print( "Invalid selection. Please try again." );
-//         }
-//     }
-// }

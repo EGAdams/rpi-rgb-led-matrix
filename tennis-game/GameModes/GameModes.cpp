@@ -68,8 +68,9 @@ void GameModes::mode1() {
     _serveLeds.serveSwitch(); // if serveSwitch >= 2, serveSwitch = 0; and toggle serve variable
     _logger->setName( "mode1" );
     _mode1Functions.mode1ButtonFunction(); // <--------- ENTRY POINT --------------<<
-    if ( _gameState->getCurrentAction() == SLEEP_MODE ) {
-        print( "not running point flash because sleep mode has been detected..." );
+    if ( _gameState->getCurrentAction() == SLEEP_MODE ||
+         _gameState->getState() == AFTER_MATCH_WIN_STATE ) {
+        print( "not running point flash because sleep or after match mode has been detected..." );
     } else {
         _mode1Functions.pointFlash();
     }
