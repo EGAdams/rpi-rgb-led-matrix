@@ -129,6 +129,13 @@ void Mode1Score::playerGameWin( Player* player ) {
                     _setLeds.updateSets();
                     GameTimer::gameDelay( _gameState->getWinDelay());
                     _resetGame();
+                    
+                    // Switch the server at the end of a set
+                    if (_gameState->getServe() == PLAYER_ONE_SERVE) {
+                        _gameState->setServe(PLAYER_TWO_SERVE);
+                    } else {
+                        _gameState->setServe(PLAYER_ONE_SERVE);
+                    }
                     player->setGames( 0 );   // not sure about this but move on...
                     opponent->setGames( 0 ); // These are match win bugs!!
                 }
@@ -148,7 +155,7 @@ void Mode1Score::playerGameWin( Player* player ) {
         }
     } else { // this is a regular game win...
         if ( player->number() == PLAYER_1_INITIALIZED ) {
-            _mode1WinSequences.p1GameWinSequence();
+            _mode1WinSequences.p1GameWinSequence();        // <-----  serve is toggled in this method ---------<<
             _gameState->setPlayer1SetHistory( player->getSetHistory());
             _gameState->setPlayer2SetHistory( opponent->getSetHistory());
         } else {
