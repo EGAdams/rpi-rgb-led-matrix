@@ -113,8 +113,9 @@ void Mode1Score::playerGameWin( Player* player ) {
                     _tieBreaker.incrementSet();
                 } else if ( player->getSets() == SETS_TO_WIN_MATCH ) {  // match win, done playing
                     MatchWinSequence mws;
-                    mws.run( player, _gameState, &_gameLeds, &_setLeds );  // match win sequence switches state
+                    // mws.run( player, _gameState, &_gameLeds, &_setLeds );  // match win sequence switches state
                     // _gameState->setCurrentAction( SLEEP_MODE );         // so we will not be comming back here.
+                    _gameState->setState( MATCH_WIN_BLINK_STATE );
                 } else {
                     if ( player->number() == PLAYER_1_INITIALIZED ) {                 // regular set win, then reset
                         _gameState->setPlayer1SetHistory( player->getSetHistory());

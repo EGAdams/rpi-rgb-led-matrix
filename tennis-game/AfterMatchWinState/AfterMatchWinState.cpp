@@ -45,11 +45,6 @@ void AfterMatchWinState::handleInput( RemoteListenerContext& context ) {
         return;
    } else {
         print( "*** Invalid input, unlocking context and returning... ***" );
-        // context.getGameObject()->resetMatch();
-        // print( "updating scoreboard..." );
-        // context.getScoreboard()->update();
-        // print( "setting state to REGULAR_PLAY_NO_SCORE_STATE..." );
-        // context.getGameState()->setState( NO_SCORE_SLEEP_STATE );
         context.unlock();
         return;
    }                                            

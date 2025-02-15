@@ -44,6 +44,7 @@
 #define REGULAR_PLAY_AFTER_SCORE_STATE 5 
 #define END_MATCH_SLEEP_STATE          6
 #define AFTER_MATCH_WIN_STATE          7
+#define MATCH_WIN_BLINK_STATE          8
 ///////////////////////////////////////////////////////////////////////////////
 
 /////////////////////// REMOTE DEFINITIONS /////////////////////////////////////

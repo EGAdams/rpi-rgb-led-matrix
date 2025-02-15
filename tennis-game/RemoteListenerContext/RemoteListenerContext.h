@@ -14,6 +14,7 @@
 #include "../BlankBlinker/BlankBlinker.h"
 #include "../ScoreboardBlinker/ScoreboardBlinker.h"
 #include "../ScoreBoard/ScoreBoard.h"
+#include "../MatchWinBlinker/MatchWinBlinker.h"
 
 /************************************************************
  * RemoteListenerContext
@@ -44,6 +45,7 @@ public:
                           std::shared_ptr<PairingBlinker> pairingBlinker,
                           std::shared_ptr<BlankBlinker> blankBlinker,
                           std::shared_ptr<ScoreboardBlinker> sleepingBlinker,
+                          std::shared_ptr<MatchWinBlinker> matchWinBlinker,
                           bool& noScoreFlag);
 
     // **Accessors for Shared Resources**
@@ -59,7 +61,8 @@ public:
     ScoreBoard* getScoreboard() const;
     bool& getNoScoreFlag() const;
 
-    std::shared_ptr<PairingBlinker> getPairingBlinker() const;  // NEW getter for pairingBlinker
+    std::shared_ptr<PairingBlinker> getPairingBlinker() const;
+    std::shared_ptr<MatchWinBlinker> getMatchWinBlinker() const;
 
     // **Thread Safety Controls**
     void lock();
@@ -77,7 +80,8 @@ private:
     IGameInput* gameInput;
     RemotePairingScreen* remotePairingScreen;
     bool& no_score;
-    std::shared_ptr<PairingBlinker> pairingBlinker;  // NEW: Store pairingBlinker
+    std::shared_ptr<PairingBlinker> pairingBlinker;
+    std::shared_ptr<MatchWinBlinker> matchWinBlinker;
 
     // Mutex for thread safety
     std::mutex mtx;

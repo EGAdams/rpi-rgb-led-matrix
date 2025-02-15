@@ -15,8 +15,11 @@ RemoteListenerContext::RemoteListenerContext(ScoreBoard* scoreboard_arg,
                                              std::shared_ptr<PairingBlinker> pairingBlinker,
                                              std::shared_ptr<BlankBlinker> blankBlinker,
                                              std::shared_ptr<ScoreboardBlinker> sleepingBlinker,
+                                             std::shared_ptr<MatchWinBlinker> matchWinBlinker,
                                              bool& noScoreFlag)
-    : gameObject(gameObj),
+    
+    : scoreboard(scoreboard_arg),
+      gameObject(gameObj),
       gameState(gameSt),
       reset(resetPtr),
       remoteLocker(rLocker),
@@ -26,7 +29,7 @@ RemoteListenerContext::RemoteListenerContext(ScoreBoard* scoreboard_arg,
       gameInput(gameIn),
       remotePairingScreen(pairingScreen),
       pairingBlinker(pairingBlinker),
-      scoreboard(scoreboard_arg),
+      matchWinBlinker(matchWinBlinker),
       no_score(noScoreFlag) {
     print( "DEBUG: RemoteListenerContext constructor called" );
 }
@@ -78,6 +81,10 @@ bool& RemoteListenerContext::getNoScoreFlag() const {
 
 std::shared_ptr<PairingBlinker> RemoteListenerContext::getPairingBlinker() const {
     return pairingBlinker;
+}
+
+std::shared_ptr<MatchWinBlinker> RemoteListenerContext::getMatchWinBlinker() const {
+    return matchWinBlinker;
 }
 
 // Thread Safety Controls

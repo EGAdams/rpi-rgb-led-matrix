@@ -73,6 +73,8 @@ extern volatile std::sig_atomic_t gSignalStatus;
 #include "RemoteGameInput/RemoteGameInput.h"
 #include "KeyboardGameInput/KeyboardGameInput.h"
 #include "StateMachine/StateMachine.h"
+#include "MatchWinBlinkState/MatchWinBlinkState.h"
+#include "MatchWinBlinker/MatchWinBlinker.h"
 
 #define SCORE_DELAY 0
 
@@ -107,9 +109,10 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
     RemotePairingScreen* remotePairingScreen = new RemotePairingScreen( scoreboard );
 
     // set up blinkers
-    std::shared_ptr<PairingBlinker>    pairingBlinker = std::make_shared<PairingBlinker>( scoreboard );
+    std::shared_ptr<PairingBlinker> pairingBlinker = std::make_shared<PairingBlinker>( scoreboard );
     std::shared_ptr<ScoreboardBlinker> sleepingBlinker = std::make_shared<ScoreboardBlinker>( scoreboard );
-    std::shared_ptr<BlankBlinker>      blankBlinker = std::make_shared<BlankBlinker>();
+    std::shared_ptr<BlankBlinker> blankBlinker = std::make_shared<BlankBlinker>();
+    std::shared_ptr<MatchWinBlinker> matchWinBlinker = std::make_shared<MatchWinBlinker>( scoreboard );
 
     // declare the input handlers
     IInputWithTimer* pairingInputWithTimer = nullptr;
@@ -142,7 +145,7 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
     RemoteListenerContext context( scoreboard, gameObject, gameState, reset, remoteLocker,
                                    pairingInputWithTimer, noBlinkInputWithTimer,
                                    sleepingInputWithTimer, gameInput, remotePairingScreen,
-                                   pairingBlinker, blankBlinker, sleepingBlinker, no_score );
+                                   pairingBlinker, blankBlinker, sleepingBlinker, matchWinBlinker, no_score );
 
     // initialize and run the StateMachine
     StateMachine stateMachine( context );

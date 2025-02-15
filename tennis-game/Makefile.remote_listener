@@ -48,6 +48,8 @@ SOURCES = \
   LogObjectFactory/LogObjectFactory.cpp \
   Logger/Logger.cpp \
   LoggerFactory/LoggerFactory.cpp \
+  MatchWinBlinker/MatchWinBlinker.cpp \
+  MatchWinBlinkState/MatchWinBlinkState.cpp \
   MatchWinSequence/MatchWinSequence.cpp \
   Mode1Functions/Mode1Functions.cpp \
   Mode1Score/Mode1Score.cpp \

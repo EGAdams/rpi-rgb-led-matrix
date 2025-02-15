@@ -1,7 +1,9 @@
 #ifndef MATCH_WIN_BLINKER_H
 #define MATCH_WIN_BLINKER_H
 
-#include "ScoreBoard.h"
+#include "../ScoreBoard/ScoreBoard.h"
+#include "../GameTimer/GameTimer.h"
+#include <iostream>
 #include <memory>
 #include <thread>
 #include <atomic>

@@ -1,9 +1,4 @@
 #include "MatchWinBlinker.h"
-#include "GameTimer.h"
-#include <iostream>
-
-#define MATCH_WIN_BLINK_COUNT 6
-#define MATCH_WIN_FLASH_DELAY 500  // Blink every 500ms
 #define MATCH_WIN_OFFSET 12
 
 MatchWinBlinker::MatchWinBlinker(ScoreBoard* scoreboard)
