@@ -5,6 +5,7 @@
 #include "../Inputs/Inputs.h"
 #include "../History/History.h"
 #include "../TennisConstants/TennisConstants.h"
+#define MATCH_WIN_OFFSET 12
 
 MatchWinBlinkState::MatchWinBlinkState() {}
 
@@ -45,6 +46,10 @@ void MatchWinBlinkState::handleInput(RemoteListenerContext& context) {
     // If no input was received and blinking is complete, transition to After Match Win State
     print("*** MatchWinBlinker finished blinking, transitioning to AfterMatchWinState ***");
     context.getGameState()->setState(AFTER_MATCH_WIN_STATE);
+    context.getScoreboard()->clearScreen();
+    context.getScoreboard()->drawNewText( "Match", 13, 60 - MATCH_WIN_OFFSET );
+    context.getScoreboard()->drawNewText( "Win",   20, 75 - MATCH_WIN_OFFSET );
+    context.getScoreboard()->drawSets();
     context.unlock();
 }
 
