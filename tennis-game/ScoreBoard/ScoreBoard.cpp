@@ -544,12 +544,12 @@ void ScoreBoard::setDrawerSize( Drawer::Size size ) { _drawer->setSize( size ); 
 void ScoreBoard::setLittleDrawerFont( const std::string& font_file ) {
     Color color( 255, 255, 0 );
     Color bg_color( 0, 0, 0 );
-    print( "loading little number font: " + font_file );
+    // print( "loading little number font: " + font_file );
     FontLoader fontLoader( font_file.c_str());
     fontLoader.LoadFont( _little_number_font );
     _text_drawer = new Drawer( _canvas.get(), &_little_number_font, Drawer::BIG, color, bg_color );
-    print( "little number font loaded" );
-    print( "set little number font disabled on october massacre. " );
+    // print( "little number font loaded" );
+    // print( "set little number font disabled on october massacre. " );
 }
 
 std::string ScoreBoard::displayAndLoadFontMenu( const std::string& fontDirectory ) {
