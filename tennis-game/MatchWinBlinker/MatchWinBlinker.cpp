@@ -9,7 +9,7 @@ MatchWinBlinker::MatchWinBlinker( ScoreBoard* scoreboard )
 MatchWinBlinker::~MatchWinBlinker() { stop(); }
 
 void MatchWinBlinker::start() {
-    if ( _running.load() ) return;  // Prevent multiple instances
+    if ( _running.load()) return;  // Prevent multiple instances
     _shouldStop.store( false );
     _running.store( true );
     _blinkThread = std::thread( &MatchWinBlinker::blinkLoop, this );
@@ -17,7 +17,7 @@ void MatchWinBlinker::start() {
 
 void MatchWinBlinker::stop() {
     _shouldStop.store( true );
-    if ( _blinkThread.joinable() ) { _blinkThread.join(); }
+    if ( _blinkThread.joinable()) { _blinkThread.join(); }
     _running.store( false );
 }
 
@@ -26,19 +26,16 @@ bool MatchWinBlinker::isRunning() const { return _running.load(); }
 void MatchWinBlinker::blinkLoop() {
     std::cout << "MatchWinBlinker started." << std::endl;
     for ( int blink_count = 0; blink_count < MATCH_WIN_BLINK_COUNT; blink_count++ ) {
-        if ( _shouldStop.load() ) break;
+        if ( _shouldStop.load()) break;
         _scoreboard->clearScreen();
         _scoreboard->drawNewText( "Match", 13, 60 - MATCH_WIN_OFFSET );
         _scoreboard->drawNewText( "Win",   20, 75 - MATCH_WIN_OFFSET );
         _scoreboard->drawSets();
         GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
-        if ( _shouldStop.load() ) break;
+        if ( _shouldStop.load()) break;
         _scoreboard->clearScreen();
         GameTimer::gameDelay( MATCH_WIN_FLASH_DELAY );
     }
     std::cout << "MatchWinBlinker completed." << std::endl;
-    _scoreboard->drawNewText( "Match", 13, 60 - MATCH_WIN_OFFSET );
-    _scoreboard->drawNewText( "Win",   20, 75 - MATCH_WIN_OFFSET );
-    _scoreboard->drawSets();
-    _running.store( false );
+    _running.store(false);
 }
