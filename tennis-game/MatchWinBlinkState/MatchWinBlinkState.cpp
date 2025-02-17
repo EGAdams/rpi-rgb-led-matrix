@@ -18,9 +18,9 @@ void MatchWinBlinkState::handleInput( RemoteListenerContext& context ) {
     unsigned long original_no_blink_time    = MAIN_INPUT_TIMEOUT;
     unsigned long match_blinking_time       = 2 * MATCH_WIN_FLASH_DELAY * MATCH_WIN_BLINK_COUNT + 100 /*ms*/; // change the timeout  
     context.getNoBlinkInputWithTimer()->setTimeout( match_blinking_time );  // of the no blink timer to the match
-    while ( context.getMatchWinBlinker()->isRunning() ) {                   // blinking time + 1 second for a buffer
+    while ( context.getMatchWinBlinker()->isRunning()) {                    // blinking time + 1 second for a buffer
         int selection = context.getNoBlinkInputWithTimer()->getInput();     // Listen for input while blinking
-        print( "Selection from noBlinkInputWithTimer: " + std::to_string( selection ) );
+        print( "Selection from noBlinkInputWithTimer: " + std::to_string( selection ));
         if ( selection == GREEN_REMOTE_GREEN_SCORE  ||
             selection == GREEN_REMOTE_RED_SCORE     ||
             selection == RED_REMOTE_GREEN_SCORE     ||
@@ -55,7 +55,7 @@ void MatchWinBlinkState::handleInput( RemoteListenerContext& context ) {
 }
 
 void MatchWinBlinkState::startBlinking( RemoteListenerContext& context ) {
-    if ( !context.getMatchWinBlinker()->isRunning() ) {
+    if ( !context.getMatchWinBlinker()->isRunning()) {
         context.getMatchWinBlinker()->start();
     }
 }

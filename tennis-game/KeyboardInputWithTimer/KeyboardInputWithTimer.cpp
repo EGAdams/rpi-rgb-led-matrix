@@ -68,6 +68,8 @@ int KeyboardInputWithTimer::getInput() {
                 print( "\n\n\n\n" );
                 _restoreTerminal( oldt, old_flags );
                 return INPUT_TIMEOUT_CODE;
+            } else {
+                print( "sleeping inside getInput() elapsed time: " << _elapsedTimeMs );
             }
 
             char ch;
