@@ -105,7 +105,7 @@ void TieBreaker::_tieBreakWin( Player* currentPlayer ) {
             _gameState->setPlayer1SetHistory( currentPlayer->getOpponent()->getSetHistory());
         }
         _scoreBoard->update();
-        MatchWinSequence  mws;
+        // MatchWinSequence  mws;
         // mws.run( currentPlayer, _gameState, &_gameLeds, &_setLeds );
         // _gameState->setCurrentAction( SLEEP_MODE ); // changing state in mws instead 021225
         _gameState->setState( MATCH_WIN_BLINK_STATE );

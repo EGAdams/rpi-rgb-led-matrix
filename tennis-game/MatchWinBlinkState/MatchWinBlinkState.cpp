@@ -45,8 +45,8 @@ void MatchWinBlinkState::handleInput(RemoteListenerContext& context) {
 
     // If no input was received and blinking is complete, transition to After Match Win State
     print("*** MatchWinBlinker finished blinking, transitioning to AfterMatchWinState ***");
-    context.getGameState()->setState(AFTER_MATCH_WIN_STATE);
-    context.getScoreboard()->clearScreen();
+    context.getGameState()->setState(AFTER_MATCH_WIN_STATE); // TODO: this code is suspect there is a crash around
+    context.getScoreboard()->clearScreen();                  // pressing score after breaking out of Match Win Blink State
     context.getScoreboard()->drawNewText( "Match", 13, 60 - MATCH_WIN_OFFSET );
     context.getScoreboard()->drawNewText( "Win",   20, 75 - MATCH_WIN_OFFSET );
     context.getScoreboard()->drawSets();
