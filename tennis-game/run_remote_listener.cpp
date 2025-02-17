@@ -103,7 +103,7 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
     RemoteLocker* remoteLocker = new RemoteLocker( gameState );
     bool no_score = true;
     Inputs* inputs = new Inputs( gameObject->getPlayer1(), gameObject->getPlayer2(), gameObject->getPinInterface(), gameState );
-    bool keyboard_off = true;     // <---------- toggle the keyboard off here ---------<<
+    bool keyboard_off = false;     // <---------- toggle the keyboard off here ---------<<
     auto scoreboard = gameObject->getScoreBoard();
     scoreboard->setLittleDrawerFont( "fonts/8x13B.bdf" );
     RemotePairingScreen* remotePairingScreen = new RemotePairingScreen( scoreboard );
