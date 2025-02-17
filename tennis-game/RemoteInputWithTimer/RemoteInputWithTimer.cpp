@@ -52,7 +52,6 @@ int RemoteInputWithTimer::getInput() {
         /*// if the selection is never one of the valid remote inputs, then we will never exit the while loop! // 011925
          * there is no timer here, the agent says.  in the future we will take out this comment and ask a new employee a question about this dillemma.  we will ask them to explain why this is a bad design because it locks up the system. meaning,  so how do we fix this?
          * the timer that would allow us to break out of this while loop is not in the scope of this while loop! we need either to make a timer in here, or pass in a timer object to this function.  */
-         // TODO: add an outside timer that will break out of this while loop.
         while ( !done ) {
             auto now = steady_clock::now();
             elapsedTimeMs = duration_cast< milliseconds >( now - startTime ).count();

@@ -20,7 +20,7 @@ void MatchWinSequence::run( Player* player, GameState* gameState, GameLeds* game
     if ( gameLeds->getScoreBoard()->hasCanvas()) {
         gameLeds->getScoreBoard()->clearScreen();
         gameLeds->getScoreBoard()->setLittleDrawerFont( "fonts/8x13B.bdf" );
-        print( "flash MATCH WIN... " ); // 051725
+        print( "flash MATCH WIN... " );
         for ( int blink_count = 0; blink_count < MATCH_WIN_BLINK_COUNT; blink_count++ ) {
             gameLeds->getScoreBoard()->setLittleDrawerFont( "the_sets_numbers.bdf" );
             gameLeds->getScoreBoard()->drawNewText( "Match", 13, 60 - MATCH_WIN_OFFSET );

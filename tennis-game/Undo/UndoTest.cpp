@@ -108,7 +108,6 @@
 // }
 
 // TEST_F( UndoTest, TestUndoFunctionality ) {
-//     // TODO: Add checks before the undo operation to verify initial state
 //     player1->setPoints( 2 );
 //     player2->setPoints( 2 );
 //     undoObj->mode1Undo( history );
@@ -127,7 +126,6 @@
 //     player2->setPoints( 2 ); // Incrementing player 2's score by 4
 //     mode1Score->updateScore( player2 );
 //     ASSERT_EQ( 2 , player2->getPoints());
-//     // TODO: Additional checks for game state after player 2 scores
 // }
 
 // TEST_F( UndoTest, TestPlayer1WinsSet ) {

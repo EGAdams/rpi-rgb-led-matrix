@@ -259,7 +259,7 @@ int main()
     std::cout << "Press Ctrl+C to exit.\n\n";
 
     try {
-        while ( gameState.gameRunning() ) {  // TODO: change to is paring or not
+        while ( gameState.gameRunning()) {
             std::cout << "\nPlease enter your selection (1, 2, or 9): ";
             int selection = keyboardInput.getInput();
 
