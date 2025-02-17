@@ -9,7 +9,13 @@ MatchWinBlinker::MatchWinBlinker( ScoreBoard* scoreboard )
 MatchWinBlinker::~MatchWinBlinker() { stop(); }
 
 void MatchWinBlinker::start() {
-    if ( _running.load()) return;  // Prevent multiple instances
+    if ( _running.load()) return;  // Prevent starting a new thread if already running
+
+    // If a previous thread finished but wasn't joined, join it.
+    if (_blinkThread.joinable()) {
+        _blinkThread.join();
+    }
+
     _shouldStop.store( false );
     _running.store( true );
     _blinkThread = std::thread( &MatchWinBlinker::blinkLoop, this );

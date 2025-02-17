@@ -16,7 +16,7 @@ void AfterMatchWinState::handleInput( RemoteListenerContext& context ) {
         context.getGameObject()->resetMatch(); // 021725 // TODO: don't show the scores here.  this is anoying
         print( "done resetting match." );
         print( "clearing History because max sleep time has been reached or exceeded." );
-        // context.getGameObject()->getHistory()->clearHistory(); // 021725 put this in after debugging
+        context.getGameObject()->getHistory()->clearHistory();
         print( "done clearing history because max sleep time has been reached or exceeded." );
         print( "setting action to SLEEP_MODE and state to NO_SCORE_SLEEP_STATE..." );
         context.getGameState()->setCurrentAction(   SLEEP_MODE           );

@@ -111,8 +111,13 @@ void GameObject::resetMatch() {
     _gameState->setP1PointsMem( 0 );
     _gameState->setP2PointsMem( 0 );
     // _pointLeds.updatePoints(); may need this for the digi LEDs
-    _scoreBoard->clearScreen();
-    _scoreBoard->update();
+    // do not clear and update the screen if we are in AFTER_MATCH_WIN_STATE
+    if ( _gameState->getState() != AFTER_MATCH_WIN_STATE ) {
+        _scoreBoard->clearScreen();
+        _scoreBoard->update();
+    } else {
+        print ( "NOT clearing the scoreboard because we are in AFTER_MATCH_WIN_STATE" );
+    }
 }
 
 PinInterface* GameObject::getPinInterface() { return _pinInterface; }
