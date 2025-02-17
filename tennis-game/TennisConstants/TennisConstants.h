@@ -31,6 +31,7 @@
 
 ///////////////////////// TIMEOUT CONSTANTS ///////////////////////////////////
 #define INPUT_TIMEOUT_CODE 99
+#define MAIN_INPUT_TIMEOUT 20000; // <----- set universal input timeout -----<<
 #define SLEEP_INPUT_TIMEOUT 5000
 #define SLEEP_FOREVER 100000000000 // a little over 3 years
 ///////////////////////////////////////////////////////////////////////////////

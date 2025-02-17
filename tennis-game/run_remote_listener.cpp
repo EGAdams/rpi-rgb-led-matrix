@@ -98,7 +98,7 @@ bool is_on_raspberry_pi() {
  * each iteration.
  ***************************************************************/
 void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset* reset ) {
-    const int MAIN_INPUT_TIMEOUT = 20000; // <---------- set universal timeout here ---------<<
+    const int main_input_timeout = MAIN_INPUT_TIMEOUT; // <---------- set universal timeout here ---------<<
     GameState* gameState = gameStatearg;
     RemoteLocker* remoteLocker = new RemoteLocker( gameState );
     bool no_score = true;
@@ -127,16 +127,16 @@ void run_remote_listener( GameObject* gameObject, GameState* gameStatearg, Reset
         if ( !pairingBlinker ) {
             print( "*** ERROR: pairingBlinker is NULL before creating RemoteInputWithTimer! ***" );
         }
-        pairingInputWithTimer  = new RemoteInputWithTimer( pairingBlinker.get(), inputs, MAIN_INPUT_TIMEOUT );
-        noBlinkInputWithTimer  = new RemoteInputWithTimer( blankBlinker.get(), inputs, MAIN_INPUT_TIMEOUT );
+        pairingInputWithTimer  = new RemoteInputWithTimer( pairingBlinker.get(), inputs, main_input_timeout );
+        noBlinkInputWithTimer  = new RemoteInputWithTimer( blankBlinker.get(), inputs, main_input_timeout );
         sleepingInputWithTimer = new RemoteInputWithTimer( sleepingBlinker.get(), inputs, SLEEP_FOREVER );
         gameInput = new RemoteGameInput( inputs );
     } else {
         if ( !pairingBlinker ) {
             print( "*** ERROR: pairingBlinker is NULL before creating KeyInputWithTimer! ***" );
         }
-        pairingInputWithTimer = new KeyboardInputWithTimer( pairingBlinker.get(), MAIN_INPUT_TIMEOUT );
-        noBlinkInputWithTimer = new KeyboardInputWithTimer( blankBlinker.get(), MAIN_INPUT_TIMEOUT );
+        pairingInputWithTimer = new KeyboardInputWithTimer( pairingBlinker.get(), main_input_timeout );
+        noBlinkInputWithTimer = new KeyboardInputWithTimer( blankBlinker.get(), main_input_timeout );
         sleepingInputWithTimer = new KeyboardInputWithTimer( sleepingBlinker.get(), SLEEP_FOREVER );
         gameInput = new KeyboardGameInput();
     }
