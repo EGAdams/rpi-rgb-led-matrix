@@ -29,6 +29,8 @@ RemoteListenerContext::RemoteListenerContext(ScoreBoard* scoreboard_arg,
       gameInput(gameIn),
       remotePairingScreen(pairingScreen),
       pairingBlinker(pairingBlinker),
+      blankBlinker(blankBlinker),
+      sleepingBlinker(sleepingBlinker),
       matchWinBlinker(matchWinBlinker),
       no_score(noScoreFlag) {
     print( "DEBUG: RemoteListenerContext constructor called" );

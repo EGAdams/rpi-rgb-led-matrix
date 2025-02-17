@@ -79,10 +79,11 @@ private:
     IInputWithTimer* sleepingInputWithTimer;
     IGameInput* gameInput;
     RemotePairingScreen* remotePairingScreen;
-    bool& no_score;
     std::shared_ptr<PairingBlinker> pairingBlinker;
+    std::shared_ptr<BlankBlinker> blankBlinker;
+    std::shared_ptr<ScoreboardBlinker> sleepingBlinker;
     std::shared_ptr<MatchWinBlinker> matchWinBlinker;
-
+    bool& no_score;
     // Mutex for thread safety
     std::mutex mtx;
 };
