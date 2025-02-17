@@ -24,7 +24,7 @@ void MatchWinBlinkState::handleInput( RemoteListenerContext& context ) {
     unsigned long time_left = 0;
 
     unsigned long original_no_blink_time    = MAIN_INPUT_TIMEOUT;
-    unsigned long match_blinking_time       = 2 * MATCH_WIN_FLASH_DELAY * MATCH_WIN_BLINK_COUNT + 100 /*ms*/; // change the timeout  
+    unsigned long match_blinking_time       = 100; // 2 * MATCH_WIN_FLASH_DELAY * MATCH_WIN_BLINK_COUNT + 100 /*ms*/; // change the timeout  
     context.getNoBlinkInputWithTimer()->setTimeout( match_blinking_time );  // of the no blink timer to the match
     while ( context.getMatchWinBlinker()->isRunning()) {                    // blinking time + 1 second for a buffer
         int selection = context.getNoBlinkInputWithTimer()->getInput();     // Listen for input while blinking
@@ -55,6 +55,8 @@ void MatchWinBlinkState::handleInput( RemoteListenerContext& context ) {
             context.getNoBlinkInputWithTimer()->setTimeout( original_no_blink_time );   // reset the main input 
             context.unlock();                                                           // timeout of no blink
             return;                                                                     // timeout before returning.
+        } else {
+            print ( "unknown input during match blink.");
         }
     }
     print( "*** MatchWinBlinker finished blinking, transitioning to AfterMatchWinState ***" ); // No input. 
@@ -65,7 +67,6 @@ void MatchWinBlinkState::handleInput( RemoteListenerContext& context ) {
     context.getScoreboard()->drawSets();
     context.getNoBlinkInputWithTimer()->setTimeout( original_no_blink_time ); // reset the main input blink time
     context.unlock();
-
 }
 void MatchWinBlinkState::startBlinking( RemoteListenerContext& context ) {
     if ( !context.getMatchWinBlinker()->isRunning()) {
