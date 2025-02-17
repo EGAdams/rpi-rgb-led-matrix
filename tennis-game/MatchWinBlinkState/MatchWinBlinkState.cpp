@@ -25,13 +25,14 @@ void MatchWinBlinkState::handleInput( RemoteListenerContext& context ) {
             selection == GREEN_REMOTE_RED_SCORE     ||
             selection == RED_REMOTE_GREEN_SCORE     ||
             selection == RED_REMOTE_RED_SCORE ) {
-            print( "*** Player button pressed, transitioning to Regular Play After Score State ***" );
-            context.getGameState()->setState( REGULAR_PLAY_AFTER_SCORE_STATE );
-            context.getScoreboard()->update();
-            context.getMatchWinBlinker()->stop();  // Stop blinking early
-            context.getNoBlinkInputWithTimer()->setTimeout( original_no_blink_time );   // reset the main input 
-            context.unlock();                                                           // timeout of the no blink
-            return;                                                                     // timer before returning.
+            print( "*** Player button pressed, ignore during Match Win Blink State... ***" );
+            // context.getGameState()->setState( REGULAR_PLAY_AFTER_SCORE_STATE );
+            // context.getScoreboard()->update();
+            // context.getMatchWinBlinker()->stop();  // Stop blinking early
+            // context.getNoBlinkInputWithTimer()->setTimeout( original_no_blink_time );   // reset the main input 
+            // context.unlock();                                                           // timeout of the no blink
+            // return;                                                                     // timer before returning.
+            continue;
         } else if ( selection == GREEN_REMOTE_UNDO || selection == RED_REMOTE_UNDO ) {
             print( "*** Undo ***" );
             context.getGameObject()->undo();
