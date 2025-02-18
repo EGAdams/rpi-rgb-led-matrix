@@ -30,11 +30,11 @@
 //  re-written in C++ by EG in June 2022
 
 ///////////////////////// TIMEOUT CONSTANTS ///////////////////////////////////
-#define INPUT_TIMEOUT_CODE 99
-#define MAIN_INPUT_TIMEOUT 20000; // <----- set universal input timeout -----<<
-#define REGULAR_GAME_PLAY_INPUT_TIMEOUT 10000
-#define SLEEP_INPUT_TIMEOUT 5000
-#define SLEEP_FOREVER 100000000000 // a little over 3 years
+#define INPUT_TIMEOUT_CODE              99
+#define MAIN_INPUT_TIMEOUT              20000
+#define REGULAR_GAME_PLAY_INPUT_TIMEOUT 60000        // one minute
+#define SLEEP_INPUT_TIMEOUT             5000
+#define SLEEP_FOREVER                   100000000000 // a little over 3 years
 ///////////////////////////////////////////////////////////////////////////////
 
 //////////////////////// STATE MACHINE CONSTANTS //////////////////////////////
