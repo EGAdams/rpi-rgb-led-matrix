@@ -69,6 +69,7 @@ void Undo::snapshot( History* history ) {
 }
 
 void Undo::mode1Undo( History* history ) {
+    _gameState->setState( UNDO_STATE );
     GameTimer::gameDelay( 100 );
     print( "history size: " << history->size() );
     if ( history->size() == 0 ) { return; }

@@ -34,7 +34,7 @@ void RegularGamePlayAfterScoreState::handleInput( RemoteListenerContext& context
 
     // Check if the correct server is pressed
     int serve_flag = context.getRemoteLocker()->playerNotServing( selection );
-    // print( "*** serve_flag: " + std::to_string( serve_flag ) + " ***" );
+    print( "*** serve_flag: " + std::to_string( serve_flag ) + " ***" );
     if ( serve_flag ) {
         print( "*** Warning: player not serving! ***" );
         context.unlock();

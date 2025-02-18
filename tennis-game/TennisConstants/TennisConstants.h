@@ -30,11 +30,11 @@
 //  re-written in C++ by EG in June 2022
 
 ///////////////////////// TIMEOUT CONSTANTS ///////////////////////////////////
-#define INPUT_TIMEOUT_CODE              99
 #define MAIN_INPUT_TIMEOUT              20000
-#define REGULAR_GAME_PLAY_INPUT_TIMEOUT 60000        // one minute
+#define REGULAR_GAME_PLAY_INPUT_TIMEOUT 60000         // one minute
 #define SLEEP_INPUT_TIMEOUT             5000
-#define SLEEP_FOREVER                   100000000000 // a little over 3 years
+#define SLEEP_FOREVER                   100000000000  // a little over 3 years
+#define UNDO_STATE_TIMEOUT              3000          // start with 3 seconds
 ///////////////////////////////////////////////////////////////////////////////
 
 //////////////////////// STATE MACHINE CONSTANTS //////////////////////////////
@@ -48,15 +48,16 @@
 #define AFTER_MATCH_WIN_STATE          7
 #define MATCH_WIN_BLINK_STATE          8
 #define REGULAR_PLAY_SLEEP_STATE       9
+#define UNDO_STATE                     10
 ///////////////////////////////////////////////////////////////////////////////
 
-/////////////////////// REMOTE DEFINITIONS /////////////////////////////////////
-# define REMOTE_INPUT 1 // Change from Remote input or keyboard input for remote input debug
-
-#define REMOTE_DATA_0 25
-#define REMOTE_DATA_1 24
-#define REMOTE_DATA_2 40
-#define REMOTE_DATA_3 17
+/////////////////////// REMOTE CODE DEFINITIONS ///////////////////////////////
+#define INPUT_TIMEOUT_CODE       99
+#define REMOTE_INPUT              1 // Change from Remote input or keyboard input for remote input debug
+#define REMOTE_DATA_0            25
+#define REMOTE_DATA_1            24
+#define REMOTE_DATA_2            40
+#define REMOTE_DATA_3            17
 #define RED_REMOTE_RED_SCORE     6
 #define RED_REMOTE_GREEN_SCORE   10
 #define RED_REMOTE_UNDO          2
@@ -66,7 +67,7 @@
 #define GREEN_REMOTE_UNDO        3
 #define GREEN_REMOTE_RESET       99
 #define NO_REMOTE_BUTTONS        0
-#define UNKNOWN_REMOTE_BUTTON   15
+#define UNKNOWN_REMOTE_BUTTON    15
 
 #define STEVE_DELAY            25
 #define REMOTE_READ_DELAY      25

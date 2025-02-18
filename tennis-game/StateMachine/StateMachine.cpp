@@ -82,6 +82,9 @@ std::unique_ptr<IRemoteListenerState> StateMachine::createState( int currentStat
     case MATCH_WIN_BLINK_STATE:
         print( "*** Entering MATCH_WIN_BLINK_STATE ***" );
         return std::make_unique<MatchWinBlinkState>();
+    case UNDO_STATE:
+        print( "*** Entering UNDO_STATE ***" );
+        return std::make_unique<UndoState>();
     default:
         std::cout << "[StateMachine] WARNING: Unknown state (" << currentState 
         << "), defaulting to REGULAR_PLAY_AFTER_SCORE_STATE." << std::endl;
