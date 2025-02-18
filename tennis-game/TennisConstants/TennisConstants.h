@@ -32,6 +32,7 @@
 ///////////////////////// TIMEOUT CONSTANTS ///////////////////////////////////
 #define INPUT_TIMEOUT_CODE 99
 #define MAIN_INPUT_TIMEOUT 20000; // <----- set universal input timeout -----<<
+#define REGULAR_GAME_PLAY_INPUT_TIMEOUT 10000
 #define SLEEP_INPUT_TIMEOUT 5000
 #define SLEEP_FOREVER 100000000000 // a little over 3 years
 ///////////////////////////////////////////////////////////////////////////////
@@ -46,6 +47,7 @@
 #define END_MATCH_SLEEP_STATE          6
 #define AFTER_MATCH_WIN_STATE          7
 #define MATCH_WIN_BLINK_STATE          8
+#define REGULAR_PLAY_SLEEP_STATE       9
 ///////////////////////////////////////////////////////////////////////////////
 
 /////////////////////// REMOTE DEFINITIONS /////////////////////////////////////

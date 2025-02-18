@@ -70,6 +70,7 @@ std::unique_ptr<IRemoteListenerState> StateMachine::createState( int currentStat
         return std::make_unique<PairingModeState>();
     case PAIRING_SLEEP_MODE_STATE:
     case NO_SCORE_SLEEP_STATE:
+    case REGULAR_PLAY_SLEEP_STATE:
         return std::make_unique<SleepModeState>();
     case REGULAR_PLAY_NO_SCORE_STATE:
         return std::make_unique<RegularGamePlayBeforeScoreState>();

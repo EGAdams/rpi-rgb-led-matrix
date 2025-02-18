@@ -2,7 +2,6 @@
 
 void RegularGamePlayAfterScoreState::handleInput( RemoteListenerContext& context ) {
     context.lock();  // Ensure thread safety
-    // we have talked about implementing a timer here, but we don't have a timer yet
 
     // print( "===============================================" );
     // print( "=== [STATE: RegularGamePlayAfterScoreState] ===" );
@@ -10,14 +9,25 @@ void RegularGamePlayAfterScoreState::handleInput( RemoteListenerContext& context
     // print( "*** updating scoreboard ***" );
     context.getScoreboard()->update();
     // print( "*** done updating scoreboard ***" );
-
-    int selection = context.getGameInput()->getInput(); // Block on the gameInput (no timers here)
+    
+    print( "setting the no blink timer for regular game play after score state..." );
+    context.getNoBlinkInputWithTimer()->setTimeout( REGULAR_GAME_PLAY_INPUT_TIMEOUT );
+    int selection = context.getNoBlinkInputWithTimer()->getInput(); // Use noBlinkInputWithTimer to detect inactivity
+    // ??!!! int selection = context.getGameInput()->getInput(); // // Use noBlinkInputWithTimer to detect inactivity
     if ( selection != 15 ) {
         print( "Selection from gameInput: " + std::to_string( selection ));
     }
     
     if ( selection == 0 ) {
         // print( "*** Invalid selection (0)! ***" );
+        context.unlock();
+        return;
+    }
+
+    if ( selection == INPUT_TIMEOUT_CODE ) {
+        print( "*** No Remotes Detected Timeout! Going to sleep mode... ***"    );
+        context.getGameState()->setCurrentAction( SLEEP_MODE                    );
+        context.getGameState()->setState(         REGULAR_PLAY_SLEEP_STATE      );
         context.unlock();
         return;
     }

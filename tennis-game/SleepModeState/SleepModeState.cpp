@@ -13,6 +13,14 @@ void SleepModeState::handleInput( RemoteListenerContext& context ) {
          selection == RED_REMOTE_UNDO          ||
          selection == GREEN_REMOTE_UNDO ) {
         print( "Time slept: " + std::to_string( context.getSleepingInputWithTimer()->getTimeSlept()));
+        
+        print( "if we are sleeping because of no remote activity, then we should wake up in regular play without adjusting the score." );
+        if ( context.getGameState()->getState() == REGULAR_PLAY_SLEEP_STATE ) {
+            context.getGameState()->setState( REGULAR_PLAY_AFTER_SCORE_STATE ); // Wake up in regular play
+            context.unlock();                                                   // Unlock before returning
+            return;
+        }
+
         if ( selection == GREEN_REMOTE_UNDO || selection == RED_REMOTE_UNDO ) {
             print( "Undoing last action..." );
             context.getGameObject()->undo();

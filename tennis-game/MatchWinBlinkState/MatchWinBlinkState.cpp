@@ -41,10 +41,10 @@ void MatchWinBlinkState::handleInput( RemoteListenerContext& context ) {
             // context.getNoBlinkInputWithTimer()->setTimeout( original_no_blink_time );   // reset the main input 
             // context.unlock();                                                           // timeout of the no blink
             // return;
-                                                                               // timer before returning.
-            time_left = match_blinking_time - _elapsedTimeMs;
-            print( "time left: " + std::to_string( time_left ));
-            context.getNoBlinkInputWithTimer()->setTimeout( time_left );
+                                                                                // timer before returning.
+            time_left = match_blinking_time - _elapsedTimeMs;                   // TODO: The next three lines of code may not
+            print( "time left: " + std::to_string( time_left ));                // be needed.  timeout is set to 100ms
+            context.getNoBlinkInputWithTimer()->setTimeout( time_left );        // effectively disabling it.
             continue;
         } else if ( selection == GREEN_REMOTE_UNDO || selection == RED_REMOTE_UNDO ) {
             print( "*** Undo ***" );
