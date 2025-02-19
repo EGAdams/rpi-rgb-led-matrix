@@ -134,6 +134,10 @@ int Inputs::readPlayerButtons() {
  }
 
  int Inputs::read_mcp23017_value() {
+    print( "checking for score board null pointer..." );
+    if ( _scoreboard == nullptr ) {
+        print( "scoreboard is null.  not flashing. ");
+    }
     int originalRemoteCode = _pinInterface->read_mcp23017_value();
     if ( originalRemoteCode == UNKNOWN_REMOTE_BUTTON ) { return originalRemoteCode; }
     print( "\n*** possibly valid RemoteCode [" + std::to_string( originalRemoteCode ) + "] ***\n" );

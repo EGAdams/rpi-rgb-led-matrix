@@ -69,6 +69,7 @@ public:
     void setDrawerSize( Drawer::Size            size  );
     void setFontFile(   const char*             font_file  );
     void setLittleDrawerFont( const std::string& font_file );
+    void flashRemote( int current_remote_button );
     std::string displayAndLoadFontMenu( const std::string& fontDirectory );
 
 private:

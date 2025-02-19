@@ -119,6 +119,24 @@ ScoreBoard::~ScoreBoard() {
     else { /* std::cout << "*** WARNING: _canvas == NULL, not deleting. ***" << std::endl; */ }
 }
 
+void ScoreBoard::flashRemote( int current_remote_button ) {
+    if ( current_remote_button == GREEN_REMOTE_GREEN_SCORE || 
+         current_remote_button == GREEN_REMOTE_GREEN_SCORE ||
+         current_remote_button == GREEN_REMOTE_UNDO ) {
+        drawGreenPeriod();
+        GameTimer::gameDelay( BUTTON_LED_FLASH_DELAY );
+        drawBlankPeriod();
+    } else if ( current_remote_button == RED_REMOTE_GREEN_SCORE || 
+                current_remote_button == RED_REMOTE_GREEN_SCORE ||
+                current_remote_button == RED_REMOTE_UNDO ) {
+        drawRedPeriod();
+        GameTimer::gameDelay( BUTTON_LED_FLASH_DELAY );
+        drawBlankPeriod();
+    } else {
+        print ( "*** Warning: unhandled button press ***" );
+    }
+}
+
 void ScoreBoard::setFontFile( const char* font_file_arg ) { _font_file = font_file_arg; }
 
 void ScoreBoard::drawText( const std::string& message, int x, int y ) {

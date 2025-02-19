@@ -9,6 +9,7 @@
 #include "../Logger/Logger.h"
 #include "../Reset/Reset.h"
 #include "../RemoteCodeTranslator/RemoteCodeTranslator.h"
+#include "../ScoreBoard/ScoreBoard.h"
 
 class Inputs {
  public:
@@ -33,6 +34,7 @@ class Inputs {
   Logger* _logger;
   RemoteCodeTranslator* _remoteCodeTranslator;
   bool _need_jump_start;
+  ScoreBoard* _scoreboard;
 };
 
 #endif
