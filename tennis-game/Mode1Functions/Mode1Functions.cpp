@@ -125,11 +125,11 @@ void Mode1Functions::pointFlash() {
 void Mode1Functions::_flashRemote( int current_remote_button ) {
     if ( current_remote_button == 1 ) {
         _scoreBoard->drawGreenPeriod();
-        GameTimer::gameDelay( FLASH_DELAY );
+        GameTimer::gameDelay( BUTTON_LED_FLASH_DELAY );
         _scoreBoard->drawBlankPeriod();
     } else if ( current_remote_button == 2 ) {
         _scoreBoard->drawRedPeriod();
-        GameTimer::gameDelay( FLASH_DELAY );
+        GameTimer::gameDelay( BUTTON_LED_FLASH_DELAY );
         _scoreBoard->drawBlankPeriod();
     } else {
         print ( "*** Warning: unhandled button press ***" );
