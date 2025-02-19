@@ -26,6 +26,7 @@ void Mode1Functions::setScoreBoard( ScoreBoard* scoreBoard ) {
 
 void Mode1Functions::mode1ButtonFunction() {
     int button = _gameState->getPlayerButton();
+    _flashRemote( button );
     switch ( button ) {
     
     case 0:
@@ -118,4 +119,19 @@ void Mode1Functions::pointFlash() {
                         _gameState->getP2PointsMem());
                         _pointLeds.updatePoints();
                         _gameState->setToggle( 0 ); }
-                    _gameState->setPreviousTime( _gameState->getNow()); }}}}
+                    _gameState->setPreviousTime( _gameState->getNow()); }}}
+}
+
+void Mode1Functions::_flashRemote( int current_remote_button ) {
+    if ( current_remote_button == 1 ) {
+        _scoreBoard->drawGreenPeriod();
+        GameTimer::gameDelay( FLASH_DELAY );
+        _scoreBoard->drawBlankPeriod();
+    } else if ( current_remote_button == 2 ) {
+        _scoreBoard->drawRedPeriod();
+        GameTimer::gameDelay( FLASH_DELAY );
+        _scoreBoard->drawBlankPeriod();
+    } else {
+        print ( "*** Warning: unhandled button press ***" );
+    }
+}

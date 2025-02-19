@@ -28,6 +28,7 @@ class Mode1Functions {
     void setScoreBoard( ScoreBoard* scoreBoard );
 
  private:
+    void _flashRemote( int current_remote_button );
     Player*       _player1;
     Player*       _player2;
     GameState*    _gameState;
