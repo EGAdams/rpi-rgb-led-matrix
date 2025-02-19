@@ -34,7 +34,7 @@
 #define REGULAR_GAME_PLAY_INPUT_TIMEOUT 60000         // one minute
 #define SLEEP_INPUT_TIMEOUT             5000
 #define SLEEP_FOREVER                   100000000000  // a little over 3 years
-#define UNDO_STATE_TIMEOUT              3000          // start with 3 seconds
+#define UNDO_STATE_TIMEOUT              1500          // 1.5 seconds
 ///////////////////////////////////////////////////////////////////////////////
 
 //////////////////////// STATE MACHINE CONSTANTS //////////////////////////////

@@ -15,6 +15,7 @@ void UndoState::handleInput( RemoteListenerContext& context ) {
     if ( selection == INPUT_TIMEOUT_CODE ) {
         print( "*** Temporary Undo superpowers invoke, changing back to regular game state... ***"    );
         context.getGameState()->setState( REGULAR_PLAY_AFTER_SCORE_STATE );
+        context.getNoBlinkInputWithTimer()->setTimeout( REGULAR_GAME_PLAY_INPUT_TIMEOUT );
         context.unlock();
         return;
     }
