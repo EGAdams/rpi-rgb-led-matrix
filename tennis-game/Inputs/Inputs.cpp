@@ -134,12 +134,11 @@ int Inputs::readPlayerButtons() {
  }
 
  int Inputs::read_mcp23017_value() {
-    print( "checking for score board null pointer..." );
-    if ( _scoreboard == nullptr ) {
-        print( "scoreboard is null.  not flashing. ");
-    }
-    int originalRemoteCode = _pinInterface->read_mcp23017_value();
-    if ( originalRemoteCode == UNKNOWN_REMOTE_BUTTON ) { return originalRemoteCode; }
+     int originalRemoteCode = _pinInterface->read_mcp23017_value();
+     if ( originalRemoteCode == UNKNOWN_REMOTE_BUTTON ) { return originalRemoteCode; }
+     if ( _scoreboard == nullptr ) {
+         print( "scoreboard is null.  not flashing. ");
+     }
     print( "\n*** possibly valid RemoteCode [" + std::to_string( originalRemoteCode ) + "] ***\n" );
     GameTimer::gameDelay( STEVE_DELAY ); // that delay steve was talking about...
     // print( "getting another remote code after STEVE_DELAY to verify" );
