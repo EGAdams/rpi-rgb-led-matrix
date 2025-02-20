@@ -14,7 +14,7 @@ void SleepModeState::handleInput( RemoteListenerContext& context ) {
          selection == UMPIRE_REMOTE_RED_SCORE   ||
          selection == RED_REMOTE_UNDO           ||
          selection == GREEN_REMOTE_UNDO         ||
-         selection == UMPIRE_REMOTE_UNDO        ||
+         selection == UMPIRE_REMOTE_UNDO        
         ) {
         print( "Time slept: " + std::to_string( context.getSleepingInputWithTimer()->getTimeSlept()));
         

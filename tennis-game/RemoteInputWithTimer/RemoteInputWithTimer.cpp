@@ -73,7 +73,7 @@ int RemoteInputWithTimer::getInput() {
                  selection == UMPIRE_REMOTE_RED_SCORE   ||
                  selection == GREEN_REMOTE_UNDO         ||
                  selection == RED_REMOTE_UNDO           ||
-                 selection == UMPIRE_REMOTE_UNDO        ||
+                 selection == UMPIRE_REMOTE_UNDO        
             ) {
                 // print( "selection: " << selection << " triggered the done flag, exiting while loop..." );
                 done = true;
