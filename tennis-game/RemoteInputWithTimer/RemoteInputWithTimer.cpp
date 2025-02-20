@@ -65,12 +65,16 @@ int RemoteInputWithTimer::getInput() {
             // print( "*** reading selection from inputs... ***" );
             selection = _inputs->read_mcp23017_value();             // this actually does have a while. // 011925
             // print( "read selection from inputs: " << selection );   // but it
-            if ( selection == GREEN_REMOTE_GREEN_SCORE ||           // isnt as bad as this
-                 selection == GREEN_REMOTE_RED_SCORE   ||           // one because it always returns a value
-                 selection == RED_REMOTE_GREEN_SCORE   ||           // 011925
-                 selection == RED_REMOTE_RED_SCORE     ||
-                 selection == GREEN_REMOTE_UNDO        ||
-                 selection == RED_REMOTE_UNDO ) {
+            if ( selection == GREEN_REMOTE_GREEN_SCORE  ||           // isnt as bad as this
+                 selection == GREEN_REMOTE_RED_SCORE    ||           // one because it always returns a value // 011925
+                 selection == UMPIRE_REMOTE_GREEN_SCORE ||
+                 selection == RED_REMOTE_GREEN_SCORE    ||          
+                 selection == RED_REMOTE_RED_SCORE      ||
+                 selection == UMPIRE_REMOTE_RED_SCORE   ||
+                 selection == GREEN_REMOTE_UNDO         ||
+                 selection == RED_REMOTE_UNDO           ||
+                 selection == UMPIRE_REMOTE_UNDO        ||
+            ) {
                 // print( "selection: " << selection << " triggered the done flag, exiting while loop..." );
                 done = true;
             } else {

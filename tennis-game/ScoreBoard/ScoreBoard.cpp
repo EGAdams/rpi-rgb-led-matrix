@@ -121,13 +121,19 @@ ScoreBoard::~ScoreBoard() {
 
 void ScoreBoard::flashRemote( int current_remote_button ) {
     if ( current_remote_button == GREEN_REMOTE_GREEN_SCORE || 
-         current_remote_button == GREEN_REMOTE_GREEN_SCORE ||
+         current_remote_button == GREEN_REMOTE_RED_SCORE ||
          current_remote_button == GREEN_REMOTE_UNDO ) {
         drawGreenPeriod();
         GameTimer::gameDelay( BUTTON_LED_FLASH_DELAY );
         drawBlankPeriod();
+    } else if ( current_remote_button == UMPIRE_REMOTE_GREEN_SCORE  ||
+                current_remote_button == UMPIRE_REMOTE_RED_SCORE    ||
+                current_remote_button == UMPIRE_REMOTE_UNDO ) {
+        print( "*** TODO: draw red period ***" );
+        GameTimer::gameDelay( BUTTON_LED_FLASH_DELAY );
+        drawBlankPeriod();
     } else if ( current_remote_button == RED_REMOTE_GREEN_SCORE || 
-                current_remote_button == RED_REMOTE_GREEN_SCORE ||
+                current_remote_button == RED_REMOTE_RED_SCORE ||
                 current_remote_button == RED_REMOTE_UNDO ) {
         drawRedPeriod();
         GameTimer::gameDelay( BUTTON_LED_FLASH_DELAY );

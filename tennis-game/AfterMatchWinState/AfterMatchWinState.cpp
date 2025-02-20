@@ -26,7 +26,10 @@ void AfterMatchWinState::handleInput( RemoteListenerContext& context ) {
     } else if ( selection == GREEN_REMOTE_GREEN_SCORE   ||
                 selection == GREEN_REMOTE_RED_SCORE     ||
                 selection == RED_REMOTE_GREEN_SCORE     ||
-                selection == RED_REMOTE_RED_SCORE ) {
+                selection == RED_REMOTE_RED_SCORE       ||
+                selection == UMPIRE_REMOTE_GREEN_SCORE  ||
+                selection == UMPIRE_REMOTE_RED_SCORE
+            ) {
         print( "*** Green player button pressed, resetting match... ***" );
         context.getGameObject()->resetMatch();
         print( "updating scoreboard..." );
@@ -36,7 +39,7 @@ void AfterMatchWinState::handleInput( RemoteListenerContext& context ) {
         print( "unlocking context and returning..." );
         context.unlock();
         return;
-    } else if ( selection == GREEN_REMOTE_UNDO || selection == RED_REMOTE_UNDO ) {
+    } else if ( selection == GREEN_REMOTE_UNDO || selection == RED_REMOTE_UNDO || selection == UMPIRE_REMOTE_UNDO ) {
         print( "*** Undo ***" );
         context.getGameObject()->undo();
         print( "setting state to REGULAR_PLAY_AFTER_SCORE_STATE..." );

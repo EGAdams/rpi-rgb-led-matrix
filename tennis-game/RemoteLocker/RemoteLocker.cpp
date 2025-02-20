@@ -7,8 +7,14 @@ bool RemoteLocker::playerNotServing( int button ) {
     bool green_serve = _gameState->getServe() == 1 ? true : false;
 
     switch ( button ) {
-    case RED_REMOTE_RED_SCORE:   
-    case RED_REMOTE_GREEN_SCORE: 
+    case UMPIRE_REMOTE_GREEN_SCORE:
+    case UMPIRE_REMOTE_RED_SCORE:
+    case UMPIRE_REMOTE_UNDO:
+        return false;
+        break;
+
+    case RED_REMOTE_RED_SCORE:
+    case RED_REMOTE_GREEN_SCORE:
     case RED_REMOTE_UNDO:
         return green_serve ? false : true;
         break;
@@ -18,8 +24,8 @@ bool RemoteLocker::playerNotServing( int button ) {
     case GREEN_REMOTE_UNDO:
         return green_serve ? true : false;
         break;
-    
+
     default:
         return false;
     }
-}    
+}

@@ -18,17 +18,25 @@ int RemoteCodeTranslator::translateRemoteCode( remoteDataStructure remote ) {
     //                             "[" + std::to_string( remote.pin_4 ) + "]  ", "translatedRemoteCode()" );
     #endif  
     // RED REMOTE
-    if ( remote.pin_1 == 1 && remote.pin_2 == 1 && remote.pin_3 == 1 && remote.pin_4 == 0 ) { return RED_REMOTE_RED_SCORE;     }
-    if ( remote.pin_1 == 1 && remote.pin_2 == 1 && remote.pin_3 == 0 && remote.pin_4 == 1 ) { return RED_REMOTE_GREEN_SCORE;   }
-    if ( remote.pin_1 == 1 && remote.pin_2 == 1 && remote.pin_3 == 0 && remote.pin_4 == 0 ) { return RED_REMOTE_UNDO;          }
-    if ( remote.pin_1 == 1 && remote.pin_2 == 0 && remote.pin_3 == 1 && remote.pin_4 == 1 ) { return RED_REMOTE_RESET;         }
+    if ( remote.pin_1 == 1 && remote.pin_2 == 1 && remote.pin_3 == 1 && remote.pin_4 == 0 ) { return RED_REMOTE_RED_SCORE;      }
+    if ( remote.pin_1 == 1 && remote.pin_2 == 1 && remote.pin_3 == 0 && remote.pin_4 == 1 ) { return RED_REMOTE_GREEN_SCORE;    }
+    if ( remote.pin_1 == 1 && remote.pin_2 == 1 && remote.pin_3 == 0 && remote.pin_4 == 0 ) { return RED_REMOTE_UNDO;           }
+    if ( remote.pin_1 == 1 && remote.pin_2 == 0 && remote.pin_3 == 1 && remote.pin_4 == 1 ) { return RED_REMOTE_RESET;          }
 
     // GREEN REMOTE
-    if ( remote.pin_1 == 0 && remote.pin_2 == 1 && remote.pin_3 == 1 && remote.pin_4 == 0 ) { return GREEN_REMOTE_GREEN_SCORE; }
-    if ( remote.pin_1 == 0 && remote.pin_2 == 1 && remote.pin_3 == 0 && remote.pin_4 == 1 ) { return GREEN_REMOTE_RED_SCORE;   }
-    if ( remote.pin_1 == 0 && remote.pin_2 == 1 && remote.pin_3 == 0 && remote.pin_4 == 0 ) { return GREEN_REMOTE_UNDO;        }
-    if ( remote.pin_1 == 0 && remote.pin_2 == 0 && remote.pin_3 == 1 && remote.pin_4 == 1 ) { return GREEN_REMOTE_RESET;       }
-    if ( remote.pin_1 == 1 && remote.pin_2 == 1 && remote.pin_3 == 1 && remote.pin_4 == 1 ) { return UNKNOWN_REMOTE_BUTTON;    }
-    // _logger->logUpdate( "returning UNKNOWN_REMOTE_BUTTON... ", "translateRemoteCode()" );
+    if ( remote.pin_1 == 0 && remote.pin_2 == 1 && remote.pin_3 == 1 && remote.pin_4 == 0 ) { return GREEN_REMOTE_GREEN_SCORE;  }
+    if ( remote.pin_1 == 0 && remote.pin_2 == 1 && remote.pin_3 == 0 && remote.pin_4 == 1 ) { return GREEN_REMOTE_RED_SCORE;    }
+    if ( remote.pin_1 == 0 && remote.pin_2 == 1 && remote.pin_3 == 0 && remote.pin_4 == 0 ) { return GREEN_REMOTE_UNDO;         }
+    if ( remote.pin_1 == 0 && remote.pin_2 == 0 && remote.pin_3 == 1 && remote.pin_4 == 1 ) { return GREEN_REMOTE_RESET;        }
+    if ( remote.pin_1 == 1 && remote.pin_2 == 1 && remote.pin_3 == 1 && remote.pin_4 == 1 ) { return UNKNOWN_REMOTE_BUTTON;     }
+
     return UNKNOWN_REMOTE_BUTTON;
 }
+
+// the above codes look fishy.  keep this for later.
+// // UMPIRE REMOTE
+// if ( remote.pin_1 == 0 && remote.pin_2 == 1 && remote.pin_3 == 1 && remote.pin_4 == 0 ) { return UMPIRE_REMOTE_GREEN_SCORE; }
+// if ( remote.pin_1 == 0 && remote.pin_2 == 1 && remote.pin_3 == 0 && remote.pin_4 == 1 ) { return UMPIRE_REMOTE_RED_SCORE;   }
+// if ( remote.pin_1 == 0 && remote.pin_2 == 1 && remote.pin_3 == 0 && remote.pin_4 == 0 ) { return UMPIRE_REMOTE_UNDO;        }
+// if ( remote.pin_1 == 0 && remote.pin_2 == 0 && remote.pin_3 == 1 && remote.pin_4 == 1 ) { return GREEN_REMOTE_RESET;        }
+// if ( remote.pin_1 == 1 && remote.pin_2 == 1 && remote.pin_3 == 1 && remote.pin_4 == 1 ) { return UNKNOWN_REMOTE_BUTTON;     }

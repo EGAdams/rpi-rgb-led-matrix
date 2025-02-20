@@ -45,13 +45,16 @@ void RegularGamePlayAfterScoreState::handleInput( RemoteListenerContext& context
     if ( selection == GREEN_REMOTE_GREEN_SCORE  ||
          selection == GREEN_REMOTE_RED_SCORE    ||
          selection == RED_REMOTE_GREEN_SCORE    ||
-         selection == RED_REMOTE_RED_SCORE ) {
-        if ( selection == GREEN_REMOTE_GREEN_SCORE || selection == RED_REMOTE_GREEN_SCORE ) {
+         selection == RED_REMOTE_RED_SCORE      ||
+         selection == UMPIRE_REMOTE_GREEN_SCORE ||
+         selection == UMPIRE_REMOTE_RED_SCORE
+        ) {
+        if ( selection == GREEN_REMOTE_GREEN_SCORE || selection == RED_REMOTE_GREEN_SCORE || selection == UMPIRE_REMOTE_GREEN_SCORE ) {
             // print( "***************************" );
             // print( "*** Green player scored ***" );
             // print( "***************************\n\n\n" );
             selection = 1; // represent GREEN
-        } else if ( selection == GREEN_REMOTE_RED_SCORE || selection == RED_REMOTE_RED_SCORE ) {
+        } else if ( selection == GREEN_REMOTE_RED_SCORE || selection == RED_REMOTE_RED_SCORE || selection == UMPIRE_REMOTE_RED_SCORE ) {
             // print( "*************************" );
             // print( "*** Red player scored ***" );
             // print( "*************************\n\n\n" );
@@ -81,5 +84,8 @@ void RegularGamePlayAfterScoreState::showHelp() {
     print( "RED REMOTE:" );
     print( "   red remote green score:   " + std::to_string( RED_REMOTE_GREEN_SCORE ) );
     print( "   red remote red score:     " + std::to_string( RED_REMOTE_RED_SCORE ) );
+    print( "UMPIRE REMOTE:" );
+    print( "   umpire remote green score:   " + std::to_string( UMPIRE_REMOTE_GREEN_SCORE ) );
+    print( "   umpire remote red score:     " + std::to_string( UMPIRE_REMOTE_RED_SCORE ) );
     print( "------------" );
 }

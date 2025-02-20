@@ -6,12 +6,16 @@ void SleepModeState::handleInput( RemoteListenerContext& context ) {
     print( "=== [STATE: SleepMode] ===" );
     print( "==========================\n\n\n" );
     int selection = context.getSleepingInputWithTimer()->getInput(); // Block for input from sleepingInputWithTimer    
-    if ( selection == GREEN_REMOTE_GREEN_SCORE ||   // Check if the user pressed a valid score button during sleep
-         selection == GREEN_REMOTE_RED_SCORE   ||
-         selection == RED_REMOTE_GREEN_SCORE   ||
-         selection == RED_REMOTE_RED_SCORE     ||
-         selection == RED_REMOTE_UNDO          ||
-         selection == GREEN_REMOTE_UNDO ) {
+    if ( selection == GREEN_REMOTE_GREEN_SCORE  ||   // Check if the user pressed a valid score button during sleep
+         selection == GREEN_REMOTE_RED_SCORE    ||
+         selection == RED_REMOTE_GREEN_SCORE    ||
+         selection == RED_REMOTE_RED_SCORE      ||
+         selection == UMPIRE_REMOTE_GREEN_SCORE ||
+         selection == UMPIRE_REMOTE_RED_SCORE   ||
+         selection == RED_REMOTE_UNDO           ||
+         selection == GREEN_REMOTE_UNDO         ||
+         selection == UMPIRE_REMOTE_UNDO        ||
+        ) {
         print( "Time slept: " + std::to_string( context.getSleepingInputWithTimer()->getTimeSlept()));
         
         print( "if we are sleeping because of no remote activity, then we should wake up in regular play without adjusting the score." );
@@ -21,7 +25,7 @@ void SleepModeState::handleInput( RemoteListenerContext& context ) {
             return;
         }
 
-        if ( selection == GREEN_REMOTE_UNDO || selection == RED_REMOTE_UNDO ) {
+        if ( selection == GREEN_REMOTE_UNDO || selection == RED_REMOTE_UNDO || selection == UMPIRE_REMOTE_UNDO) {
             print( "Undoing last action..." );
             context.getGameObject()->undo();
         } else {                                // must have it a score button, reset match...

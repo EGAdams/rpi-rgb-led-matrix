@@ -33,7 +33,10 @@ void MatchWinBlinkState::handleInput( RemoteListenerContext& context ) {
         if ( selection == GREEN_REMOTE_GREEN_SCORE  ||
             selection == GREEN_REMOTE_RED_SCORE     ||
             selection == RED_REMOTE_GREEN_SCORE     ||
-            selection == RED_REMOTE_RED_SCORE ) {
+            selection == RED_REMOTE_RED_SCORE       ||
+            selection == UMPIRE_REMOTE_GREEN_SCORE  ||
+            selection == UMPIRE_REMOTE_RED_SCORE
+        ) {
             print( "*** Player button pressed, ignore during Match Win Blink State... ***" );
             // context.getGameState()->setState( REGULAR_PLAY_AFTER_SCORE_STATE );
             // context.getScoreboard()->update();
