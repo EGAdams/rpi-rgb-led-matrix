@@ -52,25 +52,28 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 /////////////////////// REMOTE CODE DEFINITIONS ///////////////////////////////
-#define INPUT_TIMEOUT_CODE       99
+#define INPUT_TIMEOUT_CODE        99
 #define REMOTE_INPUT              1 // Change from Remote input or keyboard input for remote input debug
-#define REMOTE_DATA_0            25
-#define REMOTE_DATA_1            24
-#define REMOTE_DATA_2            40
-#define REMOTE_DATA_3            17
-#define RED_REMOTE_RED_SCORE     6
-#define RED_REMOTE_GREEN_SCORE   10
-#define RED_REMOTE_UNDO          2
-#define RED_REMOTE_RESET         99
-#define GREEN_REMOTE_GREEN_SCORE 7
-#define GREEN_REMOTE_RED_SCORE   11
-#define GREEN_REMOTE_UNDO        3
-#define GREEN_REMOTE_RESET       99
-#define NO_REMOTE_BUTTONS        0
-#define UNKNOWN_REMOTE_BUTTON    15
+#define REMOTE_DATA_0             25
+#define REMOTE_DATA_1             24
+#define REMOTE_DATA_2             40
+#define REMOTE_DATA_3             17
+#define RED_REMOTE_RED_SCORE      6
+#define RED_REMOTE_GREEN_SCORE    10
+#define RED_REMOTE_UNDO           2
+#define RED_REMOTE_RESET          99
+#define GREEN_REMOTE_GREEN_SCORE  7
+#define GREEN_REMOTE_RED_SCORE    11
+#define GREEN_REMOTE_UNDO         3
+#define GREEN_REMOTE_RESET        99
+#define UMPIRE_REMOTE_GREEN_SCORE 5
+#define UMPIRE_REMOTE_RED_SCORE   9
+#define UMPIRE_REMOTE_UNDO        1
+#define NO_REMOTE_BUTTONS         0
+#define UNKNOWN_REMOTE_BUTTON     15
 
-#define STEVE_DELAY            25
-#define REMOTE_READ_DELAY      25
+#define STEVE_DELAY               25
+#define REMOTE_READ_DELAY         25
 ///////////////////////////////////////////////////////////////////////////////
 
 #define RUNNING_MATCH_TIE_BREAK     "running match tie breaker"
