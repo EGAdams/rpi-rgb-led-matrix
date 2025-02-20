@@ -76,11 +76,19 @@ void RegularGamePlayBeforeScoreState::handleSelectionAndUpdate( RemoteListenerCo
 
 void RegularGamePlayBeforeScoreState::showHelp() {
     print( "------------" );
-    print( "GREEN REMOTE:" );
-    print( "   Green remote green score: " + std::to_string( GREEN_REMOTE_GREEN_SCORE ) );
-    print( "   Green remote red score:   " + std::to_string( GREEN_REMOTE_RED_SCORE ) );
-    print( "RED REMOTE:" );
-    print( "   Red remote green score:   " + std::to_string( RED_REMOTE_GREEN_SCORE ) );
-    print( "   Red remote red score:     " + std::to_string( RED_REMOTE_RED_SCORE ) );
-    print( "------------" );
+    print( "GREEN REMOTE: " );
+    print( "   green remote green score: "  <<  GREEN_REMOTE_GREEN_SCORE );
+    print( "or green remote, red score: "   << GREEN_REMOTE_RED_SCORE );
+    print( "or green remote, undo: "        << GREEN_REMOTE_UNDO );
+    print( " ------------ \n");
+    print( "RED REMOTE: " );
+    print( "or red remote, green score: "   << RED_REMOTE_GREEN_SCORE );
+    print( "or red remote, red score: "     << RED_REMOTE_RED_SCORE );
+    print( "or red remote, undo: "          << RED_REMOTE_UNDO );
+    print( " ------------ \n");
+    print( "UMPIRE REMOTE: " );
+    print( "or umpire remote, green score: " << UMPIRE_REMOTE_GREEN_SCORE );
+    print( "or umpire remote, red score: "   << UMPIRE_REMOTE_RED_SCORE   );
+    print( "or umpire remote, undo: "        << UMPIRE_REMOTE_UNDO );
+    print( " ------------ \n");
 }

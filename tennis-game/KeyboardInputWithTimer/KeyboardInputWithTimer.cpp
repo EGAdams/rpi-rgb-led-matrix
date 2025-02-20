@@ -85,16 +85,19 @@ int KeyboardInputWithTimer::getInput() {
                         } else {
                             print( "------------" );
                             print( "GREEN REMOTE: " );
-                            print( "   green remote green score: " <<  GREEN_REMOTE_GREEN_SCORE );
-                            print( "or green remote, red score: "  << GREEN_REMOTE_RED_SCORE );
+                            print( "   green remote green score: "  <<  GREEN_REMOTE_GREEN_SCORE );
+                            print( "or green remote, red score: "   << GREEN_REMOTE_RED_SCORE );
+                            print( "or green remote, undo: "        << GREEN_REMOTE_UNDO );
                             print( " ------------ \n");
                             print( "RED REMOTE: " );
-                            print( "or red remote, green score: " << RED_REMOTE_GREEN_SCORE );
-                            print( "or red remote, red score: " << RED_REMOTE_RED_SCORE );
+                            print( "or red remote, green score: "   << RED_REMOTE_GREEN_SCORE );
+                            print( "or red remote, red score: "     << RED_REMOTE_RED_SCORE );
+                            print( "or red remote, undo: "          << RED_REMOTE_UNDO );
                             print( " ------------ \n");
                             print( "UMPIRE REMOTE: " );
                             print( "or umpire remote, green score: " << UMPIRE_REMOTE_GREEN_SCORE );
-                            print( "or umpire remote, red score: " << UMPIRE_REMOTE_RED_SCORE );
+                            print( "or umpire remote, red score: "   << UMPIRE_REMOTE_RED_SCORE   );
+                            print( "or umpire remote, undo: "        << UMPIRE_REMOTE_UNDO );
                             print( " ------------ \n");
                             inputBuffer.clear();
                         }

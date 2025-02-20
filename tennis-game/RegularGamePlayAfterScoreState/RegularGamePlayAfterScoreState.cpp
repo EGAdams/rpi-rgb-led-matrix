@@ -61,7 +61,7 @@ void RegularGamePlayAfterScoreState::handleInput( RemoteListenerContext& context
             selection = 2; // represent RED
         }
         context.getGameObject()->playerScore( selection );
-    } else if ( selection == GREEN_REMOTE_UNDO || selection == RED_REMOTE_UNDO ) {
+    } else if ( selection == GREEN_REMOTE_UNDO || selection == RED_REMOTE_UNDO || selection == UMPIRE_REMOTE_UNDO ) {
         print( "************" );
         print( "*** Undo ***" );
         print( "************\n\n\n" );
@@ -78,14 +78,19 @@ void RegularGamePlayAfterScoreState::handleInput( RemoteListenerContext& context
 
 void RegularGamePlayAfterScoreState::showHelp() {
     print( "------------" );
-    print( "GREEN REMOTE:" );
-    print( "   green remote green score: " + std::to_string( GREEN_REMOTE_GREEN_SCORE ) );
-    print( "   green remote red score:   " + std::to_string( GREEN_REMOTE_RED_SCORE ) );
-    print( "RED REMOTE:" );
-    print( "   red remote green score:   " + std::to_string( RED_REMOTE_GREEN_SCORE ) );
-    print( "   red remote red score:     " + std::to_string( RED_REMOTE_RED_SCORE ) );
-    print( "UMPIRE REMOTE:" );
-    print( "   umpire remote green score:   " + std::to_string( UMPIRE_REMOTE_GREEN_SCORE ) );
-    print( "   umpire remote red score:     " + std::to_string( UMPIRE_REMOTE_RED_SCORE ) );
-    print( "------------" );
+    print( "GREEN REMOTE: " );
+    print( "   green remote green score: "  <<  GREEN_REMOTE_GREEN_SCORE );
+    print( "or green remote, red score: "   << GREEN_REMOTE_RED_SCORE );
+    print( "or green remote, undo: "        << GREEN_REMOTE_UNDO );
+    print( " ------------ \n");
+    print( "RED REMOTE: " );
+    print( "or red remote, green score: "   << RED_REMOTE_GREEN_SCORE );
+    print( "or red remote, red score: "     << RED_REMOTE_RED_SCORE );
+    print( "or red remote, undo: "          << RED_REMOTE_UNDO );
+    print( " ------------ \n");
+    print( "UMPIRE REMOTE: " );
+    print( "or umpire remote, green score: " << UMPIRE_REMOTE_GREEN_SCORE );
+    print( "or umpire remote, red score: "   << UMPIRE_REMOTE_RED_SCORE   );
+    print( "or umpire remote, undo: "        << UMPIRE_REMOTE_UNDO );
+    print( " ------------ \n");
 }

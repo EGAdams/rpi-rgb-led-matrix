@@ -20,7 +20,7 @@ void UndoState::handleInput( RemoteListenerContext& context ) {
         return;
     }
 
-    if ( selection == GREEN_REMOTE_UNDO || selection == RED_REMOTE_UNDO ) { // ignore serve
+    if ( selection == GREEN_REMOTE_UNDO || selection == RED_REMOTE_UNDO || selection == UMPIRE_REMOTE_UNDO ) { // ignore serve
         print( "************" );                                            // flag for this state
         print( "*** Undo ***" );
         print( "************\n\n\n" );
@@ -40,5 +40,7 @@ void UndoState::_showHelp() {
     print( "   green remote undo: " + std::to_string( GREEN_REMOTE_UNDO));
     print( "RED REMOTE:" );
     print( "   red remote undo:   " + std::to_string( RED_REMOTE_UNDO ));
+    print( "UMPIRE REMOTE:" );
+    print( "   umpire remote undo: " + std::to_string( UMPIRE_REMOTE_UNDO ));
     print( "-----------------\n\n" );
 }

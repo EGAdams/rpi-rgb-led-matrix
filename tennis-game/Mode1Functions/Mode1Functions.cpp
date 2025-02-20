@@ -26,7 +26,6 @@ void Mode1Functions::setScoreBoard( ScoreBoard* scoreBoard ) {
 
 void Mode1Functions::mode1ButtonFunction() {
     int button = _gameState->getPlayerButton();
-    _flashRemote( button );
     switch ( button ) {
     
     case 0:
